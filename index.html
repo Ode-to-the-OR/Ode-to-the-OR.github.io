@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ode to the OR — Dr. Rushika Ode</title>
+<meta name="description" content="A personal anaesthesiology education and reflection platform by Dr. Rushika Ode. Real de-identified cases, honest clinical reflections, and the human experience of learning anaesthesia from the inside.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --discord: #5865F2;
+  --wa:      #25d366;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:none;
+}
+#cur{width:7px;height:7px;background:var(--amber);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;}
+#ring{width:30px;height:30px;border:1px solid var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s;}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.22;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+.nav-name{font-size:.64rem;color:var(--faint);letter-spacing:.07em;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 5vw 9vh;position:relative;overflow:hidden;}
+.hbg{position:absolute;inset:0;overflow:hidden;}
+.hgrid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(122,32,32,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(122,32,32,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+}
+.hglow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(122,32,32,.06) 0%,transparent 68%);top:-180px;right:-120px;animation:breathe 7s ease-in-out infinite;}
+.hglow2{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(154,108,26,.07) 0%,transparent 68%);bottom:12%;left:28%;animation:breathe 10s ease-in-out infinite reverse;}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.15);opacity:1;}}
+.ecg-wrap{position:absolute;top:43%;left:0;right:0;overflow:hidden;opacity:.1;}
+.ecg-wrap svg{width:110%;margin-left:-5%;}
+.ecg-path{stroke:var(--rust);stroke-width:1.6;fill:none;stroke-dasharray:3200;stroke-dashoffset:3200;animation:drawECG 5s ease forwards .9s;}
+@keyframes drawECG{to{stroke-dashoffset:0;}}
+.hcontent{position:relative;z-index:10;max-width:880px;}
+.h-eyebrow{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;animation:fadeUp .8s both .2s;}
+.h-eyebrow::before{content:'';width:30px;height:1px;background:var(--sage);}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.6rem,8.5vw,7.8rem);font-weight:300;line-height:.92;letter-spacing:-.025em;margin-bottom:2.5rem;animation:fadeUp .8s both .35s;}
+h1 .l1{display:block;color:var(--text);}
+h1 .l2{display:block;color:var(--rust);font-style:italic;font-weight:600;}
+h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;margin-top:.25em;font-weight:300;}
+.h-byline{font-size:.98rem;color:var(--muted);line-height:1.9;max-width:540px;margin-bottom:3rem;font-weight:300;animation:fadeUp .8s both .5s;}
+.h-byline strong{color:var(--rust);font-weight:500;}
+.h-actions{display:flex;gap:1.4rem;align-items:center;flex-wrap:wrap;animation:fadeUp .8s both .65s;}
+.btn-primary{background:var(--rust);color:#f5f0e8;padding:.82rem 2rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all .25s;}
+.btn-primary:hover{background:var(--maroon);transform:translateY(-2px);}
+.btn-ghost{color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:all .2s;}
+.btn-ghost:hover{color:var(--text);border-color:var(--muted);}
+.scroll-hint{position:absolute;bottom:4vh;right:5vw;writing-mode:vertical-rl;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:1rem;animation:fadeUp 1s both 1.2s;}
+.scroll-hint::after{content:'';width:1px;height:55px;background:linear-gradient(to bottom,var(--faint),transparent);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* STATS BAR */
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 5vw;display:grid;grid-template-columns:repeat(5,1fr);}
+.st{padding:.4rem 1.8rem;border-right:1px solid var(--border);text-align:center;}
+.st:last-child{border-right:none;}
+.st-n{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--rust);line-height:1;display:block;}
+.st-l{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-top:.35rem;}
+
+/* SHARED */
+.sec-head{display:flex;align-items:center;gap:1.4rem;margin-bottom:3rem;}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);white-space:nowrap;}
+.sl{height:1px;background:var(--border);flex:1;}
+.sn{font-family:'Cormorant Garamond',serif;font-size:.88rem;color:var(--faint);}
+
+/* FEATURED */
+.featured{padding:6rem 5vw;display:grid;grid-template-columns:3fr 2fr;gap:5rem;border-bottom:1px solid var(--border);}
+.live-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--rust);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;}
+.pulse{width:6px;height:6px;background:var(--rust);border-radius:50%;position:relative;flex-shrink:0;}
+.pulse::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--maroon);animation:ripple 1.6s infinite;}
+@keyframes ripple{0%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(2.6);}}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;color:var(--text);margin-bottom:1.5rem;}
+.feat-body{font-size:.92rem;line-height:1.95;color:var(--muted);margin-bottom:1rem;font-weight:300;}
+.feat-body strong{color:var(--text);font-weight:500;}
+.tags{display:flex;gap:.45rem;flex-wrap:wrap;margin:1.5rem 0 2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tr{border-color:var(--gold);color:var(--gold);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:#7a5abf;color:#7a5abf;}
+.to{border-color:#9a4070;color:#9a4070;}
+.read-link{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:inline-flex;align-items:center;gap:.7rem;transition:gap .2s,color .2s;}
+.read-link::after{content:'→';}
+.read-link:hover{gap:1.1rem;color:var(--maroon);}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1.6rem;}
+.sbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem;}
+.sbox h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.1rem;padding-bottom:.85rem;border-bottom:1px solid var(--border);}
+.topic-grid{display:flex;flex-wrap:wrap;gap:.35rem;}
+.tbtn{font-size:.64rem;padding:.3rem .65rem;background:var(--deep);border:1px solid var(--border);color:var(--muted);cursor:none;font-family:'Instrument Sans',sans-serif;transition:all .2s;}
+.tbtn:hover{background:var(--rust);color:#f5f0e8;border-color:var(--rust);}
+.mini-entry{padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.78rem;color:var(--muted);line-height:1.55;}
+.mini-entry:last-child{border-bottom:none;padding-bottom:0;}
+.mini-date{font-size:.58rem;color:var(--faint);letter-spacing:.1em;display:block;margin-bottom:.18rem;}
+
+/* CASE GRID */
+.cases-sec{padding:6rem 5vw;border-bottom:1px solid var(--border);}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);}
+.cc{background:var(--deep);padding:2rem;position:relative;overflow:hidden;cursor:none;min-height:255px;display:flex;flex-direction:column;justify-content:space-between;transition:background .3s;}
+.cc:hover{background:var(--surface);}
+.cc-num{font-family:'Cormorant Garamond',serif;font-size:3.4rem;font-weight:700;color:var(--border);line-height:1;position:absolute;top:1.4rem;right:1.4rem;transition:color .3s;}
+.cc:hover .cc-num{color:var(--faint);}
+.cc-title{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.3;color:var(--text);margin-top:.7rem;margin-bottom:.55rem;position:relative;z-index:1;}
+.cc-exc{font-size:.76rem;color:var(--muted);line-height:1.6;position:relative;z-index:1;}
+.cc-meta{display:flex;justify-content:space-between;margin-top:1.4rem;padding-top:.95rem;border-top:1px solid var(--border);font-size:.6rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;position:relative;z-index:1;}
+
+/* OR DIARIES */
+.diary-sec{padding:6rem 5vw;display:grid;grid-template-columns:1fr 2fr;gap:7rem;border-bottom:1px solid var(--border);align-items:start;}
+.diary-intro h2{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:300;font-style:italic;line-height:1.25;color:var(--text);margin-bottom:1.2rem;}
+.diary-intro p{font-size:.84rem;color:var(--muted);line-height:1.85;font-weight:300;}
+.diary-feed{display:flex;flex-direction:column;}
+.di{padding:2rem 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:70px 1fr;gap:2rem;cursor:none;transition:padding-left .25s;}
+.di:first-child{padding-top:0;}
+.di:hover{padding-left:.5rem;}
+.di-date{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding-top:.35rem;line-height:1.7;}
+.di-text{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-style:italic;color:var(--text);line-height:1.55;}
+.di-text em{font-style:normal;color:var(--rust);font-weight:600;}
+
+/* LETTERS */
+.letters-sec{padding:7rem 5vw;border-bottom:1px solid var(--border);background:var(--surface);}
+.letters-intro{max-width:660px;margin-bottom:4rem;}
+.letters-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.8vw,3.1rem);font-weight:300;line-height:1.15;color:var(--text);margin-bottom:1.2rem;}
+.letters-intro h2 em{font-style:italic;color:var(--gold);}
+.letters-intro p{font-size:.88rem;color:var(--muted);line-height:1.9;font-weight:300;}
+.letters-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);}
+.lc{background:var(--night);padding:2.5rem;cursor:none;transition:background .3s;position:relative;overflow:hidden;border:1px solid var(--border);}
+.lc:hover{background:var(--deep);}
+.lc::before{content:'"';position:absolute;top:.8rem;left:1.5rem;font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:700;color:var(--border);line-height:1;transition:color .3s;pointer-events:none;}
+.lc:hover::before{color:var(--faint);}
+.l-to{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;position:relative;z-index:1;}
+.l-exc{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-style:italic;color:var(--text);line-height:1.6;margin-bottom:1.4rem;position:relative;z-index:1;}
+.l-meta{font-size:.7rem;color:var(--muted);line-height:1.5;font-weight:300;position:relative;z-index:1;}
+.l-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;margin-top:1.2rem;transition:gap .2s,color .2s;position:relative;z-index:1;}
+.l-link::after{content:'→';}
+.l-link:hover{gap:.8rem;color:var(--rust);}
+
+/* WHAT LIVES HERE */
+.sections-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:var(--border);border-bottom:1px solid var(--border);}
+.sb{background:var(--deep);padding:2.7rem;cursor:none;transition:background .3s;}
+.sb:hover{background:var(--surface);}
+.sb-icon{font-size:1.55rem;margin-bottom:1.1rem;display:block;}
+.sb h3{font-family:'Cormorant Garamond',serif;font-size:1.38rem;font-weight:600;color:var(--text);margin-bottom:.7rem;letter-spacing:-.01em;}
+.sb p{font-size:.82rem;line-height:1.82;color:var(--muted);font-weight:300;}
+.soon{display:inline-block;margin-top:1rem;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(154,108,26,.35);padding:.2rem .55rem;}
+
+/* PROCEDURE LOG */
+.numbers-sec{padding:6rem 5vw;background:var(--surface);border-bottom:1px solid var(--border);}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);margin-top:3rem;}
+.nb{background:var(--deep);padding:2.4rem 1.8rem;text-align:center;transition:background .3s;}
+.nb:hover{background:var(--card);}
+.nb-big{font-family:'Cormorant Garamond',serif;font-size:3.4rem;font-weight:700;color:var(--rust);line-height:1;display:block;}
+.nb-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-top:.45rem;}
+.nb-sub{font-size:.66rem;color:var(--faint);display:block;margin-top:.25rem;font-style:italic;}
+
+/* COMMUNITY */
+.comm-sec{padding:7rem 5vw;border-bottom:1px solid var(--border);}
+.comm-intro{max-width:580px;margin-bottom:4rem;}
+.comm-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;color:var(--text);margin-bottom:1rem;}
+.comm-intro h2 em{font-style:italic;color:var(--gold);}
+.comm-intro p{font-size:.87rem;color:var(--muted);line-height:1.9;font-weight:300;}
+.comm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);}
+.cb{background:var(--deep);padding:2.7rem;cursor:none;transition:background .3s;}
+.cb:hover{background:var(--card);}
+.cb-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;}
+.ci-d{background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.25);}
+.ci-w{background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);}
+.ci-m{background:rgba(122,32,32,.08);border:1px solid rgba(122,32,32,.2);}
+.cb h3{font-family:'Cormorant Garamond',serif;font-size:1.38rem;font-weight:600;color:var(--text);margin-bottom:.4rem;}
+.cb-handle{font-size:.65rem;letter-spacing:.1em;color:var(--sage);margin-bottom:1rem;font-family:'Instrument Sans',sans-serif;}
+.cb p{font-size:.81rem;color:var(--muted);line-height:1.82;font-weight:300;margin-bottom:1.4rem;}
+.channels{display:flex;flex-direction:column;gap:.35rem;}
+.ch{font-size:.7rem;color:var(--faint);display:flex;align-items:center;gap:.45rem;}
+.ch::before{content:'#';color:var(--muted);font-weight:600;}
+.wa-bullets{font-size:.78rem;color:var(--muted);line-height:2.1;font-weight:300;}
+.cb-cta{display:inline-flex;align-items:center;gap:.55rem;padding:.62rem 1.25rem;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;margin-top:1.4rem;transition:all .2s;cursor:none;}
+.cb-cta:hover{opacity:.82;transform:translateY(-2px);}
+.cta-d{background:var(--discord);color:#fff;}
+.cta-w{background:var(--wa);color:#fff;}
+.cta-rust{background:var(--rust);color:#f5f0e8;}
+
+/* CONTACT FORM */
+.contact-form{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem;}
+.contact-form input,
+.contact-form textarea{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);padding:.7rem 1rem;font-size:.78rem;
+  font-family:'Instrument Sans',sans-serif;outline:none;
+  transition:border-color .2s;resize:none;
+}
+.contact-form input:focus,
+.contact-form textarea:focus{border-color:var(--rust);}
+.contact-form textarea{height:90px;}
+.contact-email-line{font-size:.72rem;color:var(--faint);margin-top:.5rem;letter-spacing:.03em;}
+.contact-email-line a{color:var(--sage);text-decoration:none;}
+.contact-email-line a:hover{color:var(--rust);}
+
+/* ABOUT */
+.about-sec{padding:8rem 5vw;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;border-bottom:1px solid var(--border);}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,2.8vw,2.6rem);font-weight:300;font-style:italic;line-height:1.38;color:var(--text);position:relative;padding-left:2.5rem;}
+.about-quote::before{content:'"';position:absolute;left:0;top:-1.2rem;font-size:5rem;font-weight:700;color:var(--rust);opacity:.2;line-height:1;}
+.about-right h2{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:600;color:var(--text);margin-bottom:1.25rem;}
+.about-right p{font-size:.87rem;line-height:1.92;color:var(--muted);font-weight:300;margin-bottom:.9rem;}
+.about-right p strong{color:var(--rust);font-weight:500;}
+.about-links{display:flex;gap:1.4rem;margin-top:2rem;flex-wrap:wrap;}
+.al{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:all .2s;}
+.al:hover{color:var(--rust);border-color:var(--sage);}
+
+/* DISCLAIMER */
+.disclaimer-sec{padding:3rem 5vw;background:var(--surface);border-bottom:1px solid var(--border);}
+.disclaimer-inner{max-width:860px;margin:0 auto;}
+.disclaimer-title{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
+.disclaimer-title::before{content:'';width:20px;height:1px;background:var(--faint);}
+.disclaimer-text{font-size:.78rem;line-height:1.85;color:var(--faint);font-weight:300;}
+
+/* FOOTER */
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+.f-mid{text-align:center;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);line-height:2;}
+.f-right{text-align:right;font-size:.68rem;color:var(--faint);line-height:2.2;}
+.f-right a{color:var(--sage);text-decoration:none;display:block;transition:color .2s;}
+.f-right a:hover{color:var(--rust);}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .featured{grid-template-columns:1fr;gap:3rem;}
+  .letters-grid{grid-template-columns:1fr 1fr;}
+  .comm-grid{grid-template-columns:1fr 1fr;}
+  .about-sec{grid-template-columns:1fr;gap:3rem;}
+}
+@media(max-width:900px){
+  .case-grid{grid-template-columns:1fr 1fr;}
+  .num-grid{grid-template-columns:repeat(2,1fr);}
+  .diary-sec{grid-template-columns:1fr;gap:3rem;}
+  .stats-bar{grid-template-columns:repeat(3,1fr);}
+  footer{grid-template-columns:1fr;text-align:center;}
+  .f-right{text-align:center;}
+}
+@media(max-width:700px){
+  .case-grid{grid-template-columns:1fr;}
+  .letters-grid,.sections-grid,.comm-grid{grid-template-columns:1fr;}
+  nav .nav-links{display:none;}
+  h1{font-size:3rem;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#diaries">OR Diaries</a></li>
+    <li><a href="#letters">Letters</a></li>
+    <li><a href="#explore">Explore</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <span class="nav-name">Dr. Rushika Ode</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbg">
+    <div class="hgrid"></div>
+    <div class="hglow"></div>
+    <div class="hglow2"></div>
+    <div class="ecg-wrap">
+      <svg viewBox="0 0 1400 80" preserveAspectRatio="none" height="80">
+        <path class="ecg-path" d="M0,40 L110,40 L122,10 L134,72 L144,4 L158,76 L168,40 L310,40 L322,10 L334,72 L344,4 L358,76 L368,40 L510,40 L522,10 L534,72 L544,4 L558,76 L568,40 L710,40 L722,10 L734,72 L744,4 L758,76 L768,40 L910,40 L922,10 L934,72 L944,4 L958,76 L968,40 L1110,40 L1122,10 L1134,72 L1144,4 L1158,76 L1168,40 L1400,40"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hcontent">
+    <div class="h-eyebrow">Anaesthesiology · Clinical Cases · Honest Reflections</div>
+    <h1>
+      <span class="l1">Ode</span>
+      <span class="l2">to the OR</span>
+      <span class="l3">— a resident's record, in her own words</span>
+    </h1>
+    <p class="h-byline">
+      I am <strong>Dr. Rushika Ode</strong>. I put people to sleep for a living —
+      and I document everything I learn while doing it.
+      Every case here is real. Every reflection is honest.
+      Every pearl was earned the hard way.
+    </p>
+    <div class="h-actions">
+      <a href="#cases" class="btn-primary">Read the Cases</a>
+      <a href="#about" class="btn-ghost">About this project</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar" style="grid-template-columns:repeat(4,1fr);">
+  <div class="st"><span class="st-n">—</span><span class="st-l">Cases Published</span></div>
+  <div class="st"><span class="st-n">—</span><span class="st-l">Topics Covered</span></div>
+  <div class="st"><span class="st-n">—</span><span class="st-l">Research Projects</span></div>
+  <div class="st"><span class="st-n">1</span><span class="st-l">Honest Resident</span></div>
+</div>
+
+<!-- FEATURED CASE — placeholder for first publish -->
+<section class="featured" id="cases">
+  <div>
+    <div class="live-label"><span class="pulse"></span>Cases — Browse &amp; Read</div>
+    <h2 class="feat-title">Cases published here are real, anonymised &amp; shared to learn.</h2>
+    <p class="feat-body">Every case on this website comes from the OR. Patient details are fully de-identified. The clinical decisions, the challenges, the teaching moments — those are real.</p>
+    <p class="feat-body">Cases are structured around what happened, the reasoning behind the decisions made, the evidence that informed them, and the lessons carried forward. Browse by specialty below or explore the complete case library.</p>
+    <div class="tags">
+      <span class="tag ta">Airway</span>
+      <span class="tag tc">Cardiac</span>
+      <span class="tag tr">Regional</span>
+      <span class="tag to">Obstetric</span>
+      <span class="tag tp">Pediatric</span>
+    </div>
+    <a href="#cases" class="read-link">Browse all cases</a>
+  </div>
+  <div class="sidebar">
+    <div class="sbox">
+      <h4>Browse by Specialty</h4>
+      <div class="topic-grid">
+        <button class="tbtn">Airway</button>
+        <button class="tbtn">Cardiac</button>
+        <button class="tbtn">Regional</button>
+        <button class="tbtn">Pediatric</button>
+        <button class="tbtn">Obstetric</button>
+        <button class="tbtn">Neuro</button>
+        <button class="tbtn">Crisis</button>
+        <button class="tbtn">Pharmacology</button>
+        <button class="tbtn">TIVA</button>
+        <button class="tbtn">Pain</button>
+        <button class="tbtn">ICU</button>
+        <button class="tbtn">Surg. Oncology</button>
+        <button class="tbtn">Surg. Gastro</button>
+        <button class="tbtn">Urology</button>
+        <button class="tbtn">Vascular</button>
+        <button class="tbtn">Plastic</button>
+        <button class="tbtn">Orthopaedics</button>
+        <button class="tbtn">Thoracic</button>
+        <button class="tbtn">Transplant</button>
+        <button class="tbtn">Robotic</button>
+      </div>
+    </div>
+    <div class="sbox">
+      <h4>Latest OR Diary Entries</h4>
+      <div class="mini-entry"><span class="mini-date">—</span>Entries will appear here as cases are published.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE GRID — empty state for launch -->
+<section class="cases-sec">
+  <div class="sec-head"><span class="ey">All Cases</span><div class="sl"></div><span class="sn">Published as they come</span></div>
+  <div class="case-grid">
+    <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
+      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">First case</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">Coming soon</span>
+    </div>
+    <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
+      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">More cases</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">Every week</span>
+    </div>
+    <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
+      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Ongoing</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">From the OR</span>
+    </div>
+  </div>
+</section>
+
+<!-- OR DIARIES -->
+<section class="diary-sec" id="diaries">
+  <div class="diary-intro">
+    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
+      <span class="ey">OR Diaries</span>
+    </div>
+    <h2>The things that don't fit in a case report</h2>
+    <p style="margin-top:1rem;">Short. Honest. Unfiltered. The moments between the cases — the things I think about at 2am after a long shift. Sometimes one sentence carries more than a whole write-up ever could.</p>
+  </div>
+  <div class="diary-feed">
+    <div class="di">
+      <span class="di-date">—<br>—</span>
+      <p class="di-text">"Diary entries will appear here. Short, honest, from the OR floor."</p>
+    </div>
+    <div class="di">
+      <span class="di-date">—<br>—</span>
+      <p class="di-text">"The <em>unfiltered</em> version of residency — not the highlight reel."</p>
+    </div>
+    <div class="di">
+      <span class="di-date">—<br>—</span>
+      <p class="di-text">"Updated as they happen. No schedule. Just <em>honesty.</em>"</p>
+    </div>
+  </div>
+</section>
+
+<!-- LETTERS TO MY ATTENDINGS -->
+<section class="letters-sec" id="letters">
+  <div class="letters-intro">
+    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
+      <span class="ey">Letters to My Attendings</span>
+    </div>
+    <h2>To the people who I still carry<br>into <em>every case</em></h2>
+    <p style="margin-top:1rem;">Open letters to the doctors who shaped me — not just through their knowledge, but through what they chose to say, and what they knew to stay quiet about. Some letters are gratitude. Some are harder than that. All of them are true.</p>
+  </div>
+  <div class="letters-grid">
+    <div class="lc" style="border:2px dashed var(--border);background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:240px;">
+      <div class="l-to" style="margin-bottom:.8rem;">First letter</div>
+      <p class="l-exc" style="color:var(--faint);font-size:.92rem;">Letters will appear here as they are written. Each one honest, each one earned.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT LIVES HERE -->
+<div style="padding:4rem 5vw 2rem;border-bottom:1px solid var(--border);">
+  <div class="sec-head"><span class="ey">What Lives Here</span><div class="sl"></div></div>
+</div>
+<div class="sections-grid" id="explore">
+  <div class="sb">
+    <span class="sb-icon">⚗️</span>
+    <h3>Drug Deep Dives</h3>
+    <p>One drug. My take. What the textbook says vs what actually happens when you give it to a 70-year-old with three comorbidities at 3am. The clinical pharmacologist's version of honesty.</p>
+  </div>
+  <div class="sb">
+    <span class="sb-icon">🧬</span>
+    <h3>Physiology Made Human</h3>
+    <p>HPV, the oxyhemoglobin curve, Starling forces — explained like I'm talking to a smart friend, not writing a viva answer under pressure. Concepts that live in the OR, not just in textbooks.</p>
+  </div>
+  <div class="sb">
+    <span class="sb-icon">📖</span>
+    <h3>The Reading Corner</h3>
+    <p>Annotated paper summaries. One paper at a time, in plain language — what it says, what it means for practice, and what I actually thought about it after reading it twice.</p>
+  </div>
+  <div class="sb">
+    <span class="sb-icon">🎤</span>
+    <h3>Academic Conversations</h3>
+    <p>Presentations, posters, conference abstracts, and the conversations that happen around them. A record of ideas taken beyond the OR and into academic spaces.</p>
+    <span class="soon">Coming Soon</span>
+  </div>
+</div>
+
+<!-- PROCEDURE LOG -->
+<section class="numbers-sec" id="procedure-log">
+  <div class="sec-head">
+    <span class="ey">Procedure Log — Updated Periodically</span>
+    <div class="sl"></div>
+    <span class="sn">A living record</span>
+  </div>
+  <p style="font-size:.84rem;color:var(--muted);max-width:580px;font-weight:300;line-height:1.8;">A running log of procedures performed during residency. Not a trophy cabinet — a logbook. Updated periodically and kept here as an honest record of where I am in training.</p>
+  <div class="num-grid">
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Intubations</span><span class="nb-sub">Updated periodically</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Spinal Anaesthetics</span><span class="nb-sub">incl. emergency LSCS</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Arterial Lines</span><span class="nb-sub">radial, femoral, brachial</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Regional Blocks</span><span class="nb-sub">landmark + ultrasound guided</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Epidurals</span><span class="nb-sub">labour, surgical, pain</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Central Venous Lines</span><span class="nb-sub">IJV, subclavian, femoral</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Research Projects</span><span class="nb-sub">published + in progress</span></div>
+    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Cases Documented</span><span class="nb-sub">on this website</span></div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="comm-sec" id="community">
+  <div class="comm-intro">
+    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
+      <span class="ey">Join the Community</span>
+    </div>
+    <h2>Learning is better when it's<br><em>not done alone</em></h2>
+    <p style="margin-top:1rem;">This website is a monologue. The community is the conversation. Whether you're a resident, a student, or a practising anaesthetist — there is a space here for you. All free. Always will be.</p>
+  </div>
+  <div class="comm-grid">
+
+    <!-- DISCORD -->
+    <div class="cb">
+      <div class="cb-icon ci-d">
+        <svg width="20" height="15" viewBox="0 0 24 18" fill="#5865F2"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 1.492a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+      </div>
+      <h3>Discord Server</h3>
+      <p class="cb-handle">Link coming soon</p>
+      <p>Discord is a free platform with separate rooms for different topics — a staffroom that never closes. Different channels for cases, pharmacology, career questions, and honest conversation.</p>
+      <div class="channels">
+        <span class="ch">case-of-the-week</span>
+        <span class="ch">drug-of-the-day</span>
+        <span class="ch">mistakes-and-learning</span>
+        <span class="ch">journal-club</span>
+        <span class="ch">career-and-exams</span>
+      </div>
+      <a href="#" class="cb-cta cta-d">
+        <svg width="14" height="11" viewBox="0 0 24 18" fill="white"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 1.492a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+        Join on Discord
+      </a>
+    </div>
+
+    <!-- WHATSAPP -->
+    <div class="cb">
+      <div class="cb-icon ci-w">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <h3>WhatsApp</h3>
+      <p class="cb-handle">Link coming soon</p>
+      <p>For quick case updates, new posts, and community announcements — delivered where you already are. Low volume, high signal. Your inbox won't regret it.</p>
+      <div class="wa-bullets">
+        📌 New case announcements<br>
+        📌 Weekly clinical pearl<br>
+        📌 Community updates<br>
+        📌 New content alerts
+      </div>
+      <a href="#" class="cb-cta cta-w">Join WhatsApp Community</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="cb">
+      <div class="cb-icon ci-m">
+        <svg width="19" height="15" viewBox="0 0 24 20" fill="#7a2020"><path d="M20 0H4C1.8 0 0 1.8 0 4v12c0 2.2 1.8 4 4 4h16c2.2 0 4-1.8 4-4V4c0-2.2-1.8-4-4-4zm0 2l-8 7-8-7h16zm0 14H4a2 2 0 01-2-2V5.3l8.8 7.7a1 1 0 001.4 0L22 5.3V14a2 2 0 01-2 2z"/></svg>
+      </div>
+      <h3>Contact</h3>
+      <p class="cb-handle">odetotheor@gmail.com</p>
+      <p>For collaborations, questions, case submissions, or just to say hello. Write below and your message will come directly to me.</p>
+      <div class="contact-form">
+        <input type="text" placeholder="Your name" id="cf-name">
+        <input type="email" placeholder="Your email" id="cf-email">
+        <textarea placeholder="Your message" id="cf-msg"></textarea>
+        <a href="#" class="cb-cta cta-rust" style="margin-top:.25rem;justify-content:center;" onclick="handleContact(event)">Send Message</a>
+      </div>
+      <p class="contact-email-line">Or write directly to <a href="mailto:odetotheor@gmail.com">odetotheor@gmail.com</a></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="about-quote">
+    I put people to sleep for a living. The least I can do is stay awake enough to learn something from every single one of them.
+  </div>
+  <div class="about-right">
+    <h2>About Dr. Rushika Ode</h2>
+    <p>I am a resident anaesthesiologist. This website exists because I believe clinical experience only becomes wisdom if it is reflected on, written down, and shared — and because I needed somewhere honest to do that.</p>
+    <p>Every case is anonymised and published with one purpose: <strong>learning.</strong> Every pearl is hard-won. Every letter is written with gratitude.</p>
+    <p>If you're a resident anywhere in the world reading this at midnight before a difficult case — <strong>this is for you.</strong></p>
+    <div class="about-links">
+      <a href="#explore" class="al">Explore</a>
+      <a href="#community" class="al">Community</a>
+      <a href="#" class="al" onclick="document.getElementById('cf-name').focus();return false;">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer-sec">
+  <div class="disclaimer-inner">
+    <div class="disclaimer-title">Disclaimer</div>
+    <p class="disclaimer-text">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+  <div class="f-mid">
+    Dr. Rushika Ode · Anaesthesiology Resident<br>
+    A personal education project · All cases de-identified<br>
+    For education · Free forever
+  </div>
+  <div class="f-right">
+    <a href="mailto:odetotheor@gmail.com">odetotheor@gmail.com</a>
+    <a href="#community">Discord Community</a>
+    <a href="#community">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.cc,.lc,.sb,.cb,.di').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--amber)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--sage)';
+  });
+});
+
+// Contact form handler
+function handleContact(e){
+  e.preventDefault();
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if(!name||!email||!msg){alert('Please fill in all fields.');return;}
+  const subject = encodeURIComponent('Message from Ode to the OR — '+name);
+  const body = encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nMessage:\n'+msg);
+  window.location.href = 'mailto:odetotheor@gmail.com?subject='+subject+'&body='+body;
+}
+</script>
+</body>
+</html>
