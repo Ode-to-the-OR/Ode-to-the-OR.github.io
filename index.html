@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -345,8 +344,8 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 
 <!-- STATS BAR -->
 <div class="stats-bar" style="grid-template-columns:repeat(4,1fr);">
-  <div class="st"><span class="st-n">—</span><span class="st-l">Cases Published</span></div>
-  <div class="st"><span class="st-n">—</span><span class="st-l">Topics Covered</span></div>
+  <div class="st"><span class="st-n">1</span><span class="st-l">Cases Published</span></div>
+  <div class="st"><span class="st-n">3</span><span class="st-l">Topics Covered</span></div>
   <div class="st"><span class="st-n">—</span><span class="st-l">Research Projects</span></div>
   <div class="st"><span class="st-n">1</span><span class="st-l">Honest Resident</span></div>
 </div>
@@ -400,22 +399,36 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   </div>
 </section>
 
-<!-- CASE GRID — empty state for launch -->
+<!-- CASE GRID -->
 <section class="cases-sec">
   <div class="sec-head"><span class="ey">All Cases</span><div class="sl"></div><span class="sn">Published as they come</span></div>
   <div class="case-grid">
-    <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
-      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">First case</span>
-      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">Coming soon</span>
-    </div>
+
+    <!-- CASE 001 — LIVE -->
+    <a href="cases/case-001.html" class="cc" style="text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.7rem;gap:1rem;">
+      <div>
+        <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;">Case 001 &middot; June 2026</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:600;line-height:1.2;color:var(--text);margin-bottom:.7rem;">The Edema That Arrived <em style="font-style:italic;color:var(--rust);">Late</em></h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin:0;">Borderline cuff leak test, delayed-onset airway edema after prolonged steep Trendelenburg, and what a passing result doesn't promise.</p>
+      </div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap;padding-top:.8rem;border-top:1px solid var(--border);">
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--sage);color:var(--sage);">Airway</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--rust);color:var(--rust);">Robotic</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--amber);color:var(--amber);">Crisis</span>
+      </div>
+    </a>
+
+    <!-- PLACEHOLDER -->
     <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
       <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">More cases</span>
-      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">Every week</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">Coming soon</span>
     </div>
+
     <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
       <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Ongoing</span>
       <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">From the OR</span>
     </div>
+
   </div>
 </section>
 
