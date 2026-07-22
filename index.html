@@ -134,7 +134,18 @@ h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;mar
 .topic-grid{display:flex;flex-wrap:wrap;gap:.35rem;}
 .tbtn{font-size:.64rem;padding:.3rem .65rem;background:var(--deep);border:1px solid var(--border);color:var(--muted);cursor:none;font-family:'Instrument Sans',sans-serif;transition:all .2s;}
 .tbtn:hover{background:var(--rust);color:#f5f0e8;border-color:var(--rust);}
-.tbtn-active{background:var(--rust)!important;color:#f5f0e8!important;border-color:var(--rust)!important;}
+.tbtn.active{background:var(--rust);color:#f5f0e8;border-color:var(--rust);}
+.cc[hidden]{display:none;}
+.search-wrap{position:relative;margin-bottom:0;}
+.search-input{width:100%;padding:.65rem .7rem .65rem 2.1rem;background:var(--deep);border:1px solid var(--border);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:.8rem;font-weight:300;transition:border-color .2s;}
+.search-input::placeholder{color:var(--faint);}
+.search-input:focus{outline:none;border-color:var(--rust);}
+.search-icon{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--faint);pointer-events:none;}
+.no-results{grid-column:1/-1;text-align:center;padding:3rem 1.5rem;color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;}
+.filter-status{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.9rem;display:none;align-items:center;gap:.6rem;}
+.filter-status.on{display:flex;}
+.filter-status button{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--faint);color:var(--muted);padding:.15rem .5rem;cursor:none;font-family:'Instrument Sans',sans-serif;}
+.filter-status button:hover{border-color:var(--rust);color:var(--rust);}
 .mini-entry{padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.78rem;color:var(--muted);line-height:1.55;}
 .mini-entry:last-child{border-bottom:none;padding-bottom:0;}
 .mini-date{font-size:.58rem;color:var(--faint);letter-spacing:.1em;display:block;margin-bottom:.18rem;}
@@ -289,13 +300,6 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   h1{font-size:3rem;}
   .stats-bar{grid-template-columns:repeat(2,1fr);}
 }
-
-/* Search */
-.search-wrap{margin-bottom:2.5rem;}
-.search-input{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--border);padding:.65rem 1rem;font-family:'Instrument Sans',sans-serif;font-size:.84rem;color:var(--text);outline:none;transition:border-color .2s;}
-.search-input::placeholder{color:var(--faint);}
-.search-input:focus{border-color:var(--rust);}
-.no-results{font-size:.8rem;color:var(--faint);letter-spacing:.06em;padding:1.2rem 0;display:none;}
 </style>
 </head>
 <body>
@@ -352,8 +356,8 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 
 <!-- STATS BAR -->
 <div class="stats-bar" style="grid-template-columns:repeat(4,1fr);">
-  <div class="st"><span class="st-n">1</span><span class="st-l">Cases Published</span></div>
-  <div class="st"><span class="st-n">3</span><span class="st-l">Topics Covered</span></div>
+  <div class="st"><span class="st-n">2</span><span class="st-l">Cases Published</span></div>
+  <div class="st"><span class="st-n">7</span><span class="st-l">Topics Covered</span></div>
   <div class="st"><span class="st-n">—</span><span class="st-l">Research Projects</span></div>
   <div class="st"><span class="st-n">1</span><span class="st-l">Honest Resident</span></div>
 </div>
@@ -376,28 +380,41 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   </div>
   <div class="sidebar">
     <div class="sbox">
+      <h4>Search Cases</h4>
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="case-search" class="search-input" placeholder="Search title, topic, or keyword…" autocomplete="off">
+      </div>
+    </div>
+    <div class="sbox">
       <h4>Browse by Specialty</h4>
-      <div class="topic-grid">
-        <button class="tbtn" data-topic="Airway">Airway</button>
-        <button class="tbtn" data-topic="Cardiac">Cardiac</button>
-        <button class="tbtn" data-topic="Regional">Regional</button>
-        <button class="tbtn" data-topic="Pediatric">Pediatric</button>
-        <button class="tbtn" data-topic="Obstetric">Obstetric</button>
-        <button class="tbtn" data-topic="Neuro">Neuro</button>
-        <button class="tbtn" data-topic="Crisis">Crisis</button>
-        <button class="tbtn" data-topic="Pharmacology">Pharmacology</button>
-        <button class="tbtn" data-topic="TIVA">TIVA</button>
-        <button class="tbtn" data-topic="Pain">Pain</button>
-        <button class="tbtn" data-topic="ICU">ICU</button>
-        <button class="tbtn" data-topic="Surg. Oncology">Surg. Oncology</button>
-        <button class="tbtn" data-topic="Surg. Gastro">Surg. Gastro</button>
-        <button class="tbtn" data-topic="Urology">Urology</button>
-        <button class="tbtn" data-topic="Vascular">Vascular</button>
-        <button class="tbtn" data-topic="Plastic">Plastic</button>
-        <button class="tbtn" data-topic="Orthopaedics">Orthopaedics</button>
-        <button class="tbtn" data-topic="Thoracic">Thoracic</button>
-        <button class="tbtn" data-topic="Transplant">Transplant</button>
-        <button class="tbtn" data-topic="Robotic">Robotic</button>
+      <div class="topic-grid" id="topic-grid">
+        <button class="tbtn" data-topic="airway">Airway</button>
+        <button class="tbtn" data-topic="cardiac">Cardiac</button>
+        <button class="tbtn" data-topic="regional">Regional</button>
+        <button class="tbtn" data-topic="pediatric">Pediatric</button>
+        <button class="tbtn" data-topic="obstetric">Obstetric</button>
+        <button class="tbtn" data-topic="neuro">Neuro</button>
+        <button class="tbtn" data-topic="crisis">Crisis</button>
+        <button class="tbtn" data-topic="pharmacology">Pharmacology</button>
+        <button class="tbtn" data-topic="tiva">TIVA</button>
+        <button class="tbtn" data-topic="pain">Pain</button>
+        <button class="tbtn" data-topic="icu">ICU</button>
+        <button class="tbtn" data-topic="oncology">Surg. Oncology</button>
+        <button class="tbtn" data-topic="gastro">Surg. Gastro</button>
+        <button class="tbtn" data-topic="urology">Urology</button>
+        <button class="tbtn" data-topic="vascular">Vascular</button>
+        <button class="tbtn" data-topic="plastic">Plastic</button>
+        <button class="tbtn" data-topic="orthopaedics">Orthopaedics</button>
+        <button class="tbtn" data-topic="thoracic">Thoracic</button>
+        <button class="tbtn" data-topic="transplant">Transplant</button>
+        <button class="tbtn" data-topic="robotic">Robotic</button>
+        <button class="tbtn" data-topic="nephrology">Nephrology</button>
+        <button class="tbtn" data-topic="ultrasound">POCUS</button>
+      </div>
+      <div class="filter-status" id="filter-status">
+        <span id="filter-status-text">Filtering: —</span>
+        <button id="filter-clear">Clear</button>
       </div>
     </div>
     <div class="sbox">
@@ -410,19 +427,16 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 <!-- CASE GRID -->
 <section class="cases-sec">
   <div class="sec-head"><span class="ey">All Cases</span><div class="sl"></div><span class="sn">Published as they come</span></div>
-  <div class="search-wrap">
-    <input class="search-input" type="text" placeholder="Search cases by title or topic…" id="case-search" autocomplete="off">
-    <div class="no-results" id="no-results">No cases match that search yet.</div>
-  </div>
-  <div class="case-grid">
+  <div class="case-grid" id="case-grid">
+
+    <div class="no-results" id="no-results" style="display:none;">No cases match your search — try a different keyword or <a href="#" id="no-results-clear" style="color:var(--rust);">clear filters</a>.</div>
 
     <!-- CASE 001 — LIVE -->
-    <a href="cases/case-001.html" class="cc case-card" data-topics="Airway,Robotic,Crisis" style="text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.7rem;gap:1rem;">
+    <a href="cases/case-001.html" class="cc" data-topics="airway,robotic,crisis" style="text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.7rem;gap:1rem;">
       <div>
         <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;">Case 001 &middot; June 2026</div>
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:600;line-height:1.2;color:var(--text);margin-bottom:.7rem;">The Edema That Arrived <em style="font-style:italic;color:var(--rust);">Late</em></h3>
         <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin:0;">Borderline cuff leak test, delayed-onset airway edema after prolonged steep Trendelenburg, and what a passing result doesn't promise.</p>
-        <div style="font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;">8 min read</div>
       </div>
       <div style="display:flex;gap:.4rem;flex-wrap:wrap;padding-top:.8rem;border-top:1px solid var(--border);">
         <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--sage);color:var(--sage);">Airway</span>
@@ -431,11 +445,20 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
       </div>
     </a>
 
-    <!-- PLACEHOLDER -->
-    <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
-      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">More cases</span>
-      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">Coming soon</span>
-    </div>
+    <!-- CASE 002 — LIVE -->
+    <a href="cases/case-002.html" class="cc" data-topics="vascular,icu,ultrasound,nephrology" style="text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.7rem;gap:1rem;">
+      <div>
+        <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;">Case 002 &middot; July 2026</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:600;line-height:1.2;color:var(--text);margin-bottom:.7rem;">The Ninety <em style="font-style:italic;color:var(--rust);">Degrees</em></h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin:0;">A femoral vein that looked clear in transverse view. A 90&deg; probe rotation that found a floating thrombus before the needle did.</p>
+      </div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap;padding-top:.8rem;border-top:1px solid var(--border);">
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--sage);color:var(--sage);">Vascular</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--rust);color:var(--rust);">ICU</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--amber);color:var(--amber);">POCUS</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid #7a5abf;color:#7a5abf;">Nephrology</span>
+      </div>
+    </a>
 
     <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
       <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Ongoing</span>
@@ -477,7 +500,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
       <span class="ey">Letters to My Attendings</span>
     </div>
     <h2>To the people who I still carry<br>into <em>every case</em></h2>
-    <p style="margin-top:1rem;">Open letters to the doctors who shaped me — not just through their knowledge, but through what they chose to say, and what they knew to stay quiet about. Some letters are gratitude. Some are harder than that. All of them are true.</p>
+    <p style="margin-top:1rem;">Open letters to the doctors who shaped me—not only through their knowledge, but through their judgment, their kindness, and the example they set. Every letter is written with gratitude for lessons that continue to echo through every case.</p>
   </div>
   <div class="letters-grid">
     <div class="lc" style="border:2px dashed var(--border);background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:240px;">
@@ -674,49 +697,83 @@ document.querySelectorAll('a,button,.cc,.lc,.sb,.cb,.di').forEach(el=>{
   });
 });
 
-// Contact form handler
-
-// Specialty filter
+// Topic filter + search bar — Browse by Specialty buttons + case grid
 (function(){
-  const btns = document.querySelectorAll('.tbtn[data-topic]');
-  const cards = document.querySelectorAll('.case-card');
-  let active = null;
+  const buttons = Array.from(document.querySelectorAll('#topic-grid .tbtn'));
+  const cards = Array.from(document.querySelectorAll('.case-grid .cc[data-topics]'));
+  const statusBox = document.getElementById('filter-status');
+  const statusText = document.getElementById('filter-status-text');
+  const clearBtn = document.getElementById('filter-clear');
+  const searchInput = document.getElementById('case-search');
+  const noResults = document.getElementById('no-results');
+  const noResultsClear = document.getElementById('no-results-clear');
 
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const topic = btn.dataset.topic;
+  let activeTopic = null;
 
-      // Toggle off if already active
-      if(active === topic){
-        active = null;
-        btns.forEach(b => b.classList.remove('tbtn-active'));
-        cards.forEach(c => { c.style.opacity='1'; c.style.pointerEvents=''; });
-        return;
-      }
+  function render(){
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    let visibleCount = 0;
 
-      active = topic;
-      btns.forEach(b => b.classList.remove('tbtn-active'));
-      btn.classList.add('tbtn-active');
+    cards.forEach(c=>{
+      const topics = c.dataset.topics.split(',');
+      const matchesTopic = !activeTopic || topics.includes(activeTopic);
+      const matchesSearch = !query || c.textContent.toLowerCase().includes(query);
+      const visible = matchesTopic && matchesSearch;
+      c.toggleAttribute('hidden', !visible);
+      if(visible) visibleCount++;
+    });
 
-      cards.forEach(card => {
-        const topics = (card.dataset.topics || '').split(',');
-        if(topics.includes(topic)){
-          card.style.opacity='1';
-          card.style.pointerEvents='';
-          card.style.outline='2px solid var(--rust)';
-          setTimeout(()=>{ card.style.outline=''; }, 600);
-        } else {
-          card.style.opacity='.28';
-          card.style.pointerEvents='none';
-        }
+    if(noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+    if(activeTopic){
+      let matchLabel = activeTopic;
+      buttons.forEach(b=>{
+        const on = b.dataset.topic === activeTopic;
+        b.classList.toggle('active', on);
+        if(on) matchLabel = b.textContent;
       });
+      statusText.textContent = 'Filtering: ' + matchLabel;
+      statusBox.classList.add('on');
+    } else {
+      buttons.forEach(b=>b.classList.remove('active'));
+      statusBox.classList.remove('on');
+    }
+  }
 
-      // Scroll to cases grid
-      document.querySelector('.cases-sec').scrollIntoView({behavior:'smooth', block:'start'});
+  function setTopic(topic){
+    activeTopic = topic;
+    render();
+  }
+
+  buttons.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const isActive = b.classList.contains('active');
+      setTopic(isActive ? null : b.dataset.topic);
+      if(!isActive) document.getElementById('cases').scrollIntoView({behavior:'smooth'});
     });
   });
+  if(clearBtn){
+    clearBtn.addEventListener('click', ()=> setTopic(null));
+  }
+  if(searchInput){
+    searchInput.addEventListener('input', render);
+  }
+  if(noResultsClear){
+    noResultsClear.addEventListener('click', (e)=>{
+      e.preventDefault();
+      if(searchInput) searchInput.value = '';
+      setTopic(null);
+    });
+  }
+
+  // Read ?topic= from URL (used by case pages' tag links) and pre-filter on load
+  const params = new URLSearchParams(window.location.search);
+  const initialTopic = params.get('topic');
+  activeTopic = initialTopic ? initialTopic.toLowerCase() : null;
+  render();
 })();
 
+// Contact form handler
 function handleContact(e){
   e.preventDefault();
   const name = document.getElementById('cf-name').value.trim();
@@ -727,26 +784,6 @@ function handleContact(e){
   const body = encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nMessage:\n'+msg);
   window.location.href = 'mailto:odetotheor@gmail.com?subject='+subject+'&body='+body;
 }
-// Case search
-(function(){
-  const input = document.getElementById('case-search');
-  const noRes = document.getElementById('no-results');
-  if(!input) return;
-  input.addEventListener('input', function(){
-    const q = this.value.trim().toLowerCase();
-    const cards = document.querySelectorAll('.case-card');
-    let visible = 0;
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      const topics = (card.dataset.topics || '').toLowerCase();
-      const match = !q || text.includes(q) || topics.includes(q);
-      card.style.display = match ? '' : 'none';
-      if(match) visible++;
-    });
-    noRes.style.display = (q && visible === 0) ? 'block' : 'none';
-  });
-})();
-
 </script>
 </body>
 </html>
