@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 002 — The Ninety Degrees | Ode to the OR</title>
+<meta name="description" content="A 42-year-old post-operative male on noradrenaline support, needing HD access. How a 90-degree probe rotation revealed a floating thrombus and prevented catastrophe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:800px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:#7a5abf;color:#7a5abf;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Decision flow cards */
+.decision-flow{display:grid;grid-template-columns:1fr;gap:0;margin:2rem 0;}
+.d-step{background:var(--surface);border:1px solid var(--border);padding:1.6rem 1.8rem;position:relative;}
+.d-step:not(:last-child){border-bottom:none;}
+.d-step::before{
+  content:attr(data-step);
+  position:absolute;top:-12px;left:1.8rem;
+  background:var(--rust);color:#f5f0e8;
+  font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.2rem .7rem;font-weight:600;
+}
+.d-step h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin-bottom:.5rem;margin-top:.2rem;}
+.d-step p{font-size:.88rem;margin-bottom:.4rem;}
+.d-step p:last-child{margin-bottom:0;}
+
+/* POCUS Panel */
+.pocus-panel{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border:1px solid var(--border);border-radius:2px;
+  padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.pocus-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, var(--rust), var(--gold));
+}
+.pocus-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);
+  margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;
+}
+.pocus-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+@media(max-width:700px){.pocus-grid{grid-template-columns:1fr;}}
+.pocus-view{background:rgba(245,240,232,.6);border:1px solid var(--border);padding:1.2rem;text-align:center;}
+.pocus-view-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;}
+.pocus-svg{width:100%;max-width:220px;height:auto;margin:0 auto;display:block;}
+.pocus-caption{font-size:.78rem;color:var(--muted);margin-top:.8rem;font-style:italic;}
+
+/* Clip Panel (POCUS GIF) */
+.clip-panel{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border:1px solid var(--border);border-radius:2px;
+  padding:2rem;margin:2rem 0;position:relative;overflow:hidden;text-align:center;
+}
+.clip-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, var(--rust), var(--gold));
+}
+.clip-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:1.2rem;}
+.clip-media{display:block;width:100%;max-width:480px;margin:0 auto;border:1px solid var(--border);border-radius:2px;background:var(--deep);}
+.clip-caption{font-size:.8rem;color:var(--muted);margin-top:1rem;font-style:italic;}
+
+/* Complications Matrix */
+.comp-matrix{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.comp-matrix th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;}
+.comp-matrix td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.comp-matrix tr:hover td{background:var(--deep);}
+.comp-sev{color:var(--rust);font-weight:600;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;}
+
+/* Guidelines Grid */
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.guide-grid{grid-template-columns:1fr;}}
+.guide-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.guide-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.guide-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+.guide-src{font-size:.65rem;color:var(--faint);letter-spacing:.06em;margin-top:.5rem;display:block;}
+
+/* Vitals box */
+.vitals-box{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:1.5rem 0;}
+.vitals-box h3{margin-top:0;}
+.vitals-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.5rem;font-size:.84rem;}
+.vitals-grid .k{color:var(--faint);}
+.vitals-grid .v{color:var(--text);font-weight:500;}
+
+/* Pearl box */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+/* Alert box */
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+/* Smooth fade-in */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.d-step, .pocus-panel, .guide-card, .pearl-box, .alert-box{animation:fadeUp .6s both;}
+.d-step:nth-child(1){animation-delay:.1s;}
+.d-step:nth-child(2){animation-delay:.2s;}
+.d-step:nth-child(3){animation-delay:.3s;}
+.d-step:nth-child(4){animation-delay:.4s;}
+.d-step:nth-child(5){animation-delay:.5s;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#cases">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../index.html#cases" class="back-link">← Back to all cases</a>
+
+<div class="wrap">
+
+  <div class="ey">Case 002 · Vascular Access · POCUS · Nephrology</div>
+  <h1>The Ninety Degrees</h1>
+  <p class="subtitle">The turn that changed the plan.</p>
+
+  <div class="meta-row">
+    <a href="../index.html?topic=vascular#cases" class="tag ta" data-topic="Vascular">Vascular Access</a>
+    <a href="../index.html?topic=icu#cases" class="tag tc" data-topic="ICU">ICU</a>
+    <a href="../index.html?topic=ultrasound#cases" class="tag tk" data-topic="Ultrasound">POCUS</a>
+    <a href="../index.html?topic=nephrology#cases" class="tag tp" data-topic="Nephrology">Nephrology</a>
+  </div>
+
+  <p>A 42-year-old male, postoperative day 2 after major abdominal surgery, was oliguric with rising urea and creatinine. Nephrology recommended urgent haemodialysis. He had a <strong>right internal jugular central line in situ, running a noradrenaline infusion</strong> for haemodynamic support. The plan was to place a dialysis catheter. The question was where.</p>
+
+  <p>The right femoral vein was assessed first. In <strong>transverse view</strong>, it looked normal — patent and compressible. On rotating the probe to <strong>longitudinal view</strong>, a small <strong>floating thrombus</strong> was seen. The femoral approach was abandoned. The left internal jugular vein was assessed, found clear, and a dialysis line was placed there uneventfully.</p>
+
+  <p>That 90-degree rotation was the difference between a routine procedure and a potentially catastrophic embolic event.</p>
+
+  <div class="divider"></div>
+
+  <h2>Clinical Picture</h2>
+
+  <div class="vitals-box">
+    <h3>At Consultation</h3>
+    <div class="vitals-grid">
+      <span class="k">Age / Sex</span><span class="v">42 years / Male</span>
+      <span class="k">Context</span><span class="v">Post-operative, major abdominal surgery (POD 2)</span>
+      <span class="k">Renal function</span><span class="v">Rising urea & creatinine — AKI Stage 3 (KDIGO)</span>
+      <span class="k">Urine output</span><span class="v">Oliguric</span>
+      <span class="k">Coagulation</span><span class="v">Mildly deranged</span>
+      <span class="k">Haemodynamic support</span><span class="v">Noradrenaline infusion via right IJV CVC</span>
+      <span class="k">Existing access</span><span class="v">Right IJV central line (active vasopressor)</span>
+      <span class="k">Nephrology plan</span><span class="v">Initiate haemodialysis</span>
+    </div>
+  </div>
+
+  <h2>The Decision Flow</h2>
+
+  <div class="decision-flow">
+    <div class="d-step" data-step="Step 1">
+      <h4>Assess the Existing Line</h4>
+      <p>The patient had a <strong>right IJV CVC</strong> actively infusing <strong>noradrenaline</strong>. This line was maintaining his perfusion pressure. Disturbing it risked haemodynamic collapse. Exchange over a wire was considered unattractive given his coagulopathy and the risk of malposition. Additionally, preserving internal jugular veins for future fistula formation is a core principle in renal replacement therapy planning. The right IJV was therefore both occupied and protected.</p>
+    </div>
+    <div class="d-step" data-step="Step 2">
+      <h4>Consider the Femoral Approach</h4>
+      <p>With the right IJV occupied and the left IJV not yet assessed, the <strong>right femoral vein</strong> was selected as the primary candidate. It offers a large-calibre vessel, is compressible if bleeding occurs, and allows straightforward ultrasound-guided cannulation. The plan was to assess the vessel with POCUS before puncture.</p>
+    </div>
+    <div class="d-step" data-step="Step 3">
+      <h4>Two-Plane POCUS Assessment</h4>
+      <p>The ultrasound probe was placed on the right femoral region. In <strong>transverse view</strong>, the vein was patent, compressible, and appropriately located medial to the artery. On switching to <strong>longitudinal view</strong>, a small <strong>floating thrombus</strong> was visualised within the femoral vein — an incidental finding that changed management entirely.</p>
+    </div>
+    <div class="d-step" data-step="Step 4">
+      <h4>Abandon Femoral, Reassess Left IJV</h4>
+      <p>The finding was communicated to the consultant. The femoral approach was abandoned. With the <strong>right IJV occupied by noradrenaline</strong> and the <strong>right femoral vein thrombosed</strong>, the <strong>left internal jugular vein</strong> became the viable option. It was assessed with ultrasound: patent, compressible, and without thrombus. A decision was made to proceed with ultrasound-guided HD line placement in the <strong>left IJV</strong>.</p>
+    </div>
+    <div class="d-step" data-step="Step 5">
+      <h4>Procedure & Outcome</h4>
+      <p>A dual-lumen haemodialysis catheter was placed in the left IJV under real-time ultrasound guidance using an in-plane longitudinal approach. The procedure was uncomplicated. The patient was connected to haemodialysis without delay, and the noradrenaline infusion continued uninterrupted through the right IJV line. A formal lower-limb venous Doppler was arranged post-procedure to characterise the femoral thrombus and guide anticoagulation.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>The POCUS Finding That Mattered</h2>
+  <p>The transverse view showed a normal, collapsible femoral vein. Had the examination stopped there, the needle would have entered a vein containing a floating thrombus. The longitudinal view revealed what the transverse view concealed: an echogenic, mobile intraluminal structure with a free-floating tail.</p>
+
+  <div class="pocus-panel">
+    <div class="pocus-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+      Why Two-Plane Imaging Is Non-Negotiable
+    </div>
+    <div class="pocus-grid">
+      <div class="pocus-view">
+        <div class="pocus-view-label">Transverse View</div>
+        <svg class="pocus-svg" viewBox="0 0 200 140">
+          <ellipse cx="100" cy="70" rx="60" ry="35" fill="none" stroke="#7a6455" stroke-width="2"/>
+          <ellipse cx="100" cy="70" rx="52" ry="28" fill="#e8e1d4" stroke="none"/>
+          <circle cx="165" cy="70" r="18" fill="none" stroke="#a89880" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <text x="165" y="100" text-anchor="middle" font-size="9" fill="#a89880" font-family="Instrument Sans,sans-serif">A</text>
+          <text x="100" y="74" text-anchor="middle" font-size="10" fill="#7a6455" font-family="Instrument Sans,sans-serif">Patent, collapsible</text>
+          <text x="100" y="125" text-anchor="middle" font-size="9" fill="#a89880" font-family="Instrument Sans,sans-serif" font-style="italic">Appears normal</text>
+        </svg>
+        <div class="pocus-caption">The transverse view shows a patent, compressible vein. No abnormality is apparent.</div>
+      </div>
+      <div class="pocus-view">
+        <div class="pocus-view-label">Longitudinal View — 90° Rotation</div>
+        <svg class="pocus-svg" viewBox="0 0 200 140">
+          <path d="M20,60 Q100,45 180,60 L180,90 Q100,105 20,90 Z" fill="none" stroke="#7a6455" stroke-width="2"/>
+          <path d="M24,62 Q100,48 176,62 L176,88 Q100,102 24,88 Z" fill="#e8e1d4" stroke="none"/>
+          <ellipse cx="110" cy="68" rx="18" ry="10" fill="#8b3a2a" opacity="0.85"/>
+          <path d="M128,68 Q145,62 155,55" fill="none" stroke="#8b3a2a" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="155" cy="55" r="3" fill="#8b3a2a"/>
+          <path d="M95,50 L105,45 L103,52" fill="none" stroke="#7a2020" stroke-width="1.2"/>
+          <path d="M125,85 L115,90 L117,83" fill="none" stroke="#7a2020" stroke-width="1.2"/>
+          <text x="100" y="125" text-anchor="middle" font-size="9" fill="#8b3a2a" font-family="Instrument Sans,sans-serif" font-weight="600">Floating thrombus visualised</text>
+        </svg>
+        <div class="pocus-caption">The longitudinal view reveals a mobile, echogenic intraluminal thrombus with a free-floating tail.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POCUS CLIP -->
+<div class="clip-panel">
+  <div class="clip-label">POCUS Clip — Longitudinal View, Floating Thrombus</div>
+
+  <video
+    class="clip-media"
+    controls
+    autoplay
+    muted
+    loop
+    playsinline>
+    <source src="../media/case-002-thrombus.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <p class="clip-caption">
+    De-identified longitudinal-view clip showing the mobile thrombus that changed the access plan.
+  </p>
+</div>
+
+  <div class="alert-box">
+    <h3>The Floating Thrombus: Why This Matters</h3>
+    <p>A <strong>free-floating (non-occlusive) thrombus</strong> in the femoral vein carries a significantly higher risk of embolisation than a wall-adherent thrombus. Manipulation of the vein — needle puncture, guidewire insertion, catheter advancement — can dislodge the thrombus, leading to <strong>pulmonary embolism</strong>. In a patient with a patent foramen ovale, paradoxical embolism to the systemic circulation (including <strong>stroke</strong>) is a catastrophic possibility. In a patient on noradrenaline for haemodynamic support, any additional cardiopulmonary insult could be fatal.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Complications Avoided</h2>
+  <p>By identifying the thrombus before needle insertion, the following complications were prevented:</p>
+
+  <table class="comp-matrix">
+    <thead>
+      <tr>
+        <th>Complication</th>
+        <th>Mechanism</th>
+        <th>Severity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Thrombus dislodgement → PE</strong></td>
+        <td>Mechanical disruption of free-floating thrombus by needle, wire, or catheter during cannulation</td>
+        <td><span class="comp-sev">Life-threatening</span></td>
+      </tr>
+      <tr>
+        <td><strong>Thrombus propagation</strong></td>
+        <td>Foreign body (catheter) placed in thrombosed segment acts as nidus for proximal and distal extension</td>
+        <td><span class="comp-sev">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Line dysfunction / occlusion</strong></td>
+        <td>Catheter tip embedded in thrombus prevents adequate blood flow for HD</td>
+        <td><span class="comp-sev">Moderate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Post-thrombotic syndrome</strong></td>
+        <td>Additional endothelial injury and thrombus extension increase risk of chronic venous insufficiency</td>
+        <td><span class="comp-sev">Moderate — Chronic</span></td>
+      </tr>
+      <tr>
+        <td><strong>Paradoxical embolism</strong></td>
+        <td>Dislodged thrombus crosses PFO → systemic embolisation (stroke, mesenteric, limb)</td>
+        <td><span class="comp-sev">Catastrophic</span></td>
+      </tr>
+      <tr>
+        <td><strong>Haemorrhage at puncture site</strong></td>
+        <td>Coagulopathy + venous puncture in partially thrombosed segment</td>
+        <td><span class="comp-sev">Moderate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Vasopressor interruption</strong></td>
+        <td>If right IJV had been disturbed during a rushed alternative approach</td>
+        <td><span class="comp-sev">Life-threatening</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2>Guidelines, Protocols & Evidence</h2>
+  <p>The following frameworks informed the clinical reasoning:</p>
+
+  <div class="guide-grid">
+    <div class="guide-card">
+      <h4>KDIGO AKI Criteria</h4>
+      <p>AKI is defined by a rise in serum creatinine ≥0.3 mg/dL within 48 hours, or ≥1.5× baseline within 7 days, or urine volume &lt;0.5 mL/kg/h for 6 hours. Stage 3 AKI mandates renal replacement therapy when accompanied by refractory fluid overload, hyperkalaemia, or uraemic complications.</p>
+      <span class="guide-src">KDIGO Clinical Practice Guideline for Acute Kidney Injury, 2012</span>
+    </div>
+    <div class="guide-card">
+      <h4>KDOQI Vascular Access</h4>
+      <p>The "Fistula First" initiative prioritises AV fistula creation for chronic HD. For acute dialysis, temporary catheters should avoid the internal jugular veins where possible if the patient may become a candidate for permanent access.</p>
+      <span class="guide-src">KDOQI Vascular Access Guideline, 2019 Update</span>
+    </div>
+    <div class="guide-card">
+      <h4>SIR / ASA CVC Guidelines</h4>
+      <p>Real-time ultrasound guidance is the standard of care for internal jugular and femoral vein cannulation. Pre-procedure ultrasound assessment of vessel patency, thrombosis, and adjacent structures is recommended.</p>
+      <span class="guide-src">SIR Quality Improvement Guidelines, 2010; ASA Practice Advisory, 2022</span>
+    </div>
+    <div class="guide-card">
+      <h4>ISTH / Thrombosis Guidance</h4>
+      <p>Free-floating proximal DVT carries a 2–3× higher risk of PE than wall-adherent thrombus. In acute illness with coagulopathy, the threshold for avoiding mechanical manipulation of a thrombosed vein should be low.</p>
+      <span class="guide-src">ISTH Scientific Subcommittee on DVT, 2021</span>
+    </div>
+    <div class="guide-card">
+      <h4>ECRI / POCUS Standards</h4>
+      <p>Two-plane imaging (transverse + longitudinal) is the minimum standard for comprehensive vascular assessment. The transverse view confirms vessel identity and patency; the longitudinal view assesses thrombus, valves, and intraluminal pathology.</p>
+      <span class="guide-src">ACEP Emergency Ultrasound Guidelines, 2016; WINFOCUS Consensus</span>
+    </div>
+    <div class="guide-card">
+      <h4>SCCM / Anticoagulation in AKI</h4>
+      <p>In AKI with DVT, anticoagulation must be balanced against bleeding risk. Low-molecular-weight heparin is preferred where renal function permits; unfractionated heparin is favoured in HD-dependent patients due to reversibility.</p>
+      <span class="guide-src">SCCM/ISTH Guideline on VTE Prophylaxis in Critical Illness, 2021</span>
+    </div>
+  </div>
+
+  <div class="pearl-box">
+    <h3>What I Keep Coming Back To</h3>
+    <p>Never declare a vein "clear" based on transverse imaging alone. The transverse view confirms vessel identity and compressibility. The longitudinal view detects <strong>intraluminal thrombus</strong>, assesses <strong>valve morphology</strong>, and confirms <strong>wire and catheter course</strong>. In vascular access, these two views are not alternatives — they are complementary halves of a complete examination. Skipping the longitudinal view is not a time-saving measure; it is a diagnostic omission. And when the patient in front of you is on noradrenaline, oliguric, and running out of access options, that omission can cost everything.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What This Case Is Really About</h2>
+  <p>This case is about <strong>the quiet diligence that prevents catastrophes before they begin.</strong> The SGE-ICU call was routine. The patient was typical of a post-operative abdomen — septic physiology, capillary leak, renal shutdown, vasopressor-dependent. The anatomy, on first glance, was unremarkable. The only thing that stood between an uncomplicated procedure and a potentially fatal pulmonary embolism was the habit of rotating the probe ninety degrees.</p>
+
+  <p>When a vessel looks normal in the view you expect to use, there is a powerful cognitive pull to proceed. The transverse view of the femoral vein was reassuring. The patient was unstable. The consultant was waiting. It would have been easy to rationalise skipping the longitudinal assessment. But the longitudinal view does not exist to confirm what you already believe. It exists to find what you are not looking for.</p>
+
+  <h3>Site Selection Hierarchy for Temporary HD Access</h3>
+  <ol>
+    <li><strong>Right internal jugular vein</strong> — Preferred for acute HD due to direct route to right atrium and lower infection risk. Avoid if occupied by vasopressors or if preserving for future fistula.</li>
+    <li><strong>Left internal jugular vein</strong> — Acceptable alternative; becomes the primary option when the right IJV is committed. Requires careful ultrasound assessment.</li>
+    <li><strong>Femoral vein</strong> — Useful when IJV is unavailable. Higher infection risk, limits mobility, and requires rigorous two-plane thrombus exclusion.</li>
+    <li><strong>Subclavian vein</strong> — Generally avoided for HD catheters due to high stenosis rates. Reserved for exceptional circumstances.</li>
+  </ol>
+
+  <div class="quote-box">
+    The transverse view tells you where the vessel is. The longitudinal view tells you what is inside it. Both are necessary. Neither is sufficient.
+    <span class="src">— What this case taught me</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox">
+    <h3>References</h3>
+    <ol>
+      <li>KDIGO AKI Work Group. KDIGO Clinical Practice Guideline for Acute Kidney Injury. <em>Kidney Int Suppl.</em> 2012;2(1):1–138.</li>
+      <li>Lok CE, Huber TS, Lee T, et al. KDOQI Clinical Practice Guideline for Vascular Access: 2019 Update. <em>Am J Kidney Dis.</em> 2020;75(4 Suppl 2):S1–S164.</li>
+      <li>Society of Interventional Radiology. Quality improvement guidelines for the performance of central venous access. <em>J Vasc Interv Radiol.</em> 2010;21(7):976–981.</li>
+      <li>Apfelbaum JL, Connis RT, Nickinovich DG, et al. Practice advisory for the prevention and management of operating room fires. <em>Anesthesiology.</em> 2022 (ASA Practice Advisory on CVC placement).</li>
+      <li>Di Nisio M, van Es N, Büller HR. Deep vein thrombosis and pulmonary embolism. <em>Lancet.</em> 2016;388(10063):3060–3073.</li>
+      <li>Keyes LE, Frazee BW, Snoey ER, et al. Ultrasound-guided brachial and basilic vein cannulation in emergency department patients with difficult intravenous access. <em>Ann Emerg Med.</em> 1999;34(6):711–714.</li>
+      <li>Brass P, Hellmich M, Kolodziej L, et al. Ultrasound guidance versus anatomical landmarks for internal jugular vein catheterization. <em>Cochrane Database Syst Rev.</em> 2015;(1):CD006962.</li>
+      <li>American College of Emergency Physicians. Emergency Ultrasound Guidelines. <em>Ann Emerg Med.</em> 2017;69(5):e27–e54.</li>
+      <li>Alhazzani W, Lim W, Jaeschke RZ, et al. Heparin thromboprophylaxis in medical-surgical critically ill patients: a systematic review and meta-analysis. <em>Crit Care Med.</em> 2013;41(9):2088–2098.</li>
+      <li>Parienti JJ, Mongardon N, Mégarbane B, et al. Intravascular complications of central venous catheterization by insertion site. <em>N Engl J Med.</em> 2015;373(13):1220–1229.</li>
+      <li>Levitov A, Frankel HL, Blaivas M, et al. Guidelines for the appropriate use of bedside general and cardiac ultrasonography in the evaluation of critically ill patients — Part I: General ultrasonography. <em>Crit Care Med.</em> 2016;44(6):1206–1227.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>July 2026</span>
+    <span>Vascular Access · POCUS · Nephrology · ICU · Vasopressors</span>
+  </div>
+
+  <p class="disclaim">This case has been fully de-identified. No institutional or departmental identifiers are included. Patient age, specific procedure details, vasopressor doses, and timeline elements have been generalised where necessary to protect confidentiality, consistent with HIPAA principles, India's Digital Personal Data Protection (DPDP) Act 2023, and NMC ethical guidelines. This content is for educational reflection only and does not represent the views of any institution, employer, or training program, and is not a substitute for independent clinical judgment.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
