@@ -187,6 +187,11 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
 .d-step:nth-child(3){animation-delay:.3s;}
 .d-step:nth-child(4){animation-delay:.4s;}
 .d-step:nth-child(5){animation-delay:.5s;}
+
+/* NEW: scroll hint link */
+.scroll-to-clip{text-align:center;margin:1.6rem 0;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;}
+.scroll-to-clip a{color:var(--sage);text-decoration:none;border-bottom:1px solid var(--sage);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.scroll-to-clip a:hover{color:var(--rust);border-color:var(--rust);}
 </style>
 </head>
 <body>
@@ -224,6 +229,9 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <p>The right femoral vein was assessed first. In <strong>transverse view</strong>, it looked normal — patent and compressible. On rotating the probe to <strong>longitudinal view</strong>, a small <strong>floating thrombus</strong> was seen. The femoral approach was abandoned. The left internal jugular vein was assessed, found clear, and a dialysis line was placed there uneventfully.</p>
 
   <p>That 90-degree rotation was the difference between a routine procedure and a potentially catastrophic embolic event.</p>
+
+  <!-- NEW: scroll hint -->
+  <p class="scroll-to-clip"><a href="#pocus-clip">↓ Scroll down to view the POCUS clip</a></p>
 
   <div class="divider"></div>
 
@@ -311,25 +319,25 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
   </div>
 
-  <!-- POCUS CLIP -->
-<div class="clip-panel">
-  <div class="clip-label">POCUS Clip — Longitudinal View, Floating Thrombus</div>
+  <!-- POCUS CLIP — id added here -->
+  <div class="clip-panel" id="pocus-clip">
+    <div class="clip-label">POCUS Clip — Longitudinal View, Floating Thrombus</div>
 
-  <video
-    class="clip-media"
-    controls
-    autoplay
-    muted
-    loop
-    playsinline>
-    <source src="../media/case-002-thrombus.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+    <video
+      class="clip-media"
+      controls
+      autoplay
+      muted
+      loop
+      playsinline>
+      <source src="../media/case-002-thrombus.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-  <p class="clip-caption">
-    De-identified longitudinal-view clip showing the mobile thrombus that changed the access plan.
-  </p>
-</div>
+    <p class="clip-caption">
+      De-identified longitudinal-view clip showing the mobile thrombus that changed the access plan.
+    </p>
+  </div>
 
   <div class="alert-box">
     <h3>The Floating Thrombus: Why This Matters</h3>
