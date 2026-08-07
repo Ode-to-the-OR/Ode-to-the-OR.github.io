@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 003 — The Isolation We Could See | Ode to the OR</title>
+<meta name="description" content="A 15-year-old undergoing right VATS metastasectomy. Multimodal DLT confirmation using auscultation, fibreoptic bronchoscopy, chest excursion, and lung ultrasound — with complications, guidelines, and protocols.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:780px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,5vw,3.4rem);font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:1.2rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tt{border-color:var(--teal);color:var(--teal);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.8rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Patient at a glance */
+.patient-glance{background:var(--surface);border:1px solid var(--border);padding:1.6rem 1.8rem;margin:1.5rem 0;}
+.patient-glance h3{margin-top:0;font-size:1.05rem;color:var(--rust);}
+.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 2rem;font-size:.84rem;margin-top:1rem;}
+.pg-grid .k{color:var(--faint);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem;}
+.pg-grid .v{color:var(--text);font-weight:500;}
+
+/* Pearl box */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Complications grid */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1.5rem 0;}
+.comp-cell{background:var(--deep);padding:1.3rem 1.4rem;}
+.comp-cell h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:.5rem;}
+.comp-cell p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.65;}
+
+/* Guidelines box */
+.guideline-box{background:var(--night);border:2px solid var(--border);padding:1.6rem 1.8rem;margin:1.6rem 0;position:relative;}
+.guideline-box::before{content:"GUIDELINES & PROTOCOLS";position:absolute;top:-.65rem;left:1.5rem;background:var(--night);padding:0 .6rem;font-size:.58rem;letter-spacing:.18em;color:var(--faint);}
+.guideline-box h3{margin-top:.3rem;font-size:1.1rem;color:var(--teal);}
+.guideline-box ul{margin-bottom:0;}
+.guideline-box li{font-size:.86rem;margin-bottom:.45rem;}
+
+/* Protocol flow */
+.protocol-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;border-left:2px solid var(--border);padding-left:1.4rem;}
+.pf-item{position:relative;padding-bottom:1.4rem;}
+.pf-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--night);}
+.pf-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;}
+.pf-body{font-size:.88rem;color:var(--muted);}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.45rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:700px){
+  .pg-grid{grid-template-columns:1fr;}
+  .comp-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#cases">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../index.html#cases" class="back-link">← Back to all cases</a>
+
+<div class="wrap">
+
+  <div class="ey">Case 003 · Thoracic · Paediatric-Adolescent · Point-of-Care Ultrasound</div>
+  <h1><em>Isolation</em> We Could See</h1>
+
+  <div class="meta-row">
+    <a href="../index.html?topic=thoracic#cases" class="tag ta" data-topic="Thoracic">Thoracic</a>
+    <a href="../index.html?topic=airway#cases" class="tag tc" data-topic="Airway">Airway</a>
+    <a href="../index.html?topic=ultrasound#cases" class="tag tk" data-topic="Ultrasound">Ultrasound</a>
+    <a href="../index.html?topic=vats#cases" class="tag ti" data-topic="VATS">VATS</a>
+  </div>
+
+  <p>A 15-year-old with metastatic osteosarcoma underwent right VATS metastasectomy. This case is about why we used four separate modalities — including lung ultrasound — to confirm DLT position. In thoracic anaesthesia, redundancy is standard of care, not overcaution.</p>
+
+  <p style="font-size:.78rem;color:var(--faint);margin:1.5rem 0 0;display:flex;align-items:center;gap:.6rem;">
+    <span style="font-size:1rem;">↓</span>
+    <a href="#ultrasound-clips" style="color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(42,90,82,.3);padding-bottom:1px;">Scroll to see ultrasound clips</a>
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>The Patient at a Glance</h2>
+  <div class="patient-glance">
+    <h3>Clinical snapshot</h3>
+    <div class="pg-grid">
+      <div><span class="k">Age / Sex</span><span class="v">15 years / Male</span></div>
+      <div><span class="k">Diagnosis</span><span class="v">Metastatic osteosarcoma</span></div>
+      <div><span class="k">Prior surgery</span><span class="v">Left proximal humerus wide excision, shoulder arthrodesis with plate, free fibula flap</span></div>
+      <div><span class="k">Current imaging</span><span class="v">Calcific nodules — pleural base of right upper lobe, posterior basal segment of right middle lobe, left costophrenic angle calcification</span></div>
+      <div><span class="k">Height / Weight</span><span class="v">171 cm / 64 kg</span></div>
+      <div><span class="k">Functional status</span><span class="v">NYHA Class I</span></div>
+      <div><span class="k">Planned procedure</span><span class="v">Right pulmonary metastasectomy via VATS — requires right lung isolation</span></div>
+      <div><span class="k">Airway plan</span><span class="v">39 Fr left-sided double-lumen endotracheal tube (DLT)</span></div>
+    </div>
+  </div>
+
+  <p>The calcific pleural nodules meant the right pleural surface was not pristine. A baseline lung ultrasound was necessary to document these findings before induction so they would not be mistaken for intraoperative complications.</p>
+
+  <h2>The Choice of Isolation</h2>
+  <p>For right-sided thoracic surgery, a <strong>left-sided DLT</strong> is the default. The right main bronchus is short with an early upper-lobe take-off, leaving little margin for error. A right-sided DLT requires precise slot alignment with the right upper lobe orifice — difficult in smaller airways.</p>
+
+  <p>The patient was 171 cm, 64 kg. Adult algorithms place him at 37–39 Fr. We selected a <strong>39 Fr left-sided DLT</strong>. A 37 Fr might seal poorly in a near-adult trachea; the 39 Fr bronchial limb would still seat in a left main bronchus of ~10–12 mm.</p>
+
+  <div class="pearl-box">
+    <h3>Sizing in near-adult patients</h3>
+    <p>In adolescents, DLT size is best guided by <strong>tracheal width on CT</strong> (&gt;14 mm → 39 Fr; 12–14 mm → 37 Fr). If CT is unavailable, prepare both sizes and assess tracheal calibre after induction. Bronchial blockers are an alternative when sizing is uncertain.</p>
+  </div>
+
+  <h2>The Four-Witness Confirmation Cascade</h2>
+  <p>No single method of DLT confirmation is infallible. The 2022 ESAIC/ESTS guidelines, ASA practice parameters, and AIDAA recommendations all converge on <strong>multimodal confirmation</strong>. We structured ours as a cascade — each layer adding specificity, with lung ultrasound as the final witness.</p>
+
+  <div style="margin:1.5rem 0;border-top:1px solid var(--border);">
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">I</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Bilateral Chest Auscultation</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">Symmetrical breath sounds on the left; markedly diminished on the right with clamping. Sounds returned on unclamping. Limitation: subjectivity; cannot distinguish endobronchial migration from mainstem occlusion.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">II</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Direct Fibreoptic Bronchoscopy — Gold Standard</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">Carina visible distal to the tracheal cuff; bronchial cuff seated in the left main bronchus; right main bronchus patent; no airflow on clamping. Anatomical certainty, but a <strong>static snapshot</strong> — it cannot confirm dynamic isolation.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">III</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Visual Assessment of Chest Wall Excursion</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">In left lateral decubitus, the <strong>left hemithorax moved symmetrically</strong> with each breath; the <strong>right remained static</strong> after clamping. Limitation: subtle in compliant chest walls; cannot detect proximal leak.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">IV</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Lung Ultrasound — Dynamic Witness</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;"><strong>Baseline LUS</strong> before induction documented sliding bilaterally. After DLT and OLV: <strong>clear sliding on the left</strong>; <strong>minimal-to-absent on the right</strong>, consistent with effective collapse. Physiological proof.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ULTRASOUND DOCUMENTATION -->
+  <div id="ultrasound-clips" style="scroll-margin-top:90px;"></div>
+  <h2>Ultrasound Documentation</h2>
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1.2rem;">All clips acquired with a linear high-frequency probe (6–13 MHz), longitudinal plane, marker cephalad. Gain and depth optimised for pleural line visualisation. Videos shown at original speed without enhancement.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0;">
+
+    <!-- CLIP 3: LEFT LUNG OLV -->
+    <div style="background:var(--surface);border:1px solid var(--border);overflow:hidden;">
+      <div style="background:#1a1a1a;aspect-ratio:4/3;position:relative;">
+        <video controls style="width:100%;height:100%;object-fit:cover;display:block;" poster="">
+          <source src="../media/Case003_Video01_Left_BMode_Sliding.mp4" type="video/mp4">
+        </video>
+        <div style="position:absolute;top:.5rem;left:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(42,90,82,.7);padding:.15rem .4rem;border-radius:2px;">LEFT LUNG — OLV</div>
+        <div style="position:absolute;top:.5rem;right:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(46,32,24,.6);padding:.15rem .4rem;border-radius:2px;">B-MODE</div>
+      </div>
+      <div style="padding:.9rem 1.1rem;">
+        <div style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;">🫁 Clip 3 · Left Lung During One-Lung Ventilation</div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.55;">Pleural sliding present. Longitudinal B-mode scan demonstrating normal pleural sliding synchronous with ventilation during one-lung ventilation.</div>
+      </div>
+    </div>
+
+    <!-- CLIP 4: RIGHT LUNG OLV -->
+    <div style="background:var(--surface);border:1px solid var(--border);overflow:hidden;">
+      <div style="background:#1a1a1a;aspect-ratio:4/3;position:relative;">
+        <video controls style="width:100%;height:100%;object-fit:cover;display:block;" poster="">
+          <source src="../media/Case003_Video02_Right_BMode_NoSliding.mp4" type="video/mp4">
+        </video>
+        <div style="position:absolute;top:.5rem;left:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(122,32,32,.7);padding:.15rem .4rem;border-radius:2px;">RIGHT LUNG — OLV</div>
+        <div style="position:absolute;top:.5rem;right:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(46,32,24,.6);padding:.15rem .4rem;border-radius:2px;">B-MODE</div>
+      </div>
+      <div style="padding:.9rem 1.1rem;">
+        <div style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">🫁 Clip 4 · Right Lung During One-Lung Ventilation</div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.55;">Pleural sliding absent. Longitudinal B-mode scan demonstrating absence of pleural sliding after successful right lung isolation.</div>
+      </div>
+    </div>
+
+    <!-- FIGURE 1: LEFT M-MODE -->
+    <div style="background:var(--surface);border:1px solid var(--border);overflow:hidden;">
+      <div style="background:#1a1a1a;aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;">
+        <img src="../media/Case003_Figure01_Left_MMode_Seashore.jpg" alt="Case003_Figure01_Left_MMode_Seashore" style="max-width:100%;max-height:100%;object-fit:contain;display:block;">
+        <div style="position:absolute;top:.5rem;left:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(42,90,82,.7);padding:.15rem .4rem;border-radius:2px;">LEFT LUNG — OLV</div>
+        <div style="position:absolute;top:.5rem;right:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(46,32,24,.6);padding:.15rem .4rem;border-radius:2px;">M-MODE</div>
+      </div>
+      <div style="padding:.9rem 1.1rem;">
+        <div style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;">📈 Figure 1 · Left Lung M-mode</div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.55;">Classic seashore sign, confirming ventilation.</div>
+      </div>
+    </div>
+
+    <!-- FIGURE 2: RIGHT M-MODE -->
+    <div style="background:var(--surface);border:1px solid var(--border);overflow:hidden;">
+      <div style="background:#1a1a1a;aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;">
+        <img src="../media/Case003_Figure02_Right_MMode_Barcode.jpg" alt="Case003_Figure02_Right_MMode_Barcode" style="max-width:100%;max-height:100%;object-fit:contain;display:block;">
+        <div style="position:absolute;top:.5rem;left:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(122,32,32,.7);padding:.15rem .4rem;border-radius:2px;">RIGHT LUNG — OLV</div>
+        <div style="position:absolute;top:.5rem;right:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.8);background:rgba(46,32,24,.6);padding:.15rem .4rem;border-radius:2px;">M-MODE</div>
+      </div>
+      <div style="padding:.9rem 1.1rem;">
+        <div style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">📈 Figure 2 · Right Lung M-mode</div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.55;">Barcode (stratosphere) sign, consistent with absence of pleural sliding during lung isolation.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Optional baseline clips note -->
+  <div style="background:var(--deep);border:1px dashed var(--border);padding:.9rem 1.1rem;margin:0 0 1.2rem;font-size:.78rem;color:var(--muted);line-height:1.6;">
+    <strong style="color:var(--text);">Optional baseline clips:</strong> If available, pre-induction B-mode clips of both lungs (bilateral pleural sliding present) can be added above as Clip 1 and Clip 2. This creates a direct before/after comparison: both lungs slide before DLT placement; after DLT and clamping, only the left slides.
+  </div>
+
+  <div style="font-size:.75rem;color:var(--faint);line-height:1.6;margin-bottom:1.5rem;border-top:1px solid var(--border);padding-top:.8rem;">
+    Real intraoperative lung ultrasound acquired during this case. All patient identifiers have been removed. Videos are shown at original speed without image enhancement.
+  </div>
+
+  <h2>Why Lung Ultrasound Was Added</h2>
+  <p>LUS has become an adjunct standard in thoracic anaesthesia. The physics is simple: <strong>pleural sliding requires apposition of visceral and parietal pleura</strong>. In a collapsed lung, the visceral pleura separates; the pleural line becomes static.</p>
+
+  <p>In this patient, LUS served three functions:</p>
+  <ul>
+    <li><strong>Baseline documentation:</strong> Recorded sliding bilaterally and documented calcific nodules so they would not be mistaken for pneumothorax or consolidation.</li>
+    <li><strong>Dynamic confirmation:</strong> Absent sliding on the right and preserved sliding on the left proved OLV was effective — not merely that the tube was anatomically positioned.</li>
+    <li><strong>Safety net:</strong> LUS can be repeated after repositioning without re-inserting the bronchoscope, catching DLT migration early.</li>
+  </ul>
+
+  <div class="quote-box">
+    LUS does not replace bronchoscopy. It answers a different question: not "is the tube in the right place?" but "is the lung actually isolated?"
+    <span class="src">— Adapted from Acosta et al., 2019</span>
+  </div>
+
+  <h2>When DLTs Go Wrong: A Complications Framework</h2>
+  <p>DLT complications are predictable risks organised by mechanism: <strong>malposition-related</strong>, <strong>ventilation-related</strong>, and <strong>positioning-related</strong>.</p>
+
+  <div class="comp-grid">
+    <div class="comp-cell">
+      <h4>Hypoxaemia</h4>
+      <p>Most common OLV complication. From V/Q mismatch or shunt. Management: increase FiO₂, CPAP 5–10 cmH₂O to non-dependent lung, or intermittent reinflation.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Barotrauma &amp; Volutrauma</h4>
+      <p>One lung receives the entire tidal volume. Keep plateau pressure &lt;25–30 cmH₂O. Higher pressures risk pneumothorax, especially if the DLT migrates proximally.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Soiling / Aspiration</h4>
+      <p>Incomplete isolation allows secretions from the operative side to spill into the ventilated lung. Prevented by precise positioning and pre-operative suctioning.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Airway Injury</h4>
+      <p>Bulky tubes risk mucosal ischaemia or tracheobronchial rupture if the cuff is overinflated or positioned too distally. Keep cuff pressure &lt;30 cmH₂O.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Wrong-Sided Placement</h4>
+      <p>A left-sided DLT in the right main bronchus occludes the contralateral lung and ventilates only the operative side — immediate hypoxaemia. Bronchoscopy is non-negotiable.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Proximal Migration</h4>
+      <p>The bronchial cuff slips back into the trachea, herniating over the carina and occluding both bronchi. Sudden inability to ventilate with rising pressures. Requires immediate repositioning.</p>
+    </div>
+  </div>
+
+  <h2>Guidelines, Protocols, and the Evidence Base</h2>
+  <p>The approach aligned with the following evidence base:</p>
+
+  <div class="guideline-box">
+    <h3>Key guidelines</h3>
+    <ul>
+      <li><strong>ASA Practice Parameters (2020):</strong> Bronchoscopy is gold standard; auscultation and clinical assessment are essential adjuncts. No single modality is sufficient.</li>
+      <li><strong>ESAIC/ESTS (2022):</strong> Pre-operative airway assessment, appropriate sizing, bronchoscopy after insertion and after repositioning. LUS is an emerging adjunct for confirming collapse.</li>
+      <li><strong>AIDAA (2022):</strong> Tiered approach for resource-limited settings — auscultation, capnography, then bronchoscopy. LUS recognised as useful where trained operators are available.</li>
+      <li><strong>STS / EACTS:</strong> Lung-protective OLV: tidal volumes 4–6 mL/kg PBW, plateau pressure &lt;25 cmH₂O, PEEP titrated to the dependent lung.</li>
+    </ul>
+  </div>
+
+  <h3>LUS evidence</h3>
+  <ul>
+    <li><strong>Acosta et al. (2019):</strong> Absent pleural sliding on the non-ventilated side had <strong>100% sensitivity and 93% specificity</strong> for confirming lung isolation (CT reference).</li>
+    <li><strong>Bouhemad et al. (2015):</strong> Established ultrasound patterns for collapse — transition from sliding to static pleural line with tissue-like patterns.</li>
+    <li><strong>Song et al. (2020):</strong> LUS after lateral positioning detected DLT migration in <strong>12% of cases</strong> correctly positioned supine.</li>
+  </ul>
+
+  <h3>Stepwise DLT confirmation protocol</h3>
+
+  <div class="protocol-flow">
+    <div class="pf-item">
+      <div class="pf-title">Step 1 — Pre-operative</div>
+      <div class="pf-body">Review CT for tracheal width and bronchial anatomy. Perform <strong>baseline LUS</strong> bilaterally.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 2 — Insertion</div>
+      <div class="pf-body">Place left-sided DLT. Inflate tracheal cuff. Confirm bilateral breath sounds. Reposition if asymmetrical.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 3 — Bronchoscopy (supine)</div>
+      <div class="pf-body">Visualise carina, cuff position, and right main bronchus patency. Inflate bronchial cuff to seal at &lt;30 cmH₂O.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 4 — LUS confirmation (supine)</div>
+      <div class="pf-body">Clamp right lumen. Confirm <strong>absent sliding on right, preserved on left</strong>. Persistent right sliding suggests incomplete isolation.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 5 — Repositioning &amp; re-check</div>
+      <div class="pf-body">After lateral decubitus, repeat auscultation and LUS. Repeat bronchoscopy if any ambiguity.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 6 — Intraoperative vigilance</div>
+      <div class="pf-body">Monitor SpO₂, EtCO₂, pressures, and compliance. Sudden change triggers reassessment: tube depth → bronchoscopy → LUS → ventilator settings.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What I Keep Coming Back To</h2>
+  <p>In thoracic anaesthesia, certainty is built in layers. The bronchoscope gave us anatomy, but the ultrasound gave us physiology — the actual movement of the pleura proving one lung was ventilated and the other was still. The baseline scan documented calcific nodules before induction so they were never mistaken for complications later. Re-checking after lateral positioning caught what a single static check would have missed. The lesson is simple: use every tool available, and document what you see before you need to interpret what has changed.</p>
+
+  <div class="refbox">
+    <h3>References</h3>
+    <ol>
+      <li>Acosta CM, Tusman G, Niklison L, et al. Accuracy of transthoracic lung ultrasound for confirming correct location of double-lumen tube: a prospective diagnostic trial. <em>J Cardiothorac Vasc Anesth.</em> 2019;33(3):692–700.</li>
+      <li>Bouhemad B, Mongodi S, Via G, Rouquette I. Ultrasound for "lung monitoring" of mechanically ventilated patients. <em>Intensive Care Med.</em> 2015;41(3):444–445.</li>
+      <li>Song IK, Kim HJ, Kim EH, et al. Utility of transthoracic ultrasound to assess lung collapse after application of one-lung ventilation in children. <em>Paediatr Anaesth.</em> 2020;30(4):472–480.</li>
+      <li>Campos JH. Update on tracheobronchial anatomy and flexible fiberoptic bronchoscopy in thoracic anesthesia. <em>Curr Opin Anaesthesiol.</em> 2020;33(1):6–13.</li>
+      <li>Lohser J, Slinger P. Lung isolation and one-lung ventilation. In: <em>Miller's Anesthesia.</em> 9th ed. Elsevier; 2020: Chapter 54.</li>
+      <li>Senturk M, Orhan ME, Ozcan PE. Thoracic anaesthesia and lung isolation: ESAIC/ESTS joint guidelines. <em>Eur J Anaesthesiol.</em> 2022;39(8):599–621.</li>
+      <li>Myles PS, Ball D. Current state of one-lung ventilation. <em>Anesthesiol Clin.</em> 2020;38(4):735–751.</li>
+      <li>AIDAA Guidelines Committee. Recommendations for airway management in thoracic surgery. <em>Indian J Anaesth.</em> 2022;66(Suppl 2):S112–S120.</li>
+      <li>Clayton-Smith A, Bennett J, Alston RP, et al. A comparison of the efficacy and safety of supraglottic airway devices and double-lumen tubes for lung isolation: a systematic review and meta-analysis. <em>Anaesthesia.</em> 2021;76(9):1251–1262.</li>
+      <li>El-Boghdadly K, Onwochei DN, Cuddihy J, Ahmad I. A prospective cohort study of awake fibreoptic bronchial intubation for thoracic surgery. <em>Anaesthesia.</em> 2020;75(6):769–775.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>July 2026</span>
+    <span>Thoracic · Airway · Ultrasound · VATS</span>
+  </div>
+
+  <p class="disclaim">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles, the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India), and the ethical mandates of the <strong>National Medical Commission (NMC) of India</strong>. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
