@@ -23,6 +23,7 @@
   --amber:   #b8831a;
   --rust:    #7a2020;
   --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
   --discord: #5865F2;
   --wa:      #25d366;
 }
@@ -301,6 +302,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   .stats-bar{grid-template-columns:repeat(2,1fr);}
 }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -356,8 +358,8 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 
 <!-- STATS BAR -->
 <div class="stats-bar" style="grid-template-columns:repeat(4,1fr);">
-  <div class="st"><span class="st-n">2</span><span class="st-l">Cases Published</span></div>
-  <div class="st"><span class="st-n">7</span><span class="st-l">Topics Covered</span></div>
+  <div class="st"><span class="st-n">3</span><span class="st-l">Cases Published</span></div>
+  <div class="st"><span class="st-n">9</span><span class="st-l">Topics Covered</span></div>
   <div class="st"><span class="st-n">—</span><span class="st-l">Research Projects</span></div>
   <div class="st"><span class="st-n">1</span><span class="st-l">Honest Resident</span></div>
 </div>
@@ -411,16 +413,14 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
         <button class="tbtn" data-topic="robotic">Robotic</button>
         <button class="tbtn" data-topic="nephrology">Nephrology</button>
         <button class="tbtn" data-topic="ultrasound">POCUS</button>
+        <button class="tbtn" data-topic="vats">VATS</button>
       </div>
       <div class="filter-status" id="filter-status">
         <span id="filter-status-text">Filtering: —</span>
         <button id="filter-clear">Clear</button>
       </div>
     </div>
-    <div class="sbox">
-      <h4>Latest OR Diary Entries</h4>
-      <div class="mini-entry"><span class="mini-date">—</span>Entries will appear here as cases are published.</div>
-    </div>
+    
   </div>
 </section>
 
@@ -460,12 +460,28 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
       </div>
     </a>
 
-    <div class="cc" style="background:var(--surface);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;min-height:200px;">
-      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Ongoing</span>
-      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--faint);font-style:italic;">From the OR</span>
-    </div>
+    <!-- CASE 003 — LIVE -->
+    <a href="cases/case-003.html" class="cc" data-topics="thoracic,airway,ultrasound,vats" style="text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.7rem;gap:1rem;">
+      <div>
+        <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;">Case 003 · July 2026</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:600;line-height:1.2;color:var(--text);margin-bottom:.7rem;">The <em style="font-style:italic;color:var(--rust);">Isolation</em> We Could See</h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin:0;">A 15-year-old undergoing right VATS metastasectomy. Four separate modalities — including lung ultrasound — to confirm DLT position.</p>
+      </div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap;padding-top:.8rem;border-top:1px solid var(--border);">
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--sage);color:var(--sage);">Thoracic</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--rust);color:var(--rust);">Airway</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--amber);color:var(--amber);">POCUS</span>
+        <span style="font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid var(--indigo);color:var(--indigo);">VATS</span>
+      </div>
+    </a>
+
+
 
   </div>
+
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="#cases" class="read-link" style="font-size:.72rem;">Browse all cases →</a>
+    </div>
 </section>
 
 <!-- OR DIARIES -->
