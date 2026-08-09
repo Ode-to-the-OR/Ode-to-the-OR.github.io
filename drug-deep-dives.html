@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///C:/Users/Rushika/Downloads/drug-deep-dives.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drug Deep Dives — Ode to the OR</title>
+<meta name="description" content="One drug at a time. What the textbook says versus what actually happens in practice. From Ode to the OR.">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./drug-deep-dives_files/css2" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* HEADER */
+.page-head{padding:7rem 5vw 2.5rem;max-width:1200px;margin:0 auto;}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.page-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:.8rem;}
+.page-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.page-head p{font-size:.88rem;color:var(--muted);max-width:560px;line-height:1.75;font-weight:300;}
+
+/* LAYOUT */
+.layout{max-width:1200px;margin:0 auto;padding:0 5vw 5rem;display:grid;grid-template-columns:240px 1fr;gap:2.5rem;align-items:start;}
+@media(max-width:900px){ .layout{grid-template-columns:1fr;} }
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:76px;display:flex;flex-direction:column;gap:1rem;}
+.sbox{background:var(--surface);border:1px solid var(--border);padding:1.2rem;}
+.sbox h4{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.search-wrap{position:relative;}
+.search-input{width:100%;padding:.55rem .6rem .55rem 2rem;background:var(--deep);border:1px solid var(--border);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:.78rem;font-weight:300;transition:border-color .2s;border-radius:3px;}
+.search-input::placeholder{color:var(--faint);}
+.search-input:focus{outline:none;border-color:var(--rust);}
+.search-icon{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:12px;height:12px;color:var(--faint);pointer-events:none;}
+.topic-grid{display:flex;flex-wrap:wrap;gap:.3rem;}
+.tbtn{font-size:.6rem;padding:.28rem .55rem;background:var(--deep);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .2s;border-radius:3px;font-weight:400;}
+.tbtn:hover{background:var(--rust);color:#f5f0e8;border-color:var(--rust);}
+.tbtn.active{background:var(--rust);color:#f5f0e8;border-color:var(--rust);}
+.filter-status{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.7rem;display:none;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.filter-status.on{display:flex;}
+.filter-status button{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--faint);color:var(--muted);padding:.12rem .45rem;cursor:pointer;font-family:'Instrument Sans',sans-serif;border-radius:2px;transition:all .2s;}
+.filter-status button:hover{border-color:var(--rust);color:var(--rust);}
+.sort-select{width:100%;padding:.55rem .6rem;background:var(--deep);border:1px solid var(--border);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:.78rem;cursor:pointer;border-radius:3px;}
+.result-count{font-size:.72rem;color:var(--faint);letter-spacing:.05em;}
+
+/* ENTRY LIST */
+.entry-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.cc{
+  background:var(--deep);
+  padding:1.1rem 1.3rem;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:1.2rem;
+  align-items:center;
+  text-decoration:none;
+  transition:background .25s;
+  position:relative;
+}
+.cc:hover{background:var(--surface);}
+.cc[hidden]{display:none;}
+.cc-left{min-width:90px;}
+.cc-num{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--border);line-height:1;display:block;margin-bottom:.25rem;}
+.cc-date{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+.cc-body{min-width:0;}
+.cc-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;line-height:1.25;color:var(--text);margin-bottom:.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cc-title em{font-style:italic;color:var(--rust);}
+.cc-exc{font-size:.78rem;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.cc-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;min-width:110px;}
+.cc-tags{display:flex;gap:.3rem;flex-wrap:wrap;justify-content:flex-end;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .45rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tr{border-color:var(--gold);color:var(--gold);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.to{border-color:var(--rose);color:var(--rose);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.tt{border-color:var(--teal);color:var(--teal);}
+.cc-arrow{font-size:.9rem;color:var(--faint);transition:transform .2s,color .2s;}
+.cc:hover .cc-arrow{color:var(--rust);transform:translateX(3px);}
+
+.no-results{text-align:center;padding:3.5rem 1.5rem;color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;background:var(--deep);display:none;}
+.no-results.on{display:block;}
+.no-results a{color:var(--rust);}
+
+.placeholder-cc{background:var(--surface);padding:1.4rem 1.3rem;display:flex;align-items:center;justify-content:center;gap:.8rem;color:var(--faint);}
+.placeholder-cc span:first-child{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.placeholder-cc span:last-child{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;}
+
+@media(max-width:900px){
+  .sidebar{position:static;margin-bottom:1rem;}
+  .cc{grid-template-columns:1fr;gap:.6rem;}
+  .cc-left{display:flex;align-items:baseline;gap:.7rem;}
+  .cc-num{font-size:1.3rem;margin-bottom:0;}
+  .cc-right{align-items:flex-start;}
+  .cc-tags{justify-content:flex-start;}
+  .cc-title{white-space:normal;}
+}
+@media(max-width:500px){
+  .page-head{padding:5.5rem 5vw 2rem;}
+  .cc{padding:.9rem 1rem;}
+}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+</style>
+<!--<base target="_blank">--><base href="." target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="file:///C:/Users/Rushika/Downloads/index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="file:///C:/Users/Rushika/Downloads/cases.html">Cases</a></li>
+    <li><a href="file:///C:/Users/Rushika/Downloads/index.html#diaries">OR Diaries</a></li>
+    <li><a href="file:///C:/Users/Rushika/Downloads/index.html#letters">Letters</a></li>
+    <li><a href="file:///C:/Users/Rushika/Downloads/index.html#explore" class="current">Explore</a></li>
+    <li><a href="file:///C:/Users/Rushika/Downloads/index.html#community">Community</a></li>
+    <li><a href="file:///C:/Users/Rushika/Downloads/index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="page-head">
+  <div class="ey">Drug Deep Dives</div>
+  <h1>One drug. <em>What actually happens.</em></h1>
+  <p>A closer look at the drugs we use every day — mechanism, pharmacology, clinical reasoning, and the details that matter at the bedside.</p>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sbox">
+      <h4>Search</h4>
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="entry-search" class="search-input" placeholder="Search drug, class, keyword…" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="sbox">
+      <h4>Sort By</h4>
+      <select id="sort-select" class="sort-select">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="az">Title A–Z</option>
+      </select>
+    </div>
+
+    <div class="sbox">
+      <h4>Drug Class</h4>
+      <div class="topic-grid" id="topic-grid">
+        <button class="tbtn" data-topic="induction">Induction Agents</button>
+        <button class="tbtn" data-topic="opioids">Opioids</button>
+        <button class="tbtn" data-topic="nmba">NMBAs</button>
+        <button class="tbtn" data-topic="reversal">Reversal Agents</button>
+        <button class="tbtn" data-topic="vasopressors">Vasopressors</button>
+        <button class="tbtn" data-topic="local">Local Anaesthetics</button>
+        <button class="tbtn" data-topic="sedatives">Sedatives</button>
+        <button class="tbtn" data-topic="antiemetics">Antiemetics</button>
+        <button class="tbtn" data-topic="anticoagulants">Anticoagulants</button>
+        <button class="tbtn" data-topic="cardiac">Cardiac Drugs</button>
+        <button class="tbtn" data-topic="pediatric">Pediatric Dosing</button>
+        <button class="tbtn" data-topic="obstetric">Obstetric Use</button>
+      </div>
+      <div class="filter-status" id="filter-status">
+        <span id="filter-status-text">Filtering: —</span>
+        <button id="filter-clear">Clear</button>
+      </div>
+    </div>
+
+    <div class="sbox">
+      <span class="result-count" id="result-count">0 entries</span>
+    </div>
+  </div>
+
+  <!-- ENTRY LIST -->
+  <div>
+    <div class="entry-list" id="entry-list">
+
+      <div class="no-results" id="no-results">
+        No entries match your search — try a different keyword or <a href="file:///C:/Users/Rushika/Downloads/drug-deep-dives.html#" id="no-results-clear">clear filters</a>.
+      </div>
+
+      <div class="placeholder-cc">
+        <span>Coming Soon</span>
+        <span>First deep dive is on its way</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+(function(){
+  const buttons = Array.from(document.querySelectorAll('#topic-grid .tbtn'));
+  const cards = Array.from(document.querySelectorAll('.entry-list .cc[data-topics]'));
+  const statusBox = document.getElementById('filter-status');
+  const statusText = document.getElementById('filter-status-text');
+  const clearBtn = document.getElementById('filter-clear');
+  const searchInput = document.getElementById('entry-search');
+  const noResults = document.getElementById('no-results');
+  const noResultsClear = document.getElementById('no-results-clear');
+  const sortSelect = document.getElementById('sort-select');
+  const resultCount = document.getElementById('result-count');
+  const list = document.getElementById('entry-list');
+  const placeholder = document.querySelector('.placeholder-cc');
+
+  let activeTopic = null;
+
+  function applySort(){
+    const mode = sortSelect.value;
+    const sorted = cards.slice().sort((a,b)=>{
+      if(mode === 'az') return a.dataset.title.localeCompare(b.dataset.title);
+      const da = new Date(a.dataset.date), db = new Date(b.dataset.date);
+      return mode === 'oldest' ? da - db : db - da;
+    });
+    sorted.forEach(c => list.insertBefore(c, placeholder));
+  }
+
+  function render(){
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(c=>{
+      const topics = c.dataset.topics.split(',');
+      const matchesTopic = !activeTopic || topics.includes(activeTopic);
+      const keywords = (c.dataset.keywords || '').toLowerCase();
+      const title = (c.dataset.title || '').toLowerCase();
+      const topicStr = (c.dataset.topics || '').toLowerCase();
+      const text = c.textContent.toLowerCase();
+      const searchContent = title + ' ' + keywords + ' ' + topicStr + ' ' + text;
+      const matchesSearch = !query || searchContent.includes(query);
+      const visible = matchesTopic && matchesSearch;
+      c.toggleAttribute('hidden', !visible);
+      if(visible) visibleCount++;
+    });
+
+    noResults.classList.toggle('on', visibleCount === 0 && cards.length > 0);
+    resultCount.textContent = visibleCount + (visibleCount === 1 ? ' entry' : ' entries');
+
+    if(activeTopic){
+      let matchLabel = activeTopic;
+      buttons.forEach(b=>{
+        const on = b.dataset.topic === activeTopic;
+        b.classList.toggle('active', on);
+        if(on) matchLabel = b.textContent;
+      });
+      statusText.textContent = 'Filtering: ' + matchLabel;
+      statusBox.classList.add('on');
+    } else {
+      buttons.forEach(b=>b.classList.remove('active'));
+      statusBox.classList.remove('on');
+    }
+  }
+
+  function setTopic(topic){ activeTopic = topic; render(); }
+
+  buttons.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const isActive = b.classList.contains('active');
+      setTopic(isActive ? null : b.dataset.topic);
+    });
+  });
+  clearBtn.addEventListener('click', ()=> setTopic(null));
+  searchInput.addEventListener('input', render);
+  sortSelect.addEventListener('change', applySort);
+  noResultsClear.addEventListener('click', (e)=>{
+    e.preventDefault();
+    searchInput.value = '';
+    setTopic(null);
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const initialTopic = params.get('topic');
+  activeTopic = initialTopic ? initialTopic.toLowerCase() : null;
+  applySort();
+  render();
+})();
+</script>
+
+
+
+</body></html>
