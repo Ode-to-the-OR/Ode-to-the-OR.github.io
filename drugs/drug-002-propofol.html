@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propofol — Drug Deep Dive | Ode to the OR</title>
+<meta name="description" content="A deep dive into propofol — mechanism, pharmacokinetics, clinical uses, dosing, and the honest bedside reality of the most-used induction agent in anaesthesia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --plum:    #7a5abf;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.tt{border-color:var(--teal);color:var(--teal);}
+
+/* Quick facts strip */
+.quickfacts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
+  border:1px solid var(--border);margin:2.2rem 0 2.8rem;
+}
+@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
+.qf{background:var(--surface);padding:1.1rem 1.2rem;}
+.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
+.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Table of contents */
+.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
+.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
+@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
+.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
+.toc a:hover{color:var(--rust);}
+.toc a::before{content:'—';color:var(--faint);font-size:.75rem;}
+
+/* Mechanism panel */
+.mech-panel{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
+.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+
+/* Receptor comparison bars */
+.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
+.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
+.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
+.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
+.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
+
+/* Dosing table */
+.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.dose-table tr:hover td{background:var(--deep);}
+.dose-table td strong{color:var(--text);}
+
+/* Pearl / alert / caution boxes */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.caution-box p:last-child{margin-bottom:0;}
+
+.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
+.honest-box p:last-child{margin-bottom:0;}
+
+/* Comparison grid for clinical uses */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
+.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../drug-deep-dives.html" class="back-link">← Back to Drug Deep Dives</a>
+
+<div class="wrap">
+
+  <div class="ey">Drug Deep Dive · IV Anaesthetic Agent · No. 002</div>
+  <h1>Propofol</h1>
+  <p class="subtitle">The white emulsion that behaves so well, so often, that the one time it doesn't can catch you off guard.</p>
+
+  <div class="meta-row">
+    <span class="tag ta">Induction Agent</span>
+    <span class="tag tc">TIVA</span>
+    <span class="tag tk">ICU</span>
+    <span class="tag tp">Pediatric</span>
+    <span class="tag tt">Sedation</span>
+  </div>
+
+  <div class="quickfacts">
+    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">IV Anaesthetic (GABA-A agonist)</span></div>
+    <div class="qf"><span class="qf-label">Onset (IV)</span><span class="qf-val">~30–45 sec</span></div>
+    <div class="qf"><span class="qf-label">Context-Sensitive t½</span><span class="qf-val">Highly duration-dependent</span></div>
+    <div class="qf"><span class="qf-label">Reversal Agent</span><span class="qf-val">None</span></div>
+  </div>
+
+  <p>Propofol is the drug most anaesthetists give more often than any other, which is exactly why it deserves more respect than it usually gets. It is fast, forgiving in the right hands, and genuinely pleasant for the patient — smooth induction, minimal hangover, a track record long enough that it feels like background furniture in the drug tray. That familiarity is also the trap. It has no reversal agent, a narrow margin between "asleep" and "apnoeic" in the wrong patient, and a cardiovascular effect that is easy to underestimate until the blood pressure has already fallen. Here is what matters about it, from the receptor up to the bedside.</p>
+
+  <div class="toc">
+    <h4>In This Deep Dive</h4>
+    <div class="toc-grid">
+      <a href="#mechanism">1. Mechanism of Action</a>
+      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
+      <a href="#effects">3. Physiological Effects, System by System</a>
+      <a href="#uses">4. Clinical Uses</a>
+      <a href="#dosing">5. Dosing</a>
+      <a href="#cautions">6. Cautions, Contraindications & Interactions</a>
+      <a href="#pediatric">7. Pediatric Considerations</a>
+      <a href="#bedside">8. What Actually Happens at the Bedside</a>
+      <a href="#pearls">9. Pearls & Pitfalls</a>
+      <a href="#references">10. References</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="mechanism">1. Mechanism of Action</h2>
+  <p>Propofol (2,6-diisopropylphenol) is a phenol derivative formulated as a lipid emulsion — the "milk of amnesia" appearance comes from soybean oil, glycerol, and egg lecithin, not from the drug itself. Its anaesthetic effect is produced primarily through potentiation of inhibitory neurotransmission in the central nervous system.</p>
+
+  <div class="mech-panel">
+    <div class="mech-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Where It Acts, and Why
+    </div>
+    <p style="margin-bottom:1rem;"><strong>GABA-A receptor (β subunit):</strong> propofol's principal action is potentiation of the GABA-A chloride channel, increasing chloride conductance and hyperpolarising the neuronal membrane. This is the same receptor family targeted by benzodiazepines and barbiturates, though propofol binds a distinct site — which explains why its clinical profile (rapid onset, rapid offset, minimal accumulation with intermittent dosing) differs so much from either drug class despite the shared endpoint.</p>
+    <p style="margin-bottom:1rem;"><strong>NMDA receptor:</strong> at higher concentrations, propofol also inhibits NMDA glutamate receptors, contributing to the anaesthetic and possibly some of the antiemetic effect, though this is a secondary mechanism relative to GABA-A potentiation.</p>
+    <p style="margin-bottom:0;"><strong>Peripheral vasculature and myocardium:</strong> propofol directly reduces vascular smooth muscle tone (vasodilation) and has a mild direct negative inotropic effect, while simultaneously blunting the baroreceptor reflex that would normally compensate for a falling blood pressure. This combination — vasodilation, reduced contractility, and a blunted compensatory reflex — is what makes propofol-induced hypotension larger and more consistent than most trainees expect on their first solo inductions.</p>
+  </div>
+
+  <h3>Why the Offset Is So Fast</h3>
+  <p>Propofol's rapid emergence after a single bolus is driven almost entirely by redistribution — the drug moves quickly out of the richly perfused central compartment (brain, heart) into peripheral fat and muscle, dropping plasma concentration below the threshold for consciousness within minutes, long before the liver has cleared any meaningful fraction of the total dose. This matters clinically: a single bolus wears off fast because of redistribution, but a prolonged infusion wears off progressively more slowly, because those peripheral compartments become saturated and start returning drug back to the plasma — the essence of context-sensitive half-time.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
+  <p>Propofol is highly lipophilic, extensively protein-bound, and metabolised primarily by the liver via conjugation — with clearance that exceeds hepatic blood flow, implying a significant contribution from extrahepatic metabolism (lung, kidney) as well.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Onset (IV)</strong></td><td>~30–45 sec</td><td>Fastest onset of the commonly used IV induction agents</td></tr>
+      <tr><td><strong>Duration (single bolus)</strong></td><td>5–10 min</td><td>Termination is by redistribution, not metabolism</td></tr>
+      <tr><td><strong>Distribution half-life</strong></td><td>2–8 min</td><td>Explains rapid initial fall in plasma concentration</td></tr>
+      <tr><td><strong>Elimination half-life</strong></td><td>4–7 hours (terminal)</td><td>Long terminal phase, clinically masked by redistribution after single doses</td></tr>
+      <tr><td><strong>Protein binding</strong></td><td>~98%</td><td>Hypoalbuminaemia increases free fraction and effect</td></tr>
+      <tr><td><strong>Metabolism</strong></td><td>Hepatic (glucuronidation, sulfation) + extrahepatic</td><td>Clearance remains reasonably preserved even in moderate hepatic impairment</td></tr>
+      <tr><td><strong>Context-sensitive half-time</strong></td><td>Rises significantly beyond ~8 h infusion</td><td>Long infusions genuinely take longer to wear off — plan wake-up accordingly</td></tr>
+      <tr><td><strong>Vd (steady state)</strong></td><td>Large (highly lipophilic)</td><td>Obese patients require dosing strategies adjusted for lean vs total body weight</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2 id="effects">3. Physiological Effects, System by System</h2>
+
+  <h3>Cardiovascular</h3>
+  <p>The effect most likely to be underestimated. Expect a <strong>dose- and speed-dependent fall in blood pressure</strong> from a combination of vasodilation, mild negative inotropy, and blunting of the baroreceptor reflex — often 20–30% or more from baseline at induction doses, more in the elderly, the hypovolaemic, and those with limited cardiac reserve. Heart rate frequently does not rise to compensate, because the reflex tachycardia that would normally follow a falling pressure is itself blunted by the drug.</p>
+
+  <h3>Respiratory</h3>
+  <p>Reliable, dose-dependent <strong>respiratory depression</strong>, from reduced tidal volume through to apnoea at induction doses — apnoea is expected and should be anticipated, not treated as a complication. Propofol also blunts airway reflexes effectively, which is genuinely useful for supraglottic airway insertion but means aspiration risk must be actively managed rather than assumed away.</p>
+
+  <h3>Central Nervous System</h3>
+  <p>Rapid onset of unconsciousness with a clean, clear-headed quality of emergence relative to older agents — minimal hangover, low incidence of emergence delirium, and a genuinely good antiemetic profile (subanaesthetic doses are used specifically for this). Reduces cerebral metabolic rate of oxygen (CMRO2), cerebral blood flow, and intracranial pressure, making it a favoured agent in neuroanaesthesia provided cerebral perfusion pressure is protected against the accompanying drop in systemic blood pressure.</p>
+
+  <h3>Other</h3>
+  <p>Pain on injection at a peripheral vein is common and expected — related to aqueous phase drug activating venous nociceptors — and is reliably reduced by pre-treatment with lidocaine or injection into a larger, faster-flowing vein. No clinically significant effect on uterine tone at induction doses, though it does cross the placenta. Does not trigger malignant hyperthermia and is considered safe in susceptible individuals.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="uses">4. Clinical Uses</h2>
+  <p>Propofol's speed, predictability, and clean emergence have made it the default IV anaesthetic across an unusually wide range of settings.</p>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>Induction of General Anaesthesia</h4>
+      <p>The standard IV induction agent for the majority of elective and many emergency cases where cardiovascular reserve permits.</p>
+    </div>
+    <div class="use-card">
+      <h4>Maintenance — TIVA</h4>
+      <p>Target-controlled or manually titrated infusion for total intravenous anaesthesia, often paired with remifentanil; avoids volatile-related PONV and supports rapid, clear-headed emergence.</p>
+    </div>
+    <div class="use-card">
+      <h4>Procedural / MAC Sedation</h4>
+      <p>Sub-hypnotic infusion or intermittent bolus for endoscopy, interventional radiology, and cases under regional or local anaesthesia requiring light sedation.</p>
+    </div>
+    <div class="use-card">
+      <h4>ICU Sedation</h4>
+      <p>Short-term sedation of mechanically ventilated patients, valued for rapid offset that allows frequent neurological assessment ("spontaneous awakening trials").</p>
+    </div>
+    <div class="use-card">
+      <h4>Antiemetic (Subanaesthetic Dosing)</h4>
+      <p>Low-dose propofol (10–20 mg boluses) is genuinely effective rescue therapy for postoperative nausea and vomiting refractory to standard antiemetics.</p>
+    </div>
+    <div class="use-card">
+      <h4>Refractory Status Epilepticus</h4>
+      <p>Used as a continuous infusion for burst suppression in status epilepticus unresponsive to first- and second-line agents, typically in an ICU setting with EEG monitoring.</p>
+    </div>
+    <div class="use-card">
+      <h4>Electroconvulsive Therapy</h4>
+      <p>A common anaesthetic choice for ECT, though its anticonvulsant properties can shorten seizure duration — a relevant trade-off against agents like etomidate or methohexital.</p>
+    </div>
+    <div class="use-card">
+      <h4>Supraglottic Airway Insertion</h4>
+      <p>Effective suppression of airway reflexes at induction doses makes propofol well suited to LMA insertion without neuromuscular blockade.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="dosing">5. Dosing</h2>
+
+  <table class="dose-table">
+    <thead><tr><th>Indication</th><th>Dose</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Induction (healthy adult)</strong></td>
+        <td>1.5–2.5 mg/kg IV</td>
+        <td>Titrate to effect; give slower in the elderly and cardiovascularly compromised</td>
+      </tr>
+      <tr>
+        <td><strong>Induction (elderly / frail / shocked)</strong></td>
+        <td>0.5–1.5 mg/kg IV</td>
+        <td>Reduce dose and rate substantially; haemodynamic reserve is the limiting factor, not brain sensitivity alone</td>
+      </tr>
+      <tr>
+        <td><strong>TIVA maintenance</strong></td>
+        <td>4–12 mg/kg/h (manual) or target plasma/effect-site 2–6 mcg/mL (TCI)</td>
+        <td>Titrate against clinical depth or processed EEG monitoring where available</td>
+      </tr>
+      <tr>
+        <td><strong>Procedural sedation</strong></td>
+        <td>25–75 mcg/kg/min infusion ± small boluses</td>
+        <td>Requires dedicated airway monitoring regardless of the "sedation-only" label</td>
+      </tr>
+      <tr>
+        <td><strong>ICU sedation</strong></td>
+        <td>5–50 mcg/kg/min, titrated to sedation target</td>
+        <td>Monitor triglycerides beyond 48 h; observe total lipid load from the emulsion</td>
+      </tr>
+      <tr>
+        <td><strong>Antiemetic dose</strong></td>
+        <td>10–20 mg IV bolus, may repeat</td>
+        <td>Subanaesthetic — patient remains conscious</td>
+      </tr>
+      <tr>
+        <td><strong>Paediatric induction</strong></td>
+        <td>2.5–3.5 mg/kg IV</td>
+        <td>Children often require a relatively higher mg/kg dose than adults</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:var(--faint);">Doses are illustrative and drawn from commonly cited ranges in the anaesthesia literature. Always confirm against your institution's protocol and current product labelling — dosing in this table is not a substitute for local guidelines.</p>
+
+  <div class="caution-box">
+    <h3>Titrate to the Patient in Front of You, Not the Textbook Number</h3>
+    <p>The 1.5–2.5 mg/kg induction range assumes a healthy, normovolaemic adult with intact cardiovascular reflexes. That assumption fails often — in the elderly, in sepsis, in hypovolaemia, in anyone already vasoplegic. Give slowly, in fractions, watching the response rather than committing the calculated dose as a single push. The dose that works for one patient can be frankly dangerous in the next.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="cautions">6. Cautions, Contraindications & Interactions</h2>
+
+  <h3>Relative Contraindications</h3>
+  <ul>
+    <li><strong>Egg or soy allergy</strong> — historically cited as a contraindication due to the lipid emulsion; current evidence suggests the risk is lower than once assumed (most egg allergy is to egg white protein, not the lecithin in the formulation), but institutional policy and a documented severe allergy history should still guide the decision</li>
+    <li><strong>Severe cardiovascular compromise / cardiogenic shock</strong> — hypotension may be poorly tolerated or difficult to reverse</li>
+    <li><strong>Known hypersensitivity</strong> to propofol or any formulation component</li>
+  </ul>
+
+  <h3>Use With Caution</h3>
+  <ul>
+    <li>Hypovolaemia or unstable haemodynamics — exaggerated hypotensive response</li>
+    <li>Extremes of age — dose reduction required at both ends</li>
+    <li>Disorders of lipid metabolism — the emulsion contributes a real lipid and caloric load, relevant in prolonged infusions and in patients on concurrent parenteral nutrition</li>
+    <li>Epilepsy — generally safe and even anticonvulsant, but abrupt withdrawal after prolonged infusion has been associated with seizure-like phenomena in rare reports</li>
+  </ul>
+
+  <h3>Interactions</h3>
+  <ul>
+    <li><strong>Opioids:</strong> synergistic for both sedation and respiratory depression — co-administration substantially increases apnoea risk at doses that would be tolerated alone</li>
+    <li><strong>Other sedative-hypnotics and volatiles:</strong> additive CNS and cardiovascular depression</li>
+    <li><strong>Vasodilators / antihypertensives:</strong> additive hypotension</li>
+  </ul>
+
+  <div class="alert-box">
+    <h3>Propofol Infusion Syndrome (PRIS)</h3>
+    <p>A rare but frequently fatal complication of prolonged, high-dose infusion — classically described in critically ill patients (often paediatric or with concurrent catecholamine/steroid therapy) receiving &gt;4 mg/kg/h for more than 48 hours, though it has occurred outside these classic criteria too. Features include unexplained metabolic acidosis, rhabdomyolysis, hyperkalaemia, hepatomegaly, cardiac dysfunction/arrhythmia, and renal failure, thought to reflect mitochondrial fatty acid oxidation failure. There is no specific reversal — management is immediate cessation of the infusion and aggressive supportive care, including consideration of extracorporeal support in severe cases. The practical takeaway: avoid high-dose, long-duration infusions where an alternative sedative exists, and monitor triglycerides, creatine kinase, and acid-base status in anyone on propofol beyond 48 hours.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="pediatric">7. Paediatric Considerations</h2>
+  <p>Propofol is widely used in paediatric anaesthesia for induction, maintenance, and procedural sedation, but carries specific age-related caveats that deserve deliberate attention.</p>
+  <ul>
+    <li><strong>Induction dosing</strong> is typically higher on a mg/kg basis than in adults (2.5–3.5 mg/kg), reflecting a larger volume of distribution and faster clearance in children.</li>
+    <li><strong>Propofol infusion syndrome</strong> carries a disproportionate paediatric signal in the original case reports — long-duration, high-dose ICU sedation in children is now generally avoided in favour of alternative agents where feasible, and where propofol is used for prolonged sedation, metabolic monitoring is non-negotiable.</li>
+    <li>Injection pain is common in children too, and pre-treatment with lidocaine or use of a larger vein is worth the extra thirty seconds for a smoother induction and a less distressing experience.</li>
+    <li>Not licensed for sedation of children in some critical care settings depending on jurisdiction and age — local protocols and product licensing should be checked rather than assumed.</li>
+    <li>Bradycardia and hypotension on induction can occur, particularly in neonates and infants with less cardiovascular reserve; slower, more fractionated dosing is prudent in this age group.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 id="bedside">8. What Actually Happens at the Bedside</h2>
+  <p>The textbook version of propofol induction is smooth: a calm slide from awake to unconscious, a brief apnoeic pause, then a controlled airway and a stable case underway. The bedside version has more texture than that.</p>
+  <p>The first thing worth watching closely is the blood pressure trace in the sixty seconds after the bolus goes in — not the number the monitor eventually settles on, but the shape of the fall. In a healthy, well-filled patient it dips and recovers. In someone hypovolaemic, elderly, or already vasoplegic from sepsis or a spinal block, that same dose can produce a fall that doesn't recover on its own, and by the time it's obvious on the cuff reading a full cycle has already passed. Watching the arterial line or the pulse oximeter waveform amplitude in real time, rather than waiting for the next NIBP cycle, is often the difference between catching this early and chasing it after the fact.</p>
+  <p>The second thing is that "asleep" and "apnoeic" tend to arrive close together, and the gap between them narrows further with co-administered opioid. It is worth having a hand already on the bag-mask before the plunger is fully depressed, not after the first cyanosis-adjacent pause is noticed on the monitor. Propofol apnoea is expected pharmacology, not a sign that something has gone wrong — but only if the airway plan was already in hand when it happened.</p>
+  <p>The third thing, and the one that separates a comfortable induction from an unpleasant one, is injection-site pain. It is genuinely uncomfortable for a conscious patient, and skipping the thirty seconds of lidocaine pre-treatment or the extra effort of finding a bigger vein is rarely worth the saved time — patients remember a stinging injection far more vividly than almost anything else about their anaesthetic experience, which matters for a "personal record" of the encounter even when the rest of the case goes perfectly.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pearls">9. Pearls & Pitfalls</h2>
+
+  <div class="pearl-box">
+    <h3>The Core Takeaway</h3>
+    <p>Propofol's biggest risk is not unfamiliarity — it's overfamiliarity. Because it is given so often, in so many contexts, by so many hands, it is easy to stop treating each dose as a deliberate haemodynamic and respiratory event and start treating it as routine. The patients who come to harm from propofol are rarely harmed by an unusual reaction to the drug; they are harmed by a standard dose given to a non-standard patient, at standard speed, without the airway plan already in hand.</p>
+  </div>
+
+  <div class="honest-box">
+    <h3>The Honest Bit</h3>
+    <p>It is an excellent drug and a genuinely dangerous one, and both of those things are true for the same reason: it works fast, in almost everyone, almost every time. That reliability breeds a kind of casualness that the drug itself does not forgive as generously as its reputation suggests. There is no reversal agent. A hypotensive patient with a propofol-induced fall in pressure will not be rescued by anything faster than fluids, vasopressors, and time. The margin between "comfortably sedated" and "apnoeic and hypotensive" is real, and it is often narrower in the patient actually being anaesthetised than it was in the last ten patients who tolerated the same dose without incident.</p>
+  </div>
+
+  <ul>
+    <li><strong>Pitfall:</strong> Using the same induction dose for every patient regardless of volume status, age, or cardiovascular reserve. The 1.5–2.5 mg/kg range is a starting point, not a fixed prescription.</li>
+    <li><strong>Pitfall:</strong> Underestimating how much co-administered opioid changes the apnoea and hypotension risk — the combination is genuinely synergistic, not simply additive.</li>
+    <li><strong>Pearl:</strong> A slower, fractionated push in a haemodynamically fragile patient trades a few extra seconds for a materially smaller blood pressure excursion — nearly always a worthwhile trade.</li>
+    <li><strong>Pearl:</strong> Lidocaine pre-treatment (or mixing a small amount into the syringe, per local protocol) meaningfully reduces injection pain and is an easy win for patient comfort.</li>
+    <li><strong>Pitfall:</strong> Forgetting to monitor triglycerides, creatine kinase, and acid-base status in patients on prolonged high-dose infusions — propofol infusion syndrome is rare, but the window to catch it early is a monitoring habit, not a reflex response to a crashing patient.</li>
+  </ul>
+
+  <div class="quote-box">
+    The drug that behaves best in the most patients is exactly the one most likely to be given without full attention. Familiarity is not the same as safety.
+    <span class="src">— A closing thought</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox" id="references">
+    <h3>References</h3>
+    <ol>
+      <li>Sahinovic MM, Struys MMRF, Absalom AR. Clinical Pharmacokinetics and Pharmacodynamics of Propofol. <em>Clin Pharmacokinet.</em> 2018;57(12):1539–1558.</li>
+      <li>Marik PE. Propofol: therapeutic indications and side-effects. <em>Curr Pharm Des.</em> 2004;10(29):3639–3649.</li>
+      <li>Kam PC, Cardone D. Propofol infusion syndrome. <em>Anaesthesia.</em> 2007;62(7):690–701.</li>
+      <li>Vasile B, Rasulo F, Candiani A, Latronico N. The pathophysiology of propofol infusion syndrome: a simple name for a complex syndrome. <em>Intensive Care Med.</em> 2003;29(9):1417–1425.</li>
+      <li>Miner JR, Burton JH. Clinical practice advisory: emergency department procedural sedation with propofol. <em>Ann Emerg Med.</em> 2007;50(2):182–187.</li>
+      <li>Eyres R. Update on TIVA. <em>Paediatr Anaesth.</em> 2004;14(5):374–379.</li>
+      <li>Picard P, Tramèr MR. Prevention of pain on injection with propofol: a quantitative systematic review. <em>Anesth Analg.</em> 2000;90(4):963–969.</li>
+      <li>Asserhøj LL, Mosbech H, Krøigaard M, Garvey LH. No evidence for contraindications to the use of propofol in adults allergic to egg, soy or peanut. <em>Br J Anaesth.</em> 2016;116(1):77–82.</li>
+      <li>Brown TB, Lovato LM, Parker D. Procedural sedation in the acute care setting. <em>Am Fam Physician.</em> 2005;71(1):85–90.</li>
+      <li>Reddy RV, Moorthy SS, Dierdorf SF, et al. Excitatory effects and electroencephalographic correlation of etomidate, thiopental, methohexital, and propofol. <em>Anesth Analg.</em> 1993;77(5):1008–1011.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>Drug Deep Dive · No. 002</span>
+    <span>IV Anaesthetic · Induction · TIVA · ICU · Pediatric</span>
+  </div>
+
+  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. Dosing information reflects commonly cited ranges in the anaesthesia literature and is not a substitute for institutional protocols, current product labelling, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
