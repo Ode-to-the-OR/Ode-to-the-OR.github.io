@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dexmedetomidine — Drug Deep Dive | Ode to the OR</title>
+<meta name="description" content="A deep dive into dexmedetomidine — mechanism, pharmacokinetics, clinical uses, dosing, and the honest bedside reality of an alpha-2 agonist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --plum:    #7a5abf;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.tt{border-color:var(--teal);color:var(--teal);}
+
+/* Quick facts strip */
+.quickfacts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
+  border:1px solid var(--border);margin:2.2rem 0 2.8rem;
+}
+@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
+.qf{background:var(--surface);padding:1.1rem 1.2rem;}
+.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
+.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Table of contents */
+.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
+.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
+@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
+.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
+.toc a:hover{color:var(--rust);}
+.toc a::before{content:'—';color:var(--faint);font-size:.75rem;}
+
+/* Mechanism panel */
+.mech-panel{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
+.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+
+/* Receptor comparison bars */
+.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
+.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
+.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
+.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
+.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
+
+/* Dosing table */
+.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.dose-table tr:hover td{background:var(--deep);}
+.dose-table td strong{color:var(--text);}
+
+/* Pearl / alert / caution boxes */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.caution-box p:last-child{margin-bottom:0;}
+
+.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
+.honest-box p:last-child{margin-bottom:0;}
+
+/* Comparison grid for clinical uses */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
+.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../drug-deep-dives.html" class="back-link">← Back to Drug Deep Dives</a>
+
+<div class="wrap">
+
+  <div class="ey">Drug Deep Dive · Alpha-2 Agonist · No. 001</div>
+  <h1>Dexmedetomidine</h1>
+  <p class="subtitle">The sedative that lets a patient wake up when you talk to them — and punishes anyone who rushes it.</p>
+
+  <div class="meta-row">
+    <span class="tag ta">Sedation</span>
+    <span class="tag tc">Alpha-2 Agonist</span>
+    <span class="tag tk">ICU</span>
+    <span class="tag tp">Pediatric</span>
+    <span class="tag tt">TIVA Adjunct</span>
+  </div>
+
+  <div class="quickfacts">
+    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">α2-Adrenergic Agonist</span></div>
+    <div class="qf"><span class="qf-label">Onset (IV)</span><span class="qf-val">5–10 min</span></div>
+    <div class="qf"><span class="qf-label">Elimination t½</span><span class="qf-val">~2–3 hours</span></div>
+    <div class="qf"><span class="qf-label">Reversal Agent</span><span class="qf-val">None specific</span></div>
+  </div>
+
+  <p>Dexmedetomidine is the drug of choice when the goal is a patient sedated but not gone — arousable, cooperative, breathing on their own, and not fighting the tube or the monitor. It is also a drug that quietly punishes carelessness: an unanticipated bradycardia, a loading dose pushed too fast in a nervous patient. Here's what matters about it, from the receptor up to the bedside.</p>
+
+  <div class="toc">
+    <h4>In This Deep Dive</h4>
+    <div class="toc-grid">
+      <a href="#mechanism">1. Mechanism of Action</a>
+      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
+      <a href="#effects">3. Physiological Effects, System by System</a>
+      <a href="#uses">4. Clinical Uses</a>
+      <a href="#dosing">5. Dosing</a>
+      <a href="#cautions">6. Cautions, Contraindications & Interactions</a>
+      <a href="#pediatric">7. Pediatric Considerations</a>
+      <a href="#bedside">8. What Actually Happens at the Bedside</a>
+      <a href="#pearls">9. Pearls & Pitfalls</a>
+      <a href="#references">10. References</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="mechanism">1. Mechanism of Action</h2>
+  <p>Dexmedetomidine is a highly selective <strong>α2-adrenergic receptor agonist</strong> — roughly eight times more selective for α2 over α1 than clonidine, the drug most people compare it to. Its effects come from three separate α2 receptor populations, and understanding which receptor is doing what explains almost everything you see clinically.</p>
+
+  <div class="mech-panel">
+    <div class="mech-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Where It Acts, and Why
+    </div>
+    <p style="margin-bottom:1rem;"><strong>Locus coeruleus (pontine brainstem):</strong> α2 agonism here suppresses noradrenergic output, producing sedation that mimics the electrophysiology of natural non-REM sleep — which is why patients on a dexmedetomidine infusion can be roused to answer a question and then drift back off, rather than being pushed into the unresponsive state a GABAergic agent produces.</p>
+    <p style="margin-bottom:1rem;"><strong>Dorsal horn of the spinal cord:</strong> α2 activation here inhibits substance P and glutamate release from primary afferent nociceptors, contributing a genuine analgesic and opioid-sparing effect — not just sedation that happens to look analgesic.</p>
+    <p style="margin-bottom:0;"><strong>Peripheral vasculature (α2B receptors on vascular smooth muscle):</strong> this is the one that catches people out. At high plasma concentrations or with rapid bolus administration, peripheral α2B stimulation causes transient <strong>vasoconstriction and hypertension</strong>, often with a reflex bradycardia — before the central sympatholytic effect takes over and blood pressure and heart rate fall. This biphasic response is the single most important pharmacodynamic fact to know before you give a loading dose.</p>
+  </div>
+
+  <h3>Receptor Selectivity in Context</h3>
+  <p>The α2:α1 selectivity ratio is what separates dexmedetomidine from its older cousin clonidine, and it's the reason dexmedetomidine produces more predictable sedation with proportionally less α1-mediated vasoconstrictive noise.</p>
+  <div class="receptor-bars">
+    <div class="rb-row">
+      <span class="rb-label">Dexmedetomidine</span>
+      <div class="rb-track"><div class="rb-fill" style="width:100%;"></div></div>
+      <span class="rb-val">~1620:1</span>
+    </div>
+    <div class="rb-row">
+      <span class="rb-label">Clonidine</span>
+      <div class="rb-track"><div class="rb-fill" style="width:12%;"></div></div>
+      <span class="rb-val">~220:1</span>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--faint);margin-top:-.5rem;">α2:α1 receptor selectivity ratios — illustrative comparison, not to a linear pharmacologic scale.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
+  <p>Dexmedetomidine is lipophilic, rapidly distributed, and metabolised almost entirely by the liver — with essentially no active metabolites of clinical concern, which makes it forgiving in single-organ dysfunction but not in combined hepatic-renal failure.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Onset (IV)</strong></td><td>5–10 min</td><td>Not a rapid-sequence drug; plan ahead of when you need effect</td></tr>
+      <tr><td><strong>Peak effect</strong></td><td>~15 min</td><td>Loading doses should be given slowly and effect assessed before repeating</td></tr>
+      <tr><td><strong>Distribution half-life</strong></td><td>~6 min</td><td>Explains rapid initial fall in plasma concentration after bolus</td></tr>
+      <tr><td><strong>Elimination half-life</strong></td><td>2–3 hours</td><td>Longer than the "feels short-acting" bedside impression during infusion</td></tr>
+      <tr><td><strong>Protein binding</strong></td><td>~94%</td><td>Hypoalbuminaemia can increase free fraction and effect</td></tr>
+      <tr><td><strong>Metabolism</strong></td><td>Hepatic (glucuronidation + CYP2A6)</td><td>Reduce dose/rate in hepatic impairment</td></tr>
+      <tr><td><strong>Excretion</strong></td><td>Renal (~95%, as metabolites)</td><td>Metabolites are inactive; still, use caution and titrate slowly in renal failure</td></tr>
+      <tr><td><strong>Context-sensitive half-time</strong></td><td>Increases with infusion duration</td><td>A 24-hour infusion wakes up slower than a 2-hour one — plan extubation timing accordingly</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2 id="effects">3. Physiological Effects, System by System</h2>
+
+  <h3>Cardiovascular</h3>
+  <p>This is the system dexmedetomidine affects most, and the one most likely to surprise a trainee. Expect a <strong>dose-dependent fall in heart rate and blood pressure</strong> from central sympatholysis, sometimes preceded by a brief hypertensive overshoot from peripheral α2B vasoconstriction if the loading dose is given too fast. Bradycardia can progress to sinus arrest in susceptible patients, particularly those who are already vagotonic, on beta-blockers, or paediatric.</p>
+
+  <h3>Respiratory</h3>
+  <p>The signature feature: dexmedetomidine produces sedation with <strong>minimal respiratory depression</strong> at clinical doses. Patients sedated to a Ramsay 3–4 or RASS -2 to -3 typically maintain their respiratory drive and airway reflexes far better than on an equivalent depth of propofol or a benzodiazepine — which is exactly why it has become the default for awake fibreoptic intubation and non-intubated sedation cases.</p>
+
+  <h3>Central Nervous System</h3>
+  <p>Produces a sedative state that resembles natural sleep on EEG, arousable with verbal or tactile stimulation — described in the literature as "cooperative sedation." It has genuine analgesic and anxiolytic properties independent of sedation, and evidence for reduced delirium incidence compared with benzodiazepine-based sedation in the ICU population.</p>
+
+  <h3>Endocrine & Metabolic</h3>
+  <p>Inhibits insulin release from pancreatic β-cells (α2 receptors are present there too), which can cause mild hyperglycaemia, particularly with prolonged infusions. Also has a mild diuretic effect via inhibition of vasopressin.</p>
+
+  <h3>Other</h3>
+  <p>Reduces shivering threshold and has been used specifically for post-anaesthetic shivering. Reduces salivary and gastric secretions modestly. No clinically significant effect on intracranial pressure at usual doses, and it does not trigger malignant hyperthermia.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="uses">4. Clinical Uses</h2>
+  <p>Dexmedetomidine has moved well beyond its original niche and now shows up across almost every domain of anaesthesia and critical care practice.</p>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>ICU Sedation</h4>
+      <p>Light-to-moderate sedation in mechanically ventilated and non-intubated critically ill patients. Preferred over benzodiazepines in many protocols given the association with lower delirium incidence and easier neurological assessment.</p>
+    </div>
+    <div class="use-card">
+      <h4>Awake Fibreoptic Intubation</h4>
+      <p>Provides sedation and analgesia while preserving spontaneous ventilation and airway reflexes — arguably its best-suited anaesthetic application.</p>
+    </div>
+    <div class="use-card">
+      <h4>Procedural / MAC Sedation</h4>
+      <p>Used for sedation during regional anaesthesia, endoscopy, interventional radiology, and awake craniotomy, often in combination with low-dose propofol or remifentanil.</p>
+    </div>
+    <div class="use-card">
+      <h4>TIVA Adjunct</h4>
+      <p>Reduces intraoperative opioid and volatile requirement, blunts the sympathetic response to intubation and surgical stimulus, and contributes to smoother emergence.</p>
+    </div>
+    <div class="use-card">
+      <h4>Paediatric Premedication</h4>
+      <p>Intranasal dexmedetomidine is now a first-line premedicant in many paediatric units — effective, needle-free, and well tolerated.</p>
+    </div>
+    <div class="use-card">
+      <h4>Attenuation of Sympathetic Response</h4>
+      <p>Blunts the haemodynamic surge to laryngoscopy, extubation, and other noxious stimuli — useful in cardiac, neuro, and hypertensive patients where haemodynamic stability matters most.</p>
+    </div>
+    <div class="use-card">
+      <h4>Post-operative Shivering</h4>
+      <p>Effective at low bolus doses for treatment of post-anaesthetic shivering, an underused indication outside major centres.</p>
+    </div>
+    <div class="use-card">
+      <h4>Alcohol / Opioid Withdrawal Adjunct</h4>
+      <p>Used off-label as an adjunct in autonomic hyperactivity from withdrawal states, reducing catecholamine surge without the respiratory depression of benzodiazepines alone.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="dosing">5. Dosing</h2>
+
+  <table class="dose-table">
+    <thead><tr><th>Indication</th><th>Loading dose</th><th>Maintenance infusion</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>ICU sedation</strong></td>
+        <td>Often omitted or 0.5–1 mcg/kg over 10–20 min if used</td>
+        <td>0.2–0.7 mcg/kg/h, titrated to sedation target (max ~1.4 mcg/kg/h)</td>
+      </tr>
+      <tr>
+        <td><strong>Procedural sedation</strong></td>
+        <td>0.5–1 mcg/kg over 10 min</td>
+        <td>0.2–0.7 mcg/kg/h</td>
+      </tr>
+      <tr>
+        <td><strong>Awake fibreoptic intubation</strong></td>
+        <td>0.5–1 mcg/kg over 10 min</td>
+        <td>0.2–0.7 mcg/kg/h during the procedure</td>
+      </tr>
+      <tr>
+        <td><strong>TIVA / GA adjunct</strong></td>
+        <td>0.5–1 mcg/kg over 10 min pre-induction (optional)</td>
+        <td>0.2–0.6 mcg/kg/h intraoperatively; stop 15–30 min before expected emergence</td>
+      </tr>
+      <tr>
+        <td><strong>Paediatric intranasal premedication</strong></td>
+        <td>1–2 mcg/kg intranasal, 30–45 min pre-induction</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Post-op shivering</strong></td>
+        <td>0.5 mcg/kg IV bolus over 10 min</td>
+        <td>Usually not continued</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:var(--faint);">Doses are illustrative and drawn from commonly cited ranges in the anaesthesia and critical care literature. Always confirm against your institution's protocol and current product labelling — dosing in this table is not a substitute for local guidelines.</p>
+
+  <div class="caution-box">
+    <h3>Loading Dose: Slow Is Not Optional</h3>
+    <p>Give the loading dose over a full 10 minutes, not as a push. A fast bolus is the single most common cause of the transient hypertension/reflex bradycardia sequence, and in a haemodynamically fragile patient that overshoot is not benign. If you don't have 10 minutes to spare, ask whether you have time to be using this drug at all for that indication — or omit the loading dose and start the infusion directly, which many ICU protocols now do routinely.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="cautions">6. Cautions, Contraindications & Interactions</h2>
+
+  <h3>Relative Contraindications</h3>
+  <ul>
+    <li><strong>Advanced heart block</strong> (2nd/3rd degree) not on a pacemaker — risk of profound bradycardia or asystole</li>
+    <li><strong>Severe ventricular dysfunction</strong> — limited data, use cautiously</li>
+    <li><strong>Uncontrolled hypotension</strong> — the drug will make it worse</li>
+    <li><strong>Known hypersensitivity</strong> to the drug</li>
+  </ul>
+
+  <h3>Use With Caution</h3>
+  <ul>
+    <li>Pre-existing bradycardia or high vagal tone (young fit athletes included)</li>
+    <li>Hepatic impairment — reduce infusion rate</li>
+    <li>Elderly and hypovolaemic patients — more pronounced hypotension</li>
+    <li>Concurrent beta-blockers, digoxin, or other AV-nodal blocking agents — additive bradycardia</li>
+  </ul>
+
+  <h3>Interactions</h3>
+  <ul>
+    <li><strong>Anaesthetic and sedative agents:</strong> synergistic — expect to reduce propofol, volatile, and opioid requirements when co-administered; this is often the point, but it must be anticipated rather than discovered</li>
+    <li><strong>Beta-blockers / calcium channel blockers:</strong> additive negative chronotropic effect</li>
+    <li><strong>Vasodilators / other antihypertensives:</strong> additive hypotension</li>
+  </ul>
+
+  <div class="alert-box">
+    <h3>No Specific Reversal Agent</h3>
+    <p>Unlike opioids or benzodiazepines, there is no readily available clinical reversal agent for dexmedetomidine's sedative or cardiovascular effects. Atipamezole exists as a selective α2 antagonist but is not approved or generally available for human use. Management of significant bradycardia or hypotension is supportive: stop or reduce the infusion, give anticholinergics (atropine/glycopyrrolate) for symptomatic bradycardia, and fluids or vasopressors for hypotension as needed. Plan doses knowing you cannot simply reverse your way out of trouble.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="pediatric">7. Paediatric Considerations</h2>
+  <p>Dexmedetomidine has earned a particular place in paediatric anaesthesia, largely because of the intranasal route and its favourable respiratory profile in a population where airway complications are the dominant concern.</p>
+  <ul>
+    <li><strong>Intranasal premedication</strong> (1–2 mcg/kg) is well tolerated, produces reliable anxiolysis and separation from parents without the loss of airway tone seen with midazolam, and has a pleasant onset without the disinhibited, paradoxical agitation occasionally seen with benzodiazepines.</li>
+    <li>Children appear to tolerate the bradycardic effect reasonably well haemodynamically, but the <strong>relative</strong> bradycardia can still be striking on the monitor and needs to be anticipated and explained to the team rather than treated as an emergency by reflex.</li>
+    <li>Used as a co-sedative for MRI and other non-painful imaging in children, often avoiding general anaesthesia altogether.</li>
+    <li>Emerging use as an adjunct for prevention of <strong>emergence delirium</strong> after sevoflurane anaesthesia in children — a genuinely useful, well-supported indication.</li>
+    <li>Weight-based dosing must be precise; the therapeutic-to-adverse-effect margin is narrower in small children, and volume calculations for micro-dosing deserve a second check.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 id="bedside">8. What Actually Happens at the Bedside</h2>
+  <p>The textbook version of dexmedetomidine is a smooth infusion producing calm, cooperative sedation. The bedside version has more texture than that.</p>
+  <p>The first thing to watch for, on a monitor followed closely, is that the heart rate starts drifting down before the patient even looks sedated. It's subtle — a few beats over a few minutes — and easy to attribute to "settling in" rather than the drug. In someone already on a beta-blocker, or a fit patient with high resting vagal tone, that drift doesn't reliably stop at "fine." A healthy young adult can drop into the low 30s during an awake fibreoptic set-up if the infusion rate is trusted more than the trend on the screen.</p>
+  <p>The second thing is that the sedation is genuinely different in kind, not just depth, from propofol. A patient who looks deeply asleep on a dexmedetomidine infusion will often open their eyes and answer a clear question appropriately, then close their eyes and drift straight back off. This can be disconcerting the first few times — it's easy to second-guess whether the patient is actually sedated at all — but it's expected pharmacology, not a sign the drug "isn't working."</p>
+  <p>The third thing, and the one that costs the most time in practice, is patience with onset. Because peak effect takes roughly 15 minutes, the instinct in a slow-to-settle patient is to give more — and then the first and second doses stack on top of each other 10 minutes later, producing a much deeper effect than intended, right when it's least expected. Loading slowly and waiting the full time, rather than chasing a sedation target the drug hasn't had time to reach, avoids this.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pearls">9. Pearls & Pitfalls</h2>
+
+  <div class="pearl-box">
+    <h3>The Core Takeaway</h3>
+    <p>Dexmedetomidine rewards patience and punishes speed. Nearly every genuinely bad moment with this drug traces back to going faster than the pharmacokinetics allow — a rushed loading dose, an impatient repeat bolus, or trusting a "settled" heart rate that was still falling. Respect the 10-minute load and the 15-minute peak, and the drug behaves exactly as advertised.</p>
+  </div>
+
+  <div class="honest-box">
+    <h3>The Honest Bit</h3>
+    <p>It is not a fast drug, and it is not a forgiving one if you treat it like one. It will not save you time in an emergency, it will not reliably produce unconsciousness on its own, and it is a genuinely poor choice as a sole agent when you need rapid, deep, predictable sedation right now. Its value is precisely in the situations where "slow and cooperative" is the goal — which means the single most important skill with this drug is recognising, before you draw it up, whether that is actually what the clinical moment calls for.</p>
+  </div>
+
+  <ul>
+    <li><strong>Pitfall:</strong> Treating the loading dose like a routine IV bolus. It isn't — give it over 10 minutes, on a pump or a careful hand-timed push, every time.</li>
+    <li><strong>Pitfall:</strong> Forgetting that elimination half-life (2–3 h) is longer than the bedside impression of a "short-acting" drug during a brief procedure — plan discharge or extubation timing accordingly, especially after longer infusions.</li>
+    <li><strong>Pearl:</strong> Because arousable sedation is preserved, dexmedetomidine lets you perform a genuine neurological exam on a "sedated" patient — invaluable in neuro-ICU and post-craniotomy care.</li>
+    <li><strong>Pearl:</strong> The opioid- and volatile-sparing effect is real and clinically meaningful — anticipate and pre-emptively reduce co-administered agents rather than discovering the interaction as an unexpectedly deep plane.</li>
+    <li><strong>Pitfall:</strong> Assuming a stable heart rate means a stable patient. Bradycardia can progress rapidly in susceptible individuals; trend the number, don't just glance at it.</li>
+  </ul>
+
+  <div class="quote-box">
+    It may be the only sedative where a patient can be asleep and still answer to their name. That is either the most useful thing about it, or the thing most likely to lull you into underestimating it.
+    <span class="src">— A closing thought</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox">
+    <h3>References</h3>
+    <ol>
+      <li>Weerink MAS, Struys MMRF, Hannivoort LN, et al. Clinical Pharmacokinetics and Pharmacodynamics of Dexmedetomidine. <em>Clin Pharmacokinet.</em> 2017;56(8):893–913.</li>
+      <li>Gerlach AT, Dasta JF. Dexmedetomidine: an updated review. <em>Ann Pharmacother.</em> 2007;41(2):245–252.</li>
+      <li>Riker RR, Shehabi Y, Bokesch PM, et al. Dexmedetomidine vs midazolam for sedation of critically ill patients: a randomized trial (SEDCOM). <em>JAMA.</em> 2009;301(5):489–499.</li>
+      <li>Pandharipande PP, Pun BT, Herr DL, et al. Effect of sedation with dexmedetomidine vs lorazepam on acute brain dysfunction in mechanically ventilated patients: the MENDS randomized controlled trial. <em>JAMA.</em> 2007;298(22):2644–2653.</li>
+      <li>Mason KP, Lerman J. Dexmedetomidine in children: current knowledge and future applications. <em>Anesth Analg.</em> 2011;113(5):1129–1142.</li>
+      <li>Bong CL, Tan J, Lim S, et al. Effects of preoperative intranasal dexmedetomidine on inhalational induction and postoperative behavior in children. <em>Paediatr Anaesth.</em> 2015;25(9):907–913.</li>
+      <li>Gerlach AT, Murphy CV, Dasta JF. An updated focused review of dexmedetomidine in adults. <em>Ann Pharmacother.</em> 2009;43(12):2064–2074.</li>
+      <li>Kaur M, Singh PM. Current role of dexmedetomidine in clinical anesthesia and intensive care. <em>Anesth Essays Res.</em> 2011;5(2):128–133.</li>
+      <li>Grant MJC, Schneider JB, Asaro LA, et al. Dexmedetomidine use in critically ill children with acute respiratory failure (RESTORE study). <em>Pediatr Crit Care Med.</em> 2016;17(12):1131–1141.</li>
+      <li>Barends CRM, Absalom AR, Struys MMRF. Drug selection for ambulatory procedural sedation. <em>Curr Opin Anaesthesiol.</em> 2018;31(6):673–678.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>Drug Deep Dive · No. 001</span>
+    <span>Alpha-2 Agonist · ICU Sedation · Airway · Pediatric · TIVA</span>
+  </div>
+
+  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. Dosing information reflects commonly cited ranges in the anaesthesia and critical care literature and is not a substitute for institutional protocols, current product labelling, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
