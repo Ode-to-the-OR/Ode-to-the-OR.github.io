@@ -225,10 +225,49 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         No entries match your search — try a different keyword or <a href="#" id="no-results-clear">clear filters</a>.
       </div>
 
-      <div class="placeholder-cc">
-        <span>Coming Soon</span>
-        <span>First update is on its way</span>
-      </div>
+      <a href="asra-5th-edition.html" class="cc" target="_self"
+         data-title="Anticoagulation &amp; Regional Anesthesia: ASRA 5th Edition"
+         data-date="2025-01-29"
+         data-topics="regional,pain"
+         data-keywords="asra anticoagulation regional anesthesia doac warfarin heparin lmwh neuraxial hold times reversal">
+        <div class="cc-left">
+          <span class="cc-num">01</span>
+          <span class="cc-date">Jan 2025</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-title">Anticoagulation &amp; regional anesthesia: <em>what the 5th edition actually changed.</em></div>
+          <div class="cc-exc">ASRA Pain Medicine's 2025 guideline on regional anesthesia in patients on antithrombotic or thrombolytic therapy — the low-dose/high-dose shift, individualised DOAC timing, and a practical hold-time table.</div>
+        </div>
+        <div class="cc-right">
+          <div class="cc-tags">
+            <span class="tag tr">Regional</span>
+            <span class="tag tp">Pain</span>
+          </div>
+          <span class="cc-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="ssc-2026.html" class="cc" target="_self"
+         data-title="Surviving Sepsis Campaign 2026: What Actually Changed"
+         data-date="2026-03-23"
+         data-topics="sepsis,icu,resuscitation"
+         data-keywords="surviving sepsis campaign ssc sccm esicm septic shock map target vasopressor beta-lactam qsofa news2 fluid resuscitation">
+        <div class="cc-left">
+          <span class="cc-num">02</span>
+          <span class="cc-date">Mar 2026</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-title">Surviving Sepsis Campaign 2026: <em>what actually changed.</em></div>
+          <div class="cc-exc">The fifth-edition SCCM/ESICM sepsis guideline — 129 statements, 46 new. Screening away from qSOFA, individualized fluids, the 65 mmHg MAP target, and an upgraded beta-lactam strategy.</div>
+        </div>
+        <div class="cc-right">
+          <div class="cc-tags">
+            <span class="tag tt">ICU</span>
+            <span class="tag tk">Sepsis</span>
+          </div>
+          <span class="cc-arrow">→</span>
+        </div>
+      </a>
 
     </div>
   </div>
@@ -263,7 +302,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
       const da = new Date(a.dataset.date), db = new Date(b.dataset.date);
       return mode === 'oldest' ? da - db : db - da;
     });
-    sorted.forEach(c => list.insertBefore(c, placeholder));
+    sorted.forEach(c => list.insertBefore(c, placeholder || null));
   }
 
   function render(){
