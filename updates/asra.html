@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASRA 5th Edition: Anticoagulation & Regional Anesthesia — Ode to the OR</title>
+<meta name="description" content="What actually changed in ASRA's 2025 guideline on regional anesthesia and antithrombotic therapy — the low-dose/high-dose shift, individualised DOAC timing, and the practical hold-time table for the bedside.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* BACK LINK */
+.back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.back-link:hover{color:var(--rust);}
+.back-link svg{width:11px;height:11px;}
+
+/* ARTICLE HEAD */
+.article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.article-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.1rem);font-weight:300;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+.article-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.dek{font-size:.95rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:620px;margin-bottom:1.4rem;}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.tr{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
+.article-body > * + *{margin-top:1.5rem;}
+.article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--text);padding-top:.6rem;}
+.article-body h2 em{font-style:italic;color:var(--rust);}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);margin-top:1.6rem !important;}
+
+.callout{background:var(--surface);border-left:3px solid var(--sage);padding:1.1rem 1.3rem;}
+.callout p{font-size:.85rem;color:var(--muted);}
+.callout p:first-child{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--sage);margin-bottom:.4rem;}
+
+.source-note{background:var(--deep);border:1px solid var(--border);padding:1rem 1.3rem;font-size:.78rem;color:var(--muted);line-height:1.75;}
+.source-note strong{color:var(--text);font-weight:500;}
+
+ul.plain{list-style:none;padding:0;display:flex;flex-direction:column;gap:.85rem;}
+ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:1.2rem;position:relative;}
+ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
+ul.plain li strong{font-weight:500;color:var(--rust);}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
+thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:.75rem .9rem;border-bottom:1px solid var(--border);color:var(--text);font-weight:300;vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
+.table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* WORKED EXAMPLE */
+.worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.worked h3{margin-top:0 !important;}
+.worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
+.worked ol li{counter-increment:step;font-size:.87rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:2rem;position:relative;}
+.worked ol li::before{content:counter(step);position:absolute;left:0;top:0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--border);}
+.worked ol li strong{font-weight:500;color:var(--text);}
+
+/* CLOSING */
+.lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
+.lesson h3{color:var(--sage) !important;}
+
+.refs{border-top:1px solid var(--border);padding-top:1.4rem;}
+.refs h3{margin-top:0 !important;color:var(--muted) !important;font-family:'Instrument Sans',sans-serif !important;font-size:.6rem !important;letter-spacing:.16em;text-transform:uppercase;font-weight:500 !important;}
+.refs ol{list-style:decimal;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;margin-top:.8rem;}
+.refs li{font-size:.76rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+.disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
+
+/* NEXT / FOOTER NAV */
+.article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:600px){
+  .back-row{padding:5rem 6vw 0;}
+  .article-head{padding:1.4rem 6vw 2rem;}
+  .article-body{padding:2.2rem 6vw 3rem;}
+  .article-foot{padding:0 6vw 2.5rem;}
+  table{font-size:.76rem;}
+  thead th,tbody td{padding:.6rem .6rem;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="updates-guidelines.html" class="current">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="updates-guidelines.html" class="back-link" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Updates &amp; Guidelines
+  </a>
+</div>
+
+<div class="article-head">
+  <div class="ey">Guideline Update</div>
+  <h1>Anticoagulation &amp; regional anesthesia: <em>what the 5th edition actually changed.</em></h1>
+  <p class="dek">ASRA Pain Medicine's 2025 guideline on regional anesthesia in patients on antithrombotic or thrombolytic therapy — read in a few minutes, with a practical hold-time table for the bedside.</p>
+  <div class="meta-row">
+    <span class="tag tr">Regional</span>
+    <span class="tag tk">Anticoagulation</span>
+    <span class="meta-date">ASRA Pain Medicine · Published online 29 Jan 2025</span>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>The core hold times for warfarin, heparin, and standard-dose LMWH carry over from the 4th edition largely unchanged. What moved is mostly how DOACs are classified and timed, plus a firmer position on two recurring questions: reversal agents and drug-specific assays.</p>
+
+  <div class="callout">
+    <p>In short</p>
+    <p>Most of the established framework holds. The shift is in language and precision — low dose/high dose, individualised DOAC timing — layered onto the same underlying safety principles.</p>
+  </div>
+
+  <h2>Five things that are genuinely <em>new</em></h2>
+  <ul class="plain">
+    <li><strong>Low dose vs high dose</strong> replaces prophylactic vs therapeutic. Dosing categories are now defined explicitly per drug — e.g. apixaban 2.5&nbsp;mg BID is low dose, 5&nbsp;mg BID is high dose — rather than relying on the looser older split.</li>
+    <li><strong>Individualised DOAC timing.</strong> Hold intervals for direct oral anticoagulants are now adjusted for renal function and patient-specific thrombosis risk, not a single fixed number per drug.</li>
+    <li><strong>Drug-specific assays get a seat at the table.</strong> Where available, a calibrated anti-Xa assay or DOAC plasma level can support proceeding with a block even if the fixed interval hasn't strictly been met — useful when the exact timing of the last dose is uncertain.</li>
+    <li><strong>Reversal agents are explicitly not a shortcut.</strong> Idarucizumab, andexanet alfa, PCC, and aPCC are not recommended solely to enable a neuraxial procedure in routine patients. Separately, guidance on reversal strategy itself — for both vitamin K antagonists and DOACs — has been updated to reflect newer agents, for situations where reversal genuinely is indicated (active bleeding, emergency surgery).</li>
+    <li><strong>Neuraxial vs deep plexus/peripheral</strong> recommendations are now separated more explicitly, reflecting the different consequences of bleeding at each site.</li>
+  </ul>
+
+  <h2>The risk framework, in one line</h2>
+  <p>Every recommendation balances two risks that must be weighed together: the rare but catastrophic risk of spinal or epidural hematoma against the real risk of stroke, VTE recurrence, or valve thrombosis if anticoagulation is held unnecessarily long. Hold times exist to clear the drug's effect from the epidural space while minimising time off anticoagulation — that's why they're drug- and dose-specific rather than one blanket rule.</p>
+
+  <h3>Standing principles across every agent</h3>
+  <ul class="plain">
+    <li>Review the medication list daily for anything affecting hemostasis before block placement.</li>
+    <li>Check a platelet count before needling if UFH or LMWH has been given for more than 4 days — HIT risk.</li>
+    <li>Anti-Xa (heparin-calibrated) is <strong>not</strong> predictive of bleeding risk and isn't recommended for routine pre-block screening.</li>
+    <li>Indwelling catheters should generally come out before anticoagulation restarts, with a defined delay before the next dose.</li>
+  </ul>
+
+  <h2>Hold times, by agent</h2>
+  <p>Verify against the current published guideline and your local protocol before applying to an individual patient — renal function and case-specific bleeding/thrombosis risk can still shift these.</p>
+
+  <h3>Heparins</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Hold before block</th><th>Resume after block/catheter</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">UFH (IV)</td><td>Stop ≥4–6h before; confirm normal aPTT</td><td>Delay restart ≥1h after needle placement</td></tr>
+        <tr><td class="agent">UFH (SC, low dose)</td><td>No routine contraindication</td><td>Standard timing, per local protocol</td></tr>
+        <tr><td class="agent">LMWH — low dose</td><td>≥12h since last dose</td><td>First dose ≥12h after placement; 4h after catheter removal</td></tr>
+        <tr><td class="agent">LMWH — high dose</td><td>≥24h since last dose</td><td>Delay per surgical hemostasis; catheter out first</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Vitamin K antagonists</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Hold before block</th><th>Resume after block/catheter</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Warfarin</td><td>Stop, ideally 5 days before; INR normalised to local laboratory range before block</td><td>Evening of/day after surgery if hemostasis secure</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>DOACs — the section that actually changed</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Hold before block</th><th>Resume</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Apixaban — low dose</td><td>≥36h</td><td>Individualised per bleeding risk</td></tr>
+        <tr><td class="agent">Apixaban — high dose</td><td>≥72h</td><td>Consider drug-specific level or anti-Xa if timing uncertain</td></tr>
+        <tr><td class="agent">Rivaroxaban — low dose</td><td>≥24h (30h if CrCl &lt;30 mL/min)</td><td>Individualised</td></tr>
+        <tr><td class="agent">Rivaroxaban — high dose</td><td>≥72h</td><td>Individualised</td></tr>
+        <tr><td class="agent">Edoxaban — high dose</td><td>≥72h (no FDA-approved low-dose indication)</td><td>Individualised</td></tr>
+        <tr><td class="agent">Dabigatran — high dose</td><td>≥72h if CrCl ≥50 mL/min; 120h if CrCl 30–49; against block below CrCl 30 unless level &lt;30 ng/mL</td><td>Individualised</td></tr>
+        <tr><td class="agent">Dabigatran — low dose</td><td>≥48h</td><td>Individualised</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">Betrixaban was withdrawn from the US market in 2020 and is no longer addressed in the current guideline.</p>
+  <p class="table-caption">Where a calibrated assay is available, residual level below threshold (commonly &lt;30 ng/mL, or anti-Xa ≤0.1 IU/mL for Xa inhibitors) can support proceeding even before the fixed interval — reversal agents are not a substitute for this.</p>
+
+  <h3>Antiplatelets</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Hold before block</th><th>Resume</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Aspirin (mono)</td><td>No mandatory interruption in most patients</td><td>Continue per cardiology/surgical team</td></tr>
+        <tr><td class="agent">Clopidogrel</td><td>5–7 days</td><td>May resume immediately, no loading dose</td></tr>
+        <tr><td class="agent">Prasugrel</td><td>7–10 days</td><td>Per surgical/cardiology guidance</td></tr>
+        <tr><td class="agent">Ticagrelor</td><td>≥5 days</td><td>Per surgical/cardiology guidance</td></tr>
+        <tr><td class="agent">Cangrelor</td><td>≥3h since discontinuation (based on elimination half-life)</td><td>Catheter removed before restart; first dose ≥8h after removal</td></tr>
+        <tr><td class="agent">Cilostazol</td><td>≥2 days (based on elimination half-life)</td><td>Catheter removed before restart; first dose 6h after removal</td></tr>
+        <tr><td class="agent">GPIIb/IIIa inhibitors</td><td>Until platelet aggregation normalises: 24–48h for abciximab, 4–8h for eptifibatide/tirofiban</td><td>Individualised, typically delayed</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">Catheters generally shouldn't be maintained with prasugrel or ticagrelor given their rapid onset; clopidogrel is more forgiving and may be maintained 1–2 days if no loading dose is given.</p>
+
+  <h3>Parenteral direct thrombin inhibitors</h3>
+  <p>Argatroban, bivalirudin, and desirudin are used chiefly for HIT and have no available reversal agent. Given the lack of an antidote and the population that typically needs them, the guideline advises against performing neuraxial techniques in these patients altogether.</p>
+
+  <h3>Fondaparinux — low dose</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Renal function</th><th>Hold before block</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Normal renal function</td><td>36h (younger patients) to 42h (older patients)</td></tr>
+        <tr><td class="agent">Moderate impairment (CrCl 30–50 mL/min)</td><td>≥58h</td></tr>
+        <tr><td class="agent">Severe impairment (CrCl &lt;30 mL/min)</td><td>Neuraxial/deep plexus block not recommended, given a ~72h half-life</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">High-dose fondaparinux (5–10 mg once daily): ≥70h in younger patients and ≥105h in elderly patients, both with normal renal function. A fondaparinux-calibrated anti-Xa level (≤0.1 IU/mL) can support the timing decision if placement is being considered ahead of these intervals.</p>
+
+  <h3>Fibrinolytics</h3>
+  <p>Neuraxial or epidural anesthesia is generally avoided altogether in patients who have received fibrinolytic or thrombolytic drugs, except in highly unusual circumstances. Where the exact safe interval isn't established, the guideline suggests holding needle placement for at least 48 hours, with documented normalisation of clotting studies including fibrinogen. If a neuraxial block has already been placed around the time of fibrinolytic therapy, frequent neurological monitoring — roughly every 2 hours — is suggested for at least 48 hours afterward.</p>
+
+  <h2>What the labs actually tell you</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Test</th><th>Role</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">PT / INR</td><td>Warfarin monitoring; confirming normalisation before block</td><td>Established, reliable for this purpose</td></tr>
+        <tr><td class="agent">aPTT</td><td>IV UFH dosing; confirming clearance before block</td><td>Established, reliable for this purpose</td></tr>
+        <tr><td class="agent">Anti-Xa (heparin-calibrated)</td><td>Not predictive of bleeding risk; not for routine pre-block screening</td><td>Cannot reliably predict DOAC levels — must be drug-specific</td></tr>
+        <tr><td class="agent">Anti-Xa (drug-specific)</td><td>Can support timing decisions for Xa-inhibitor DOACs</td><td>Requires an assay calibrated to that specific DOAC</td></tr>
+        <tr><td class="agent">Platelet count</td><td>Recommended after &gt;4 days of heparin/LMWH — HIT screening</td><td>Simple, widely available</td></tr>
+        <tr><td class="agent">Viscoelastic testing (TEG/ROTEM)</td><td>Characterises overall clot kinetics</td><td>Emerging role; not yet a routine requirement pre-neuraxial</td></tr>
+        <tr><td class="agent">Platelet function assays</td><td>Assess residual P2Y12 inhibitor effect</td><td>No routine test exists for aspirin's antiplatelet effect</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>HIT: the platelet count matters independent of the clock</h2>
+  <p>HIT can follow either UFH or LMWH exposure beyond 4 days — check a platelet count before needling regardless of how clean the hold-time math looks. A falling count should raise HIT as a differential independent of the standard calculation. If HIT is confirmed, heparin products stop entirely, and neuraxial timing follows the alternative agent's own interval, not the heparin schedule.</p>
+
+  <div class="worked">
+    <h3>Worked example</h3>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.6rem;">Patient on enoxaparin 60&nbsp;mg SC BID (~1&nbsp;mg/kg BID), posted for major elective abdominal surgery.</p>
+    <ol>
+      <li><strong>Classify the dose.</strong> 60 mg BID in a ~65–70 kg patient is high-dose LMWH, not low-dose prophylaxis — this determines which interval applies.</li>
+      <li><strong>Apply the interval.</strong> High-dose LMWH needs ≥24h since last dose. Confirm the night-before dose was actually withheld and calculate from when it was actually given, not when it was scheduled.</li>
+      <li><strong>Confirm with a repeat coag profile</strong> the morning of surgery where ordered, especially if renal clearance or timing is uncertain.</li>
+      <li><strong>Decide neuraxial vs general</strong> on the full picture — case duration, additional VTE risk, and the consequences of a block wearing off mid-case all belong in this decision, not the LMWH timing alone.</li>
+      <li><strong>Plan the resumption before the case starts</strong>, in writing, with the surgical team, rather than improvising it afterward.</li>
+    </ol>
+  </div>
+
+  <div class="lesson">
+    <h3>The lesson that doesn't show up in any table</h3>
+    <p>Meeting the hold-time interval makes a neuraxial technique <em>eligible</em>, not necessarily the best choice. A spinal that's technically permissible under the 24-hour rule can still be the wrong call if the case will outlast a single-shot block, or if a block regressing intraoperatively — a long, adhesion-heavy laparotomy — would be dangerous. The guideline governs bleeding safety at the needle site; the case-duration judgment sits with the clinician.</p>
+  </div>
+
+  <div class="source-note">
+    <strong>On this summary.</strong> Written independently for personal study and bedside reference. It reflects the 5th edition's structure and key numbers in original language and is cross-checked against secondary reporting on the guideline — it is not a reproduction of the published text, tables, or evidence grading. Always confirm exact wording, grading, and any subsequent updates against the primary source and your institutional protocol before applying to a real patient.
+  </div>
+
+  <div class="refs">
+    <h3>References</h3>
+    <ol>
+      <li>Kopp SL, Vandermeulen E, McBane RD, et al. Regional Anesthesia in the Patient Receiving Antithrombotic or Thrombolytic Therapy: ASRA Pain Medicine Evidence-Based Guidelines (5th edition). <em>Reg Anesth Pain Med.</em> Published online 29 Jan 2025. doi:10.1136/rapm-2024-105766.</li>
+      <li>Horlocker TT, Vandermeulen E, Kopp SL, et al. 4th edition. <em>Reg Anesth Pain Med.</em> 2018;43(3):263–309.</li>
+      <li>Douketis JD, Spyropoulos AC, Murad MH, et al. Perioperative Management of Antithrombotic Therapy: ACCP Guideline. <em>Chest.</em> 2022;162(5):e207–e243.</li>
+      <li>Kearon C, Akl EA, Ornelas J, et al. Antithrombotic Therapy for VTE Disease: CHEST Guideline. <em>Chest.</em> 2016;149(2):315–352.</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    This is a personal educational summary, not the guideline itself and not exhaustive. It is not a substitute for reading the full published 5th edition or for independent clinical judgment. Re-verify all numeric intervals against the current publication and your institutional protocol before clinical use.
+  </div>
+
+</div>
+
+<div class="article-foot">
+  <a href="updates-guidelines.html" class="foot-back" target="_self">← Back to Updates &amp; Guidelines</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
