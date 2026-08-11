@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surviving Sepsis Campaign 2026: What Actually Changed — Ode to the OR</title>
+<meta name="description" content="The 2026 SCCM/ESICM Surviving Sepsis Campaign guideline, read in a few minutes — screening away from qSOFA, individualized fluids, the 65 mmHg MAP target, beta-lactam infusion strategy, and a bedside bundle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* BACK LINK */
+.back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.back-link:hover{color:var(--rust);}
+.back-link svg{width:11px;height:11px;}
+
+/* ARTICLE HEAD */
+.article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.article-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.1rem);font-weight:300;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+.article-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.dek{font-size:.95rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:620px;margin-bottom:1.4rem;}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.tt{border-color:var(--teal);color:var(--teal);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
+.article-body > * + *{margin-top:1.5rem;}
+.article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--text);padding-top:.6rem;}
+.article-body h2 em{font-style:italic;color:var(--rust);}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);margin-top:1.6rem !important;}
+
+.callout{background:var(--surface);border-left:3px solid var(--sage);padding:1.1rem 1.3rem;}
+.callout p{font-size:.85rem;color:var(--muted);}
+.callout p:first-child{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--sage);margin-bottom:.4rem;}
+
+.source-note{background:var(--deep);border:1px solid var(--border);padding:1rem 1.3rem;font-size:.78rem;color:var(--muted);line-height:1.75;}
+.source-note strong{color:var(--text);font-weight:500;}
+
+ul.plain{list-style:none;padding:0;display:flex;flex-direction:column;gap:.85rem;}
+ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:1.2rem;position:relative;}
+ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
+ul.plain li strong{font-weight:500;color:var(--rust);}
+
+/* RECOMMENDATION STRENGTH PILLS (new for this article) */
+.pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;}
+.pill{font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;padding:.22rem .55rem;border-radius:2px;font-weight:500;white-space:nowrap;}
+.p-strong{background:rgba(42,90,82,.15);color:var(--teal);border:1px solid var(--teal);}
+.p-cond{background:rgba(154,108,26,.15);color:var(--gold);border:1px solid var(--gold);}
+.p-insuff{background:rgba(122,100,85,.15);color:var(--muted);border:1px solid var(--faint);}
+.p-new{background:rgba(122,32,32,.12);color:var(--rust);border:1px solid var(--rust);}
+.p-up{background:rgba(58,58,106,.12);color:var(--indigo);border:1px solid var(--indigo);}
+.p-down{background:rgba(154,64,112,.12);color:var(--rose);border:1px solid var(--rose);}
+
+.rec-box{background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;}
+.rec-box p{font-size:.88rem;color:var(--text);line-height:1.7;}
+.rec-box p em{font-style:italic;color:var(--muted);font-size:.78rem;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
+thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:.75rem .9rem;border-bottom:1px solid var(--border);color:var(--text);font-weight:300;vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
+.table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* WORKED EXAMPLE / BUNDLE */
+.worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.worked h3{margin-top:0 !important;}
+.worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
+.worked ol li{counter-increment:step;font-size:.87rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:2rem;position:relative;}
+.worked ol li::before{content:counter(step);position:absolute;left:0;top:0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--border);}
+.worked ol li strong{font-weight:500;color:var(--text);}
+
+.bundle{background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.bundle h3{margin-top:0 !important;color:var(--teal) !important;}
+.bundle-step{margin-top:1.1rem;}
+.bundle-step:first-of-type{margin-top:1rem;}
+.bundle-step .step-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:.4rem;}
+.bundle-step p, .bundle-step li{font-size:.85rem;color:var(--text);line-height:1.7;}
+.bundle-step ul{list-style:none;padding:0;margin-top:.3rem;}
+.bundle-step ul li{padding-left:1rem;position:relative;}
+.bundle-step ul li::before{content:'·';position:absolute;left:0;color:var(--faint);}
+
+/* CLOSING */
+.lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
+.lesson h3{color:var(--sage) !important;}
+
+.refs{border-top:1px solid var(--border);padding-top:1.4rem;}
+.refs h3{margin-top:0 !important;color:var(--muted) !important;font-family:'Instrument Sans',sans-serif !important;font-size:.6rem !important;letter-spacing:.16em;text-transform:uppercase;font-weight:500 !important;}
+.refs ol{list-style:decimal;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;margin-top:.8rem;}
+.refs li{font-size:.76rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+.disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
+
+/* NEXT / FOOTER NAV */
+.article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:600px){
+  .back-row{padding:5rem 6vw 0;}
+  .article-head{padding:1.4rem 6vw 2rem;}
+  .article-body{padding:2.2rem 6vw 3rem;}
+  .article-foot{padding:0 6vw 2.5rem;}
+  table{font-size:.76rem;}
+  thead th,tbody td{padding:.6rem .6rem;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="updates-guidelines.html" class="current">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="updates-guidelines.html" class="back-link" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Updates &amp; Guidelines
+  </a>
+</div>
+
+<div class="article-head">
+  <div class="ey">Guideline Update</div>
+  <h1>Surviving Sepsis Campaign 2026: <em>what actually changed.</em></h1>
+  <p class="dek">The fifth iteration of the SCCM/ESICM adult sepsis guideline — 129 statements, 46 of them new. Screening moves away from qSOFA, fluids get individualized, the MAP target firms up, and beta-lactam dosing gets a strong upgrade. Read in a few minutes, with a bedside bundle at the end.</p>
+  <div class="meta-row">
+    <span class="tag tt">ICU</span>
+    <span class="tag tk">Sepsis</span>
+    <span class="tag ti">Resuscitation</span>
+    <span class="meta-date">SCCM / ESICM · Published simultaneously in Crit Care Med &amp; Intensive Care Med, March 2026</span>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>The 2026 update is the fifth edition of the SSC adult guideline, produced by a 69-member international panel across 23 countries using GRADE methodology. It carries 129 total statements, 46 of them new since 2021. The headline shift isn't any single number — it's a move away from one-size-fits-all bundles toward individualized, dynamically monitored care, while the non-negotiables (early recognition, early cultures, early antimicrobials, early source control) stay exactly as firm as before.</p>
+
+  <div class="callout">
+    <p>In short</p>
+    <p>qSOFA is out as a standalone screen. Fluids beyond the first 30 mL/kg are now explicitly your call — liberal or restrictive, individualized. MAP target of 65 is now a strong, high-certainty recommendation. Beta-lactam extended infusion and antimicrobial de-escalation both got upgraded to strong. Vasopressor choice, inotropes, and steroids all moved the other direction — downgraded to conditional. And for the first time, the guideline codifies a third resuscitation phase: active de-resuscitation.</p>
+  </div>
+
+  <h2>How to read the tags in this article</h2>
+  <div class="pill-row">
+    <span class="pill p-strong">Strong</span>
+    <span class="pill p-cond">Conditional</span>
+    <span class="pill p-insuff">Insufficient evidence</span>
+    <span class="pill p-new">New 2026</span>
+    <span class="pill p-up">Upgraded</span>
+    <span class="pill p-down">Downgraded</span>
+  </div>
+  <p><strong>Strong</strong> means "we recommend" — follow this for most patients. <strong>Conditional</strong> means "we suggest" — individualize based on the patient and setting in front of you. <strong>Insufficient evidence</strong> means no directional call could be made; local protocol and judgment govern. New, upgraded, and downgraded tags track what moved since the 2021 edition.</p>
+
+  <h2>Screening: <em>the move away from qSOFA</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span></div>
+    <p>For acutely ill patients in hospital, use NEWS, NEWS2, MEWS, or SIRS over qSOFA as a single screening tool. <em>Certainty: moderate.</em></p>
+  </div>
+  <p>A cohort of over 221,000 patients showed NEWS2 had the best sensitivity and specificity of the group. Early Warning Scores were built to flag any deterioration, which happens to make them good at catching evolving sepsis before hypotension sets in. qSOFA still has a role as a bedside prompt — a positive qSOFA should still raise concern — but its poor sensitivity means it can't stand alone as the screen. A negative qSOFA does not rule out sepsis and should never be used to defer evaluation.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-new">New 2026</span></div>
+    <p>Hospitals and health systems should run a performance improvement program for sepsis — screening for high-risk patients, standard operating procedures, and quality improvement strategies. <em>Certainty: moderate–high.</em></p>
+  </div>
+  <p>This is a genuinely new systems-level mandate. It pairs with a <strong>conditional, new-2026</strong> suggestion to adopt a "Code Sepsis" or sepsis huddle protocol — a multidisciplinary rapid-response system modeled on code stroke or code STEMI. One cited quality-improvement dataset showed a structured protocol cut median time-to-antibiotic from 113 to 40 minutes.</p>
+
+  <h2>Diagnosis: cultures, lactate, and what the labs can't tell you</h2>
+  <p>Draw blood cultures — at least two sets from two different sites — before antimicrobials if it can be done without meaningfully delaying treatment. The evidence for this got more concrete in 2026: a 325-patient multicenter study found blood-culture positivity fell from 31.4% pre-antimicrobial to 19.4% at a median of 70 minutes post-antimicrobial, a 38.2% relative drop. Still — never hold antibiotics in a hypotensive patient to chase a difficult line.</p>
+  <p>Lactate is suggested for all patients with possible, probable, or definite sepsis, with serial measurements to guide resuscitation in those with elevated lactate or shock. Lactate elevation in sepsis isn't purely hypoperfusion — catecholamine-driven glycolysis and impaired hepatic clearance both contribute, so trend it rather than chasing a single normal number. Procalcitonin and other biomarkers remain <span class="pill p-insuff" style="display:inline-block;vertical-align:middle;">Insufficient evidence</span> as standalone diagnostic triggers, though procalcitonin still has a role in guiding antimicrobial discontinuation.</p>
+
+  <h2>Resuscitation: <em>the biggest philosophical shift</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span></div>
+    <p>At least 30 mL/kg IV crystalloid within the first 3 hours for sepsis-induced hypoperfusion or septic shock. <em>Certainty: low.</em></p>
+  </div>
+  <p>The number is unchanged from 2016/2021, but the framing shifted: this is a starting point, not a target to hit rigidly in every patient. The evidence behind it is more nuanced than it looks — volumes under ~20 mL/kg associate with increased mortality, observational data suggest a trend toward harm above ~45 mL/kg, and the survival benefit specifically attaches to completing 30 mL/kg <em>within 3 hours</em>.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span> <span class="pill p-new">New / Upgraded 2026</span></div>
+    <p>Beyond the initial 30 mL/kg, for patients with persistent hypoperfusion: either a liberal or a restrictive fluid strategy, individualized to patient and health-system factors.</p>
+  </div>
+  <p>In 2021 this was explicitly insufficient evidence. Now the panel formally endorses either pathway, rejecting a single mandate. In practice: reassess after every bolus using dynamic measures, lactate trend, urine output, capillary refill, and exam — and escalate to vasopressors early rather than continuing large-volume loading indefinitely.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span> <span class="pill p-new">New 2026</span></div>
+    <p>Once the resuscitation phase is complete and the patient has stabilized with a positive fluid balance, begin active fluid removal — diuresis or ultrafiltration.</p>
+  </div>
+  <p>This is the first SSC edition to explicitly codify a third resuscitation phase. Think of it as: <strong>(1) Rescue</strong> — rapid bolus to restore perfusion; <strong>(2) Optimization</strong> — dynamic-measure-guided titration, often with earlier vasopressor start to avoid overload; <strong>(3) De-escalation</strong> — active fluid removal once shock resolves.</p>
+
+  <h3>Fluid type</h3>
+  <p>Balanced crystalloids (lactated Ringer's, Plasma-Lyte, Hartmann's) remain preferred over 0.9% saline given accumulating evidence on hyperchloremic acidosis and renal effects with large-volume saline — though saline stays acceptable if balanced solutions aren't available, and may still be preferred with significant hyponatremia or elevated ICP concerns. Starches and gelatins are suggested against; albumin is not first-line but retains a conditional adjunct role with large crystalloid volumes.</p>
+
+  <h3>MAP target</h3>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-up">Upgraded</span></div>
+    <p>An initial MAP target of 65 mmHg over higher targets in septic shock. <em>High-certainty — one of the strongest recommendations in the entire document.</em></p>
+  </div>
+  <p>This firms up a prior conditional 60–65 range. Higher targets (80–85 mmHg) haven't shown mortality benefit and raise vasopressor exposure and arrhythmia risk. Exception: patients with chronic hypertension or known cerebrovascular/coronary disease may reasonably need an individualized higher target if end-organ perfusion looks inadequate at 65 — but that's not the default starting point.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Target / signal</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">MAP</td><td>≥65 mmHg</td><td>Strong recommendation; don't chase supranormal values</td></tr>
+        <tr><td class="agent">Lactate</td><td>Trending down</td><td>Serial measurement; interpret with the source of elevation in mind</td></tr>
+        <tr><td class="agent">Capillary refill</td><td>&lt;3 sec, improving</td><td>Adjunct only, not a standalone target</td></tr>
+        <tr><td class="agent">Urine output</td><td>&gt;0.5 mL/kg/hr</td><td>Interpret cautiously with AKI/diuretics</td></tr>
+        <tr><td class="agent">Mentation</td><td>Improving / at baseline</td><td>Sensitive once sedation is accounted for</td></tr>
+        <tr><td class="agent">Skin perfusion</td><td>Warm extremities, reduced mottling</td><td>Simple bedside marker</td></tr>
+        <tr><td class="agent">Dynamic measures</td><td>PLR, PPV, SVV as applicable</td><td>Preferred over static measures or exam alone</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Vasopressors &amp; inotropes: <em>strength moved down, not the drugs</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span> <span class="pill p-down">Downgraded from Strong</span></div>
+    <p>Norepinephrine as first-line vasopressor over vasopressin or angiotensin II.</p>
+  </div>
+  <p>Norepinephrine is still the practical default in nearly all cases — the downgrade reflects narrowing (not eliminated) trial margins against angiotensin II and vasopressin, not license to start elsewhere routinely. Early, even peripheral, vasopressor initiation should not wait for central access or a "completed" fluid bolus in a patient with severe or worsening shock — a well-monitored peripheral line is an accepted bridge.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Line</th><th>Typical dose</th><th>Key notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Norepinephrine</td><td>First-line</td><td>0.01–1 mcg/kg/min</td><td>Predominant α1, some β1; titrate to MAP</td></tr>
+        <tr><td class="agent">Vasopressin</td><td>Second-line add-on</td><td>Fixed 0.03–0.04 U/min</td><td>Not titrated; catecholamine-sparing; caution with mesenteric/digital ischemia</td></tr>
+        <tr><td class="agent">Epinephrine</td><td>Third-line, or first-line with cardiac dysfunction</td><td>0.01–0.5 mcg/kg/min</td><td>Watch lactate rise (glycolytic, not hypoperfusion), tachyarrhythmia, hyperglycemia</td></tr>
+        <tr><td class="agent">Dobutamine</td><td>Add-on for hypoperfusion + cardiac dysfunction</td><td>2.5–20 mcg/kg/min</td><td>Vasodilator effect — always pair with a vasopressor</td></tr>
+        <tr><td class="agent">Angiotensin II</td><td>Not first-line; niche adjunct</td><td>Per label, titrate to MAP</td><td>2026 comparator agent; consider in catecholamine-refractory shock per local protocol</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">Sequence: vasopressin added if inadequate MAP on norepinephrine alone; epinephrine added third if still inadequate. Norepinephrine or epinephrine are the suggested first-line options with concomitant cardiac dysfunction.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span> <span class="pill p-down">Downgraded / reworded</span></div>
+    <p>Inotropes over no inotropes for cardiac dysfunction with persistent hypoperfusion despite adequate fluids and pressure — practically, adding dobutamine to norepinephrine, or using epinephrine alone, rather than a strict mandate for dobutamine specifically.</p>
+  </div>
+
+  <h2>Antimicrobials: timing, tiering, and stewardship</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span></div>
+    <p>For septic shock or high likelihood of sepsis, antimicrobials within 1 hour of recognition — despite low/very-low certainty evidence for the specific cutoff. The strength reflects the catastrophic downside of delay, not a precisely-timed RCT.</p>
+  </div>
+  <p>The 2026 guideline adds a tiered framework to counter blanket 1-hour mandates applied to every undifferentiated patient:</p>
+  <ul class="plain">
+    <li><strong>Definite / probable sepsis or shock</strong> — treat within 1 hour, no exceptions.</li>
+    <li><strong>Possible sepsis, no shock</strong> — a brief, focused evaluation (roughly 3 hours) before committing to antimicrobials, rather than reflexive treatment. <span class="pill p-cond" style="display:inline-block;">Conditional</span></li>
+    <li><strong>Low likelihood of infection, no shock</strong> — defer antimicrobials, monitor closely. <span class="pill p-cond" style="display:inline-block;">Conditional</span> <span class="pill p-new" style="display:inline-block;">New 2026</span></li>
+  </ul>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-up">Upgraded from Conditional</span></div>
+    <p>Prolonged (extended) infusion of beta-lactams for maintenance dosing, after an initial loading dose, over conventional intermittent bolus.</p>
+  </div>
+  <p>Beta-lactams are time-dependent killers — keeping free drug above the MIC for more of the dosing interval improves bactericidal activity, especially against less-susceptible organisms and given the altered pharmacokinetics (augmented renal clearance, increased volume of distribution) typical of septic shock. Always give a full bolus loading dose first, then transition to extended or continuous infusion.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Drug</th><th>Loading dose</th><th>Extended maintenance (illustrative)</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Piperacillin-tazobactam</td><td>4.5 g IV over 30 min</td><td>3.375–4.5 g infused over 4h, q8h</td></tr>
+        <tr><td class="agent">Meropenem</td><td>1–2 g IV over 30 min</td><td>1–2 g infused over 3h, q8h</td></tr>
+        <tr><td class="agent">Cefepime</td><td>2 g IV over 30 min</td><td>2 g infused over 3–4h, q8h</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">Illustrative dosing only — renal-adjust per institutional pharmacy protocol and confirm local infusion-pump capability before initiating.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-up">Upgraded from Conditional</span></div>
+    <p>De-escalation of antimicrobial therapy over no de-escalation once a confirmed microbiological diagnosis and susceptibility profile is available.</p>
+  </div>
+  <p>Narrowing spectrum, dropping redundant empiric agents, and stopping antifungals when cultures are negative is now a default expectation, not a permissive suggestion. Duration: 7–10 days remains a reasonable default for most uncomplicated sources, with shorter courses (5–7 days or less) supported for many source-controlled infections — individualize rather than reflexively extend. Longer courses stay reserved for undrainable abscesses, endocarditis, and osteomyelitis.</p>
+
+  <h2>Source control</h2>
+  <p>No amount of antimicrobial therapy substitutes for source control in a drainable or debridable focus. Persistent shock despite appropriate antibiotics and resuscitation should always prompt re-evaluation for an unaddressed source.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Source</th><th>Typical intervention</th><th>Timing</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Intra-abdominal abscess/perforation</td><td>Percutaneous or surgical drainage; laparotomy/laparoscopy for perforation</td><td>ASAP once hemodynamically feasible</td></tr>
+        <tr><td class="agent">Infected line/hardware</td><td>Device removal</td><td>Promptly once confirmed or strongly suspected</td></tr>
+        <tr><td class="agent">Necrotizing soft tissue infection</td><td>Emergent surgical debridement</td><td>Emergent — mortality rises sharply with delay</td></tr>
+        <tr><td class="agent">Pyonephrosis</td><td>Stent or percutaneous nephrostomy</td><td>Urgent decompression</td></tr>
+        <tr><td class="agent">Empyema</td><td>Chest tube / VATS drainage</td><td>Prompt; consider fibrinolytics if loculated</td></tr>
+        <tr><td class="agent">Cholangitis</td><td>ERCP or percutaneous biliary drainage</td><td>Urgent, especially with ongoing shock</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Corticosteroids &amp; adjuncts</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span> <span class="pill p-down">Downgraded / broadened</span></div>
+    <p>IV corticosteroids for septic shock — the 2021 qualifier "with an ongoing vasopressor requirement" was removed, broadening the wording, while the underlying trial evidence stays mixed on mortality benefit versus faster shock reversal alone.</p>
+  </div>
+  <p>Most clinicians in practice still reserve steroids for septic shock with a meaningful, ongoing vasopressor requirement rather than universally at shock onset. Typical regimen: hydrocortisone 200 mg/day IV (continuous or divided q6h), or hydrocortisone 50 mg IV q6h plus fludrocortisone 50 mcg enterally daily. Taper once vasopressors are weaned and shock resolves — no strong consensus on optimal taper length.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Suggest against</span> <span class="pill p-down">Broadened from 2021</span></div>
+    <p>Blood purification therapies — hemoperfusion, high-dose hemofiltration, plasma exchange — for sepsis. The 2021 edition targeted polymyxin B hemoperfusion specifically; 2026 broadens this against the whole class, given accumulating lack of convincing mortality benefit.</p>
+  </div>
+  <p>High-dose IV vitamin C, thiamine, and "HAT therapy" are not recommended as routine adjuncts, consistent with recent large RCT data showing no benefit and a signal for possible harm in some trials.</p>
+
+  <h2>Supportive care, in brief</h2>
+  <ul class="plain">
+    <li><strong>Ventilation:</strong> lung-protective volumes (~6 mL/kg PBW), plateau pressure &lt;30 cmH₂O; higher PEEP over lower in moderate–severe ARDS; prone positioning &gt;12h/day for PaO₂/FiO₂ &lt;150; high-flow nasal oxygen favored over NIV for hypoxemic respiratory failure without another NIV indication.</li>
+    <li><strong>RRT:</strong> continuous or intermittent per local expertise and hemodynamic tolerance; delayed initiation driven by conventional indications (refractory hyperkalemia, acidosis, volume overload, uremia) is generally preferred over early initiation for AKI staging alone.</li>
+    <li><strong>Transfusion:</strong> restrictive strategy, transfuse at Hb ≤7 g/dL, absent active hemorrhage, ACS, or severe hypoxemia.</li>
+    <li><strong>Glucose:</strong> start insulin at ≥180 mg/dL; target upper glucose ≤180 mg/dL rather than tight control.</li>
+    <li><strong>VTE prophylaxis:</strong> pharmacologic (LMWH preferred) absent contraindication; mechanical when pharmacologic is contraindicated.</li>
+    <li><strong>Nutrition:</strong> early enteral feeding (24–72h) preferred when tolerated; trophic/hypocaloric feeding in week one is acceptable.</li>
+    <li><strong>Sedation:</strong> analgesia-first, light sedation target (RASS −2 to 0); daily SAT/SBT pairing; avoid benzodiazepines first-line — propofol or dexmedetomidine preferred when sedation is needed.</li>
+  </ul>
+
+  <h2>Post-sepsis care: a real 2026 expansion</h2>
+  <p>The 2026 edition substantially expands attention to survivorship as its own phase of care — structured discharge transitions (medication reconciliation, clear follow-up, communication with outpatient providers), screening for post-sepsis physical, cognitive, and psychological sequelae (overlapping with PICS), and anticipatory guidance given the elevated risk of readmission and recurrent infection. Goals-of-care conversations are recommended within 72 hours of ICU admission for septic shock patients at high risk of death, and revisited as the picture evolves.</p>
+
+  <div class="worked">
+    <h3>Anesthesiology-specific: the OR &amp; perioperative sepsis</h3>
+    <ol>
+      <li><strong>Don't delay emergent source control for "complete" resuscitation.</strong> Necrotizing fasciitis debridement, perforated viscus — resuscitation and source control proceed in parallel, with hemodynamic support continuing into and through the case.</li>
+      <li><strong>Verify antimicrobials explicitly at time-out.</strong> Don't assume they've been given — confirm, or administer immediately if not.</li>
+      <li><strong>Anticipate the induction hit.</strong> Septic patients are relatively hypovolemic and catecholamine-depleted; consider reduced induction doses and hemodynamically-sparing agents (etomidate or ketamine), with vasopressors primed and ready to push. A low threshold for pre-induction arterial line is reasonable in unstable patients.</li>
+      <li><strong>Maintain the same MAP ≥65 target intraoperatively.</strong> Don't drift into permissive hypotension under the assumption the surgeon will "fix it shortly." Use dynamic parameters (PPV, SVV via arterial waveform) to guide further fluids, consistent with the broader 2026 emphasis.</li>
+      <li><strong>Neuraxial is generally relatively contraindicated</strong> in overtly septic or shocked patients — vasoplegia risk plus theoretical epidural abscess concern in bacteremia. General anesthesia is typically preferred for source-control procedures.</li>
+      <li><strong>Hand off explicitly.</strong> Source and adequacy of control, cultures and antimicrobials given (agent/dose/timing), intraoperative fluid and vasopressor trends, and any instability requiring escalation.</li>
+    </ol>
+  </div>
+
+  <div class="bundle">
+    <h3>Hour-1 bundle, at a glance</h3>
+    <div class="bundle-step">
+      <div class="step-label">Recognize (t = 0)</div>
+      <p>Screen with NEWS/NEWS2/MEWS/SIRS — not qSOFA alone. Classify diagnostic certainty: definite / probable / possible / unlikely.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Simultaneous actions</div>
+      <ul>
+        <li>Blood cultures × 2 sites, lactate, IV/IO access — ideally before antimicrobials, but don't delay treatment for this if hypotensive</li>
+        <li>Empiric antimicrobials: shock/high-likelihood → within 1h, no exceptions; possible without shock → rapid eval then treat; unlikely → consider deferring</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Fluids (0–3h)</div>
+      <p>≥30 mL/kg balanced crystalloid, individualized. Reassess with dynamic measures + lactate + exam after each bolus.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Vasopressors</div>
+      <p>Norepinephrine first, titrate to MAP ≥65. Add vasopressin, then epinephrine if inadequate. Don't wait for "complete" fluids to start.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Source control</div>
+      <p>Identify in parallel with the above; execute (drain/debride/remove device) as soon as feasible.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Reassess &amp; transition</div>
+      <p>Trend perfusion markers continuously; consider steroids if shock persists; de-escalate antimicrobials once susceptibilities return; begin active de-resuscitation once stable; plan goals-of-care and survivorship follow-up.</p>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <h3>The lesson that doesn't show up in any table</h3>
+    <p>The 2026 edition's real message is that sepsis care has matured past the era of a single bundle applied identically to every patient. The fundamentals — recognize fast, culture and treat fast, control the source — stay non-negotiable. Everything downstream of that (how much fluid, which vasopressor sequence, whether to add steroids, how long antimicrobials run) is now explicitly framed as a judgment call layered onto those fundamentals, not a fixed protocol to execute blindly.</p>
+  </div>
+
+  <div class="source-note">
+    <strong>On this summary.</strong> Written independently for personal study and bedside reference from the published 2026 SSC guideline and its accompanying guideline-summary coverage. It reflects the structure and key numbers of the guideline in original language and is not a reproduction of the published text, tables, or evidence grading. Always confirm exact wording, grading, and any subsequent corrections against the primary source and your institutional protocol before applying to a real patient.
+  </div>
+
+  <div class="refs">
+    <h3>References</h3>
+    <ol>
+      <li>Prescott HC, Antonelli M, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026. <em>Crit Care Med.</em> 2026;54(4):725–812. doi:10.1097/CCM.0000000000007075.</li>
+      <li>Prescott HC, Antonelli M, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026. <em>Intensive Care Med.</em> Published online 23 Mar 2026. doi:10.1007/s00134-026-08361-1 (Publisher correction 5 May 2026).</li>
+      <li>Society of Critical Care Medicine (SCCM). Surviving Sepsis Campaign: International Guidelines 2026 — Guideline Summary. sccm.org/clinical-resources/guidelines.</li>
+      <li>European Society of Intensive Care Medicine (ESICM). The 2026 Surviving Sepsis Campaign Guidelines — Release Summary. esicm.org.</li>
+      <li>SCCM/ESICM. Surviving Sepsis Campaign: International Guidelines for the Management of Sepsis and Septic Shock in Children 2026. <em>Pediatric Critical Care Medicine</em>, 2026 (concurrent pediatric edition; not the focus of this summary).</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    This is a personal educational summary, not the guideline itself and not exhaustive. It is not a substitute for reading the full published 2026 SSC guideline or for independent clinical judgment. Drug doses shown are illustrative — always verify against current institutional pharmacy references and the patient's renal/hepatic function before administration. Re-verify all recommendations against the current publication and your institutional protocol before clinical use.
+  </div>
+
+</div>
+
+<div class="article-foot">
+  <a href="updates-guidelines.html" class="foot-back" target="_self">← Back to Updates &amp; Guidelines</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
