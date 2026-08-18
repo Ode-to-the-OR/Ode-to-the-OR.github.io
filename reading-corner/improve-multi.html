@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Individualized Perioperative Blood Pressure Management — Ode to the OR</title>
+<meta name="description" content="An annotated read of the IMPROVE-multi trial (JAMA, 2025) — why individualizing intraoperative MAP to a patient's own nighttime pressure did not reduce kidney injury, myocardial injury, or death after major abdominal surgery, and what that means for tomorrow's case.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* BACK LINK */
+.back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.back-link:hover{color:var(--rust);}
+.back-link svg{width:11px;height:11px;}
+
+/* ARTICLE HEAD */
+.article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.article-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,4.4vw,2.7rem);font-weight:300;line-height:1.18;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+.article-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.subhead{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--muted);margin-top:-.6rem;margin-bottom:1.2rem;}
+.dek{font-size:.95rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:620px;margin-bottom:1.4rem;}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.tr{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tt{border-color:var(--teal);color:var(--teal);}
+.meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
+.article-body > * + *{margin-top:1.5rem;}
+.article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--text);padding-top:.6rem;}
+.article-body h2 em{font-style:italic;color:var(--rust);}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);margin-top:1.6rem !important;}
+
+.callout{background:var(--surface);border-left:3px solid var(--sage);padding:1.1rem 1.3rem;}
+.callout p{font-size:.85rem;color:var(--muted);}
+.callout p:first-child{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--sage);margin-bottom:.4rem;}
+
+.source-note{background:var(--deep);border:1px solid var(--border);padding:1rem 1.3rem;font-size:.78rem;color:var(--muted);line-height:1.75;}
+.source-note strong{color:var(--text);font-weight:500;}
+
+ul.plain{list-style:none;padding:0;display:flex;flex-direction:column;gap:.85rem;}
+ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:1.2rem;position:relative;}
+ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
+ul.plain li strong{font-weight:500;color:var(--rust);}
+
+/* CITATION CHIP */
+.pchip{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;letter-spacing:.04em;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.25rem .6rem .25rem .5rem;border-radius:3px;margin:0 .15rem;}
+.pchip .n{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--rust);font-size:.82rem;}
+
+/* PAPER META CARD */
+.paper-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.6rem;}
+.paper-card .pk{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:.2rem;}
+.paper-card .pv{font-size:.86rem;color:var(--text);font-weight:400;margin-bottom:1rem;}
+.paper-card .pv:last-child{margin-bottom:0;}
+.paper-card .pv em{font-style:italic;color:var(--muted);}
+.paper-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.8rem;}
+@media(max-width:600px){.paper-grid{grid-template-columns:1fr;}}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
+thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:.75rem .9rem;border-bottom:1px solid var(--border);color:var(--text);font-weight:300;vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
+.table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* MARGIN NOTE / ANNOTATION BLOCK */
+.annot{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1rem 1.3rem;}
+.annot .al{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;}
+.annot p{font-size:.85rem;color:var(--text);line-height:1.75;}
+.annot p+p{margin-top:.6rem;}
+
+.verdict{background:var(--deep);border:1px solid var(--border);padding:1.3rem 1.4rem;display:flex;gap:1.1rem;align-items:flex-start;}
+.verdict .vicon{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--rust);flex-shrink:0;line-height:1;padding-top:.1rem;}
+.verdict p{font-size:.88rem;color:var(--muted);line-height:1.8;}
+.verdict strong{color:var(--text);font-weight:500;}
+
+/* WORKED EXAMPLE / TAKEAWAY BOX */
+.worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.worked h3{margin-top:0 !important;}
+.worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
+.worked ol li{counter-increment:step;font-size:.87rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:2rem;position:relative;}
+.worked ol li::before{content:counter(step);position:absolute;left:0;top:0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--border);}
+.worked ol li strong{font-weight:500;color:var(--text);}
+
+/* CLOSING */
+.lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
+.lesson h3{color:var(--sage) !important;}
+
+.refs{border-top:1px solid var(--border);padding-top:1.4rem;}
+.refs h3{margin-top:0 !important;color:var(--muted) !important;font-family:'Instrument Sans',sans-serif !important;font-size:.6rem !important;letter-spacing:.16em;text-transform:uppercase;font-weight:500 !important;}
+.refs ol{list-style:decimal;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;margin-top:.8rem;}
+.refs li{font-size:.76rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+.disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
+
+/* NEXT / FOOTER NAV */
+.article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:600px){
+  .back-row{padding:5rem 6vw 0;}
+  .article-head{padding:1.4rem 6vw 2rem;}
+  .article-body{padding:2.2rem 6vw 3rem;}
+  .article-foot{padding:0 6vw 2.5rem;}
+  table{font-size:.76rem;}
+  thead th,tbody td{padding:.6rem .6rem;}
+  .verdict{flex-direction:column;gap:.6rem;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="index.html#explore" class="current">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="reading-corner.html" class="back-link" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    The Reading Corner
+  </a>
+</div>
+
+<div class="article-head">
+  <div class="ey">The Reading Corner · Paper 01</div>
+  <h1>Individualized Perioperative <em>Blood Pressure</em> Management</h1>
+  <div class="subhead">IMPROVE-multi · JAMA · 2025</div>
+  <p class="dek">IMPROVE-multi, JAMA, October 2025 — the largest trial to date on individualizing intraoperative blood pressure to a patient's own baseline. It was expected to confirm what many anesthesiologists already believe. It didn't, and that is what makes it worth a close read.</p>
+  <div class="meta-row">
+    <span class="tag tr">Perioperative Medicine</span>
+    <span class="tag tk">Hemodynamics</span>
+    <span class="tag tt">RCT</span>
+    <span class="meta-date">JAMA · Published online 12 Oct 2025</span>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>Every anesthesiologist has been taught some version of the same rule: a patient's "normal" blood pressure is not 65&nbsp;mmHg — it's whatever <em>their</em> body runs at. Push a chronically hypertensive 70-year-old down to a MAP of 65 during a four-hour laparotomy and their kidneys may be perfusing below what their brain and kidneys have adapted to. The fix seems obvious: find each patient's own baseline, and defend that number in theatre. IMPROVE-multi is the most rigorous test that idea has ever received, and the result is less comfortable than the theory.</p>
+
+  <div class="paper-card">
+    <div class="paper-grid">
+      <div>
+        <span class="pk">Trial</span>
+        <span class="pv">IMPROVE-multi</span>
+      </div>
+      <div>
+        <span class="pk">Design</span>
+        <span class="pv">Multicentre, randomized, single-blind, superiority trial</span>
+      </div>
+      <div>
+        <span class="pk">Where</span>
+        <span class="pv">15 German university hospitals</span>
+      </div>
+      <div>
+        <span class="pk">Who</span>
+        <span class="pv">1,134 patients ≥45y, elective major abdominal surgery ≥90 min, at least one high-risk criterion</span>
+      </div>
+      <div>
+        <span class="pk">Question</span>
+        <span class="pv">Does an individualized intraoperative MAP target (based on the patient's own preoperative nighttime MAP) beat a routine target of ≥65 mmHg?</span>
+      </div>
+      <div>
+        <span class="pk">Primary outcome</span>
+        <span class="pv">Composite: acute kidney injury, acute myocardial injury, nonfatal cardiac arrest, or death — first 7 postop days</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>The backstory</h2>
+  <p>The logic behind individualized blood pressure targets has always made intuitive sense. Intraoperative hypotension — MAP under roughly 60–65&nbsp;mmHg for any meaningful stretch — keeps showing up in observational data linked to kidney injury, cardiac injury, and death after noncardiac surgery. So guidelines settled on keeping MAP above 60–65 as a floor. But that floor is built for an average patient, and a lot of patients aren't average — someone whose resting pressure normally sits at 95 might genuinely be under-perfused at 65, even while technically "within guideline."</p>
+  <p>The trial that really put this on the map was INPRESS, back in 2017: keeping systolic pressure within 10% of baseline, rather than a flat threshold, dropped a composite of inflammation and organ dysfunction from 52% to 38%. Small trial, one hospital, 292 patients — but it was persuasive enough that "treat the patient's own number" became something close to received wisdom. IMPROVE-multi is essentially the bigger, better-designed sequel, asking the same question with a sharper definition of what "baseline" actually means.</p>
+
+  <p>One notable feature of the design: instead of a single preop blood pressure reading (which INPRESS used, and which is easily thrown off by nerves or a busy holding bay), this trial measured overnight blood pressure every 30 minutes before surgery and used the average nighttime MAP — the number a patient settles into during real sleep — as their individual target. It's a genuinely better baseline, which means this was a fair shot at the hypothesis rather than a strawman version of it.</p>
+
+  <h2>What they did</h2>
+  <p>1,142 patients having major abdominal, urologic, gynecologic, or liver surgery, randomized 1:1. One group had MAP kept at or above their own overnight baseline throughout surgery and for two hours after (capped between 65 and 110&nbsp;mmHg, so nobody's chasing a reverse-dipper's freak overnight reading of 130). The other group just got routine care: MAP ≥65, managed however the anesthesiologist normally would.</p>
+  <p>The groups were well matched going in — similar age, similar comorbidities, about half with a history of hypertension in each. And the individualized group really did run at higher pressures during surgery: more time above target, more norepinephrine used to get there. So this wasn't a trial that failed to deliver its own intervention. It did what it set out to do.</p>
+
+  <h2>And then — nothing</h2>
+  <p>That's really the headline. Nothing happened.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Outcome (first 7 postop days)</th><th>Individualized</th><th>Routine (≥65 mmHg)</th><th>Relative risk</th><th>P</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Primary composite*</td><td>190/567 (33.5%)</td><td>173/567 (30.5%)</td><td>1.10 (0.93–1.30)</td><td>.31</td></tr>
+        <tr><td class="agent">Acute kidney injury</td><td>72/566 (12.7%)</td><td>58/567 (10.2%)</td><td>1.24 (0.90–1.72)</td><td>.22</td></tr>
+        <tr><td class="agent">Acute myocardial injury</td><td>153/558 (27.4%)</td><td>138/561 (24.6%)</td><td>1.11 (0.91–1.36)</td><td>.31</td></tr>
+        <tr><td class="agent">Infectious complications</td><td>90/567 (15.9%)</td><td>97/567 (17.1%)</td><td>0.93 (0.71–1.21)</td><td>.63</td></tr>
+        <tr><td class="agent">90-day composite†</td><td>32/566 (5.7%)</td><td>20/567 (3.5%)</td><td>1.60 (0.93–2.77)</td><td>.12</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">*AKI, myocardial injury, nonfatal cardiac arrest, or death within 7 days. †Kidney replacement therapy, MI, nonfatal cardiac arrest, or death within 90 days. None of the 22 secondary outcomes reached significance.</p>
+
+  <p>What stands out most is that every single point estimate trends the wrong way — AKI, myocardial injury, the 90-day composite, even MI at 90 days. All numerically worse in the individualized group, none of it statistically significant, all of it consistent with plain noise around a true null. And this wasn't an underpowered trial that quietly missed something real — it hit its planned sample size with 90% power to detect an 8% absolute risk reduction. The trial looked hard for an effect, and there was nothing there to find. If anything there's a faint suggestion of harm from chasing higher pressures with more norepinephrine, though that signal shouldn't carry much weight given the confidence intervals.</p>
+
+  <div class="verdict">
+    <span class="vicon">Ø</span>
+    <p><strong>The subgroup analysis doesn't save it either.</strong> A little over half the patients had documented hypertension — exactly the group expected to benefit most from having their higher baseline respected. No benefit showed up there either, at any degree of hypertension.</p>
+  </div>
+
+  <h2>How this sits with everything else</h2>
+  <p>IMPROVE-multi isn't landing in a vacuum — the field had already been drifting this way. A smaller trial in 2021 found a fixed MAP target of 75 was no better than 60. POISE-3, with over 7,000 patients, found a hypotension-avoidance strategy no better than a permissive one for cardiovascular outcomes. What this trial adds is the individualization piece specifically, tested with about as good a baseline measurement as anyone's used — and it still came back null.</p>
+  <p>Worth saying plainly, because the authors do: hypotension in the routine-care group was rare and brief to begin with, since everyone was already being kept above 65 per guideline. So this trial isn't telling us what happens if MAP actually drops to 45 for twenty minutes — almost nobody in either arm experienced that. It's telling us that once patients are already being kept reasonably safe at the existing floor, pushing a subset higher because of their personal baseline doesn't seem to buy anything measurable. That's a narrower claim than "individualizing doesn't matter," and it's the one the data actually supports.</p>
+
+  <p>One limitation worth flagging: anesthesiologists obviously knew which group each patient was in, since they had to hit the target. Impossible to blind, but it does mean subtly different attention beyond just the number on the monitor can't be fully ruled out for the individualized group. The authors acknowledge this limitation themselves.</p>
+
+  <div class="annot">
+    <div class="al">Practical takeaway</div>
+    <p>The practical shift here is small, and that's arguably the point. A MAP floor of 65 still holds, and real, sustained hypotension still needs treating the way it always has. What this trial argues against is the instinct to push a chronically hypertensive patient's pressure up toward their "normal" simply because it feels physiologically tidy. That habit isn't free — it usually means more pressor, more titrating, more attention spent — and this trial is a reasonable basis for not paying that cost without a demonstrated return.</p>
+  </div>
+
+  <div class="worked">
+    <h3>Quick takeaways</h3>
+    <ol>
+      <li><strong>MAP ≥65 still holds up</strong> as a working floor — the routine-care arm was managed to it and did just fine.</li>
+      <li><strong>Chasing a hypertensive patient's own baseline intraoperatively</strong> isn't supported here, even though it sounds right on paper.</li>
+      <li><strong>Real hypotension still needs treating</strong> — this is about the value of going higher than 65, not about tolerating genuine drops.</li>
+      <li><strong>What happens at truly low MAPs is still unanswered</strong> — this trial barely saw that scenario in either arm.</li>
+      <li><strong>Worth watching</strong> — the same JAMA issue carried another null trial on hypotension treatment strategy (PRETREAT). Two big German trials landing null together isn't nothing, and it raises the question of whether the next round of guidelines will quietly soften the individualized-targeting language.</li>
+    </ol>
+  </div>
+
+  <div class="lesson">
+    <h3>The broader point</h3>
+    <p>What stands out most about this paper isn't the result itself, but the reminder underneath it. "Treat the patient's own baseline" sounds like it can't possibly be wrong — it's just good physiology. But good physiology tells you what's plausible, not what actually moves outcomes, because the body has more redundancy in it than any bedside mental model accounts for. It's a useful trial to keep in mind the next time an intervention sounds obviously right on mechanism alone.</p>
+  </div>
+
+  <div class="source-note">
+    <strong>On this annotation.</strong> Written independently as a study summary. Numbers, outcome definitions, and conclusions are drawn directly from the published trial and its supplementary materials; framing and emphasis reflect an independent read. This is not a reproduction of the original manuscript — read the full paper before changing practice, and treat this as a study companion, not a substitute.
+  </div>
+
+  <div class="refs">
+    <h3>References</h3>
+    <ol>
+      <li>Saugel B, Meidert AS, Brunkhorst FM, et al; IMPROVE-multi Trial Group. Individualized Perioperative Blood Pressure Management in Patients Undergoing Major Abdominal Surgery: The IMPROVE-multi Randomized Clinical Trial. <em>JAMA.</em> 2025;334(21):1893–1904. doi:10.1001/jama.2025.17235.</li>
+      <li>Futier E, Lefrant JY, Guinot PG, et al; INPRESS Study Group. Effect of Individualized vs Standard Blood Pressure Management Strategies on Postoperative Organ Dysfunction Among High-Risk Patients Undergoing Major Surgery. <em>JAMA.</em> 2017;318(14):1346–1357.</li>
+      <li>Marcucci M, Painter TW, Conen D, et al; POISE-3 Trial Investigators. Hypotension-Avoidance Versus Hypertension-Avoidance Strategies in Noncardiac Surgery. <em>Ann Intern Med.</em> 2023;176(5):605–614.</li>
+      <li>Wanner PM, Wulff DU, Djurdjevic M, et al. Targeting Higher Intraoperative Blood Pressures Does Not Reduce Adverse Cardiovascular Events Following Noncardiac Surgery. <em>J Am Coll Cardiol.</em> 2021;78(18):1753–1764.</li>
+      <li>Kant M, van Klei WA, Hollmann MW, et al. Proactive vs Reactive Treatment of Hypotension During Surgery: The PRETREAT Randomized Clinical Trial. <em>JAMA.</em> 2025. doi:10.1001/jama.2025.18007.</li>
+      <li>Legrand M, Lamontagne F, Pirracchio R. Perioperative Outcomes — The Limits of Blood Pressure–Centered Strategies. <em>JAMA.</em> 2025;334(21):1885–1887. doi:10.1001/jama.2025.18572.</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    This is an educational summary of a single published trial, not a clinical guideline and not exhaustive. It is not a substitute for reading the full published paper, its editorial commentary, or independent clinical judgment. Perioperative blood pressure management should follow institutional protocol and current society guidelines.
+  </div>
+
+</div>
+
+<div class="article-foot">
+  <a href="reading-corner.html" class="foot-back" target="_self">← Back to The Reading Corner</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
