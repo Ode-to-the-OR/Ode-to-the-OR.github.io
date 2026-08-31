@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 004 — Why the Saturation Held: One-Lung Ventilation in a Chronically Collapsed Lung | Ode to the OR</title>
+<meta name="description" content="A 27-year-old female with tubercular pyopneumothorax and lung entrapment underwent left decortication. Thoracic epidural, one-lung ventilation with a 32 Fr DLT, and protective lung strategy — with reflections on why saturation held despite a chronically collapsed left lung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --moss:    #4a5a3a;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:780px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,5vw,3.4rem);font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:1.2rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tt{border-color:var(--teal);color:var(--teal);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.tm{border-color:var(--moss);color:var(--moss);}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.8rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Patient at a glance */
+.patient-glance{background:var(--surface);border:1px solid var(--border);padding:1.6rem 1.8rem;margin:1.5rem 0;}
+.patient-glance h3{margin-top:0;font-size:1.05rem;color:var(--rust);}
+.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 2rem;font-size:.84rem;margin-top:1rem;}
+.pg-grid .k{color:var(--faint);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem;}
+.pg-grid .v{color:var(--text);font-weight:500;}
+
+/* Pearl box */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+/* Alert box */
+.alert-box{background:var(--card);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Complications grid */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1.5rem 0;}
+.comp-cell{background:var(--deep);padding:1.3rem 1.4rem;}
+.comp-cell h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:.5rem;}
+.comp-cell p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.65;}
+
+/* Guidelines box */
+.guideline-box{background:var(--night);border:2px solid var(--border);padding:1.6rem 1.8rem;margin:1.6rem 0;position:relative;}
+.guideline-box::before{content:"GUIDELINES & PROTOCOLS";position:absolute;top:-.65rem;left:1.5rem;background:var(--night);padding:0 .6rem;font-size:.58rem;letter-spacing:.18em;color:var(--faint);}
+.guideline-box h3{margin-top:.3rem;font-size:1.1rem;color:var(--teal);}
+.guideline-box ul{margin-bottom:0;}
+.guideline-box li{font-size:.86rem;margin-bottom:.45rem;}
+
+/* Protocol flow */
+.protocol-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;border-left:2px solid var(--border);padding-left:1.4rem;}
+.pf-item{position:relative;padding-bottom:1.4rem;}
+.pf-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--night);}
+.pf-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;}
+.pf-body{font-size:.88rem;color:var(--muted);}
+
+/* Ventilator box */
+.vent-box{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin:1.5rem 0;}
+.vent-box h3{margin-top:0;color:var(--teal);font-size:1.05rem;}
+.vent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+.vent-item{text-align:center;padding:.8rem;background:var(--night);border:1px solid var(--border);}
+.vent-item .num{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--rust);line-height:1;}
+.vent-item .label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.4rem;}
+
+/* CXR box */
+.cxr-box{background:var(--surface);border:1px solid var(--border);overflow:hidden;margin:1.5rem 0;}
+.cxr-frame{background:#1a1a1a;aspect-ratio:16/10;position:relative;display:flex;align-items:center;justify-content:center;}
+.cxr-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.cxr-caption{padding:.9rem 1.1rem;}
+.cxr-caption .title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;}
+.cxr-caption .desc{font-size:.8rem;color:var(--muted);line-height:1.55;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.45rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:700px){
+  .pg-grid{grid-template-columns:1fr;}
+  .comp-grid{grid-template-columns:1fr;}
+  .vent-grid{grid-template-columns:1fr;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#cases">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../index.html#cases" class="back-link">← Back to all cases</a>
+
+<div class="wrap">
+
+  <div class="ey">Case 004 · Thoracic · Tubercular Pleural Disease · Decortication</div>
+  <h1>Why the Saturation Held: <em>One-Lung Ventilation in a Chronically Collapsed Lung</em></h1>
+
+  <div class="meta-row">
+    <a href="../index.html?topic=thoracic#cases" class="tag ta" data-topic="Thoracic">Thoracic</a>
+    <a href="../index.html?topic=airway#cases" class="tag tc" data-topic="Airway">Airway</a>
+    <a href="../index.html?topic=epidural#cases" class="tag tk" data-topic="Epidural">Epidural</a>
+    <a href="../index.html?topic=tb#cases" class="tag ti" data-topic="Tuberculosis">Tuberculosis</a>
+    <a href="../index.html?topic=decortication#cases" class="tag tm" data-topic="Decortication">Decortication</a>
+  </div>
+
+  <p>A 27-year-old woman with tubercular pyopneumothorax and lung entrapment underwent left decortication. The pleural space had organized into a thick, fibrotic rind that refused to let the left lung re-expand despite weeks of drainage and anti-tubercular therapy. This case is about the physiology of one-lung ventilation when the non-ventilated lung was already collapsed — and why her saturation never faltered.</p>
+
+  <p style="font-size:.78rem;color:var(--faint);margin:1.5rem 0 0;display:flex;align-items:center;gap:.6rem;">
+    <span style="font-size:1rem;">↓</span>
+    <a href="#cxr-section" style="color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(42,90,82,.3);padding-bottom:1px;">Scroll to imaging</a>
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>The Patient at a Glance</h2>
+  <div class="patient-glance">
+    <h3>Clinical snapshot</h3>
+    <div class="pg-grid">
+      <div><span class="k">Age / Sex</span><span class="v">27 years / Female</span></div>
+      <div><span class="k">Weight</span><span class="v">45 kg</span></div>
+      <div><span class="k">Diagnosis</span><span class="v">Left tubercular pyopneumothorax with organized pleural process and lung entrapment</span></div>
+      <div><span class="k">Microbiology</span><span class="v">CBNAAT positive; Rifampicin sensitive</span></div>
+      <div><span class="k">Pleural fluid</span><span class="v">ADA and LDH elevated; purulent, loculated</span></div>
+      <div><span class="k">Imaging (HRCT)</span><span class="v">Gross left pleural effusion, mild pneumothorax, complete collapse of left upper and lower lobes, diffuse pleural thickening, patchy consolidations with fibroatelectasis, left bronchial changes</span></div>
+      <div><span class="k">Intervention so far</span><span class="v">Left pigtail catheter inserted for massive effusion; drained; on ATT since diagnosis</span></div>
+      <div><span class="k">Repeat imaging</span><span class="v">Pigtail in situ; mild residual fluid; mild–moderate free air; persistent left lung collapse; diffuse pleural thickening involving entire left pleura</span></div>
+      <div><span class="k">Planned procedure</span><span class="v">Left decortication via thoracotomy — requires left lung isolation</span></div>
+    </div>
+  </div>
+
+  <p>The persistent pleural collection, diffuse pleural thickening, and failure of the lung to re-expand despite adequate drainage were consistent with an <strong>organized pleural process with lung entrapment</strong>. The pleura had transformed from a thin serous membrane into a rigid, fibrotic shell. Decortication was the only remaining option to liberate the trapped lung.</p>
+
+  <div class="alert-box">
+    <h3>The problem with entrapment</h3>
+    <p>In lung entrapment, the visceral pleura becomes encased in a thick, fibrotic peel that prevents expansion. Drainage alone cannot solve this — the rind must be surgically stripped. Without decortication, the patient faces permanent volume loss, restrictive physiology, and a persistent septic focus.</p>
+  </div>
+
+  <!-- IMAGING SECTION -->
+  <div id="cxr-section" style="scroll-margin-top:90px;"></div>
+  <h2>Imaging</h2>
+
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1.2rem;">Only a chest X-ray is reproduced here. The HRCT carried patient identifiers burned into every transection level, and de-identifying each slice individually was neither practical nor reliable — so the plain film stands in as the sole imaging reference for this write-up.</p>
+
+  <div class="cxr-box">
+    <div class="cxr-frame">
+      <img src="../media/Case004_CXR_Preop.jpg" alt="Case004 Preoperative Chest X-ray" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'color:rgba(245,240,232,.5);font-size:.8rem;\'>Image: Case004_CXR_Preop.jpg</div>';">
+    </div>
+    <div class="cxr-caption">
+      <div class="title">📷 Preoperative Chest X-ray</div>
+      <div class="desc">Left pleural opacity with pigtail catheter in situ. Evidence of left lung collapse, pleural thickening, and mild pneumothorax. Right lung fields are clear.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>The Anaesthetic Plan</h2>
+
+  <h3>Thoracic epidural analgesia</h3>
+  <p>A thoracic epidural was placed at <strong>T5–T6</strong> before induction and confirmed. It was used for adequate analgesia throughout the procedure and continued into the postoperative period.</p>
+
+  <div class="pearl-box">
+    <h3>Why epidural before induction</h3>
+    <p>In thoracic surgery, a preemptive thoracic epidural reduces volatile anaesthetic requirements, attenuates the surgical stress response, and provides excellent postoperative analgesia. Lower volatile concentrations help preserve <strong>hypoxic pulmonary vasoconstriction (HPV)</strong> — a critical defence during one-lung ventilation.</p>
+  </div>
+
+  <h3>Airway and isolation</h3>
+  <p>A <strong>32 Fr left-sided double-lumen endotracheal tube (DLT)</strong> was placed. A left-sided DLT has two lumens: the tracheal lumen opens above the carina and delivers gas to the right lung, while the bronchial lumen sits in the left main bronchus. For left-sided surgery, the bronchial lumen was clamped, allowing ventilation through the tracheal lumen to the right lung while the left lung was isolated and deflated.</p>
+
+  <p>Isolation was confirmed by auscultation and visual assessment of chest wall excursion. Breath sounds were symmetrical with both lumens open, absent on the left with clamping, and preserved on the right. In right lateral decubitus, the right hemithorax moved with each ventilated breath while the left remained static after clamping.</p>
+
+  <h3>Monitoring</h3>
+  <p>Standard American Society of Anesthesiologists monitoring was supplemented with an <strong>arterial line</strong> (right radial) for continuous blood pressure and arterial blood gas sampling, and a <strong>central venous catheter</strong> (right internal jugular) for central venous pressure monitoring and vasopressor access. A urinary catheter was placed for hourly output measurement.</p>
+
+  <div class="divider"></div>
+
+  <h2>The Ventilation Strategy</h2>
+  <p>One-lung ventilation (OLV) was initiated after positioning in the <strong>right lateral decubitus</strong> position (left side up). Protective lung ventilation was employed throughout:</p>
+
+  <p>Protective one-lung ventilation was employed. Tidal volume and respiratory rate were adjusted according to oxygenation, carbon dioxide elimination, and airway pressures, with the aim of maintaining plateau pressure below 25 cmH₂O and applying PEEP to the dependent lung to prevent derecruitment. FiO₂ was titrated to maintain adequate oxygenation while avoiding unnecessary hyperoxia.</p>
+
+  <div class="pearl-box">
+    <h3>Protective ventilation during OLV</h3>
+    <p>Current guidelines recommend tidal volumes of <strong>4–6 mL/kg predicted body weight (PBW)</strong> during one-lung ventilation, with plateau pressure kept below 25 cmH₂O. PEEP of 5 cmH₂O applied to the dependent lung helps maintain recruitment without overdistension. PBW is derived from patient height, not actual body weight, and should be calculated individually for each patient.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Why the Saturation Held</h2>
+  <p>Despite ventilating only one lung for several hours, SpO₂ remained <strong>above 95% throughout</strong>, and the patient was extubated breathing room air with SpO₂ of 98–99%. This is not luck — it is physiology working in her favour. Here is why:</p>
+
+  <div style="margin:1.5rem 0;border-top:1px solid var(--border);">
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">I</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Effective Lung Isolation</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">The DLT was correctly positioned. There was no soiling, no spillage of purulent material into the dependent right lung, and no proximal leak. The right lung remained pristine and fully ventilated throughout.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">II</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Adequate Dependent-Lung Ventilation</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">Protective tidal volumes, PEEP, and an open lung approach kept the right lung recruited and compliant. The ventilated lung was able to match perfusion with ventilation effectively.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">III</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Gravity Favoured the Ventilated Lung</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">In the <strong>right lateral decubitus position</strong> (left side up), gravity directed pulmonary blood flow toward the dependent, ventilated right lung. The non-dependent, non-ventilated left lung received less perfusion by simple hydrostatic mechanics.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">IV</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Hypoxic Pulmonary Vasoconstriction (HPV)</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">Alveolar hypoxia in the collapsed left lung triggered HPV, diverting blood away from the non-ventilated lung toward the ventilated right lung. This reduced intrapulmonary shunt fraction and preserved systemic oxygenation.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">V</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Anaesthetic Technique Preserved HPV</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">Volatile anaesthetic was kept at <strong>&lt;1 MAC</strong> due to the thoracic epidural. High-dose volatile agents inhibit HPV; by minimizing volatile requirements, we preserved this crucial physiological reflex. No vasodilators or beta-agonists that blunt HPV were used.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">VI</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">The Right Lung Was Healthy</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">The right lung had normal parenchyma, no disease, and adequate compliance. It was capable of maintaining full gas exchange for the entire body. A diseased contralateral lung would have struggled to compensate.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">VII</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Chronic Collapse Meant Less Shunt</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">The left lung had been collapsed for weeks. Chronic atelectasis and fibrosis led to <strong>reduced vascularity</strong> in the affected lung. There was simply less blood flowing to the non-ventilated lung to create a physiologic shunt. An acute intraoperative collapse would have caused more desaturation.</div>
+      </div>
+    </div>
+    <div style="padding:1.2rem 0;display:flex;gap:1.2rem;align-items:baseline;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;min-width:28px;">VIII</span>
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;">Preoperative Drainage Decompressed the System</div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.65;">The pigtail catheter had already drained the majority of the effusion and relieved tension physiology. This prevented mediastinal shift, optimized hemodynamics, and allowed the right lung to expand fully before OLV even began.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Hypoxic Pulmonary Vasoconstriction: The Physiology</h2>
+
+  <p>HPV is the single most important physiological mechanism that preserves arterial oxygenation during one-lung ventilation. Understanding its mechanism, modulators, and clinical relevance is essential for every thoracic anaesthetist.</p>
+
+  <h3>Mechanism</h3>
+  <p>HPV is an active vasoconstrictor response of the pulmonary circulation to alveolar hypoxia. When alveolar PO₂ falls below approximately 60 mmHg (or when the lung is completely collapsed and unventilated), pulmonary arteriolar smooth muscle contracts, increasing vascular resistance in the hypoxic lung zone. This diverts blood flow toward better-ventilated (and better-oxygenated) lung regions, thereby minimizing intrapulmonary shunt and preserving systemic PaO₂.</p>
+
+  <p>The response is biphasic. An acute phase begins within seconds and peaks at approximately 15–30 minutes. A sustained phase maintains the vasoconstrictor tone for hours. In OLV, the non-ventilated lung becomes a potent stimulus for HPV, and the response can persist for the duration of the procedure.</p>
+
+  <h3>Factors that inhibit HPV</h3>
+  <p>Several commonly used drugs and physiological states attenuate or abolish HPV, increasing shunt and worsening oxygenation:</p>
+  <ul>
+    <li><strong>Volatile anaesthetic agents:</strong> Isoflurane, sevoflurane, and desflurane all inhibit HPV in a dose-dependent manner. The effect is clinically significant at concentrations above 1 MAC. Nitrous oxide also inhibits HPV and should be avoided during OLV.</li>
+    <li><strong>Vasodilators:</strong> Sodium nitroprusside, nitroglycerin, calcium channel blockers, and phosphodiesterase inhibitors (e.g., milrinone) directly oppose pulmonary vasoconstriction.</li>
+    <li><strong>Beta-agonists:</strong> High-dose beta-adrenergic agonists (salbutamol, dobutamine) can blunt HPV through pulmonary vasodilation.</li>
+    <li><strong>Alkalosis:</strong> Respiratory or metabolic alkalosis shifts the oxygen–haemoglobin dissociation curve leftward and reduces HPV. Mild hypercapnia or normocapnia is preferable.</li>
+    <li><strong>Hypothermia and acidosis:</strong> While acidosis generally potentiates HPV, severe hypothermia can impair the vascular response.</li>
+    <li><strong>High pulmonary artery pressures:</strong> Pre-existing pulmonary hypertension or excessive fluid loading can overcome the hypoxic vasoconstrictor response by forcing blood through the high-resistance hypoxic vasculature.</li>
+  </ul>
+
+  <h3>Factors that preserve or potentiate HPV</h3>
+  <ul>
+    <li><strong>Low volatile concentrations:</strong> Keeping volatile agents below 1 MAC preserves the majority of the HPV response. Total intravenous anaesthesia (TIVA) with propofol and opioids preserves HPV completely.</li>
+    <li><strong>Thoracic epidural analgesia:</strong> By reducing volatile requirements and providing opioid-sparing analgesia, epidurals indirectly protect HPV. Epidural local anaesthetics do not directly affect pulmonary vascular tone.</li>
+    <li><strong>Mild hypercapnia:</strong> A PaCO₂ of 40–50 mmHg enhances HPV through acidosis-mediated pulmonary vasoconstriction. However, excessive hypercapnia causes systemic acidosis and sympathetic stimulation.</li>
+    <li><strong>Adequate depth without vasodilation:</strong> Deep anaesthesia with opioids or dexmedetomidine maintains HPV without the vasodilatory side effects of high-dose volatiles.</li>
+    <li><strong>Normovolaemia:</strong> Excessive fluid administration increases pulmonary capillary pressure and can overcome HPV. Conservative fluid management supports the response.</li>
+  </ul>
+
+  <h3>Clinical relevance in this case</h3>
+  <p>In this patient, HPV was particularly effective for two reasons. First, the left lung had been chronically collapsed, so the pulmonary vasculature in that region was already remodelled and poorly perfused — there was less blood to redirect. Second, the anaesthetic technique (low-dose volatile, thoracic epidural, no vasodilators) preserved the HPV response in the remaining perfused vessels. The result was a marked reduction in shunt fraction despite complete left lung isolation.</p>
+
+  <div class="pearl-box">
+    <h3>HPV and the lateral position</h3>
+    <p>HPV works synergistically with gravity. In the lateral decubitus position, the dependent lung receives more perfusion by hydrostatic forces, while the non-dependent (non-ventilated) lung receives less. HPV further reduces perfusion to the non-ventilated lung. Together, these mechanisms can reduce shunt fraction to 20–30% during OLV — low enough to maintain SpO₂ &gt;92% in most patients with a healthy contralateral lung.</p>
+  </div>
+
+  <h2>The Extubation</h2>
+  <p>Extubation was smooth and uneventful. The patient awoke without coughing or straining, maintained SpO₂ of <strong>98–99% on room air</strong> immediately after extubation, and was transferred to the postoperative care unit in stable condition. This was attributed to the thoracic epidural providing dense analgesia without respiratory depression, effective lung isolation preventing soiling, stable hemodynamics throughout, and protective ventilation preserving the right lung mechanics.</p>
+
+  <div class="divider"></div>
+
+  <h2>Complications Specific to Decortication</h2>
+  <p>Decortication for chronic empyema carries risks distinct from routine thoracotomy. Awareness allows anticipation and early intervention:</p>
+
+  <div class="comp-grid">
+    <div class="comp-cell">
+      <h4>Massive Haemorrhage</h4>
+      <p>Stripping the fibrotic peel from the visceral pleura can injure the lung parenchyma or intercostal vessels. Blood loss can be rapid and occult. Maintain low-normal CVP, have blood available, and communicate with the surgeon before each peel.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Air Leak / Bronchopleural Fistula</h4>
+      <p>The inflamed, friable lung may tear during decortication, creating a bronchopleural fistula. Low airway pressures help, but persistent air leak postoperatively requires water-seal drainage and may need re-exploration.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Re-expansion Pulmonary Oedema</h4>
+      <p>Rapid re-expansion of a chronically collapsed lung can cause unilateral pulmonary oedema. Prevent by gradual re-expansion, limiting suction on the chest drain, and maintaining cautious fluid balance.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Hypotension from Epidural</h4>
+      <p>Thoracic epidurals cause sympathetic blockade and vasodilation. Hypotension is common after positioning and dosing. Treat with fluid boluses and phenylephrine or noradrenaline as needed. Avoid over-resuscitation.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Soiling of the Ventilated Lung</h4>
+      <p>Purulent material from the empyema space can spill into the dependent right lung if isolation is imperfect. Meticulous DLT positioning, pre-operative suctioning, and intraoperative bronchoscopic surveillance are essential.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Residual Sepsis / Empyema Recurrence</h4>
+      <p>Incomplete decortication or residual loculations can lead to persistent sepsis. Adequate drainage, appropriate ATT, and nutritional support are critical. The anaesthetist must ensure the patient is stable enough for prolonged surgery.</p>
+    </div>
+  </div>
+
+  <h2>Guidelines, Protocols, and the Evidence Base</h2>
+
+  <div class="guideline-box">
+    <h3>Key guidelines</h3>
+    <ul>
+      <li><strong>ATS / BTS / INSHAC (2020):</strong> For tuberculous pleural effusion with failed drainage and lung entrapment, decortication is indicated once ATT has been initiated and the patient is clinically optimized.</li>
+      <li><strong>ESAIC/ESTS (2022):</strong> OLV should use protective ventilation: tidal volumes 4–6 mL/kg PBW, plateau pressure &lt;25 cmH₂O, PEEP 5 cmH₂O, and FiO₂ titrated to SpO₂ &gt;92%.</li>
+      <li><strong>ASA Practice Parameters (2020):</strong> Thoracic epidural analgesia is recommended for open thoracotomy to reduce postoperative pain, pulmonary complications, and chronic post-thoracotomy pain syndrome.</li>
+      <li><strong>STS / EACTS:</strong> In decortication for chronic empyema, maintain low-normal CVP to minimize bleeding; use lung-protective ventilation; and watch for re-expansion pulmonary oedema.</li>
+    </ul>
+  </div>
+
+  <h3>Stepwise anaesthetic protocol for decortication</h3>
+
+  <div class="protocol-flow">
+    <div class="pf-item">
+      <div class="pf-title">Step 1 — Pre-operative assessment</div>
+      <div class="pf-body">Review imaging for extent of pleural disease, lung collapse, and mediastinal shift. Check CBNAAT and ATT regimen. Assess nutritional status and sepsis control. Ensure blood is cross-matched.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 2 — Thoracic epidural placement</div>
+      <div class="pf-body">Place T5–T6 epidural before induction. Confirm placement. Start infusion. This is the foundation of analgesia and volatile sparing.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 3 — Induction and airway</div>
+      <div class="pf-body">Rapid sequence or standard induction as indicated. Insert 32 Fr left-sided DLT. Confirm with auscultation and fibreoptic bronchoscopy. Position patient in right lateral decubitus.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 4 — One-lung ventilation</div>
+      <div class="pf-body">Initiate OLV with protective settings: TV 4–6 mL/kg PBW, RR 14–16, PEEP 5 cmH₂O, FiO₂ 0.5–0.6. Monitor SpO₂, EtCO₂, plateau pressure, and compliance continuously.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 5 — Intraoperative vigilance</div>
+      <div class="pf-body">Watch for bleeding (CVP, urine output, haemoglobin), air leak (sudden drop in compliance), and soiling (desaturation, increased airway pressures). Communicate with surgeon before each peel.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 6 — Re-expansion and closure</div>
+      <div class="pf-body">Allow gradual re-expansion of the decorticated left lung. Avoid aggressive suction on the chest drain. Check for air leak under water seal. Resume two-lung ventilation gently.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 7 — Extubation</div>
+      <div class="pf-body">Ensure full reversal, adequate spontaneous ventilation, and pain control. Extubate awake. Confirm SpO₂ &gt;95% on room air before transfer.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What I Keep Coming Back To</h2>
+  <p>This case illustrates that a chronically collapsed lung behaves differently from an acutely deflated one. The weeks of fibrosis and reduced vascularity meant less shunt during OLV, while the preserved HPV response and healthy right lung maintained oxygenation throughout. The smooth extubation and immediate room-air saturation were the result of deliberate, layered choices: preemptive epidural analgesia, meticulous DLT confirmation, protective ventilation, and volatile sparing. Each element reinforced the others.</p>
+
+  <div class="refbox">
+    <h3>References</h3>
+    <ol>
+      <li>Senturk M, Orhan ME, Ozcan PE. Thoracic anaesthesia and lung isolation: ESAIC/ESTS joint guidelines. <em>Eur J Anaesthesiol.</em> 2022;39(8):599–621.</li>
+      <li>Lohser J, Slinger P. Lung isolation and one-lung ventilation. In: <em>Miller's Anesthesia.</em> 9th ed. Elsevier; 2020: Chapter 54.</li>
+      <li>Licker M, et al. The hypoxic pulmonary vasoconstriction: From physiology to clinical application in thoracic surgery. <em>J Thorac Dis.</em> 2021;13(8):4995–5016.</li>
+      <li>Parab S, et al. Inhalational versus intravenous anesthetics during one lung ventilation in elective thoracic surgeries: A narrative review. <em>J Cardiothorac Vasc Anesth.</em> 2021;35(12):3675–3685.</li>
+      <li>Myles PS, Ball D. Current state of one-lung ventilation. <em>Anesthesiol Clin.</em> 2020;38(4):735–751.</li>
+      <li>Kellow NH, Scott AD, White SA, Feneck RO. Comparison of the effects of propofol and isoflurane anaesthesia on right ventricular function and shunt fraction during thoracic surgery. <em>Br J Anaesth.</em> 1995;75(5):578–582.</li>
+      <li>Scarci M, et al. EACTS expert consensus statement for surgical management of pleural empyema. <em>Eur J Cardiothorac Surg.</em> 2015;48(5):642–653.</li>
+      <li>World Health Organization. <em>Guidelines for treatment of drug-susceptible tuberculosis and patient care.</em> 2017 update. WHO Press; 2017.</li>
+      <li>Light RW. Parapneumonic effusions and empyema. <em>Proc Am Thorac Soc.</em> 2006;3(1):75–80.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>August 2026</span>
+    <span>Thoracic · Airway · Epidural · Tuberculosis · Decortication</span>
+  </div>
+
+  <p class="disclaim">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles, the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India), and the ethical mandates of the <strong>National Medical Commission (NMC) of India</strong>. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
