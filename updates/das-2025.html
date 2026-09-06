@@ -1,1 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAS 2025: The Unanticipated Difficult Airway — Ode to the OR</title>
+<meta name="description" content="The 2025 Difficult Airway Society guideline for unanticipated difficult tracheal intubation in adults — what changed from 2015, the Plan A to D algorithm, first-pass success, continuous oxygenation, and the physiologically difficult airway.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
 
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* BACK LINK */
+.back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.back-link:hover{color:var(--rust);}
+.back-link svg{width:11px;height:11px;}
+
+/* ARTICLE HEAD */
+.article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.article-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.1rem);font-weight:300;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+.article-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.dek{font-size:.95rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:620px;margin-bottom:1.4rem;}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.tt{border-color:var(--teal);color:var(--teal);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
+.article-body > * + *{margin-top:1.5rem;}
+.article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--text);padding-top:.6rem;}
+.article-body h2 em{font-style:italic;color:var(--rust);}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);margin-top:1.6rem !important;}
+
+.callout{background:var(--surface);border-left:3px solid var(--sage);padding:1.1rem 1.3rem;}
+.callout p{font-size:.85rem;color:var(--muted);}
+.callout p:first-child{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--sage);margin-bottom:.4rem;}
+
+.source-note{background:var(--deep);border:1px solid var(--border);padding:1rem 1.3rem;font-size:.78rem;color:var(--muted);line-height:1.75;}
+.source-note strong{color:var(--text);font-weight:500;}
+
+ul.plain{list-style:none;padding:0;display:flex;flex-direction:column;gap:.85rem;}
+ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:1.2rem;position:relative;}
+ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
+ul.plain li strong{font-weight:500;color:var(--rust);}
+
+/* RECOMMENDATION STRENGTH PILLS */
+.pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;}
+.pill{font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;padding:.22rem .55rem;border-radius:2px;font-weight:500;white-space:nowrap;}
+.p-strong{background:rgba(42,90,82,.15);color:var(--teal);border:1px solid var(--teal);}
+.p-cond{background:rgba(154,108,26,.15);color:var(--gold);border:1px solid var(--gold);}
+.p-cons{background:rgba(58,58,106,.12);color:var(--indigo);border:1px solid var(--indigo);}
+.p-new{background:rgba(122,32,32,.12);color:var(--rust);border:1px solid var(--rust);}
+.p-emph{background:rgba(154,64,112,.12);color:var(--rose);border:1px solid var(--rose);}
+
+.rec-box{background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;}
+.rec-box p{font-size:.88rem;color:var(--text);line-height:1.7;}
+.rec-box p em{font-style:italic;color:var(--muted);font-size:.78rem;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
+thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:.75rem .9rem;border-bottom:1px solid var(--border);color:var(--text);font-weight:300;vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
+.table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* WORKED EXAMPLE / BUNDLE */
+.worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.worked h3{margin-top:0 !important;}
+.worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
+.worked ol li{counter-increment:step;font-size:.87rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:2rem;position:relative;}
+.worked ol li::before{content:counter(step);position:absolute;left:0;top:0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--border);}
+.worked ol li strong{font-weight:500;color:var(--text);}
+
+.bundle{background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.bundle h3{margin-top:0 !important;color:var(--teal) !important;}
+.bundle-step{margin-top:1.1rem;}
+.bundle-step:first-of-type{margin-top:1rem;}
+.bundle-step .step-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:.4rem;}
+.bundle-step p, .bundle-step li{font-size:.85rem;color:var(--text);line-height:1.7;}
+.bundle-step ul{list-style:disc;padding-left:1.1rem;margin-top:.3rem;}
+.bundle-step ul li{padding-left:0;}
+
+/* CLOSING */
+.lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
+.lesson h3{color:var(--sage) !important;}
+
+.refs{border-top:1px solid var(--border);padding-top:1.4rem;}
+.refs h3{margin-top:0 !important;color:var(--muted) !important;font-family:'Instrument Sans',sans-serif !important;font-size:.6rem !important;letter-spacing:.16em;text-transform:uppercase;font-weight:500 !important;}
+.refs ol{list-style:decimal;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;margin-top:.8rem;}
+.refs li{font-size:.76rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+.disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
+
+/* NEXT / FOOTER NAV */
+.article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:600px){
+  .back-row{padding:5rem 6vw 0;}
+  .article-head{padding:1.4rem 6vw 2rem;}
+  .article-body{padding:2.2rem 6vw 3rem;}
+  .article-foot{padding:0 6vw 2.5rem;}
+  table{font-size:.76rem;}
+  thead th,tbody td{padding:.6rem .6rem;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="updates-guidelines.html" class="current">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="updates-guidelines.html" class="back-link" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Updates &amp; Guidelines
+  </a>
+</div>
+
+<div class="article-head">
+  <div class="ey">Guideline Update</div>
+  <h1>DAS 2025: <em>the unanticipated difficult airway, rewritten.</em></h1>
+  <p class="dek">The Difficult Airway Society's 2025 guideline for management of unanticipated difficult tracheal intubation in adults — 65 recommendations drawn from 1,241 papers and a three-round Delphi over three years. The philosophy shifts from rescue after failure to engineering success from the start: videolaryngoscopy as default, continuous oxygenation as standard, and the physiologically difficult airway — including obesity as its own recognised phenotype — brought centre stage.</p>
+  <div class="meta-row">
+    <span class="tag tt">Airway</span>
+    <span class="tag tk">Difficult Airway</span>
+    <span class="tag ti">Intubation</span>
+    <span class="meta-date">DAS &middot; Br J Anaesth, Jan 2026 (online Nov 2025)</span>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>The 2025 DAS guideline is the first full revision of the adult unanticipated difficult intubation algorithm since 2015. A group of twelve authors met sixty-five times over three years, conducting a systematic review of 1,241 papers and a three-round Delphi process with twenty external experts guiding the emergency front-of-neck airway (eFONA) section, plus sixteen international airway reviewers. The result is sixty-five recommendations that keep the familiar Plan A to D structure but reframe its purpose: the goal is no longer to manage failure gracefully, but to maximise the probability of first-pass success and continuous oxygenation from the outset.</p>
+
+  <div class="callout">
+    <p>In short</p>
+    <p>Videolaryngoscopy is now the default for Plan A, not a rescue device. Continuous oxygen delivery — via nasal cannula or high-flow nasal oxygen — must run through every phase, not just preoxygenation. The &quot;3 + 1&quot; attempt limit for intubation is a hard ceiling, not a quota (Plan B is capped at 3 attempts, without the extra "+1"). The physiologically difficult airway (shock, hypoxia, acidosis) and obesity — now recognised as its own distinct high-risk airway phenotype rather than a footnote — are formally addressed for the first time. Human factors, team briefing, and simulation are woven through every plan. And the scalpel&ndash;bougie&ndash;tube technique remains the preferred eFONA method when Plan D is declared.</p>
+  </div>
+
+  <h2>How to read the tags in this article</h2>
+  <div class="pill-row">
+    <span class="pill p-strong">Strong</span>
+    <span class="pill p-cond">Recommend</span>
+    <span class="pill p-cons">Consensus</span>
+    <span class="pill p-new">New 2025</span>
+    <span class="pill p-emph">Emphasis Shift</span>
+  </div>
+  <p><strong>Strong</strong> means the panel recommends this for most patients. <strong>Recommend</strong> means it is advised where circumstances allow. <strong>Consensus</strong> reflects expert agreement where high-quality evidence is limited. <strong>New 2025</strong> marks what entered the guideline for the first time in this edition. <strong>Emphasis Shift</strong> tracks where the philosophy or weight of a recommendation changed materially since 2015.</p>
+
+  <h2>The philosophy: <em>from rescue to success</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-emph">Emphasis Shift</span></div>
+    <p>The safest airway is one secured on the first attempt. Optimise physiology, positioning, neuromuscular blockade, and teamwork <em>before</em> the blade enters the mouth. Progress through the algorithm rapidly if failure occurs, but the primary objective is to prevent failure rather than to manage it.</p>
+  </div>
+  <p>This is the single biggest conceptual change from 2015. The previous edition framed the algorithm as an escape route: if intubation fails, here is the ladder out. The 2025 edition treats every plan as an opportunity to optimise for success. That means better preparation, clearer stop-and-think prompts, and an institutional expectation that departments will train, simulate, and debrief airway events as a matter of routine safety culture.</p>
+
+  <h2>Pre-intubation: assessment, planning, and the physiologically difficult airway</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025</span> <span class="pill p-cons">Consensus</span></div>
+    <p>Airway assessment and planning must explicitly address the <strong>physiologically difficult airway</strong> — patients with shock, severe hypoxia, or acidosis — alongside anatomical risk stratification.</p>
+  </div>
+  <p>The 2025 guideline is the first DAS intubation guideline to formally separate the physiologically difficult airway from the anatomically difficult one. Anatomical predictors (Mallampati, mouth opening, neck mobility, thyromental distance, upper lip bite test) remain essential, but they are no longer sufficient on their own. A patient with a normal airway examination who is profoundly hypoxaemic, hypotensive, or acidotic is at high risk of peri-intubation cardiovascular collapse and desaturation regardless of geometry.</p>
+  <p>Preparation now includes:</p>
+  <ul class="plain">
+    <li><strong>Positioning:</strong> ramped or head-elevated for obesity or pregnancy; left lateral tilt for the third-trimester parturient.</li>
+    <li><strong>Preoxygenation / peroxygenation:</strong> 3 minutes of tidal breathing or 8 vital-capacity breaths on 100% oxygen; consider non-invasive ventilation or HFNO if baseline SpO₂ is low.</li>
+    <li><strong>Continuous oxygenation:</strong> nasal cannula at 15 L/min or HFNO at 40&ndash;60 L/min should run throughout laryngoscopy and between attempts — not just during the preoxygenation phase.</li>
+    <li><strong>Team briefing:</strong> assign roles (operator, assistant, drugs, timer, runner), declare the airway plan aloud, and confirm equipment and cognitive aids are present.</li>
+    <li><strong>POCUS:</strong> point-of-care ultrasound is endorsed as a useful adjunct for airway assessment (thyrohyoid/cricothyroid membrane visualisation), gastric assessment to stratify aspiration risk, and confirmation of tracheal tube placement — though its role is optional and not embedded within the core pathway.</li>
+  </ul>
+
+  <h2>Obesity: a distinct airway phenotype</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025</span> <span class="pill p-strong">Strong</span></div>
+    <p>Obesity is recognised in its own right as a high-risk airway phenotype requiring a dedicated package of measures, not merely as an example of the physiologically difficult airway or a minor adjustment to standard technique.</p>
+  </div>
+  <p>Previously, guidance for patients living with obesity existed only as an addendum or subsection within general airway guidelines. The 2025 DAS guideline gives obesity its own section and explicitly aligns with the Society for Obesity and Bariatric Anaesthesia's (SOBA) 2025 best-practice recommendations — a parallel, DAS-endorsed document with forty-three recommendations of its own covering pre-assessment, planning, peroxygenation, tracheal intubation, SAD use, extubation, and training.</p>
+  <p>DAS-specific recommendations for this group:</p>
+  <ul class="plain">
+    <li><strong>Consider awake tracheal intubation</strong> in people living with obesity — a direct recommendation, not just a suggestion for anticipated difficulty.</li>
+    <li><strong>Head-up positioning of at least 30 degrees</strong> for pre-oxygenation, facemask ventilation, and tracheal intubation — a specific, quantified threshold, not just "ramped."</li>
+    <li><strong>Consider HFNO for peroxygenation</strong>, given higher basal metabolic rate and reduced functional residual capacity increase the risk of rapid desaturation after induction.</li>
+    <li><strong>Consider early use of a second-generation SAD</strong> for ventilation if facemask ventilation is suboptimal — people living with obesity are more likely to be difficult to ventilate by facemask or SAD alike.</li>
+    <li><strong>Consider performing airway management in the operating theatre</strong> rather than a remote or lower-resource location, and call for help earlier in this group.</li>
+  </ul>
+
+  <h2>Plan A: <em>tracheal intubation</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-new">New 2025</span></div>
+    <p>Videolaryngoscopy is the default technique for tracheal intubation where available. Direct laryngoscopy remains acceptable if videolaryngoscopy is unavailable or if the operator's experience strongly favours it, but the expectation has shifted.</p>
+  </div>
+  <p>The evidence for videolaryngoscopy improving first-pass success in both routine and anticipated difficult airways has become overwhelming since 2015. The guideline does not ban direct laryngoscopy, but it reframes VL as the standard and DL as the exception. A stylet, bougie, or flexible bronchoscope should be used when a hyperangulated videolaryngoscope blade is chosen, and a bougie or stylet more generally whenever the glottic view is partial or the operator anticipates difficulty directing the tube.</p>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span></div>
+    <p>Maximise the likelihood of first-attempt success. This includes optimal positioning, adequate neuromuscular blockade, skilled use of the chosen device, and continuous oxygen delivery during the attempt.</p>
+  </div>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Recommend</span> <span class="pill p-emph">Emphasis Shift</span></div>
+    <p>The &quot;3 + 1&quot; attempt limit for intubation is a hard upper boundary, not an invitation to take three tries before moving on. Declare failure early if progress is poor or oxygenation is deteriorating.</p>
+  </div>
+  <p>The 2015 guideline introduced the 3 + 1 rule for intubation (three attempts by the primary operator, one by the most experienced available). In 2025 the panel stresses that this is a ceiling, not a target. If the first attempt is poorly optimised, do not burn attempts hoping for luck. If the second attempt is no better than the first, stop. The decision to move to Plan B should be driven by clinical trajectory — desaturation, deteriorating view, or haemodynamic instability — not by a rigid count.</p>
+
+  <h3>Neuromuscular blockade</h3>
+  <p>Adequate neuromuscular blockade is essential for optimising intubating conditions and minimising airway trauma, and improves the likelihood of successful tracheal intubation, SAD ventilation, facemask ventilation, and eFONA alike &mdash; it should be used routinely to facilitate tracheal intubation. Rocuronium (1.2 mg/kg for RSI) or succinylcholine remain standard. On sugammadex: the guideline is explicit that reversing rocuronium to "wake and rescue" is <strong>not a reliable strategy in failed tracheal intubation</strong> &mdash; it can worsen laryngospasm or aspiration risk, does not guarantee a patent airway, and the time taken to draw it up can distract from the immediate CICO response. If eFONA becomes necessary after sugammadex has already been given, a non-aminosteroidal agent (i.e. not rocuronium or vecuronium) will likely be needed to re-paralyse. The guideline reinforces that attempting intubation in a poorly paralysed patient wastes attempts and risks airway injury.</p>
+
+  <h2>Plan B: <em>supraglottic airway device ventilation</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-emph">Emphasis Shift</span></div>
+    <p>Plan B is not a symbol of failure — it is an oxygenation and ventilation platform. A second-generation supraglottic airway device (SAD) should be inserted promptly after declared failed intubation, with a maximum of three attempts (not 3 + 1 — there is no additional "most experienced operator" attempt for SAD insertion).</p>
+  </div>
+  <p>The 2015 edition framed Plan B partly as a pause to consider waking the patient. The 2025 edition recognises that many patients cannot simply be woken — they are critically ill, septic, obstructed, or the procedure cannot be abandoned. Plan B is therefore repositioned as a deliberate oxygenation strategy: maintain SpO₂ while the team decides whether to intubate via the SAD (e.g. flexible bronchoscope through the SAD), ventilate to completion via the SAD, or progress to Plan C or D.</p>
+  <p>A second-generation SAD with a gastric drainage channel is preferred. Ventilation must be confirmed with waveform capnography before any further steps. If ventilation via the SAD is successful but intubation is still required, the SAD can serve as a conduit for bronchoscope-guided tracheal intubation — but only if oxygenation remains stable during the attempt. If oxygenation and ventilation remain unsuccessful after three attempts, or at any point during Plan B if things are deteriorating, the operator should declare failed SAD ventilation, call for help if not already present, open the eFONA kit, and move to Plan C — recognising that eFONA is now increasingly likely to be needed.</p>
+
+  <h2>Plan C: <em>facemask ventilation</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Recommend</span></div>
+    <p>Two-person facemask ventilation with oral/nasal adjuncts and optimal positioning. Treat this as a trigger to prepare for Plan D unless oxygenation is clearly and sustainably restored.</p>
+  </div>
+  <p>Plan C remains the final non-invasive rescue step. The guideline emphasises two-person technique, a tight mask seal, and airway adjuncts (oropharyngeal or nasopharyngeal airways). However, the panel is explicit: a patient who has failed intubation and failed SAD ventilation is in a cannot-intubate, cannot-oxygenate (CICO) trajectory. Plan C should not be prolonged. Unless facemask ventilation is immediately and obviously effective, the team should <strong>prepare for eFONA in parallel</strong> rather than treating Plan C as a comfortable reflection point.</p>
+
+  <h2>Plan D: <em>emergency front-of-neck airway</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span></div>
+    <p>Declare CICO explicitly and proceed to emergency front-of-neck airway without delay when the patient cannot be intubated and cannot be oxygenated. The scalpel&ndash;bougie&ndash;tube technique is the preferred method.</p>
+  </div>
+  <p>The 2025 guideline retains the scalpel&ndash;bougie&ndash;tube technique as the default eFONA approach, but changes the incision strategy. In 2015, the choice was a transverse stab for a palpable cricothyroid membrane or a vertical incision for an impalpable one. In 2025, a <strong>vertical midline skin incision (up to 8 cm)</strong> is recommended as the default regardless of palpability &mdash; because locating the membrane by palpation alone is often unreliable, even in elective settings &mdash; followed by blunt finger dissection to the larynx, then a <strong>transverse stab through the cricothyroid membrane itself</strong>, passage of a bougie, and railroading of a cuffed tracheal tube (size 6.0 mm). This decision about incision approach is now meant to be made and verbalised during Plan A, not deferred to the crisis moment of Plan D. The panel engaged twenty external experts specifically to refine the eFONA recommendations, reflecting the high-stakes, low-frequency nature of the procedure.</p>
+  <p>Key points:</p>
+  <ul class="plain">
+    <li><strong>"Priming" starts long before CICO is declared.</strong> This is the guideline's own term for preparing the eFONA kit in parallel with Plans A to C — after a failed intubation attempt, the eFONA kit should already be immediately accessible, and after a maximum of three failed SAD attempts, the assistant should open the kit. By the time Plan D is reached, nothing should need to be found.</li>
+    <li><strong>Declare CICO aloud.</strong> The verbal declaration is a team synchronisation event — it tells everyone that the algorithm has reached its terminal non-invasive step and that invasive rescue is now indicated.</li>
+    <li><strong>Full neuromuscular block before the stab.</strong> eFONA should not be attempted without it; if sugammadex has already reversed rocuronium or vecuronium, a different agent will be needed to re-paralyse.</li>
+    <li><strong>Do not delay for repeated facemask attempts.</strong> If oxygenation is not restored within a brief, time-limited Plan C attempt, move to scalpel.</li>
+    <li><strong>Post-eFONA care:</strong> confirm tube position with waveform capnography, secure the tube, exclude bronchial intubation and pneumothorax, and arrange surgical review for definitive airway management once the patient is stabilised.</li>
+  </ul>
+
+  <h2>Human factors, teamwork, and systems</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025</span> <span class="pill p-cons">Consensus</span></div>
+    <p>Airway safety is an institutional responsibility, not only an individual competence. Departments must provide simulation training, cognitive aids, standardised equipment layouts, and a culture of debriefing after every difficult airway event.</p>
+  </div>
+  <p>Human factors are no longer an appendix — they run through the entire document. The guideline expects:</p>
+  <ul class="plain">
+    <li><strong>Shared mental models:</strong> the team briefing before induction establishes who does what, what the backup plans are, and when to call for help.</li>
+    <li><strong>Cognitive aids:</strong> checklists and algorithms should be visible in every anaesthetic location, not stored on a phone.</li>
+    <li><strong>Role clarity:</strong> someone should be timing attempts, someone managing drugs, someone ready to fetch equipment — not everyone watching the laryngoscope screen.</li>
+    <li><strong>Debriefing:</strong> every unanticipated difficult intubation should be debriefed, regardless of outcome. The goal is system learning, not blame allocation.</li>
+    <li><strong>Documentation:</strong> record the airway assessment, the plan, the devices used, the number of attempts, the CICO declaration if made, and the extubation plan.</li>
+  </ul>
+
+  <h2>Confirmation and post-intubation care</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong</span></div>
+    <p>Waveform capnography is mandatory to confirm tracheal intubation, supraglottic airway ventilation, and facemask ventilation. Colour-change devices are not sufficient.</p>
+  </div>
+  <p>After successful intubation, the guideline emphasises:</p>
+  <ul class="plain">
+    <li><strong>Two-point check:</strong> visual confirmation of the tube passing through the cords (or fibreoptic/bronchoscopic confirmation) plus continuous waveform capnography.</li>
+    <li><strong>Depth and security:</strong> note the tube depth at the teeth/lips, secure it, and confirm bilateral air entry.</li>
+    <li><strong>Haemodynamic stability:</strong> the post-intubation period is high-risk for hypotension — prepare vasopressors and reassess fluid status.</li>
+    <li><strong>Plan for extubation:</strong> patients who had an unanticipated difficult intubation are at high risk of extubation difficulty. Follow the DAS 2011 extubation guideline: risk-stratify, prepare equipment and personnel, and have a re-intubation strategy ready.</li>
+  </ul>
+
+  <h2>Anticipated difficult airway: the 2019 ATI guidelines</h2>
+  <p>The 2025 guideline addresses the <em>unanticipated</em> difficult airway. For the <em>anticipated</em> difficult airway, the <strong>DAS 2019 awake tracheal intubation (ATI) guidelines</strong> remain the standard. The two documents are complementary, not competing.</p>
+  <p>The 2019 ATI recommendations in brief:</p>
+  <ul class="plain">
+    <li><strong>Consider ATI</strong> whenever predictors of difficult airway management are present — anatomical or physiological.</li>
+    <li><strong>sTOP framework:</strong> Sedation, Topicalisation, Oxygenation, Performance.</li>
+    <li><strong>Topicalisation:</strong> lidocaine to the airway via nebuliser, spray-as-you-go, or transtracheal injection; maximum 9 mg/kg lean body weight.</li>
+    <li><strong>Sedation:</strong> minimal, cautious, ideally administered by an independent practitioner; never a substitute for poor topicalisation.</li>
+    <li><strong>Attempts:</strong> 3 + 1, same as the asleep algorithm.</li>
+    <li><strong>Two-point check</strong> (visual + capnography) before inducing anaesthesia.</li>
+    <li><strong>Nil by mouth</strong> for at least 2 hours after airway topicalisation.</li>
+  </ul>
+  <p>Videolaryngoscopy is now increasingly used for ATI (ATI:VL) as an alternative to flexible bronchoscopy (ATI:FB), particularly when blood or secretions are expected. The 2019 guideline anticipated this evolution and both techniques are acceptable under the ATI umbrella.</p>
+
+  <h2>Extubation: the 2011 guideline still governs</h2>
+  <p>The DAS has not yet published a new extubation guideline; the <strong>2011 extubation guideline</strong> remains current. Its four-step approach — Plan, Prepare, Perform, Post-extubation care — should be applied to every patient who experienced difficult intubation. Key elements include risk stratification (low risk vs at risk), optimisation of patient factors, having a re-intubation plan and equipment ready, and careful observation in a suitable recovery environment.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Plan</th><th>Action</th><th>Key limits / notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Plan A</td><td>Tracheal intubation (videolaryngoscopy default)</td><td>Max 3 + 1 attempts; continuous O₂; declare failure early</td></tr>
+        <tr><td class="agent">Plan B</td><td>Second-generation SAD insertion</td><td>Max 3 attempts (no "+1"); confirm with waveform capnography; can use as conduit</td></tr>
+        <tr><td class="agent">Plan C</td><td>Two-person facemask ventilation with adjuncts</td><td>Time-limited; prepare for Plan D in parallel if not immediately effective</td></tr>
+        <tr><td class="agent">Plan D</td><td>Declare CICO → scalpel&ndash;bougie&ndash;tube eFONA</td><td>No delay; vertical skin incision (up to 8 cm) as default, transverse stab at membrane itself; size 6.0 mm tube</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">The linear DAS algorithm. Progression is not optional — if a plan fails, move to the next. Oxygenation is the mission; everything else is a tactic.</p>
+
+  <div class="worked">
+    <h3>Worked example: the crashing patient</h3>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.6rem;">A 45-year-old patient with necrotising pancreatitis and ARDS requires intubation on the ward. SpO₂ 84% on 15 L/min non-rebreather, RR 38, MAP 58 mmHg.</p>
+    <ol>
+      <li><strong>Call for help before you start.</strong> This is a physiologically difficult airway. You need an experienced operator, a skilled assistant, and someone to draw and administer drugs.</li>
+      <li><strong>Optimise what you can.</strong> Head-up position, preload with crystalloid, have vasopressors drawn and ready. Preoxygenate with NIV or bag-valve-mask with PEEP if HFNO is not available. Start nasal cannula oxygen at 15 L/min and leave it on.</li>
+      <li><strong>Use a videolaryngoscope.</strong> First pass is everything. Give rocuronium 1.2 mg/kg. Have a bougie ready. The nasal cannula stays on during laryngoscopy.</li>
+      <li><strong>First attempt fails — poor view, desaturation to 78%.</strong> Do not take a second look immediately. Insert a second-generation SAD (Plan B) with the nasal cannula still running. Confirm ventilation with waveform capnography.</li>
+      <li><strong>SAD ventilates successfully.</strong> You now have oxygenation. You may attempt intubation via the SAD with a bronchoscope, or ventilate through the SAD to the ICU and intubate there with better preparation. Do not chase intubation at the cost of oxygenation.</li>
+      <li><strong>If the SAD had failed</strong> after up to three attempts, two-person facemask ventilation (Plan C) for a brief, time-limited attempt while someone opens the eFONA kit and prepares the scalpel. If no sustainable oxygenation, declare CICO and proceed to scalpel&ndash;bougie&ndash;tube without further delay.</li>
+    </ol>
+  </div>
+
+  <div class="bundle">
+    <h3>Bedside bundle: unanticipated difficult intubation</h3>
+    <div class="bundle-step">
+      <div class="step-label">Before induction</div>
+      <ul>
+        <li>Airway assessment: anatomical + physiological risk factors, including obesity as its own consideration</li>
+        <li>Team briefing: roles, plans A to D, cognitive aid visible</li>
+        <li>Equipment: videolaryngoscope, bougie, SAD, facemask, eFONA kit, suction</li>
+        <li>Preoxygenate; start continuous O₂ (nasal cannula or HFNO)</li>
+        <li>Confirm suction working, vasopressors drawn, sugammadex available</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Plan A — Intubation</div>
+      <ul>
+        <li>Videolaryngoscopy first-line; bougie/stylet prepared</li>
+        <li>Adequate neuromuscular blockade confirmed</li>
+        <li>Max 3 + 1 attempts; declare failure early if no progress</li>
+        <li>Continuous oxygen throughout</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Plan B — SGA</div>
+      <ul>
+        <li>Second-generation SAD, max 3 attempts (no extra "+1")</li>
+        <li>Confirm ventilation with waveform capnography</li>
+        <li>Use as oxygenation platform or conduit; do not delay if oxygenation is poor</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Plan C — Facemask</div>
+      <ul>
+        <li>Two-person technique with adjuncts</li>
+        <li>Time-limited; prepare for Plan D in parallel</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Plan D — eFONA</div>
+      <ul>
+        <li>Declare CICO aloud</li>
+        <li>Scalpel&ndash;bougie&ndash;tube: vertical skin incision (default, up to 8 cm), blunt dissection, transverse stab at the membrane, bougie, size 6.0 mm tube</li>
+        <li>Confirm with waveform capnography</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Afterwards</div>
+      <ul>
+        <li>Document: assessment, plan, devices, attempts, CICO declaration, complications</li>
+        <li>Debrief the team</li>
+        <li>Plan extubation per DAS 2011; assume re-intubation may be difficult</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <h3>The lesson that doesn't show up in any algorithm</h3>
+    <p>The 2025 DAS guideline's deepest message is that airway safety is a system property, not a personal skill. An individual anaesthetist can execute perfect laryngoscopy and still fail if the team is unclear on roles, if the eFONA kit is missing, or if the culture punishes early declaration of failure. The guideline asks departments to treat airway management like aviation: brief every case, use checklists, train in simulation, debrief every event, and maintain equipment to a standard. The algorithm is the visible part; the invisible part is the culture that makes the algorithm usable under pressure.</p>
+  </div>
+
+  <div class="source-note">
+    <strong>On this summary.</strong> Written independently for personal study and bedside reference from the published 2025 DAS guideline and its accompanying coverage. It reflects the structure and key recommendations of the guideline in original language and is not a reproduction of the published text, tables, or algorithms. Always confirm exact wording, grading, and any subsequent corrections against the primary source and your institutional protocol before applying to a real patient.
+  </div>
+
+  <div class="refs">
+    <h3>References</h3>
+    <ol>
+      <li>Ahmad I, El-Boghdadly K, Iliff H, et al. Difficult Airway Society 2025 guidelines for management of unanticipated difficult tracheal intubation in adults. <em>Br J Anaesth.</em> 2026;136(1):283&ndash;307. doi:10.1016/j.bja.2025.10.006. Epub 2025 Nov 7.</li>
+      <li>McKechnie A, Iliff HA, Black R, et al. Airway management in patients living with obesity: best practice recommendations from the Society for Obesity and Bariatric Anaesthesia. <em>Anaesthesia.</em> 2025;80(9):1103&ndash;1114. doi:10.1111/anae.16647. Endorsed by the Difficult Airway Society.</li>
+      <li>Ahmad I, El-Boghdadly K, Bhagrath R, et al. Difficult Airway Society guidelines for awake tracheal intubation (ATI) in adults. <em>Anaesthesia.</em> 2020;75(4):509&ndash;528. doi:10.1111/anae.14904.</li>
+      <li>Popat M, Mitchell V, Dravid R, et al. Difficult Airway Society guidelines for the management of tracheal extubation. <em>Anaesthesia.</em> 2012;67(3):318&ndash;340. doi:10.1111/j.1365-2044.2011.06917.x. (Originally published 2011; current extubation standard.)</li>
+      <li>Frerk C, Mitchell VS, McNarry AF, et al. Difficult Airway Society 2015 guidelines for management of unanticipated difficult intubation in adults. <em>Br J Anaesth.</em> 2015;115(6):827&ndash;848. doi:10.1093/bja/aev371. (Superseded by 2025 edition.)</li>
+      <li>Difficult Airway Society. DAS Guidelines. <a href="https://das.uk.com/guidelines/">das.uk.com/guidelines/</a>. Accessed Sept 2026.</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    This is a personal educational summary, not the guideline itself and not exhaustive. It is not a substitute for reading the full published 2025 DAS guideline or for independent clinical judgment. Re-verify all recommendations against the current publication and your institutional protocol before clinical use. Airway management is a high-risk activity; always follow local governance, training requirements, and equipment standards.
+  </div>
+
+</div>
+
+<div class="article-foot">
+  <a href="updates-guidelines.html" class="foot-back" target="_self">&larr; Back to Updates &amp; Guidelines</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
