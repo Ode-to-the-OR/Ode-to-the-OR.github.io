@@ -1,1 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketamine — Drug Deep Dive | Ode to the OR</title>
+<meta name="description" content="A deep dive into ketamine — mechanism, pharmacokinetics, clinical uses, dosing, and the honest bedside reality of a dissociative anaesthetic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --plum:    #7a5abf;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
 
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.tt{border-color:var(--teal);color:var(--teal);}
+
+/* Quick facts strip */
+.quickfacts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
+  border:1px solid var(--border);margin:2.2rem 0 2.8rem;
+}
+@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
+.qf{background:var(--surface);padding:1.1rem 1.2rem;}
+.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
+.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Table of contents */
+.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
+.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
+@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
+.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
+.toc a:hover{color:var(--rust);}
+.toc a::before{content:'—';color:var(--faint);font-size:.75rem;}
+
+/* Mechanism panel */
+.mech-panel{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
+.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+
+/* Receptor comparison bars */
+.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
+.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
+.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
+.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
+.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
+
+/* Dosing table */
+.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.dose-table tr:hover td{background:var(--deep);}
+.dose-table td strong{color:var(--text);}
+
+/* Pearl / alert / caution boxes */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.caution-box p:last-child{margin-bottom:0;}
+
+.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
+.honest-box p:last-child{margin-bottom:0;}
+
+/* Comparison grid for clinical uses */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
+.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../drug-deep-dives.html" class="back-link">← Back to Drug Deep Dives</a>
+
+<div class="wrap">
+
+  <div class="ey">Drug Deep Dive · Dissociative Anaesthetic · No. 003</div>
+  <h1>Ketamine</h1>
+  <p class="subtitle">The one induction agent that supports blood pressure instead of dropping it — with a reputation that often precedes the pharmacology.</p>
+
+  <div class="meta-row">
+    <span class="tag ta">Induction Agent</span>
+    <span class="tag tc">Analgesia</span>
+    <span class="tag tk">ICU</span>
+    <span class="tag tp">Pediatric</span>
+    <span class="tag tt">Trauma / Prehospital</span>
+  </div>
+
+  <div class="quickfacts">
+    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">NMDA Receptor Antagonist</span></div>
+    <div class="qf"><span class="qf-label">Onset (IV)</span><span class="qf-val">30–60 sec</span></div>
+    <div class="qf"><span class="qf-label">Elimination t½</span><span class="qf-val">~2–3 hours</span></div>
+    <div class="qf"><span class="qf-label">Reversal Agent</span><span class="qf-val">None</span></div>
+  </div>
+
+  <p>Ketamine occupies a strange place in the drug cupboard — simultaneously a first-line trauma induction agent, a legitimate analgesic infusion, a treatment-resistant depression therapy, a battlefield and disaster-medicine staple, and a drug carrying enough reputation from misuse that many patients (and some clinicians) are wary of it before understanding what it actually does. Nearly everything unusual about ketamine, good and bad, traces back to a single fact: it works by a completely different receptor mechanism than every other induction agent in routine use. Here is what matters about it, from the receptor up to the bedside.</p>
+
+  <div class="toc">
+    <h4>In This Deep Dive</h4>
+    <div class="toc-grid">
+      <a href="#mechanism">1. Mechanism of Action</a>
+      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
+      <a href="#effects">3. Physiological Effects, System by System</a>
+      <a href="#uses">4. Clinical Uses</a>
+      <a href="#dosing">5. Dosing</a>
+      <a href="#cautions">6. Cautions, Contraindications & Interactions</a>
+      <a href="#pediatric">7. Pediatric Considerations</a>
+      <a href="#bedside">8. What Actually Happens at the Bedside</a>
+      <a href="#pearls">9. Pearls & Pitfalls</a>
+      <a href="#references">10. References</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="mechanism">1. Mechanism of Action</h2>
+  <p>Ketamine is a phencyclidine derivative and the prototypical <strong>NMDA (N-methyl-D-aspartate) receptor antagonist</strong> used in clinical anaesthesia. Where propofol and the benzodiazepines work by potentiating inhibitory GABA-A signalling, ketamine works by blocking excitatory glutamate transmission — a fundamentally different lever, which explains why its clinical footprint looks so unlike the other induction agents.</p>
+
+  <div class="mech-panel">
+    <div class="mech-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Where It Acts, and Why
+    </div>
+    <p style="margin-bottom:1rem;"><strong>NMDA receptor (non-competitive antagonism, phencyclidine site):</strong> ketamine binds inside the NMDA ion channel and blocks glutamate-mediated excitatory transmission at cortical and subcortical sites. This produces "dissociative anaesthesia" — functional and electrophysiological dissociation between the thalamo-neocortical and limbic systems, rather than the generalised cortical depression produced by GABAergic agents. The patient can appear to have their eyes open, exhibit spontaneous movement, and yet be fully amnestic and unresponsive to surgical stimulus.</p>
+    <p style="margin-bottom:1rem;"><strong>Opioid receptors (mu, kappa, sigma):</strong> ketamine has weak affinity at opioid receptors, contributing modestly to its analgesic profile independent of the NMDA effect.</p>
+    <p style="margin-bottom:1rem;"><strong>Monoaminergic system:</strong> ketamine inhibits reuptake of noradrenaline, dopamine, and serotonin at central and peripheral synapses. This is the mechanism behind its signature <strong>sympathomimetic</strong> cardiovascular profile — a rise, not a fall, in heart rate and blood pressure — and it is also the mechanism increasingly implicated in ketamine's rapid antidepressant effect via downstream synaptic plasticity changes.</p>
+    <p style="margin-bottom:0;"><strong>Direct myocardial and central effects:</strong> in isolated tissue, ketamine is actually a direct myocardial depressant and central sympathetic depressant. In the intact, catecholamine-replete patient, the indirect sympathomimetic effect from monoamine reuptake inhibition dominates and wins out — but in a catecholamine-depleted patient (prolonged critical illness, exhausted sympathetic reserve), the direct depressant effect can unmask itself, and blood pressure may fall instead of rise. This is one of the most important and most frequently missed pharmacological subtleties of the drug.</p>
+  </div>
+
+  <h3>Why "Dissociative," Not "Hypnotic"</h3>
+  <p>Ketamine does not produce anaesthesia on the same spectrum as propofol or the volatiles, where deeper dosing simply produces a deeper version of the same unconscious state. Instead it produces a distinct dissociative state — analgesia, amnesia, and a trance-like catalepsy — that exists somewhat orthogonally to the sedation-to-unconsciousness continuum most anaesthetists are trained to think in. This is precisely why airway reflexes, spontaneous ventilation, and even purposeful-looking movement can persist throughout a technically adequate ketamine anaesthetic, and why depth-of-anaesthesia monitors calibrated to GABAergic agents do not reliably apply to it.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
+  <p>Ketamine is highly lipophilic — five to ten times more so than thiopental — which underlies its rapid onset via prompt penetration of the blood-brain barrier. It is metabolised in the liver to a genuinely active metabolite, which is unusual among induction agents and clinically relevant for repeated or prolonged dosing.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Onset (IV)</strong></td><td>30–60 sec</td><td>Comparable to propofol; suitable for rapid-sequence use</td></tr>
+      <tr><td><strong>Onset (IM)</strong></td><td>3–5 min</td><td>Valuable when IV access is difficult or absent — combative or paediatric patients</td></tr>
+      <tr><td><strong>Duration (single IV dose)</strong></td><td>10–15 min (dissociation)</td><td>Terminated by redistribution, like propofol; full reorientation takes longer</td></tr>
+      <tr><td><strong>Elimination half-life</strong></td><td>~2–3 hours</td><td>Longer than the "wears off fast" bedside impression from redistribution alone</td></tr>
+      <tr><td><strong>Active metabolite</strong></td><td>Norketamine (~⅓ potency of parent)</td><td>Contributes to prolonged analgesia and sedation, especially with repeated dosing or infusion</td></tr>
+      <tr><td><strong>Protein binding</strong></td><td>~20–30%</td><td>Relatively low compared with propofol or dexmedetomidine</td></tr>
+      <tr><td><strong>Metabolism</strong></td><td>Hepatic (CYP3A4, CYP2B6) — N-demethylation</td><td>Reduce dose in significant hepatic impairment; watch for drug interactions via CYP3A4</td></tr>
+      <tr><td><strong>Bioavailability</strong></td><td>IV/IM ~100%; oral/intranasal considerably lower with first-pass effect</td><td>Oral and intranasal routes exist for analgesia/sedation but require higher doses</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2 id="effects">3. Physiological Effects, System by System</h2>
+
+  <h3>Cardiovascular</h3>
+  <p>The defining feature. Expect a <strong>rise</strong> in heart rate, blood pressure, and cardiac output from centrally and peripherally mediated sympathetic stimulation — the opposite of every other IV induction agent in common use. This makes ketamine a genuinely useful choice in hypovolaemic, haemorrhaging, or septic patients where haemodynamic support rather than further depression is needed at induction. The important caveat: in patients with exhausted or maximally stimulated endogenous catecholamine stores (prolonged shock, catecholamine-depleted critical illness), ketamine's intrinsic direct myocardial depressant effect can dominate instead, producing hypotension rather than the expected pressor response — the single most important exception to keep in mind.</p>
+
+  <h3>Respiratory</h3>
+  <p>Relatively preserved respiratory drive at analgesic and dissociative doses compared with other induction agents — apnoea is uncommon as a sole agent at standard doses, though it can still occur, particularly with rapid administration or co-administered sedatives/opioids. Ketamine is also a genuine <strong>bronchodilator</strong>, through both direct smooth muscle relaxation and catecholamine release, making it a favoured induction agent in patients with reactive airway disease or status asthmaticus. Airway reflexes are relatively preserved, though this should never be relied upon as protection against aspiration — patients are not considered to have an intact, protected airway simply because they are on ketamine.</p>
+
+  <h3>Central Nervous System</h3>
+  <p>Increases cerebral metabolic rate, cerebral blood flow, and — in spontaneously ventilating patients without controlled normocapnia — intracranial pressure; this classic teaching has been substantially revisited in the literature, and in mechanically ventilated, normocapnic patients ketamine's ICP effect appears far more modest than once taught, but caution and individualised judgement in raised-ICP states remains reasonable practice. Produces the dissociative state described above along with potent analgesia and amnesia. <strong>Emergence phenomena</strong> — vivid dreaming, hallucinations, or frank dysphoria on emergence — are the most clinically troublesome CNS effect and are discussed further below.</p>
+
+  <h3>Other</h3>
+  <p>Increases salivary and bronchial secretions, which is why an antisialagogue (glycopyrrolate) is frequently co-administered, particularly in children. Preserves airway muscle tone better than propofol. Does not reliably trigger malignant hyperthermia. Analgesic effects at sub-dissociative ("low") doses are genuinely distinct from and additive to its anaesthetic effects — this is the basis of ketamine's expanding role in acute and chronic pain medicine.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="uses">4. Clinical Uses</h2>
+  <p>Ketamine's unusual combination of haemodynamic support, preserved respiratory drive, bronchodilation, and potent analgesia has earned it a genuinely broad clinical footprint, from the trauma bay to the chronic pain clinic.</p>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>Induction in Haemodynamically Unstable Patients</h4>
+      <p>A commonly favoured induction agent in trauma, hypovolaemia, and septic shock, where the pressor effect can help rather than compound an already compromised circulation — though the response is patient-dependent and not guaranteed in every case.</p>
+    </div>
+    <div class="use-card">
+      <h4>Prehospital / Battlefield / Disaster Medicine</h4>
+      <p>IM availability, wide safety margin, preserved airway reflexes, and analgesic potency make it a mainstay where monitoring and rescue resources are limited.</p>
+    </div>
+    <div class="use-card">
+      <h4>Procedural Sedation</h4>
+      <p>Widely used in emergency departments and paediatric settings for fracture reduction, laceration repair, and burns dressing changes — a genuine strength given the analgesic-plus-sedative combination in one drug.</p>
+    </div>
+    <div class="use-card">
+      <h4>Status Asthmaticus</h4>
+      <p>Bronchodilator properties make it a favoured induction and sedation agent when mechanical ventilation is required for severe reactive airway disease.</p>
+    </div>
+    <div class="use-card">
+      <h4>Sub-Dissociative Analgesia</h4>
+      <p>Low-dose IV ketamine infusion is an established opioid-sparing analgesic strategy for acute pain, including in the emergency department and postoperatively.</p>
+    </div>
+    <div class="use-card">
+      <h4>Chronic and Refractory Pain</h4>
+      <p>Ketamine infusions are used for complex regional pain syndrome and other refractory chronic pain states, typically in specialised pain-service settings with careful monitoring.</p>
+    </div>
+    <div class="use-card">
+      <h4>ICU Sedation / Adjunct</h4>
+      <p>Used as an opioid- and sedative-sparing adjunct in mechanically ventilated ICU patients, particularly where haemodynamic instability limits other agents.</p>
+    </div>
+    <div class="use-card">
+      <h4>Treatment-Resistant Depression</h4>
+      <p>Sub-anaesthetic IV ketamine (and its S-enantiomer, esketamine, as an approved intranasal formulation) has a genuine, rapid-onset antidepressant effect in treatment-resistant depression — administered in monitored psychiatric settings distinct from anaesthetic use.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="dosing">5. Dosing</h2>
+
+  <table class="dose-table">
+    <thead><tr><th>Indication</th><th>Dose</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Induction (IV)</strong></td>
+        <td>1–2 mg/kg IV</td>
+        <td>Give over 60 seconds; titrate to clinical effect — lower doses are often appropriate in profoundly haemodynamically compromised or catecholamine-depleted patients, where the full 2 mg/kg dose is not automatically required</td>
+      </tr>
+      <tr>
+        <td><strong>Induction (IM)</strong></td>
+        <td>6.5–13 mg/kg IM</td>
+        <td>Labelled range for induction of anaesthesia as a sole agent; useful when IV access is not yet secured — combative, paediatric, or prehospital settings. Distinct from the lower IM doses used for procedural sedation below</td>
+      </tr>
+      <tr>
+        <td><strong>Procedural sedation (IV)</strong></td>
+        <td>0.5–1 mg/kg IV, repeat 0.25–0.5 mg/kg as needed</td>
+        <td>Titrate to effect; co-administer antisialagogue where secretions are a concern</td>
+      </tr>
+      <tr>
+        <td><strong>Procedural sedation (IM)</strong></td>
+        <td>3–4 mg/kg IM</td>
+        <td>Common in paediatric ED settings without IV access</td>
+      </tr>
+      <tr>
+        <td><strong>Sub-dissociative analgesia (IV infusion)</strong></td>
+        <td>0.1–0.3 mg/kg/h, or small serial boluses of 0.1–0.2 mg/kg</td>
+        <td>Opioid-sparing adjunct for acute pain; monitor for dissociative side effects even at "low" dose</td>
+      </tr>
+      <tr>
+        <td><strong>ICU sedation adjunct</strong></td>
+        <td>0.1–0.5 mg/kg/h infusion</td>
+        <td>Typically combined with a primary sedative rather than used alone</td>
+      </tr>
+      <tr>
+        <td><strong>Paediatric procedural sedation</strong></td>
+        <td>IV 0.5–1 mg/kg; IM 3–4 mg/kg</td>
+        <td>Co-administer glycopyrrolate to reduce secretions; monitor emergence closely</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:var(--faint);">Doses are illustrative and drawn from commonly cited ranges in the anaesthesia and emergency medicine literature. Always confirm against your institution's protocol and current product labelling — dosing in this table is not a substitute for local guidelines.</p>
+
+  <div class="caution-box">
+    <h3>The Pressor Response Is Not Guaranteed</h3>
+    <p>Ketamine is taught as the induction agent that "protects" blood pressure, and in the well-resourced, catecholamine-replete patient that is usually true. But in a patient whose sympathetic reserve is already exhausted — prolonged septic shock, late-stage haemorrhage, or profound critical illness — the direct myocardial and central depressant properties of the drug can dominate instead, and blood pressure can fall rather than rise. Treat the "ketamine will support the pressure" teaching as a strong tendency, not a guarantee, and be ready to support the circulation regardless of which agent is chosen. This is also why the induction dose itself should be titrated rather than reflexively pushed to the higher end in an unstable patient — a full dissociative dose landing on top of an unmasked direct depressant effect is a genuine risk, not a theoretical one.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="cautions">6. Cautions, Contraindications & Interactions</h2>
+
+  <h3>Relative Contraindications</h3>
+  <ul>
+    <li><strong>Poorly controlled hypertension or significant coronary artery disease</strong> — the sympathomimetic rise in heart rate and blood pressure increases myocardial oxygen demand, which may be poorly tolerated</li>
+    <li><strong>Active psychosis or significant psychiatric history involving hallucinations</strong> — emergence phenomena may be more pronounced or distressing</li>
+    <li><strong>Known hypersensitivity</strong> to the drug</li>
+    <li><strong>Severe, uncontrolled raised intracranial pressure</strong> — historically absolute, now more often treated as relative given revised evidence, but caution and individualised risk-benefit assessment still apply, particularly outside controlled ventilation</li>
+  </ul>
+
+  <h3>Use With Caution</h3>
+  <ul>
+    <li>Catecholamine-depleted critical illness — risk of unmasked direct myocardial depression and hypotension rather than the expected pressor response</li>
+    <li>Globe injury or open eye injury — historically avoided due to theoretical IOP rise; evidence is limited and mixed, individualised judgement is reasonable</li>
+    <li>History of significant emergence reactions with prior ketamine use</li>
+    <li>Chronic, heavy recreational use — tolerance and altered dose-response can complicate clinical dosing</li>
+  </ul>
+
+  <h3>Interactions</h3>
+  <ul>
+    <li><strong>Other sedatives and opioids:</strong> additive sedation and respiratory depression, particularly at higher combined doses</li>
+    <li><strong>Theophylline:</strong> reports of lowered seizure threshold with concurrent use</li>
+    <li><strong>Sympathomimetics / thyroid hormone:</strong> potential for additive hypertensive and tachycardic effects</li>
+    <li><strong>CYP3A4 inducers/inhibitors:</strong> can alter ketamine metabolism and clinical effect given its hepatic clearance pathway</li>
+  </ul>
+
+  <div class="alert-box">
+    <h3>Emergence Phenomena</h3>
+    <p>Vivid dreaming, out-of-body sensations, and frank hallucinations or dysphoria can occur as the dissociative state resolves, most notably in adults and with rapid IV administration. Risk is reduced by administering the drug in a calm, quiet environment, minimising unnecessary stimulation during emergence, and co-administering a benzodiazepine, which reliably lowers the incidence and severity of these reactions. There is no reversal agent for ketamine — management of a significant emergence reaction is supportive: a calm environment, reassurance, and a small dose of benzodiazepine if the reaction is distressing rather than mild.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="pediatric">7. Paediatric Considerations</h2>
+  <p>Ketamine has a long and well-established track record in paediatric anaesthesia and emergency procedural sedation, valued for its wide safety margin and IM availability in a population where IV access is often the limiting step.</p>
+  <ul>
+    <li><strong>IM administration</strong> is a genuine practical advantage in a frightened or combative child without existing IV access, avoiding the trauma of repeated attempts before sedation is achieved. The dose used depends on the goal — lower IM doses (3–4 mg/kg) for procedural sedation, higher doses toward the labelled induction range when full anaesthesia is intended.</li>
+    <li>Children generally tolerate ketamine's cardiovascular profile well, given typically robust baseline sympathetic reserve — but this should not be assumed reflexively in the critically ill or shocked child.</li>
+    <li><strong>Emergence reactions</strong> are generally less common and less distressing in young children than in adults, though they still occur, particularly in older children and adolescents.</li>
+    <li>Hypersalivation is more pronounced in children; co-administration of glycopyrrolate is standard practice in many paediatric procedural sedation protocols.</li>
+    <li>Widely used for paediatric burns dressing changes and fracture reductions specifically because it combines analgesia, sedation, and a preserved airway in a single agent — genuinely difficult to replicate with any other single drug.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 id="bedside">8. What Actually Happens at the Bedside</h2>
+  <p>The textbook version of ketamine induction is a fast, haemodynamically supportive slide into dissociation, ideal for the unstable patient who cannot tolerate another drop in blood pressure. The bedside version has more texture than that.</p>
+  <p>The first thing worth watching is that the eyes often stay open. A patient who is fully dissociated, amnestic, and unresponsive to a surgical incision can still have open, roving eyes and even spontaneous limb movement — which is disconcerting to anyone in the room unfamiliar with ketamine's particular brand of "unconscious." Explaining this to the surgical team and any observers before it happens avoids a moment of unnecessary alarm mid-procedure.</p>
+  <p>The second thing is that the secretions are real and can genuinely interfere with airway management if not anticipated. A dry field for laryngoscopy or fibreoptic work can become considerably less dry within minutes of a ketamine dose, particularly in children — glycopyrrolate given ahead of time, rather than reached for after the fact, makes a meaningful difference to how the airway actually looks when it matters.</p>
+  <p>The third thing, and the one most likely to be underappreciated by someone using ketamine for the first time outside a controlled OR setting, is the emergence period. A patient who tolerated the procedure itself without apparent distress can still surface into a genuinely unpleasant dissociative afterimage — vivid, sometimes frightening dreams, disorientation, or tearfulness — minutes to tens of minutes later, in a recovery bay that is loud, bright, and full of unfamiliar faces. A quiet, dim, unhurried emergence environment does more for the patient's actual experience of the drug than almost any other single intervention available.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pearls">9. Pearls & Pitfalls</h2>
+
+  <div class="pearl-box">
+    <h3>The Core Takeaway</h3>
+    <p>Ketamine's reputation as "the safe one" for unstable patients is well earned, but it is not a universal exemption from haemodynamic vigilance. The drug supports blood pressure through an indirect, catecholamine-dependent mechanism — which means it works best precisely in the patients who still have sympathetic reserve to draw on, and can behave unpredictably in those who don't. Know which patient is in front of you before assuming the pressor effect will show up on cue, and be ready to titrate the induction dose down rather than up when that reserve is in doubt.</p>
+  </div>
+
+  <div class="honest-box">
+    <h3>The Honest Bit</h3>
+    <p>Ketamine carries more stigma into the room than almost any other anaesthetic drug, largely disconnected from its actual clinical profile — a reputation shaped by recreational misuse rather than its behaviour at clinical doses under monitored conditions. That stigma can influence decisions more than the pharmacology does, sometimes leading to an appropriate choice being avoided or a patient being under-prepared for what emergence will feel like. The drug is best evaluated on what it actually does, not on what it is assumed to represent.</p>
+  </div>
+
+  <ul>
+    <li><strong>Pitfall:</strong> Assuming the pressor response is guaranteed in every unstable patient — catecholamine-depleted physiology can flip the expected direction entirely, and reflexively reaching for the higher end of the induction dose range in a compromised patient can compound the problem rather than help it.</li>
+    <li><strong>Pitfall:</strong> Forgetting the antisialagogue in a case where airway secretions matter, and discovering the problem only once the airway is already being managed.</li>
+    <li><strong>Pearl:</strong> A benzodiazepine given alongside (or shortly after) ketamine meaningfully reduces the incidence and severity of emergence phenomena — a simple, evidence-supported step that is easy to skip under time pressure.</li>
+    <li><strong>Pearl:</strong> The IM route is a genuine practical advantage, not a fallback of last resort — worth defaulting to early in a combative or IV-inaccessible patient rather than after several failed attempts at a line.</li>
+    <li><strong>Pitfall:</strong> Treating "airway reflexes preserved" as equivalent to "airway protected." Aspiration risk still requires the same clinical judgement it would with any other sedative or anaesthetic agent.</li>
+  </ul>
+
+  <div class="quote-box">
+    Ketamine supports the circulation where most other agents suppress it, and preserves the airway where most other agents relax it. That difference is exactly why it rewards being understood on its own terms rather than judged against the rest of the induction agents.
+    <span class="src">— A closing thought</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox" id="references">
+    <h3>References</h3>
+    <ol>
+      <li>Craven R. Ketamine. <em>Anaesthesia.</em> 2007;62(Suppl 1):48–53.</li>
+      <li>Green SM, Roback MG, Kennedy RM, Krauss B. Clinical practice guideline for emergency department ketamine dissociative sedation: 2011 update. <em>Ann Emerg Med.</em> 2011;57(5):449–461.</li>
+      <li>Himmelseher S, Durieux ME. Revising a dogma: ketamine for patients with neurological injury? <em>Anesth Analg.</em> 2005;101(2):524–534.</li>
+      <li>Cohen L, Athaide V, Wickham ME, et al. The effect of ketamine on intracranial and cerebral perfusion pressure and health outcomes: a systematic review. <em>Ann Emerg Med.</em> 2015;65(1):43–51.e2.</li>
+      <li>Schwenk ES, Viscusi ER, Buvanendran A, et al. Consensus guidelines on the use of intravenous ketamine infusions for acute pain management. <em>Reg Anesth Pain Med.</em> 2018;43(5):456–466.</li>
+      <li>Zanos P, Moaddel R, Morris PJ, et al. Ketamine and ketamine metabolite pharmacology: insights into therapeutic mechanisms. <em>Pharmacol Rev.</em> 2018;70(3):621–660.</li>
+      <li>Green SM, Roback MG, Krauss B, et al. Predictors of airway and respiratory adverse events with ketamine sedation in the emergency department. <em>Ann Emerg Med.</em> 2009;54(2):158–168.e1–4.</li>
+      <li>Wolff K, Winstock AR. Ketamine: from medicine to misuse. <em>CNS Drugs.</em> 2006;20(3):199–218.</li>
+      <li>Kurdi MS, Theerth KA, Deva RS. Ketamine: current applications in anesthesia, pain, and critical care. <em>Anesth Essays Res.</em> 2014;8(3):283–290.</li>
+      <li>Wan LB, Levitch CF, Perez AM, et al. Ketamine safety and tolerability in clinical trials for treatment-resistant depression. <em>J Clin Psychiatry.</em> 2015;76(3):247–252.</li>
+      <li>Green SM, Krauss B. Clinical practice guideline for emergency department ketamine dissociative sedation in children. <em>Ann Emerg Med.</em> 2004;44(5):460–471.</li>
+      <li>KETALAR (ketamine hydrochloride) injection, for intravenous or intramuscular use. Full Prescribing Information. U.S. Food and Drug Administration.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>Drug Deep Dive · No. 003</span>
+    <span>Dissociative Anaesthetic · Trauma · Analgesia · ICU · Pediatric</span>
+  </div>
+
+  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. Dosing information reflects commonly cited ranges in the anaesthesia and emergency medicine literature and is not a substitute for institutional protocols, current product labelling, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
