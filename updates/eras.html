@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ERAS 2025–2026: The Complete Anaesthesiology Guide — Ode to the OR</title>
+<title>ERAS 2025–2026: The Anaesthesiologist's Guide to Enhanced Recovery — Ode to the OR</title>
 <meta name="description" content="The complete anaesthesiology guide to the latest ERAS Society guidelines — colorectal, cesarean, cardiac, gynecologic oncology, and trauma. Cross-specialty anaesthesiological core, specialty-specific recommendations, and practical tables.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -37,7 +37,6 @@ body{
   line-height:1.6;
 }
 
-/* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:600;
   height:58px;padding:0 5vw;
@@ -52,13 +51,11 @@ nav{
 .nav-links a:hover,.nav-links a.current{color:var(--rust);}
 @media(max-width:700px){nav .nav-links{display:none;}}
 
-/* BACK LINK */
 .back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
 .back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
 .back-link:hover{color:var(--rust);}
 .back-link svg{width:11px;height:11px;}
 
-/* ARTICLE HEAD */
 .article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
 .ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
 .ey::before{content:'';width:26px;height:1px;background:var(--sage);}
@@ -72,10 +69,8 @@ nav{
 .ti{border-color:var(--indigo);color:var(--indigo);}
 .tr{border-color:var(--gold);color:var(--gold);}
 .tp{border-color:var(--plum);color:var(--plum);}
-.to{border-color:var(--rose);color:var(--rose);}
 .meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
 
-/* ARTICLE BODY */
 .article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
 .article-body > * + *{margin-top:1.5rem;}
 .article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
@@ -95,7 +90,6 @@ ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;p
 ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
 ul.plain li strong{font-weight:500;color:var(--rust);}
 
-/* RECOMMENDATION STRENGTH PILLS */
 .pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;}
 .pill{font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;padding:.22rem .55rem;border-radius:2px;font-weight:500;white-space:nowrap;}
 .p-strong{background:rgba(42,90,82,.15);color:var(--teal);border:1px solid var(--teal);}
@@ -109,7 +103,6 @@ ul.plain li strong{font-weight:500;color:var(--rust);}
 .rec-box p{font-size:.88rem;color:var(--text);line-height:1.7;}
 .rec-box p em{font-style:italic;color:var(--muted);font-size:.78rem;}
 
-/* TABLES */
 .table-wrap{overflow-x:auto;border:1px solid var(--border);}
 table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
 thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
@@ -118,7 +111,6 @@ tbody tr:last-child td{border-bottom:none;}
 td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
 .table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
 
-/* WORKED EXAMPLE / BUNDLE */
 .worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
 .worked h3{margin-top:0 !important;}
 .worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
@@ -135,13 +127,11 @@ td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
 .bundle-step ul{list-style:disc;padding-left:1.1rem;margin-top:.3rem;}
 .bundle-step ul li{padding-left:0;}
 
-/* SPECIALTY HEADER */
 .spec-header{background:var(--card);border:1px solid var(--border);padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem;margin-top:2rem !important;}
 .spec-header .spec-icon{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--rust);line-height:1;}
 .spec-header .spec-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text);}
 .spec-header .spec-sub{font-size:.7rem;color:var(--muted);letter-spacing:.05em;}
 
-/* CLOSING */
 .lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
 .lesson h3{color:var(--sage) !important;}
 
@@ -152,7 +142,6 @@ td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
 
 .disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
 
-/* FLOWCHART / VISUAL */
 .flow-box{background:var(--deep);border:1px solid var(--border);padding:1.3rem 1.4rem;}
 .flow-row{display:flex;align-items:flex-start;gap:.8rem;margin-bottom:.8rem;}
 .flow-row:last-child{margin-bottom:0;}
@@ -161,7 +150,6 @@ td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
 .flow-text strong{font-weight:500;color:var(--rust);}
 .flow-connector{text-align:center;color:var(--faint);font-size:.8rem;margin:-.3rem 0 .3rem 13px;}
 
-/* NEXT / FOOTER NAV */
 .article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
 .foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
 
@@ -204,7 +192,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
 
 <div class="article-head">
   <div class="ey">ERAS Society · Complete Anaesthesiology Guide</div>
-  <h1>ERAS 2025–2026: <em>everything the anaesthesiologist needs.</em></h1>
+  <h1>ERAS 2025–2026: <em>The Anaesthesiologist's Guide to Enhanced Recovery</em></h1>
   <p class="dek">The ERAS Society has published 24 guidelines spanning 2013–2025. A landmark systematic review in the <em>British Journal of Anaesthesia</em> has now identified a universal anaesthesiological core across all of them. This is the complete, specialty-by-specialty guide — colorectal, cesarean, cardiac, gynecologic oncology, and trauma — distilled into what actually matters for the anaesthetist in the room.</p>
   <div class="meta-row">
     <span class="tag tt">ERAS Society</span>
@@ -218,7 +206,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
 
   <p>Enhanced Recovery After Surgery began as a colorectal surgery protocol in 2005. Twenty years later, the ERAS Society has published procedure-specific guidelines covering nearly every major surgical specialty. For anaesthesiologists, the challenge has been fragmentation: each guideline is written for its own surgical audience, and the anaesthetic recommendations are scattered across dozens of documents.</p>
 
-  <p>A 2026 systematic review in the <em>British Journal of Anaesthesia</em> changed that. Bornemann-Cimenti and colleagues screened all ERAS Society guidelines published between 2013 and 2025, extracting every anaesthesiological recommendation and classifying them against 45 umbrella terms. Of 39 publications, 24 guidelines were included in the final analysis. The result: <strong>a consistent anaesthesiological core does exist</strong> — eight domains that appear across guidelines with &gt;80% consistency, plus ten more that are mostly consistent (60–80%)[reference:0].</p>
+  <p>A 2026 systematic review in the <em>British Journal of Anaesthesia</em> changed that. Bornemann-Cimenti and colleagues screened all ERAS Society guidelines published between 2013 and 2025, extracting every anaesthesiological recommendation and classifying them against 45 umbrella terms. Of 39 publications, 24 guidelines were included in the final analysis. The result: <strong>a consistent anaesthesiological core does exist</strong> — eight domains that appear across guidelines with &gt;80% consistency, plus ten more that are mostly consistent (60–80%).</p>
 
   <div class="callout">
     <p>Why this matters</p>
@@ -240,9 +228,9 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <!-- UNIVERSAL CORE -->
   <!-- ============================================================ -->
 
-  <h2>The universal anaesthesiological core: <em>eight non-negotiable domains</em></h2>
+  <h2>The universal anaesthesiological core: <em>eight consistently represented domains</em></h2>
 
-  <p>Across 24 procedure-specific guidelines published over twelve years, eight anaesthesiological domains were recommended consistently in more than 80% of guidelines[reference:1]. These are the interventions that should be standard in <em>any</em> ERAS pathway, regardless of surgery type.</p>
+  <p>Across 24 procedure-specific guidelines published over twelve years, eight anaesthesiological domains were recommended consistently in more than 80% of guidelines. These are the domains most consistently represented across ERAS guidelines and therefore form the transposable anaesthesiological core.</p>
 
   <div class="table-wrap">
     <table>
@@ -261,7 +249,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         </tr>
         <tr>
           <td class="agent">Preoperative fasting</td>
-          <td>Shortened fasting: clear fluids up to 2 hours, solids up to 6 hours before anaesthesia. Overnight fasting is outdated and harmful.</td>
+          <td>Shortened fasting: clear fluids up to 2 hours, solids up to 6 hours before anaesthesia. Prolonged overnight fasting is discouraged when contemporary fasting recommendations can be safely followed.</td>
           <td>Consistent (&gt;80%)</td>
         </tr>
         <tr>
@@ -286,7 +274,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         </tr>
         <tr>
           <td class="agent">Fluid management</td>
-          <td>Goal-directed, balanced crystalloids. Avoid both hypovolaemia and hypervolaemia. The 2025 colorectal update shifted from "near-zero balance" to "slightly positive balance."</td>
+          <td>Goal-directed, balanced crystalloids. Avoid both hypovolaemia and excessive fluid administration. The 2025 colorectal guideline moved away from a strict near-zero-balance target toward avoidance of both extremes, with individualized goal-directed management.</td>
           <td>Consistent (&gt;80%)</td>
         </tr>
         <tr>
@@ -297,11 +285,11 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
       </tbody>
     </table>
   </div>
-  <p class="table-caption">The eight consistent domains identified in the BJA systematic review. These form the universal anaesthesiological core across all ERAS guidelines.</p>
+  <p class="table-caption">The eight consistent domains identified in the BJA systematic review. These form the transposable anaesthesiological core across ERAS guidelines.</p>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-gap">Evidence Gap</span></div>
-    <p><strong>Fluid management warrants special attention.</strong> Although it appears consistently across guidelines, the recommendation strength is often mixed. The 2025 colorectal guideline explicitly shifted from a "near-zero balance" strategy to "slightly positive balance," reflecting new evidence that overly restrictive fluid regimens may impair tissue perfusion and gastrointestinal recovery[reference:2]. The BJA review identified fluid management, preoperative carbohydrate administration, and preanaesthetic medication as the three domains where consistency is high but recommendation strength varies most — these require structured local appraisal.</p>
+    <p><strong>Fluid management warrants special attention.</strong> Although it appears consistently across guidelines, the recommendation strength is often mixed. The 2025 colorectal guideline explicitly moved away from a strict "near-zero balance" strategy toward avoidance of both hypovolaemia and excessive fluid administration, reflecting new evidence that overly restrictive fluid regimens may impair tissue perfusion and gastrointestinal recovery. The BJA review identified fluid management, preoperative carbohydrate administration, and preanaesthetic medication as the three domains where consistency is high but recommendation strength varies most — these require structured local appraisal.</p>
   </div>
 
   <!-- ============================================================ -->
@@ -316,39 +304,39 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
   </div>
 
-  <p>The 2025 colorectal guideline is the first full <em>de novo</em> rewrite since the original 2005 consensus, not a simple update. It introduces a new, more rigorous methodology and explicitly separates anaesthetic recommendations from surgical ones[reference:3]. The most consequential changes for anaesthesiologists involve fluid management, epidural analgesia, and cerebral monitoring.</p>
+  <p>The 2025 colorectal guideline is the first full <em>de novo</em> rewrite since the original 2005 consensus, not a simple update. It introduces a new, more rigorous methodology and explicitly separates anaesthetic recommendations from surgical ones. The most consequential changes for anaesthesiologists involve fluid management, epidural analgesia, and cerebral monitoring.</p>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-emph">Emphasis Shift</span></div>
-    <p><strong>Fluid management:</strong> The 2025 guideline explicitly shifts from "near-zero balance" to <strong>slightly positive balance</strong>. Goal-directed fluid therapy remains the framework, but the target is no longer maximal restriction. Balanced crystalloids are preferred. Avoid both hypovolaemia and hypervolaemia[reference:4].</p>
+    <p><strong>Fluid management:</strong> The 2025 guideline moves away from a strict near-zero-balance target toward avoidance of both hypovolaemia and excessive fluid administration, with individualized goal-directed management. Balanced crystalloids are preferred. The guideline specifies maintaining slightly positive balance (≤2.5 kg weight gain).</p>
   </div>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-emph">Emphasis Shift</span></div>
-    <p><strong>Epidural analgesia in minimally invasive surgery:</strong> The 2025 guideline <strong>abandons routine thoracic epidural anaesthesia (TEA) in minimally invasive colorectal surgery</strong> in favour of multimodal analgesia. TEA remains appropriate for open surgery where the incision demands it, but for laparoscopic and robotic approaches the risks (hypotension, urinary retention, delayed mobilisation) now outweigh the benefits[reference:5].</p>
+    <p><strong>Epidural analgesia in minimally invasive surgery:</strong> The 2025 guideline <strong>abandons routine thoracic epidural anaesthesia (TEA) in minimally invasive colorectal surgery</strong> in favour of multimodal analgesia. TEA remains appropriate for open surgery where the incision demands it, but for laparoscopic and robotic approaches the risks (hypotension, urinary retention, delayed mobilisation) now outweigh the benefits.</p>
   </div>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span></div>
-    <p><strong>Standard anaesthetic protocol:</strong> Use short-acting agents, tailored depth of anaesthesia with <strong>cerebral function monitoring (pEEG)</strong>, and antiadrenergic and anti-inflammatory strategies to reduce surgical stress. Hypotension should be avoided — maintain mean arterial pressure within 20% of baseline[reference:6].</p>
+    <p><strong>Anaesthetic considerations:</strong> The guideline discusses short-acting agents, tailored depth of anaesthesia with cerebral function monitoring (pEEG) where available, and antiadrenergic and anti-inflammatory strategies to reduce surgical stress. Hypotension should be avoided. These are anaesthetic considerations within the ERAS framework — they should be individualised to patient and procedural factors rather than applied as a fixed protocol.</p>
   </div>
 
   <h3>Preoperative preparation</h3>
   <ul class="plain">
-    <li><strong>Fasting:</strong> Clear fluids until 2 hours before anaesthesia; solids until 6 hours. Overnight fasting is explicitly discouraged.</li>
+    <li><strong>Fasting:</strong> Clear fluids until 2 hours before anaesthesia; solids until 6 hours. Prolonged overnight fasting is discouraged when contemporary fasting recommendations can be safely followed.</li>
     <li><strong>Carbohydrate loading:</strong> Clear carbohydrate drink the evening before and 2 hours before anaesthesia, unless contraindicated (severe diabetes, gastric emptying delay).</li>
     <li><strong>Preanaesthetic medication:</strong> Routine anxiolytic premedication is not recommended; short-acting agents may be considered for specific patients. This domain was identified in the BJA review as having mixed-strength recommendations across guidelines.</li>
     <li><strong>Preoperative optimisation:</strong> Anaemia correction, smoking cessation, nutritional assessment, and management of coexisting comorbidity should be completed before the day of surgery.</li>
   </ul>
 
-  <h3>Intraoperative anaesthetic protocol</h3>
+  <h3>Intraoperative anaesthetic considerations</h3>
   <ul class="plain">
     <li><strong>Induction:</strong> Propofol or volatile induction; short-acting neuromuscular blockade with sugammadex reversal available.</li>
     <li><strong>Maintenance:</strong> Volatile or TIVA; depth guided by pEEG where available. Avoid deep anaesthesia.</li>
     <li><strong>Analgesia:</strong> Multimodal — paracetamol, NSAIDs (unless contraindicated), regional techniques as appropriate (TAP block, ESP block, or TEA for open surgery), and opioid rescue.</li>
-    <li><strong>Fluids:</strong> Goal-directed, balanced crystalloids; slightly positive balance preferred over near-zero.</li>
+    <li><strong>Fluids:</strong> Goal-directed, balanced crystalloids; avoid both hypovolaemia and excessive administration.</li>
     <li><strong>Temperature:</strong> Active warming to maintain ≥36°C.</li>
-    <li><strong>PONV:</strong> Multimodal prophylaxis (dexamethasone + ondansetron ± droperidol) for high-risk patients.</li>
+    <li><strong>PONV:</strong> Multimodal prophylaxis for high-risk patients.</li>
   </ul>
 
   <!-- ============================================================ -->
@@ -363,7 +351,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
   </div>
 
-  <p>The 2025 cesarean update is the first revision of the intraoperative ERAS recommendations since 2018. It defines ten intraoperative intervention categories, all graded as strong recommendations — despite evidence quality ranging from very low to moderate[reference:7]. For the obstetric anaesthesiologist, the key domains are spinal hypotension prevention, antiemetic prophylaxis, multimodal analgesia, and uterotonic optimisation.</p>
+  <p>The 2025 cesarean update is the first revision of the intraoperative ERAS recommendations since 2018. It defines ten intraoperative intervention categories, all graded as strong recommendations — despite evidence quality ranging from very low to moderate. For the obstetric anaesthesiologist, the key domains are spinal hypotension prevention, antiemetic prophylaxis, multimodal analgesia, and uterotonic optimisation.</p>
 
   <div class="table-wrap">
     <table>
@@ -441,21 +429,22 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   </div>
   <p class="table-caption">The ten intraoperative ERAS recommendations for cesarean delivery. All are strong recommendations, but note the low evidence quality underlying spinal hypotension prevention, antiemetic prophylaxis, and multimodal analgesia.</p>
 
-  <h3>Spinal hypotension: a practical protocol</h3>
+  <h3>Practical interpretation: preventing spinal hypotension</h3>
+  <p>A commonly used approach is prophylactic phenylephrine infusion with crystalloid co-loading, titrated to maintain maternal blood pressure. The guideline supports prevention of spinal hypotension and identifies vasopressor use and fluid management as important components, but exact dosing should follow local obstetric anaesthesia protocols. The steps below illustrate a widely used clinical approach — they are not prescriptive ERAS dosing.</p>
   <div class="flow-box">
     <div class="flow-row">
       <div class="flow-num">1</div>
-      <div class="flow-text"><strong>Before spinal:</strong> Co-load with 10–15 mL/kg balanced crystalloid. Have phenylephrine drawn up and infusion ready.</div>
+      <div class="flow-text"><strong>Before spinal:</strong> Co-load with balanced crystalloid. Have phenylephrine drawn up and infusion ready.</div>
     </div>
     <div class="flow-connector">↓</div>
     <div class="flow-row">
       <div class="flow-num">2</div>
-      <div class="flow-text"><strong>At spinal:</strong> Start phenylephrine infusion at 40–50 mcg/min <em>concurrently</em> with spinal medication — do not wait for hypotension to develop[reference:8].</div>
+      <div class="flow-text"><strong>At spinal:</strong> Start phenylephrine infusion <em>concurrently</em> with spinal medication — do not wait for hypotension to develop.</div>
     </div>
     <div class="flow-connector">↓</div>
     <div class="flow-row">
       <div class="flow-num">3</div>
-      <div class="flow-text"><strong>Monitoring:</strong> Continuous blood pressure monitoring (cycle ≤2.5 min). If hypotension develops despite infusion, treat with phenylephrine boluses 50–100 mcg.</div>
+      <div class="flow-text"><strong>Monitoring:</strong> Continuous blood pressure monitoring (cycle ≤2.5 min). If hypotension develops despite infusion, treat with phenylephrine boluses.</div>
     </div>
     <div class="flow-connector">↓</div>
     <div class="flow-row">
@@ -470,12 +459,13 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   </div>
 
   <h3>Multimodal analgesia for cesarean</h3>
+  <p>The ERAS guideline supports a multimodal approach including neuraxial morphine, paracetamol, NSAIDs, and opioid rescue. The specific agents and doses below illustrate a commonly used institutional approach — they are not ERAS-prescribed doses and should be adapted to local protocols and patient factors.</p>
   <ul class="plain">
-    <li><strong>Intrathecal morphine:</strong> 50–100 mcg (depending on local protocol) provides prolonged analgesia. Monitor for respiratory depression — especially in patients with obesity or sleep apnoea.</li>
-    <li><strong>Paracetamol:</strong> 1 g IV every 6 hours, scheduled.</li>
-    <li><strong>NSAID:</strong> Ketorolac 15–30 mg IV every 6 hours or ibuprofen 400 mg every 6 hours, scheduled, unless contraindicated.</li>
+    <li><strong>Intrathecal morphine:</strong> Provides prolonged analgesia. Monitor for respiratory depression — especially in patients with obesity or sleep apnoea. Dosing per local protocol.</li>
+    <li><strong>Paracetamol:</strong> Scheduled dosing, per local protocol.</li>
+    <li><strong>NSAID:</strong> Scheduled dosing, per local protocol, unless contraindicated.</li>
     <li><strong>Opioid rescue:</strong> Oxycodone or morphine for breakthrough pain. Avoid codeine in breastfeeding mothers (CYP2D6 ultra-rapid metaboliser risk).</li>
-    <li><strong>Dexamethasone:</strong> 4–8 mg IV at induction, serves dual purpose for PONV and analgesia[reference:9].</li>
+    <li><strong>Dexamethasone:</strong> Serves dual purpose for PONV and analgesia; dosing per local protocol.</li>
   </ul>
 
   <!-- ============================================================ -->
@@ -486,7 +476,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <div class="spec-icon">03</div>
     <div>
       <div class="spec-title">Cardiac Surgery — 2024/2025</div>
-      <div class="spec-sub">Grant et al. · Joint ERAS Cardiac Society / ERAS International / STS Consensus</div>
+      <div class="spec-sub">Grant et al. · Ann Thorac Surg 2024;117(4):669-689 · ERAS Cardiac Society / ERAS International / STS</div>
     </div>
   </div>
 
@@ -494,22 +484,22 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span></div>
-    <p><strong>Opioid-sparing multimodal analgesia:</strong> Minimise intraoperative opioids and use shorter-acting anaesthetics. An ERAS rollout featuring gabapentin, lidocaine infusion, and regular paracetamol/NSAIDs produced a <strong>57% reduction in total opioid consumption</strong> (from 452 to 259 MME)[reference:10]. Parasternal plane blocks and erector spinae plane blocks are increasingly used as regional adjuncts.</p>
+    <p><strong>Opioid-sparing multimodal analgesia:</strong> Minimise intraoperative opioids and use shorter-acting anaesthetics. In a separate cardiac ERAS implementation study, total opioid consumption was 57% lower (259 vs 452 MME) with an ERAS rollout featuring gabapentin, lidocaine infusion, and regular paracetamol/NSAIDs. Parasternal plane blocks and erector spinae plane blocks are increasingly used as regional adjuncts. (The 57% figure comes from an implementation study, not the consensus statement itself.)</p>
   </div>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span></div>
-    <p><strong>Lung-protective ventilation:</strong> Low tidal volume (6–8 mL/kg predicted body weight), PEEP 5–8 cmH₂O, and recruitment manoeuvres as needed. This is recommended for all cardiac surgical patients, not just those with pre-existing lung disease[reference:11].</p>
+    <p><strong>Lung-protective ventilation:</strong> Low tidal volume (6–8 mL/kg predicted body weight), PEEP 5–8 cmH₂O, and recruitment manoeuvres as needed. This is recommended for all cardiac surgical patients, not just those with pre-existing lung disease.</p>
   </div>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span></div>
-    <p><strong>Preoperative carbohydrate loading:</strong> 800 mL of 12.5% carbohydrate clear drink the night before and 400 mL of the same fluid 2 hours before surgery, except for patients with severe diabetes or known gastric emptying delay[reference:12]. A commonly used regimen is 400 mL of a clear 10% carbohydrate drink up to 2 hours before anaesthesia[reference:13].</p>
+    <p><strong>Preoperative carbohydrate loading:</strong> 800 mL of a 12.5% carbohydrate clear drink the night before and 400 mL of the same fluid 2 hours before surgery, except for patients with severe diabetes or known gastric emptying delay. Commercial formulations vary — the volumes and concentrations above reflect the commonly cited ERAS cardiac regimen.</p>
   </div>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-cond">Recommend</span></div>
-    <p><strong>Anaesthetic agents:</strong> Propofol for induction and maintenance is recommended by the consensus statement. Dexamethasone 4–8 mg IV at induction and ondansetron 4 mg IV at the end of surgery are standard components[reference:14].</p>
+    <p><strong>Anaesthetic agents:</strong> Propofol-based anaesthesia is incorporated into ERAS cardiac pathways, although anaesthetic technique should be individualised to patient and procedural factors. Dexamethasone and ondansetron are standard components.</p>
   </div>
 
   <h3>The cardiac ERAS bundle: what the anaesthesiologist owns</h3>
@@ -528,13 +518,13 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <div class="bundle-step">
       <div class="step-label">Intraoperative</div>
       <ul>
-        <li>Propofol induction and maintenance</li>
-        <li>Dexamethasone 4–8 mg at induction</li>
+        <li>Propofol-based anaesthesia (individualised)</li>
+        <li>Dexamethasone at induction</li>
         <li>Lung-protective ventilation</li>
         <li>Opioid-sparing multimodal analgesia</li>
         <li>Goal-directed fluid therapy</li>
         <li>Active warming — maintain normothermia</li>
-        <li>Ondansetron 4 mg at end of surgery</li>
+        <li>Ondansetron at end of surgery</li>
       </ul>
     </div>
     <div class="bundle-step">
@@ -556,20 +546,20 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <div class="spec-icon">04</div>
     <div>
       <div class="spec-title">Gynecologic Oncology — 2026 Update</div>
-      <div class="spec-sub">ERAS Society · Third updated guideline · Database search 2018–2025</div>
+      <div class="spec-sub">Nelson et al. · Third updated guideline · Database search 2018–2025</div>
     </div>
   </div>
 
-  <p>The 2026 gynecologic oncology update is the third revision of the ERAS Society guideline for this specialty. It emphasises opioid-sparing multimodal anaesthesia and introduces the concept of same-day discharge for selected patients — a significant shift from the traditional overnight admission paradigm[reference:15][reference:16].</p>
+  <p>The 2026 gynecologic oncology update is the third revision of the ERAS Society guideline for this specialty. It emphasises opioid-sparing multimodal anaesthesia and introduces the concept of same-day discharge for selected patients — a significant shift from the traditional overnight admission paradigm.</p>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-new">New 2026</span></div>
-    <p><strong>Opioid-sparing multimodal anaesthesia:</strong> A randomised clinical trial published in 2026 confirmed that an opioid-sparing multimodal anaesthesia protocol within an ERAS pathway significantly improves postoperative recovery in gynecologic oncologic surgery[reference:17]. The core components are paracetamol, NSAIDs, dexamethasone, and regional techniques where appropriate (TAP block, ESP block, or wound infiltration).</p>
+    <p><strong>Opioid-sparing multimodal anaesthesia:</strong> The guideline emphasises opioid-sparing postoperative analgesia, including restrictive or no-opioid discharge prescribing, as a core component of the ERAS pathway. Multimodal strategies include paracetamol, NSAIDs, dexamethasone, and regional techniques where appropriate (TAP block, ESP block, or wound infiltration).</p>
   </div>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-cond">Recommend</span> <span class="pill p-new">New 2026</span></div>
-    <p><strong>Same-day discharge:</strong> For selected patients undergoing minimally invasive gynecologic oncology surgery, same-day discharge is now recommended. This requires preoperative education, a clear discharge protocol, and reliable follow-up. Anaesthetic considerations include using short-acting agents, avoiding long-acting opioids, and ensuring PONV prophylaxis is robust.</p>
+    <p><strong>Same-day discharge:</strong> Same-day discharge is supported for selected patients undergoing minimally invasive gynecologic oncology surgery when appropriate clinical and system criteria are met. This requires preoperative education, a clear discharge protocol, and reliable follow-up. Anaesthetic considerations include using short-acting agents, avoiding long-acting opioids, and ensuring PONV prophylaxis is robust.</p>
   </div>
 
   <h3>Anaesthetic protocol for gynecologic oncology</h3>
@@ -579,11 +569,11 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <li><strong>Premedication:</strong> Avoid routine anxiolytics; consider short-acting agents for specific patients.</li>
     <li><strong>Induction:</strong> Propofol; short-acting neuromuscular blockade.</li>
     <li><strong>Maintenance:</strong> Volatile or TIVA; consider pEEG monitoring for depth.</li>
-    <li><strong>Analgesia:</strong> Multimodal — paracetamol, NSAID, dexamethasone 4–8 mg, regional blocks (TAP/ESP) for open or laparoscopic procedures, opioid rescue only.</li>
+    <li><strong>Analgesia:</strong> Multimodal — paracetamol, NSAID, dexamethasone, regional blocks (TAP/ESP) for open or laparoscopic procedures, opioid rescue only.</li>
     <li><strong>Fluids:</strong> Goal-directed, balanced crystalloids; avoid overload.</li>
-    <li><strong>PONV:</strong> Multimodal prophylaxis (dexamethasone + ondansetron ± droperidol).</li>
+    <li><strong>PONV:</strong> Multimodal prophylaxis.</li>
     <li><strong>Temperature:</strong> Active warming.</li>
-    <li><strong>Urinary catheter:</strong> Remove early (within 6–12 hours) unless contraindicated.</li>
+    <li><strong>Urinary catheter:</strong> Remove as early as possible — on the day of surgery for minimally invasive surgery and no later than postoperative day 1 for laparotomy, unless contraindicated. Catheters should remain in place for 7 days in patients with elective or traumatic cystotomy or cystectomy.</li>
   </ul>
 
   <!-- ============================================================ -->
@@ -598,18 +588,18 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
   </div>
 
-  <p>The ERATIC guidelines represent the first attempt to apply ERAS principles to major trauma and polytrauma — a population with deranged physiology, unpredictable timing, and high mortality. Published in three parts in the <em>World Journal of Surgery</em>, the guideline covers pre-hospital care, resuscitation-room management, intraoperative care, and postoperative ICU care. Thirty-seven aspects of trauma care were assessed, with 87% overall agreement across all statements after a modified Delphi process[reference:18].</p>
+  <p>The ERATIC guidelines represent the first attempt to apply ERAS principles to major trauma and polytrauma — a population with deranged physiology, unpredictable timing, and high mortality. Published in three parts in the <em>World Journal of Surgery</em>, the guideline covers pre-hospital care, resuscitation-room management, intraoperative care, and postoperative ICU care. Thirty-seven aspects of trauma care were considered, with 87% overall agreement on all statements after a modified Delphi process (100% agreement on 31 of the main statement sets).</p>
 
   <div class="rec-box">
     <div class="pill-row"><span class="pill p-strong">Strong</span> <span class="pill p-new">New 2025</span></div>
-    <p><strong>ERAS principles apply to trauma — with modified expectations.</strong> The core ERAS domains (multimodal analgesia, temperature management, goal-directed fluids, early nutrition) remain valid, but the trauma patient's deranged physiology means that strict adherence to elective-surgery fasting protocols or near-zero fluid balance is not appropriate. The guideline explicitly extrapolates from elective surgery where evidence is lacking, and flags these extrapolations as areas needing further evaluation[reference:19].</p>
+    <p><strong>ERAS principles apply to trauma — with modified expectations.</strong> The core ERAS domains (multimodal analgesia, temperature management, goal-directed fluids, early nutrition) remain valid, but the trauma patient's deranged physiology means that strict adherence to elective-surgery fasting protocols or near-zero fluid balance is not appropriate. The guideline explicitly extrapolates from elective surgery where evidence is lacking, and flags these extrapolations as areas needing further evaluation.</p>
   </div>
 
   <h3>Key anaesthetic recommendations for trauma</h3>
   <ul class="plain">
     <li><strong>Shortened fasting:</strong> Clear liquids up to 2 hours before anaesthesia where feasible. In the acute trauma setting, this may not be achievable — do not delay necessary surgery for fasting.</li>
     <li><strong>Balanced anaesthesia:</strong> Use balanced techniques with short-acting agents; avoid excessive depth. Maintain normothermia aggressively — trauma patients are at high risk of hypothermia.</li>
-    <li><strong>Goal-directed fluid therapy:</strong> Avoid both under-resuscitation and fluid overload. Use dynamic parameters (stroke volume variation, pulse pressure variation) where available. Judicious vasopressor use when hypotension persists despite adequate volume.</li>
+    <li><strong>Goal-directed fluid therapy:</strong> Avoid both under-resuscitation and fluid overload. Use appropriate haemodynamic assessment and dynamic indices where valid and applicable; interpret them in the context of the patient's ventilation, rhythm, bleeding and overall physiology. Judicious vasopressor use when hypotension persists despite adequate volume.</li>
     <li><strong>Early antibiotic prophylaxis:</strong> Timed appropriately for open fractures and penetrating injuries.</li>
     <li><strong>Multimodal analgesia:</strong> Opioid-sparing where possible; regional techniques may be appropriate for isolated limb trauma, but consider coagulopathy and compartment syndrome risk.</li>
     <li><strong>Early nutrition:</strong> Initiate enteral nutrition within 24–48 hours in ICU patients, unless contraindicated.</li>
@@ -662,11 +652,11 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         </tr>
         <tr>
           <td class="agent">Fluid strategy</td>
-          <td>Slightly positive balance; GDFT; balanced crystalloid</td>
+          <td>Avoid both hypovolaemia and excess; GDFT; balanced crystalloid</td>
           <td>Euvolemia; avoid overload; co-loading for spinal</td>
           <td>GDFT; avoid overload</td>
           <td>GDFT; balanced crystalloid</td>
-          <td>GDFT; judicious vasopressors</td>
+          <td>GDFT; judicious vasopressors; interpret indices in context</td>
         </tr>
         <tr>
           <td class="agent">Temperature</td>
@@ -678,18 +668,18 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         </tr>
         <tr>
           <td class="agent">PONV prophylaxis</td>
-          <td>Dexamethasone + ondansetron ± droperidol</td>
+          <td>Multimodal</td>
           <td>Dexamethasone + ondansetron</td>
           <td>Dexamethasone at induction + ondansetron at end</td>
-          <td>Dexamethasone + ondansetron ± droperidol</td>
+          <td>Multimodal</td>
           <td>As indicated</td>
         </tr>
         <tr>
           <td class="agent">Special considerations</td>
-          <td>Cerebral monitoring (pEEG); avoid deep anaesthesia</td>
+          <td>Cerebral monitoring (pEEG) where available; avoid deep anaesthesia</td>
           <td>Prevent spinal hypotension; phenylephrine infusion from spinal</td>
           <td>Lung-protective ventilation; early extubation</td>
-          <td>Same-day discharge for selected MIS patients</td>
+          <td>Same-day discharge for selected MIS patients; early catheter removal</td>
           <td>Modified expectations; deranged physiology</td>
         </tr>
       </tbody>
@@ -706,11 +696,11 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <p>The 2026 systematic review by Bornemann-Cimenti and colleagues is the most important ERAS publication for anaesthesiologists in the last decade. Its key findings:</p>
 
   <ul class="plain">
-    <li><strong>24 guidelines</strong> published between 2013 and 2025 were included in the final analysis. Anaesthesiological involvement was identifiable in <strong>23 of 24</strong>[reference:20].</li>
-    <li>Of 45 anaesthesiological umbrella terms, <strong>eight were consistent</strong> (&gt;80%), <strong>ten were mostly consistent</strong> (60–80%), <strong>sixteen were mixed</strong> (20–60%), and <strong>eleven were sparse</strong> (≤20%)[reference:21].</li>
-    <li>The mean AGREE II methodological quality score was <strong>76%</strong> — highest for scope/purpose and clarity of presentation, lowest for stakeholder involvement[reference:22].</li>
-    <li>The consistent domains — multimodal analgesia, fasting, thromboprophylaxis, antimicrobial prophylaxis, nutrition, temperature management, fluid management, and surgery-specific recommendations — define the <strong>transposable anaesthesiological core</strong>[reference:23].</li>
-    <li>Domains with high consistency but mixed recommendation strength — <strong>fluid management, preoperative carbohydrate administration, and preanaesthetic medication</strong> — warrant structured local appraisal rather than blind adoption[reference:24].</li>
+    <li><strong>24 guidelines</strong> published between 2013 and 2025 were included in the final analysis. Anaesthesiological involvement was identifiable in <strong>23 of 24</strong>.</li>
+    <li>Of 45 anaesthesiological umbrella terms, <strong>eight were consistent</strong> (&gt;80%), <strong>ten were mostly consistent</strong> (60–80%), <strong>sixteen were mixed</strong> (20–60%), and <strong>eleven were sparse</strong> (≤20%).</li>
+    <li>The mean AGREE II methodological quality score was <strong>76%</strong> — highest for scope/purpose and clarity of presentation, lowest for stakeholder involvement.</li>
+    <li>The consistent domains — multimodal analgesia, fasting, thromboprophylaxis, antimicrobial prophylaxis, nutrition, temperature management, fluid management, and surgery-specific recommendations — define the <strong>transposable anaesthesiological core</strong>.</li>
+    <li>Domains with high consistency but mixed recommendation strength — <strong>fluid management, preoperative carbohydrate administration, and preanaesthetic medication</strong> — warrant structured local appraisal rather than blind adoption.</li>
   </ul>
 
   <div class="callout">
@@ -729,18 +719,18 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   </div>
 
   <div class="source-note">
-    <strong>On this summary.</strong> Written independently for personal study and bedside reference from the published ERAS Society guidelines, the 2026 BJA systematic review (Bornemann-Cimenti et al.), the 2025 colorectal guideline (Gustafsson et al.), the 2025 cesarean update (Caughey et al.), the 2024/2025 cardiac consensus (Grant et al.), the 2026 gynecologic oncology update, and the 2025 ERATIC trauma guidelines. It reflects the structure and key recommendations of these documents in original language and is not a reproduction of the published text, tables, or algorithms. Always confirm exact wording, grading, and any subsequent corrections against the primary source and your institutional protocol before applying to a real patient.
+    <strong>On this summary.</strong> Written independently for personal study and bedside reference from the published ERAS Society guidelines, the 2026 BJA systematic review (Bornemann-Cimenti et al.), the 2025 colorectal guideline (Gustafsson et al.), the 2025 cesarean update (Caughey et al.), the 2024 cardiac consensus (Grant et al.), the 2026 gynecologic oncology update (Nelson et al.), and the 2025 ERATIC trauma guidelines (Hardcastle et al.). It reflects the structure and key recommendations of these documents in original language and is not a reproduction of the published text, tables, or algorithms. Always confirm exact wording, grading, and any subsequent corrections against the primary source and your institutional protocol before applying to a real patient.
   </div>
 
   <div class="refs">
     <h3>References</h3>
     <ol>
-      <li>Bornemann-Cimenti H, Furtmüller JM, Labenbacher S, et al. Beyond procedure-specific protocols: a systematic review identifying a universal anaesthesiological core across Enhanced Recovery After Surgery Society guidelines. <em>Br J Anaesth.</em> 2026. doi:10.1016/j.bja.2026.06.006.</li>
+      <li>Bornemann-Cimenti H, Furtmüller JM, Labenbacher S, et al. Beyond procedure-specific protocols: a systematic review identifying a universal anaesthesiological core across Enhanced Recovery After Surgery Society guidelines. <em>Br J Anaesth.</em> 2026;137(3). doi:10.1016/j.bja.2026.06.006.</li>
       <li>Gustafsson UO, Rockall TA, Wexner S, et al. Guidelines for perioperative care in elective colorectal surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations 2025. <em>Surgery.</em> 2025;184:109397. doi:10.1016/j.surg.2025.109397.</li>
-      <li>Caughey AB, Sultan P, Monks DT, et al. Guidelines for intraoperative care in cesarean delivery: Enhanced Recovery After Surgery Society recommendations (part 2)—2025 update. <em>Am J Obstet Gynecol.</em> 2025. doi:10.1016/j.ajog.2025.01.018.</li>
-      <li>Grant MC, Crisafi C, Alvarez A, et al. Perioperative care in cardiac surgery: a joint consensus statement by the Enhanced Recovery After Surgery (ERAS) Cardiac Society, ERAS International Society, and The Society of Thoracic Surgeons (STS). <em>JAMA Surg.</em> 2024;159(9):1055–1065. doi:10.1001/jamasurg.2024.2177.</li>
-      <li>Ruzycki SM, et al. Enhanced recovery after surgery (ERAS®) society guidelines for gynecologic oncology: 2026 update. <em>Int J Gynecol Cancer.</em> 2026. (Third updated guideline.)</li>
-      <li>Hardcastle TC, et al. Guidelines for Enhanced Recovery After Trauma and Intensive Care (ERATIC): Enhanced Recovery After Surgery (ERAS) Society and International Association of Trauma Surgery and Intensive Care (IATSIC) Recommendations: Paper 1: Initial Care—Pre and Intraoperative Care Until ICU. <em>World J Surg.</em> 2025;49(8):1997–2028. doi:10.1002/wjs.70002.</li>
+      <li>Caughey AB, Sultan P, Monks DT, et al. Guidelines for intraoperative care in cesarean delivery: Enhanced Recovery After Surgery Society recommendations (part 2)—2025 update. <em>Am J Obstet Gynecol.</em> 2025;233(6S). doi:10.1016/j.ajog.2025.02.040.</li>
+      <li>Grant MC, Crisafi C, Alvarez A, et al. Perioperative care in cardiac surgery: a joint consensus statement by the Enhanced Recovery After Surgery (ERAS) Cardiac Society, ERAS International Society, and The Society of Thoracic Surgeons (STS). <em>Ann Thorac Surg.</em> 2024;117(4):669-689. doi:10.1016/j.athoracsur.2023.12.006.</li>
+      <li>Nelson G, Altman AD, Metcalfe A, et al. Enhanced recovery after surgery (ERAS®) society guidelines for gynecologic oncology: 2026 update. <em>Gynecol Oncol.</em> 2026. (Third updated guideline.)</li>
+      <li>Hardcastle TC, et al. Guidelines for Enhanced Recovery After Trauma and Intensive Care (ERATIC): Enhanced Recovery After Surgery (ERAS) Society and International Association of Trauma Surgery and Intensive Care (IATSIC) Recommendations: Paper 1: Initial Care—Pre and Intraoperative Care Until ICU, Including Non-Operative Management. <em>World J Surg.</em> 2025;49(8):1997-2028. doi:10.1002/wjs.70002.</li>
       <li>ERAS® Society. Guidelines. <a href="https://erassociety.org/guidelines/list-of-guidelines/">erassociety.org/guidelines/</a>. Accessed Sept 2026.</li>
     </ol>
   </div>
