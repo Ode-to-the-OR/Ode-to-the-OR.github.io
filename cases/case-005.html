@@ -1,1 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 005 — Chasing the Flow: Femoral-to-Popliteal Bypass and a Second Chance Taken in Time | Ode to the OR</title>
+<meta name="description" content="A 51-year-old female, six months post fem-fem bypass for iatrogenic femoral artery dissection, returns with acute-on-chronic limb ischemia and diffuse SFA-to-popliteal occlusion. Emergency femoral-to-popliteal bypass, intraoperative hypertensive crisis, GDT-guided resuscitation, cardiac arrest in the ICU, and a redo thrombectomy caught and acted upon in time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --moss:    #4a5a3a;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top: 90px;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
 
+/* NAV */
+nav{
+position:fixed;top:0;left:0;right:0;z-index:600;
+height:66px;padding:0 5vw;
+display:flex;align-items:center;justify-content:space-between;
+background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:800px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,5vw,3.5rem);font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tt{border-color:var(--teal);color:var(--teal);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.tm{border-color:var(--moss);color:var(--moss);}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Patient at a glance */
+.patient-glance{background:var(--surface);border:1px solid var(--border);padding:1.6rem 1.8rem;margin:1.5rem 0;}
+.patient-glance h3{margin-top:0;font-size:1.05rem;color:var(--rust);}
+.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 2rem;font-size:.84rem;margin-top:1rem;}
+.pg-grid .k{color:var(--faint);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem;}
+.pg-grid .v{color:var(--text);font-weight:500;}
+
+/* Timeline */
+.timeline{margin:1.5rem 0;border-left:2px solid var(--border);padding-left:1.4rem;}
+.tl-item{position:relative;padding-bottom:1.5rem;}
+.tl-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--rust);border:2px solid var(--night);}
+.tl-date{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;}
+.tl-body{font-size:.88rem;color:var(--muted);}
+
+/* Vitals box */
+.vitals-box{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:1.5rem 0;}
+.vitals-box h3{margin-top:0;}
+.vitals-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.5rem;font-size:.84rem;}
+.vitals-grid .k{color:var(--faint);}
+.vitals-grid .v{color:var(--text);font-weight:500;}
+
+/* Pearl box */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+/* Alert box */
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Drug/dose box */
+.dose-box{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin:1.5rem 0;}
+.dose-box h3{margin-top:0;color:var(--teal);font-size:1.05rem;}
+.dose-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+@media(max-width:700px){.dose-grid{grid-template-columns:1fr;}}
+.dose-item{background:var(--night);border:1px solid var(--border);padding:.9rem 1.1rem;}
+.dose-item .name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.3rem;}
+.dose-item .calc{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.dose-item .calc strong{color:var(--text);}
+
+/* Complications grid */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1.5rem 0;}
+.comp-cell{background:var(--deep);padding:1.3rem 1.4rem;}
+.comp-cell h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:.5rem;}
+.comp-cell p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.65;}
+@media(max-width:700px){.comp-grid{grid-template-columns:1fr;}}
+
+/* Guidelines box */
+.guideline-box{background:var(--night);border:2px solid var(--border);padding:1.6rem 1.8rem;margin:1.6rem 0;position:relative;}
+.guideline-box::before{content:"GUIDELINES & PROTOCOLS";position:absolute;top:-.65rem;left:1.5rem;background:var(--night);padding:0 .6rem;font-size:.58rem;letter-spacing:.18em;color:var(--faint);}
+.guideline-box h3{margin-top:.3rem;font-size:1.1rem;color:var(--teal);}
+.guideline-box ul{margin-bottom:0;}
+.guideline-box li{font-size:.86rem;margin-bottom:.45rem;}
+
+/* Imaging box */
+.cxr-box{background:var(--surface);border:1px solid var(--border);overflow:hidden;margin:1.5rem 0;}
+.cxr-frame{background:#1a1a1a;aspect-ratio:16/10;position:relative;display:flex;align-items:center;justify-content:center;}
+.cxr-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.cxr-caption{padding:.9rem 1.1rem;}
+.cxr-caption .title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;}
+.cxr-caption .desc{font-size:.8rem;color:var(--muted);line-height:1.55;}
+
+/* POCUS / haemodynamic panel */
+.pocus-panel{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem 1.1rem;margin:1.8rem 0;}
+.pocus-title{display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:1rem;}
+.pocus-caption{font-size:.78rem;color:var(--muted);line-height:1.6;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.45rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+.scroll-to-clip{text-align:center;margin:1.6rem 0;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;}
+.scroll-to-clip a{color:var(--sage);text-decoration:none;border-bottom:1px solid var(--sage);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.scroll-to-clip a:hover{color:var(--rust);border-color:var(--rust);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.tl-item, .pearl-box, .alert-box, .comp-cell{animation:fadeUp .6s both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="index.html#explore">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="cases.html" class="back-link">← Back to all cases</a>
+
+<div class="wrap">
+
+  <div class="ey">Case 005 · Vascular Surgery · Redo Bypass · Critical Care</div>
+  <h1>Chasing the Flow: <em>Femoral-to-Popliteal Bypass and a Second Chance Taken in Time</em></h1>
+  <p class="subtitle">Acute-on-chronic ischemia, a diffusely occluded outflow, a cardiac arrest in the ICU — and a limb saved because the team caught the signs and acted before it was too late.</p>
+
+  <div class="meta-row">
+    <a href="cases.html?topic=vascular#cases" class="tag ta" data-topic="Vascular">Vascular Surgery</a>
+    <a href="cases.html?topic=icu#cases" class="tag tc" data-topic="ICU">Critical Care</a>
+    <a href="cases.html?topic=hemodynamics#cases" class="tag tk" data-topic="Hemodynamics">Hemodynamics</a>
+    <a href="cases.html?topic=gdt#cases" class="tag tt" data-topic="GDT">Goal-Directed Therapy</a>
+    <a href="cases.html?topic=cardiacarrest#cases" class="tag ti" data-topic="Cardiac Arrest">Cardiac Arrest</a>
+    <a href="cases.html?topic=redosurgery#cases" class="tag tm" data-topic="Redo Surgery">Redo Surgery</a>
+  </div>
+
+  <p>A 51-year-old woman with a background of resected pulmonary carcinoid presented with acute-on-chronic ischemia of the left lower limb, six months after a femoro-femoral crossover bypass performed to salvage an iatrogenic femoral artery injury. What followed was a graft thrombectomy complicated by severe intraoperative hypertension, a distal bypass extension when the native artery proved unsalvageable, a cardiac arrest on the ward the following day, and a second emergency thrombectomy carried out inside the narrow window that separates a viable limb from an amputated one. She walked out of the hospital a week later.</p>
+
+  <p class="scroll-to-clip">↓ Scroll down for imaging, or <a href="#cta-section">click here for the CT angiogram</a> and <a href="#intraop-section">the intraoperative photograph</a></p>
+
+  <div class="divider"></div>
+
+  <h2>Background: How the Patient Got Here</h2>
+  <p>Six months earlier, this patient had undergone a left lobectomy for a pulmonary carcinoid tumour. During that surgery, an arterial line placed in the left common femoral artery resulted in arterial dissection, producing acute limb-threatening ischemia intraoperatively. A <strong>femoro-femoral (fem-fem) crossover bypass</strong> was performed at the time to restore perfusion from the contralateral right femoral system. Distal pulses were confirmed present postoperatively, and she was discharged in stable condition.</p>
+
+  <p>Roughly a month before this presentation, she developed left lower limb pain that she and her family attributed to claudication — exertional at first, then present at rest, then progressively worsening over the 2–3 days preceding admission. CT angiography showed a patent proximal fem-fem graft with an abrupt cutoff of contrast at the level of the left superficial femoral artery (SFA), with no runoff visualised distally. The working diagnosis was <strong>acute-on-chronic thrombosis at the graft–SFA anastomosis</strong>.</p>
+
+  <div class="patient-glance">
+    <h3>Patient at a glance</h3>
+    <div class="pg-grid">
+      <div><span class="k">Age / Sex</span><span class="v">51 years / Female</span></div>
+      <div><span class="k">Weight</span><span class="v">57 kg</span></div>
+      <div><span class="k">Relevant history</span><span class="v">Pulmonary carcinoid tumour, left lobectomy (6 months prior)</span></div>
+      <div><span class="k">Prior vascular event</span><span class="v">Iatrogenic left femoral artery dissection during lobectomy → fem-fem crossover bypass</span></div>
+      <div><span class="k">Presenting complaint</span><span class="v">Left lower limb pain, ~1 month, acutely worsening over 2–3 days</span></div>
+      <div><span class="k">Imaging</span><span class="v">CT angiogram: contrast cutoff beyond the SFA on the left; graft-anastomotic thrombus suspected</span></div>
+      <div><span class="k">Diagnosis</span><span class="v">Acute-on-chronic left lower limb ischemia, graft-anastomotic thrombosis</span></div>
+      <div><span class="k">Coagulation profile</span><span class="v">Deranged at presentation</span></div>
+      <div><span class="k">Anticoagulation on admission</span><span class="v">Therapeutic heparin infusion, ongoing pre-operatively</span></div>
+      <div><span class="k">Plan</span><span class="v">Emergency graft thrombectomy ± redo bypass</span></div>
+    </div>
+  </div>
+
+  <div id="cta-section" style="scroll-margin-top:90px;"></div>
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1.2rem;">CT angiogram imaging is included below to illustrate the abrupt contrast cutoff that shaped the diagnosis and operative plan.</p>
+
+  <div class="cxr-box">
+    <div class="cxr-frame">
+      <img src="media/Case005_CTA_Preop.jpg" alt="Case005 Preoperative CT Angiogram" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'color:rgba(245,240,232,.5);font-size:.8rem;\'>Image: media/Case005_CTA_Preop.jpg</div>';">
+    </div>
+    <div class="cxr-caption">
+      <div class="title">📷 Preoperative CT Angiogram</div>
+      <div class="desc">Patent fem-fem crossover graft with abrupt loss of contrast column at the level of the left SFA. No distal runoff is visualised beyond this point, consistent with graft-anastomotic thrombosis superimposed on chronic occlusive disease.</div>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <h3>Is this really an emergency?</h3>
+    <p>Yes. Acute limb ischemia superimposed on a chronically diseased or bypassed segment is a <strong>time-critical surgical emergency</strong>. The Rutherford classification governs urgency: a viable or marginally threatened limb (Rutherford I–IIa) allows time for imaging and optimisation, while an immediately threatened limb (Rutherford IIb) — with rest pain, sensory loss, or new motor weakness — requires revascularisation within hours to avoid irreversible muscle and nerve necrosis. Progressive rest pain over 2–3 days in a graft with no distal runoff on angiography places this squarely in the category that cannot wait for elective correction of the coagulopathy; anticoagulation and correction had to proceed in parallel with, not instead of, surgery.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div id="timeline-section" style="scroll-margin-top:90px;"></div>
+  <h2>The Anaesthetic Course</h2>
+
+  <h3>Induction and access</h3>
+  <p>General anaesthesia was planned given the anticipated duration, the need for muscle relaxation during graft handling, and the haemodynamic instability expected during clamp release and reperfusion. An arterial line was sited in the upper limb before induction. A central venous catheter was placed in the right internal jugular vein after induction for vasoactive drug delivery and central venous pressure monitoring.</p>
+
+  <div class="alert-box">
+    <h3>Baseline BP of 200/120 mmHg on entering the OR — what does this mean, and was NTG appropriate?</h3>
+    <p>This reading was taken after the patient was moved onto the OR table, before induction — not a post-intubation pressor response. In a patient with critical limb ischemia, severe rest pain is itself a potent sympathetic stimulus, and untreated pain-driven hypertension of this magnitude before induction is a recognised and expected finding, not a false alarm to be dismissed. A short-acting titratable vasodilator such as <strong>glyceryl trinitrate (GTN/NTG)</strong> is a reasonable first-line choice here: it is easily titrated, has a rapid offset if hypotension develops, provides venodilation that can be favourable if there is any element of volume overload, and does not blunt the heart rate response needed to detect subsequent hypovolaemia or bleeding. The alternative reasoning is equally valid — an unrepaired ischaemic limb with occluded outflow does not benefit from arteriolar vasodilation from a perfusion standpoint (there is nowhere for the flow to go until the graft is fixed), so some clinicians would prioritise adequate analgesia and depth of anaesthesia first, reserving vasodilators for pressures that remain dangerously high despite this. Given that NTG was used only in the first hour and titrated off as the case progressed toward hypotension, it was used appropriately as a short bridge rather than a sustained strategy.</p>
+  </div>
+
+  <h3>Intraoperative haemodynamics: a full swing from hypertension to shock</h3>
+  <p>The case illustrates a haemodynamic arc familiar to anyone who has anaesthetised a patient for emergency revascularisation: severe hypertension at the outset from pain and sympathetic activation, followed by a swing toward hypotension as anaesthesia deepened, fluid shifts occurred, and — critically — as the ischaemic, acidotic, hyperkalaemic limb was reperfused.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">On arrival in OR</div>
+      <div class="tl-body">BP 200/120 mmHg, HR 110 bpm, prior to induction. Attributed to ischaemic pain and sympathetic surge. GTN infusion commenced for the first hour of surgery, titrated to effect.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Early intraoperative</div>
+      <div class="tl-body">Antibiotic prophylaxis given. Multimodal analgesia maintained throughout the case, with intraoperative opioids as the primary analgesic component and paracetamol used as an opioid-sparing adjunct. Serial arterial blood gases sent throughout the case to track acid-base status, potassium, ionised calcium, and lactate. Systemic heparinisation given in two divided doses, guided by activated clotting time (ACT) rather than a fixed schedule.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Mid-case through late intraoperative</div>
+      <div class="tl-body">After the GTN infusion was weaned, blood pressure remained labile and then trended downward as anaesthesia deepened, blood loss continued, and clamp/reperfusion physiology began to dominate. Hypotension during this middle portion of the case was managed with fluid optimisation, adjustment of anaesthetic depth, and correction of acid–base and electrolyte derangements rather than with a vasoactive infusion. Noradrenaline was started only in the final approximately 1.5 hours of surgery, once hypotension persisted despite these measures, and was titrated to a mean arterial pressure target.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Reperfusion</div>
+      <div class="tl-body">Serial ABGs guided correction of metabolic acidosis (sodium bicarbonate), hyperkalaemia (calcium, insulin-dextrose as required), and ionised hypocalcaemia (calcium chloride/gluconate) — the expected biochemical signature of reperfusing an ischaemic limb.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Throughout</div>
+      <div class="tl-body">Goal-directed fluid therapy using stroke volume variation (SVV) and pulse pressure variation (PPV) guided volume replacement. Five units of Plasma-Lyte, packed red cells, and fresh frozen plasma were given to address ongoing losses and the deranged coagulation profile. Urine output was maintained at approximately 1600 mL over the case, reflecting adequate renal perfusion pressure and volume status.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Closure</div>
+      <div class="tl-body">Protamine given to reverse residual heparin effect after the vascular repair was secured. Patient kept intubated and ventilated, transferred to ICU on a low-dose noradrenaline infusion for ongoing haemodynamic support and monitoring.</div>
+    </div>
+  </div>
+
+  <div class="pocus-panel">
+    <div class="pocus-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);">
+        <path d="M3 12h4l3 8 4-16 3 8h4"/>
+      </svg>
+      The Haemodynamic Arc of the Case
+    </div>
+    <svg viewBox="0 0 700 260" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+      <!-- axes -->
+      <line x1="60" y1="20" x2="60" y2="210" stroke="#d0c8b8" stroke-width="1.5"/>
+      <line x1="60" y1="210" x2="670" y2="210" stroke="#d0c8b8" stroke-width="1.5"/>
+      <text x="30" y="30" font-size="10" fill="#a89880" font-family="Instrument Sans,sans-serif">High</text>
+      <text x="30" y="205" font-size="10" fill="#a89880" font-family="Instrument Sans,sans-serif">Low</text>
+      <text x="365" y="240" font-size="10" text-anchor="middle" fill="#a89880" font-family="Instrument Sans,sans-serif" letter-spacing="1">TIME →</text>
+
+      <!-- MAP-like curve: starts high (hypertension), dips (hypotension/reperfusion), stabilises -->
+      <path d="M60,60 C 120,40 160,50 200,70 C 260,100 300,150 340,175 C 380,195 430,190 480,175 C 540,158 600,150 660,148"
+            fill="none" stroke="#7a2020" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- phase markers -->
+      <circle cx="90" cy="55" r="5" fill="#7a2020"/>
+      <circle cx="330" cy="172" r="5" fill="#2a5a52"/>
+      <circle cx="480" cy="175" r="5" fill="#9a6c1a"/>
+      <circle cx="640" cy="149" r="5" fill="#4a5a3a"/>
+
+      <!-- phase labels -->
+      <text x="90" y="35" font-size="10" text-anchor="middle" fill="#7a2020" font-family="Instrument Sans,sans-serif" font-weight="600">Arrival: 200/120</text>
+      <text x="90" y="47" font-size="9" text-anchor="middle" fill="#7a6455" font-family="Instrument Sans,sans-serif">pain / sympathetic surge</text>
+
+      <text x="330" y="200" font-size="10" text-anchor="middle" fill="#2a5a52" font-family="Instrument Sans,sans-serif" font-weight="600">Reperfusion dip</text>
+      <text x="330" y="212" font-size="9" text-anchor="middle" fill="#7a6455" font-family="Instrument Sans,sans-serif">vasoplegia + acidosis</text>
+
+      <text x="480" y="200" font-size="10" text-anchor="middle" fill="#9a6c1a" font-family="Instrument Sans,sans-serif" font-weight="600">Norad started</text>
+      <text x="480" y="212" font-size="9" text-anchor="middle" fill="#7a6455" font-family="Instrument Sans,sans-serif">titrated to MAP target</text>
+
+      <text x="640" y="130" font-size="10" text-anchor="middle" fill="#4a5a3a" font-family="Instrument Sans,sans-serif" font-weight="600">Stable at closure</text>
+      <text x="640" y="142" font-size="9" text-anchor="middle" fill="#7a6455" font-family="Instrument Sans,sans-serif">low-dose norad, ICU-bound</text>
+
+      <!-- GTN bracket -->
+      <line x1="65" y1="230" x2="205" y2="230" stroke="#8b3a2a" stroke-width="2"/>
+      <text x="135" y="245" font-size="9" text-anchor="middle" fill="#8b3a2a" font-family="Instrument Sans,sans-serif">GTN infusion (~1st hour)</text>
+
+      <!-- Norad bracket -->
+      <line x1="335" y1="230" x2="665" y2="230" stroke="#4a5a3a" stroke-width="2"/>
+      <text x="500" y="245" font-size="9" text-anchor="middle" fill="#4a5a3a" font-family="Instrument Sans,sans-serif">Noradrenaline infusion → continued into ICU</text>
+    </svg>
+    <p class="pocus-caption" style="margin-top:.8rem;">A schematic representation of the pressure trend, not a plotted vital-signs chart: severe hypertension on arrival, treated with GTN; a reversal into hypotension as anaesthesia deepened and the ischaemic limb was reperfused; noradrenaline started and titrated; relative stability by closure, carried into the ICU on a low-dose infusion.</p>
+  </div>
+
+  <div class="dose-box">
+    <h3>The numbers behind the drugs</h3>
+    <div class="dose-grid">
+      <div class="dose-item">
+        <div class="name">Heparin — Intraoperative Systemic Anticoagulation</div>
+        <div class="calc">For open arterial thrombectomy/bypass, a weight-based bolus of <strong>70–100 units/kg</strong> is standard before clamping (roughly 4,000–5,700 units for this 57 kg patient), titrated to a target <strong>ACT of 200–300 seconds</strong>, with supplemental boluses guided by repeat ACT rather than fixed timing — consistent with the two intraoperative doses given here.</div>
+      </div>
+      <div class="dose-item">
+        <div class="name">Noradrenaline — ICU Infusion</div>
+        <div class="calc">Prepared as <strong>8 mg in 50 mL</strong> (160 mcg/mL). At an infusion rate of <strong>2 mL/hr</strong> in a 57 kg patient, this delivers approximately <strong>0.09 mcg/kg/min</strong> — a low-to-moderate, appropriately titrated dose for post-reperfusion vasoplegia and supporting perfusion pressure to the fresh graft.</div>
+      </div>
+      <div class="dose-item">
+        <div class="name">Goal-Directed Fluid Therapy</div>
+        <div class="calc">Dynamic indices — <strong>stroke volume variation (SVV)</strong> and <strong>pulse pressure variation (PPV)</strong> — were used to guide fluid administration rather than static pressures alone, appropriate in a mechanically ventilated patient with an arterial line already in place and large expected fluid shifts from bleeding, third-spacing, and reperfusion.</div>
+      </div>
+      <div class="dose-item">
+        <div class="name">Protamine</div>
+        <div class="calc">Given at case closure to reverse circulating heparin once the anastomosis was secure, reducing the bleeding risk from residual anticoagulation before transfer — standard practice after therapeutic intraoperative heparinisation for vascular procedures.</div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <h2>The Surgical Findings</h2>
+  <p>On opening, a thrombosed anastomosis was confirmed at the graft–SFA junction. Graft thrombectomy was performed and flow checked. A <strong>Fogarty balloon catheter</strong> was passed to clear thrombus from the outflow tract, but could not be advanced through the SFA — a finding that changed the operative plan. Extending the dissection revealed the underlying problem: the native SFA itself was chronically diseased, with extensive atherosclerotic plaque, and could not serve as a reliable outflow target.</p>
+
+  <p>The popliteal artery was exposed, but complete occlusion was found extending from the SFA through to the distal popliteal/tibioperoneal trunk. With no usable outflow above this point, the surgical team performed a <strong>femoral-to-popliteal (distal) bypass</strong>, bypassing the diseased SFA segment entirely and re-establishing flow into the popliteal artery. Distal pulses were confirmed present by handheld Doppler at the end of the procedure, with good triphasic/biphasic signals.</p>
+
+  <div id="intraop-section" style="scroll-margin-top:90px;"></div>
+  <div class="cxr-box">
+    <div class="cxr-frame">
+      <img src="media/Case005_Intraop_Graft.jpg" alt="Case005 Intraoperative Graft Photograph" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'color:rgba(245,240,232,.5);font-size:.8rem;\'>Image: media/Case005_Intraop_Graft.jpg</div>';">
+    </div>
+    <div class="cxr-caption">
+      <div class="title">📷 Intraoperative Graft Picture</div>
+      <div class="desc">The completed distal femoral-to-popliteal anastomosis, photographed at the end of the procedure prior to closure — the new bypass conduit re-establishing flow into the popliteal artery beyond the diseased, occluded SFA segment.</div>
+    </div>
+  </div>
+
+  <div class="pearl-box">
+    <h3>Why the Fogarty catheter failing to pass matters</h3>
+    <p>A thrombectomy catheter that cannot traverse a segment is not simply "stuck" — it is telling you the outflow vessel itself is diseased, not just occluded by a fresh, removable clot. Acute-on-chronic ischemia implies exactly this: a fresh thrombus superimposed on a chronically narrowed or plaque-laden artery. When mechanical thrombectomy fails to restore a patent conduit, the correct response is not repeated attempts at the same level — it is to extend the dissection, find a healthier outflow vessel, and construct a new bypass to it. That is precisely what happened here.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>ICU Course: Extubation, Then a Cardiac Arrest</h2>
+  <p>The patient remained intubated and ventilated overnight on a titrated noradrenaline infusion. The following day she was extubated, awake, and obeying commands. By evening, however, her condition deteriorated: she developed <strong>ventricular tachycardia</strong>, was reintubated, and underwent cardiopulmonary resuscitation for two cycles before return of spontaneous circulation (ROSC) was achieved.</p>
+
+  <p>Standard post-arrest ICU care followed — antiarrhythmic therapy, serial arterial blood gas correction, antibiotic cover, volume optimisation, glycaemic control, and hourly urine output monitoring. The following day, the patient required a further three cycles of CPR. A multidisciplinary team was convened, including neurology; NCCT and HRCT imaging were obtained, and the neurology assessment was consistent with an acute ischaemic stroke.</p>
+
+  <div class="alert-box">
+    <h3>The second crisis: the limb was failing too</h3>
+    <p>While the cardiac and neurological picture was being managed, handheld Doppler examination of the left lower limb revealed <strong>poor distal signals</strong> below the SFA, and skin colour change consistent with critical hypoperfusion had already begun — raising concern for myonecrosis if flow was not restored urgently. This occurred in a patient already dependent on inotropic and vasopressor support, freshly post-cardiac arrest, with an uncertain neurological outcome. The decision to return to the operating theatre for a redo thrombectomy under these circumstances was a genuinely difficult one, weighing global physiological instability against an unambiguous, time-limited threat to limb viability.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>The Redo Thrombectomy: A Second Chance, Taken in Time</h2>
+
+  <div class="guideline-box" style="border-color:var(--rust);">
+    <h3 style="color:var(--rust);">The Decision, Mapped Out</h3>
+
+    <div style="background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;margin-top:1rem;">
+      <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.5rem;">Arguing for delay</div>
+      <ul style="margin:0;padding-left:1.1rem;font-size:.82rem;">
+        <li>Patient just post-cardiac arrest, ROSC achieved after 2 cycles of CPR</li>
+        <li>Ongoing inotrope/vasopressor requirement</li>
+        <li>Neurological status uncertain, stroke suspected</li>
+        <li>General anaesthesia itself carries risk in this state</li>
+      </ul>
+    </div>
+
+    <div style="text-align:center;margin:.9rem 0;">
+      <span style="font-size:1.2rem;color:var(--faint);">↓</span>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;">
+      <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.5rem;">Arguing for immediate surgery</div>
+      <ul style="margin:0;padding-left:1.1rem;font-size:.82rem;">
+        <li>Poor Doppler signals distal to the SFA — flow is failing now</li>
+        <li>Skin colour change already present — a late, not early, sign</li>
+        <li>Warm ischaemia time is fixed and unforgiving (~4–6 hrs to myonecrosis)</li>
+        <li>A graft that thrombosed once is unlikely to spontaneously improve</li>
+      </ul>
+    </div>
+
+    <div style="text-align:center;margin:.9rem 0 .3rem;">
+      <span style="font-size:1.2rem;color:var(--faint);">↓</span>
+    </div>
+
+    <div style="background:var(--card);border-left:3px solid var(--gold);padding:1rem 1.3rem;font-size:.86rem;color:var(--text);">
+      <strong>Decision:</strong> the limb's ischaemic clock does not pause for the patient's other physiology to improve. The multidisciplinary team proceeded to theatre for redo thrombectomy while continuing full cardiovascular and neurological support in parallel — treating this as two urgent problems managed simultaneously, not sequentially.
+    </div>
+  </div>
+
+  <p>The multidisciplinary team elected to proceed with an emergency redo thrombectomy at the graft site, recognising that the limb remained salvageable and that prompt action offered the best chance of a good outcome despite the patient's critical overall condition. Thrombectomy was performed, and post-procedure Doppler confirmed restored distal signals with palpable pulses — the limb had been salvaged.</p>
+
+  <div class="pearl-box">
+    <h3>What "the window" actually means</h3>
+    <p>Skeletal muscle tolerates warm ischemia poorly — irreversible myonecrosis begins within approximately 4 to 6 hours of complete arterial occlusion, with nerve tissue affected even earlier. Once skin colour change and Doppler signal loss are present, the clock is not theoretical; it is actively running. The decision to operate on a patient who has just survived a cardiac arrest and remains on vasopressor support is never taken lightly, but a limb lost to delayed revascularisation cannot be recovered by later stabilising the rest of the physiology. This is the central tension of vascular emergencies in critically ill patients: the surgical indication does not wait for the patient to become a better anaesthetic candidate.</p>
+  </div>
+
+  <p>Following the successful redo thrombectomy, the patient's condition gradually stabilised. She was weaned from inotropic and vasopressor support, extubated, and transferred out of the ICU to the ward within three days — without cardiovascular or respiratory support. She was discharged home walking approximately one week after the redo procedure.</p>
+
+  <div class="vitals-box" style="background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);">
+    <h3 style="color:var(--moss);">The Recovery, at a Glance</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;text-align:center;">
+      <div style="flex:1;min-width:110px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--rust);">Day 0–1</div>
+        <div style="font-size:.72rem;color:var(--muted);">VT → arrest → ROSC → 2nd arrest, 3 cycles CPR</div>
+      </div>
+      <div style="color:var(--faint);font-size:1.2rem;">→</div>
+      <div style="flex:1;min-width:110px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold);">Redo OR</div>
+        <div style="font-size:.72rem;color:var(--muted);">Emergency thrombectomy, signals restored</div>
+      </div>
+      <div style="color:var(--faint);font-size:1.2rem;">→</div>
+      <div style="flex:1;min-width:110px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--teal);">Day 3</div>
+        <div style="font-size:.72rem;color:var(--muted);">Off all support, ICU → ward</div>
+      </div>
+      <div style="color:var(--faint);font-size:1.2rem;">→</div>
+      <div style="flex:1;min-width:110px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--moss);">Day ~10</div>
+        <div style="font-size:.72rem;color:var(--muted);">Discharged home, walking</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Complications Relevant to This Case</h2>
+
+  <div class="comp-grid">
+    <div class="comp-cell">
+      <h4>Reperfusion Syndrome</h4>
+      <p>Restoring flow to a chronically and then acutely ischaemic limb releases potassium, hydrogen ions, myoglobin, and lactate into the systemic circulation, producing hyperkalaemia, metabolic acidosis, and hypotension — precisely the pattern seen intraoperatively here, and the reason serial ABGs are non-negotiable during clamp release.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Rhabdomyolysis / Myonecrosis</h4>
+      <p>Prolonged ischaemia causes muscle cell breakdown with myoglobin release, risking acute kidney injury. Adequate urine output (as maintained here, ~1600 mL intraoperatively) and volume repletion are protective; the skin colour change and poor Doppler signals noted later were warning signs of this process recurring.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Compartment Syndrome</h4>
+      <p>Reperfusion of an ischaemic limb causes tissue oedema within a fixed fascial compartment, which can itself compromise perfusion. Fasciotomy should be considered proactively in prolonged ischemia, especially after a redo procedure with a second ischaemic insult.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Graft Rethrombosis</h4>
+      <p>A graft that has already thrombosed once, in the setting of a chronically diseased native artery, remains at elevated risk of repeat thrombosis — which is exactly what necessitated the second operation. Ongoing anticoagulation and close monitoring of distal perfusion are essential after any thrombectomy.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Perioperative Cardiac Arrest</h4>
+      <p>The combination of severe haemodynamic swings, reperfusion-related electrolyte derangement, and a critically ill vascular patient created substantial arrhythmic risk. The ventricular tachycardia and subsequent arrests underline the need for continuous rhythm monitoring well beyond the immediate postoperative period.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Ischemic Stroke</h4>
+      <p>Cardiac arrest with variable periods of low or absent cerebral perfusion carries a substantial risk of hypoxic-ischaemic brain injury or embolic stroke, as borne out by the neurology findings here. Early imaging and neurology involvement, as occurred, are essential to guide prognosis and ongoing care.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Guidelines, Protocols, and the Evidence Base</h2>
+
+  <div class="guideline-box">
+    <h3>Key frameworks</h3>
+    <ul>
+      <li><strong>Rutherford Classification for Acute Limb Ischemia:</strong> Stratifies urgency by viability (I: viable, IIa: marginally threatened, IIb: immediately threatened, III: irreversible), directly guiding the timeline for revascularisation in this case.</li>
+      <li><strong>ESVS Clinical Practice Guidelines on Acute Limb Ischaemia (2020):</strong> Recommend immediate systemic anticoagulation on diagnosis, with revascularisation timing determined by the severity of threat rather than deferred for full correction of coagulopathy.</li>
+      <li><strong>ACC/AHA Perioperative Guidelines:</strong> Support arterial line and central venous access for cases with anticipated major haemodynamic swings and vasoactive drug requirements, as employed here.</li>
+      <li><strong>Surviving Sepsis/Critical Care GDT principles (applied to vascular reperfusion):</strong> Dynamic indices (SVV/PPV) are preferred over static filling pressures for fluid responsiveness assessment in mechanically ventilated patients without arrhythmia — appropriate for this case's monitoring strategy.</li>
+      <li><strong>ILCOR/AHA Advanced Cardiac Life Support:</strong> Governed the resuscitation following ventricular tachycardia and cardiac arrest, including the multiple CPR cycles and post-ROSC bundle of care described.</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What I Keep Coming Back To</h2>
+  <p>This case is really two emergencies stacked on top of each other, separated by less than 48 hours. The first — a thrombosed graft with no usable outflow — was solved by a surgical team willing to extend the dissection and change the plan mid-operation rather than force a failing strategy. The second — a critically unstable, freshly resuscitated patient with a dying limb — was solved by a multidisciplinary team willing to accept the risk of returning to theatre because the alternative, delay, was not actually safer. It only felt safer.</p>
+
+  <p>From an anaesthetic standpoint, the through-line is vigilance across a shifting haemodynamic terrain: severe hypertension from pain, a swing into vasoplegic hypotension from anaesthesia and reperfusion, an electrolyte storm that had to be corrected in real time, and enough foresight to secure invasive monitoring before any of it happened. None of the individual interventions here were exotic. What mattered was doing the ordinary things — serial gases, dynamic fluid indices, weight-based anticoagulation, appropriately titrated vasopressor support — without delay, and being willing to go back into the operating room when the data on the skin and the Doppler probe said the window was still open.</p>
+
+  <div class="quote-box">
+    The surgical indication does not wait for the patient to become a better anaesthetic candidate. Sometimes the safest thing you can do is go back to theatre.
+    <span class="src">— What this case taught me</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox">
+    <h3>References</h3>
+    <ol>
+      <li>Björck M, Earnshaw JJ, Acosta S, et al. Editor's Choice – European Society for Vascular Surgery (ESVS) 2020 Clinical Practice Guidelines on the Management of Acute Limb Ischaemia. <em>Eur J Vasc Endovasc Surg.</em> 2020;59(2):173–218.</li>
+      <li>Rutherford RB, Baker JD, Ernst C, et al. Recommended standards for reports dealing with lower extremity ischemia: revised version. <em>J Vasc Surg.</em> 1997;26(3):517–538.</li>
+      <li>Blaisdell FW. The pathophysiology of skeletal muscle ischemia and the reperfusion syndrome: a review. <em>Cardiovasc Surg.</em> 2002;10(6):620–630.</li>
+      <li>Hirsh J, Bauer KA, Donati MB, et al. Parenteral anticoagulants: American College of Chest Physicians evidence-based clinical practice guidelines. <em>Chest.</em> 2008;133(6 Suppl):141S–159S.</li>
+      <li>Panchal AR, Bartos JA, Cabañas JG, et al. Part 3: Adult Basic and Advanced Life Support: 2020 American Heart Association Guidelines for CPR and ECC. <em>Circulation.</em> 2020;142(16_suppl_2):S366–S468.</li>
+      <li>Cannesson M, Pestel G, Ricks C, et al. Hemodynamic monitoring and management in patients undergoing high risk surgery: a survey among North American and European anesthesiologists. <em>Crit Care.</em> 2011;15(4):R197.</li>
+      <li>Creager MA, Kaufman JA, Conte MS. Acute limb ischemia. <em>N Engl J Med.</em> 2012;366(23):2198–2206.</li>
+      <li>Nolan JP, Sandroni C, Böttiger BW, et al. European Resuscitation Council and European Society of Intensive Care Medicine Guidelines 2021: Post-resuscitation care. <em>Resuscitation.</em> 2021;161:220–269.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>September 2026</span>
+    <span>Vascular Surgery · Redo Bypass · ICU · Hemodynamics · Cardiac Arrest</span>
+  </div>
+
+  <p class="disclaim">This case has been fully de-identified. No institutional or departmental identifiers are included. Patient age, procedural details, drug doses, and timeline elements have been generalised where necessary to protect confidentiality, consistent with HIPAA principles, India's Digital Personal Data Protection (DPDP) Act 2023, and NMC ethical guidelines. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. This content is for educational reflection only and does not represent the views of any institution, employer, or training program, and is not a substitute for independent clinical judgment.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
