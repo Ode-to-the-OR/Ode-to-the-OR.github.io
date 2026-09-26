@@ -1,1 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnesium Sulfate — Drug Deep Dive | Ode to the OR</title>
+<meta name="description" content="A deep dive into magnesium sulfate — mechanism, pharmacokinetics, clinical uses across obstetric, cardiac, and anaesthetic practice, dosing, and the honest bedside reality of an old drug with a wide reach.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --plum:    #7a5abf;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
 
+/* NAV */
+nav{
+position:fixed;top:0;left:0;right:0;z-index:600;
+height:66px;padding:0 5vw;
+display:flex;align-items:center;justify-content:space-between;
+background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.tt{border-color:var(--teal);color:var(--teal);}
+
+/* Quick facts strip */
+.quickfacts{
+display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
+border:1px solid var(--border);margin:2.2rem 0 2.8rem;
+}
+@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
+.qf{background:var(--surface);padding:1.1rem 1.2rem;}
+.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
+.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Table of contents */
+.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
+.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
+@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
+.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
+.toc a:hover{color:var(--rust);}
+.toc a::before{content:'\2014';color:var(--faint);font-size:.75rem;}
+
+/* Mechanism panel */
+.mech-panel{
+background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
+.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+
+/* Receptor comparison bars */
+.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
+.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
+.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
+.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
+.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
+
+/* Dosing table */
+.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.dose-table tr:hover td{background:var(--deep);}
+.dose-table td strong{color:var(--text);}
+
+/* Pearl / alert / caution boxes */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.caution-box p:last-child{margin-bottom:0;}
+
+.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
+.honest-box p:last-child{margin-bottom:0;}
+
+/* Comparison grid for clinical uses */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
+.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../drug-deep-dives.html" class="back-link">&larr; Back to Drug Deep Dives</a>
+
+<div class="wrap">
+
+  <div class="ey">Drug Deep Dive &middot; Electrolyte / Multi-System Agent &middot; No. 005</div>
+  <h1>Magnesium Sulfate</h1>
+  <p class="subtitle">An old, inexpensive electrolyte that ended up as a seizure prophylactic, a treatment for torsades de pointes, and an anaesthetic adjunct &mdash; three separate careers under one name.</p>
+
+  <div class="meta-row">
+    <span class="tag ta">Obstetric</span>
+    <span class="tag tc">Cardiac / Antiarrhythmic</span>
+    <span class="tag tk">ICU</span>
+    <span class="tag tp">Analgesic Adjunct</span>
+    <span class="tag tt">Resuscitation</span>
+  </div>
+
+  <div class="quickfacts">
+    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">Electrolyte / Anticonvulsant / Antiarrhythmic Adjunct</span></div>
+    <div class="qf"><span class="qf-label">Onset (IV)</span><span class="qf-val">Minutes</span></div>
+    <div class="qf"><span class="qf-label">Elimination</span><span class="qf-val">Renal &mdash; dose-dependent on renal function</span></div>
+    <div class="qf"><span class="qf-label">Antidote for Toxicity</span><span class="qf-val">IV calcium salt (calcium gluconate)</span></div>
+  </div>
+
+  <p>Magnesium sulfate is unusual among drugs covered here in that it isn't a drug purpose-built for anaesthesia at all &mdash; it's a naturally occurring electrolyte that anaesthesia, obstetrics, and emergency medicine each independently discovered a use for. The seizure-prophylaxis dose in eclampsia, the antiarrhythmic dose for torsades, and the analgesic-adjunct dose in the OR are genuinely different regimens for genuinely different mechanisms, and treating them as interchangeable is one of the easiest ways to get the dosing wrong. Here is what matters about it, from the ion channel up to the bedside.</p>
+
+  <div class="toc">
+    <h4>In This Deep Dive</h4>
+    <div class="toc-grid">
+      <a href="#mechanism">1. Mechanism of Action</a>
+      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
+      <a href="#effects">3. Physiological Effects, System by System</a>
+      <a href="#uses">4. Clinical Uses</a>
+      <a href="#dosing">5. Dosing</a>
+      <a href="#cautions">6. Cautions, Contraindications &amp; Interactions</a>
+      <a href="#pediatric">7. Paediatric Considerations</a>
+      <a href="#bedside">8. What Actually Happens at the Bedside</a>
+      <a href="#pearls">9. Pearls &amp; Pitfalls</a>
+      <a href="#references">10. References</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="mechanism">1. Mechanism of Action</h2>
+  <p>Magnesium is the second most abundant intracellular cation in the body and a cofactor for several hundred enzymatic reactions. Pharmacologically, it influences calcium-dependent processes across excitable tissue &mdash; presynaptic neurotransmitter release, vascular smooth muscle, and cardiac conduction &mdash; and at the concentrations used therapeutically it acts as a functional calcium antagonist at several of these sites. Its clinical effects follow from a small number of overlapping actions at very different sites.</p>
+
+  <div class="mech-panel">
+    <div class="mech-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Where It Acts, and Why
+    </div>
+    <p style="margin-bottom:1rem;"><strong>Eclampsia prophylaxis (mechanism multifactorial, not fully established):</strong> the anticonvulsant effect of magnesium in eclampsia is considered to be multi-factorial rather than attributable to a single receptor action. Proposed contributors include calcium-antagonist relaxation of cerebral and peripheral vascular smooth muscle (reducing vasospasm and vasogenic oedema), protection of the blood–brain barrier, and central anticonvulsant activity via NMDA-receptor modulation. No single mechanism is considered sufficient to explain the clinical effect.</p>
+    <p style="margin-bottom:1rem;"><strong>NMDA receptor (voltage-dependent channel block):</strong> magnesium physiologically occupies and blocks the NMDA receptor-associated calcium channel at resting membrane potential, requiring depolarisation to displace it before glutamate-mediated excitatory transmission can proceed. This contributes to its modest but genuine analgesic and anti-hyperalgesic effect as a perioperative adjunct, and may contribute to its central anticonvulsant action in eclampsia alongside the vascular and blood–brain barrier effects above.</p>
+    <p style="margin-bottom:1rem;"><strong>Presynaptic calcium channels (neuromuscular junction and vascular smooth muscle):</strong> magnesium competitively inhibits calcium entry at the presynaptic motor nerve terminal, reducing acetylcholine release and producing dose-dependent neuromuscular blockade &mdash; the mechanism behind both its effect in eclampsia (where part of the anticonvulsant benefit may be peripheral as well as central) and its potentiation of non-depolarising neuromuscular blocking agents. The same calcium-channel effect on vascular smooth muscle produces peripheral vasodilation and a modest fall in blood pressure.</p>
+    <p style="margin-bottom:0;"><strong>Cardiac electrophysiology:</strong> magnesium suppresses early afterdepolarisations and the triggered activity associated with prolonged repolarisation, and slows conduction through the atrioventricular node &mdash; the electrophysiological basis of its established role in torsades de pointes, notably even when the patient's measured serum magnesium is within the normal range.</p>
+  </div>
+
+  <h3>Why It Works Even at "Normal" Serum Levels</h3>
+  <p>A recurring point of confusion is why magnesium is given for torsades de pointes even in patients whose measured serum magnesium is normal. The answer is that at pharmacological IV doses its antiarrhythmic effect is a direct membrane-stabilising and triggered-activity-suppressing action, not simply a correction of a deficiency &mdash; it behaves as a therapeutic drug, independent of whether a deficiency state exists. Serum magnesium, in any case, reflects only a tiny fraction of total body magnesium (most of which is intracellular or in bone), so a "normal" serum level does not reliably exclude a clinically relevant total-body deficit either.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
+  <p>Magnesium is not metabolised &mdash; it is an ion, and its pharmacokinetics are governed entirely by distribution and renal excretion, which is precisely why renal function is the single most important variable determining how a magnesium infusion behaves in a given patient.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Onset (IV)</strong></td><td>Minutes</td><td>Anticonvulsant and antiarrhythmic effect follows plasma level rise closely</td></tr>
+      <tr><td><strong>Distribution</strong></td><td>~99% intracellular or in bone; ~1% extracellular</td><td>Serum level is a poor proxy for total body stores</td></tr>
+      <tr><td><strong>Protein binding</strong></td><td>~40%</td><td>Free (ionised) fraction is the physiologically active portion</td></tr>
+      <tr><td><strong>Metabolism</strong></td><td>None &mdash; magnesium is not metabolised</td><td>Effect duration is governed by distribution and clearance, not biotransformation</td></tr>
+      <tr><td><strong>Excretion</strong></td><td>Renal, essentially unchanged</td><td>Renal impairment is the dominant factor prolonging effect and elevating toxicity risk</td></tr>
+      <tr><td><strong>Therapeutic serum concentrations (eclampsia)</strong></td><td>Target 2.5&ndash;5 mEq/L per US labeling; other sources cite ~4&ndash;7 mEq/L</td><td>Labeling recommends targeting 2.5&ndash;5 mEq/L to control convulsions; many obstetric protocols use higher targets. Follow the local protocol &mdash; levels most useful when renal function is impaired or toxicity is suspected</td></tr>
+      <tr><td><strong>Normal serum magnesium</strong></td><td>~1.4&ndash;2.0 mEq/L (0.7&ndash;1.0 mmol/L)</td><td>Therapeutic concentrations for seizure prophylaxis sit above physiological normal &mdash; a deliberate pharmacological effect, not a "correction"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2 id="effects">3. Physiological Effects, System by System</h2>
+
+  <h3>Cardiovascular</h3>
+  <p>Dose-dependent peripheral vasodilation and a modest fall in blood pressure, more pronounced with rapid administration. Slows AV-nodal conduction. At toxic levels, magnesium produces progressive cardiac conduction abnormalities &mdash; PR and QRS widening &mdash; that can culminate in complete heart block and asystole, discussed further below.</p>
+
+  <h3>Neuromuscular</h3>
+  <p>Dose-dependent reduction in acetylcholine release at the neuromuscular junction produces a spectrum of effects from reduced deep tendon reflexes (used clinically as a bedside toxicity marker) through to frank neuromuscular weakness and, at very high levels, respiratory paralysis. Magnesium meaningfully potentiates non-depolarising neuromuscular blocking agents &mdash; a clinically important interaction discussed in the cautions section.</p>
+
+  <h3>Central Nervous System</h3>
+  <p>Anticonvulsant action, the basis for its use in eclampsia prophylaxis and treatment, via mechanisms that include NMDA-receptor modulation alongside vascular and endothelial effects. At toxic levels, CNS depression progresses from lethargy and confusion to loss of consciousness. Provides a genuine, though modest, opioid-sparing analgesic effect as a perioperative adjunct, and lowers the shivering threshold similarly to some other agents used for post-anaesthetic shivering.</p>
+
+  <h3>Respiratory</h3>
+  <p>Minimal direct effect at therapeutic doses. At toxic levels, neuromuscular weakness can progress to respiratory muscle paralysis and apnoea &mdash; the most immediately dangerous feature of significant magnesium toxicity, and the reason respiratory rate and deep tendon reflexes are monitored together during high-dose infusion.</p>
+
+  <h3>Uterine / Obstetric</h3>
+  <p>Magnesium is not recommended as a first-line tocolytic agent, and evidence does not support its use for delaying preterm labour. Prolonged administration is discouraged because of fetal safety concerns, including bone abnormalities and calcium/phosphorus derangements. In contemporary obstetric practice its major roles are seizure prophylaxis and treatment in pre-eclampsia/eclampsia, and fetal neuroprotection when very preterm birth is anticipated.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="uses">4. Clinical Uses</h2>
+  <p>Magnesium's clinical uses fall into genuinely distinct categories, each with its own evidence base, dosing regimen, and monitoring requirements &mdash; a single drug doing several separate jobs rather than one job in several settings.</p>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>Pre-eclampsia / Eclampsia Prophylaxis and Treatment</h4>
+      <p>First-line agent for seizure prevention in severe pre-eclampsia and for terminating and preventing recurrence of eclamptic seizures &mdash; one of the best-established uses of magnesium in medicine, supported by large randomised trial evidence.</p>
+    </div>
+    <div class="use-card">
+      <h4>Torsades de Pointes</h4>
+      <p>First-line for polymorphic VT with QT prolongation (torsades de pointes), effective even when serum magnesium is normal. Per the 2025 AHA guideline, magnesium 1&ndash;2 g IV over 1&ndash;2 minutes may be considered for torsades de pointes in the cardiac arrest setting (Class IIb; LOE C-LD); for non-arrest settings, ACC/AHA/ESC arrhythmia guidelines classify it as Class IIa (LOE B). Sustained or haemodynamically unstable polymorphic VT still requires immediate unsynchronised defibrillation &mdash; magnesium should not delay electrical therapy. Routine magnesium is not recommended for polymorphic VT without QT prolongation or in undifferentiated cardiac arrest.</p>
+    </div>
+    <div class="use-card">
+      <h4>Refractory Ventricular Arrhythmias</h4>
+      <p>Used as an adjunct in selected refractory ventricular arrhythmias occurring in the setting of electrolyte disturbance, generally alongside correction of the underlying abnormality.</p>
+    </div>
+    <div class="use-card">
+      <h4>Severe Asthma / Status Asthmaticus</h4>
+      <p>IV magnesium is used as an adjunct bronchodilator in severe acute asthma refractory to first-line therapy, via smooth muscle relaxation. Not for routine exacerbations.</p>
+    </div>
+    <div class="use-card">
+      <h4>Perioperative Analgesic Adjunct</h4>
+      <p>IV magnesium as part of a multimodal analgesia strategy reduces opioid consumption and postoperative pain scores in some surgical populations, via its NMDA-modulating action. Evidence supports an opioid-sparing effect, though magnitude varies between studies.</p>
+    </div>
+    <div class="use-card">
+      <h4>Fetal Neuroprotection</h4>
+      <p>Antenatal magnesium sulfate given when very preterm birth is anticipated reduces the risk of cerebral palsy in surviving infants &mdash; a distinct, well-supported obstetric indication with its own institutional dosing protocols, separate from eclampsia prophylaxis.</p>
+    </div>
+    <div class="use-card">
+      <h4>Neuromuscular Blockade Potentiation</h4>
+      <p>Not typically given for this purpose deliberately, but a clinically important effect to anticipate whenever magnesium and non-depolarising neuromuscular blocking agents are used in the same patient &mdash; most relevant in obstetric general anaesthesia.</p>
+    </div>
+    <div class="use-card">
+      <h4>Hypomagnesaemia Replacement</h4>
+      <p>Straightforward electrolyte correction in documented deficiency, common in critically ill, malnourished, and alcohol-dependent patients, and a frequent contributor to refractory hypokalaemia and hypocalcaemia if left uncorrected.</p>
+    </div>
+    <div class="use-card">
+      <h4>Cardiac Surgery / Perioperative Electrolyte Management</h4>
+      <p>Frequently studied in cardiac-surgical protocols, but routine prophylactic use for postoperative atrial fibrillation is not supported by recent randomised evidence. Use remains institution- and protocol-dependent rather than a standard indication.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="dosing">5. Dosing</h2>
+
+  <table class="dose-table">
+    <thead><tr><th>Indication</th><th>Dose</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Eclampsia / severe pre-eclampsia (Zuspan regimen)</strong></td>
+        <td>4 g IV loading over 20&ndash;30 min, then 1&ndash;2 g/h IV infusion</td>
+        <td>Product labeling describes a 4&ndash;6 g load followed by 1&ndash;2 g/h; continued for 24 h after delivery or after the last seizure, whichever is later (some protocols extend to 24&ndash;48 h) &mdash; confirm current local/ACOG/WHO protocol</td>
+      </tr>
+      <tr>
+        <td><strong>Eclampsia (Pritchard regimen, IM alternative)</strong></td>
+        <td>4 g IV plus 10 g IM loading, then 5 g IM every 4 h</td>
+        <td>Used where IV infusion pumps are unavailable; more painful, higher local infection risk</td>
+      </tr>
+      <tr>
+        <td><strong>Recurrent eclamptic seizure</strong></td>
+        <td>Additional 2 g IV over 5 min</td>
+        <td>Reassess for an alternative cause of seizure if recurrence continues despite adequate magnesium levels</td>
+      </tr>
+      <tr>
+        <td><strong>Torsades de pointes / long-QT polymorphic VT</strong></td>
+        <td>1&ndash;2 g IV/IO; administration rate depends on haemodynamic stability and local protocol</td>
+        <td>Sustained polymorphic VT requires immediate unsynchronised defibrillation &mdash; magnesium should not delay it. Per the 2025 AHA guideline, magnesium may be considered for torsades de pointes in the cardiac arrest setting (Class IIb; LOE C-LD); for non-arrest settings, ACC/AHA/ESC arrhythmia guidelines classify it as Class IIa (LOE B). Routine magnesium is not recommended for polymorphic VT without QT prolongation or in undifferentiated cardiac arrest</td>
+      </tr>
+      <tr>
+        <td><strong>High-dose infusion with renal impairment / oliguria</strong></td>
+        <td>Reduce or withhold maintenance dosing per protocol; monitor serum magnesium and clinical signs closely</td>
+        <td>Magnesium is eliminated renally &mdash; accumulation to toxic levels occurs quickly with standard infusion rates when clearance is impaired</td>
+      </tr>
+      <tr>
+        <td><strong>Perioperative analgesic adjunct</strong></td>
+        <td>Bolus ~30&ndash;50 mg/kg, then infusion ~8&ndash;15 mg/kg/h intraoperatively</td>
+        <td>No universally standardised regimen exists &mdash; published trials use a range of bolus and infusion strategies. Follow the institutional protocol and the specific surgical/anaesthetic context</td>
+      </tr>
+      <tr>
+        <td><strong>Hypomagnesaemia replacement</strong></td>
+        <td>Dose and rate depend on severity, symptoms, serum concentration, renal function, and ongoing losses</td>
+        <td>IV replacement is generally used for symptomatic or severe deficiency, or when enteral replacement is not tolerated; follow institutional electrolyte-replacement protocols rather than a single universal dose</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:var(--faint);">Doses are illustrative and reflect commonly cited ranges in the obstetric, cardiac resuscitation, and anaesthesia literature. Always confirm against your institution's protocol, current product labelling, and current ACLS/obstetric guideline versions &mdash; dosing in this table is not a substitute for local guidelines.</p>
+
+  <div class="caution-box">
+    <h3>Three Regimens, Not One</h3>
+    <p>The eclampsia dose, the torsades dose, and the perioperative analgesic dose are genuinely different regimens, arrived at from different evidence bases for different indications &mdash; not interchangeable applications of "the magnesium dose." Confirm which indication is being treated before reaching for a dose from memory, particularly when moving between obstetric, cardiac, and general anaesthetic contexts in the same shift.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="cautions">6. Cautions, Contraindications &amp; Interactions</h2>
+
+  <h3>Contraindications / Major Cautions</h3>
+  <ul>
+    <li><strong>Myasthenia gravis</strong> &mdash; contraindicated; magnesium's neuromuscular blocking effect can precipitate a myasthenic crisis</li>
+    <li><strong>Heart block or myocardial damage</strong> &mdash; contraindicated; magnesium further slows AV conduction</li>
+    <li><strong>Diabetic coma</strong> &mdash; contraindicated per US labeling</li>
+    <li><strong>Severe renal impairment</strong> &mdash; relative contraindication or major caution; magnesium is cleared almost entirely by the kidneys, and reduced clearance significantly raises toxicity risk with standard doses and infusion rates</li>
+    <li><strong>Hypotension</strong> &mdash; major caution; rapid administration can precipitate significant hypotension, particularly in patients with reduced cardiac reserve</li>
+    <li><strong>Known hypersensitivity</strong> to the drug</li>
+  </ul>
+
+  <h3>Use With Caution</h3>
+  <ul>
+    <li>Concurrent use of non-depolarising neuromuscular blocking agents &mdash; potentiation is clinically significant and should be anticipated, not discovered</li>
+    <li>Concurrent calcium channel blockers &mdash; may contribute to additive hypotension and conduction slowing; monitor haemodynamics</li>
+    <li>Elderly patients and those with reduced cardiac reserve &mdash; more pronounced hypotension with rapid administration</li>
+  </ul>
+
+  <h3>Interactions</h3>
+  <ul>
+    <li><strong>Non-depolarising neuromuscular blocking agents:</strong> significantly potentiated by magnesium &mdash; anticipate a deeper and longer block, use quantitative neuromuscular monitoring, and consider reduced doses whenever both are used &mdash; particularly when a patient on a magnesium infusion requires general anaesthesia</li>
+    <li><strong>CNS depressants (opioids, sedatives):</strong> additive sedation and respiratory depression risk, relevant given magnesium's own dose-dependent CNS and respiratory effects at high levels</li>
+    <li><strong>Digoxin toxicity:</strong> magnesium is not a primary treatment for digoxin toxicity; manage according to current toxicology/cardiology guidance</li>
+    <li><strong>Calcium channel blockers:</strong> may contribute to additive vasodilation and cardiac conduction slowing; use clinical judgment and monitor haemodynamics</li>
+  </ul>
+
+  <div class="alert-box">
+    <h3>Magnesium Toxicity: A Progressive, Dose-Dependent Sequence</h3>
+    <p>The progression of hypermagnesaemia is generally dose-dependent, but the sequence is not a fixed staircase and varies between patients. Loss of deep tendon reflexes is often the earliest clinical sign and is a useful bedside warning, but cardiac conduction changes or respiratory depression may appear without a clear preceding reflex loss in some cases. Serum levels correlate imperfectly with clinical signs, particularly in renal impairment. Monitoring during high-dose infusion &mdash; deep tendon reflexes, respiratory rate, urine output, and serum levels where available or where renal function is impaired &mdash; is what allows toxicity to be caught early. <strong>An IV calcium salt (calcium gluconate)</strong> is the specific antidote, physiologically antagonising magnesium's effects at the neuromuscular junction and myocardium in cases of significant toxicity or magnesium-induced cardiac or respiratory compromise &mdash; an injectable calcium salt should be immediately available whenever high-dose magnesium is given. Confirm the current dose and local protocol at your institution.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="pediatric">7. Paediatric Considerations</h2>
+  <p>Magnesium's paediatric use is largely distinct from its major adult indications, with its own evidence base and dosing considerations.</p>
+  <ul>
+    <li><strong>Severe acute asthma:</strong> IV magnesium is an established adjunct in paediatric status asthmaticus refractory to first-line bronchodilator therapy. GINA 2025 supports intravenous magnesium for moderate-to-severe exacerbations in children, but no longer recommends nebulised magnesium in this age group &mdash; a change from previous guidance. Dosing is weight-based and distinct from adult regimens.</li>
+    <li><strong>Neonatal effects following maternal magnesium therapy:</strong> infants born to mothers who received magnesium can show transient neonatal hypotonia, hyporeflexia, respiratory depression, or reduced Apgar scores &mdash; particularly after prolonged or high-level exposure &mdash; so the neonatal team should be aware whenever maternal magnesium has been given close to delivery.</li>
+    <li><strong>Neuroprotection in preterm labour:</strong> antenatal magnesium sulfate given for fetal neuroprotection ahead of anticipated very preterm birth is a distinct, well-supported obstetric indication from eclampsia prophylaxis, with its own separate institutional dosing protocols.</li>
+    <li>Weight-based dosing and careful attention to renal function (which can be harder to assess clinically in neonates and young infants) are essential wherever magnesium is used in paediatric populations.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 id="bedside">8. What Actually Happens at the Bedside</h2>
+  <p>The textbook version of magnesium is a straightforward infusion, monitored periodically, doing its job quietly in the background. The bedside version has more texture than that.</p>
+  <p>The first thing worth building into routine practice on any obstetric unit is checking deep tendon reflexes before increasing or continuing a magnesium infusion, not as a box-ticking exercise but as the actual clinical test it is designed to be. It is easy, on a busy shift, to let this become a formality &mdash; a quick tap of the patellar tendon logged as "present" without genuinely assessing whether the reflex has diminished from the previous check. The reflex-loss stage is the entire point of monitoring it; if it's checked carelessly, the warning sign it exists to provide is lost along with it. The same applies to urine output &mdash; because magnesium is eliminated almost entirely by the kidneys, a falling urine output during a high-dose infusion is an early pharmacokinetic warning, not an incidental finding.</p>
+  <p>The second thing is that a patient on a magnesium infusion who needs general anaesthesia &mdash; for an urgent caesarean section, most commonly &mdash; requires a genuinely different approach to neuromuscular blockade than a patient who isn't. The potentiation of non-depolarising agents is clinically significant, not a minor theoretical interaction, and a standard intubating dose given without adjustment can produce a considerably deeper and longer block than expected. Quantitative neuromuscular monitoring (train-of-four) is not optional in this scenario. This is worth anticipating and communicating clearly before induction, not discovering mid-case when the monitor shows an unexpectedly profound block.</p>
+  <p>The third thing is that magnesium's cardiovascular effect, while usually modest, is genuinely additive to whatever else is happening to the patient's haemodynamics at the same time &mdash; a hypotensive patient receiving a spinal or epidural for caesarean section, already vasodilated from the block, can have that hypotension meaningfully compounded by a magnesium loading dose running concurrently. Timing and rate of administration matter more in that combined scenario than the isolated pharmacology of either drug alone would suggest.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pearls">9. Pearls &amp; Pitfalls</h2>
+
+  <div class="pearl-box">
+    <h3>The Core Takeaway</h3>
+    <p>Magnesium's major clinical roles are genuinely separate pharmacological stories that happen to share one ion. Treating "the magnesium dose" as a single number to recall from memory, rather than a specific regimen tied to a specific indication, is the most common source of dosing error with this drug. Know which job it's doing before deciding how much to give.</p>
+  </div>
+
+  <div class="honest-box">
+    <h3>The Honest Bit</h3>
+    <p>Magnesium is cheap, familiar, and has been in clinical use long enough to feel like background furniture &mdash; which makes it easy to underestimate. It is not a benign electrolyte top-up in every context; at the doses used for eclampsia or arrhythmia control, it is a drug with a genuine toxicity syndrome, a narrower-than-expected therapeutic window in renal impairment, and clinically significant interactions with neuromuscular blocking agents. Its long track record reflects a well-understood drug used carefully, not a drug that no longer requires care.</p>
+  </div>
+
+  <ul>
+    <li><strong>Pitfall:</strong> Using the eclampsia dosing regimen from memory for a different indication, or vice versa, without checking which regimen actually applies.</li>
+    <li><strong>Pitfall:</strong> Forgetting that non-depolarising neuromuscular blocking agents are significantly potentiated by magnesium &mdash; particularly relevant when converting an obstetric patient on a magnesium infusion to general anaesthesia.</li>
+    <li><strong>Pearl:</strong> Deep tendon reflex assessment is a genuine, actionable bedside toxicity monitor during high-dose infusion &mdash; worth doing properly, not as a formality.</li>
+    <li><strong>Pearl:</strong> Torsades de pointes responds to magnesium even with a normal serum level &mdash; as an adjunct to defibrillation for long-QT polymorphic VT, don't withhold it while waiting for lab confirmation of a deficiency that isn't the actual mechanism of benefit.</li>
+    <li><strong>Pitfall:</strong> Underestimating toxicity risk in renal impairment, where standard infusion rates can accumulate to toxic levels considerably faster than in a patient with normal renal clearance.</li>
+  </ul>
+
+  <div class="quote-box">
+    One ion, several separate jobs, several separate doses. The mistake is treating it as one drug with one number to remember, rather than as distinct therapies that happen to share a name.
+    <span class="src">&mdash; A closing thought</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox" id="references">
+    <h3>References</h3>
+    <ol>
+      <li>Duley L, G&uuml;lmezoglu AM, Henderson-Smart DJ, Chou D. Magnesium sulphate and other anticonvulsants for women with pre-eclampsia. <em>Cochrane Database Syst Rev.</em> 2010;(11):CD000025.</li>
+      <li>The Eclampsia Trial Collaborative Group. Which anticonvulsant for women with eclampsia? Evidence from the Collaborative Eclampsia Trial. <em>Lancet.</em> 1995;345(8963):1455&ndash;1463.</li>
+      <li>American College of Obstetricians and Gynecologists. <em>Hypertensive Disorders of Pregnancy in Adolescents and Adults</em> (Clinical Practice Guideline, 2025; supersedes Practice Bulletin No. 222).</li>
+      <li>American Heart Association. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care &mdash; Part 9: Adult Advanced Life Support. <em>Circulation.</em> 2025.</li>
+      <li>Tzivoni D, Banai S, Schuger C, et al. Treatment of torsade de pointes with magnesium sulfate. <em>Circulation.</em> 1988;77(2):392&ndash;397.</li>
+      <li>Lu JF, Nightingale CH. Magnesium sulfate in eclampsia and pre-eclampsia: pharmacokinetic principles. <em>Clin Pharmacokinet.</em> 2000;38(4):305&ndash;314.</li>
+      <li>Albrecht E, Kirkham KR, Liu SS, Brull R. Peri-operative intravenous administration of magnesium sulphate and postoperative pain: a meta-analysis. <em>Anaesthesia.</em> 2013;68(1):79&ndash;90.</li>
+      <li>Fawcett WJ, Haxby EJ, Male DA. Magnesium: physiology and pharmacology. <em>Br J Anaesth.</em> 1999;83(2):302&ndash;320.</li>
+      <li>Global Initiative for Asthma. <em>Global Strategy for Asthma Management and Prevention.</em> GINA; 2025.</li>
+      <li>Doyle LW, Crowther CA, Middleton P, Marret S. Antenatal magnesium sulfate and neurologic outcome in preterm infants: a systematic review. <em>Obstet Gynecol.</em> 2009;113(6):1327&ndash;1333.</li>
+      <li>Euser AG, Cipolla MJ. Magnesium sulfate for the treatment of eclampsia: a brief review. <em>Stroke.</em> 2009;40(4):1169&ndash;1175.</li>
+      <li>Magnesium sulfate injection &mdash; FDA prescribing information (DailyMed), current version.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>Drug Deep Dive &middot; No. 005</span>
+    <span>Obstetric &middot; Cardiac &middot; ICU &middot; Analgesic Adjunct &middot; Resuscitation</span>
+  </div>
+
+  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. Dosing information reflects commonly cited ranges in the obstetric, cardiac resuscitation, and anaesthesia literature and is not a substitute for institutional protocols, current product labelling, current ACLS/obstetric guideline versions, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
