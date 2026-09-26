@@ -1,1 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sevoflurane — Drug Deep Dive | Ode to the OR</title>
+<meta name="description" content="A deep dive into sevoflurane — mechanism, pharmacokinetics, clinical uses, MAC and dosing, the Compound A question, and the honest bedside reality of the default inhalational agent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --plum:    #7a5abf;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
 
+/* NAV */
+nav{
+position:fixed;top:0;left:0;right:0;z-index:600;
+height:66px;padding:0 5vw;
+display:flex;align-items:center;justify-content:space-between;
+background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.tt{border-color:var(--teal);color:var(--teal);}
+
+/* Quick facts strip */
+.quickfacts{
+display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
+border:1px solid var(--border);margin:2.2rem 0 2.8rem;
+}
+@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
+.qf{background:var(--surface);padding:1.1rem 1.2rem;}
+.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
+.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Table of contents */
+.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
+.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
+@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
+.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
+.toc a:hover{color:var(--rust);}
+.toc a::before{content:'—';color:var(--faint);font-size:.75rem;}
+
+/* Mechanism panel */
+.mech-panel{
+background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
+.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+
+/* Receptor comparison bars (repurposed for agent comparisons) */
+.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
+.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
+.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
+.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
+.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
+
+/* Dosing table */
+.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.dose-table tr:hover td{background:var(--deep);}
+.dose-table td strong{color:var(--text);}
+
+/* Pearl / alert / caution boxes */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.caution-box p:last-child{margin-bottom:0;}
+
+.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
+.honest-box p:last-child{margin-bottom:0;}
+
+/* Comparison grid for clinical uses */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
+.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../drug-deep-dives.html" class="back-link">← Back to Drug Deep Dives</a>
+
+<div class="wrap">
+
+  <div class="ey">Drug Deep Dive · Volatile Anaesthetic · No. 006</div>
+  <h1>Sevoflurane</h1>
+  <p class="subtitle">Sweet-smelling enough to breathe a child to sleep, and ordinary enough that the calculation behind every vaporiser dial rarely gets a second thought.</p>
+
+  <div class="meta-row">
+    <span class="tag ta">Volatile Anaesthetic</span>
+    <span class="tag tc">Inhalational Induction</span>
+    <span class="tag tk">Pediatric</span>
+    <span class="tag tp">Maintenance</span>
+    <span class="tag tt">Neuroanaesthesia</span>
+  </div>
+
+  <div class="quickfacts">
+    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">Halogenated Volatile Anaesthetic (Ether)</span></div>
+    <div class="qf"><span class="qf-label">MAC (40-year-old adult, O₂)</span><span class="qf-val">2.1%</span></div>
+    <div class="qf"><span class="qf-label">Blood:Gas Coefficient (37°C)</span><span class="qf-val">0.63–0.69</span></div>
+    <div class="qf"><span class="qf-label">Reversal Agent</span><span class="qf-val">None — terminate delivery, ventilate</span></div>
+  </div>
+
+  <p>Sevoflurane has become the default volatile agent across most of modern anaesthetic practice — non-pungent enough for a mask induction in a frightened child, fast enough in onset and offset to suit day-case turnover, and stable enough in its physiological profile to be the reasonable default in the majority of cases. That very ubiquity is what makes it worth re-examining properly: a drug given in essentially every general anaesthetic deserves to be understood beyond "turn the dial and watch the number," including the parts of its story — Compound A, fluoride metabolism, emergence agitation — that get simplified into either dismissal or alarm depending on who is teaching it. Here is what matters about it, from the receptor up to the bedside.</p>
+
+  <div class="toc">
+    <h4>In This Deep Dive</h4>
+    <div class="toc-grid">
+      <a href="#mechanism">1. Mechanism of Action</a>
+      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
+      <a href="#effects">3. Physiological Effects, System by System</a>
+      <a href="#uses">4. Clinical Uses</a>
+      <a href="#dosing">5. Dosing &amp; MAC</a>
+      <a href="#cautions">6. Cautions, Contraindications &amp; Interactions</a>
+      <a href="#pediatric">7. Paediatric Considerations</a>
+      <a href="#bedside">8. What Actually Happens at the Bedside</a>
+      <a href="#pearls">9. Pearls &amp; Pitfalls</a>
+      <a href="#references">10. References</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="mechanism">1. Mechanism of Action</h2>
+  <p>Sevoflurane is a fluorinated methyl isopropyl ether, one of the modern halogenated volatile anaesthetics that produce general anaesthesia through a mechanism still not completely resolved at the molecular level, though the broad picture is well established.</p>
+
+  <div class="mech-panel">
+    <div class="mech-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Where It Acts, and Why
+    </div>
+    <p style="margin-bottom:1rem;"><strong>GABA-A receptor potentiation:</strong> like most volatile anaesthetics, sevoflurane enhances inhibitory GABA-A mediated chloride conductance, contributing significantly to the hypnotic and amnestic components of general anaesthesia. It also has actions at glycine receptors (spinally mediated immobility) and inhibits excitatory glutamatergic transmission at certain receptor subtypes, meaning its overall anaesthetic effect is genuinely multi-receptor rather than attributable to any single molecular target.</p>
+    <p style="margin-bottom:1rem;"><strong>Two-pore-domain potassium channels:</strong> volatile anaesthetics including sevoflurane activate certain background potassium channels, hyperpolarising neurons and reducing excitability — an action increasingly implicated in the anaesthetic and analgesic components of the volatile agents as a class.</p>
+    <p style="margin-bottom:0;"><strong>No single "site of action" fully explains anaesthesia:</strong> unlike a drug such as ketamine with one dominant receptor story, volatile anaesthetics act across multiple ion channels and receptor systems simultaneously, at concentrations best described by their physical solubility characteristics (the Meyer-Overton correlation between lipid solubility and anaesthetic potency) as much as by any single binding site. This is part of why volatile anaesthetic pharmacology is taught around MAC — a population-level, empirically measured endpoint — rather than around a single receptor occupancy curve.</p>
+  </div>
+
+  <h3>Why Physical Properties Drive So Much of the Clinical Picture</h3>
+  <p>Sevoflurane's defining pharmacological features — a low blood:gas partition coefficient (~0.63–0.69) and non-pungency — explain most of what makes it clinically distinctive. Low blood solubility means relatively little drug needs to dissolve in blood before alveolar and arterial partial pressures equilibrate, producing the fast onset and, more importantly for recovery, the fast offset that has made it the default for day-case and paediatric practice. Non-pungency — the absence of airway irritation at clinically relevant concentrations — is what makes it particularly suitable among modern volatile agents for a smooth inhalational induction without triggering breath-holding, coughing, or laryngospasm.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
+  <p>Sevoflurane's pharmacokinetics are governed overwhelmingly by its physical solubility properties rather than by classical metabolism — it is largely eliminated unchanged via the lungs, with only a small fraction undergoing hepatic biotransformation.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Blood:gas partition coefficient (37°C)</strong></td><td>0.63–0.69</td><td>Low solubility — among the faster-onset/offset volatiles after desflurane</td></tr>
+      <tr><td><strong>Oil:gas partition coefficient</strong></td><td>~47–50</td><td>Reflects lipid solubility and correlates with anaesthetic potency (Meyer-Overton)</td></tr>
+      <tr><td><strong>MAC (40-year-old adult, 100% O₂)</strong></td><td>2.1%</td><td>Age-dependent — highest in neonates, declining progressively with age thereafter</td></tr>
+      <tr><td><strong>MAC (neonates)</strong></td><td>~3.3%</td><td>Highest requirement across all age groups; MAC in premature infants has not been determined</td></tr>
+      <tr><td><strong>MAC (1–6 months)</strong></td><td>~3.0%</td><td>Declining from neonatal peak but still above adult values</td></tr>
+      <tr><td><strong>MAC (6 months–3 years)</strong></td><td>~2.8%</td><td>Continues to decline through early childhood</td></tr>
+      <tr><td><strong>MAC (3–12 years)</strong></td><td>~2.5%</td><td>Approaches adult values by adolescence</td></tr>
+      <tr><td><strong>Hepatic metabolism</strong></td><td>~2–5% of absorbed dose</td><td>Low compared with older agents (e.g. halothane); reduces but does not eliminate metabolic byproduct concerns</td></tr>
+      <tr><td><strong>Primary metabolic pathway</strong></td><td>CYP2E1-mediated defluorination</td><td>Produces inorganic fluoride and hexafluoroisopropanol (HFIP)</td></tr>
+      <tr><td><strong>Elimination</strong></td><td>Predominantly pulmonary (unchanged), remainder renal (as metabolites)</td><td>Recovery time is governed mainly by ventilation/washout, not hepatic clearance</td></tr>
+    </tbody>
+  </table>
+
+  <h3>How Sevoflurane Compares to the Other Volatiles</h3>
+  <p>Blood:gas solubility is the single best predictor of how quickly a volatile agent's alveolar concentration — and therefore depth of anaesthesia — changes when the vaporiser setting is adjusted. Lower solubility means faster equilibration in both directions.</p>
+  <div class="receptor-bars">
+    <div class="rb-row">
+      <span class="rb-label">Desflurane</span>
+      <div class="rb-track"><div class="rb-fill" style="width:24%;"></div></div>
+      <span class="rb-val">~0.42</span>
+    </div>
+    <div class="rb-row">
+      <span class="rb-label">Sevoflurane</span>
+      <div class="rb-track"><div class="rb-fill" style="width:38%;"></div></div>
+      <span class="rb-val">~0.63–0.69</span>
+    </div>
+    <div class="rb-row">
+      <span class="rb-label">Isoflurane</span>
+      <div class="rb-track"><div class="rb-fill" style="width:80%;"></div></div>
+      <span class="rb-val">~1.4</span>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--faint);margin-top:-.5rem;">Blood:gas partition coefficients — lower values mean faster equilibration (onset and offset). Bar length is illustrative of relative solubility, not to a strict linear scale.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="effects">3. Physiological Effects, System by System</h2>
+
+  <h3>Cardiovascular</h3>
+  <p>Dose-dependent reduction in systemic vascular resistance and a modest direct negative inotropic effect, with the vasodilatory component generally predominating at clinical concentrations — producing a fall in mean arterial pressure that is a predictable consequence of increasing depth rather than a sign of pathological cardiac depression in the healthy patient. Heart rate is generally well preserved — a notable difference from some other volatile agents — and sevoflurane does not sensitise the myocardium to catecholamine-induced arrhythmias to the degree that halothane historically did, making it compatible with epinephrine-containing local infiltration during the same anaesthetic. The arrhythmogenic threshold with epinephrine during sevoflurane anaesthesia is substantially higher than with halothane, and comparable to isoflurane.</p>
+
+  <h3>Respiratory</h3>
+  <p>Produces dose-dependent respiratory depression — reduced tidal volume with a compensatory but incomplete rise in respiratory rate, net reduction in minute ventilation, and blunting of the ventilatory response to hypercapnia and hypoxia. Non-pungent and generally well tolerated by the airway even at higher inspired concentrations, in contrast to desflurane and isoflurane, which is the basis for its particular suitability for inhalational induction. Produces bronchodilation, useful in patients with reactive airway disease once anaesthesia is established.</p>
+
+  <h3>Central Nervous System</h3>
+  <p>Dose-dependent reduction in cerebral metabolic rate of oxygen consumption (CMRO2) alongside a direct, dose-dependent cerebral vasodilatory effect. Cerebral autoregulation is generally preserved at lower MAC values, but volatile anaesthetics impair autoregulation in a dose-dependent fashion; with sevoflurane, autoregulation is maintained up to approximately 1.5 MAC, above which it becomes impaired. In patients with reduced intracranial compliance, the balance between reduced cerebral metabolic demand and the vasodilation accompanying higher concentrations warrants careful titration and attention to CO2 management rather than a fixed MAC threshold. Amnesia and hypnosis are reliable at standard MAC values. Sevoflurane has a well-documented association with <strong>emergence agitation/delirium</strong>, particularly in the paediatric population, discussed further below.</p>
+
+  <h3>Neuromuscular</h3>
+  <p>Produces dose-dependent skeletal muscle relaxation independent of neuromuscular blocking agents, and meaningfully potentiates both depolarising and non-depolarising neuromuscular blockers — relevant when titrating muscle relaxant dosing during a volatile-based anaesthetic.</p>
+
+  <h3>Other</h3>
+  <p>Genuine uterine relaxant effect at higher MAC values, relevant in obstetric anaesthesia where uterine tone must be considered (e.g. retained placenta, uterine inversion) versus where it must be avoided (risk of increased postpartum bleeding at higher concentrations). Does trigger malignant hyperthermia in susceptible individuals — one of the clearest and most important contraindications in anaesthetic practice, addressed in the cautions section.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="uses">4. Clinical Uses</h2>
+  <p>Sevoflurane's combination of non-pungency, favourable haemodynamic profile, and relatively fast titration has made it the default volatile agent across most routine anaesthetic practice, with particular strength in a few specific settings.</p>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>Inhalational Induction</h4>
+      <p>A preferred agent for mask induction, especially in children, owing to its non-pungent odour and tolerability at increasing concentrations without airway irritation.</p>
+    </div>
+    <div class="use-card">
+      <h4>Maintenance of General Anaesthesia</h4>
+      <p>Standard maintenance agent across the majority of elective and emergency surgical cases where volatile-based (rather than total intravenous) anaesthesia is chosen.</p>
+    </div>
+    <div class="use-card">
+      <h4>Day-Case / Ambulatory Anaesthesia</h4>
+      <p>Relatively fast emergence supports same-day discharge pathways, though desflurane offers a modestly faster offset where turnover time is the dominant priority.</p>
+    </div>
+    <div class="use-card">
+      <h4>Neuroanaesthesia</h4>
+      <p>Widely used at controlled MAC values, with attention to CO2 and blood pressure management, and awareness that cerebral vasodilation becomes more clinically relevant at higher concentrations.</p>
+    </div>
+    <div class="use-card">
+      <h4>Paediatric Anaesthesia</h4>
+      <p>A default agent for both induction and maintenance in children across most of modern paediatric anaesthetic practice, for the reasons detailed in the dedicated section below.</p>
+    </div>
+    <div class="use-card">
+      <h4>Cases Requiring Preserved Haemodynamics</h4>
+      <p>Relatively well-preserved heart rate and moderate blood pressure effects make it a reasonable default in many cardiac and haemodynamically sensitive cases, alongside appropriate monitoring and adjunct agents.</p>
+    </div>
+    <div class="use-card">
+      <h4>Bronchospasm-Prone Patients</h4>
+      <p>Bronchodilator properties and airway tolerability make it a favoured maintenance agent once the airway is secured in patients with reactive airway disease.</p>
+    </div>
+    <div class="use-card">
+      <h4>Sedation via Volatile Agent (Select ICU Settings)</h4>
+      <p>Used in some ICU settings via dedicated delivery systems for sedation, an application distinct from and additional to its role as a surgical anaesthetic. Evidence supports inhaled sedation in select critically ill patients, though a recent RCT in moderate-to-severe ARDS found worse outcomes with sevoflurane compared with propofol, underscoring the need for careful patient selection.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="dosing">5. Dosing &amp; MAC</h2>
+  <p>Volatile anaesthetic "dosing" is expressed as inspired or end-tidal concentration relative to MAC (minimum alveolar concentration) — the alveolar concentration at 1 atmosphere that prevents movement in 50% of subjects in response to a standardised surgical stimulus — rather than as a weight-based milligram dose.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Population / Context</th><th>Typical MAC value</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>40-year-old adult, 100% O₂</strong></td>
+        <td>2.1%</td>
+        <td>Standard reference value; individual requirement varies</td>
+      </tr>
+      <tr>
+        <td><strong>Neonate (0–1 month)</strong></td>
+        <td>~3.3%</td>
+        <td>Highest MAC across all age groups; premature infant MAC not determined</td>
+      </tr>
+      <tr>
+        <td><strong>Infant (1–6 months)</strong></td>
+        <td>~3.0%</td>
+        <td>Declining from neonatal peak</td>
+      </tr>
+      <tr>
+        <td><strong>Infant/young child (6 months–3 years)</strong></td>
+        <td>~2.8%</td>
+        <td>Continues to decline through early childhood</td>
+      </tr>
+      <tr>
+        <td><strong>Child (3–12 years)</strong></td>
+        <td>~2.5%</td>
+        <td>Approaches adult values by adolescence</td>
+      </tr>
+      <tr>
+        <td><strong>Elderly</strong></td>
+        <td>Reduced (~6–7% decline per decade beyond 40 years, as with other volatiles)</td>
+        <td>Titrate to lower end-tidal targets; age-related MAC reduction applies across all volatile agents</td>
+      </tr>
+      <tr>
+        <td><strong>With concurrent N₂O</strong></td>
+        <td>Reduced requirement</td>
+        <td>MAC values for N₂O and volatile agents are broadly additive, though the interaction is not strictly linear — sub-MAC N₂O has been shown to decrease volatile requirement non-linearly</td>
+      </tr>
+      <tr>
+        <td><strong>With concurrent opioid</strong></td>
+        <td>Significant MAC reduction (MAC-sparing effect)</td>
+        <td>Reduces required volatile concentration substantially; anticipate rather than discover this interaction</td>
+      </tr>
+      <tr>
+        <td><strong>Inhalational induction (mask)</strong></td>
+        <td>May be achieved by inhalation of 0.5–1.0% sevoflurane in oxygen, increasing by increments of 0.5–1.0% to a maximum of 8% until the required depth is achieved</td>
+        <td>An initial concentration of 8% is also commonly used, or the concentration can be gradually increased; titrate down promptly once depth is adequate</td>
+      </tr>
+      <tr>
+        <td><strong>Maintenance (typical)</strong></td>
+        <td>0.5–1.3 MAC, individualised to clinical response; typical end-tidal 1.5–2.5%</td>
+        <td>Titrate to clinical signs and, where available, processed EEG or end-tidal monitoring rather than a fixed number</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:var(--faint);">Figures are illustrative and drawn from commonly cited ranges in the anaesthesia literature. Always confirm against your institution's protocol, vaporiser calibration, and current product labelling — MAC and dosing figures here are not a substitute for local guidelines or individualised titration.</p>
+
+  <div class="caution-box">
+    <h3>MAC Is a Population Statistic, Not a Patient-Specific Guarantee</h3>
+    <p>MAC values describe the concentration at which half of a studied population does not move in response to a standardised stimulus — by definition, roughly half of any population requires more, and individual variation is genuinely wide. Age, other co-administered agents, temperature, and acute intoxication or chronic substance use all shift requirement meaningfully. Treat published MAC values as a starting reference for titration, not as a number expected to produce adequate anaesthesia in every patient at that exact setting.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="cautions">6. Cautions, Contraindications &amp; Interactions</h2>
+
+  <h3>Absolute Contraindications</h3>
+  <ul>
+    <li><strong>Known or suspected malignant hyperthermia susceptibility</strong> — sevoflurane is a recognised MH trigger agent; this is an absolute contraindication addressed in detail below</li>
+    <li><strong>Known hypersensitivity</strong> to sevoflurane or other halogenated agents</li>
+  </ul>
+
+  <h3>Use With Caution</h3>
+  <ul>
+    <li>Significantly reduced intracranial compliance — dose-dependent cerebral vasodilation warrants careful titration, CO2 management, and attention to the balance between reduced cerebral metabolic demand and vasodilation at higher concentrations</li>
+    <li>Haemodynamically unstable or hypovolaemic patients — vasodilatory hypotension can be more pronounced</li>
+    <li>Personal or family history of significant emergence agitation with prior volatile anaesthesia, particularly in children</li>
+    <li>Renal impairment — while human evidence has not demonstrated clinically significant harm, individualised judgement remains reasonable in high-risk renal patients, per the Compound A discussion below</li>
+  </ul>
+
+  <h3>Interactions</h3>
+  <ul>
+    <li><strong>Opioids and other sedative-hypnotics:</strong> significant MAC-sparing effect — reduces the volatile concentration required, and this should be anticipated in dosing rather than discovered as unexpectedly deep anaesthesia</li>
+    <li><strong>Nitrous oxide:</strong> MAC values for N₂O and volatile agents are broadly additive, though the interaction is not strictly linear; sub-MAC N₂O has been shown to decrease volatile requirement non-linearly, allowing a lower sevoflurane concentration for the same anaesthetic depth</li>
+    <li><strong>Neuromuscular blocking agents:</strong> potentiated by sevoflurane, allowing reduced dosing of the blocking agent</li>
+    <li><strong>Epinephrine (local infiltration):</strong> considerably better tolerated with sevoflurane than with older agents like halothane, with a substantially higher arrhythmogenic threshold — the dose required to induce arrhythmia is approximately 11 times higher during sevoflurane anaesthesia than during halothane anaesthesia, and comparable to isoflurane</li>
+  </ul>
+
+  <div class="alert-box">
+    <h3>Malignant Hyperthermia</h3>
+    <p>Sevoflurane is a recognised triggering agent for malignant hyperthermia in genetically susceptible individuals (most commonly RYR1 mutation carriers), a life-threatening hypermetabolic crisis presenting with rising end-tidal CO2, tachycardia, muscle rigidity, and hyperthermia (often a late sign rather than an early one). Known or strongly suspected MH susceptibility is an absolute contraindication to sevoflurane and all other volatile triggering agents. Management follows the current Malignant Hyperthermia Association of the United States (MHAUS) protocol: stop the triggering agent immediately, hyperventilate with 100% oxygen on a non-triggering circuit, give dantrolene promptly per current weight-based dosing, and initiate active cooling and supportive management of the metabolic derangements that follow. Confirm your institution's current MH protocol and dantrolene stocking location before starting any case, not during one.</p>
+  </div>
+
+  <div class="caution-box">
+    <h3>Compound A and Low Fresh Gas Flow: The Current Picture</h3>
+    <p>Sevoflurane reacts with strong-base CO2 absorbents (particularly those containing KOH) to form Compound A, a degradation product shown to be nephrotoxic in rat models at high, prolonged exposure. The FDA product label remains conservative — recommending fresh gas flows of at least 2 L/min and specifically advising against flows under 1 L/min — but this labelling is based on animal data that has not been replicated in humans. The American Society of Anesthesiologists issued a formal statement in 2023 concluding that "there is no reasonable evidence to support a lower limit of fresh gas flow when using sevoflurane," and the Society actively supports low-flow practice given its economic and environmental benefits. Extensive human research has found no evidence of clinically significant renal injury from Compound A exposure. European anaesthetic practice, which never introduced minimal FGF restrictions, routinely uses low flows. Furthermore, modern CO2 absorbents formulated with limited or no NaOH/KOH produce negligible Compound A even at low flows. In practice: a genuine divergence persists between conservative product labelling and current clinical evidence and institutional practice — know what your institution's protocol and CO2 absorbent specify, and don't treat either "Compound A is a real, common clinical danger" or "Compound A is entirely outdated and irrelevant" as the complete picture.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="pediatric">7. Paediatric Considerations</h2>
+  <p>Sevoflurane's paediatric role is arguably its single strongest clinical application — the reason it largely displaced halothane as the paediatric inhalational induction agent of choice once it became widely available.</p>
+  <ul>
+    <li><strong>Non-pungency</strong> makes it genuinely tolerable for mask induction in an awake, often frightened child, without the breath-holding and airway irritation that made older agents unsuitable for this purpose.</li>
+    <li>MAC requirement is <strong>highest in neonates and infants</strong>, declining progressively through childhood toward adult values — a pattern opposite to the commonly assumed peak in early infancy. Neonates have the highest MAC (~3.3%), which declines to ~3.0% at 1–6 months, ~2.8% at 6 months–3 years, and ~2.5% at 3–12 years.</li>
+    <li><strong>Emergence agitation/delirium</strong> is a well-documented phenomenon associated with sevoflurane in children — characterised by inconsolable crying, thrashing, and disorientation in the immediate recovery period, typically self-limiting but distressing for the child, family, and recovery staff. Risk factors include younger age, ophthalmology and ENT procedures, and rapid emergence; strategies including adequate analgesia, a calm emergence environment, and pharmacological adjuncts (such as low-dose dexmedetomidine) are used to reduce incidence.</li>
+    <li>The cardiovascular stability and airway tolerability that make sevoflurane suitable for adults apply equally, and arguably more importantly, in children with less physiological reserve to buffer a poorly tolerated induction.</li>
+    <li>Bradycardia during sevoflurane induction is a recognised phenomenon in some paediatric populations, with a notably higher incidence reported in children with Down syndrome (trisomy 21), with and without congenital heart disease. When it occurs, it is generally transient and resolves with reduction of inspired concentration, though continuous ECG monitoring during induction is prudent.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 id="bedside">8. What Actually Happens at the Bedside</h2>
+  <p>The textbook version of sevoflurane use is a straightforward vaporiser dial, a MAC target, and a predictable, controllable depth of anaesthesia throughout the case. The bedside version has more texture than that.</p>
+  <p>The first thing worth genuine attention during an inhalational induction, particularly in a child, is that the transition from awake to anaesthetised is not always as smooth as the drug's non-pungent reputation suggests. A distressed, crying child breathing irregularly through a mask delivers a genuinely unpredictable dose compared with the calm, cooperative induction described in teaching demonstrations — and the excitement phase of induction (a normal, expected stage where movement, breath-holding, or laryngospasm risk can transiently increase) deserves the same vigilance whether or not the child appeared to be settling nicely a moment before.</p>
+  <p>The second thing is that MAC-sparing from co-administered opioid is easy to underestimate in the moment, particularly midway through a case when a large opioid bolus has just been given for a specific stimulus. The reflexive instinct to keep the vaporiser at the same setting that worked earlier in the case can produce a deeper plane of anaesthesia than intended once the opioid takes full effect — worth actively reassessing and reducing the volatile concentration proactively rather than only in response to a falling blood pressure that has already happened.</p>
+  <p>The third thing is that emergence agitation in children is genuinely distressing to witness for parents and staff even when it is expected and self-limiting, and preparing a family for the possibility ahead of time — rather than explaining it only after it has already happened — changes how the whole experience is received. A calm, quiet recovery environment and adequate analgesia going into emergence measurably reduce both the incidence and the intensity of the reaction, and are worth building into the plan before the case starts rather than treating emergence agitation purely as something to manage reactively once it appears.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pearls">9. Pearls &amp; Pitfalls</h2>
+
+  <div class="pearl-box">
+    <h3>The Core Takeaway</h3>
+    <p>Sevoflurane earns its status as the default volatile through a genuinely favourable combination of properties — but "default" should not become "unexamined." MAC-sparing interactions, the Compound A evidence-versus-label divergence, and paediatric emergence phenomena are all real, specific pieces of pharmacology that deserve active management, not passive assumption that the drug will simply behave itself because it usually does.</p>
+  </div>
+
+  <div class="honest-box">
+    <h3>The Honest Bit</h3>
+    <p>Very little about sevoflurane is genuinely controversial in the way its reputation for the Compound A debate might suggest — the overwhelming weight of human clinical evidence supports its safety at standard and low fresh gas flows, and the ASA's 2023 statement explicitly supports low-flow practice. What is worth honest acknowledgment is that regulatory labelling and clinical evidence have not fully converged on this point, and that reasonable, well-informed clinicians and institutions currently land in different places on low-flow practice as a result. That is a genuine, current state of affairs rather than a settled fact in either direction, and it is worth knowing rather than assuming.</p>
+  </div>
+
+  <ul>
+    <li><strong>Pitfall:</strong> Treating a fixed MAC value as a guarantee of adequate anaesthesia for every patient, rather than a population-average starting reference for titration.</li>
+    <li><strong>Pitfall:</strong> Keeping the vaporiser setting static after a significant opioid bolus, rather than anticipating and adjusting for the MAC-sparing effect.</li>
+    <li><strong>Pearl:</strong> The favourable haemodynamic profile and airway tolerability make sevoflurane a reasonable default across a wide range of case types — worth knowing when a different agent is genuinely indicated rather than simply defaulting out of habit.</li>
+    <li><strong>Pearl:</strong> Preparing families for the possibility of paediatric emergence agitation before the case, not only explaining it afterward, is a simple communication step with a disproportionate effect on how the experience is received.</li>
+    <li><strong>Pitfall:</strong> Assuming MH susceptibility screening (family history, personal history of a prior anaesthetic reaction) is someone else's job to have asked about — confirm it was genuinely asked, not just documented as "nil" by default.</li>
+  </ul>
+
+  <div class="quote-box">
+    The agents used most often are the ones most likely to be operated by habit rather than understood by mechanism. Sevoflurane rewards the deeper look precisely because it is so rarely given one.
+    <span class="src">— A closing thought</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox" id="references">
+    <h3>References</h3>
+    <ol>
+      <li>Patel SS, Goa KL. Sevoflurane: a review of its pharmacodynamic and pharmacokinetic properties and its clinical use in general anaesthesia. <em>Drugs.</em> 1996;51(4):658–700.</li>
+      <li>Behne M, Wilke HJ, Harder S. Clinical pharmacokinetics of sevoflurane. <em>Clin Pharmacokinet.</em> 1999;36(1):13–26.</li>
+      <li>American Society of Anesthesiologists. Statement on the Use of Low Gas Flows for Sevoflurane. ASA Committee on Equipment and Facilities, approved October 18, 2023.</li>
+      <li>Brioni JD, Varughese S, Ahmed R, Bein B. A clinical review of inhalation anesthesia with sevoflurane: from early research to emerging topics. <em>J Anesth.</em> 2017;31(5):764–778.</li>
+      <li>Kobayashi S, Bito H, Obata Y, et al. Compound A concentrations during low-flow sevoflurane anesthesia correlate directly with the concentration of monovalent bases in carbon dioxide absorbents. <em>Anesth Analg.</em> 2004;98(2):395–397.</li>
+      <li>Aoyama Y, et al. Risk factors for emergence delirium in pediatric anesthesia: a systematic review. <em>Can J Anaesth.</em> 2025;72(3):384–396.</li>
+      <li>Vlajkovic GP, Sindjelic RP. Emergence delirium in children: many questions, few answers. <em>Anesth Analg.</em> 2007;104(1):84–91.</li>
+      <li>Eger EI 2nd. Age, minimum alveolar anesthetic concentration, and minimum alveolar anesthetic concentration-awake. <em>Anesth Analg.</em> 2001;93(4):947–953.</li>
+      <li>Cole DJ, Kalichman MW, Shapiro HM. The nonlinear potency of sub-MAC concentrations of nitrous oxide in decreasing the anesthetic requirement of enflurane, halothane, and isoflurane in rats. <em>Anesthesiology.</em> 1990;73(1):93–99.</li>
+      <li>Larach MG, Gronert GA, Allen GC, et al. Clinical presentation, treatment, and complications of malignant hyperthermia in North America from 1987 to 2006. <em>Anesth Analg.</em> 2010;110(2):498–507.</li>
+      <li>Malignant Hyperthermia Association of the United States (MHAUS). Emergency Therapy for Malignant Hyperthermia — current treatment protocol. Accessed via mhaus.org.</li>
+      <li>Constant I, Seeman R, Murat I. Sevoflurane and epileptiform EEG changes. <em>Paediatr Anaesth.</em> 2005;15(4):266–274.</li>
+      <li>Walia H, et al. Sevoflurane and bradycardia in infants with trisomy 21: A case report and review of the literature. <em>Paediatr Anaesth.</em> 2015.</li>
+      <li>Gil-Castillejos D, et al. Safe use of inhaled sedation in critically ill patients with invasive mechanical ventilation. <em>Enferm Intensiva (Engl Ed).</em> 2025;36(1):100490.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>Drug Deep Dive · No. 006</span>
+    <span>Volatile Anaesthetic · Pediatric · Neuroanaesthesia · Maintenance</span>
+  </div>
+
+  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. MAC values, dosing ranges, and fresh gas flow guidance reflect commonly cited figures in the anaesthesia literature and are not a substitute for institutional protocols, current product labelling, current ASA/regulatory guidance, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
