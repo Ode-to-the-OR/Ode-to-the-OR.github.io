@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sevoflurane — Drug Deep Dive | Ode to the OR</title>
-<meta name="description" content="A deep dive into sevoflurane — mechanism, pharmacokinetics, clinical uses, MAC and dosing, the Compound A question, and the honest bedside reality of the default inhalational agent.">
+<title>Case 006 — The Balloon and the Right Heart: When PBMV Fails in Severe Mitral Stenosis | Ode to the OR</title>
+<meta name="description" content="A 48-year-old woman with severe mitral stenosis and severe pulmonary hypertension underwent PBMV, complicated by severe MR and pulmonary edema, requiring emergency MVR. An anaesthetic exploration of the right heart, pulmonary hypertensive crisis, and CPB management.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -23,7 +23,9 @@
   --rust:    #7a2020;
   --maroon:  #5a1515;
   --teal:    #2a5a52;
-  --plum:    #7a5abf;
+  --indigo:  #3a3a6a;
+  --moss:    #4a5a3a;
+  --purple:  #6a3a6a;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -37,11 +39,11 @@ body{
 
 /* NAV */
 nav{
-position:fixed;top:0;left:0;right:0;z-index:600;
-height:66px;padding:0 5vw;
-display:flex;align-items:center;justify-content:space-between;
-background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
-border-bottom:1px solid var(--border);
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
 }
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
 .nav-logo em{font-style:italic;color:var(--gold);}
@@ -58,33 +60,25 @@ border-bottom:1px solid var(--border);
 .ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
 .ey::before{content:'';width:30px;height:1px;background:var(--sage);}
 
-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,5vw,3.4rem);font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:1.2rem;}
 h1 em{font-style:italic;color:var(--rust);}
 
-.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.45;}
 
-.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
 .tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
 .ta{border-color:var(--sage);color:var(--sage);}
 .tc{border-color:var(--rust);color:var(--rust);}
 .tk{border-color:var(--amber);color:var(--amber);}
-.tp{border-color:var(--plum);color:var(--plum);}
 .tt{border-color:var(--teal);color:var(--teal);}
-
-/* Quick facts strip */
-.quickfacts{
-display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
-border:1px solid var(--border);margin:2.2rem 0 2.8rem;
-}
-@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
-.qf{background:var(--surface);padding:1.1rem 1.2rem;}
-.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
-.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.tm{border-color:var(--moss);color:var(--moss);}
+.tp{border-color:var(--purple);color:var(--purple);}
 
 .divider{height:1px;background:var(--border);margin:2.8rem 0;}
 
 h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
-h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.8rem 0 .6rem;}
 
 p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
 p strong{color:var(--text);font-weight:500;}
@@ -92,73 +86,108 @@ ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
 li{margin-bottom:.5rem;}
 li strong{color:var(--text);font-weight:500;}
 
-/* Table of contents */
-.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
-.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
-.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
-@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
-.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
-.toc a:hover{color:var(--rust);}
-.toc a::before{content:'—';color:var(--faint);font-size:.75rem;}
+/* Patient at a glance */
+.patient-glance{background:var(--surface);border:1px solid var(--border);padding:1.6rem 1.8rem;margin:1.5rem 0;}
+.patient-glance h3{margin-top:0;font-size:1.05rem;color:var(--rust);}
+.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 2rem;font-size:.84rem;margin-top:1rem;}
+.pg-grid .k{color:var(--faint);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem;}
+.pg-grid .v{color:var(--text);font-weight:500;}
 
-/* Mechanism panel */
-.mech-panel{
-background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
-border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
-}
-.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
-.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
-
-/* Receptor comparison bars (repurposed for agent comparisons) */
-.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
-.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
-.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
-.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
-.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
-.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
-
-/* Dosing table */
-.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
-.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
-.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
-.dose-table tr:hover td{background:var(--deep);}
-.dose-table td strong{color:var(--text);}
-
-/* Pearl / alert / caution boxes */
+/* Pearl box */
 .pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
 .pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
 .pearl-box p:last-child{margin-bottom:0;}
 
-.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+/* Alert box */
+.alert-box{background:var(--card);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
 .alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
 .alert-box p:last-child{margin-bottom:0;}
-
-.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
-.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
-.caution-box p:last-child{margin-bottom:0;}
-
-.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
-.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
-.honest-box p:last-child{margin-bottom:0;}
-
-/* Comparison grid for clinical uses */
-.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
-@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
-.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
-.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
-.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
 
 /* Quote box */
 .quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
 .quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
 
+/* Echo table */
+.echo-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.84rem;}
+.echo-table th{background:var(--surface);border:1px solid var(--border);padding:.6rem .9rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;}
+.echo-table td{border:1px solid var(--border);padding:.6rem .9rem;color:var(--muted);vertical-align:top;}
+.echo-table tr:hover td{background:var(--deep);}
+.echo-table .label{color:var(--faint);font-size:.75rem;display:block;}
+.echo-table .val{color:var(--text);font-weight:500;}
+
+/* Wilkins grid */
+.wilkins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin:1.5rem 0;}
+.wilkins-cell{background:var(--deep);padding:1.2rem;text-align:center;}
+.wilkins-cell .label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;}
+.wilkins-cell .score{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--rust);line-height:1;}
+.wilkins-cell .max{font-size:.65rem;color:var(--faint);}
+
+/* Patho flow */
+.patho-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;}
+.patho-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);}
+.patho-item:last-child{border-bottom:none;}
+.patho-arrow{color:var(--sage);font-size:1.2rem;min-width:20px;text-align:center;padding-top:.2rem;}
+.patho-content{flex:1;}
+.patho-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.15rem;}
+.patho-text{font-size:.86rem;color:var(--muted);line-height:1.6;}
+
+/* Drug table */
+.drug-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.82rem;}
+.drug-table th{background:var(--surface);border:1px solid var(--border);padding:.6rem .9rem;text-align:left;font-weight:600;color:var(--text);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;}
+.drug-table td{border:1px solid var(--border);padding:.6rem .9rem;color:var(--muted);vertical-align:top;}
+.drug-table tr:hover td{background:var(--deep);}
+.drug-name{color:var(--text);font-weight:500;}
+
+/* CPB flow */
+.cpb-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;border-left:2px solid var(--border);padding-left:1.4rem;}
+.cpb-item{position:relative;padding-bottom:1.4rem;}
+.cpb-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--rust);border:2px solid var(--night);}
+.cpb-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.2rem;}
+.cpb-body{font-size:.88rem;color:var(--muted);}
+
+/* ACT box */
+.act-box{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin:1.5rem 0;}
+.act-box h3{margin-top:0;color:var(--teal);font-size:1.05rem;}
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+.act-item{text-align:center;padding:.8rem;background:var(--night);border:1px solid var(--border);}
+.act-item .num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--rust);line-height:1;}
+.act-item .label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.4rem;}
+
+/* Complication grid */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1.5rem 0;}
+.comp-cell{background:var(--deep);padding:1.3rem 1.4rem;}
+.comp-cell h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:.5rem;}
+.comp-cell p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.65;}
+
+/* Guidelines box */
+.guideline-box{background:var(--night);border:2px solid var(--border);padding:1.6rem 1.8rem;margin:1.6rem 0;position:relative;}
+.guideline-box::before{content:"GUIDELINES & PROTOCOLS";position:absolute;top:-.65rem;left:1.5rem;background:var(--night);padding:0 .6rem;font-size:.58rem;letter-spacing:.18em;color:var(--faint);}
+.guideline-box h3{margin-top:.3rem;font-size:1.1rem;color:var(--teal);}
+.guideline-box ul{margin-bottom:0;}
+.guideline-box li{font-size:.86rem;margin-bottom:.45rem;}
+
+/* Protocol flow */
+.protocol-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;border-left:2px solid var(--border);padding-left:1.4rem;}
+.pf-item{position:relative;padding-bottom:1.4rem;}
+.pf-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--night);}
+.pf-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;}
+.pf-body{font-size:.88rem;color:var(--muted);}
+
+/* Ventilator box */
+.vent-box{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin:1.5rem 0;}
+.vent-box h3{margin-top:0;color:var(--teal);font-size:1.05rem;}
+.vent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+.vent-item{text-align:center;padding:.8rem;background:var(--night);border:1px solid var(--border);}
+.vent-item .num{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--rust);line-height:1;}
+.vent-item .label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.4rem;}
+
 /* Ref box */
 .refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
 .refbox h3{margin-top:0;font-size:.95rem;}
 .refbox ol{margin-left:1.1rem;}
-.refbox li{margin-bottom:.4rem;}
+.refbox li{margin-bottom:.45rem;}
 
-.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;}
 
 .disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
 
@@ -166,365 +195,740 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
 .f-logo em{font-style:italic;color:var(--gold);}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+@media(max-width:700px){
+  .pg-grid{grid-template-columns:1fr;}
+  .comp-grid{grid-template-columns:1fr;}
+  .vent-grid{grid-template-columns:1fr;}
+  .act-grid{grid-template-columns:1fr;}
+  .wilkins-grid{grid-template-columns:1fr 1fr;}
+}
 </style>
-
 </head>
 <body>
 
 <!-- NAV -->
-
 <nav>
   <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
   <ul class="nav-links">
-    <li><a href="../cases.html">Cases</a></li>
-    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#cases">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
     <li><a href="../index.html#letters">Letters</a></li>
-    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#explore">Explore</a></li>
     <li><a href="../index.html#community">Community</a></li>
     <li><a href="../index.html#about">About</a></li>
   </ul>
 </nav>
 
-<a href="../drug-deep-dives.html" class="back-link">← Back to Drug Deep Dives</a>
+<a href="../index.html#cases" class="back-link">← Back to all cases</a>
 
 <div class="wrap">
 
-  <div class="ey">Drug Deep Dive · Volatile Anaesthetic · No. 006</div>
-  <h1>Sevoflurane</h1>
-  <p class="subtitle">Sweet-smelling enough to breathe a child to sleep, and ordinary enough that the calculation behind every vaporiser dial rarely gets a second thought.</p>
+  <div class="ey">Case 006 · Cardiac · Mitral Stenosis · PBMV Complication · MVR</div>
+  <h1>The Balloon and the Right Heart: <em>When PBMV Fails in Severe Mitral Stenosis</em></h1>
+  <p class="subtitle">A 48-year-old woman with severe mitral stenosis and severe pulmonary hypertension undergoes percutaneous balloon mitral valvuloplasty — and returns with severe mitral regurgitation, pulmonary edema, and a right heart under siege.</p>
 
   <div class="meta-row">
-    <span class="tag ta">Volatile Anaesthetic</span>
-    <span class="tag tc">Inhalational Induction</span>
-    <span class="tag tk">Pediatric</span>
-    <span class="tag tp">Maintenance</span>
-    <span class="tag tt">Neuroanaesthesia</span>
+    <a href="../index.html?topic=cardiac#cases" class="tag ta" data-topic="Cardiac">Cardiac</a>
+    <a href="../index.html?topic=mitral#cases" class="tag tc" data-topic="Mitral Stenosis">Mitral Stenosis</a>
+    <a href="../index.html?topic=pbmv#cases" class="tag tk" data-topic="PBMV">PBMV</a>
+    <a href="../index.html?topic=pah#cases" class="tag tt" data-topic="Pulmonary Hypertension">Pulmonary Hypertension</a>
+    <a href="../index.html?topic=mvr#cases" class="tag ti" data-topic="MVR">MVR</a>
+    <a href="../index.html?topic=cpb#cases" class="tag tm" data-topic="CPB">CPB</a>
   </div>
 
-  <div class="quickfacts">
-    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">Halogenated Volatile Anaesthetic (Ether)</span></div>
-    <div class="qf"><span class="qf-label">MAC (40-year-old adult, O₂)</span><span class="qf-val">2.1%</span></div>
-    <div class="qf"><span class="qf-label">Blood:Gas Coefficient (37°C)</span><span class="qf-val">0.63–0.69</span></div>
-    <div class="qf"><span class="qf-label">Reversal Agent</span><span class="qf-val">None — terminate delivery, ventilate</span></div>
-  </div>
+  <p>A 48-year-old woman presented with three months of exertional breathlessness that resolved with rest. She had no chest pain, no palpitations, no orthopnoea, no oedema. She was not hypertensive, not diabetic, had no history of stroke or coronary disease. She had never smoked. Her ECG showed T-wave inversions in leads III, aVF, and V2–V6. Her echocardiogram told a different story: <strong>severe mitral stenosis, severe pulmonary hypertension, and a right heart under pressure.</strong></p>
 
-  <p>Sevoflurane has become the default volatile agent across most of modern anaesthetic practice — non-pungent enough for a mask induction in a frightened child, fast enough in onset and offset to suit day-case turnover, and stable enough in its physiological profile to be the reasonable default in the majority of cases. That very ubiquity is what makes it worth re-examining properly: a drug given in essentially every general anaesthetic deserves to be understood beyond "turn the dial and watch the number," including the parts of its story — Compound A, fluoride metabolism, emergence agitation — that get simplified into either dismissal or alarm depending on who is teaching it. Here is what matters about it, from the receptor up to the bedside.</p>
+  <p>The plan was percutaneous balloon mitral valvuloplasty (PBMV). The balloon crossed the valve, dilated it — and something went wrong. The V wave shot up. Severe mitral regurgitation. Pulmonary oedema. The patient was shifted for emergency mitral valve replacement (MVR). This case is about the right heart, the pulmonary circulation, and the anaesthetic battle to keep both alive.</p>
 
-  <div class="toc">
-    <h4>In This Deep Dive</h4>
-    <div class="toc-grid">
-      <a href="#mechanism">1. Mechanism of Action</a>
-      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
-      <a href="#effects">3. Physiological Effects, System by System</a>
-      <a href="#uses">4. Clinical Uses</a>
-      <a href="#dosing">5. Dosing &amp; MAC</a>
-      <a href="#cautions">6. Cautions, Contraindications &amp; Interactions</a>
-      <a href="#pediatric">7. Paediatric Considerations</a>
-      <a href="#bedside">8. What Actually Happens at the Bedside</a>
-      <a href="#pearls">9. Pearls &amp; Pitfalls</a>
-      <a href="#references">10. References</a>
+  <div class="divider"></div>
+
+  <h2>The Patient at a Glance</h2>
+  <div class="patient-glance">
+    <h3>Clinical snapshot</h3>
+    <div class="pg-grid">
+      <div><span class="k">Age / Sex</span><span class="v">48 years / Female</span></div>
+      <div><span class="k">Weight</span><span class="v">~60 kg</span></div>
+      <div><span class="k">Complaints</span><span class="v">Exertional dyspnoea (3 months), relieved by rest. No chest pain, palpitations, oedema.</span></div>
+      <div><span class="k">Comorbidities</span><span class="v">None. No HTN, DM, CVA, CAD, thyroid disease.</span></div>
+      <div><span class="k">Social history</span><span class="v">Non-smoker, non-alcoholic</span></div>
+      <div><span class="k">ECG</span><span class="v">T-wave inversions in III, aVF, V2–V6. Rest normal.</span></div>
+      <div><span class="k">2D Echo</span><span class="v">Severe MS, mild MR, mild AR, severe TR, severe PAH, RVSP 70 mmHg, good LVF (EF 58%), no RWMA, no vegetation, no clot (on 2D), no pericardial effusion</span></div>
+      <div><span class="k">TEE (pre-procedure)</span><span class="v">CRHD, AML doming, PML restricted mobility, severe MS, mild MR, mild AR, severe TR, severe PAH, LAA clot (organic), LA/LAA SEC present, D-shaped LV, good LV systolic function</span></div>
+      <div><span class="k">Wilkins score</span><span class="v">M3 T2 C1 S3 — 9/16</span></div>
+      <div><span class="k">Coronary angiography</span><span class="v">Normal epicardial coronaries (no significant CAD)</span></div>
+      <div><span class="k">Planned procedure</span><span class="v">Percutaneous balloon mitral valvuloplasty (PBMV)</span></div>
+      <div><span class="k">Complication</span><span class="v">Severe MR, pulmonary oedema — shifted for emergency MVR</span></div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <h2 id="mechanism">1. Mechanism of Action</h2>
-  <p>Sevoflurane is a fluorinated methyl isopropyl ether, one of the modern halogenated volatile anaesthetics that produce general anaesthesia through a mechanism still not completely resolved at the molecular level, though the broad picture is well established.</p>
-
-  <div class="mech-panel">
-    <div class="mech-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Where It Acts, and Why
-    </div>
-    <p style="margin-bottom:1rem;"><strong>GABA-A receptor potentiation:</strong> like most volatile anaesthetics, sevoflurane enhances inhibitory GABA-A mediated chloride conductance, contributing significantly to the hypnotic and amnestic components of general anaesthesia. It also has actions at glycine receptors (spinally mediated immobility) and inhibits excitatory glutamatergic transmission at certain receptor subtypes, meaning its overall anaesthetic effect is genuinely multi-receptor rather than attributable to any single molecular target.</p>
-    <p style="margin-bottom:1rem;"><strong>Two-pore-domain potassium channels:</strong> volatile anaesthetics including sevoflurane activate certain background potassium channels, hyperpolarising neurons and reducing excitability — an action increasingly implicated in the anaesthetic and analgesic components of the volatile agents as a class.</p>
-    <p style="margin-bottom:0;"><strong>No single "site of action" fully explains anaesthesia:</strong> unlike a drug such as ketamine with one dominant receptor story, volatile anaesthetics act across multiple ion channels and receptor systems simultaneously, at concentrations best described by their physical solubility characteristics (the Meyer-Overton correlation between lipid solubility and anaesthetic potency) as much as by any single binding site. This is part of why volatile anaesthetic pharmacology is taught around MAC — a population-level, empirically measured endpoint — rather than around a single receptor occupancy curve.</p>
-  </div>
-
-  <h3>Why Physical Properties Drive So Much of the Clinical Picture</h3>
-  <p>Sevoflurane's defining pharmacological features — a low blood:gas partition coefficient (~0.63–0.69) and non-pungency — explain most of what makes it clinically distinctive. Low blood solubility means relatively little drug needs to dissolve in blood before alveolar and arterial partial pressures equilibrate, producing the fast onset and, more importantly for recovery, the fast offset that has made it the default for day-case and paediatric practice. Non-pungency — the absence of airway irritation at clinically relevant concentrations — is what makes it particularly suitable among modern volatile agents for a smooth inhalational induction without triggering breath-holding, coughing, or laryngospasm.</p>
+  <h2>ECG Findings</h2>
+  <p>The ECG showed <strong>T-wave inversions in leads III, aVF, and V2–V6</strong>. These are non-specific but may reflect:</p>
+  <ul>
+    <li><strong>Right heart strain:</strong> T-wave inversions in inferior leads (III, aVF) and precordial leads (V2–V6) can indicate RV pressure overload and strain — consistent with severe pulmonary hypertension.</li>
+    <li><strong>LV diastolic overload:</strong> T-wave changes in V4–V6 can reflect altered LV filling dynamics in severe MS with reduced preload.</li>
+    <li><strong>Chronic LA hypertension:</strong> Repolarisation abnormalities are common in chronic mitral valve disease.</li>
+  </ul>
+  <p>There were no ischaemic changes, no arrhythmias, and no evidence of acute coronary syndrome. The ECG was consistent with the underlying valvular and pulmonary vascular disease.</p>
 
   <div class="divider"></div>
 
-  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
-  <p>Sevoflurane's pharmacokinetics are governed overwhelmingly by its physical solubility properties rather than by classical metabolism — it is largely eliminated unchanged via the lungs, with only a small fraction undergoing hepatic biotransformation.</p>
+  <h2>Echocardiography — 2D Findings</h2>
 
-  <table class="dose-table">
-    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+  <table class="echo-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Finding</th>
+        <th>Interpretation</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr><td><strong>Blood:gas partition coefficient (37°C)</strong></td><td>0.63–0.69</td><td>Low solubility — among the faster-onset/offset volatiles after desflurane</td></tr>
-      <tr><td><strong>Oil:gas partition coefficient</strong></td><td>~47–50</td><td>Reflects lipid solubility and correlates with anaesthetic potency (Meyer-Overton)</td></tr>
-      <tr><td><strong>MAC (40-year-old adult, 100% O₂)</strong></td><td>2.1%</td><td>Age-dependent — highest in neonates, declining progressively with age thereafter</td></tr>
-      <tr><td><strong>MAC (neonates)</strong></td><td>~3.3%</td><td>Highest requirement across all age groups; MAC in premature infants has not been determined</td></tr>
-      <tr><td><strong>MAC (1–6 months)</strong></td><td>~3.0%</td><td>Declining from neonatal peak but still above adult values</td></tr>
-      <tr><td><strong>MAC (6 months–3 years)</strong></td><td>~2.8%</td><td>Continues to decline through early childhood</td></tr>
-      <tr><td><strong>MAC (3–12 years)</strong></td><td>~2.5%</td><td>Approaches adult values by adolescence</td></tr>
-      <tr><td><strong>Hepatic metabolism</strong></td><td>~2–5% of absorbed dose</td><td>Low compared with older agents (e.g. halothane); reduces but does not eliminate metabolic byproduct concerns</td></tr>
-      <tr><td><strong>Primary metabolic pathway</strong></td><td>CYP2E1-mediated defluorination</td><td>Produces inorganic fluoride and hexafluoroisopropanol (HFIP)</td></tr>
-      <tr><td><strong>Elimination</strong></td><td>Predominantly pulmonary (unchanged), remainder renal (as metabolites)</td><td>Recovery time is governed mainly by ventilation/washout, not hepatic clearance</td></tr>
+      <tr>
+        <td><span class="label">LV function</span></td>
+        <td><span class="val">EF 58%, no RWMA</span></td>
+        <td>Good LV systolic function. No regional wall motion abnormality.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Mitral valve area</span></td>
+        <td><span class="val">1.2 cm² (planimetry)</span></td>
+        <td>Severe mitral stenosis (normal MVA 4–6 cm²; severe &lt;1.5 cm²).</td>
+      </tr>
+      <tr>
+        <td><span class="label">Mitral gradient</span></td>
+        <td><span class="val">27/10 mmHg</span></td>
+        <td>Elevated mean gradient consistent with severe MS.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Mitral regurgitation</span></td>
+        <td><span class="val">Mild MR</span></td>
+        <td>Mild — not the dominant lesion at this stage.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Aortic regurgitation</span></td>
+        <td><span class="val">Mild AR</span></td>
+        <td>Mild — unlikely to require intervention.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Tricuspid regurgitation</span></td>
+        <td><span class="val">Severe TR</span></td>
+        <td>Functional TR secondary to severe PAH and RV dilation.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Pulmonary artery pressure</span></td>
+        <td><span class="val">RVSP 70 mmHg</span></td>
+        <td>Severe pulmonary hypertension.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Pericardium</span></td>
+        <td><span class="val">No effusion</span></td>
+        <td>Normal.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Clot / vegetation</span></td>
+        <td><span class="val">None on 2D</span></td>
+        <td>2D echo did not detect LAA clot — TEE later revealed organic clot.</td>
+      </tr>
     </tbody>
   </table>
 
-  <h3>How Sevoflurane Compares to the Other Volatiles</h3>
-  <p>Blood:gas solubility is the single best predictor of how quickly a volatile agent's alveolar concentration — and therefore depth of anaesthesia — changes when the vaporiser setting is adjusted. Lower solubility means faster equilibration in both directions.</p>
-  <div class="receptor-bars">
-    <div class="rb-row">
-      <span class="rb-label">Desflurane</span>
-      <div class="rb-track"><div class="rb-fill" style="width:24%;"></div></div>
-      <span class="rb-val">~0.42</span>
-    </div>
-    <div class="rb-row">
-      <span class="rb-label">Sevoflurane</span>
-      <div class="rb-track"><div class="rb-fill" style="width:38%;"></div></div>
-      <span class="rb-val">~0.63–0.69</span>
-    </div>
-    <div class="rb-row">
-      <span class="rb-label">Isoflurane</span>
-      <div class="rb-track"><div class="rb-fill" style="width:80%;"></div></div>
-      <span class="rb-val">~1.4</span>
-    </div>
-  </div>
-  <p style="font-size:.75rem;color:var(--faint);margin-top:-.5rem;">Blood:gas partition coefficients — lower values mean faster equilibration (onset and offset). Bar length is illustrative of relative solubility, not to a strict linear scale.</p>
-
-  <div class="divider"></div>
-
-  <h2 id="effects">3. Physiological Effects, System by System</h2>
-
-  <h3>Cardiovascular</h3>
-  <p>Dose-dependent reduction in systemic vascular resistance and a modest direct negative inotropic effect, with the vasodilatory component generally predominating at clinical concentrations — producing a fall in mean arterial pressure that is a predictable consequence of increasing depth rather than a sign of pathological cardiac depression in the healthy patient. Heart rate is generally well preserved — a notable difference from some other volatile agents — and sevoflurane does not sensitise the myocardium to catecholamine-induced arrhythmias to the degree that halothane historically did, making it compatible with epinephrine-containing local infiltration during the same anaesthetic. The arrhythmogenic threshold with epinephrine during sevoflurane anaesthesia is substantially higher than with halothane, and comparable to isoflurane.</p>
-
-  <h3>Respiratory</h3>
-  <p>Produces dose-dependent respiratory depression — reduced tidal volume with a compensatory but incomplete rise in respiratory rate, net reduction in minute ventilation, and blunting of the ventilatory response to hypercapnia and hypoxia. Non-pungent and generally well tolerated by the airway even at higher inspired concentrations, in contrast to desflurane and isoflurane, which is the basis for its particular suitability for inhalational induction. Produces bronchodilation, useful in patients with reactive airway disease once anaesthesia is established.</p>
-
-  <h3>Central Nervous System</h3>
-  <p>Dose-dependent reduction in cerebral metabolic rate of oxygen consumption (CMRO2) alongside a direct, dose-dependent cerebral vasodilatory effect. Cerebral autoregulation is generally preserved at lower MAC values, but volatile anaesthetics impair autoregulation in a dose-dependent fashion; with sevoflurane, autoregulation is maintained up to approximately 1.5 MAC, above which it becomes impaired. In patients with reduced intracranial compliance, the balance between reduced cerebral metabolic demand and the vasodilation accompanying higher concentrations warrants careful titration and attention to CO2 management rather than a fixed MAC threshold. Amnesia and hypnosis are reliable at standard MAC values. Sevoflurane has a well-documented association with <strong>emergence agitation/delirium</strong>, particularly in the paediatric population, discussed further below.</p>
-
-  <h3>Neuromuscular</h3>
-  <p>Produces dose-dependent skeletal muscle relaxation independent of neuromuscular blocking agents, and meaningfully potentiates both depolarising and non-depolarising neuromuscular blockers — relevant when titrating muscle relaxant dosing during a volatile-based anaesthetic.</p>
-
-  <h3>Other</h3>
-  <p>Genuine uterine relaxant effect at higher MAC values, relevant in obstetric anaesthesia where uterine tone must be considered (e.g. retained placenta, uterine inversion) versus where it must be avoided (risk of increased postpartum bleeding at higher concentrations). Does trigger malignant hyperthermia in susceptible individuals — one of the clearest and most important contraindications in anaesthetic practice, addressed in the cautions section.</p>
-
-  <div class="divider"></div>
-
-  <h2 id="uses">4. Clinical Uses</h2>
-  <p>Sevoflurane's combination of non-pungency, favourable haemodynamic profile, and relatively fast titration has made it the default volatile agent across most routine anaesthetic practice, with particular strength in a few specific settings.</p>
-
-  <div class="use-grid">
-    <div class="use-card">
-      <h4>Inhalational Induction</h4>
-      <p>A preferred agent for mask induction, especially in children, owing to its non-pungent odour and tolerability at increasing concentrations without airway irritation.</p>
-    </div>
-    <div class="use-card">
-      <h4>Maintenance of General Anaesthesia</h4>
-      <p>Standard maintenance agent across the majority of elective and emergency surgical cases where volatile-based (rather than total intravenous) anaesthesia is chosen.</p>
-    </div>
-    <div class="use-card">
-      <h4>Day-Case / Ambulatory Anaesthesia</h4>
-      <p>Relatively fast emergence supports same-day discharge pathways, though desflurane offers a modestly faster offset where turnover time is the dominant priority.</p>
-    </div>
-    <div class="use-card">
-      <h4>Neuroanaesthesia</h4>
-      <p>Widely used at controlled MAC values, with attention to CO2 and blood pressure management, and awareness that cerebral vasodilation becomes more clinically relevant at higher concentrations.</p>
-    </div>
-    <div class="use-card">
-      <h4>Paediatric Anaesthesia</h4>
-      <p>A default agent for both induction and maintenance in children across most of modern paediatric anaesthetic practice, for the reasons detailed in the dedicated section below.</p>
-    </div>
-    <div class="use-card">
-      <h4>Cases Requiring Preserved Haemodynamics</h4>
-      <p>Relatively well-preserved heart rate and moderate blood pressure effects make it a reasonable default in many cardiac and haemodynamically sensitive cases, alongside appropriate monitoring and adjunct agents.</p>
-    </div>
-    <div class="use-card">
-      <h4>Bronchospasm-Prone Patients</h4>
-      <p>Bronchodilator properties and airway tolerability make it a favoured maintenance agent once the airway is secured in patients with reactive airway disease.</p>
-    </div>
-    <div class="use-card">
-      <h4>Sedation via Volatile Agent (Select ICU Settings)</h4>
-      <p>Used in some ICU settings via dedicated delivery systems for sedation, an application distinct from and additional to its role as a surgical anaesthetic. Evidence supports inhaled sedation in select critically ill patients, though a recent RCT in moderate-to-severe ARDS found worse outcomes with sevoflurane compared with propofol, underscoring the need for careful patient selection.</p>
-    </div>
+  <div class="alert-box">
+    <h3>The 2D echo missed the LAA clot</h3>
+    <p>The 2D transthoracic echo reported "no clot." The pre-procedure TEE revealed <strong>organic clot in the left atrial appendage (LAA)</strong> with spontaneous echo contrast (SEC) and reduced LAA emptying velocity (38 cm/s). This is a critical teaching point: <strong>TEE is far more sensitive than TTE for LAA thrombus detection</strong>. In patients with severe MS, LA dilation, and SEC, TEE is mandatory before PBMV.</p>
   </div>
 
   <div class="divider"></div>
 
-  <h2 id="dosing">5. Dosing &amp; MAC</h2>
-  <p>Volatile anaesthetic "dosing" is expressed as inspired or end-tidal concentration relative to MAC (minimum alveolar concentration) — the alveolar concentration at 1 atmosphere that prevents movement in 50% of subjects in response to a standardised surgical stimulus — rather than as a weight-based milligram dose.</p>
+  <h2>Echocardiography — TEE Findings</h2>
 
-  <table class="dose-table">
-    <thead><tr><th>Population / Context</th><th>Typical MAC value</th><th>Notes</th></tr></thead>
+  <table class="echo-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Finding</th>
+        <th>Interpretation</th>
+      </tr>
+    </thead>
     <tbody>
       <tr>
-        <td><strong>40-year-old adult, 100% O₂</strong></td>
-        <td>2.1%</td>
-        <td>Standard reference value; individual requirement varies</td>
+        <td><span class="label">Valve morphology</span></td>
+        <td><span class="val">AML doming, PML restricted mobility</span></td>
+        <td>Classic rheumatic MS. Anterior leaflet pliable, posterior leaflet immobile.</td>
       </tr>
       <tr>
-        <td><strong>Neonate (0–1 month)</strong></td>
-        <td>~3.3%</td>
-        <td>Highest MAC across all age groups; premature infant MAC not determined</td>
+        <td><span class="label">MVA (planimetry)</span></td>
+        <td><span class="val">1.4 cm²</span></td>
+        <td>Severe MS (TEE measurement slightly larger than TTE).</td>
       </tr>
       <tr>
-        <td><strong>Infant (1–6 months)</strong></td>
-        <td>~3.0%</td>
-        <td>Declining from neonatal peak</td>
+        <td><span class="label">MVA (PHT)</span></td>
+        <td><span class="val">1.1 cm²</span></td>
+        <td>Pressure half-time derived MVA — consistent with severe MS.</td>
       </tr>
       <tr>
-        <td><strong>Infant/young child (6 months–3 years)</strong></td>
-        <td>~2.8%</td>
-        <td>Continues to decline through early childhood</td>
+        <td><span class="label">Mitral gradient</span></td>
+        <td><span class="val">21/16 mmHg</span></td>
+        <td>Elevated gradient across the mitral valve.</td>
       </tr>
       <tr>
-        <td><strong>Child (3–12 years)</strong></td>
-        <td>~2.5%</td>
-        <td>Approaches adult values by adolescence</td>
+        <td><span class="label">Subvalvular thickening</span></td>
+        <td><span class="val">Grade 3</span></td>
+        <td>Significant subvalvular disease — makes PBMV technically more difficult and less likely to succeed.</td>
       </tr>
       <tr>
-        <td><strong>Elderly</strong></td>
-        <td>Reduced (~6–7% decline per decade beyond 40 years, as with other volatiles)</td>
-        <td>Titrate to lower end-tidal targets; age-related MAC reduction applies across all volatile agents</td>
+        <td><span class="label">Mitral regurgitation</span></td>
+        <td><span class="val">Mild MR</span></td>
+        <td>Mild — not a contraindication to PBMV at this stage.</td>
       </tr>
       <tr>
-        <td><strong>With concurrent N₂O</strong></td>
-        <td>Reduced requirement</td>
-        <td>MAC values for N₂O and volatile agents are broadly additive, though the interaction is not strictly linear — sub-MAC N₂O has been shown to decrease volatile requirement non-linearly</td>
+        <td><span class="label">Aortic regurgitation</span></td>
+        <td><span class="val">Mild AR (jet 20% of LVOT, PHT 670 ms)</span></td>
+        <td>Mild — haemodynamically insignificant.</td>
       </tr>
       <tr>
-        <td><strong>With concurrent opioid</strong></td>
-        <td>Significant MAC reduction (MAC-sparing effect)</td>
-        <td>Reduces required volatile concentration substantially; anticipate rather than discover this interaction</td>
+        <td><span class="label">LAA clot</span></td>
+        <td><span class="val">Organic clot present</span></td>
+        <td>Contraindication to PBMV (risk of embolisation).</td>
       </tr>
       <tr>
-        <td><strong>Inhalational induction (mask)</strong></td>
-        <td>May be achieved by inhalation of 0.5–1.0% sevoflurane in oxygen, increasing by increments of 0.5–1.0% to a maximum of 8% until the required depth is achieved</td>
-        <td>An initial concentration of 8% is also commonly used, or the concentration can be gradually increased; titrate down promptly once depth is adequate</td>
+        <td><span class="label">LAA emptying velocity</span></td>
+        <td><span class="val">38 cm/s</span></td>
+        <td>Reduced (&lt;40 cm/s indicates stasis and high thrombus risk).</td>
       </tr>
       <tr>
-        <td><strong>Maintenance (typical)</strong></td>
-        <td>0.5–1.3 MAC, individualised to clinical response; typical end-tidal 1.5–2.5%</td>
-        <td>Titrate to clinical signs and, where available, processed EEG or end-tidal monitoring rather than a fixed number</td>
+        <td><span class="label">Spontaneous echo contrast</span></td>
+        <td><span class="val">Present in LA/LAA</span></td>
+        <td>"Smoke" — indicates blood stasis, high risk of thrombus formation.</td>
+      </tr>
+      <tr>
+        <td><span class="label">Tricuspid valve</span></td>
+        <td><span class="val">Annulus dilated, severe TR</span></td>
+        <td>Functional TR from RV dilation and severe PAH.</td>
+      </tr>
+      <tr>
+        <td><span class="label">TR jet velocity</span></td>
+        <td><span class="val">5.08 m/s</span></td>
+        <td>Corresponds to a high RV–RA gradient, consistent with severe PAH.</td>
+      </tr>
+      <tr>
+        <td><span class="label">RVSP</span></td>
+        <td><span class="val">~100 mmHg (PVSP)</span></td>
+        <td>Severe pulmonary hypertension.</td>
+      </tr>
+      <tr>
+        <td><span class="label">RA / RV</span></td>
+        <td><span class="val">Dilated</span></td>
+        <td>Right heart enlargement from chronic pressure overload.</td>
+      </tr>
+      <tr>
+        <td><span class="label">LV shape</span></td>
+        <td><span class="val">D-shaped LV</span></td>
+        <td>Septal flattening due to RV pressure overload — impairs LV filling.</td>
+      </tr>
+      <tr>
+        <td><span class="label">LV function</span></td>
+        <td><span class="val">Good systolic function</span></td>
+        <td>Preserved LV contractility.</td>
       </tr>
     </tbody>
   </table>
-  <p style="font-size:.78rem;color:var(--faint);">Figures are illustrative and drawn from commonly cited ranges in the anaesthesia literature. Always confirm against your institution's protocol, vaporiser calibration, and current product labelling — MAC and dosing figures here are not a substitute for local guidelines or individualised titration.</p>
 
-  <div class="caution-box">
-    <h3>MAC Is a Population Statistic, Not a Patient-Specific Guarantee</h3>
-    <p>MAC values describe the concentration at which half of a studied population does not move in response to a standardised stimulus — by definition, roughly half of any population requires more, and individual variation is genuinely wide. Age, other co-administered agents, temperature, and acute intoxication or chronic substance use all shift requirement meaningfully. Treat published MAC values as a starting reference for titration, not as a number expected to produce adequate anaesthesia in every patient at that exact setting.</p>
+  <div class="divider"></div>
+
+  <h2>The Wilkins Score</h2>
+  <p>The Wilkins score predicts the likelihood of successful PBMV based on valve morphology. Each component is scored 0–4, with a maximum of 16. A score ≤8 predicts a good result; &gt;8 predicts a poorer outcome.</p>
+
+  <div class="wilkins-grid">
+    <div class="wilkins-cell">
+      <div class="label">Morphology</div>
+      <div class="score">3</div>
+      <div class="max">/ 4</div>
+    </div>
+    <div class="wilkins-cell">
+      <div class="label">Motion</div>
+      <div class="score">2</div>
+      <div class="max">/ 4</div>
+    </div>
+    <div class="wilkins-cell">
+      <div class="label">Calcification</div>
+      <div class="score">1</div>
+      <div class="max">/ 4</div>
+    </div>
+    <div class="wilkins-cell">
+      <div class="label">Subvalvular</div>
+      <div class="score">3</div>
+      <div class="max">/ 4</div>
+    </div>
+  </div>
+
+  <div class="pearl-box">
+    <h3>Wilkins score 9/16 — borderline</h3>
+    <p>A score of 9 is above the ideal threshold of 8. The high subvalvular score (3) and morphology score (3) indicate significant leaflet and subvalvular disease. This predicts a <strong>higher risk of suboptimal PBMV result</strong> and a greater likelihood of complications, including leaflet tear and severe MR. The presence of LAA clot further complicates the decision.</p>
   </div>
 
   <div class="divider"></div>
 
-  <h2 id="cautions">6. Cautions, Contraindications &amp; Interactions</h2>
+  <h2>Pathophysiology of Severe Mitral Stenosis</h2>
+  <p>Severe MS is not just a valve problem — it is a haemodynamic cascade that affects the left atrium, pulmonary circulation, right heart, and eventually the left ventricle.</p>
 
-  <h3>Absolute Contraindications</h3>
-  <ul>
-    <li><strong>Known or suspected malignant hyperthermia susceptibility</strong> — sevoflurane is a recognised MH trigger agent; this is an absolute contraindication addressed in detail below</li>
-    <li><strong>Known hypersensitivity</strong> to sevoflurane or other halogenated agents</li>
-  </ul>
+  <div class="patho-flow">
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Obstruction at the mitral valve</div>
+        <div class="patho-text">Restricted opening of the mitral valve creates a pressure gradient between the left atrium and left ventricle. Normal MVA is 4–6 cm²; this patient's MVA was 1.2–1.4 cm².</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Left atrial hypertension</div>
+        <div class="patho-text">Elevated LA pressure (mean 24 mmHg pre-PBMV) leads to LA dilation, increased wall stress, and a predisposition to atrial fibrillation.</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Pulmonary venous congestion</div>
+        <div class="patho-text">Backward transmission of pressure into the pulmonary veins causes pulmonary venous and capillary hypertension, leading to interstitial and alveolar oedema, reduced lung compliance, and increased work of breathing.</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Reactive pulmonary hypertension</div>
+        <div class="patho-text">Chronic pulmonary venous hypertension triggers vasoconstriction and structural remodelling of the pulmonary arterioles. This patient had severe PAH with RVSP ~70–100 mmHg.</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Right ventricular pressure overload</div>
+        <div class="patho-text">The RV must generate higher pressures to overcome pulmonary vascular resistance. This leads to RV hypertrophy, dilation, and eventually dysfunction.</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Septal shift and D-shaped LV</div>
+        <div class="patho-text">RV dilation pushes the interventricular septum leftward, compressing the LV cavity. The LV becomes D-shaped, impairing diastolic filling and reducing stroke volume.</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">Reduced LV preload and cardiac output</div>
+        <div class="patho-text">The combination of mitral obstruction, septal shift, and reduced LV compliance leads to low LV end-diastolic volume and low cardiac output. The patient becomes dependent on adequate preload and sinus rhythm.</div>
+      </div>
+    </div>
+    <div class="patho-item">
+      <div class="patho-arrow">→</div>
+      <div class="patho-content">
+        <div class="patho-label">LAA stasis and thrombus formation</div>
+        <div class="patho-text">LA dilation and low LAA emptying velocity (38 cm/s) predispose to blood stasis, spontaneous echo contrast, and thrombus formation — as seen in this patient.</div>
+      </div>
+    </div>
+  </div>
 
-  <h3>Use With Caution</h3>
-  <ul>
-    <li>Significantly reduced intracranial compliance — dose-dependent cerebral vasodilation warrants careful titration, CO2 management, and attention to the balance between reduced cerebral metabolic demand and vasodilation at higher concentrations</li>
-    <li>Haemodynamically unstable or hypovolaemic patients — vasodilatory hypotension can be more pronounced</li>
-    <li>Personal or family history of significant emergence agitation with prior volatile anaesthesia, particularly in children</li>
-    <li>Renal impairment — while human evidence has not demonstrated clinically significant harm, individualised judgement remains reasonable in high-risk renal patients, per the Compound A discussion below</li>
-  </ul>
+  <div class="pearl-box">
+    <h3>The right heart is the problem</h3>
+    <p>In severe MS with severe PAH, the <strong>right ventricle is the vulnerable chamber</strong>. It is pressure-loaded, dilated, and poorly tolerant of any additional afterload increase. Anaesthetic management must focus on protecting the RV: maintaining systemic vascular tone, avoiding hypoxia and hypercarbia, preserving sinus rhythm, and using pulmonary vasodilators and inotropes judiciously.</p>
+  </div>
 
-  <h3>Interactions</h3>
+  <div class="divider"></div>
+
+  <h2>Pulmonary Hypertension and the Right Heart</h2>
+  <p>Severe pulmonary hypertension (RVSP ~70–100 mmHg) in this patient was not a passive consequence — it was an active driver of morbidity and the central challenge for anaesthetic management.</p>
+
+  <h3>Why the right heart fails under pressure</h3>
   <ul>
-    <li><strong>Opioids and other sedative-hypnotics:</strong> significant MAC-sparing effect — reduces the volatile concentration required, and this should be anticipated in dosing rather than discovered as unexpectedly deep anaesthesia</li>
-    <li><strong>Nitrous oxide:</strong> MAC values for N₂O and volatile agents are broadly additive, though the interaction is not strictly linear; sub-MAC N₂O has been shown to decrease volatile requirement non-linearly, allowing a lower sevoflurane concentration for the same anaesthetic depth</li>
-    <li><strong>Neuromuscular blocking agents:</strong> potentiated by sevoflurane, allowing reduced dosing of the blocking agent</li>
-    <li><strong>Epinephrine (local infiltration):</strong> considerably better tolerated with sevoflurane than with older agents like halothane, with a substantially higher arrhythmogenic threshold — the dose required to induce arrhythmia is approximately 11 times higher during sevoflurane anaesthesia than during halothane anaesthesia, and comparable to isoflurane</li>
+    <li><strong>The RV is a volume pump, not a pressure pump:</strong> The thin-walled RV is designed to eject into a low-resistance pulmonary circuit. When PVR rises, the RV must generate much higher pressures to maintain forward flow.</li>
+    <li><strong>RV ischaemia:</strong> RV hypertrophy increases oxygen demand, while systemic hypotension reduces coronary perfusion to the RV. This supply–demand mismatch can precipitate RV failure.</li>
+    <li><strong>Interventricular dependence:</strong> RV dilation shifts the septum leftward, impairing LV filling and reducing cardiac output. This creates a vicious cycle: RV failure → LV failure → systemic hypotension → RV ischaemia.</li>
+    <li><strong>Pulmonary hypertensive crisis:</strong> Any stimulus that acutely increases PVR — hypoxia, hypercarbia, acidosis, pain, light anaesthesia, hypothermia — can trigger a catastrophic rise in pulmonary pressures, leading to RV failure and cardiovascular collapse.</li>
   </ul>
 
   <div class="alert-box">
-    <h3>Malignant Hyperthermia</h3>
-    <p>Sevoflurane is a recognised triggering agent for malignant hyperthermia in genetically susceptible individuals (most commonly RYR1 mutation carriers), a life-threatening hypermetabolic crisis presenting with rising end-tidal CO2, tachycardia, muscle rigidity, and hyperthermia (often a late sign rather than an early one). Known or strongly suspected MH susceptibility is an absolute contraindication to sevoflurane and all other volatile triggering agents. Management follows the current Malignant Hyperthermia Association of the United States (MHAUS) protocol: stop the triggering agent immediately, hyperventilate with 100% oxygen on a non-triggering circuit, give dantrolene promptly per current weight-based dosing, and initiate active cooling and supportive management of the metabolic derangements that follow. Confirm your institution's current MH protocol and dantrolene stocking location before starting any case, not during one.</p>
-  </div>
-
-  <div class="caution-box">
-    <h3>Compound A and Low Fresh Gas Flow: The Current Picture</h3>
-    <p>Sevoflurane reacts with strong-base CO2 absorbents (particularly those containing KOH) to form Compound A, a degradation product shown to be nephrotoxic in rat models at high, prolonged exposure. The FDA product label remains conservative — recommending fresh gas flows of at least 2 L/min and specifically advising against flows under 1 L/min — but this labelling is based on animal data that has not been replicated in humans. The American Society of Anesthesiologists issued a formal statement in 2023 concluding that "there is no reasonable evidence to support a lower limit of fresh gas flow when using sevoflurane," and the Society actively supports low-flow practice given its economic and environmental benefits. Extensive human research has found no evidence of clinically significant renal injury from Compound A exposure. European anaesthetic practice, which never introduced minimal FGF restrictions, routinely uses low flows. Furthermore, modern CO2 absorbents formulated with limited or no NaOH/KOH produce negligible Compound A even at low flows. In practice: a genuine divergence persists between conservative product labelling and current clinical evidence and institutional practice — know what your institution's protocol and CO2 absorbent specify, and don't treat either "Compound A is a real, common clinical danger" or "Compound A is entirely outdated and irrelevant" as the complete picture.</p>
+    <h3>The D-shaped LV</h3>
+    <p>The D-shaped LV on TEE is a direct sign of RV pressure overload. It means the RV is pushing the septum into the LV cavity, reducing LV filling. This is a <strong>red flag for severe RV strain</strong> and predicts difficult haemodynamic management, especially during induction and CPB weaning.</p>
   </div>
 
   <div class="divider"></div>
 
-  <h2 id="pediatric">7. Paediatric Considerations</h2>
-  <p>Sevoflurane's paediatric role is arguably its single strongest clinical application — the reason it largely displaced halothane as the paediatric inhalational induction agent of choice once it became widely available.</p>
+  <h2>The PBMV Procedure — What Happened</h2>
+  <p>Percutaneous balloon mitral valvuloplasty (PBMV) is a catheter-based procedure that dilates the stenotic mitral valve using a balloon. The standard technique is the <strong>Inoue balloon</strong>, which is advanced from the femoral vein, across the interatrial septum, into the left atrium, and then across the mitral valve into the left ventricle.</p>
+
+  <div class="protocol-flow">
+    <div class="pf-item">
+      <div class="pf-title">Step 1 — Femoral venous access</div>
+      <div class="pf-body">The right femoral vein is cannulated, and a guidewire is advanced into the right atrium.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 2 — Transseptal puncture</div>
+      <div class="pf-body">A needle is advanced through the interatrial septum to enter the left atrium. This is a critical step — it must be performed under TEE or fluoroscopic guidance.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 3 — Balloon advancement</div>
+      <div class="pf-body">The Inoue balloon is advanced over a wire across the mitral valve into the left ventricle. The distal portion of the balloon is inflated first, then the proximal portion — this "stepwise" inflation helps anchor the balloon across the valve.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 4 — Balloon inflation and deflation</div>
+      <div class="pf-body">The balloon is inflated to dilate the valve commissures. The goal is to split the fused commissures without causing leaflet tear or severe MR.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 5 — Assessment</div>
+      <div class="pf-body">Post-dilation, the valve area, gradient, and MR are assessed. In this patient, the post-PBMV V wave was ~80 mmHg, and echo showed <strong>severe MR</strong>.</div>
+    </div>
+  </div>
+
+  <h3>The Complication</h3>
+  <p>Post-PBMV, the patient developed <strong>severe mitral regurgitation</strong>. The V wave on left atrial pressure tracing rose to ~75–80 mmHg — a giant V wave indicating severe MR. The patient developed pulmonary oedema and was shifted to the ICU, then to the operating room for emergency MVR.</p>
+
+  <table class="echo-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Pre-PBMV</th>
+        <th>Post-PBMV</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="label">LA mean pressure</span></td>
+        <td><span class="val">24 mmHg</span></td>
+        <td><span class="val">Elevated (not specified)</span></td>
+      </tr>
+      <tr>
+        <td><span class="label">V wave</span></td>
+        <td><span class="val">34 mmHg</span></td>
+        <td><span class="val">75–80 mmHg</span></td>
+      </tr>
+      <tr>
+        <td><span class="label">LVEDP</span></td>
+        <td><span class="val">0–6 mmHg</span></td>
+        <td><span class="val">—</span></td>
+      </tr>
+      <tr>
+        <td><span class="label">Mitral gradient</span></td>
+        <td><span class="val">18 mmHg</span></td>
+        <td><span class="val">Reduced (but MR dominates)</span></td>
+      </tr>
+      <tr>
+        <td><span class="label">Mitral regurgitation</span></td>
+        <td><span class="val">Mild</span></td>
+        <td><span class="val">Severe</span></td>
+      </tr>
+      <tr>
+        <td><span class="label">Clinical status</span></td>
+        <td><span class="val">Stable</span></td>
+        <td><span class="val">Pulmonary oedema</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert-box">
+    <h3>Why PBMV failed in this patient</h3>
+    <p>Several factors predicted a poor outcome:</p>
+    <ul>
+      <li><strong>Wilkins score 9/16:</strong> Above the ideal threshold of 8, indicating significant leaflet and subvalvular disease.</li>
+      <li><strong>Subvalvular grade 3:</strong> Severe subvalvular thickening makes commissural splitting difficult and increases the risk of leaflet tear.</li>
+      <li><strong>LAA clot:</strong> A contraindication to PBMV due to embolic risk. The presence of organic clot and SEC indicates a high-risk atrium.</li>
+      <li><strong>Severe PAH:</strong> The right heart was already under pressure; the acute volume overload from severe MR precipitated pulmonary oedema and RV failure.</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>The Decision to Proceed with MVR</h2>
+  <p>Following the failed PBMV, the patient developed severe MR with pulmonary oedema. Medical management was insufficient. The decision was made to proceed with <strong>emergency mitral valve replacement (MVR)</strong> on cardiopulmonary bypass.</p>
+
+  <p>The anaesthetic plan needed to address:</p>
   <ul>
-    <li><strong>Non-pungency</strong> makes it genuinely tolerable for mask induction in an awake, often frightened child, without the breath-holding and airway irritation that made older agents unsuitable for this purpose.</li>
-    <li>MAC requirement is <strong>highest in neonates and infants</strong>, declining progressively through childhood toward adult values — a pattern opposite to the commonly assumed peak in early infancy. Neonates have the highest MAC (~3.3%), which declines to ~3.0% at 1–6 months, ~2.8% at 6 months–3 years, and ~2.5% at 3–12 years.</li>
-    <li><strong>Emergence agitation/delirium</strong> is a well-documented phenomenon associated with sevoflurane in children — characterised by inconsolable crying, thrashing, and disorientation in the immediate recovery period, typically self-limiting but distressing for the child, family, and recovery staff. Risk factors include younger age, ophthalmology and ENT procedures, and rapid emergence; strategies including adequate analgesia, a calm emergence environment, and pharmacological adjuncts (such as low-dose dexmedetomidine) are used to reduce incidence.</li>
-    <li>The cardiovascular stability and airway tolerability that make sevoflurane suitable for adults apply equally, and arguably more importantly, in children with less physiological reserve to buffer a poorly tolerated induction.</li>
-    <li>Bradycardia during sevoflurane induction is a recognised phenomenon in some paediatric populations, with a notably higher incidence reported in children with Down syndrome (trisomy 21), with and without congenital heart disease. When it occurs, it is generally transient and resolves with reduction of inspired concentration, though continuous ECG monitoring during induction is prudent.</li>
+    <li><strong>Severe pulmonary hypertension</strong> with a dilated, pressure-loaded RV.</li>
+    <li><strong>D-shaped LV</strong> with impaired filling and a small effective cavity.</li>
+    <li><strong>Severe MR</strong> with pulmonary oedema and acute volume overload of the LA and pulmonary circulation.</li>
+    <li><strong>Right heart failure risk</strong> during induction, CPB, and weaning.</li>
+    <li><strong>Coagulopathy</strong> from CPB and the need for blood products.</li>
+    <li><strong>Postoperative ventilation</strong> — the patient was not extubated at the end of the case.</li>
   </ul>
 
   <div class="divider"></div>
 
-  <h2 id="bedside">8. What Actually Happens at the Bedside</h2>
-  <p>The textbook version of sevoflurane use is a straightforward vaporiser dial, a MAC target, and a predictable, controllable depth of anaesthesia throughout the case. The bedside version has more texture than that.</p>
-  <p>The first thing worth genuine attention during an inhalational induction, particularly in a child, is that the transition from awake to anaesthetised is not always as smooth as the drug's non-pungent reputation suggests. A distressed, crying child breathing irregularly through a mask delivers a genuinely unpredictable dose compared with the calm, cooperative induction described in teaching demonstrations — and the excitement phase of induction (a normal, expected stage where movement, breath-holding, or laryngospasm risk can transiently increase) deserves the same vigilance whether or not the child appeared to be settling nicely a moment before.</p>
-  <p>The second thing is that MAC-sparing from co-administered opioid is easy to underestimate in the moment, particularly midway through a case when a large opioid bolus has just been given for a specific stimulus. The reflexive instinct to keep the vaporiser at the same setting that worked earlier in the case can produce a deeper plane of anaesthesia than intended once the opioid takes full effect — worth actively reassessing and reducing the volatile concentration proactively rather than only in response to a falling blood pressure that has already happened.</p>
-  <p>The third thing is that emergence agitation in children is genuinely distressing to witness for parents and staff even when it is expected and self-limiting, and preparing a family for the possibility ahead of time — rather than explaining it only after it has already happened — changes how the whole experience is received. A calm, quiet recovery environment and adequate analgesia going into emergence measurably reduce both the incidence and the intensity of the reaction, and are worth building into the plan before the case starts rather than treating emergence agitation purely as something to manage reactively once it appears.</p>
+  <h2>Anaesthetic Management</h2>
 
-  <div class="divider"></div>
-
-  <h2 id="pearls">9. Pearls &amp; Pitfalls</h2>
+  <h3>Pre-induction planning</h3>
+  <p>The patient was shifted to the cardiac operating room with continuous monitoring. The goals were:</p>
+  <ul>
+    <li>Maintain <strong>systemic vascular tone</strong> to preserve coronary perfusion to the RV.</li>
+    <li>Avoid <strong>hypoxia, hypercarbia, and acidosis</strong> — all increase PVR.</li>
+    <li>Maintain <strong>sinus rhythm</strong> or controlled ventricular rate. Tachycardia reduces diastolic filling time in MS; bradycardia reduces cardiac output.</li>
+    <li>Ensure adequate <strong>preload</strong> but avoid over-transfusion, which can worsen pulmonary oedema.</li>
+    <li>Have <strong>inotropes, vasopressors, and pulmonary vasodilators</strong> ready before induction.</li>
+  </ul>
 
   <div class="pearl-box">
-    <h3>The Core Takeaway</h3>
-    <p>Sevoflurane earns its status as the default volatile through a genuinely favourable combination of properties — but "default" should not become "unexamined." MAC-sparing interactions, the Compound A evidence-versus-label divergence, and paediatric emergence phenomena are all real, specific pieces of pharmacology that deserve active management, not passive assumption that the drug will simply behave itself because it usually does.</p>
+    <h3>Induction goals in severe PAH</h3>
+    <p>The induction agent should provide <strong>haemodynamic stability</strong> without significant drops in SVR or increases in PVR. Options include <strong>etomidate</strong> (haemodynamically neutral), <strong>ketamine</strong> (sympathomimetic, but may increase PVR), or a <strong>high-dose opioid technique</strong> (fentanyl or remifentanil). Propofol should be used cautiously — it can cause significant vasodilation and hypotension.</p>
   </div>
 
-  <div class="honest-box">
-    <h3>The Honest Bit</h3>
-    <p>Very little about sevoflurane is genuinely controversial in the way its reputation for the Compound A debate might suggest — the overwhelming weight of human clinical evidence supports its safety at standard and low fresh gas flows, and the ASA's 2023 statement explicitly supports low-flow practice. What is worth honest acknowledgment is that regulatory labelling and clinical evidence have not fully converged on this point, and that reasonable, well-informed clinicians and institutions currently land in different places on low-flow practice as a result. That is a genuine, current state of affairs rather than a settled fact in either direction, and it is worth knowing rather than assuming.</p>
-  </div>
+  <h3>Induction and airway management</h3>
+  <p>The patient was induced with a carefully titrated technique. A large-bore endotracheal tube was placed, and the patient was ventilated with a lung-protective strategy: low tidal volumes, PEEP titrated to avoid derecruitment, and FiO₂ adjusted to maintain SpO₂ &gt;92%. <strong>Hypercarbia was avoided</strong> — it increases PVR and can precipitate RV failure.</p>
 
+  <h3>Intercostal nerve block (ICN)</h3>
+  <p>An <strong>intercostal nerve block</strong> was performed for intraoperative and postoperative analgesia. This reduces opioid requirements, improves pain control, and helps prevent pulmonary complications. In a patient with severe PAH, adequate analgesia is critical — pain increases sympathetic tone, PVR, and myocardial oxygen demand.</p>
+
+  <h3>Monitoring</h3>
   <ul>
-    <li><strong>Pitfall:</strong> Treating a fixed MAC value as a guarantee of adequate anaesthesia for every patient, rather than a population-average starting reference for titration.</li>
-    <li><strong>Pitfall:</strong> Keeping the vaporiser setting static after a significant opioid bolus, rather than anticipating and adjusting for the MAC-sparing effect.</li>
-    <li><strong>Pearl:</strong> The favourable haemodynamic profile and airway tolerability make sevoflurane a reasonable default across a wide range of case types — worth knowing when a different agent is genuinely indicated rather than simply defaulting out of habit.</li>
-    <li><strong>Pearl:</strong> Preparing families for the possibility of paediatric emergence agitation before the case, not only explaining it afterward, is a simple communication step with a disproportionate effect on how the experience is received.</li>
-    <li><strong>Pitfall:</strong> Assuming MH susceptibility screening (family history, personal history of a prior anaesthetic reaction) is someone else's job to have asked about — confirm it was genuinely asked, not just documented as "nil" by default.</li>
+    <li><strong>Arterial line:</strong> Continuous blood pressure monitoring and ABG sampling.</li>
+    <li><strong>Central venous catheter:</strong> CVP monitoring, vasopressor infusion, and fluid administration.</li>
+    <li><strong>TEE:</strong> Essential for assessing valve function, MR severity, RV function, and guiding weaning from CPB.</li>
+    <li><strong>Temperature monitoring:</strong> For CPB management.</li>
+    <li><strong>Urine output:</strong> Hourly measurement.</li>
+    <li><strong>ABG:</strong> Regular monitoring for oxygenation, ventilation, and acid–base status.</li>
   </ul>
 
-  <div class="quote-box">
-    The agents used most often are the ones most likely to be operated by habit rather than understood by mechanism. Sevoflurane rewards the deeper look precisely because it is so rarely given one.
-    <span class="src">— A closing thought</span>
+  <div class="divider"></div>
+
+  <h2>Cardiopulmonary Bypass (CPB) Management</h2>
+
+  <div class="cpb-flow">
+    <div class="cpb-item">
+      <div class="cpb-title">Heparinisation</div>
+      <div class="cpb-body">Heparin was administered to achieve an ACT &gt;480 seconds. The post-heparin ACT was <strong>540 seconds</strong> — adequate for CPB.</div>
+    </div>
+    <div class="cpb-item">
+      <div class="cpb-title">On-pump management</div>
+      <div class="cpb-body">CPB was initiated. <strong>Dexmedetomidine</strong> was used during the on-pump period for sedation and haemodynamic stability. Dexmedetomidine reduces sympathetic tone, may lower PVR, and provides analgesia without respiratory depression.</div>
+    </div>
+    <div class="cpb-item">
+      <div class="cpb-title">Myocardial protection</div>
+      <div class="cpb-body">Antegrade and/or retrograde cardioplegia was administered. Hypothermia was used as appropriate. The myocardium was protected during aortic cross-clamping.</div>
+    </div>
+    <div class="cpb-item">
+      <div class="cpb-title">MVR</div>
+      <div class="cpb-body">The mitral valve was replaced. The surgeon assessed the valve and chose the appropriate prosthesis (mechanical or bioprosthetic).</div>
+    </div>
+    <div class="cpb-item">
+      <div class="cpb-title">Weaning from CPB</div>
+      <div class="cpb-body">This was the critical moment. The RV had been unloaded during CPB, but now had to eject against a high-resistance pulmonary circulation. Inotropes and vasopressors were used to support the RV and maintain systemic pressure.</div>
+    </div>
+    <div class="cpb-item">
+      <div class="cpb-title">Protamine administration</div>
+      <div class="cpb-body">After CPB, protamine was given to reverse heparin. The post-protamine ACT was <strong>105 seconds</strong> — adequate reversal. Blood and FFP were administered as required.</div>
+    </div>
+  </div>
+
+  <h3>Inotropes and Vasopressors Used</h3>
+  <p>The patient required multiple agents before, during, and after CPB. The specific combination reflects the need to support both the right and left ventricles while maintaining systemic vascular tone.</p>
+
+  <table class="drug-table">
+    <thead>
+      <tr>
+        <th>Drug</th>
+        <th>Class / Mechanism</th>
+        <th>Role in this case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="drug-name">Noradrenaline</span></td>
+        <td>α1 agonist → vasoconstriction → ↑SVR</td>
+        <td>Maintain systemic vascular tone, improve coronary perfusion to the RV, counter vasodilation from CPB and anaesthetic agents.</td>
+      </tr>
+      <tr>
+        <td><span class="drug-name">Dopamine</span></td>
+        <td>Dose-dependent: β1 inotrope, α1 vasopressor</td>
+        <td>Inotropic support for the RV and LV, renal perfusion.</td>
+      </tr>
+      <tr>
+        <td><span class="drug-name">Adrenaline</span></td>
+        <td>α + β agonist → ↑HR, ↑contractility, ↑SVR</td>
+        <td>Rescue inotrope/vasopressor for severe RV or LV dysfunction.</td>
+      </tr>
+      <tr>
+        <td><span class="drug-name">Milrinone</span></td>
+        <td>PDE3 inhibitor → ↑contractility, ↓SVR, ↓PVR</td>
+        <td>RV support, pulmonary vasodilation, LV support. Particularly useful in pulmonary hypertension and RV failure.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pearl-box">
+    <h3>Why milrinone matters in severe PAH</h3>
+    <p>Milrinone is a <strong>phosphodiesterase-3 inhibitor</strong> that increases intracellular cAMP. It has two key effects in this context: <strong>inotropy</strong> (improves RV contractility) and <strong>pulmonary vasodilation</strong> (reduces PVR). This makes it an ideal agent for RV failure with pulmonary hypertension. However, it also causes systemic vasodilation, so it is often combined with <strong>noradrenaline</strong> to maintain systemic vascular tone.</p>
+  </div>
+
+  <h3>Coagulation Management</h3>
+
+  <div class="act-box">
+    <h3>Activated Clotting Time (ACT)</h3>
+    <div class="act-grid">
+      <div class="act-item">
+        <div class="num">540</div>
+        <div class="label">ACT after heparin (seconds)</div>
+      </div>
+      <div class="act-item">
+        <div class="num">105</div>
+        <div class="label">ACT after protamine (seconds)</div>
+      </div>
+      <div class="act-item">
+        <div class="num">480+</div>
+        <div class="label">Target ACT for CPB (seconds)</div>
+      </div>
+    </div>
+  </div>
+
+  <p>Blood and fresh frozen plasma (FFP) were administered as required. ABG corrections were made throughout the procedure to maintain homeostasis. Temperature and CVP were monitored continuously.</p>
+
+  <div class="divider"></div>
+
+  <h2>Why the Patient Was Not Extubated</h2>
+  <p>At the end of the procedure, the patient remained intubated and was shifted to the ICU with full inotropic and vasopressor support (noradrenaline, dopamine, adrenaline, and milrinone). This was a deliberate decision based on several factors:</p>
+
+  <div class="comp-grid">
+    <div class="comp-cell">
+      <h4>Severe Pulmonary Hypertension</h4>
+      <p>The pulmonary circulation remained highly reactive. Any stimulus — hypoxia, hypercarbia, pain, light sedation — could trigger a pulmonary hypertensive crisis. Controlled ventilation and sedation allowed for tight regulation of oxygenation and CO₂.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Right Ventricular Dysfunction</h4>
+      <p>The RV was dilated and pressure-loaded. It needed inotropic support (milrinone, adrenaline) and careful preload management. Spontaneous ventilation would increase RV afterload and could precipitate failure.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Pulmonary Oedema</h4>
+      <p>The patient had developed pulmonary oedema from acute severe MR. The lungs needed time to recover, and positive pressure ventilation helped maintain alveolar recruitment.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Post-CPB Stunning</h4>
+      <p>Myocardial stunning after CPB is common. The heart needed time to recover, and inotropic support was essential to maintain cardiac output.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Coagulopathy</h4>
+      <p>CPB causes dilutional and consumptive coagulopathy. The patient received blood and FFP. Extubation in the presence of coagulopathy and potential bleeding risk was not advisable.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Planned Re-exploration Risk</h4>
+      <p>In complex cardiac surgery, the risk of bleeding or tamponade requiring re-exploration is significant. Keeping the patient intubated and sedated allowed for safe transfer and monitoring.</p>
+    </div>
   </div>
 
   <div class="divider"></div>
 
-  <div class="refbox" id="references">
+  <h2>Complications and Pitfalls</h2>
+
+  <div class="comp-grid">
+    <div class="comp-cell">
+      <h4>Pulmonary Hypertensive Crisis</h4>
+      <p>Any acute increase in PVR — hypoxia, hypercarbia, acidosis, pain, hypothermia — can precipitate a crisis. Management: 100% O₂, hyperventilation, milrinone, noradrenaline, and iNO if available.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>RV Failure</h4>
+      <p>The RV is the most vulnerable chamber. Maintain systemic vascular tone, avoid excessive preload, and use inotropes early. TEE monitoring is essential.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>LV Failure After MVR</h4>
+      <p>After MVR, the LV is suddenly exposed to increased preload. A previously "protected" LV may fail. Inotropic support and careful volume management are critical.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Bleeding and Coagulopathy</h4>
+      <p>CPB causes coagulopathy. Monitor ACT, platelet count, and fibrinogen. Transfuse blood products as needed. Protamine reversal must be adequate.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Air Embolism</h4>
+      <p>During MVR, air can enter the left heart. Meticulous de-airing is essential. TEE guidance helps confirm adequate de-airing before weaning from CPB.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Arrhythmias</h4>
+      <p>Atrial fibrillation is common in MS. Post-MVR, sinus rhythm or controlled rate is important for LV filling. Amiodarone or pacing may be required.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Guidelines, Protocols & Evidence</h2>
+
+  <div class="guideline-box">
+    <h3>Key guidelines</h3>
+    <ul>
+      <li><strong>ACC/AHA (2020):</strong> PBMV is indicated for symptomatic severe MS with favourable valve morphology (Wilkins score ≤8) and no LAA thrombus. TEE is mandatory before the procedure to exclude LAA clot.</li>
+      <li><strong>ESC/EACTS (2021):</strong> MVR is indicated for severe MR or failed PBMV with haemodynamic compromise. Perioperative TEE is essential for assessment and guidance.</li>
+      <li><strong>ESAIC/ESTS (2022):</strong> In cardiac surgery with pulmonary hypertension, maintain systemic vascular tone, avoid increases in PVR, and use TEE for monitoring. Pulmonary vasodilators (milrinone, iNO) should be available.</li>
+      <li><strong>STS/SCA (2021):</strong> Protective ventilation, careful fluid management, and early use of inotropes/vasopressors are recommended in cardiac surgery with RV dysfunction.</li>
+    </ul>
+  </div>
+
+  <h3>Stepwise anaesthetic protocol for MVR in severe PAH</h3>
+
+  <div class="protocol-flow">
+    <div class="pf-item">
+      <div class="pf-title">Step 1 — Pre-operative optimisation</div>
+      <div class="pf-body">Assess PAH severity, RV function, and volume status. Review TEE for LAA clot, MR severity, and LV function. Ensure blood products are available. Plan for postoperative ventilation.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 2 — Monitoring and access</div>
+      <div class="pf-body">Arterial line, CVC, TEE, temperature probe, urinary catheter. Have inotropes and vasopressors ready before induction.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 3 — Induction</div>
+      <div class="pf-body">Slow, controlled induction with etomidate or high-dose opioid. Avoid hypotension and tachycardia. Maintain SVR.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 4 — Maintenance</div>
+      <div class="pf-body">Balanced anaesthesia with volatile (low MAC) or TIVA. Avoid hypoxia, hypercarbia, and acidosis. Maintain sinus rhythm or controlled rate.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 5 — CPB and MVR</div>
+      <div class="pf-body">Heparinise (ACT &gt;480s). Initiate CPB. Dexmedetomidine infusion. Myocardial protection. MVR. De-air carefully.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 6 — Weaning from CPB</div>
+      <div class="pf-body">Assess with TEE. Start milrinone and noradrenaline. Maintain systemic pressure. Avoid RV distension. Gradually wean from CPB.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 7 — Post-CPB management</div>
+      <div class="pf-body">Continue inotropes/vasopressors. Monitor ABG, ACT, and coagulation. Transfuse as needed. Transfer to ICU intubated.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What I Keep Coming Back To</h2>
+  <p>This case is a study in <strong>right heart physiology and pulmonary vascular control</strong>. The left-sided valve was the trigger, but the right heart was the battlefield. The failed PBMV created a sudden, severe volume overload on an already compromised pulmonary circulation, and the anaesthetic team had to navigate the narrow path between systemic hypotension and pulmonary hypertensive crisis.</p>
+
+  <p>The decision to proceed with PBMV despite a Wilkins score of 9 and an LAA clot is a reminder that clinical decisions are rarely binary. The patient was highly symptomatic, and the team may have judged that the risks of intervention were outweighed by the risks of untreated severe MS. The complication — severe MR — is a known risk of PBMV, particularly in valves with subvalvular disease and borderline morphology.</p>
+
+  <p>The intraoperative management was a masterclass in <strong>multimodal haemodynamic support</strong>: noradrenaline to maintain systemic tone, milrinone for RV inotropy and pulmonary vasodilation, dopamine and adrenaline for additional support, dexmedetomidine for sedation, and meticulous coagulation management with heparin and protamine. The patient was not extubated — and that was the right call. The right heart needed time.</p>
+
+  <div class="quote-box">
+    In severe mitral stenosis with pulmonary hypertension, the left atrium is the pressure chamber, the pulmonary circulation is the resistance circuit, and the right ventricle is the victim. Protect the right heart, and the rest follows.
+    <span class="src">— What this case taught me</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox">
     <h3>References</h3>
     <ol>
-      <li>Patel SS, Goa KL. Sevoflurane: a review of its pharmacodynamic and pharmacokinetic properties and its clinical use in general anaesthesia. <em>Drugs.</em> 1996;51(4):658–700.</li>
-      <li>Behne M, Wilke HJ, Harder S. Clinical pharmacokinetics of sevoflurane. <em>Clin Pharmacokinet.</em> 1999;36(1):13–26.</li>
-      <li>American Society of Anesthesiologists. Statement on the Use of Low Gas Flows for Sevoflurane. ASA Committee on Equipment and Facilities, approved October 18, 2023.</li>
-      <li>Brioni JD, Varughese S, Ahmed R, Bein B. A clinical review of inhalation anesthesia with sevoflurane: from early research to emerging topics. <em>J Anesth.</em> 2017;31(5):764–778.</li>
-      <li>Kobayashi S, Bito H, Obata Y, et al. Compound A concentrations during low-flow sevoflurane anesthesia correlate directly with the concentration of monovalent bases in carbon dioxide absorbents. <em>Anesth Analg.</em> 2004;98(2):395–397.</li>
-      <li>Aoyama Y, et al. Risk factors for emergence delirium in pediatric anesthesia: a systematic review. <em>Can J Anaesth.</em> 2025;72(3):384–396.</li>
-      <li>Vlajkovic GP, Sindjelic RP. Emergence delirium in children: many questions, few answers. <em>Anesth Analg.</em> 2007;104(1):84–91.</li>
-      <li>Eger EI 2nd. Age, minimum alveolar anesthetic concentration, and minimum alveolar anesthetic concentration-awake. <em>Anesth Analg.</em> 2001;93(4):947–953.</li>
-      <li>Cole DJ, Kalichman MW, Shapiro HM. The nonlinear potency of sub-MAC concentrations of nitrous oxide in decreasing the anesthetic requirement of enflurane, halothane, and isoflurane in rats. <em>Anesthesiology.</em> 1990;73(1):93–99.</li>
-      <li>Larach MG, Gronert GA, Allen GC, et al. Clinical presentation, treatment, and complications of malignant hyperthermia in North America from 1987 to 2006. <em>Anesth Analg.</em> 2010;110(2):498–507.</li>
-      <li>Malignant Hyperthermia Association of the United States (MHAUS). Emergency Therapy for Malignant Hyperthermia — current treatment protocol. Accessed via mhaus.org.</li>
-      <li>Constant I, Seeman R, Murat I. Sevoflurane and epileptiform EEG changes. <em>Paediatr Anaesth.</em> 2005;15(4):266–274.</li>
-      <li>Walia H, et al. Sevoflurane and bradycardia in infants with trisomy 21: A case report and review of the literature. <em>Paediatr Anaesth.</em> 2015.</li>
-      <li>Gil-Castillejos D, et al. Safe use of inhaled sedation in critically ill patients with invasive mechanical ventilation. <em>Enferm Intensiva (Engl Ed).</em> 2025;36(1):100490.</li>
+      <li>Otto CM, Nishimura RA, Bonow RO, et al. 2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease. <em>J Am Coll Cardiol.</em> 2021;77(4):e25–e197.</li>
+      <li>Vahanian A, Beyersdorf F, Praz F, et al. 2021 ESC/EACTS Guidelines for the management of valvular heart disease. <em>Eur Heart J.</em> 2022;43(7):561–632.</li>
+      <li>Inoue K, Owaki T, Nakamura T, et al. Clinical application of transvenous mitral commissurotomy by a new balloon catheter. <em>J Thorac Cardiovasc Surg.</em> 1984;87(3):394–402.</li>
+      <li>Wilkins GT, Weyman AE, Abascal VM, et al. Percutaneous balloon dilatation of the mitral valve: an analysis of echocardiographic variables related to outcome and the mechanism of dilatation. <em>Br Heart J.</em> 1988;60(4):299–308.</li>
+      <li>Lohser J, Slinger P. Lung isolation and one-lung ventilation. In: <em>Miller's Anesthesia.</em> 9th ed. Elsevier; 2020: Chapter 54.</li>
+      <li>Denault AY, Couture P, Vegas A, et al. <em>Transesophageal Echocardiography Multimedia Manual.</em> 2nd ed. CRC Press; 2011.</li>
+      <li>Kaplan JA, Cronin B, Maus T. <em>Kaplan's Cardiac Anesthesia.</em> 7th ed. Elsevier; 2017.</li>
+      <li>Haddad F, Couture P, Tousignant C, Denault AY. The right ventricle in cardiac surgery, a perioperative perspective: II. Pathophysiology, clinical importance, and management. <em>Anesth Analg.</em> 2009;108(2):422–433.</li>
+      <li>Pulmonary Hypertension Association. <em>Perioperative Management of Pulmonary Hypertension.</em> 2020.</li>
+      <li>Vlahakes GJ. Right ventricular failure after cardiac surgery. <em>Cardiol Clin.</em> 2012;30(2):245–254.</li>
     </ol>
   </div>
 
   <div class="cc-meta-end">
-    <span>Drug Deep Dive · No. 006</span>
-    <span>Volatile Anaesthetic · Pediatric · Neuroanaesthesia · Maintenance</span>
+    <span>August 2026</span>
+    <span>Cardiac · Mitral Stenosis · PBMV · Pulmonary Hypertension · MVR · CPB</span>
   </div>
 
-  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. MAC values, dosing ranges, and fresh gas flow guidance reflect commonly cited figures in the anaesthesia literature and are not a substitute for institutional protocols, current product labelling, current ASA/regulatory guidance, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+  <p class="disclaim">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles, the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India), and the ethical mandates of the <strong>National Medical Commission (NMC) of India</strong>. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
 
 </div>
 
