@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemodynamic Monitoring — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to haemodynamic monitoring — CVP, PA catheterisation, cardiac output, fluid responsiveness, and microvascular perfusion. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--amber);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 120px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(122,32,32,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(122,32,32,.03) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(122,32,32,.05) 0%,transparent 68%);top:-200px;right:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--sage); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--rust);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:600px;font-weight:300; }
+.hero-sub strong { color:var(--rust);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--amber);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:66px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--rust);border-bottom-color:var(--rust); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--rust),var(--amber));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--rust); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--rust);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--rust);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--sage);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(122,32,32,.02); }
+.td-hi { color:var(--amber)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── WAVEFORM BOXES ─── */
+.wave-box { background:var(--card);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.wave-label { font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:1rem; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(122,32,32,.04);border-color:var(--rust);color:var(--muted); }
+.co-key strong { color:var(--rust); }
+.co-pearl { background:rgba(58,90,58,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(58,58,106,.05);border-color:var(--indigo);color:var(--muted); }
+.co-fact strong { color:var(--indigo); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--rust);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--rust);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-a { border-color:var(--sage);color:var(--sage); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-i { border-color:var(--indigo);color:var(--indigo); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--rust);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--rust); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--rust);font-size:.9rem;font-weight:700; }
+
+/* ─── SHOCK TABLE ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sage);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--rust);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--amber);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--rust);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── DIVIDER ─── */
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+
+/* ─── BACK LINK ─── */
+.back-link { font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:gap .2s,color .2s;margin-bottom:1.5rem; }
+.back-link::before { content:'←'; }
+.back-link:hover { gap:.95rem;color:var(--rust); }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../reading-corner.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    The Reading Corner
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hero-eyebrow">Critical Care · Intensive Monitoring · ICU</div>
+  <h1>Haemodynamic<br><em>Monitoring</em></h1>
+  <p class="hero-sub">
+    A complete reference across all six domains of haemodynamic monitoring — CVP to microcirculation, static indices to dynamic, invasive to non-invasive. <strong>Six modules. Updated 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>06</span></div>
+    <div class="meta-item">Topics <span>CVP · PAC · CO · Fluid Responsiveness · Microvascular</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · CVP</button>
+  <button onclick="showMod(1)">02 · PA Catheter</button>
+  <button onclick="showMod(2)">03 · Invasive CO</button>
+  <button onclick="showMod(3)">04 · Non-Invasive CO</button>
+  <button onclick="showMod(4)">05 · Fluid Responsiveness</button>
+  <button onclick="showMod(5)">06 · Microvascular</button>
+  <button onclick="showMod(6)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:14.3%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: CVP -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 06</div>
+      <div class="mod-title">Central Venous Pressure <em>Monitoring</em></div>
+      <div class="mod-intro">The oldest continuous haemodynamic monitoring tool in clinical use — measuring pressure in the right atrium to reflect right ventricular filling.</div>
+    </div>
+
+    <div class="sec-label"><span>What is CVP?</span></div>
+    <p>CVP is the pressure measured in the <strong>superior vena cava (SVC) or right atrium (RA)</strong>. It reflects right ventricular end-diastolic pressure (RVEDP) and serves as a surrogate for right ventricular preload. Measured in <strong>mmHg</strong> (or cmH₂O — divide by 1.36 to convert).</p>
+
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">Normal CVP</div><div class="val-num">2–8</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">in cmH₂O</div><div class="val-num">3–10</div><span class="val-unit">cmH₂O</span></div>
+      <div class="val-item"><div class="val-label">Low — hypovolaemia</div><div class="val-num">&lt;2</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">Elevated — overload / RHF</div><div class="val-num">&gt;10</div><span class="val-unit">mmHg</span></div>
+    </div>
+
+    <h2 class="subhead">Sites of Insertion</h2>
+    <table class="data-table">
+      <tr><th>Site</th><th>Advantages</th><th>Disadvantages</th><th>Infection Risk</th></tr>
+      <tr><td><strong>Internal Jugular (R)</strong></td><td>Straight path to RA, high success rate</td><td>Carotid artery risk, uncomfortable</td><td class="td-good">Low</td></tr>
+      <tr><td><strong>Subclavian</strong></td><td>Most comfortable, lowest infection risk</td><td>Pneumothorax (1–3%), cannot compress</td><td class="td-good">Lowest</td></tr>
+      <tr><td><strong>Femoral</strong></td><td>Easy in emergency, no PTX risk</td><td>High infection risk, less accurate CVP</td><td class="td-bad">Highest</td></tr>
+      <tr><td><strong>External Jugular</strong></td><td>Visible, accessible</td><td>Tortuous, may not reach SVC</td><td class="td-good">Low</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Tip Placement</strong>
+      Optimal tip position: <strong>cavo-atrial junction</strong> — lower third of SVC, at or just above the carina on CXR.
+    </div>
+
+    <h2 class="subhead">The CVP Waveform</h2>
+    <p>Five components — three positive waves (a, c, v) and two negative descents (x, y). Memorise these cold.</p>
+
+    <div class="wave-box">
+      <div class="wave-label">▸ CVP Waveform — Two Complete Cycles, Annotated</div>
+      <svg viewBox="0 0 660 160" width="100%" style="display:block;">
+
+        <!-- ── ECG STRIP (top) ── -->
+        <text x="10" y="14" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7" letter-spacing="1.5">ECG</text>
+        <line x1="38" y1="10" x2="660" y2="10" stroke="#d0c8b8" stroke-width=".5"/>
+        <!-- ECG cycle 1: isoelectric → P → QRS spike → T → isoelectric -->
+        <path d="M38,10 L90,10 L98,4 L106,10 L114,10 L118,2 L122,22 L126,10 L148,10 L162,5 L170,10 L210,10"
+              stroke="#a89880" stroke-width="1.2" fill="none"/>
+        <!-- ECG cycle 2 -->
+        <path d="M210,10 L262,10 L270,4 L278,10 L286,10 L290,2 L294,22 L298,10 L320,10 L334,5 L342,10 L382,10"
+              stroke="#a89880" stroke-width="1.2" fill="none"/>
+        <!-- P, QRS, T labels for cycle 1 -->
+        <text x="95" y="26" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7">P</text>
+        <text x="117" y="30" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7">QRS</text>
+        <text x="158" y="26" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7">T</text>
+        <!-- P, QRS, T labels for cycle 2 -->
+        <text x="267" y="26" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7">P</text>
+        <text x="289" y="30" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7">QRS</text>
+        <text x="330" y="26" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7">T</text>
+
+        <!-- ── BASELINE ── -->
+        <line x1="38" y1="130" x2="660" y2="130" stroke="#d0c8b8" stroke-width=".8" stroke-dasharray="3,4"/>
+        <text x="10" y="134" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7" letter-spacing="1.5">CVP</text>
+
+        <!-- ── CVP WAVEFORM — CYCLE 1 ──
+             Sequence: baseline → a (peak ~P wave) → x descent → c (small, ~QRS) → x' descent → baseline → v (peak ~end T) → y descent → baseline
+             a: x≈105, peak y=90
+             c: x≈128, small peak y=108
+             x descent trough: x≈148, y=125
+             v: x≈170, peak y=88
+             y descent trough: x≈196, y=126
+        -->
+        <path d="
+          M38,128
+          L88,128
+          C94,128 100,100 105,90
+          C110,100 115,115 120,118
+          C124,115 127,108 130,105
+          C133,108 136,118 140,122
+          C144,126 148,128 155,128
+          C160,115 165,95 170,88
+          C175,98 180,118 186,124
+          C190,127 196,128 210,128
+        " stroke="#7a2020" stroke-width="2" fill="none"/>
+
+        <!-- ── CVP WAVEFORM — CYCLE 2 ── -->
+        <path d="
+          M210,128
+          L260,128
+          C266,128 272,100 277,90
+          C282,100 287,115 292,118
+          C296,115 299,108 302,105
+          C305,108 308,118 312,122
+          C316,126 320,128 327,128
+          C332,115 337,95 342,88
+          C347,98 352,118 358,124
+          C362,127 368,128 382,128
+        " stroke="#7a2020" stroke-width="2" fill="none"/>
+
+        <!-- ── WAVE LABELS — CYCLE 1 ── -->
+        <!-- a wave -->
+        <line x1="105" y1="90" x2="105" y2="75" stroke="#7a2020" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="100" y="72" fill="#7a2020" font-family="Cormorant Garamond,serif" font-size="15" font-style="italic" font-weight="600">a</text>
+        <!-- c wave -->
+        <line x1="130" y1="105" x2="130" y2="75" stroke="#9a6c1a" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="125" y="72" fill="#9a6c1a" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">c</text>
+        <!-- x descent -->
+        <text x="143" y="148" fill="#a89880" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">x</text>
+        <!-- v wave -->
+        <line x1="170" y1="88" x2="170" y2="75" stroke="#7a2020" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="165" y="72" fill="#7a2020" font-family="Cormorant Garamond,serif" font-size="15" font-style="italic" font-weight="600">v</text>
+        <!-- y descent -->
+        <text x="188" y="148" fill="#a89880" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">y</text>
+
+        <!-- ── WAVE LABELS — CYCLE 2 ── -->
+        <line x1="277" y1="90" x2="277" y2="75" stroke="#7a2020" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="272" y="72" fill="#7a2020" font-family="Cormorant Garamond,serif" font-size="15" font-style="italic" font-weight="600">a</text>
+        <line x1="302" y1="105" x2="302" y2="75" stroke="#9a6c1a" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="297" y="72" fill="#9a6c1a" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">c</text>
+        <text x="315" y="148" fill="#a89880" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">x</text>
+        <line x1="342" y1="88" x2="342" y2="75" stroke="#7a2020" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="337" y="72" fill="#7a2020" font-family="Cormorant Garamond,serif" font-size="15" font-style="italic" font-weight="600">v</text>
+        <text x="360" y="148" fill="#a89880" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">y</text>
+
+        <!-- ── TIMING LEGEND ── -->
+        <text x="420" y="80" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7.5" letter-spacing=".5">a  — after P wave (atrial systole)</text>
+        <text x="420" y="93" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7.5" letter-spacing=".5">c  — after QRS (TV closure)</text>
+        <text x="420" y="106" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7.5" letter-spacing=".5">x  — systolic descent (atrial relax)</text>
+        <text x="420" y="119" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7.5" letter-spacing=".5">v  — after T wave (venous filling)</text>
+        <text x="420" y="132" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7.5" letter-spacing=".5">y  — diastolic descent (TV opens)</text>
+      </svg>
+    </div>
+
+    <div class="mnemonic-box">
+      <div class="mnemonic-word">a · c · v</div>
+      <div class="mnem-row"><span class="mnem-l">a</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">A</strong>trial contraction — after P wave — absent in AF</span></div>
+      <div class="mnem-row"><span class="mnem-l">c</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">C</strong>losure of tricuspid valve + RV isovolumetric contraction — after QRS</span></div>
+      <div class="mnem-row"><span class="mnem-l">v</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">V</strong>enous filling of atrium while TV is shut — after T wave</span></div>
+      <div class="mnem-row"><span class="mnem-l" style="color:var(--faint)">x</span><span style="font-size:.85rem;color:var(--muted)">e<strong style="color:var(--text)">X</strong>it — atrial relaxation + TV annular descent (systolic dip)</span></div>
+      <div class="mnem-row"><span class="mnem-l" style="color:var(--faint)">y</span><span style="font-size:.85rem;color:var(--muted)">emptying <strong style="color:var(--text)">Y</strong>ields to RV — TV opens, RV starts to fill (diastolic dip)</span></div>
+    </div>
+
+    <h2 class="subhead">Pathological Waveform Changes</h2>
+    <table class="data-table">
+      <tr><th>Pattern</th><th>Mechanism</th><th>Condition</th></tr>
+      <tr><td><strong>Giant a wave</strong></td><td>Atrium contracts against closed/resistant TV</td><td>Pulmonary hypertension, tricuspid stenosis, RV failure, AV block</td></tr>
+      <tr><td><strong>Cannon a wave</strong></td><td>Atrium contracts against closed TV (AV dissociation)</td><td>Complete heart block, VT, junctional rhythm</td></tr>
+      <tr><td><strong>Giant v wave</strong></td><td>Regurgitant flow into atrium during systole</td><td>Severe tricuspid regurgitation</td></tr>
+      <tr><td><strong>Absent a wave</strong></td><td>No organised atrial contraction</td><td>Atrial fibrillation</td></tr>
+      <tr><td><strong>Steep x, blunted y — "M" pattern</strong></td><td>Pericardial fluid limits ventricular filling; x preserved, y obliterated</td><td>Cardiac tamponade</td></tr>
+      <tr><td><strong>Steep x AND steep y — "W" pattern</strong></td><td>Both descents prominent; rapid early filling then abrupt halt</td><td>Constrictive pericarditis</td></tr>
+      <tr><td><strong>Absent / blunted x</strong></td><td>No atrial relaxation visible</td><td>Tricuspid regurgitation</td></tr>
+    </table>
+
+    <h2 class="subhead">Zero Reference & Transducer Positioning</h2>
+    <ul class="clist">
+      <li><strong>Zero reference:</strong> Phlebostatic axis — intersection of 4th ICS and mid-axillary line (approximates RA level)</li>
+      <li>Patient can be supine or up to 30–45° HOB (if transducer is re-levelled)</li>
+      <li>Always measure at <strong>end-expiration</strong> — intrathoracic pressure closest to atmospheric</li>
+      <li>On mechanical ventilation: read at end-expiration = <em>highest</em> point on the CVP waveform during the respiratory cycle</li>
+      <li>Each 2.54 cm (1 inch) transducer error = ~2 mmHg reading error</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Central Limitation</strong>
+      CVP is a <strong>poor predictor of fluid responsiveness</strong>. Marik et al. 2008 meta-analysis (24 studies, 803 patients): CVP AUC-ROC = 0.55 — no better than chance. A single CVP value should never be used in isolation to guide fluid therapy.
+    </div>
+
+    <h2 class="subhead">Causes of Elevated & Low CVP</h2>
+    <div class="compare-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--rust)">Elevated CVP (&gt;10 mmHg)</h4>
+        <ul class="clist">
+          <li>Right heart failure (primary or secondary)</li>
+          <li>Pulmonary hypertension / massive PE</li>
+          <li>Cardiac tamponade</li>
+          <li>Constrictive pericarditis</li>
+          <li>Fluid overload / hypervolaemia</li>
+          <li>SVC obstruction</li>
+          <li>High PEEP / auto-PEEP (transmitted)</li>
+          <li>Tension pneumothorax</li>
+          <li>Tricuspid stenosis / regurgitation</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:#4a7c59">Low CVP (&lt;2 mmHg)</h4>
+        <ul class="clist">
+          <li>Hypovolaemia (haemorrhage, dehydration, third-spacing)</li>
+          <li>Distributive shock (relative hypovolaemia)</li>
+          <li>Over-diuresis</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="subhead">Complications of CVC Insertion</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Immediate Complications <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <ul class="clist">
+          <li>Arterial puncture / haematoma</li>
+          <li>Pneumothorax — especially subclavian (1–3%)</li>
+          <li>Haemothorax</li>
+          <li>Air embolism (nurse patient head-down during insertion)</li>
+          <li>Arrhythmias — guide wire in RV</li>
+          <li>Nerve injury — brachial plexus</li>
+          <li>Thoracic duct injury — left subclavian → chylothorax</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Delayed Complications <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <ul class="clist">
+          <li>CLABSI — catheter-line associated bloodstream infection</li>
+          <li>Catheter-related deep vein thrombosis</li>
+          <li>Catheter malposition / migration</li>
+          <li>Venous erosion / perforation (stiff catheter tip)</li>
+          <li>Cardiac tamponade (delayed)</li>
+          <li>Catheter embolism</li>
+        </ul>
+        <div class="callout co-pearl" style="margin-top:.75rem">
+          <strong>✦ CLABSI Bundle</strong>
+          Maximal sterile barrier · Chlorhexidine skin prep · Subclavian or IJV preferred over femoral · Daily review of necessity · Hand hygiene. Subclavian has lowest infection rate.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: PA CATHETER -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 06</div>
+      <div class="mod-title">Pulmonary Artery <em>Catheterisation</em></div>
+      <div class="mod-intro">The Swan-Ganz catheter — balloon-tipped, flow-directed, and capable of measuring pressures through the entire right heart and into the pulmonary vasculature.</div>
+    </div>
+
+    <div class="callout co-fact">
+      <strong>Historical note</strong>
+      Introduced by Swan and Ganz in <strong>1970</strong>. A 7.5 Fr catheter that floats through the right heart when its balloon is inflated, guided by blood flow.
+    </div>
+
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">RA pressure</div><div class="val-num">2–8</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">RV systolic / diastolic</div><div class="val-num">15–30 / 0–8</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">PA systolic / diastolic</div><div class="val-num">15–30 / 6–12</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">mPAP</div><div class="val-num">9–18</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">PCWP (wedge)</div><div class="val-num">6–12</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">Cardiac Output</div><div class="val-num">4–8</div><span class="val-unit">L/min</span></div>
+      <div class="val-item"><div class="val-label">CI</div><div class="val-num">2.5–4.0</div><span class="val-unit">L/min/m²</span></div>
+      <div class="val-item"><div class="val-label">Mixed SvO₂</div><div class="val-num">60–80</div><span class="val-unit">%</span></div>
+      <div class="val-item"><div class="val-label">SVR</div><div class="val-num">800–1200</div><span class="val-unit">dynes·s/cm⁵</span></div>
+      <div class="val-item"><div class="val-label">PVR</div><div class="val-num">20–120</div><span class="val-unit">dynes·s/cm⁵</span></div>
+    </div>
+
+    <h2 class="subhead">PAC Ports & Lumens</h2>
+    <table class="data-table">
+      <tr><th>Port</th><th>Location</th><th>Purpose</th></tr>
+      <tr><td><strong>Proximal (blue)</strong></td><td>RA — 30 cm from tip</td><td>CVP, CO injectate, drug/fluid infusion</td></tr>
+      <tr><td><strong>Distal (yellow)</strong></td><td>PA tip</td><td>PAP measurement, mixed SvO₂ sampling, PCWP when wedged</td></tr>
+      <tr><td><strong>Balloon inflation</strong></td><td>Tip</td><td>Inflate 1.5 mL air to float/wedge — <strong>never use liquids</strong></td></tr>
+      <tr><td><strong>Thermistor connector</strong></td><td>4 cm from tip</td><td>Temperature sensing for thermodilution CO</td></tr>
+      <tr><td><strong>VIP port (white)</strong></td><td>Mid-catheter (RV position)</td><td>Additional infusion lumen</td></tr>
+    </table>
+
+    <h2 class="subhead">Waveform Recognition During Insertion</h2>
+    <div class="wave-box">
+      <div class="wave-label">▸ RA → RV → PA → PCWP — pressure sequence on insertion</div>
+      <svg viewBox="0 0 680 120" width="100%" style="display:block;">
+        <!-- RA -->
+        <text x="12" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">RA  (2–8)</text>
+        <path d="M10,82 Q22,78 30,68 Q36,58 40,68 Q44,80 52,82 Q60,84 68,82 Q76,72 82,62 Q86,72 92,82 Q100,84 108,82" stroke="#7a2020" stroke-width="1.5" fill="none"/>
+        <!-- RV -->
+        <text x="140" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">RV  (15-30 / 0-8) — no dicrotic notch</text>
+        <path d="M130,88 L136,88 L138,84 L140,30 L142,18 L144,30 L146,84 L150,88 L160,88 L162,84 L164,30 L166,18 L168,30 L170,84 L174,88 L184,88 L186,84 L188,30 L190,18 L192,30 L194,84 L198,88" stroke="#9a6c1a" stroke-width="1.5" fill="none"/>
+        <!-- PA -->
+        <text x="260" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">PA  (15-30 / 6-12) — dicrotic notch ✓</text>
+        <path d="M250,88 L255,85 L258,72 L262,28 L266,22 L270,38 L272,54 L274,62 L278,68 L282,66 L286,72 L290,28 L294,22 L298,38 L300,54 L302,62 L306,68 L310,66 L314,72 L318,28 L322,22 L326,38 L328,54 L330,62 L334,68 L338,66" stroke="#7a5abf" stroke-width="1.5" fill="none"/>
+        <!-- PCWP -->
+        <text x="390" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">PCWP / Wedge  (6–12) — damped, a+v waves</text>
+        <path d="M380,82 Q392,78 400,68 Q406,58 410,68 Q414,80 422,82 Q430,84 438,82 Q446,72 452,62 Q456,72 462,82 Q470,84 478,82 Q486,78 492,68 Q498,58 502,68 Q506,78 514,82 Q520,84 528,82"
+              stroke="#4a7c59" stroke-width="1.5" fill="none"/>
+        <!-- Dividers -->
+        <line x1="125" y1="8" x2="125" y2="105" stroke="#d0c8b8" stroke-dasharray="3,3"/>
+        <line x1="245" y1="8" x2="245" y2="105" stroke="#d0c8b8" stroke-dasharray="3,3"/>
+        <line x1="375" y1="8" x2="375" y2="105" stroke="#d0c8b8" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+
+    <div class="callout co-key">
+      <strong>⚑ RV vs PA — the critical distinction</strong>
+      RV: high systolic + diastolic near <strong>zero</strong>, NO dicrotic notch · PA: high systolic + diastolic <strong>elevated (6–12)</strong> + dicrotic notch present. If you see high systolic + low diastolic with no notch — you're still in the RV. Advance further before deflating the balloon.
+    </div>
+
+    <h2 class="subhead">PCWP — Pulmonary Capillary Wedge Pressure</h2>
+    <p>Balloon inflated in a branch PA occludes flow, creating a static column from catheter tip → pulmonary capillaries → pulmonary veins → left atrium. Therefore <strong>PCWP ≈ LAP ≈ LVEDP</strong> (in the absence of mitral stenosis or pulmonary venous hypertension).</p>
+
+    <div class="formula-box">
+      <span class="flabel">Transpulmonary Gradient</span>
+      TPG = mPAP − PCWP
+      <div class="fexpl">Normal &lt;12 mmHg · Elevated in pre-capillary pulmonary hypertension</div>
+    </div>
+    <div class="formula-box">
+      <span class="flabel">Pulmonary Vascular Resistance</span>
+      PVR = (mPAP − PCWP) / CO × 80
+      <div class="fexpl">Units: dynes·s/cm⁵ · Normal: 20–120</div>
+    </div>
+
+    <h2 class="subhead">West Zones of the Lung</h2>
+    <table class="data-table">
+      <tr><th>Zone</th><th>Pressure Relationship</th><th>Blood Flow</th><th>PCWP Validity</th></tr>
+      <tr><td>Zone I (apex)</td><td>P<sub>alv</sub> &gt; P<sub>a</sub> &gt; P<sub>v</sub></td><td>Absent</td><td class="td-bad">Invalid — reflects alveolar pressure</td></tr>
+      <tr><td>Zone II (middle)</td><td>P<sub>a</sub> &gt; P<sub>alv</sub> &gt; P<sub>v</sub></td><td>Intermittent</td><td class="td-mid">Unreliable</td></tr>
+      <tr><td>Zone III (base)</td><td>P<sub>a</sub> &gt; P<sub>v</sub> &gt; P<sub>alv</sub></td><td>Continuous</td><td class="td-good">✓ Valid — PAC floats here naturally</td></tr>
+    </table>
+    <div class="callout co-pearl">
+      <strong>✦ Clinical Pearl</strong>
+      High PEEP can convert Zone III to Zone II → suspect if PCWP fluctuates with ventilation or PCWP &gt; PA diastolic. Lateral CXR can confirm tip position below LA.
+    </div>
+
+    <h2 class="subhead">Thermodilution Cardiac Output — Stewart-Hamilton</h2>
+    <p>Inject a known volume of cold or room-temperature saline into the proximal (RA) port. The thermistor at the PA tip measures temperature change over time. Area under the temperature-time curve is <strong>inversely proportional</strong> to cardiac output.</p>
+    <div class="formula-box">
+      <span class="flabel">Stewart-Hamilton Equation (simplified)</span>
+      CO = [V × (T<sub>b</sub> − T<sub>i</sub>) × K] / ∫ΔT(t)dt
+      <div class="fexpl">V = volume injected · T<sub>b</sub> = blood temp · T<sub>i</sub> = injectate temp · ∫ΔT = area under temperature-time curve</div>
+    </div>
+    <ul class="clist">
+      <li>Inject <strong>10 mL</strong> rapidly <strong>(&lt;4 seconds)</strong> at end-expiration</li>
+      <li>Average <strong>3 measurements</strong> within 10% of each other</li>
+      <li><strong>Overestimated CO:</strong> slow injection, warm injectate, TR (recirculation), L→R shunt</li>
+      <li><strong>Underestimated CO:</strong> rapid injection, very cold injectate, low output states (flat curve)</li>
+      <li><strong>Invalid in:</strong> severe TR, significant intracardiac shunts</li>
+    </ul>
+
+    <h2 class="subhead">Fick Principle</h2>
+    <div class="formula-box">
+      <span class="flabel">Fick Equation</span>
+      CO = VO₂ / (CaO₂ − CvO₂)
+      <div class="fexpl">CaO₂ = (Hb × 1.34 × SaO₂) + (0.003 × PaO₂) · CvO₂ = (Hb × 1.34 × SvO₂) + (0.003 × PvO₂)</div>
+    </div>
+    <p>SvO₂ is sampled from the distal (PA) port. VO₂ is often assumed (~125 mL/min/m²) rather than measured — a limitation. Requires a metabolic cart for true VO₂ measurement.</p>
+
+    <h2 class="subhead">Derived Haemodynamic Parameters</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Formula</th><th>Normal</th><th>Units</th></tr>
+      <tr><td>SVR</td><td>(MAP − CVP) / CO × 80</td><td class="td-hi">800–1200</td><td>dynes·s/cm⁵</td></tr>
+      <tr><td>PVR</td><td>(mPAP − PCWP) / CO × 80</td><td class="td-hi">20–120</td><td>dynes·s/cm⁵</td></tr>
+      <tr><td>Stroke Volume</td><td>CO / HR × 1000</td><td class="td-hi">60–100</td><td>mL/beat</td></tr>
+      <tr><td>SVI</td><td>CI / HR × 1000</td><td class="td-hi">33–47</td><td>mL/beat/m²</td></tr>
+      <tr><td>DO₂ (O₂ delivery)</td><td>CO × CaO₂ × 10</td><td class="td-hi">520–720</td><td>mL/min/m²</td></tr>
+      <tr><td>VO₂ (O₂ consumption)</td><td>CO × (CaO₂−CvO₂) × 10</td><td class="td-hi">100–180</td><td>mL/min/m²</td></tr>
+      <tr><td>O₂ Extraction Ratio</td><td>VO₂ / DO₂ × 100</td><td class="td-hi">22–30</td><td>%</td></tr>
+    </table>
+
+    <h2 class="subhead">Haemodynamic Profiles in Shock</h2>
+    <table class="data-table">
+      <tr><th>Shock Type</th><th>CO</th><th>SVR</th><th>PCWP</th><th>CVP</th><th>SvO₂</th></tr>
+      <tr><td><strong>Cardiogenic</strong></td><td class="td-bad">↓↓</td><td class="td-bad">↑↑</td><td class="td-bad">↑</td><td class="td-bad">↑</td><td class="td-bad">↓</td></tr>
+      <tr><td><strong>Hypovolaemic</strong></td><td class="td-bad">↓</td><td class="td-bad">↑</td><td class="td-bad">↓</td><td class="td-bad">↓</td><td class="td-bad">↓</td></tr>
+      <tr><td><strong>Distributive (Septic)</strong></td><td class="td-good">↑/N</td><td class="td-good">↓↓</td><td class="td-good">↓/N</td><td class="td-good">↓/N</td><td class="td-good">↑ early</td></tr>
+      <tr><td><strong>Obstructive (PE/Tamponade)</strong></td><td class="td-bad">↓</td><td class="td-bad">↑</td><td class="td-good">↓/N</td><td class="td-bad">↑↑</td><td class="td-bad">↓</td></tr>
+      <tr><td><strong>Neurogenic</strong></td><td class="td-bad">↓/N</td><td class="td-good">↓↓</td><td class="td-good">N</td><td class="td-good">N/↓</td><td class="td-good">↑/N</td></tr>
+    </table>
+
+    <h2 class="subhead">Complications of PAC</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Full Complication List <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <ul class="clist">
+          <li><strong>Arrhythmias:</strong> PVCs, VT/VF as catheter passes through RVOT — most common during insertion</li>
+          <li><strong>RBBB (3–6%):</strong> catheter irritates right bundle branch; critical if pre-existing LBBB → complete heart block. Have pacing ready</li>
+          <li><strong>PA rupture (0.02–0.2%):</strong> rare but life-threatening. Higher risk with PHT, elderly, anticoagulation. Caused by balloon over-inflation or inflation in a small-calibre vessel</li>
+          <li><strong>Pulmonary infarction:</strong> catheter permanently wedged → distal ischaemia</li>
+          <li><strong>Catheter knotting:</strong> excess catheter looped in RV without advancing</li>
+          <li><strong>Balloon rupture → air embolism:</strong> never use &gt;1.5 mL air; never use liquids in balloon</li>
+          <li><strong>Thrombosis / endocarditis</strong></li>
+          <li><strong>Overwedge:</strong> balloon overinflated → falsely elevated, spike-shaped PCWP tracing</li>
+        </ul>
+        <div class="callout co-key" style="margin-top:.75rem">
+          <strong>PA Rupture — Emergency Management</strong>
+          Trendelenburg position · 100% O₂ · Lung isolation (double lumen tube, affected side dependent) · Bronchoscopy · Catheter balloon as temporary tamponade · Interventional radiology (embolisation) or surgical repair.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout co-warn">
+      <strong>⚠ The PAC Controversy</strong>
+      PACMAN, ESCAPE, and FACTT trials found PAC-guided therapy did <strong>not</strong> improve mortality vs standard management in ICU patients, septic shock, or acute heart failure. PAC use has declined significantly since 2000. Modern practice: target-specific goals with the least invasive method that answers the clinical question.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: INVASIVE CO -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 06</div>
+      <div class="mod-title">Cardiac Output Monitoring — <em>Invasive Methods</em></div>
+      <div class="mod-intro">Pulse contour analysis and transpulmonary thermodilution — comprehensive haemodynamic data without a PA catheter.</div>
+    </div>
+
+    <h2 class="subhead">Pulse Contour Analysis — Core Principle</h2>
+    <p>Derives CO by analysing the <strong>morphology of the arterial pressure waveform</strong>. The area under the systolic portion of the waveform is proportional to stroke volume, adjusted for estimated aortic compliance and impedance.</p>
+    <div class="formula-box">
+      <span class="flabel">Core Relationship</span>
+      SV ∝ Area under systolic portion of arterial waveform (corrected for aortic impedance / compliance)
+    </div>
+
+    <table class="data-table">
+      <tr><th>System</th><th>Calibration</th><th>Access Required</th><th>Unique Features</th></tr>
+      <tr><td><strong>PiCCO</strong> (Pulsion)</td><td>Transpulmonary thermodilution — required</td><td>CVC + radial or femoral arterial line</td><td>ITBV, EVLW, GEDV, CFI, GEF, PVPI</td></tr>
+      <tr><td><strong>LiDCO plus</strong></td><td>Lithium dilution — required</td><td>Peripheral IV + arterial line</td><td>Contraindicated on lithium therapy, early pregnancy</td></tr>
+      <tr><td><strong>LiDCOrapid</strong></td><td>Uncalibrated (nomogram)</td><td>Peripheral arterial line</td><td>Continuous SV/CO; good for trending and fluid responsiveness</td></tr>
+      <tr><td><strong>FloTrac / Vigileo</strong> (Edwards)</td><td>Uncalibrated (auto-calibrated)</td><td>Any arterial line</td><td>Uses SD of pulse pressure + patient demographics; no external calibration needed</td></tr>
+      <tr><td><strong>MOSTCARE / Argos</strong></td><td>Uncalibrated</td><td>Arterial line</td><td>dP/dt-based analysis</td></tr>
+    </table>
+
+    <h2 class="subhead">PiCCO — Volumetric Parameters</h2>
+    <p>PiCCO calibrates via <strong>transpulmonary thermodilution (TPTD)</strong>: cold injectate via CVC proximal port; thermistor in femoral or radial artery line. Provides unique volumetric preload indices unavailable from PAC.</p>
+
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">ITBVI — Intrathoracic Blood Volume</div><div class="val-num">850–1000</div><span class="val-unit">mL/m²</span></div>
+      <div class="val-item"><div class="val-label">GEDVI — Global End-Diastolic Volume</div><div class="val-num">680–800</div><span class="val-unit">mL/m²</span></div>
+      <div class="val-item"><div class="val-label">EVLWI — Extravascular Lung Water</div><div class="val-num">&lt;10</div><span class="val-unit">mL/kg</span></div>
+      <div class="val-item"><div class="val-label">PVPI — Pulmonary Vasc Permeability</div><div class="val-num">1.0–3.0</div><span class="val-unit">ratio</span></div>
+      <div class="val-item"><div class="val-label">CFI — Cardiac Function Index</div><div class="val-num">4.5–6.5</div><span class="val-unit">/min</span></div>
+      <div class="val-item"><div class="val-label">GEF — Global Ejection Fraction</div><div class="val-num">25–35</div><span class="val-unit">%</span></div>
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ EVLW in Clinical Practice</strong>
+      EVLWI &gt;10 mL/kg = pulmonary oedema · &gt;15 mL/kg = severe · PVPI &gt;3 = increased permeability → ARDS pattern (vs hydrostatic oedema). This distinction directly guides de-resuscitation decisions and diuretic therapy.
+    </div>
+
+    <h2 class="subhead">Limitations of Pulse Contour Analysis</h2>
+    <ul class="clist">
+      <li><strong>Aortic regurgitation:</strong> overestimates SV (increased diastolic runoff increases waveform area)</li>
+      <li><strong>IABP:</strong> invalidates waveform analysis entirely — cannot use PCA during balloon pumping</li>
+      <li><strong>Arrhythmias (AF):</strong> highly variable beat-to-beat SV; averaging required, accuracy reduced</li>
+      <li><strong>Peripheral vasoconstriction:</strong> dampened waveform → underestimates SV</li>
+      <li>Calibrated systems (PiCCO, LiDCO): more accurate but require recalibration every 8h or after major haemodynamic shifts</li>
+      <li>Uncalibrated systems: adequate for <strong>trending</strong> and relative changes, not absolute values</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: NON-INVASIVE CO -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 06</div>
+      <div class="mod-title">Cardiac Output — Minimally &amp; <em>Non-Invasive Methods</em></div>
+      <div class="mod-intro">Measuring CO without arterial cannulation or central access — the direction of modern haemodynamic monitoring.</div>
+    </div>
+
+    <h2 class="subhead">Oesophageal Doppler Monitoring (ODM)</h2>
+    <p>A probe passed into the oesophagus (in intubated, sedated patients) measures <strong>blood flow velocity in the descending thoracic aorta</strong> using continuous-wave Doppler. Aortic cross-sectional area is estimated from a nomogram to derive CO.</p>
+    <ul class="clist">
+      <li><strong>Devices:</strong> CardioQ (Deltex), HemoSonic</li>
+      <li><strong>FTc (flow time corrected):</strong> normal 330–360 ms; ↓ in hypovolaemia; ↑ in vasodilation</li>
+      <li><strong>Peak velocity (PV):</strong> reflects contractility; ↓ in poor ventricular function</li>
+      <li>Measures ~70% of CO (descending aorta); assumes a fixed proportion to upper body</li>
+      <li>Validated in perioperative goal-directed therapy (GDT) — reduced complications in major surgery</li>
+      <li><strong>Limitations:</strong> requires sedation, frequent probe repositioning, oesophageal pathology a contraindication</li>
+    </ul>
+
+    <h2 class="subhead">Echocardiography — LVOT Doppler</h2>
+    <div class="formula-box">
+      <span class="flabel">SV via LVOT (Doppler)</span>
+      SV = VTI<sub>LVOT</sub> × π × (D<sub>LVOT</sub>/2)²  →  CO = SV × HR
+      <div class="fexpl">VTI = velocity time integral (PW Doppler in LVOT, apical 5-chamber) · D measured in parasternal long-axis view</div>
+    </div>
+    <ul class="clist">
+      <li>Most validated non-invasive CO method; within ±10–15% of thermodilution</li>
+      <li>Key source of error: LVOT diameter (squaring effect — small errors amplify significantly)</li>
+      <li>TEE: continuous intraoperative use (semi-invasive); TTE limited by ventilation and body habitus</li>
+      <li>POCUS: IVC collapsibility, LVOT VTI response to PLR — practical bedside fluid responsiveness assessment</li>
+    </ul>
+
+    <h2 class="subhead">Non-Invasive CO Methods at a Glance</h2>
+    <table class="data-table">
+      <tr><th>Method</th><th>Technology</th><th>Invasiveness</th><th>Accuracy</th><th>Best Use</th></tr>
+      <tr><td><strong>Thoracic Bioimpedance (TEB)</strong></td><td>Impedance change with SV</td><td class="td-good">None</td><td class="td-mid">Moderate</td><td>Trending, non-critical</td></tr>
+      <tr><td><strong>Bioreactance (NICOM)</strong></td><td>Phase shift of AC current</td><td class="td-good">None</td><td class="td-mid">Moderate–Good</td><td>Periop, fluid responsiveness</td></tr>
+      <tr><td><strong>Volume Clamp (ClearSight)</strong></td><td>Finger arterial waveform</td><td class="td-good">None (finger cuff)</td><td class="td-mid">Variable</td><td>OR monitoring</td></tr>
+      <tr><td><strong>PPG / PVI</strong></td><td>SpO₂ pleth waveform</td><td class="td-good">None</td><td class="td-bad">Trending only</td><td>Adjunct; PVI for fluid responsiveness</td></tr>
+      <tr><td><strong>Oesophageal Doppler</strong></td><td>Doppler aortic velocity</td><td class="td-mid">Semi-invasive</td><td class="td-good">Good</td><td>OR, ICU — intubated patients</td></tr>
+      <tr><td><strong>Echocardiography (TTE/TEE)</strong></td><td>LVOT Doppler VTI</td><td class="td-mid">TTE none / TEE semi</td><td class="td-good">Good</td><td>Periop, ICU, diagnostic</td></tr>
+      <tr><td><strong>Partial CO₂ rebreathing (NICO)</strong></td><td>Modified Fick (CO₂)</td><td class="td-mid">Requires intubation</td><td class="td-mid">Moderate</td><td>Intubated, no significant shunt</td></tr>
+    </table>
+
+    <h2 class="subhead">Pleth Variability Index (PVI)</h2>
+    <div class="formula-box">
+      <span class="flabel">PVI Formula</span>
+      PVI = [(PI<sub>max</sub> − PI<sub>min</sub>) / PI<sub>max</sub>] × 100%
+      <div class="fexpl">PI = perfusion index from SpO₂ probe · PVI &gt;14% in ventilated patients predicts fluid responsiveness (similar performance to PPV)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: FLUID RESPONSIVENESS -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 06</div>
+      <div class="mod-title">Markers of Fluid <em>Responsiveness</em></div>
+      <div class="mod-intro">Static and dynamic indices — predicting which patients will increase cardiac output in response to a fluid challenge. The central question in resuscitation.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>⚑ The Core Question</strong>
+      Only ~50% of haemodynamically unstable ICU patients are truly fluid-responsive. Fluid in a non-responder causes harm — pulmonary oedema, dilutional coagulopathy, abdominal compartment syndrome. We must predict before we pour.
+      <br><br>
+      <strong>Definition:</strong> Fluid responsiveness = ≥10–15% increase in stroke volume or CO after a fluid challenge.
+    </div>
+
+    <h2 class="subhead">Static Indices — Poor Predictors</h2>
+    <p>Static filling pressures tell you where you are on the x-axis. They do not tell you the slope of the Frank-Starling curve — which is the only thing that matters for predicting response.</p>
+
+    <table class="data-table">
+      <tr><th>Index</th><th>Normal</th><th>AUC-ROC</th><th>Why It Fails</th></tr>
+      <tr><td>CVP</td><td>2–8 mmHg</td><td class="td-bad">~0.55 (no better than chance)</td><td>Does not reflect ventricular compliance or contractility</td></tr>
+      <tr><td>PCWP</td><td>6–12 mmHg</td><td class="td-bad">~0.56</td><td>Same fundamental limitation; more invasive</td></tr>
+      <tr><td>ITBVI (PiCCO)</td><td>850–1000 mL/m²</td><td class="td-mid">~0.64</td><td>Volumetric; better than pressure but still static</td></tr>
+      <tr><td>GEDVI (PiCCO)</td><td>680–800 mL/m²</td><td class="td-mid">~0.66</td><td>Reasonable preload estimate; not a prediction of response</td></tr>
+    </table>
+
+    <h2 class="subhead">Why Dynamic Indices Work — The Mechanism</h2>
+    <p>Positive pressure inspiration → ↑ intrathoracic pressure → ↓ venous return → ↓ RV preload → (after 2-beat pulmonary transit time) → ↓ LV filling → ↓ SV. In a heart sitting on the <strong>steep part</strong> of the Starling curve (preload-dependent), this cyclical variation is <strong>exaggerated</strong>. In a heart on the flat part, it is minimal. This is the basis of all dynamic indices.</p>
+
+    <h3 class="subsubhead">Pulse Pressure Variation (PPV)</h3>
+    <div class="formula-box">
+      <span class="flabel">PPV Formula</span>
+      PPV = [(PP<sub>max</sub> − PP<sub>min</sub>) / ((PP<sub>max</sub> + PP<sub>min</sub>) / 2)] × 100%
+      <div class="fexpl">Threshold: &gt;13% predicts fluid responsiveness · AUC ~0.94</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Prerequisites:</strong> controlled mechanical ventilation (no spontaneous breaths), regular rhythm (no AF), Vt ≥8 mL/kg IBW, closed chest</li>
+      <li>Measured over at least 3 respiratory cycles from arterial line waveform</li>
+      <li>Fails in: spontaneous breathing, arrhythmias, low Vt ventilation, open chest, raised intra-abdominal pressure, RV failure</li>
+    </ul>
+
+    <h3 class="subsubhead">Stroke Volume Variation (SVV)</h3>
+    <div class="formula-box">
+      <span class="flabel">SVV Formula</span>
+      SVV = [(SV<sub>max</sub> − SV<sub>min</sub>) / SV<sub>mean</sub>] × 100%
+      <div class="fexpl">Threshold: &gt;10–13% · AUC ~0.84 · Derived from pulse contour devices</div>
+    </div>
+
+    <h3 class="subsubhead">IVC Indices — Ultrasound</h3>
+    <div class="formula-box">
+      <span class="flabel">IVC Collapsibility Index — Spontaneously Breathing</span>
+      IVC-CI = [(IVC<sub>max</sub> − IVC<sub>min</sub>) / IVC<sub>max</sub>] × 100%
+      <div class="fexpl">Threshold: &gt;50% predicts fluid responsiveness · AUC ~0.75</div>
+    </div>
+    <div class="formula-box">
+      <span class="flabel">IVC Distensibility Index — Mechanically Ventilated</span>
+      IVC-DI = [(IVC<sub>max</sub> − IVC<sub>min</sub>) / IVC<sub>min</sub>] × 100%
+      <div class="fexpl">Threshold: &gt;18% predicts fluid responsiveness · AUC ~0.89</div>
+    </div>
+    <div class="callout co-warn">
+      <strong>⚠ IVC Limitations</strong>
+      RV failure → plethoric IVC despite volume depletion · High intra-abdominal pressure → IVC compressed · Poor windows in obese or post-operative patients · Hepatic congestion confounds measurement. Always interpret in clinical context.
+    </div>
+
+    <h3 class="subsubhead">Passive Leg Raise (PLR) — The Most Versatile Test</h3>
+    <ul class="clist">
+      <li>Raise both legs to <strong>45°</strong> from semi-recumbent (30–45° HOB) position → transfers ~300 mL from venous reservoir → reversible autotransfusion</li>
+      <li>Measure CO/SV response within <strong>60–90 seconds</strong> continuously</li>
+      <li><strong>Positive:</strong> ≥10% increase in CO → fluid responsive (AUC ~0.95)</li>
+      <li>Reversible — no fluid administered. Safe in fluid-restricted patients</li>
+      <li>Works in: spontaneous breathing, arrhythmias (AF), low Vt ventilation — where PPV/SVV fail</li>
+      <li>Best measured with: oesophageal Doppler, echo VTI, PiCCO, or bioreactance (not MAP alone)</li>
+      <li><strong>Contraindications:</strong> raised ICP, suspected femoral fracture, intra-abdominal hypertension</li>
+    </ul>
+
+    <h3 class="subsubhead">End-Expiratory Occlusion Test (EEOT)</h3>
+    <ul class="clist">
+      <li>Occlude expiratory circuit for <strong>15 seconds</strong> → prevents cyclic reduction in venous return</li>
+      <li>CO increase ≥5% → fluid responsive (AUC ~0.93)</li>
+      <li>Requires continuous CO monitoring; works only in controlled MV patients</li>
+    </ul>
+
+    <h3 class="subsubhead">Tidal Volume Challenge</h3>
+    <ul class="clist">
+      <li>Temporarily increase Vt from 6 → 8 mL/kg IBW for one minute</li>
+      <li>If PPV increases by &gt;3.5% → would be PPV-positive at standard Vt (AUC ~0.97)</li>
+      <li>Useful when lung-protective low-Vt ventilation makes PPV unreliable</li>
+    </ul>
+
+    <h2 class="subhead">Comparison Table — Dynamic Indices</h2>
+    <table class="data-table">
+      <tr><th>Test</th><th>Threshold</th><th>AUC-ROC</th><th>Spont. Breathing</th><th>AF</th></tr>
+      <tr><td>PPV</td><td>&gt;13%</td><td class="td-good">~0.94</td><td class="td-bad">No</td><td class="td-bad">No</td></tr>
+      <tr><td>SVV</td><td>&gt;13%</td><td class="td-good">~0.84</td><td class="td-bad">No</td><td class="td-bad">No</td></tr>
+      <tr><td>IVC Distensibility</td><td>&gt;18%</td><td class="td-good">~0.89</td><td class="td-bad">No</td><td class="td-mid">Limited</td></tr>
+      <tr><td>IVC Collapsibility</td><td>&gt;50%</td><td class="td-mid">~0.75</td><td class="td-good">Yes</td><td class="td-mid">Limited</td></tr>
+      <tr><td><strong>PLR + CO measurement</strong></td><td>≥10% ↑CO</td><td class="td-good">~0.95</td><td class="td-good">Yes</td><td class="td-good">Yes</td></tr>
+      <tr><td>EEOT</td><td>≥5% ↑CO</td><td class="td-good">~0.93</td><td class="td-bad">No</td><td class="td-mid">Limited</td></tr>
+      <tr><td>Tidal Volume Challenge</td><td>ΔPPV &gt;3.5%</td><td class="td-good">~0.97</td><td class="td-bad">No</td><td class="td-bad">No</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Clinical Bottom Line</strong>
+      In a mechanically ventilated patient with no spontaneous effort, regular rhythm, Vt ≥8 mL/kg: use <strong>PPV</strong>. In everyone else: use <strong>PLR + continuous CO measurement</strong>. EEOT adds value when you need confirmation in MV patients.
+    </div>
+
+    <h2 class="subhead">Frank-Starling Curve — The Visual</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 400 220" width="360">
+        <line x1="40" y1="190" x2="370" y2="190" stroke="#d0c8b8" stroke-width="1.5"/>
+        <line x1="40" y1="190" x2="40" y2="20" stroke="#d0c8b8" stroke-width="1.5"/>
+        <path d="M50,185 Q100,140 160,90 Q220,50 290,40 Q340,36 360,36" stroke="#7a2020" stroke-width="2" fill="none"/>
+        <!-- Responsive point -->
+        <circle cx="130" cy="112" r="5" fill="#4a7c59"/>
+        <line x1="130" y1="190" x2="130" y2="112" stroke="#4a7c59" stroke-dasharray="3,3" stroke-width="1"/>
+        <line x1="40" y1="112" x2="130" y2="112" stroke="#4a7c59" stroke-dasharray="3,3" stroke-width="1"/>
+        <!-- Non-responsive point -->
+        <circle cx="300" cy="42" r="5" fill="#7a2020"/>
+        <line x1="300" y1="190" x2="300" y2="42" stroke="#7a2020" stroke-dasharray="3,3" stroke-width="1"/>
+        <!-- Preload arrows -->
+        <path d="M130,190 L172,190" stroke="#9a6c1a" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <path d="M300,190 L342,190" stroke="#9a6c1a" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <defs><marker id="arr2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9a6c1a"/></marker></defs>
+        <text x="100" y="205" fill="#4a7c59" font-family="Instrument Sans" font-size="8">Fluid responsive</text>
+        <text x="268" y="205" fill="#7a2020" font-family="Instrument Sans" font-size="8">Non-responsive</text>
+        <text x="42" y="16" fill="#a89880" font-family="Instrument Sans" font-size="8">SV / CO</text>
+        <text x="320" y="205" fill="#a89880" font-family="Instrument Sans" font-size="8">Preload</text>
+        <text x="348" y="48" fill="#a89880" font-family="Instrument Sans" font-size="7">Flat</text>
+        <text x="54" y="130" fill="#a89880" font-family="Instrument Sans" font-size="7">Steep</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: MICROVASCULAR -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 06</div>
+      <div class="mod-title">Markers of <em>Microvascular Perfusion</em></div>
+      <div class="mod-intro">Global haemodynamics can be normalised while the microcirculation remains in crisis — the invisible failure that drives organ dysfunction.</div>
+    </div>
+
+    <div class="callout co-fact">
+      <strong>The Macro-Micro Disconnect</strong>
+      A patient may have MAP ≥65, CO normal, CVP normalised — and yet have stopped, intermittent, and heterogeneous capillary flow at the microvascular level. This <strong>persistent microcirculatory failure</strong> is an independent predictor of organ dysfunction and mortality in septic shock.
+    </div>
+
+    <h2 class="subhead">Lactate & Lactate Clearance</h2>
+    <table class="data-table">
+      <tr><th>Lactate Level</th><th>Interpretation</th><th>Action</th></tr>
+      <tr><td class="td-good">&lt;2 mmol/L</td><td>Normal</td><td>Reassuring; continue monitoring</td></tr>
+      <tr><td class="td-mid">2–4 mmol/L</td><td>Moderate — possible hypoperfusion or impaired clearance</td><td>Investigate; treat cause; serial measurement</td></tr>
+      <tr><td class="td-bad">&gt;4 mmol/L</td><td>Severe — high mortality risk · Sepsis-3 criterion for septic shock</td><td>Aggressive resuscitation; ICU; vasopressors</td></tr>
+    </table>
+
+    <div class="formula-box">
+      <span class="flabel">Lactate Clearance</span>
+      Clearance (%) = [(Lactate<sub>initial</sub> − Lactate<sub>follow-up</sub>) / Lactate<sub>initial</sub>] × 100
+      <div class="fexpl">≥10% clearance at 2–6 hours = adequate resuscitation response (Surviving Sepsis Campaign target)</div>
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ Lactate is Not Only Anaerobic</strong>
+      Aerobic sources in sepsis: Warburg effect (aerobic glycolysis in inflammatory cells) · Exogenous epinephrine → β₂-stimulation → ↑ skeletal muscle glycolysis · Impaired hepatic clearance · Thiamine deficiency · Metformin toxicity · Respiratory muscle fatigue (severe asthma). Always interpret in context.
+    </div>
+
+    <h2 class="subhead">ScvO₂ — Central Venous Oxygen Saturation</h2>
+    <p>Measured from the <strong>distal port of a CVC in the SVC</strong>. Reflects the balance between O₂ delivery (DO₂) and consumption (VO₂) for the upper body. Overestimates true mixed SvO₂ by ~5–7%.</p>
+    <div class="formula-box">
+      <span class="flabel">Fick-derived relationship</span>
+      SvO₂ = SaO₂ − VO₂ / (CO × Hb × 1.34)
+      <div class="fexpl">↓ SvO₂: ↑ extraction → ↓ DO₂ (low CO, low Hb, low SaO₂) or ↑ VO₂ (fever, shivering) · ↑ SvO₂ in sepsis: microvascular shunting → O₂ not being extracted at cell level despite adequate delivery</div>
+    </div>
+
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">Normal ScvO₂</div><div class="val-num">&gt;70</div><span class="val-unit">%</span></div>
+      <div class="val-item"><div class="val-label">Normal mixed SvO₂ (PA)</div><div class="val-num">60–80</div><span class="val-unit">%</span></div>
+      <div class="val-item"><div class="val-label">In cardiogenic shock</div><div class="val-num">&lt;50</div><span class="val-unit">%</span></div>
+      <div class="val-item"><div class="val-label">In early sepsis (shunting)</div><div class="val-num">&gt;80</div><span class="val-unit">%</span></div>
+    </div>
+
+    <h2 class="subhead">Pv-aCO₂ Gap — Venoarterial CO₂ Difference</h2>
+    <div class="formula-box">
+      <span class="flabel">Pv-aCO₂ Gap</span>
+      Pv-aCO₂ = PvCO₂ − PaCO₂  [venous from CVC, arterial from ABG]
+      <div class="fexpl">Normal: 2–6 mmHg · &gt;6 mmHg despite normalised ScvO₂ → inadequate CO₂ washout → inadequate flow or microvascular impairment</div>
+    </div>
+    <ul class="clist">
+      <li>Elevated Pv-aCO₂ (&gt;6 mmHg) indicates impaired tissue CO₂ washout → inadequate cardiac output relative to metabolic demand</li>
+      <li>Particularly valuable when ScvO₂ appears normalised but lactate remains elevated — the <em>"cryptic shock"</em> state</li>
+      <li><strong>Pv-aCO₂ / Ca-vO₂ ratio:</strong> if &gt;1.4 → suggests anaerobic CO₂ production (not just low flow)</li>
+    </ul>
+
+    <h2 class="subhead">Near-Infrared Spectroscopy (NIRS)</h2>
+    <ul class="clist">
+      <li>Measures regional oxygen saturation (rSO₂) non-invasively via differential absorption of NIR light by oxyHb/deoxyHb</li>
+      <li><strong>Sites:</strong> cerebral (forehead), somatic (flank, thenar eminence, deltoid)</li>
+      <li><strong>Normal cerebral rSO₂:</strong> 55–75% · Devices: INVOS, FORE-SIGHT, EQUANOX</li>
+      <li>Signal is ~70–75% venous compartment — reflects microvascular + macrovascular perfusion</li>
+      <li>Used in: cardiac surgery (cerebral protection), ECMO monitoring, neonatal ICU</li>
+      <li>Thenar rSO₂: sensitive early marker of peripheral hypoperfusion in shock</li>
+      <li><strong>Limitations:</strong> skin pigmentation, CSF layer, subcutaneous fat, electromagnetic interference</li>
+    </ul>
+
+    <h2 class="subhead">Sublingual Capillaroscopy (SDF / IDF Imaging)</h2>
+    <ul class="clist">
+      <li>Direct real-time visualisation of sublingual microcirculation using <strong>Sidestream Dark Field (SDF)</strong> or <strong>Incident Dark Field (IDF)</strong> imaging</li>
+      <li>Measures: functional capillary density (FCD), total vessel density (TVD), microvascular flow index (MFI), perfused vessel density (PVD)</li>
+      <li>MFI scale: 0 = absent · 1 = intermittent · 2 = sluggish · 3 = normal</li>
+      <li>In septic shock: ↓FCD, heterogeneous flow — stopped and intermittent capillaries adjacent to normal-flow vessels</li>
+      <li>Currently a research tool — not routine clinical practice. Requires expertise and offline analysis software</li>
+    </ul>
+
+    <h2 class="subhead">Clinical Markers — Rapid Bedside Assessment</h2>
+    <div class="compare-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--rust)">Mottling Score</h4>
+        <ul class="clist">
+          <li>Score 0–5 based on area of mottling extending proximally from knee</li>
+          <li>Score ≥3 = poor prognosis, high mortality</li>
+          <li>Reflects microvascular vasoconstriction and heterogeneous flow</li>
+          <li>Easy bedside assessment — no equipment needed</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--rust)">Capillary Refill Time (CRT)</h4>
+        <ul class="clist">
+          <li>Normal &lt;2 seconds (fingertip, press for 15 sec)</li>
+          <li>&gt;2 sec = impaired peripheral perfusion</li>
+          <li>ANDROMEDA-SHOCK trial: CRT-guided resuscitation non-inferior to lactate-guided strategy</li>
+          <li>Peripheral-core temperature gradient: &gt;7°C (core–toe) or &gt;4°C (forearm–fingertip) suggests peripheral vasoconstriction</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="subhead">Integrated Approach to Shock Assessment</h2>
+    <div class="flow-row">
+      <div class="flow-box">MAP &lt;65<br>± Lactate &gt;2</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Global haemodynamics<br>CO · SVR · CVP</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Fluid responsive?<br>PLR · PPV · IVC</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Microvascular<br>ScvO₂ · Lactate<br>CRT · Pv-aCO₂</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Targets:<br>MAP ≥65<br>Lactate ↓ ≥10%/2h<br>ScvO₂ &gt;70%<br>CRT &lt;2s</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twelve questions across all six modules. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot">
+  <a href="../reading-corner.html" class="foot-back" target="_self">← Back to The Reading Corner</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--amber)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--sage)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/7)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 70, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  {q:"Which CVP waveform component is absent in atrial fibrillation?",opts:["c wave","v wave","a wave","y descent"],ans:2,exp:"The 'a' wave represents atrial contraction. In AF there is no organised atrial systole, so the 'a' wave disappears. The remaining waveform shows only c and v waves with x and y descents."},
+  {q:"ICU patient: CO ↓↓, SVR ↑↑, PCWP ↑, CVP ↑, SvO₂ ↓. What type of shock?",opts:["Distributive","Hypovolaemic","Cardiogenic","Obstructive"],ans:2,exp:"Cardiogenic shock: the failing pump gives low CO, driving compensatory vasoconstriction (high SVR). Backward failure raises filling pressures (high PCWP and CVP). Low SvO₂ reflects maximal oxygen extraction from low delivery."},
+  {q:"PPV threshold for predicting fluid responsiveness in mechanically ventilated patients?",opts:[">5%",">8%",">13%",">20%"],ans:2,exp:"PPV >13% predicts fluid responsiveness with AUC ~0.94 — one of the best-validated thresholds in haemodynamic monitoring. Prerequisites: controlled MV, no spontaneous breaths, regular rhythm, Vt ≥8 mL/kg IBW."},
+  {q:"Which statement about CVP and fluid responsiveness is correct?",opts:["CVP >10 mmHg confirms fluid overload","CVP <5 mmHg confirms the patient will respond to fluid","A single CVP value cannot reliably predict fluid responsiveness","CVP is the gold standard for fluid responsiveness"],ans:2,exp:"Marik et al. 2008 meta-analysis (803 patients): CVP AUC-ROC = 0.55 — statistically indistinguishable from chance. CVP reflects filling pressure, not the slope of the Frank-Starling curve, which is what determines fluid responsiveness."},
+  {q:"A PAC waveform shows: systolic 26 mmHg, diastolic 2 mmHg, NO dicrotic notch. Where is the catheter tip?",opts:["Correctly in the pulmonary artery","In the wedge position","In the right ventricle","In the SVC"],ans:2,exp:"This is a classic RV waveform: high systolic (matching PA), diastolic nearly at zero, and no dicrotic notch. The PA waveform has elevated diastolic (6–12 mmHg) AND a dicrotic notch (pulmonic valve closure). The balloon should remain inflated and the catheter advanced."},
+  {q:"EVLWI on PiCCO is 18 mL/kg and PVPI is 3.8. What does this suggest?",opts:["Normal lung water","Hydrostatic pulmonary oedema only","Increased permeability pulmonary oedema — ARDS pattern","Pleural effusion"],ans:2,exp:"EVLWI >15 mL/kg = severe pulmonary oedema. PVPI >3 indicates increased pulmonary vascular permeability — consistent with ARDS rather than simple hydrostatic (cardiogenic) oedema. This guides aggressive fluid restriction / de-resuscitation."},
+  {q:"Which dynamic index works in spontaneously breathing patients AND in AF?",opts:["PPV","SVV","IVC distensibility index","Passive leg raise with continuous CO measurement"],ans:3,exp:"PLR with continuous CO measurement (AUC ~0.95) is the only major dynamic index validated across all these conditions: spontaneous breathing, arrhythmias, low Vt ventilation, and even open chest. PPV and SVV require controlled MV and regular rhythm."},
+  {q:"Pv-aCO₂ gap is 9 mmHg despite ScvO₂ of 74%. What is the most likely explanation?",opts:["Normal — both values are acceptable","Patient is fluid overloaded","Inadequate cardiac output or microvascular impairment despite apparent ScvO₂ normalisation","Measurement error"],ans:2,exp:"This is the 'cryptic' state — ScvO₂ appears normalised but Pv-aCO₂ >6 mmHg indicates inadequate CO₂ washout from tissues, implying persistent inadequate flow. The Pv-aCO₂/Ca-vO₂ ratio >1.4 would further suggest anaerobic CO₂ production."},
+  {q:"Which West Zone must the PAC tip be in for PCWP to accurately reflect LVEDP?",opts:["Zone I","Zone II","Zone III","Any zone"],ans:2,exp:"Zone III (lung base): Pa > Pv > Palv — continuous blood flow creates an uninterrupted fluid column from catheter tip to left atrium. PAC floats to Zone III naturally. Zones I and II have periods where alveolar pressure interrupts the blood column, making PCWP reflect alveolar not left atrial pressure."},
+  {q:"The SVR formula is:",opts:["(MAP − PCWP) / CO × 80","(MAP − CVP) / CO × 80","(mPAP − PCWP) / CO × 80","(SBP − DBP) / CO × 80"],ans:1,exp:"SVR = (MAP − CVP) / CO × 80. The ×80 converts from Wood units (mmHg/L/min) to CGS units (dynes·s/cm⁵). Normal 800–1200. PVR uses (mPAP − PCWP) / CO × 80. Don't confuse the driving pressure (MAP−CVP for systemic; mPAP−PCWP for pulmonary)."},
+  {q:"IVC collapsibility index of 62% on POCUS in a spontaneously breathing patient suggests:",opts:["Volume overload","Fluid responsiveness likely","Cardiac tamponade","Constrictive pericarditis"],ans:1,exp:"IVC-CI >50% in spontaneously breathing patients = significant collapse on inspiration → low right atrial filling pressure → preload-dependent state → likely fluid responsive (AUC ~0.75). Caveats: RV failure, high IAP, and obesity can confound this measurement."},
+  {q:"In septic shock, a high ScvO₂ (>80%) with an elevated lactate is most consistent with:",opts:["Excellent resuscitation — stop fluids","Measurement error","Microvascular shunting — O₂ not being extracted at cellular level","Patient needs more blood transfusion"],ans:2,exp:"In septic shock, microvascular shunting causes blood to bypass metabolically active tissues. ScvO₂ appears high because O₂ is not being consumed at the capillary level despite elevated delivery. Lactate remains high from anaerobic/dysoxic metabolism. This is not a reassuring picture — it represents microcirculatory failure."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--sage);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — ready for the OR floor.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
