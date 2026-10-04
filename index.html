@@ -77,12 +77,13 @@ nav{
 @media(max-width:700px){.capno-wrap{height:44px;bottom:1vh;}}
 .hcontent{position:relative;z-index:10;max-width:880px;}
 .h-eyebrow{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;animation:fadeUp .8s both .2s;}
-.h-eyebrow::before{content:'';width:30px;height:1px;background:var(--sage);}
+.h-eyebrow::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--sage);}
 h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.6rem,8.5vw,7.8rem);font-weight:300;line-height:.92;letter-spacing:-.025em;margin-bottom:2.5rem;animation:fadeUp .8s both .35s;}
 @media(min-width:1024px){h1{font-size:clamp(3.6rem,6.8vw,6.2rem);}}
 h1 .l1{display:block;color:var(--text);}
 h1 .l2{display:block;color:var(--rust);font-style:italic;font-weight:600;}
-h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;margin-top:.25em;font-weight:300;}
+h1 .l3{display:flex;align-items:center;gap:1rem;color:var(--muted);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.05rem,1.7vw,1.5rem);letter-spacing:.015em;line-height:1.4;margin-top:1.6rem;padding-left:2.6rem;font-weight:300;}
+h1 .l3::before{content:'';flex:none;width:34px;height:1px;background:var(--gold);opacity:.7;}
 .h-byline{font-size:.98rem;color:var(--muted);line-height:1.9;max-width:540px;margin-bottom:3rem;font-weight:300;animation:fadeUp .8s both .5s;}
 .h-byline strong{color:var(--rust);font-weight:500;}
 .h-actions{display:flex;gap:1.4rem;align-items:center;flex-wrap:wrap;animation:fadeUp .8s both .65s;}
@@ -93,6 +94,18 @@ h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;mar
 .scroll-hint{position:absolute;bottom:4vh;right:5vw;writing-mode:vertical-rl;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:1rem;animation:fadeUp 1s both 1.2s;}
 .scroll-hint::after{content:'';width:1px;height:55px;background:linear-gradient(to bottom,var(--faint),transparent);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* HERO VITALS (decorative) */
+.vitals{position:absolute;right:9vw;top:36%;z-index:10;width:210px;padding-left:1.6rem;border-left:1px solid var(--border);animation:fadeUp 1s both 1s;pointer-events:none;}
+.v-head{font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.7rem;margin-bottom:1.6rem;}
+.v-row{display:flex;align-items:baseline;gap:.55rem;margin-bottom:1.15rem;opacity:.8;}
+.v-l{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);width:46px;}
+.v-n{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:300;line-height:1;color:var(--rust);font-variant-numeric:tabular-nums;}
+.v-row:nth-child(3) .v-n{color:var(--gold);}
+.v-row:nth-child(4) .v-n{color:var(--sage);}
+.v-row:nth-child(5) .v-n{color:var(--indigo);}
+.v-u{font-size:.58rem;letter-spacing:.1em;color:var(--faint);}
+@media(max-width:1100px){.vitals{display:none;}}
 
 /* STATS BAR */
 .stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 5vw;display:grid;grid-template-columns:repeat(5,1fr);}
@@ -141,6 +154,29 @@ h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;mar
 .sidebar-cta{color:var(--rust);font-weight:600;}
 .sidebar-cta:hover{gap:.95rem;color:var(--maroon);}
 
+/* ARCHIVE LINK — distinct, gently animated call-to-action */
+.archive-link{
+  position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.85rem;
+  padding:.85rem 1.5rem;margin-top:.4rem;
+  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+  color:var(--rust);border:1px solid rgba(122,32,32,.3);background:rgba(245,240,232,.55);
+  animation:archiveGlow 3.2s ease-in-out infinite;
+  transition:background .3s,color .3s,transform .25s;
+}
+.archive-link::before{
+  content:'';position:absolute;top:0;bottom:0;left:-60%;width:45%;
+  background:linear-gradient(105deg,transparent,rgba(184,131,26,.32),transparent);
+  transform:skewX(-18deg);animation:archiveShine 3.2s ease-in-out infinite;pointer-events:none;
+}
+.archive-link::after{content:'\2192';font-size:1rem;line-height:1;animation:archiveNudge 1.6s ease-in-out infinite;}
+.archive-link:hover{background:rgba(122,32,32,.07);color:var(--maroon);border-color:var(--rust);transform:translateY(-2px);animation:none;}
+.archive-link:hover::before{animation:none;opacity:0;}
+.archive-link--sm{margin-top:1.1rem;padding:.7rem 1.2rem;font-size:.64rem;}
+@keyframes archiveShine{0%,55%{left:-60%;}100%{left:130%;}}
+@keyframes archiveNudge{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
+@keyframes archiveGlow{0%,100%{box-shadow:0 0 0 0 rgba(122,32,32,0);}50%{box-shadow:0 0 0 5px rgba(122,32,32,.05);}}
+@media(prefers-reduced-motion:reduce){.archive-link,.archive-link::before,.archive-link::after{animation:none;}}
+
 /* CASE GRID */
 .cases-sec{padding:6rem 5vw;border-bottom:1px solid var(--border);}
 .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);}
@@ -184,7 +220,9 @@ h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;mar
 .sb h3{font-family:'Cormorant Garamond',serif;font-size:1.38rem;font-weight:600;color:var(--text);margin-bottom:.7rem;letter-spacing:-.01em;}
 .sb p{font-size:.82rem;line-height:1.82;color:var(--muted);font-weight:300;}
 .sb-cta{display:inline-flex;align-items:center;gap:.55rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-top:1.2rem;transition:gap .2s,color .2s;}
-.sb-cta::after{content:'→';}
+.sb-cta::after{content:'→';display:inline-block;animation:ctaArrow 1.8s ease-in-out infinite;}
+@keyframes ctaArrow{0%,100%{transform:translateX(0);opacity:.65;}50%{transform:translateX(6px);opacity:1;}}
+@media(prefers-reduced-motion:reduce){.sb-cta::after{animation:none;}}
 .sb:hover .sb-cta{gap:.9rem;color:var(--maroon);}
 .soon{display:inline-block;margin-top:1rem;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(154,108,26,.35);padding:.2rem .55rem;}
 
@@ -203,7 +241,7 @@ h1 .l3{display:block;color:var(--muted);font-size:.52em;letter-spacing:.04em;mar
 .comm-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;color:var(--text);margin-bottom:1rem;}
 .comm-intro h2 em{font-style:italic;color:var(--gold);}
 .comm-intro p{font-size:.87rem;color:var(--muted);line-height:1.9;font-weight:300;}
-.comm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);}
+.comm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:var(--border);}
 .cb{background:var(--deep);padding:2.7rem;cursor:none;transition:background .3s;}
 .cb:hover{background:var(--card);}
 .cb-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;}
@@ -283,6 +321,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   .f-right{text-align:center;}
 }
 @media(max-width:700px){
+  h1 .l3{padding-left:0;}
   .case-grid{grid-template-columns:1fr;}
   .letters-grid,.sections-grid,.comm-grid{grid-template-columns:1fr;}
   nav .nav-links{display:none;}
@@ -328,7 +367,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
     <h1>
       <span class="l1">Ode</span>
       <span class="l2">to the OR</span>
-      <span class="l3">— a resident's record, in her own words</span>
+      <span class="l3">An ode to the operating room, from the other side of the drape.</span>
     </h1>
     <p class="h-byline">
       I am <strong>Dr. Rushika Ode</strong>. I put people to sleep for a living —
@@ -341,13 +380,20 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
       <a href="#about" class="btn-ghost">About this project</a>
     </div>
   </div>
+  <div class="vitals" aria-hidden="true">
+    <div class="v-head"><span class="pulse"></span>Vitals &middot; stable</div>
+    <div class="v-row"><span class="v-l">HR</span><span class="v-n" id="v-hr">72</span><span class="v-u">bpm</span></div>
+    <div class="v-row"><span class="v-l">SpO&#8322;</span><span class="v-n">99</span><span class="v-u">%</span></div>
+    <div class="v-row"><span class="v-l">EtCO&#8322;</span><span class="v-n" id="v-et">35</span><span class="v-u">mmHg</span></div>
+    <div class="v-row"><span class="v-l">NIBP</span><span class="v-n">118/76</span></div>
+  </div>
   <div class="scroll-hint">Scroll</div>
 </section>
 
 <!-- STATS BAR -->
 <div class="stats-bar" style="grid-template-columns:repeat(4,1fr);">
-  <div class="st"><span class="st-n">3</span><span class="st-l">Cases Published</span></div>
-  <div class="st"><span class="st-n">9</span><span class="st-l">Topics Covered</span></div>
+  <div class="st"><span class="st-n">6</span><span class="st-l">Cases Published</span></div>
+  <div class="st"><span class="st-n">35</span><span class="st-l">Topics Covered</span></div>
   <div class="st"><span class="st-n">—</span><span class="st-l">Research Projects</span></div>
   <div class="st"><span class="st-n">1</span><span class="st-l">Honest Resident</span></div>
 </div>
@@ -366,7 +412,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
       <span class="tag to">Obstetric</span>
       <span class="tag tp">Pediatric</span>
     </div>
-    <a href="cases.html" class="read-link">Explore the Case Archives</a>
+    <a href="cases.html" class="archive-link">Explore the Case Archives</a>
   </div>
   <div class="sidebar">
     <div class="sbox" id="topics-box">
@@ -396,7 +442,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
         <a class="tbtn" href="cases.html?topic=ultrasound">POCUS</a>
         <a class="tbtn" href="cases.html?topic=vats">VATS</a>
       </div>
-      <a href="cases.html" class="sidebar-cta">Explore the Case Archives</a>
+      <a href="cases.html" class="archive-link archive-link--sm">Explore the Case Archives</a>
     </div>
   </div>
 </section>
@@ -462,50 +508,8 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   </div>
 
     <div style="text-align:center;margin-top:2.5rem;">
-      <a href="cases.html" class="read-link" style="font-size:.72rem;">Explore the Case Archives</a>
+      <a href="cases.html" class="archive-link">Explore the Case Archives</a>
     </div>
-</section>
-
-<!-- OR DIARIES -->
-<section class="diary-sec" id="diaries">
-  <div class="diary-intro">
-    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
-      <span class="ey">OR Diaries</span>
-    </div>
-    <h2>The things that don't fit in a case report</h2>
-    <p style="margin-top:1rem;">Short. Honest. Unfiltered. The moments between the cases — the things I think about at 2am after a long shift. Sometimes one sentence carries more than a whole write-up ever could.</p>
-  </div>
-  <div class="diary-feed">
-    <div class="di">
-      <span class="di-date">—<br>—</span>
-      <p class="di-text">"Diary entries will appear here. Short, honest, from the OR floor."</p>
-    </div>
-    <div class="di">
-      <span class="di-date">—<br>—</span>
-      <p class="di-text">"The <em>unfiltered</em> version of residency — not the highlight reel."</p>
-    </div>
-    <div class="di">
-      <span class="di-date">—<br>—</span>
-      <p class="di-text">"Updated as they happen. No schedule. Just <em>honesty.</em>"</p>
-    </div>
-  </div>
-</section>
-
-<!-- LETTERS TO MY ATTENDINGS -->
-<section class="letters-sec" id="letters">
-  <div class="letters-intro">
-    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
-      <span class="ey">Letters to My Attendings</span>
-    </div>
-    <h2>To the people who I still carry<br>into <em>every case</em></h2>
-    <p style="margin-top:1rem;">Open letters to the doctors who shaped me—not only through their knowledge, but through their judgment, their kindness, and the example they set. Every letter is written with gratitude for lessons that continue to echo through every case.</p>
-  </div>
-  <div class="letters-grid">
-    <div class="lc" style="border:2px dashed var(--border);background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:240px;">
-      <div class="l-to" style="margin-bottom:.8rem;">First letter</div>
-      <p class="l-exc" style="color:var(--faint);font-size:.92rem;">Letters will appear here as they are written. Each one honest, each one earned.</p>
-    </div>
-  </div>
 </section>
 
 <!-- WHAT LIVES HERE -->
@@ -539,23 +543,20 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   </a>
 </div>
 
-<!-- PROCEDURE LOG -->
-<section class="numbers-sec" id="procedure-log">
-  <div class="sec-head">
-    <span class="ey">Procedure Log — Updated Periodically</span>
-    <div class="sl"></div>
-    <span class="sn">A living record</span>
+<!-- LETTERS TO MY ATTENDINGS -->
+<section class="letters-sec" id="letters">
+  <div class="letters-intro">
+    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
+      <span class="ey">Letters to My Attendings</span>
+    </div>
+    <h2>To the people who I still carry<br>into <em>every case</em></h2>
+    <p style="margin-top:1rem;">Open letters to the doctors who shaped me—not only through their knowledge, but through their judgment, their kindness, and the example they set. Every letter is written with gratitude for lessons that continue to echo through every case.</p>
   </div>
-  <p style="font-size:.84rem;color:var(--muted);max-width:580px;font-weight:300;line-height:1.8;">A running log of procedures performed during residency. Not a trophy cabinet — a logbook. Updated periodically and kept here as an honest record of where I am in training.</p>
-  <div class="num-grid">
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Intubations</span><span class="nb-sub">Updated periodically</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Spinal Anaesthetics</span><span class="nb-sub">incl. emergency LSCS</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Arterial Lines</span><span class="nb-sub">radial, femoral, brachial</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Regional Blocks</span><span class="nb-sub">landmark + ultrasound guided</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Epidurals</span><span class="nb-sub">labour, surgical, pain</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Central Venous Lines</span><span class="nb-sub">IJV, subclavian, femoral</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Research Projects</span><span class="nb-sub">published + in progress</span></div>
-    <div class="nb"><span class="nb-big">—</span><span class="nb-label">Cases Documented</span><span class="nb-sub">on this website</span></div>
+  <div class="letters-grid">
+    <div class="lc" style="border:2px dashed var(--border);background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:240px;">
+      <div class="l-to" style="margin-bottom:.8rem;">First letter</div>
+      <p class="l-exc" style="color:var(--faint);font-size:.92rem;">Letters will appear here as they are written. Each one honest, each one earned.</p>
+    </div>
   </div>
 </section>
 
@@ -569,44 +570,6 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
     <p style="margin-top:1rem;">This website is a monologue. The community is the conversation. Whether you're a resident, a student, or a practising anaesthetist — there is a space here for you. All free. Always will be.</p>
   </div>
   <div class="comm-grid">
-
-    <!-- DISCORD -->
-    <div class="cb">
-      <div class="cb-icon ci-d">
-        <svg width="20" height="15" viewBox="0 0 24 18" fill="#5865F2"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 1.492a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
-      </div>
-      <h3>Discord Server</h3>
-      <p class="cb-handle">Link coming soon</p>
-      <p>Discord is a free platform with separate rooms for different topics — a staffroom that never closes. Different channels for cases, pharmacology, career questions, and honest conversation.</p>
-      <div class="channels">
-        <span class="ch">case-of-the-week</span>
-        <span class="ch">drug-of-the-day</span>
-        <span class="ch">mistakes-and-learning</span>
-        <span class="ch">journal-club</span>
-        <span class="ch">career-and-exams</span>
-      </div>
-      <a href="#" class="cb-cta cta-d">
-        <svg width="14" height="11" viewBox="0 0 24 18" fill="white"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 1.492a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
-        Join on Discord
-      </a>
-    </div>
-
-    <!-- WHATSAPP -->
-    <div class="cb">
-      <div class="cb-icon ci-w">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </div>
-      <h3>WhatsApp</h3>
-      <p class="cb-handle">Link coming soon</p>
-      <p>For quick case updates, new posts, and community announcements — delivered where you already are. Low volume, high signal. Your inbox won't regret it.</p>
-      <div class="wa-bullets">
-        📌 New case announcements<br>
-        📌 Weekly clinical pearl<br>
-        📌 Community updates<br>
-        📌 New content alerts
-      </div>
-      <a href="#" class="cb-cta cta-w">Join WhatsApp Community</a>
-    </div>
 
     <!-- CONTACT -->
     <div class="cb">
@@ -625,6 +588,52 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
       <p class="contact-email-line">Or write directly to <a href="mailto:odetotheor@gmail.com">odetotheor@gmail.com</a></p>
     </div>
 
+    <!-- DISCORD -->
+    <div class="cb">
+      <div class="cb-icon ci-d">
+        <svg width="20" height="15" viewBox="0 0 24 18" fill="#5865F2"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 1.492a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+      </div>
+      <h3>Discord Server</h3>
+      <p class="cb-handle">Link coming soon</p>
+      <p>Discord is a free platform with separate rooms for different topics — a staffroom that never closes. Different channels for cases, pharmacology, career questions, and honest conversation.</p>
+      <div class="channels">
+        <span class="ch">case-of-the-week</span>
+        <span class="ch">drug-of-the-day</span>
+        <span class="ch">clinical-pearls</span>
+        <span class="ch">journal-club</span>
+        <span class="ch">career-and-exams</span>
+      </div>
+      <a href="#" class="cb-cta cta-d">
+        <svg width="14" height="11" viewBox="0 0 24 18" fill="white"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 1.492a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+        Join on Discord
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- OR DIARIES -->
+<section class="diary-sec" id="diaries">
+  <div class="diary-intro">
+    <div class="sec-head" style="flex-direction:column;align-items:flex-start;gap:.8rem;margin-bottom:1.4rem;">
+      <span class="ey">OR Diaries</span>
+    </div>
+    <h2>The things that don't fit in a case report</h2>
+    <p style="margin-top:1rem;">Short. Honest. Unfiltered. The moments between the cases — the things I think about at 2am after a long shift. Sometimes one sentence carries more than a whole write-up ever could.</p>
+  </div>
+  <div class="diary-feed">
+    <div class="di">
+      <span class="di-date">—<br>—</span>
+      <p class="di-text">"Diary entries will appear here. Short, honest, from the OR floor."</p>
+    </div>
+    <div class="di">
+      <span class="di-date">—<br>—</span>
+      <p class="di-text">"The <em>unfiltered</em> version of residency — not the highlight reel."</p>
+    </div>
+    <div class="di">
+      <span class="di-date">—<br>—</span>
+      <p class="di-text">"Updated as they happen. No schedule. Just <em>honesty.</em>"</p>
+    </div>
   </div>
 </section>
 
@@ -632,7 +641,6 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 <section class="about-sec" id="about">
   <div class="about-quote">
     I put people to sleep for a living. The least I can do is stay awake enough to learn something from every single one of them.
-    <p class="about-quote-sub">An ode to the operating room, from the other side of the drape.</p>
   </div>
   <div class="about-right">
     <h2>About Dr. Rushika Ode</h2>
@@ -698,6 +706,16 @@ document.querySelectorAll('a,button,.cc,.lc,.sb,.cb,.di').forEach(el=>{
     ring.style.borderColor='var(--sage)';
   });
 });
+
+// Decorative vitals: tiny, realistic drift
+(function(){
+  const hr=document.getElementById('v-hr'),et=document.getElementById('v-et');
+  if(!hr||!et)return;
+  setInterval(()=>{
+    hr.textContent=70+Math.floor(Math.random()*5);
+    et.textContent=34+Math.floor(Math.random()*3);
+  },2600);
+})();
 
 // Contact form handler
 function handleContact(e){
