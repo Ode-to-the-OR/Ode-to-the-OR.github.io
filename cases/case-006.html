@@ -28,7 +28,7 @@
   --purple:  #6a3a6a;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;scroll-padding-top:90px;}
 body{
   background:var(--night);
   color:var(--text);
@@ -107,6 +107,22 @@ li strong{color:var(--text);font-weight:500;}
 .quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
 .quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
 
+/* Figure panels (SVG diagrams) */
+.fig-panel{background:linear-gradient(135deg,var(--surface) 0%,var(--deep) 100%);border:1px solid var(--border);padding:1.8rem 1.6rem 1.4rem;margin:2rem 0;position:relative;overflow:hidden;}
+.fig-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rust),var(--gold));}
+.fig-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--rust);margin-bottom:.3rem;}
+.fig-sub{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1rem;}
+.fig-panel svg{width:100%;height:auto;display:block;}
+.fig-caption{font-size:.8rem;color:var(--muted);margin-top:.9rem;font-style:italic;line-height:1.6;}
+
+/* Two-column figure grid */
+.fig-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+@media(max-width:700px){.fig-2{grid-template-columns:1fr;}}
+.fig-cell{background:rgba(245,240,232,.6);border:1px solid var(--border);padding:1rem;text-align:center;}
+.fig-cell .lab{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem;}
+.tbl-scroll{overflow-x:auto;}
+.hi{color:var(--rust);font-weight:600;}
+
 /* Echo table */
 .echo-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.84rem;}
 .echo-table th{background:var(--surface);border:1px solid var(--border);padding:.6rem .9rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;}
@@ -149,6 +165,7 @@ li strong{color:var(--text);font-weight:500;}
 .act-box{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin:1.5rem 0;}
 .act-box h3{margin-top:0;color:var(--teal);font-size:1.05rem;}
 .act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+.act-note{font-size:.82rem;margin:1rem 0 0;}
 .act-item{text-align:center;padding:.8rem;background:var(--night);border:1px solid var(--border);}
 .act-item .num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--rust);line-height:1;}
 .act-item .label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.4rem;}
@@ -201,7 +218,9 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
   .vent-grid{grid-template-columns:1fr;}
   .act-grid{grid-template-columns:1fr;}
   .wilkins-grid{grid-template-columns:1fr 1fr;}
+  .fig-2{grid-template-columns:1fr;}
 }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
 </style>
 </head>
 <body>
@@ -225,7 +244,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
 
   <div class="ey">Case 006 · Cardiac · Mitral Stenosis · PBMV Complication · MVR</div>
   <h1>The Balloon and the Right Heart: <em>When PBMV Fails in Severe Mitral Stenosis</em></h1>
-  <p class="subtitle">A 48-year-old woman with severe mitral stenosis and severe pulmonary hypertension undergoes percutaneous balloon mitral valvuloplasty — and returns with severe mitral regurgitation, pulmonary edema, and a right heart under siege.</p>
+  <p class="subtitle">A 48-year-old woman with severe mitral stenosis and severe pulmonary hypertension undergoes percutaneous balloon mitral valvuloplasty — and returns with severe mitral regurgitation, pulmonary edema, and a right heart under pressure.</p>
 
   <div class="meta-row">
     <a href="../index.html?topic=cardiac#cases" class="tag ta" data-topic="Cardiac">Cardiac</a>
@@ -239,6 +258,8 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <p>A 48-year-old woman presented with three months of exertional breathlessness that resolved with rest. She had no chest pain, no palpitations, no orthopnoea, no oedema. She was not hypertensive, not diabetic, had no history of stroke or coronary disease. She had never smoked. Her ECG showed T-wave inversions in leads III, aVF, and V2–V6. Her echocardiogram told a different story: <strong>severe mitral stenosis, severe pulmonary hypertension, and a right heart under pressure.</strong></p>
 
   <p>The plan was percutaneous balloon mitral valvuloplasty (PBMV). The balloon crossed the valve, dilated it — and something went wrong. The V wave shot up. Severe mitral regurgitation. Pulmonary oedema. The patient was shifted for emergency mitral valve replacement (MVR). This case is about the right heart, the pulmonary circulation, and the anaesthetic battle to keep both alive.</p>
+
+  
 
   <div class="divider"></div>
 
@@ -261,210 +282,97 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
   </div>
 
+  
+
   <div class="divider"></div>
 
   <h2>ECG Findings</h2>
-  <p>The ECG showed <strong>T-wave inversions in leads III, aVF, and V2–V6</strong>. These are non-specific but may reflect:</p>
-  <ul>
-    <li><strong>Right heart strain:</strong> T-wave inversions in inferior leads (III, aVF) and precordial leads (V2–V6) can indicate RV pressure overload and strain — consistent with severe pulmonary hypertension.</li>
-    <li><strong>LV diastolic overload:</strong> T-wave changes in V4–V6 can reflect altered LV filling dynamics in severe MS with reduced preload.</li>
-    <li><strong>Chronic LA hypertension:</strong> Repolarisation abnormalities are common in chronic mitral valve disease.</li>
-  </ul>
-  <p>There were no ischaemic changes, no arrhythmias, and no evidence of acute coronary syndrome. The ECG was consistent with the underlying valvular and pulmonary vascular disease.</p>
+  <p>The ECG showed <strong>T-wave inversions in leads III, aVF and V2–V6</strong>. These changes are non-specific. In a patient with severe pulmonary hypertension they are commonly attributed to <strong>right ventricular strain</strong>, and the echo findings (dilated RV, D-shaped LV) fit that picture. There were no arrhythmias, and coronary angiography showed normal epicardial coronaries, so an ischaemic cause was not supported.</p>
 
   <div class="divider"></div>
 
-  <h2>Echocardiography — 2D Findings</h2>
+  <h2>Echocardiography — The Numbers, Decoded</h2>
+  <p>The pre-procedure TTE and TEE tell the same story with slightly different numbers. The <strong>difference between them is worth noting</strong>: gradients depend on heart rate and flow, while planimetry does not.</p>
 
+  <div class="tbl-scroll">
   <table class="echo-table">
     <thead>
-      <tr>
-        <th>Parameter</th>
-        <th>Finding</th>
-        <th>Interpretation</th>
-      </tr>
+      <tr><th>Parameter</th><th>TTE</th><th>TEE</th><th>What it means</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="label">LV function</span></td>
-        <td><span class="val">EF 58%, no RWMA</span></td>
-        <td>Good LV systolic function. No regional wall motion abnormality.</td>
+        <td><span class="label">MVA, planimetry</span></td>
+        <td><span class="val">1.2 cm²</span></td>
+        <td><span class="val">1.4 cm²</span></td>
+        <td>Direct trace of the orifice, independent of rate and flow. Severe MS is ≤1.5 cm².</td>
       </tr>
       <tr>
-        <td><span class="label">Mitral valve area</span></td>
-        <td><span class="val">1.2 cm² (planimetry)</span></td>
-        <td>Severe mitral stenosis (normal MVA 4–6 cm²; severe &lt;1.5 cm²).</td>
+        <td><span class="label">MVA, PHT</span></td>
+        <td>—</td>
+        <td><span class="val">1.1 cm²</span></td>
+        <td>220 ÷ pressure half-time. Concordant with planimetry.</td>
       </tr>
       <tr>
         <td><span class="label">Mitral gradient</span></td>
-        <td><span class="val">27/10 mmHg</span></td>
-        <td>Elevated mean gradient consistent with severe MS.</td>
+        <td><span class="val">27 / 10 mmHg</span></td>
+        <td><span class="val">21 / 16 mmHg</span></td>
+        <td>Flow- and rate-dependent, so it varies between studies.</td>
       </tr>
       <tr>
-        <td><span class="label">Mitral regurgitation</span></td>
-        <td><span class="val">Mild MR</span></td>
-        <td>Mild — not the dominant lesion at this stage.</td>
+        <td><span class="label">Leaflets and subvalvular apparatus</span></td>
+        <td>—</td>
+        <td><span class="val">AML doming, PML restricted; subvalvular grade 3</span></td>
+        <td>Classic rheumatic MS. Grade 3 subvalvular disease lowers the odds of a clean PBMV result.</td>
       </tr>
       <tr>
-        <td><span class="label">Aortic regurgitation</span></td>
-        <td><span class="val">Mild AR</span></td>
-        <td>Mild — unlikely to require intervention.</td>
+        <td><span class="label">MR / AR</span></td>
+        <td><span class="val">Mild / Mild</span></td>
+        <td><span class="val">Mild / Mild (AR jet 20% of LVOT, PHT 670 ms)</span></td>
+        <td>Baseline MR was mild, which gives a reference for comparison after PBMV.</td>
       </tr>
       <tr>
-        <td><span class="label">Tricuspid regurgitation</span></td>
-        <td><span class="val">Severe TR</span></td>
-        <td>Functional TR secondary to severe PAH and RV dilation.</td>
+        <td><span class="label">TR and PA pressure</span></td>
+        <td><span class="val">Severe TR · RVSP 70 mmHg</span></td>
+        <td><span class="val">Severe TR, dilated annulus · TR velocity 5.08 m/s · PASP ~100 mmHg</span></td>
+        <td>Functional TR (dilated annulus). 4v² ≈ 103 mmHg, plus RA pressure, implies near-systemic pulmonary pressure.</td>
       </tr>
       <tr>
-        <td><span class="label">Pulmonary artery pressure</span></td>
-        <td><span class="val">RVSP 70 mmHg</span></td>
-        <td>Severe pulmonary hypertension.</td>
+        <td><span class="label">RA / RV / septum</span></td>
+        <td><span class="val">Dilated</span></td>
+        <td><span class="val">Dilated · D-shaped LV</span></td>
+        <td>Septal flattening reflects RV pressure and/or volume overload and can impair LV filling.</td>
       </tr>
       <tr>
-        <td><span class="label">Pericardium</span></td>
-        <td><span class="val">No effusion</span></td>
-        <td>Normal.</td>
+        <td><span class="label">LV</span></td>
+        <td><span class="val">EF 58%, no RWMA</span></td>
+        <td><span class="val">Good systolic function</span></td>
+        <td>Preserved systolic function. The LV is under-filled because of the mitral obstruction rather than intrinsically weak.</td>
       </tr>
       <tr>
-        <td><span class="label">Clot / vegetation</span></td>
-        <td><span class="val">None on 2D</span></td>
-        <td>2D echo did not detect LAA clot — TEE later revealed organic clot.</td>
+        <td><span class="label">LA / LAA</span></td>
+        <td><span class="val">No clot on 2D</span></td>
+        <td><span class="val">SEC · organic LAA clot · LAA velocity 38 cm/s</span></td>
+        <td>Spontaneous echo contrast reflects stasis. LAA emptying velocity of 38 cm/s is reduced (normally above about 40–50 cm/s).</td>
       </tr>
     </tbody>
   </table>
-
-  <div class="alert-box">
-    <h3>The 2D echo missed the LAA clot</h3>
-    <p>The 2D transthoracic echo reported "no clot." The pre-procedure TEE revealed <strong>organic clot in the left atrial appendage (LAA)</strong> with spontaneous echo contrast (SEC) and reduced LAA emptying velocity (38 cm/s). This is a critical teaching point: <strong>TEE is far more sensitive than TTE for LAA thrombus detection</strong>. In patients with severe MS, LA dilation, and SEC, TEE is mandatory before PBMV.</p>
   </div>
 
   <div class="divider"></div>
 
-  <h2>Echocardiography — TEE Findings</h2>
-
-  <table class="echo-table">
-    <thead>
-      <tr>
-        <th>Parameter</th>
-        <th>Finding</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="label">Valve morphology</span></td>
-        <td><span class="val">AML doming, PML restricted mobility</span></td>
-        <td>Classic rheumatic MS. Anterior leaflet pliable, posterior leaflet immobile.</td>
-      </tr>
-      <tr>
-        <td><span class="label">MVA (planimetry)</span></td>
-        <td><span class="val">1.4 cm²</span></td>
-        <td>Severe MS (TEE measurement slightly larger than TTE).</td>
-      </tr>
-      <tr>
-        <td><span class="label">MVA (PHT)</span></td>
-        <td><span class="val">1.1 cm²</span></td>
-        <td>Pressure half-time derived MVA — consistent with severe MS.</td>
-      </tr>
-      <tr>
-        <td><span class="label">Mitral gradient</span></td>
-        <td><span class="val">21/16 mmHg</span></td>
-        <td>Elevated gradient across the mitral valve.</td>
-      </tr>
-      <tr>
-        <td><span class="label">Subvalvular thickening</span></td>
-        <td><span class="val">Grade 3</span></td>
-        <td>Significant subvalvular disease — makes PBMV technically more difficult and less likely to succeed.</td>
-      </tr>
-      <tr>
-        <td><span class="label">Mitral regurgitation</span></td>
-        <td><span class="val">Mild MR</span></td>
-        <td>Mild — not a contraindication to PBMV at this stage.</td>
-      </tr>
-      <tr>
-        <td><span class="label">Aortic regurgitation</span></td>
-        <td><span class="val">Mild AR (jet 20% of LVOT, PHT 670 ms)</span></td>
-        <td>Mild — haemodynamically insignificant.</td>
-      </tr>
-      <tr>
-        <td><span class="label">LAA clot</span></td>
-        <td><span class="val">Organic clot present</span></td>
-        <td>Contraindication to PBMV (risk of embolisation).</td>
-      </tr>
-      <tr>
-        <td><span class="label">LAA emptying velocity</span></td>
-        <td><span class="val">38 cm/s</span></td>
-        <td>Reduced (&lt;40 cm/s indicates stasis and high thrombus risk).</td>
-      </tr>
-      <tr>
-        <td><span class="label">Spontaneous echo contrast</span></td>
-        <td><span class="val">Present in LA/LAA</span></td>
-        <td>"Smoke" — indicates blood stasis, high risk of thrombus formation.</td>
-      </tr>
-      <tr>
-        <td><span class="label">Tricuspid valve</span></td>
-        <td><span class="val">Annulus dilated, severe TR</span></td>
-        <td>Functional TR from RV dilation and severe PAH.</td>
-      </tr>
-      <tr>
-        <td><span class="label">TR jet velocity</span></td>
-        <td><span class="val">5.08 m/s</span></td>
-        <td>Corresponds to a high RV–RA gradient, consistent with severe PAH.</td>
-      </tr>
-      <tr>
-        <td><span class="label">RVSP</span></td>
-        <td><span class="val">~100 mmHg (PVSP)</span></td>
-        <td>Severe pulmonary hypertension.</td>
-      </tr>
-      <tr>
-        <td><span class="label">RA / RV</span></td>
-        <td><span class="val">Dilated</span></td>
-        <td>Right heart enlargement from chronic pressure overload.</td>
-      </tr>
-      <tr>
-        <td><span class="label">LV shape</span></td>
-        <td><span class="val">D-shaped LV</span></td>
-        <td>Septal flattening due to RV pressure overload — impairs LV filling.</td>
-      </tr>
-      <tr>
-        <td><span class="label">LV function</span></td>
-        <td><span class="val">Good systolic function</span></td>
-        <td>Preserved LV contractility.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="divider"></div>
-
-  <h2>The Wilkins Score</h2>
-  <p>The Wilkins score predicts the likelihood of successful PBMV based on valve morphology. Each component is scored 0–4, with a maximum of 16. A score ≤8 predicts a good result; &gt;8 predicts a poorer outcome.</p>
+  <h2>The Wilkins Score — 9/16</h2>
+  <p>Four components, each graded 1–4 (maximum 16). A score of 8 or less predicts a good PBMV result, 9–11 is borderline, and higher scores predict a less favourable result.</p>
 
   <div class="wilkins-grid">
-    <div class="wilkins-cell">
-      <div class="label">Morphology</div>
-      <div class="score">3</div>
-      <div class="max">/ 4</div>
-    </div>
-    <div class="wilkins-cell">
-      <div class="label">Motion</div>
-      <div class="score">2</div>
-      <div class="max">/ 4</div>
-    </div>
-    <div class="wilkins-cell">
-      <div class="label">Calcification</div>
-      <div class="score">1</div>
-      <div class="max">/ 4</div>
-    </div>
-    <div class="wilkins-cell">
-      <div class="label">Subvalvular</div>
-      <div class="score">3</div>
-      <div class="max">/ 4</div>
-    </div>
+    <div class="wilkins-cell"><div class="label">Mobility</div><div class="score">3</div><div class="max">/ 4</div></div>
+    <div class="wilkins-cell"><div class="label">Thickening</div><div class="score">2</div><div class="max">/ 4</div></div>
+    <div class="wilkins-cell"><div class="label">Calcification</div><div class="score">1</div><div class="max">/ 4</div></div>
+    <div class="wilkins-cell"><div class="label">Subvalvular</div><div class="score">3</div><div class="max">/ 4</div></div>
   </div>
 
   <div class="pearl-box">
-    <h3>Wilkins score 9/16 — borderline</h3>
-    <p>A score of 9 is above the ideal threshold of 8. The high subvalvular score (3) and morphology score (3) indicate significant leaflet and subvalvular disease. This predicts a <strong>higher risk of suboptimal PBMV result</strong> and a greater likelihood of complications, including leaflet tear and severe MR. The presence of LAA clot further complicates the decision.</p>
+    <h3>Two sub-scores worth noting</h3>
+    <p>M3 and S3 describe a valve whose <strong>commissures can be opened but whose leaflets and chordae cannot stretch to accommodate it</strong>. Splitting the commissure can then tear a leaflet or rupture a chord. The total score estimates the likelihood of a good result, and the sub-score pattern can hint at how an unfavourable result might arise.</p>
   </div>
 
   <div class="divider"></div>
@@ -526,33 +434,37 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
       <div class="patho-arrow">→</div>
       <div class="patho-content">
         <div class="patho-label">LAA stasis and thrombus formation</div>
-        <div class="patho-text">LA dilation and low LAA emptying velocity (38 cm/s) predispose to blood stasis, spontaneous echo contrast, and thrombus formation — as seen in this patient.</div>
+        <div class="patho-text">LA dilation and a reduced LAA emptying velocity (38 cm/s) predispose to blood stasis, spontaneous echo contrast, and thrombus formation — as seen in this patient.</div>
       </div>
     </div>
   </div>
 
   <div class="pearl-box">
     <h3>The right heart is the problem</h3>
-    <p>In severe MS with severe PAH, the <strong>right ventricle is the vulnerable chamber</strong>. It is pressure-loaded, dilated, and poorly tolerant of any additional afterload increase. Anaesthetic management must focus on protecting the RV: maintaining systemic vascular tone, avoiding hypoxia and hypercarbia, preserving sinus rhythm, and using pulmonary vasodilators and inotropes judiciously.</p>
+    <p>In severe MS with severe PAH, the <strong>right ventricle is the vulnerable chamber</strong>. It is pressure-loaded, dilated, and poorly tolerant of any additional afterload increase. Anaesthetic management centres on protecting the RV: maintaining systemic perfusion pressure, avoiding hypoxia, hypercarbia and acidosis, preserving sinus rhythm, and using inotropes and pulmonary vasodilators judiciously.</p>
   </div>
+
+  
 
   <div class="divider"></div>
 
   <h2>Pulmonary Hypertension and the Right Heart</h2>
-  <p>Severe pulmonary hypertension (RVSP ~70–100 mmHg) in this patient was not a passive consequence — it was an active driver of morbidity and the central challenge for anaesthetic management.</p>
+  <p>Severe pulmonary hypertension (RVSP ~70–100 mmHg) in this patient was a major determinant of risk and the central challenge for anaesthetic management.</p>
 
   <h3>Why the right heart fails under pressure</h3>
   <ul>
-    <li><strong>The RV is a volume pump, not a pressure pump:</strong> The thin-walled RV is designed to eject into a low-resistance pulmonary circuit. When PVR rises, the RV must generate much higher pressures to maintain forward flow.</li>
+    <li><strong>The RV is built for a low-pressure circuit:</strong> The thin-walled RV is suited to ejecting into a low-resistance pulmonary circulation. When PVR rises, the RV must generate much higher pressures to maintain forward flow.</li>
     <li><strong>RV ischaemia:</strong> RV hypertrophy increases oxygen demand, while systemic hypotension reduces coronary perfusion to the RV. This supply–demand mismatch can precipitate RV failure.</li>
     <li><strong>Interventricular dependence:</strong> RV dilation shifts the septum leftward, impairing LV filling and reducing cardiac output. This creates a vicious cycle: RV failure → LV failure → systemic hypotension → RV ischaemia.</li>
-    <li><strong>Pulmonary hypertensive crisis:</strong> Any stimulus that acutely increases PVR — hypoxia, hypercarbia, acidosis, pain, light anaesthesia, hypothermia — can trigger a catastrophic rise in pulmonary pressures, leading to RV failure and cardiovascular collapse.</li>
+    <li><strong>Pulmonary hypertensive crisis:</strong> Stimuli that acutely raise PVR — hypoxia, hypercarbia, acidosis, pain, light anaesthesia, hypothermia — can sharply increase pulmonary pressure and lead to RV failure and cardiovascular collapse.</li>
   </ul>
 
   <div class="alert-box">
     <h3>The D-shaped LV</h3>
-    <p>The D-shaped LV on TEE is a direct sign of RV pressure overload. It means the RV is pushing the septum into the LV cavity, reducing LV filling. This is a <strong>red flag for severe RV strain</strong> and predicts difficult haemodynamic management, especially during induction and CPB weaning.</p>
+    <p>A D-shaped LV on TEE indicates RV pressure and/or volume overload, with the septum flattened toward the LV cavity. It is a <strong>marker of significant RV strain</strong> and a reason to anticipate haemodynamic difficulty, particularly during induction and weaning from bypass.</p>
   </div>
+
+  
 
   <div class="divider"></div>
 
@@ -578,12 +490,48 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 5 — Assessment</div>
-      <div class="pf-body">Post-dilation, the valve area, gradient, and MR are assessed. In this patient, the post-PBMV V wave was ~80 mmHg, and echo showed <strong>severe MR</strong>.</div>
+      <div class="pf-body">Post-dilation, the valve area, gradient, and MR are assessed. In this patient, the post-PBMV V wave was about 75–80 mmHg, and echo showed <strong>severe MR</strong>.</div>
     </div>
   </div>
 
   <h3>The Complication</h3>
-  <p>Post-PBMV, the patient developed <strong>severe mitral regurgitation</strong>. The V wave on left atrial pressure tracing rose to ~75–80 mmHg — a giant V wave indicating severe MR. The patient developed pulmonary oedema and was shifted to the ICU, then to the operating room for emergency MVR.</p>
+  <p>Post-PBMV, the patient developed <strong>severe mitral regurgitation</strong>. The V wave on left atrial pressure tracing rose to ~75–80 mmHg — a giant V wave indicating severe MR. The patient developed pulmonary oedema and was shifted for emergency MVR.</p>
+
+  <div class="fig-panel">
+    <div class="fig-title">Left atrial pressure — before and after the balloon</div>
+    <div class="fig-sub">Schematic · not the patient's original tracing</div>
+    <div class="fig-2">
+      <div class="fig-cell">
+        <div class="lab">Pre-PBMV · mean 24 · V 34</div>
+        <svg viewBox="0 0 260 150" role="img" aria-label="Schematic LA pressure trace before PBMV with V wave 34 mmHg">
+          <line x1="20" y1="130" x2="245" y2="130" stroke="#a89880" stroke-width="1"/>
+          <line x1="20" y1="20" x2="20" y2="130" stroke="#a89880" stroke-width="1"/>
+          <text x="6" y="25" font-size="8" fill="#a89880" font-family="Instrument Sans,sans-serif">mmHg</text>
+          <line x1="20" y1="90" x2="245" y2="90" stroke="#d0c8b8" stroke-dasharray="3 3"/>
+          <text x="248" y="93" font-size="8" fill="#a89880" font-family="Instrument Sans,sans-serif" text-anchor="end">mean 24</text>
+          <path d="M20,96 L38,88 L50,96 L62,82 L88,70 L98,100 L112,94 L128,104 L138,90 L150,96 L162,82 L188,70 L198,100 L212,94 L228,104 L242,90"
+                fill="none" stroke="#2a5a52" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <text x="75" y="62" font-size="9" fill="#2a5a52" font-family="Instrument Sans,sans-serif" font-weight="600" text-anchor="middle">v</text>
+          <text x="175" y="62" font-size="9" fill="#2a5a52" font-family="Instrument Sans,sans-serif" font-weight="600" text-anchor="middle">v</text>
+          <text x="132" y="145" font-size="8.5" fill="#7a6455" font-family="Instrument Sans,sans-serif" text-anchor="middle" font-style="italic">Modest V wave, sustained mean pressure</text>
+        </svg>
+      </div>
+      <div class="fig-cell">
+        <div class="lab">Post-PBMV · V 75</div>
+        <svg viewBox="0 0 260 150" role="img" aria-label="Schematic LA pressure trace after PBMV with V wave 75 mmHg">
+          <line x1="20" y1="130" x2="245" y2="130" stroke="#a89880" stroke-width="1"/>
+          <line x1="20" y1="20" x2="20" y2="130" stroke="#a89880" stroke-width="1"/>
+          <text x="6" y="25" font-size="8" fill="#a89880" font-family="Instrument Sans,sans-serif">mmHg</text>
+          <path d="M20,100 L36,92 L46,100 L60,60 L84,22 L100,92 L114,96 L128,104 L142,60 L166,22 L182,92 L196,96 L210,104 L224,60 L242,26"
+                fill="none" stroke="#7a2020" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <text x="84" y="16" font-size="9" fill="#7a2020" font-family="Instrument Sans,sans-serif" font-weight="700" text-anchor="middle">V 75</text>
+          <text x="166" y="16" font-size="9" fill="#7a2020" font-family="Instrument Sans,sans-serif" font-weight="700" text-anchor="middle">V</text>
+          <text x="132" y="145" font-size="8.5" fill="#7a6455" font-family="Instrument Sans,sans-serif" text-anchor="middle" font-style="italic">Giant, tall V waves: regurgitant volume into the LA</text>
+        </svg>
+      </div>
+    </div>
+    <div class="fig-caption">The pre-balloon V wave of 34 mmHg already exceeds normal (about 15), consistent with a pressure-loaded, poorly compliant LA in severe MS. After the balloon, the V wave more than doubles.</div>
+  </div>
 
   <table class="echo-table">
     <thead>
@@ -597,7 +545,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
       <tr>
         <td><span class="label">LA mean pressure</span></td>
         <td><span class="val">24 mmHg</span></td>
-        <td><span class="val">Elevated (not specified)</span></td>
+        <td><span class="val">Not recorded</span></td>
       </tr>
       <tr>
         <td><span class="label">V wave</span></td>
@@ -612,7 +560,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
       <tr>
         <td><span class="label">Mitral gradient</span></td>
         <td><span class="val">18 mmHg</span></td>
-        <td><span class="val">Reduced (but MR dominates)</span></td>
+        <td><span class="val">—</span></td>
       </tr>
       <tr>
         <td><span class="label">Mitral regurgitation</span></td>
@@ -627,56 +575,104 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </tbody>
   </table>
 
-  <div class="alert-box">
-    <h3>Why PBMV failed in this patient</h3>
-    <p>Several factors predicted a poor outcome:</p>
-    <ul>
-      <li><strong>Wilkins score 9/16:</strong> Above the ideal threshold of 8, indicating significant leaflet and subvalvular disease.</li>
-      <li><strong>Subvalvular grade 3:</strong> Severe subvalvular thickening makes commissural splitting difficult and increases the risk of leaflet tear.</li>
-      <li><strong>LAA clot:</strong> A contraindication to PBMV due to embolic risk. The presence of organic clot and SEC indicates a high-risk atrium.</li>
-      <li><strong>Severe PAH:</strong> The right heart was already under pressure; the acute volume overload from severe MR precipitated pulmonary oedema and RV failure.</li>
-    </ul>
+    <div class="alert-box">
+    <h3>Why acute MR is worse than the stenosis it replaced</h3>
+    <p>Chronic MR is tolerated because the LA enlarges and becomes compliant. Here the LA was pressure-loaded and poorly compliant from long-standing stenosis, and had <strong>not adapted to absorb a regurgitant volume</strong>. The V wave is then transmitted to the pulmonary veins, producing oedema in a lung bed and RV already under high pressure. The stenosis had developed over years, whereas the regurgitation appeared within minutes.</p>
   </div>
+
+  <div class="alert-box">
+    <h3>Why PBMV may have failed</h3>
+    <p>The exact mechanism of the MR is not established here. Features that are recognised predictors of severe MR or a suboptimal result after PBMV, and that this patient had, include:</p>
+    <ul>
+      <li><strong>Wilkins score 9/16:</strong> Above the threshold of 8 associated with the best outcomes, indicating leaflet and subvalvular involvement.</li>
+      <li><strong>Subvalvular grade 3:</strong> Marked chordal thickening and fusion limit how much the valve can open without leaflet or chordal injury.</li>
+      <li><strong>Restricted posterior leaflet mobility:</strong> Less pliable leaflets are more likely to tear than to stretch.</li>
+    </ul>
+    <p>Severe MR can follow PBMV even in apparently suitable valves, so these features raise the likelihood without making the outcome certain. Severe PAH did not cause the MR, but it made the sudden regurgitant volume much harder to tolerate.</p>
+  </div>
+
+  
 
   <div class="divider"></div>
 
   <h2>The Decision to Proceed with MVR</h2>
-  <p>Following the failed PBMV, the patient developed severe MR with pulmonary oedema. Medical management was insufficient. The decision was made to proceed with <strong>emergency mitral valve replacement (MVR)</strong> on cardiopulmonary bypass.</p>
+  <p>After PBMV, the patient developed severe MR with pulmonary oedema. Medical management was insufficient, and the decision was made to proceed with <strong>emergency mitral valve replacement (MVR)</strong> on cardiopulmonary bypass.</p>
 
-  <p>The anaesthetic plan needed to address:</p>
-  <ul>
-    <li><strong>Severe pulmonary hypertension</strong> with a dilated, pressure-loaded RV.</li>
-    <li><strong>D-shaped LV</strong> with impaired filling and a small effective cavity.</li>
-    <li><strong>Severe MR</strong> with pulmonary oedema and acute volume overload of the LA and pulmonary circulation.</li>
-    <li><strong>Right heart failure risk</strong> during induction, CPB, and weaning.</li>
-    <li><strong>Coagulopathy</strong> from CPB and the need for blood products.</li>
-    <li><strong>Postoperative ventilation</strong> — the patient was not extubated at the end of the case.</li>
-  </ul>
+  <p>Any MVR is demanding. This one stacked four independent problems on a single circulation.</p>
+
+  <div class="fig-panel">
+    <div class="fig-title">Four problems, one circulation</div>
+    <div class="fig-sub">The physiologic map at induction</div>
+    <svg viewBox="0 0 640 300" role="img" aria-label="Diagram showing the circulation with acute severe MR, high PA pressure, dilated RV, and preload-starved LV">
+      <!-- RA -->
+      <ellipse cx="100" cy="90" rx="52" ry="42" fill="#e2dace" stroke="#7a6455" stroke-width="1.5"/>
+      <text x="100" y="86" text-anchor="middle" font-size="11" fill="#2e2018" font-family="Instrument Sans,sans-serif" font-weight="600">RA</text>
+      <text x="100" y="101" text-anchor="middle" font-size="8.5" fill="#7a6455" font-family="Instrument Sans,sans-serif">dilated · TR severe</text>
+      <!-- RV -->
+      <ellipse cx="100" cy="205" rx="58" ry="46" fill="#e8d0c8" stroke="#7a2020" stroke-width="2"/>
+      <text x="100" y="200" text-anchor="middle" font-size="11" fill="#2e2018" font-family="Instrument Sans,sans-serif" font-weight="600">RV</text>
+      <text x="100" y="215" text-anchor="middle" font-size="8.5" fill="#7a2020" font-family="Instrument Sans,sans-serif">dilated · pressure-loaded</text>
+      <!-- Lungs -->
+      <rect x="250" y="120" width="140" height="80" rx="40" fill="#e8e1d4" stroke="#2a5a52" stroke-width="2"/>
+      <text x="320" y="155" text-anchor="middle" font-size="11" fill="#2e2018" font-family="Instrument Sans,sans-serif" font-weight="600">Pulmonary bed</text>
+      <text x="320" y="171" text-anchor="middle" font-size="8.5" fill="#2a5a52" font-family="Instrument Sans,sans-serif">PASP ~100 · now oedematous</text>
+      <!-- LA -->
+      <ellipse cx="540" cy="90" rx="52" ry="42" fill="#e8d0c8" stroke="#7a2020" stroke-width="2"/>
+      <text x="540" y="86" text-anchor="middle" font-size="11" fill="#2e2018" font-family="Instrument Sans,sans-serif" font-weight="600">LA</text>
+      <text x="540" y="101" text-anchor="middle" font-size="8.5" fill="#7a2020" font-family="Instrument Sans,sans-serif">stiff · V wave 75</text>
+      <!-- LV -->
+      <ellipse cx="540" cy="205" rx="58" ry="46" fill="#e2dace" stroke="#7a6455" stroke-width="1.5"/>
+      <text x="540" y="200" text-anchor="middle" font-size="11" fill="#2e2018" font-family="Instrument Sans,sans-serif" font-weight="600">LV</text>
+      <text x="540" y="215" text-anchor="middle" font-size="8.5" fill="#7a6455" font-family="Instrument Sans,sans-serif">EF 58% · under-filled · D-shaped</text>
+      <!-- Arrows -->
+      <path d="M100,132 L100,158" stroke="#7a6455" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+      <path d="M158,205 C210,205 220,175 250,165" stroke="#7a2020" stroke-width="2" fill="none" marker-end="url(#ahr)"/>
+      <path d="M390,150 C440,140 470,110 500,100" stroke="#7a6455" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+      <path d="M540,132 L540,158" stroke="#7a2020" stroke-width="2.2" fill="none" marker-end="url(#ahr)"/>
+      <!-- MR arrow back -->
+      <path d="M570,160 C590,140 590,120 575,128" stroke="#7a2020" stroke-width="2" stroke-dasharray="4 3" fill="none" marker-end="url(#ahr)"/>
+      <text x="612" y="145" text-anchor="middle" font-size="9" fill="#7a2020" font-family="Instrument Sans,sans-serif" font-weight="600">MR</text>
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a6455"/></marker>
+        <marker id="ahr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a2020"/></marker>
+      </defs>
+      <!-- Problem badges -->
+      <g font-family="Instrument Sans,sans-serif" font-size="9" font-weight="600">
+        <rect x="18" y="262" width="150" height="24" fill="#f5f0e8" stroke="#7a2020"/><text x="93" y="278" text-anchor="middle" fill="#7a2020">① RV failure risk</text>
+        <rect x="178" y="262" width="150" height="24" fill="#f5f0e8" stroke="#7a2020"/><text x="253" y="278" text-anchor="middle" fill="#7a2020">② Pulmonary oedema</text>
+        <rect x="338" y="262" width="150" height="24" fill="#f5f0e8" stroke="#7a2020"/><text x="413" y="278" text-anchor="middle" fill="#7a2020">③ Acute MR on a stiff LA</text>
+        <rect x="498" y="262" width="130" height="24" fill="#f5f0e8" stroke="#7a2020"/><text x="563" y="278" text-anchor="middle" fill="#7a2020">④ Preload-starved LV</text>
+      </g>
+    </svg>
+    <div class="fig-caption">The RV is dilated, pressure-loaded and pushed against a D-shaped LV. The LA is stiff and has just been given a regurgitant hole. The LV is fine but empty. Every intervention that helps one node can hurt another.</div>
+  </div>
+
+  <p>Added to these were the risk of <strong>coagulopathy</strong> after bypass and the likely need for <strong>postoperative ventilation</strong>.</p>
 
   <div class="divider"></div>
 
   <h2>Anaesthetic Management</h2>
 
   <h3>Pre-induction planning</h3>
-  <p>The patient was shifted to the cardiac operating room with continuous monitoring. The goals were:</p>
+  <p>The patient was shifted to the cardiac operating room with continuous monitoring. With severe PAH and a mixed mitral lesion, the goals were:</p>
   <ul>
-    <li>Maintain <strong>systemic vascular tone</strong> to preserve coronary perfusion to the RV.</li>
-    <li>Avoid <strong>hypoxia, hypercarbia, and acidosis</strong> — all increase PVR.</li>
-    <li>Maintain <strong>sinus rhythm</strong> or controlled ventricular rate. Tachycardia reduces diastolic filling time in MS; bradycardia reduces cardiac output.</li>
-    <li>Ensure adequate <strong>preload</strong> but avoid over-transfusion, which can worsen pulmonary oedema.</li>
-    <li>Have <strong>inotropes, vasopressors, and pulmonary vasodilators</strong> ready before induction.</li>
+    <li>Maintain <strong>systemic perfusion pressure</strong> to preserve coronary perfusion of the RV, while avoiding a large rise in SVR, which would increase the regurgitant fraction.</li>
+    <li>Avoid <strong>hypoxia, hypercarbia and acidosis</strong>, all of which increase PVR.</li>
+    <li>Keep <strong>sinus rhythm</strong> and a heart rate in the range of roughly 70–90 beats per minute. Tachycardia shortens diastolic filling across a stenotic valve, while bradycardia increases regurgitant volume per beat.</li>
+    <li>Aim for adequate <strong>preload</strong> without over-transfusion, which can worsen pulmonary oedema.</li>
+    <li>Have <strong>inotropes, vasopressors and pulmonary vasodilators</strong> ready before induction.</li>
   </ul>
 
   <div class="pearl-box">
     <h3>Induction goals in severe PAH</h3>
-    <p>The induction agent should provide <strong>haemodynamic stability</strong> without significant drops in SVR or increases in PVR. Options include <strong>etomidate</strong> (haemodynamically neutral), <strong>ketamine</strong> (sympathomimetic, but may increase PVR), or a <strong>high-dose opioid technique</strong> (fentanyl or remifentanil). Propofol should be used cautiously — it can cause significant vasodilation and hypotension.</p>
+    <p>The aim is <strong>haemodynamic stability</strong>: no fall in SVR, no rise in PVR, no tachycardia. Agents commonly used include <strong>etomidate</strong> (minimal haemodynamic effect) and <strong>opioids such as fentanyl</strong>, titrated slowly. <strong>Ketamine</strong> has little direct effect on PVR when ventilation is controlled, but its tachycardia is a drawback. <strong>Propofol</strong> needs caution because of vasodilation and hypotension.</p>
   </div>
 
   <h3>Induction and airway management</h3>
-  <p>The patient was induced with a carefully titrated technique. A large-bore endotracheal tube was placed, and the patient was ventilated with a lung-protective strategy: low tidal volumes, PEEP titrated to avoid derecruitment, and FiO₂ adjusted to maintain SpO₂ &gt;92%. <strong>Hypercarbia was avoided</strong> — it increases PVR and can precipitate RV failure.</p>
+  <p>The patient was induced with a carefully titrated technique and ventilated with a lung-protective strategy: modest tidal volumes, PEEP to avoid derecruitment, and enough FiO₂ to avoid hypoxia. <strong>Hypercarbia was avoided</strong>, since it raises PVR and can precipitate RV failure.</p>
 
   <h3>Intercostal nerve block (ICN)</h3>
-  <p>An <strong>intercostal nerve block</strong> was performed for intraoperative and postoperative analgesia. This reduces opioid requirements, improves pain control, and helps prevent pulmonary complications. In a patient with severe PAH, adequate analgesia is critical — pain increases sympathetic tone, PVR, and myocardial oxygen demand.</p>
+  <p>An <strong>intercostal nerve block</strong> was performed for intraoperative and postoperative analgesia. This reduces opioid requirements and improves pain control. In a patient with severe PAH, adequate analgesia matters because pain increases sympathetic tone and PVR.</p>
 
   <h3>Monitoring</h3>
   <ul>
@@ -688,40 +684,15 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <li><strong>ABG:</strong> Regular monitoring for oxygenation, ventilation, and acid–base status.</li>
   </ul>
 
+  
+
   <div class="divider"></div>
 
-  <h2>Cardiopulmonary Bypass (CPB) Management</h2>
-
-  <div class="cpb-flow">
-    <div class="cpb-item">
-      <div class="cpb-title">Heparinisation</div>
-      <div class="cpb-body">Heparin was administered to achieve an ACT &gt;480 seconds. The post-heparin ACT was <strong>540 seconds</strong> — adequate for CPB.</div>
-    </div>
-    <div class="cpb-item">
-      <div class="cpb-title">On-pump management</div>
-      <div class="cpb-body">CPB was initiated. <strong>Dexmedetomidine</strong> was used during the on-pump period for sedation and haemodynamic stability. Dexmedetomidine reduces sympathetic tone, may lower PVR, and provides analgesia without respiratory depression.</div>
-    </div>
-    <div class="cpb-item">
-      <div class="cpb-title">Myocardial protection</div>
-      <div class="cpb-body">Antegrade and/or retrograde cardioplegia was administered. Hypothermia was used as appropriate. The myocardium was protected during aortic cross-clamping.</div>
-    </div>
-    <div class="cpb-item">
-      <div class="cpb-title">MVR</div>
-      <div class="cpb-body">The mitral valve was replaced. The surgeon assessed the valve and chose the appropriate prosthesis (mechanical or bioprosthetic).</div>
-    </div>
-    <div class="cpb-item">
-      <div class="cpb-title">Weaning from CPB</div>
-      <div class="cpb-body">This was the critical moment. The RV had been unloaded during CPB, but now had to eject against a high-resistance pulmonary circulation. Inotropes and vasopressors were used to support the RV and maintain systemic pressure.</div>
-    </div>
-    <div class="cpb-item">
-      <div class="cpb-title">Protamine administration</div>
-      <div class="cpb-body">After CPB, protamine was given to reverse heparin. The post-protamine ACT was <strong>105 seconds</strong> — adequate reversal. Blood and FFP were administered as required.</div>
-    </div>
-  </div>
+  <h2>Bypass and Weaning — Context for This Case</h2>
+  <p>Bypass itself will be covered in a separate case, so only the points relevant here are included. The patient was heparinised to an <strong>ACT above 480 seconds</strong> (540 seconds achieved) and placed on CPB, and the mitral valve was replaced under cardioplegic arrest. <strong>Weaning was the high-risk moment</strong>: the RV, unloaded during bypass, had to eject again against a high pulmonary vascular resistance, and was supported with inotropes and vasopressors under TEE guidance.</p>
+  <p>Heparin was reversed with protamine, with a post-protamine ACT of <strong>105 seconds</strong>. In severe PAH protamine is best given slowly with a vasopressor ready, because of the risk of pulmonary vasoconstriction. Blood products, including FFP, were given as guided by bleeding, ABG and coagulation results.</p>
 
   <h3>Inotropes and Vasopressors Used</h3>
-  <p>The patient required multiple agents before, during, and after CPB. The specific combination reflects the need to support both the right and left ventricles while maintaining systemic vascular tone.</p>
-
   <table class="drug-table">
     <thead>
       <tr>
@@ -733,115 +704,74 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <tbody>
       <tr>
         <td><span class="drug-name">Noradrenaline</span></td>
-        <td>α1 agonist → vasoconstriction → ↑SVR</td>
-        <td>Maintain systemic vascular tone, improve coronary perfusion to the RV, counter vasodilation from CPB and anaesthetic agents.</td>
+        <td>α1 agonist with some β1 effect → ↑SVR</td>
+        <td>Maintains systemic pressure and coronary perfusion of the RV.</td>
       </tr>
       <tr>
         <td><span class="drug-name">Dopamine</span></td>
         <td>Dose-dependent: β1 inotrope, α1 vasopressor</td>
-        <td>Inotropic support for the RV and LV, renal perfusion.</td>
+        <td>Inotropic support.</td>
       </tr>
       <tr>
         <td><span class="drug-name">Adrenaline</span></td>
         <td>α + β agonist → ↑HR, ↑contractility, ↑SVR</td>
-        <td>Rescue inotrope/vasopressor for severe RV or LV dysfunction.</td>
+        <td>Additional inotropic and vasopressor support for RV or LV dysfunction.</td>
       </tr>
       <tr>
         <td><span class="drug-name">Milrinone</span></td>
         <td>PDE3 inhibitor → ↑contractility, ↓SVR, ↓PVR</td>
-        <td>RV support, pulmonary vasodilation, LV support. Particularly useful in pulmonary hypertension and RV failure.</td>
+        <td>RV support and pulmonary vasodilation. Its systemic vasodilation is why it is often paired with noradrenaline.</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="pearl-box">
-    <h3>Why milrinone matters in severe PAH</h3>
-    <p>Milrinone is a <strong>phosphodiesterase-3 inhibitor</strong> that increases intracellular cAMP. It has two key effects in this context: <strong>inotropy</strong> (improves RV contractility) and <strong>pulmonary vasodilation</strong> (reduces PVR). This makes it an ideal agent for RV failure with pulmonary hypertension. However, it also causes systemic vasodilation, so it is often combined with <strong>noradrenaline</strong> to maintain systemic vascular tone.</p>
-  </div>
-
-  <h3>Coagulation Management</h3>
-
-  <div class="act-box">
-    <h3>Activated Clotting Time (ACT)</h3>
-    <div class="act-grid">
-      <div class="act-item">
-        <div class="num">540</div>
-        <div class="label">ACT after heparin (seconds)</div>
-      </div>
-      <div class="act-item">
-        <div class="num">105</div>
-        <div class="label">ACT after protamine (seconds)</div>
-      </div>
-      <div class="act-item">
-        <div class="num">480+</div>
-        <div class="label">Target ACT for CPB (seconds)</div>
-      </div>
-    </div>
-  </div>
-
-  <p>Blood and fresh frozen plasma (FFP) were administered as required. ABG corrections were made throughout the procedure to maintain homeostasis. Temperature and CVP were monitored continuously.</p>
-
   <div class="divider"></div>
 
-  <h2>Why the Patient Was Not Extubated</h2>
-  <p>At the end of the procedure, the patient remained intubated and was shifted to the ICU with full inotropic and vasopressor support (noradrenaline, dopamine, adrenaline, and milrinone). This was a deliberate decision based on several factors:</p>
+  <h2>Why the Patient Remained Intubated</h2>
+  <p>At the end of the procedure, the patient remained intubated and was shifted to the ICU with full inotropic and vasopressor support (noradrenaline, dopamine, adrenaline, and milrinone). Reasons that commonly favour continued ventilation in this setting include:</p>
 
   <div class="comp-grid">
     <div class="comp-cell">
       <h4>Severe Pulmonary Hypertension</h4>
-      <p>The pulmonary circulation remained highly reactive. Any stimulus — hypoxia, hypercarbia, pain, light sedation — could trigger a pulmonary hypertensive crisis. Controlled ventilation and sedation allowed for tight regulation of oxygenation and CO₂.</p>
+      <p>The pulmonary circulation remained reactive, and hypoxia, hypercarbia, pain or light sedation could provoke a pulmonary hypertensive crisis.</p>
     </div>
     <div class="comp-cell">
       <h4>Right Ventricular Dysfunction</h4>
-      <p>The RV was dilated and pressure-loaded. It needed inotropic support (milrinone, adrenaline) and careful preload management. Spontaneous ventilation would increase RV afterload and could precipitate failure.</p>
+      <p>The RV was dilated and pressure-loaded. It needed inotropic support (milrinone, adrenaline) and careful preload management. Hypoxia, hypercarbia or agitation during emergence could raise PVR, whereas controlled ventilation allows tight control of oxygenation and CO₂.</p>
     </div>
     <div class="comp-cell">
       <h4>Pulmonary Oedema</h4>
-      <p>The patient had developed pulmonary oedema from acute severe MR. The lungs needed time to recover, and positive pressure ventilation helped maintain alveolar recruitment.</p>
+      <p>Pulmonary oedema had developed from acute severe MR, and PEEP and positive pressure ventilation support oxygenation while the lungs recover.</p>
     </div>
     <div class="comp-cell">
       <h4>Post-CPB Stunning</h4>
-      <p>Myocardial stunning after CPB is common. The heart needed time to recover, and inotropic support was essential to maintain cardiac output.</p>
+      <p>Myocardial stunning after bypass is common, and inotropic support was needed to maintain cardiac output.</p>
     </div>
     <div class="comp-cell">
       <h4>Coagulopathy</h4>
-      <p>CPB causes dilutional and consumptive coagulopathy. The patient received blood and FFP. Extubation in the presence of coagulopathy and potential bleeding risk was not advisable.</p>
+      <p>Bypass causes dilutional coagulopathy and platelet dysfunction. The patient received blood and FFP, and early extubation is generally avoided while bleeding risk remains.</p>
     </div>
     <div class="comp-cell">
-      <h4>Planned Re-exploration Risk</h4>
-      <p>In complex cardiac surgery, the risk of bleeding or tamponade requiring re-exploration is significant. Keeping the patient intubated and sedated allowed for safe transfer and monitoring.</p>
+      <h4>Risk of Re-exploration</h4>
+      <p>Bleeding or tamponade may require a return to theatre, and an intubated, sedated patient can be transferred and monitored safely.</p>
     </div>
   </div>
 
+  
+
   <div class="divider"></div>
 
-  <h2>Complications and Pitfalls</h2>
+  <h2>Complications to Watch For</h2>
 
   <div class="comp-grid">
-    <div class="comp-cell">
-      <h4>Pulmonary Hypertensive Crisis</h4>
-      <p>Any acute increase in PVR — hypoxia, hypercarbia, acidosis, pain, hypothermia — can precipitate a crisis. Management: 100% O₂, hyperventilation, milrinone, noradrenaline, and iNO if available.</p>
-    </div>
-    <div class="comp-cell">
-      <h4>RV Failure</h4>
-      <p>The RV is the most vulnerable chamber. Maintain systemic vascular tone, avoid excessive preload, and use inotropes early. TEE monitoring is essential.</p>
-    </div>
-    <div class="comp-cell">
-      <h4>LV Failure After MVR</h4>
-      <p>After MVR, the LV is suddenly exposed to increased preload. A previously "protected" LV may fail. Inotropic support and careful volume management are critical.</p>
-    </div>
-    <div class="comp-cell">
-      <h4>Bleeding and Coagulopathy</h4>
-      <p>CPB causes coagulopathy. Monitor ACT, platelet count, and fibrinogen. Transfuse blood products as needed. Protamine reversal must be adequate.</p>
-    </div>
-    <div class="comp-cell">
-      <h4>Air Embolism</h4>
-      <p>During MVR, air can enter the left heart. Meticulous de-airing is essential. TEE guidance helps confirm adequate de-airing before weaning from CPB.</p>
-    </div>
-    <div class="comp-cell">
-      <h4>Arrhythmias</h4>
-      <p>Atrial fibrillation is common in MS. Post-MVR, sinus rhythm or controlled rate is important for LV filling. Amiodarone or pacing may be required.</p>
-    </div>
+    <div class="comp-cell"><h4>Acute RV failure</h4><p>Dilated, pressure-loaded RV on a dropping systemic pressure. The first sign is a rising CVP with a falling MAP. Treat the cause: oxygenate, ventilate, inotrope, vasopressor, and consider inhaled pulmonary vasodilator.</p></div>
+    <div class="comp-cell"><h4>Pulmonary hypertensive crisis</h4><p>Triggered by light anaesthesia, suction, hypoxia, hypercarbia, acidosis, or protamine. Prevent with depth, oxygenation, ventilation, and slow protamine.</p></div>
+    <div class="comp-cell"><h4>Low cardiac output after MVR</h4><p>Once the regurgitant leak is closed, the LV faces a higher afterload. Inotropic support and volume optimisation are the usual responses.</p></div>
+    <div class="comp-cell"><h4>Rupture of the atrioventricular groove</h4><p>An uncommon but catastrophic early complication of MVR. Warning signs are sudden haemorrhage and a pressure drop after weaning.</p></div>
+    <div class="comp-cell"><h4>Pulmonary oedema and hypoxia</h4><p>Already present from the acute MR. PEEP, lung-protective ventilation and fluid restraint after bypass.</p></div>
+    <div class="comp-cell"><h4>Bleeding and coagulopathy</h4><p>Heparin effect, dilutional coagulopathy and platelet dysfunction after bypass. Blood products guided by ACT, coagulation tests and visible bleeding.</p></div>
+    <div class="comp-cell"><h4>Arrhythmia</h4><p>Atrial fibrillation with loss of atrial kick is poorly tolerated in a valve-replaced heart. Maintain electrolytes, magnesium, and rate control.</p></div>
+    <div class="comp-cell"><h4>Vasoplegia</h4><p>Low SVR after bypass. Noradrenaline first, with vasopressin as a second-line option.</p></div>
   </div>
 
   <div class="divider"></div>
@@ -851,19 +781,21 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <div class="guideline-box">
     <h3>Key guidelines</h3>
     <ul>
-      <li><strong>ACC/AHA (2020):</strong> PBMV is indicated for symptomatic severe MS with favourable valve morphology (Wilkins score ≤8) and no LAA thrombus. TEE is mandatory before the procedure to exclude LAA clot.</li>
-      <li><strong>ESC/EACTS (2021):</strong> MVR is indicated for severe MR or failed PBMV with haemodynamic compromise. Perioperative TEE is essential for assessment and guidance.</li>
-      <li><strong>ESAIC/ESTS (2022):</strong> In cardiac surgery with pulmonary hypertension, maintain systemic vascular tone, avoid increases in PVR, and use TEE for monitoring. Pulmonary vasodilators (milrinone, iNO) should be available.</li>
-      <li><strong>STS/SCA (2021):</strong> Protective ventilation, careful fluid management, and early use of inotropes/vasopressors are recommended in cardiac surgery with RV dysfunction.</li>
+      <li><strong>ACC/AHA (2020):</strong> PBMV is recommended for symptomatic severe rheumatic MS (MVA ≤1.5 cm²) with favourable valve morphology and no LA thrombus or moderate-to-severe MR. Haemodynamically significant MR after PBMV is an indication for surgical repair or replacement.</li>
+      <li><strong>ESC/EACTS (2021):</strong> PBMV is the preferred intervention in symptomatic patients with suitable anatomy; surgery is considered for unfavourable anatomy and when PBMV fails.</li>
+      <li><strong>Wilkins (1988):</strong> A score of 8 or less predicts a good immediate and long-term PBMV result. Higher scores predict a less favourable result.</li>
+      <li><strong>ASE/SCA intraoperative TEE (2013):</strong> Comprehensive TEE for all valve surgery, with pre-bypass assessment of mechanism and post-bypass assessment of prosthesis function, paravalvular leak, LVOT and RV function.</li>
+      <li><strong>ESC/ERS pulmonary hypertension (2022):</strong> Avoid hypoxia, hypercarbia, acidosis, hypothermia, pain and light anaesthesia. Maintain systemic pressure to perfuse the RV, and consider inodilators and inhaled pulmonary vasodilators.</li>
+      <li><strong>Protamine:</strong> Give slowly because of the risk of hypotension and pulmonary vasoconstriction. The post-reversal ACT should return close to baseline (STS/SCA blood conservation guideline, 2011).</li>
     </ul>
   </div>
 
-  <h3>Stepwise anaesthetic protocol for MVR in severe PAH</h3>
+  <h3>Anaesthetic sequence for MVR in severe PAH</h3>
 
   <div class="protocol-flow">
     <div class="pf-item">
       <div class="pf-title">Step 1 — Pre-operative optimisation</div>
-      <div class="pf-body">Assess PAH severity, RV function, and volume status. Review TEE for LAA clot, MR severity, and LV function. Ensure blood products are available. Plan for postoperative ventilation.</div>
+      <div class="pf-body">Assess PAH severity, RV function, and volume status. Review TEE for MR severity, RV and LV function. Ensure blood products are available. Plan for postoperative ventilation.</div>
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 2 — Monitoring and access</div>
@@ -871,7 +803,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 3 — Induction</div>
-      <div class="pf-body">Slow, controlled induction with etomidate or high-dose opioid. Avoid hypotension and tachycardia. Maintain SVR.</div>
+      <div class="pf-body">Slow, titrated induction. Avoid hypotension, tachycardia, hypoxia and hypercarbia.</div>
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 4 — Maintenance</div>
@@ -879,11 +811,11 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 5 — CPB and MVR</div>
-      <div class="pf-body">Heparinise (ACT &gt;480s). Initiate CPB. Dexmedetomidine infusion. Myocardial protection. MVR. De-air carefully.</div>
+      <div class="pf-body">Heparinise (ACT &gt;480 s), go on bypass, MVR, de-air carefully.</div>
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 6 — Weaning from CPB</div>
-      <div class="pf-body">Assess with TEE. Start milrinone and noradrenaline. Maintain systemic pressure. Avoid RV distension. Gradually wean from CPB.</div>
+      <div class="pf-body">Assess with TEE. Start inotropes and vasopressors as needed. Maintain systemic pressure and avoid RV distension.</div>
     </div>
     <div class="pf-item">
       <div class="pf-title">Step 7 — Post-CPB management</div>
@@ -891,18 +823,20 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
   </div>
 
+  
+
   <div class="divider"></div>
 
-  <h2>What I Keep Coming Back To</h2>
-  <p>This case is a study in <strong>right heart physiology and pulmonary vascular control</strong>. The left-sided valve was the trigger, but the right heart was the battlefield. The failed PBMV created a sudden, severe volume overload on an already compromised pulmonary circulation, and the anaesthetic team had to navigate the narrow path between systemic hypotension and pulmonary hypertensive crisis.</p>
+  <h2>Reflections</h2>
+  <p>This case is a study in <strong>right heart physiology and pulmonary vascular control</strong>. The left-sided valve was the trigger, but the right heart set the limits. The sudden regurgitant volume fell on an already compromised pulmonary circulation, and the anaesthetic had to hold a narrow path between systemic hypotension and pulmonary hypertensive crisis.</p>
 
-  <p>The decision to proceed with PBMV despite a Wilkins score of 9 and an LAA clot is a reminder that clinical decisions are rarely binary. The patient was highly symptomatic, and the team may have judged that the risks of intervention were outweighed by the risks of untreated severe MS. The complication — severe MR — is a known risk of PBMV, particularly in valves with subvalvular disease and borderline morphology.</p>
+  <p>A Wilkins score of 9 with grade 3 subvalvular disease raises the likelihood of leaflet injury and significant MR, and severe MR is a recognised complication of PBMV. The case is also a reminder that <strong>the lesion can change during a procedure, and the plan has to change with it</strong>: stenotic physiology was replaced by regurgitant physiology in a lung bed already under high pressure.</p>
 
-  <p>The intraoperative management was a masterclass in <strong>multimodal haemodynamic support</strong>: noradrenaline to maintain systemic tone, milrinone for RV inotropy and pulmonary vasodilation, dopamine and adrenaline for additional support, dexmedetomidine for sedation, and meticulous coagulation management with heparin and protamine. The patient was not extubated — and that was the right call. The right heart needed time.</p>
+  <p>Management was layered: noradrenaline for systemic pressure, milrinone for RV inotropy and pulmonary vasodilation, dopamine and adrenaline as further support, and careful heparin and protamine management. Continued ventilation afterwards gave the right heart time to recover.</p>
 
   <div class="quote-box">
-    In severe mitral stenosis with pulmonary hypertension, the left atrium is the pressure chamber, the pulmonary circulation is the resistance circuit, and the right ventricle is the victim. Protect the right heart, and the rest follows.
-    <span class="src">— What this case taught me</span>
+    In severe mitral stenosis with pulmonary hypertension, the left atrium is the pressure chamber, the pulmonary circulation is the resistance circuit, and the right ventricle bears the load.
+    <span class="src">— Reflection</span>
   </div>
 
   <div class="divider"></div>
@@ -910,16 +844,16 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <div class="refbox">
     <h3>References</h3>
     <ol>
-      <li>Otto CM, Nishimura RA, Bonow RO, et al. 2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease. <em>J Am Coll Cardiol.</em> 2021;77(4):e25–e197.</li>
+      <li>Otto CM, Nishimura RA, Bonow RO, et al. 2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease. <em>Circulation.</em> 2021;143(5):e72–e227.</li>
       <li>Vahanian A, Beyersdorf F, Praz F, et al. 2021 ESC/EACTS Guidelines for the management of valvular heart disease. <em>Eur Heart J.</em> 2022;43(7):561–632.</li>
       <li>Inoue K, Owaki T, Nakamura T, et al. Clinical application of transvenous mitral commissurotomy by a new balloon catheter. <em>J Thorac Cardiovasc Surg.</em> 1984;87(3):394–402.</li>
-      <li>Wilkins GT, Weyman AE, Abascal VM, et al. Percutaneous balloon dilatation of the mitral valve: an analysis of echocardiographic variables related to outcome and the mechanism of dilatation. <em>Br Heart J.</em> 1988;60(4):299–308.</li>
-      <li>Lohser J, Slinger P. Lung isolation and one-lung ventilation. In: <em>Miller's Anesthesia.</em> 9th ed. Elsevier; 2020: Chapter 54.</li>
-      <li>Denault AY, Couture P, Vegas A, et al. <em>Transesophageal Echocardiography Multimedia Manual.</em> 2nd ed. CRC Press; 2011.</li>
-      <li>Kaplan JA, Cronin B, Maus T. <em>Kaplan's Cardiac Anesthesia.</em> 7th ed. Elsevier; 2017.</li>
+      <li>Wilkins GT, Weyman AE, Abascal VM, Block PC, Palacios IF. Percutaneous balloon dilatation of the mitral valve: an analysis of echocardiographic variables related to outcome and the mechanism of dilatation. <em>Br Heart J.</em> 1988;60(4):299–308.</li>
+      <li>Baumgartner H, Hung J, Bermejo J, et al. Echocardiographic assessment of valve stenosis: EAE/ASE recommendations for clinical practice. <em>J Am Soc Echocardiogr.</em> 2009;22(1):1–23.</li>
+      <li>Humbert M, Kovacs G, Hoeper MM, et al. 2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension. <em>Eur Heart J.</em> 2022;43(38):3618–3731.</li>
+      <li>Hahn RT, Abraham T, Adams MS, et al. Guidelines for performing a comprehensive transesophageal echocardiographic examination: recommendations from the ASE and SCA. <em>J Am Soc Echocardiogr.</em> 2013;26(9):921–964.</li>
       <li>Haddad F, Couture P, Tousignant C, Denault AY. The right ventricle in cardiac surgery, a perioperative perspective: II. Pathophysiology, clinical importance, and management. <em>Anesth Analg.</em> 2009;108(2):422–433.</li>
-      <li>Pulmonary Hypertension Association. <em>Perioperative Management of Pulmonary Hypertension.</em> 2020.</li>
-      <li>Vlahakes GJ. Right ventricular failure after cardiac surgery. <em>Cardiol Clin.</em> 2012;30(2):245–254.</li>
+      <li>Ferraris VA, Brown JR, Despotis GJ, et al. 2011 update to the STS and SCA blood conservation clinical practice guidelines. <em>Ann Thorac Surg.</em> 2011;91(3):944–982.</li>
+      <li>Kaplan JA, Augoustides JG, Manecke GR, Maus T, Reich DL. <em>Kaplan's Cardiac Anesthesia.</em> 7th ed. Elsevier; 2017.</li>
     </ol>
   </div>
 
@@ -928,7 +862,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justif
     <span>Cardiac · Mitral Stenosis · PBMV · Pulmonary Hypertension · MVR · CPB</span>
   </div>
 
-  <p class="disclaim">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles, the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India), and the ethical mandates of the <strong>National Medical Commission (NMC) of India</strong>. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
+  <p class="disclaim">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles, the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India), and the ethical mandates of the <strong>National Medical Commission (NMC) of India</strong>. Patient age, procedural details, haemodynamic values and timeline elements have been generalised where necessary. The pressure tracings and circulation diagram shown are schematic illustrations, not the patient's recorded waveforms. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
 
 </div>
 
