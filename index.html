@@ -301,6 +301,8 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
 .f-logo em{font-style:italic;color:var(--gold);}
 .f-mid{text-align:center;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);line-height:2;}
+.nazar{display:inline-block;vertical-align:-2px;margin-right:.55rem;opacity:.8;transition:opacity .3s,transform .4s;}
+.nazar:hover{opacity:1;transform:rotate(12deg) scale(1.15);}
 .f-right{text-align:right;font-size:.68rem;color:var(--faint);line-height:2.2;}
 .f-right a{color:var(--sage);text-decoration:none;display:block;transition:color .2s;}
 .f-right a:hover{color:var(--rust);}
@@ -665,7 +667,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo">Ode <em>to the OR</em></div>
+  <div class="f-logo"><span class="nazar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#3a3a6a"/><circle cx="12" cy="12" r="8" fill="#f5f0e8"/><circle cx="12" cy="12" r="5.2" fill="#6a74b8"/><circle cx="12" cy="12" r="2.4" fill="#2e2018"/><circle cx="12.9" cy="11.1" r=".7" fill="#f5f0e8" opacity=".85"/></svg></span>Ode <em>to the OR</em></div>
   <div class="f-mid">
     Dr. Rushika Ode · Anaesthesiology Resident<br>
     A personal education project · All cases de-identified<br>
