@@ -26,7 +26,6 @@
   --indigo:  #3a3a6a;
   --plum:    #7a5abf;
   --rose:    #9a4070;
-  --moss:    #4a5a3a;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -160,7 +159,6 @@ nav{
 .to{border-color:var(--rose);color:var(--rose);}
 .ti{border-color:var(--indigo);color:var(--indigo);}
 .tt{border-color:var(--teal);color:var(--teal);}
-.tm{border-color:var(--moss);color:var(--moss);}
 
 .cc-arrow{
   font-size:.9rem;
@@ -216,7 +214,6 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
 .f-logo em{font-style:italic;color:var(--gold);}
 </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -285,6 +282,16 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         <button class="tbtn" data-topic="robotic">Robotic</button>
         <button class="tbtn" data-topic="nephrology">Nephrology</button>
         <button class="tbtn" data-topic="ultrasound">POCUS</button>
+        <button class="tbtn" data-topic="vats">VATS</button>
+        <button class="tbtn" data-topic="mitral">Mitral Stenosis</button>
+        <button class="tbtn" data-topic="pbmv">PBMV</button>
+        <button class="tbtn" data-topic="pah">Pulmonary Hypertension</button>
+        <button class="tbtn" data-topic="mvr">MVR</button>
+        <button class="tbtn" data-topic="cpb">CPB</button>
+        <button class="tbtn" data-topic="hemodynamics">Hemodynamics</button>
+        <button class="tbtn" data-topic="gdt">GDT</button>
+        <button class="tbtn" data-topic="cardiacarrest">Cardiac Arrest</button>
+        <button class="tbtn" data-topic="redosurgery">Redo Surgery</button>
       </div>
       <div class="filter-status" id="filter-status">
         <span id="filter-status-text">Filtering: —</span>
@@ -293,7 +300,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     </div>
 
     <div class="sbox">
-      <span class="result-count" id="result-count">4 cases</span>
+      <span class="result-count" id="result-count">5 cases</span>
     </div>
   </div>
 
@@ -305,27 +312,55 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         No cases match your search — try a different keyword or <a href="#" id="no-results-clear">clear filters</a>.
       </div>
 
-      <!-- CASE 004 -->
-      <a href="cases/case-004.html" class="cc"
-         data-topics="thoracic,airway,epidural,tb,decortication"
-         data-date="2026-08-20"
-         data-title="Why the Saturation Held"
-         data-keywords="one lung ventilation OLV hypoxic pulmonary vasoconstriction HPV decortication pyopneumothorax tuberculosis DLT double lumen tube">
+      <!-- CASE 006 -->
+      <a href="cases/case-006.html" class="cc"
+         data-topics="cardiac,mitral,pbmv,pah,mvr,cpb"
+         data-date="2026-08-01"
+         data-title="The Balloon and the Right Heart: When PBMV Fails in Severe Mitral Stenosis"
+         data-keywords="mitral stenosis PBMV percutaneous balloon mitral valvuloplasty pulmonary hypertension right heart MVR mitral valve replacement CPB cardiopulmonary bypass pulmonary oedema Wilkins score severe MR">
         <div class="cc-left">
-          <span class="cc-num">004</span>
+          <span class="cc-num">006</span>
           <span class="cc-date">Aug 2026</span>
         </div>
         <div class="cc-body">
-          <h3 class="cc-title">Why the Saturation Held: <em>One-Lung Ventilation in a Chronically Collapsed Lung</em></h3>
-          <p class="cc-exc">A 27-year-old with tubercular pyopneumothorax and lung entrapment underwent left decortication. Saturation never faltered during OLV — this is the physiology of why.</p>
+          <h3 class="cc-title">The Balloon and the Right Heart: <em>When PBMV Fails in Severe Mitral Stenosis</em></h3>
+          <p class="cc-exc">A 48-year-old woman with severe mitral stenosis and severe pulmonary hypertension undergoes PBMV — complicated by severe MR and pulmonary edema, requiring emergency MVR. An anaesthetic exploration of the right heart and pulmonary hypertensive crisis.</p>
         </div>
         <div class="cc-right">
           <div class="cc-tags">
-            <span class="tag ta">Thoracic</span>
-            <span class="tag tc">Airway</span>
-            <span class="tag tk">Epidural</span>
-            <span class="tag ti">TB</span>
-            <span class="tag tm">Decortication</span>
+            <span class="tag ta">Cardiac</span>
+            <span class="tag tc">Mitral Stenosis</span>
+            <span class="tag tk">PBMV</span>
+            <span class="tag tt">Pulmonary HTN</span>
+            <span class="tag ti">MVR</span>
+            <span class="tag tm">CPB</span>
+          </div>
+          <span class="cc-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- CASE 005 -->
+      <a href="cases/case-005.html" class="cc"
+         data-topics="vascular,icu,hemodynamics,gdt,cardiacarrest,redosurgery"
+         data-date="2026-09-01"
+         data-title="Chasing the Flow: Femoral-to-Popliteal Bypass and a Second Chance Taken in Time"
+         data-keywords="femoral popliteal bypass acute limb ischemia redo thrombectomy cardiac arrest ICU goal directed therapy GDT hemodynamics vascular surgery Fogarty catheter reperfusion syndrome">
+        <div class="cc-left">
+          <span class="cc-num">005</span>
+          <span class="cc-date">Sep 2026</span>
+        </div>
+        <div class="cc-body">
+          <h3 class="cc-title">Chasing the Flow: <em>Femoral-to-Popliteal Bypass and a Second Chance Taken in Time</em></h3>
+          <p class="cc-exc">A 51-year-old woman with acute-on-chronic limb ischemia after a fem-fem bypass, undergoing emergency femoral-to-popliteal bypass. Intraoperative hypertensive crisis, cardiac arrest in the ICU, and a redo thrombectomy caught in time.</p>
+        </div>
+        <div class="cc-right">
+          <div class="cc-tags">
+            <span class="tag ta">Vascular</span>
+            <span class="tag tc">ICU</span>
+            <span class="tag tk">Hemodynamics</span>
+            <span class="tag tt">GDT</span>
+            <span class="tag ti">Cardiac Arrest</span>
+            <span class="tag tm">Redo Surgery</span>
           </div>
           <span class="cc-arrow">→</span>
         </div>
