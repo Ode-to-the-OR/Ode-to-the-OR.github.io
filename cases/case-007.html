@@ -1,1 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 007 — Pneumocephalus with Pneumoventricle: More Than Just Air | Ode to the OR</title>
+<meta name="description" content="A 27-year-old polytrauma patient with traumatic pneumocephalus, pneumoventricle, frontal contusion, IVH, and aspiration pneumonitis. A neurocritical care case on brain–lung protection and the implications of intracranial air.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --moss:    #4a5a3a;
+  --purple:  #6a3a6a;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:90px;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
 
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,5vw,3.4rem);font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:1.2rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.45;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tt{border-color:var(--teal);color:var(--teal);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.tm{border-color:var(--moss);color:var(--moss);}
+.tp{border-color:var(--purple);color:var(--purple);}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.8rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+.patient-glance{background:var(--surface);border:1px solid var(--border);padding:1.6rem 1.8rem;margin:1.5rem 0;}
+.patient-glance h3{margin-top:0;font-size:1.05rem;color:var(--rust);}
+.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 2rem;font-size:.84rem;margin-top:1rem;}
+.pg-grid .k{color:var(--faint);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem;}
+.pg-grid .v{color:var(--text);font-weight:500;}
+
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:var(--card);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1.5rem 0;}
+.comp-cell{background:var(--deep);padding:1.3rem 1.4rem;}
+.comp-cell h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:.5rem;}
+.comp-cell p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.65;}
+
+.guideline-box{background:var(--night);border:2px solid var(--border);padding:1.6rem 1.8rem;margin:1.6rem 0;position:relative;}
+.guideline-box::before{content:"GUIDELINES & PROTOCOLS";position:absolute;top:-.65rem;left:1.5rem;background:var(--night);padding:0 .6rem;font-size:.58rem;letter-spacing:.18em;color:var(--faint);}
+.guideline-box h3{margin-top:.3rem;font-size:1.1rem;color:var(--teal);}
+.guideline-box ul{margin-bottom:0;}
+.guideline-box li{font-size:.86rem;margin-bottom:.45rem;}
+
+.protocol-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;border-left:2px solid var(--border);padding-left:1.4rem;}
+.pf-item{position:relative;padding-bottom:1.4rem;}
+.pf-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--night);}
+.pf-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.2rem;}
+.pf-body{font-size:.88rem;color:var(--muted);}
+
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.45rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+.data-table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.84rem;}
+.data-table th{text-align:left;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid var(--border);padding:.5rem .7rem;font-weight:500;}
+.data-table td{padding:.6rem .7rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;}
+.data-table td strong{color:var(--text);font-weight:500;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:var(--deep);}
+
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1.5rem 0;}
+.compare-cell{background:var(--deep);padding:1.3rem 1.4rem;}
+.compare-cell h4{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;font-weight:600;}
+.compare-cell.brain h4{color:var(--indigo);}
+.compare-cell.lung h4{color:var(--teal);}
+.compare-cell p{font-size:.82rem;color:var(--muted);margin:0 0 .6rem;line-height:1.6;}
+.compare-cell p:last-child{margin-bottom:0;}
+
+.formula-box{background:var(--night);border:1px dashed var(--border);padding:1.1rem 1.4rem;margin:1.4rem 0;text-align:center;}
+.formula-box .formula{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--text);}
+.formula-box .caption{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.5rem;}
+
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0;}
+.img-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;}
+.img-frame{background:#1a1a1a;aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;}
+.img-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.img-badge{position:absolute;top:.5rem;left:.5rem;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.85);padding:.15rem .4rem;border-radius:2px;}
+.badge-admit{background:rgba(122,32,32,.75);}
+.badge-repeat{background:rgba(42,90,82,.75);}
+.badge-lung{background:rgba(58,58,106,.75);}
+.img-caption{padding:.9rem 1.1rem;}
+.img-caption .t{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:.2rem;}
+.img-caption .d{font-size:.8rem;color:var(--muted);line-height:1.55;}
+.img-caption.rust .t{color:var(--rust);}
+.img-caption.teal .t{color:var(--teal);}
+.img-caption.indigo .t{color:var(--indigo);}
+
+/* Patho flow — original version */
+.patho-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;}
+.patho-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);}
+.patho-item:last-child{border-bottom:none;}
+.patho-arrow{color:var(--sage);font-size:1.2rem;min-width:20px;text-align:center;padding-top:.2rem;}
+.patho-content{flex:1;}
+.patho-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.15rem;}
+.patho-text{font-size:.86rem;color:var(--muted);line-height:1.6;}
+
+@media(max-width:700px){
+  .pg-grid{grid-template-columns:1fr;}
+  .comp-grid{grid-template-columns:1fr;}
+  .compare-grid{grid-template-columns:1fr;}
+  .img-grid{grid-template-columns:1fr;}
+  .data-table{font-size:.78rem;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#cases">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../index.html#cases" class="back-link">← Back to all cases</a>
+
+<div class="wrap">
+
+  <div class="ey">Case 007 · Neuroanaesthesia · Neurocritical Care · Trauma</div>
+  <h1>Pneumocephalus with Pneumoventricle: <em>More Than Just Air</em></h1>
+  <p class="subtitle">A 27-year-old man with a frontal sinus fracture, a broken skull base and air in his sulci and ventricles. This case is about traumatic pneumocephalus and how it shapes every airway, ventilation and ICU decision that follows.</p>
+
+  <div class="meta-row">
+    <a href="../index.html?topic=neuro#cases" class="tag ta" data-topic="Neuroanaesthesia">Neuroanaesthesia</a>
+    <a href="../index.html?topic=pneumocephalus#cases" class="tag tc" data-topic="Pneumocephalus">Pneumocephalus</a>
+    <a href="../index.html?topic=tbi#cases" class="tag tk" data-topic="TBI">TBI</a>
+    <a href="../index.html?topic=icp#cases" class="tag tt" data-topic="ICP">ICP</a>
+    <a href="../index.html?topic=ccm#cases" class="tag ti" data-topic="Critical Care">Critical Care</a>
+  </div>
+
+  <p>After a road traffic accident, a 27-year-old man had a right frontal contusion, intraventricular blood, a small left temporal extradural haematoma and a comminuted fracture running through both walls of the frontal sinus, the orbit, the maxilla and the clivus. His GCS was 13, but the CT showed <strong>air in the sulci, cerebellar folia and ventricles</strong>. Air inside the dura means a dural breach, and it changes how the airway is secured, how the patient is ventilated, which gases are used, and how he is moved.</p>
+
+  <div class="divider"></div>
+
+  <h2>The Patient at a Glance</h2>
+  <div class="patient-glance">
+    <h3>Clinical snapshot</h3>
+    <div class="pg-grid">
+      <div><span class="k">Age / Sex</span><span class="v">27 years / Male</span></div>
+      <div><span class="k">Mechanism</span><span class="v">High-velocity road traffic accident</span></div>
+      <div><span class="k">Presenting GCS</span><span class="v">E3 V4 M6 (total 13)</span></div>
+      <div><span class="k">Initial symptoms</span><span class="v">Altered sensorium, 2 episodes of vomiting, periorbital edema, bilateral eye ecchymosis</span></div>
+      <div><span class="k">Provisional diagnosis</span><span class="v">Mild TBI, right frontal bone fracture, right frontal contusion with edema, IVH (right lateral ventricle), pneumocephalus, pneumoventriculus, multiple skull fractures, left temporal EDH</span></div>
+      <div><span class="k">Airway</span><span class="v">Intubated, initially VC/AC, FiO₂ 50%</span></div>
+      <div><span class="k">Key complications</span><span class="v">Hypernatremia, aspiration pneumonia, decreased P/F ratios, hypotension requiring noradrenaline</span></div>
+      <div><span class="k">Interventions</span><span class="v">ICP monitor (bolt), tracheostomy (Day 9–10), bronchoscopy with BAL, PRVC mode, free water via orogastric tube</span></div>
+      <div><span class="k">Repeat imaging</span><span class="v">Interim and Day 10 NCCT showing resolving bilateral frontal contusions; HRCT showing bilateral basal consolidations and centrilobular nodules</span></div>
+      <div><span class="k">Outcome</span><span class="v">Survived to tracheostomy; later tolerated CPAP/PS weaning trials; conservative management of frontal contusions throughout</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Initial NCCT Brain — Admission</h2>
+  <p>Serial axial sections without contrast. Posterior cranial fossa including 4th ventricle normal.</p>
+
+  <h3>Key findings</h3>
+  <ul>
+    <li><strong>Right frontal lobe haemorrhagic contusion</strong> with surrounding vasogenic edema</li>
+    <li><strong>Intraventricular haemorrhage</strong> in the right lateral ventricle</li>
+    <li><strong>Pneumocephalus</strong> — air foci in bilateral cortical sulci and cerebellar folia</li>
+    <li><strong>Pneumoventriculus</strong> — air in the supra- and infratentorial ventricular system</li>
+    <li><strong>Extradural haemorrhage</strong> along the left temporal convexity, maximum thickness <strong>8 mm</strong></li>
+    <li><strong>Comminuted displaced right frontal bone fracture</strong> extending into both walls of the frontal sinus (haemosinus)</li>
+    <li><strong>Comminuted displaced left temporal bone fracture</strong> (squamous part) and greater wing of sphenoid</li>
+    <li><strong>Clivus fracture</strong> extending to the posterior wall of the left sphenoid sinus</li>
+    <li><strong>Right orbital floor and lamina papyracea fractures</strong> with periorbital edema and ecchymosis</li>
+    <li><strong>Subgaleal emphysema</strong> in the right premaxillary and preseptal region</li>
+  </ul>
+
+  <p><strong>Impression:</strong> Haemorrhagic contusion in right frontal lobe. Intraventricular haemorrhage. Extradural haemorrhage along left temporal convexity. Pneumocephalus and pneumoventriculus. Multiple fractures as described.</p>
+
+  <h3>Where the air lies</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>What it suggests</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Epidural or subdural (frontal)</strong></td><td>Common after frontal sinus or anterior skull base fracture. Bilateral frontal subdural air that separates and points the frontal lobes is the <strong>Mount Fuji sign</strong>, a marker of tension.</td></tr>
+      <tr><td><strong>Sulcal and cisternal (subarachnoid), cerebellar folia</strong></td><td>Air has passed through the dura and arachnoid. Seen in this patient.</td></tr>
+      <tr><td><strong>Intraventricular (pneumoventriculus)</strong></td><td>Air has reached the CSF pathways, again through a dural breach. Seen in this patient.</td></tr>
+      <tr><td><strong>Confirming it is air</strong></td><td>Air measures about −1000 HU and is black on lung windows. Fat is about −100 HU, so a window change separates them.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Air seen on the first CT within hours of injury is <strong>acute</strong> pneumocephalus. Air that appears after about 72 hours is called delayed and often follows CSF leak or ventilation or drainage events.</p>
+
+  <div class="pearl-box">
+    <h3>Pearl — Pneumocephalus and the Trauma Airway</h3>
+    <p>Pneumocephalus and pneumoventriculus after skull base fracture mandate <strong>avoidance of nitrous oxide</strong> — it diffuses into air-filled spaces and can expand intracranial air, raising ICP. Positive pressure ventilation through a disrupted dura requires vigilance for air leak and tension pneumocephalus.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Simple or Tension?</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Simple</th>
+        <th>Tension</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Clinical</strong></td><td>Stable, headache at most</td><td>Falling GCS, new headache, seizure, focal deficit, pupil change, later Cushing response</td></tr>
+      <tr><td><strong>CT</strong></td><td>Air without mass effect; Mount Fuji sign absent</td><td>Mount Fuji sign, effacement, midline shift</td></tr>
+      <tr><td><strong>Course</strong></td><td>Resorbs over days to weeks</td><td>Progressive</td></tr>
+      <tr><td><strong>Action</strong></td><td>Observe, serial CT, precautions</td><td>Emergency neurosurgical decompression (burr hole or needle aspiration), 100% oxygen</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2>Follow-up NCCT Brain — Interim and Day 10</h2>
+
+  <p>Serial follow-up imaging was performed. An <strong>interim NCCT</strong> already demonstrated resolving bilateral frontal contusions with stable fracture configuration and no progression of the extradural haemorrhage.</p>
+
+  <p>The <strong>repeat NCCT on Day 10</strong> confirmed the trend:</p>
+
+  <ul>
+    <li><strong>Resolving contusions</strong> in bilateral frontal lobes (R &gt; L)</li>
+    <li><strong>Subgaleal haematoma</strong> along the frontal convexity with air foci, maximum thickness <strong>5 mm</strong></li>
+    <li><strong>Extradural haemorrhage</strong> along left temporal convexity reduced to <strong>6 × 4 mm</strong> (from 8 mm)</li>
+    <li>Multiple fractures as previously described</li>
+  </ul>
+
+  <p><strong>Impression:</strong> Resolving contusions in bilateral frontal lobes. Subgaleal haematoma along the frontal convexity. Multiple fractures as described.</p>
+
+  <div class="quote-box">
+    Serial imaging is not just about what has changed. It is about what has <em>not</em> changed — the fractures are stable, the EDH is smaller, the contusions are resolving. In neurotrauma, stability across multiple scans is the finding we hope for.
+    <span class="src">— Case 007, serial imaging review</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div id="imaging" style="scroll-margin-top:90px;"></div>
+  <h2>Imaging Documentation</h2>
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1.2rem;">NCCT brain on admission and on Day 10 (the final follow-up available for upload). HRCT chest for aspiration pneumonitis. Images shown without enhancement.</p>
+
+  <div class="img-grid">
+
+    <div class="img-card">
+      <div class="img-frame">
+        <img src="../media/Case007_Figure01_Initial_NCCT_Pneumocephalus.jpg" alt="Case007_Figure01_Initial_NCCT_Pneumocephalus">
+        <div class="img-badge badge-admit">ADMISSION · NCCT</div>
+      </div>
+      <div class="img-caption rust">
+        <div class="t">Figure 1 · Initial NCCT — Pneumocephalus</div>
+        <div class="d">Multiple air foci in bilateral cortical sulci and cerebellar folia, with air in the ventricular system (pneumoventriculus). Right frontal haemorrhagic contusion with surrounding edema.</div>
+      </div>
+    </div>
+
+    <div class="img-card">
+      <div class="img-frame">
+        <img src="../media/Case007_Figure02_Repeat_NCCT_Resolving.jpg" alt="Case007_Figure02_Repeat_NCCT_Resolving">
+        <div class="img-badge badge-repeat">DAY 10 · NCCT</div>
+      </div>
+      <div class="img-caption teal">
+        <div class="t">Figure 2 · Day 10 NCCT — Resolving Contusions</div>
+        <div class="d">Resolving bilateral frontal contusions (R &gt; L) on the Day 10 scan, consistent with the interim follow-up trend. Subgaleal haematoma with air foci. Left temporal EDH reduced from 8 mm to 6 × 4 mm.</div>
+      </div>
+    </div>
+
+    <div class="img-card">
+      <div class="img-frame">
+        <img src="../media/Case007_Figure03_HRCT_Chest_Aspiration.jpg" alt="Case007_Figure03_HRCT_Chest_Aspiration">
+        <div class="img-badge badge-lung">HRCT CHEST</div>
+      </div>
+      <div class="img-caption indigo">
+        <div class="t">Figure 3 · HRCT Chest — Aspiration Pneumonitis</div>
+        <div class="d">Diffuse consolidations in bilateral lower lobes (R &gt; L). Centrilobular nodules with adjacent ground-glass opacities in right upper lobe, middle lobe, and lingula. Subpleural subsegmental dependent consolidations.</div>
+      </div>
+    </div>
+
+    <div class="img-card">
+      <div class="img-frame">
+        <img src="../media/Case007_Figure04_CT_Chest_Basal_Collapse.jpg" alt="Case007_Figure04_CT_Chest_Basal_Collapse">
+        <div class="img-badge badge-lung">CT CHEST</div>
+      </div>
+      <div class="img-caption indigo">
+        <div class="t">Figure 4 · CT Chest — Basal Collapse</div>
+        <div class="d">Bilateral basal collapse with minimum effusion. Consistent with dependent atelectasis and aspiration injury in the setting of prolonged recumbency and sedation.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>The Fundamental Dilemma: Brain vs. Lung</h2>
+  <p>This case sits at the intersection of two competing physiological priorities. Every ventilator change, every fluid bolus, every position adjustment must be evaluated through both lenses.</p>
+
+  <div class="compare-grid">
+    <div class="compare-cell brain">
+      <h4>🧠 Brain Protection</h4>
+      <p><strong>PaCO₂:</strong> Normocapnia (35–38 mmHg) — avoid hypercapnia (raises ICP) and hypocapnia (ischemia).</p>
+      <p><strong>PEEP:</strong> May increase ICP by impeding cerebral venous drainage; use with caution and monitor ICP.</p>
+      <p><strong>Head position:</strong> Head of bed 30° promotes cerebral venous drainage.</p>
+      <p><strong>Sedation:</strong> Needed to control ICP, facilitate ventilation, and prevent coughing.</p>
+      <p><strong>Fluids:</strong> Avoid hypotonic fluids (worsen cerebral edema); maintain euvolemia.</p>
+    </div>
+    <div class="compare-cell lung">
+      <h4>🫁 Lung Protection</h4>
+      <p><strong>PaCO₂:</strong> Permissive hypercapnia may be tolerated in ARDS.</p>
+      <p><strong>PEEP:</strong> Recruits collapsed alveoli, improves oxygenation, reduces atelectrauma.</p>
+      <p><strong>Head position:</strong> 30–45° reduces VAP risk but may worsen dependent lung atelectasis.</p>
+      <p><strong>Sedation:</strong> Minimize to promote weaning and reduce VAP risk.</p>
+      <p><strong>Fluids:</strong> Conservative fluids may worsen lung edema; balance against perfusion needs.</p>
+    </div>
+  </div>
+
+  <p>The evidence, as synthesised in recent narrative reviews, supports a <strong>physiology-driven, patient-specific approach</strong> that integrates lung mechanics, gas exchange, and cerebral hemodynamics — rather than protocolised strategies that prioritise one organ over the other.</p>
+
+  <div class="divider"></div>
+
+  <h2>Precautions: Airway to Transport</h2>
+  <div class="protocol-flow">
+    <div class="pf-item">
+      <div class="pf-title">I — Airway</div>
+      <div class="pf-body">Oral rapid sequence induction (vomiting, full stomach, and later proven aspiration), controlled blood pressure and avoidance of a laryngoscopy pressor surge. <strong>No nasal route</strong> of any kind: nasotracheal tube, nasal airway, nasogastric tube. Use the orogastric route. Gentle, low-pressure mask ventilation if needed; manual in-line stabilisation until the spine is cleared (here the spine was normal on imaging).</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">II — Ventilation</div>
+      <div class="pf-body">Once the airway is secured with a cuffed tube, lung-protective ventilation is standard. Avoid coughing and bucking (adequate sedation, relaxant for suctioning if needed), avoid unnecessary high PEEP and peak pressures, and avoid blind nasopharyngeal suction. <strong>CPAP, BiPAP and high-flow nasal oxygen</strong> carry a theoretical risk of forcing air intracranially, which matters when planning weaning from the ventilator.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">III — Gases</div>
+      <div class="pf-body"><strong>Avoid nitrous oxide</strong>. It is roughly 30 times more soluble than nitrogen, so it enters an air pocket faster than nitrogen leaves and can turn simple pneumocephalus into tension. Avoid it until the air has resolved on imaging. <strong>High FiO₂</strong> lowers blood nitrogen and speeds absorption (supported by theory and small series, Dexter 1996), but it has to be balanced against oxygen toxicity and absorption atelectasis, especially with lung injury.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">IV — CSF drainage and posture</div>
+      <div class="pf-body">Head up about 30° remains standard for ICP and CSF leak. <strong>Excess CSF drainage</strong> from an EVD or lumbar drain can draw air in (soda-bottle effect), so drain with care and avoid sitting upright with an open drain. Avoid straining, Valsalva and forceful nose-blowing once awake.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">V — Transport and flight</div>
+      <div class="pf-body">CT trips need an attentive, stable transfer. For air transport, cabin pressure at about 8,000 ft is around 565 mmHg against 760 at sea level, so by <strong>Boyle's law</strong> trapped gas expands by about one-third.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>ICP Monitoring: The Bolt</h2>
+  <p>An <strong>intraparenchymal ICP monitor (bolt)</strong> was placed via a right frontal burr hole at Kocher's point, inserted to a depth of approximately <strong>5 cm</strong>. This is the most common device for acute monitoring, providing continuous pressure readings without the technical challenges of ventriculostomy in compressed ventricles.</p>
+
+  <h3>ICP threshold for treatment</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Guideline</th>
+        <th>Threshold</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Historical / widely accepted</strong></td><td>20 mmHg</td><td>Traditional threshold for intervention</td></tr>
+      <tr><td><strong>Brain Trauma Foundation, 4th Edition</strong></td><td>22 mmHg</td><td>Level IIB recommendation</td></tr>
+      <tr><td><strong>Individualised targets</strong></td><td>May be lower</td><td>18 mmHg in older patients and females</td></tr>
+    </tbody>
+  </table>
+
+  <p>The patient's recorded ICP values — <strong>12, 18, 10, 14 mmHg</strong> — remained below the treatment threshold. The transient elevation to 18 mmHg warranted vigilance but not escalation beyond conservative management.</p>
+
+  <h3>Stepwise treatment of raised ICP</h3>
+  <div class="protocol-flow">
+    <div class="pf-item">
+      <div class="pf-title">Step 1 — Basic measures</div>
+      <div class="pf-body">Head elevation 30°, neutral neck position, normocapnia (PaCO₂ 35–38 mmHg), adequate analgesia and sedation.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 2 — Osmotherapy</div>
+      <div class="pf-body">Hypertonic saline (first-line) or mannitol (second-line). Monitor serum sodium and osmolality. Avoid hypotension during infusion.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 3 — Sedation and analgesia</div>
+      <div class="pf-body">Propofol and fentanyl, titrated to ICP and hemodynamics. Avoid hypotension.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 4 — Neuromuscular blockade</div>
+      <div class="pf-body">Short-term use for refractory ICP. Monitor with train-of-four.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 5 — Barbiturates</div>
+      <div class="pf-body">For refractory intracranial hypertension in hemodynamically stable patients. Requires EEG monitoring.</div>
+    </div>
+    <div class="pf-item">
+      <div class="pf-title">Step 6 — Surgical decompression</div>
+      <div class="pf-body">Decompressive craniectomy for refractory cases. Multidisciplinary decision.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Conservative Management of Frontal Contusions</h2>
+  <p>Not every contusion needs an operation. In this patient, the right frontal haemorrhagic contusion and the 8 mm left temporal EDH were managed <strong>conservatively</strong> — a decision grounded in both imaging and clinical trajectory.</p>
+
+  <h3>Rationale for conservative management</h3>
+  <ul>
+    <li><strong>Contusion size and location:</strong> Frontal contusions are often "silent" — they may cause behavioural and cognitive changes rather than herniation. Without mass effect, midline shift, or cisternal effacement, surgery offers no clear benefit.</li>
+    <li><strong>EDH thickness &lt; 10 mm:</strong> The left temporal EDH measured 8 mm with no midline shift and no neurological deterioration. Guidelines support non-operative management for EDH &lt; 10 mm with GCS &gt; 8 and no focal deficit.</li>
+    <li><strong>ICP monitoring:</strong> With an ICP bolt in situ and readings consistently below 20 mmHg, there was objective evidence that intracranial pressure was controlled.</li>
+    <li><strong>Serial imaging:</strong> Both the interim follow-up and the Day 10 NCCT showed resolving contusions and a smaller EDH — confirming the conservative path was working across multiple time points, not just once.</li>
+    <li><strong>Avoiding second-hit injury:</strong> Surgery in a polytrauma patient with aspiration pneumonitis and hypernatremia carries additional risk. Avoiding an unnecessary operation is itself a form of organ protection.</li>
+  </ul>
+
+  <div class="pearl-box">
+    <h3>Pearl — When to operate on contusions</h3>
+    <p>Surgery is indicated for contusions with <strong>progressive neurological deterioration</strong>, <strong>refractory intracranial hypertension</strong>, <strong>significant mass effect with midline shift</strong>, or <strong>cisternal compression</strong>. In the absence of these, conservative management with ICP monitoring and serial CT is the standard of care — and often the better path.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Ventilation Strategy: Walking the Tightrope</h2>
+
+  <h3>Initial ventilation — VC/AC</h3>
+  <p>The patient was initially ventilated in <strong>volume-controlled (VC/AC)</strong> mode. This mode is widely used in neurocritical care because it guarantees a constant tidal volume and thus stable PaCO₂, which directly influences cerebral vessel diameter and ICP.</p>
+
+  <h3>Transition to PRVC</h3>
+  <p>The patient was later transitioned to <strong>Pressure-Regulated Volume Control (PRVC)</strong>. This mode delivers a set tidal volume at the lowest possible pressure, automatically adjusting inspiratory pressure to changes in compliance and resistance.</p>
+
+  <div class="pearl-box">
+    <h3>Pearl — Why PRVC in TBI with aspiration pneumonitis?</h3>
+    <p>PRVC provides a <strong>constant tidal volume</strong> (important for CO₂ stability and ICP control), a <strong>decelerating inspiratory flow</strong> pattern, and <strong>automatic adjustment for deteriorating lung compliance</strong>. In a patient with both brain injury and aspiration pneumonitis, this is a theoretical advantage: it maintains CO₂ stability while adapting to changing pulmonary mechanics.</p>
+  </div>
+
+  <h3>Lung-protective ventilation parameters</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Target</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Tidal volume</strong></td><td>4–8 mL/kg PBW</td><td>Lung protection</td></tr>
+      <tr><td><strong>Plateau pressure</strong></td><td>≤ 30 cmH₂O</td><td>Prevent barotrauma</td></tr>
+      <tr><td><strong>Driving pressure</strong></td><td>≤ 15 cmH₂O</td><td>Ultra-low DP may improve outcomes</td></tr>
+      <tr><td><strong>PEEP</strong></td><td>5–10 cmH₂O (titrated)</td><td>Balance: recruit lung vs. ICP</td></tr>
+      <tr><td><strong>PaCO₂</strong></td><td>35–38 mmHg</td><td>Normocapnia for ICP control</td></tr>
+      <tr><td><strong>PaO₂</strong></td><td>80–120 mmHg</td><td>Avoid hypoxia and hyperoxia</td></tr>
+      <tr><td><strong>SpO₂</strong></td><td>≥ 94%</td><td>Adequate oxygen delivery</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h2>Hypernatremia Management</h2>
+  <p>Hypernatremia (serum Na⁺ &gt; 145 mmol/L) is common in neurocritical care, affecting <strong>6–47%</strong> of ICU patients, and is independently associated with mortality.</p>
+
+  <h3>Causes in this patient</h3>
+  <ul>
+    <li><strong>Reduced water intake</strong> — sedation, intubation, impaired consciousness</li>
+    <li><strong>Increased water loss</strong> — vomiting, insensible losses, possible osmotic diuresis</li>
+    <li><strong>Sodium administration</strong> — resuscitation fluids, medications</li>
+  </ul>
+
+  <h3>Management principles</h3>
+  <ol>
+    <li><strong>Correct volume deficits first</strong> — with isotonic fluids (0.9% NaCl) if hypovolemic.</li>
+    <li><strong>Then replace free water deficit</strong> — via enteral route (orogastric tube) with sterile water or IV D5W.</li>
+    <li><strong>Correction rate</strong> — not to exceed <strong>10–12 mEq/L per 24 hours</strong> (chronic hypernatremia).</li>
+    <li><strong>Monitor serum sodium</strong> every 4–6 hours during active correction.</li>
+  </ol>
+
+  <div class="formula-box">
+    <div class="formula">Free Water Deficit (L) = TBW × (Serum Na⁺ / 140 − 1)</div>
+    <div class="caption">TBW = body weight (kg) × 0.6 in young men</div>
+  </div>
+
+  <div class="alert-box">
+    <h3>Distilled or sterile water</h3>
+    <p>Suitable for <strong>enteral free-water flushes</strong>. <strong>Never intravenous on its own</strong>: it is profoundly hypotonic and causes haemolysis. For IV free water use 5% dextrose or 0.45% saline, noting hyperglycaemia and oedema risks. Resuscitate with isotonic fluid; avoid albumin in TBI (SAFE study).</p>
+  </div>
+
+  <p>In this patient, free water was replaced via the <strong>orogastric route</strong> alongside careful sodium monitoring. Enteral replacement is preferred when the gut is functional — it is simple, safe, and avoids the glucose load of IV D5W.</p>
+
+  <div class="divider"></div>
+
+  <h2>Respiratory Failure and Aspiration Pneumonitis</h2>
+
+  <h3>The clinical trajectory</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Investigation</th>
+        <th>Findings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Chest X-ray on admission</strong></td><td>Right lung opacities</td></tr>
+      <tr><td><strong>POCUS at ICU</strong></td><td>Bilateral subpleural consolidation, bilateral lower lobe consolidation (R &gt; L), dynamic air bronchogram present</td></tr>
+      <tr><td><strong>P/F ratios</strong></td><td>Decreased — consistent with aspiration pneumonitis and possible early ARDS</td></tr>
+      <tr><td><strong>CT chest</strong></td><td>Bilateral basal collapse with minimum effusion</td></tr>
+      <tr><td><strong>HRCT chest</strong></td><td>Diffuse consolidations (R &gt; L), centrilobular nodules with ground-glass, subpleural subsegmental consolidations — likely aspiration pneumonitis</td></tr>
+    </tbody>
+  </table>
+
+  <h3>POCUS findings in aspiration pneumonitis</h3>
+  <ul>
+    <li><strong>Subpleural consolidation</strong> — peripheral lung involvement</li>
+    <li><strong>Dynamic air bronchogram</strong> — patent airways within consolidation; distinguishes from atelectasis</li>
+    <li><strong>Bilateral lower lobe consolidation</strong> — dependent lung regions affected</li>
+  </ul>
+
+  <p><strong>Lungs:</strong> vomiting with altered sensorium, dependent bilateral lower-lobe change and centrilobular nodules fit aspiration pneumonitis, which is a chemical injury and does not by itself need antibiotics. Antibiotics are added if infection is likely, and routine anaerobic cover is not advised unless abscess or empyema.</p>
+
+  <div class="divider"></div>
+
+  <h2>Bronchoscopy and BAL</h2>
+  <p><strong>Bronchoscopy</strong> was performed with <strong>bronchoalveolar lavage (BAL)</strong>. BAL showed <strong>no growth</strong>, which was reassuring but does not exclude aspiration pneumonitis — the initial injury is chemical, not infectious.</p>
+
+  <h3>Indications for bronchoscopy in this case</h3>
+  <ul>
+    <li><strong>Therapeutic:</strong> clearance of secretions, mucus plugging</li>
+    <li><strong>Diagnostic:</strong> BAL for microbiological analysis to rule out bacterial superinfection</li>
+    <li><strong>Management of atelectasis</strong> not responding to physiotherapy or recruitment manoeuvres</li>
+  </ul>
+
+  <h3>Technique considerations</h3>
+  <ul>
+    <li>FiO₂ increased to 100% prior to procedure</li>
+    <li>Low-pressure suction (&lt;100 mmHg)</li>
+    <li>At least 100 mL saline instilled for BAL</li>
+    <li>Post-procedure recruitment manoeuvre may reduce atelectasis incidence</li>
+  </ul>
+
+  <p><strong>BAL results:</strong> No growth — supports aspiration pneumonitis rather than bacterial pneumonia at that time.</p>
+
+  <div class="divider"></div>
+
+  <h2>Tracheostomy and Weaning</h2>
+  <p>The patient failed <strong>CPAP/PS</strong> trials consecutively. This is not uncommon in severe TBI with aspiration pneumonitis: the combination of impaired consciousness, weak cough, and poor lung compliance makes extubation high-risk.</p>
+
+  <h3>Indications for tracheostomy in this patient</h3>
+  <ul>
+    <li><strong>Prolonged mechanical ventilation</strong> — expected duration &gt; 7–14 days</li>
+    <li><strong>Failed weaning</strong> — consecutive CPAP/PS failures</li>
+    <li><strong>Need for airway protection</strong> — GCS not improving rapidly</li>
+    <li><strong>Facilitation of pulmonary toilet</strong> — retained secretions, atelectasis</li>
+    <li><strong>Reduced sedation needs</strong> — easier neurological assessment</li>
+  </ul>
+
+  <p>Tracheostomy was performed on <strong>Day 9–10</strong> of admission. The timing aligns with current evidence supporting early tracheostomy (within 7–14 days) in patients with severe TBI and predicted prolonged ventilation, which may reduce ventilator-associated pneumonia, sedation requirements, and ICU length of stay.</p>
+
+  <p><strong>Weaning trajectory:</strong> Following tracheostomy, the patient was gradually weaned. He later <strong>tolerated CPAP/PS weaning trials</strong> — a significant milestone that reflected improving lung compliance, adequate neurological recovery, and successful clearance of secretions. The combination of tracheostomy, reduced sedation, and daily spontaneous breathing trials formed the backbone of the weaning strategy.</p>
+
+  <div class="quote-box">
+    Tracheostomy is not a failure of weaning. It is a strategic decision to optimise the trajectory — protecting the lung, freeing the brain from sedation, and giving the patient the best chance of meaningful recovery.
+    <span class="src">— Case 007, Day 10 ICU rounds</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Complications to Watch For</h2>
+  <div class="comp-grid">
+    <div class="comp-cell">
+      <h4>Tension Pneumocephalus</h4>
+      <p>Neurological decline after positive pressure, CSF drainage or transport. Mount Fuji sign on CT. Urgent neurosurgical decompression.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Meningitis</h4>
+      <p>Risk persists while a dural breach is open. Pneumococcus is the classic organism. Prophylactic antibiotics are not recommended (Cochrane 2015).</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Persistent CSF Leak</h4>
+      <p>Clear nasal or ear fluid, halo sign. Most settle in 7–10 days with head elevation. Needs surgical repair if it does not settle.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Haematoma Growth</h4>
+      <p>Contusion and EDH can enlarge. Repeat CT for any neurological change. Serial imaging is the safety net.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Vascular Injury</h4>
+      <p>Clival and carotid-canal fractures can injure the carotid or vertebrobasilar vessels. Consider CT angiography.</p>
+    </div>
+    <div class="comp-cell">
+      <h4>Orbital Injury</h4>
+      <p>Check pupils, proptosis and vision; urgent ophthalmology if abnormal.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Guidelines, Protocols & Evidence</h2>
+  <div class="guideline-box">
+    <h3>Key sources</h3>
+    <ul>
+      <li><strong>Brain Trauma Foundation, 4th edition (2017):</strong> ICP threshold 22 mmHg; CPP 60–70 mmHg; avoid hypotension and hypoxia; no steroids; no prophylactic hyperventilation.</li>
+      <li><strong>Pneumocephalus reviews (Schirmer 2010; Pillai 2017):</strong> most cases resolve spontaneously; tension pneumocephalus is a neurosurgical emergency; avoid nitrous oxide, positive-pressure and nasal devices where a breach exists.</li>
+      <li><strong>Dexter and Reasoner (1996):</strong> theoretical assessment of high-FiO₂ therapy for pneumocephalus.</li>
+      <li><strong>Surgical management of EDH (Bullock 2006):</strong> criteria for non-operative care.</li>
+      <li><strong>Cochrane (2015):</strong> prophylactic antibiotics do not reduce meningitis in basilar skull fracture.</li>
+      <li><strong>ARDSNet / ESICM:</strong> Lung-protective ventilation with low tidal volumes (4–8 mL/kg PBW) and plateau pressure ≤ 30 cmH₂O.</li>
+      <li><strong>Surviving Sepsis Campaign:</strong> Aspiration pneumonitis is not treated with antibiotics unless bacterial superinfection is suspected.</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>What I Keep Coming Back To</h2>
+  <p>A GCS of 13 did not describe this injury; the CT did. Air in the ventricles told us a dural breach was open, and each later decision — from the route of the tube and the choice of gas to the weaning plan and the way he was transported — had to respect that. The ICP monitor told us the pressure was controlled. The serial CTs told us the contusions were resolving. The bronchoscopy told us the airway was clear. The tracheostomy told us the patient was ready for the long road of weaning. And through it all, the discipline of daily reassessment — of imaging, of ventilation, of sodium, of sedation — is what kept the trajectory moving in the right direction. Conservative management is not the absence of intervention. It is the deliberate, evidence-based decision to let the body heal while we support it, monitor it, and stay ready to act if it doesn't.</p>
+
+  <div class="quote-box">
+    The air is not the injury, but it decides how gently everything else must be done.
+    <span class="src">— Reflection</span>
+  </div>
+
+  <div class="refbox">
+    <h3>References</h3>
+    <ol>
+      <li>Carney N, Totten AM, O'Reilly C, et al. Guidelines for the Management of Severe Traumatic Brain Injury, Fourth Edition. <em>Neurosurgery.</em> 2017;80(1):6–15.</li>
+      <li>Schirmer CM, Heilman CB, Bhardwaj A. Pneumocephalus: case illustrations and review. <em>Neurocrit Care.</em> 2010;13(1):152–158.</li>
+      <li>Pillai P, Sharma R, MacKenzie L, et al. Traumatic tension pneumocephalus — two cases and comprehensive review of literature. <em>Int J Crit Illn Inj Sci.</em> 2017;7(1):58–64.</li>
+      <li>Dexter F, Reasoner DK. Theoretical assessment of normobaric oxygen therapy to treat pneumocephalus. <em>Anesthesiology.</em> 1996;84(2):442–447.</li>
+      <li>Ishiwata Y, Fujitsu K, Sekino T, et al. Subdural tension pneumocephalus following surgery for chronic subdural hematoma. <em>J Neurosurg.</em> 1988;68(1):58–61.</li>
+      <li>Bullock MR, Chesnut R, Ghajar J, et al. Surgical management of traumatic epidural hematomas. <em>Neurosurgery.</em> 2006;58(3 Suppl):S7–S15.</li>
+      <li>Ratilal BO, Costa J, Pappamikail L, Sampaio C. Antibiotic prophylaxis for preventing meningitis in patients with basilar skull fractures. <em>Cochrane Database Syst Rev.</em> 2015;(4):CD004884.</li>
+      <li>Adrogué HJ, Madias NE. Hypernatremia. <em>N Engl J Med.</em> 2000;342(20):1493–1499.</li>
+      <li>Myburgh J, Cooper DJ, Finfer S, et al. Saline or albumin for fluid resuscitation in patients with traumatic brain injury. <em>N Engl J Med.</em> 2007;357(9):874–884.</li>
+      <li>Robba C, Poole D, McNett M, et al. Mechanical ventilation in patients with acute brain injury: recommendations of the ESICM. <em>Intensive Care Med.</em> 2020;46:2397–2410.</li>
+      <li>Metlay JP, Waterer GW, Long AC, et al. Diagnosis and treatment of adults with community-acquired pneumonia. <em>Am J Respir Crit Care Med.</em> 2019;200(7):e45–e67.</li>
+      <li>Hawryluk GWJ, Aguilera S, Buki A, et al. A management algorithm for patients with intracranial pressure monitoring: the Seattle International Severe Traumatic Brain Injury Consensus Conference (SIBICC). <em>Intensive Care Med.</em> 2019;45(12):1783–1794.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>October 2026</span>
+    <span>Neuroanaesthesia · Pneumocephalus · TBI · ICP · Critical Care</span>
+  </div>
+
+  <p class="disclaim">Ode to the OR is a personal project dedicated to education and reflection. Any patient-related content has been fully de-identified and may be modified to protect confidentiality in accordance with HIPAA principles, the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India), and the ethical mandates of the <strong>National Medical Commission (NMC) of India</strong>. Patient age, procedural details, haemodynamic values and timeline elements have been generalised where necessary. AI tools may assist with language refinement and presentation, but all content is reviewed, curated, and published by the author. The views expressed are solely my own and do not represent any institution, hospital, employer, or training program. Nothing on this site should be considered medical advice or a substitute for professional clinical judgment.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
