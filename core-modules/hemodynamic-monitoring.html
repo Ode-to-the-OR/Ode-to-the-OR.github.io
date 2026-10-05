@@ -60,12 +60,30 @@ nav {
 .nav-links a:hover,.nav-links a.current { color:var(--rust); }
 @media(max-width:700px){.nav-links{display:none;}}
 
+/* ─── BACK LINK ROW ─── */
+.back-row {
+  padding: 80px 5vw 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.back-link-top {
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.62rem;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--sage);
+  text-decoration:none;transition:color .2s,gap .2s;
+}
+.back-link-top:hover { color:var(--rust);gap:.8rem; }
+.back-link-top svg { transition:transform .2s; }
+.back-link-top:hover svg { transform:translateX(-3px); }
+
 /* ─── PAGE HERO ─── */
 .page-hero {
-  padding: 120px 5vw 5rem;
+  padding: 2rem 5vw 5rem;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 .hgrid {
   position:absolute;inset:0;
@@ -86,7 +104,7 @@ nav {
 
 /* ─── MODULE NAV ─── */
 .module-nav {
-  position:sticky;top:66px;z-index:500;
+  position:sticky;top:58px;z-index:500;
   background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   padding:0 5vw;
@@ -242,6 +260,21 @@ hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
 .back-link::before { content:'←'; }
 .back-link:hover { gap:.95rem;color:var(--rust); }
 
+/* ─── ARTICLE FOOT ─── */
+.article-foot {
+  padding: 2.5rem 5vw;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+.foot-back {
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.64rem;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--sage);
+  text-decoration:none;transition:color .2s,gap .2s;
+}
+.foot-back:hover { color:var(--rust);gap:.8rem; }
+
 /* ─── FOOTER ─── */
 footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
 .f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
@@ -251,7 +284,6 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
 @media(max-width:900px){ .data-table{font-size:.76rem;} }
 @media(max-width:600px){ .data-table{display:block;overflow-x:auto;} }
 </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -273,9 +305,9 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
 
 <!-- BACK LINK -->
 <div class="back-row">
-  <a href="../reading-corner.html" class="back-link-top" target="_self">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-    The Reading Corner
+    Core Modules
   </a>
 </div>
 
@@ -371,14 +403,7 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
         <line x1="38" y1="130" x2="660" y2="130" stroke="#d0c8b8" stroke-width=".8" stroke-dasharray="3,4"/>
         <text x="10" y="134" fill="#a89880" font-family="Instrument Sans,sans-serif" font-size="7" letter-spacing="1.5">CVP</text>
 
-        <!-- ── CVP WAVEFORM — CYCLE 1 ──
-             Sequence: baseline → a (peak ~P wave) → x descent → c (small, ~QRS) → x' descent → baseline → v (peak ~end T) → y descent → baseline
-             a: x≈105, peak y=90
-             c: x≈128, small peak y=108
-             x descent trough: x≈148, y=125
-             v: x≈170, peak y=88
-             y descent trough: x≈196, y=126
-        -->
+        <!-- ── CVP WAVEFORM — CYCLE 1 ── -->
         <path d="
           M38,128
           L88,128
@@ -407,18 +432,13 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
         " stroke="#7a2020" stroke-width="2" fill="none"/>
 
         <!-- ── WAVE LABELS — CYCLE 1 ── -->
-        <!-- a wave -->
         <line x1="105" y1="90" x2="105" y2="75" stroke="#7a2020" stroke-width=".8" stroke-dasharray="2,2"/>
         <text x="100" y="72" fill="#7a2020" font-family="Cormorant Garamond,serif" font-size="15" font-style="italic" font-weight="600">a</text>
-        <!-- c wave -->
         <line x1="130" y1="105" x2="130" y2="75" stroke="#9a6c1a" stroke-width=".8" stroke-dasharray="2,2"/>
         <text x="125" y="72" fill="#9a6c1a" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">c</text>
-        <!-- x descent -->
         <text x="143" y="148" fill="#a89880" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">x</text>
-        <!-- v wave -->
         <line x1="170" y1="88" x2="170" y2="75" stroke="#7a2020" stroke-width=".8" stroke-dasharray="2,2"/>
         <text x="165" y="72" fill="#7a2020" font-family="Cormorant Garamond,serif" font-size="15" font-style="italic" font-weight="600">v</text>
-        <!-- y descent -->
         <text x="188" y="148" fill="#a89880" font-family="Cormorant Garamond,serif" font-size="13" font-style="italic">y</text>
 
         <!-- ── WAVE LABELS — CYCLE 2 ── -->
@@ -575,20 +595,15 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
     <div class="wave-box">
       <div class="wave-label">▸ RA → RV → PA → PCWP — pressure sequence on insertion</div>
       <svg viewBox="0 0 680 120" width="100%" style="display:block;">
-        <!-- RA -->
         <text x="12" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">RA  (2–8)</text>
         <path d="M10,82 Q22,78 30,68 Q36,58 40,68 Q44,80 52,82 Q60,84 68,82 Q76,72 82,62 Q86,72 92,82 Q100,84 108,82" stroke="#7a2020" stroke-width="1.5" fill="none"/>
-        <!-- RV -->
         <text x="140" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">RV  (15-30 / 0-8) — no dicrotic notch</text>
         <path d="M130,88 L136,88 L138,84 L140,30 L142,18 L144,30 L146,84 L150,88 L160,88 L162,84 L164,30 L166,18 L168,30 L170,84 L174,88 L184,88 L186,84 L188,30 L190,18 L192,30 L194,84 L198,88" stroke="#9a6c1a" stroke-width="1.5" fill="none"/>
-        <!-- PA -->
         <text x="260" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">PA  (15-30 / 6-12) — dicrotic notch ✓</text>
         <path d="M250,88 L255,85 L258,72 L262,28 L266,22 L270,38 L272,54 L274,62 L278,68 L282,66 L286,72 L290,28 L294,22 L298,38 L300,54 L302,62 L306,68 L310,66 L314,72 L318,28 L322,22 L326,38 L328,54 L330,62 L334,68 L338,66" stroke="#7a5abf" stroke-width="1.5" fill="none"/>
-        <!-- PCWP -->
         <text x="390" y="12" fill="#a89880" font-family="Instrument Sans" font-size="7" letter-spacing="1">PCWP / Wedge  (6–12) — damped, a+v waves</text>
         <path d="M380,82 Q392,78 400,68 Q406,58 410,68 Q414,80 422,82 Q430,84 438,82 Q446,72 452,62 Q456,72 462,82 Q470,84 478,82 Q486,78 492,68 Q498,58 502,68 Q506,78 514,82 Q520,84 528,82"
               stroke="#4a7c59" stroke-width="1.5" fill="none"/>
-        <!-- Dividers -->
         <line x1="125" y1="8" x2="125" y2="105" stroke="#d0c8b8" stroke-dasharray="3,3"/>
         <line x1="245" y1="8" x2="245" y2="105" stroke="#d0c8b8" stroke-dasharray="3,3"/>
         <line x1="375" y1="8" x2="375" y2="105" stroke="#d0c8b8" stroke-dasharray="3,3"/>
@@ -914,14 +929,11 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
         <line x1="40" y1="190" x2="370" y2="190" stroke="#d0c8b8" stroke-width="1.5"/>
         <line x1="40" y1="190" x2="40" y2="20" stroke="#d0c8b8" stroke-width="1.5"/>
         <path d="M50,185 Q100,140 160,90 Q220,50 290,40 Q340,36 360,36" stroke="#7a2020" stroke-width="2" fill="none"/>
-        <!-- Responsive point -->
         <circle cx="130" cy="112" r="5" fill="#4a7c59"/>
         <line x1="130" y1="190" x2="130" y2="112" stroke="#4a7c59" stroke-dasharray="3,3" stroke-width="1"/>
         <line x1="40" y1="112" x2="130" y2="112" stroke="#4a7c59" stroke-dasharray="3,3" stroke-width="1"/>
-        <!-- Non-responsive point -->
         <circle cx="300" cy="42" r="5" fill="#7a2020"/>
         <line x1="300" y1="190" x2="300" y2="42" stroke="#7a2020" stroke-dasharray="3,3" stroke-width="1"/>
-        <!-- Preload arrows -->
         <path d="M130,190 L172,190" stroke="#9a6c1a" stroke-width="1.5" marker-end="url(#arr2)"/>
         <path d="M300,190 L342,190" stroke="#9a6c1a" stroke-width="1.5" marker-end="url(#arr2)"/>
         <defs><marker id="arr2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9a6c1a"/></marker></defs>
@@ -1076,7 +1088,7 @@ footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;just
 
 <!-- ARTICLE FOOT -->
 <div class="article-foot">
-  <a href="../reading-corner.html" class="foot-back" target="_self">← Back to The Reading Corner</a>
+  <a href="../core-modules.html" class="foot-back" target="_self">← Back to Core Modules</a>
 </div>
 
 <!-- FOOTER -->
