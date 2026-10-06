@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pain: From Alarm to Aftermath — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to pain — from nociception to chronic pain. The alarm, the response, and the aftermath. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  --purple:      #5a4a6a;
+  --purple-soft: #6a5a7a;
+  --purple-deep: #3e3348;
+  --purple-light:#8a7a9a;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--purple);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--purple-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── BACK LINK ─── */
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--purple-deep); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(90,74,106,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(90,74,106,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(90,74,106,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(90,74,106,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(106,90,122,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--purple);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--purple); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--purple);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:640px;font-weight:300; }
+.hero-sub strong { color:var(--purple);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--purple-soft);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--purple);border-bottom-color:var(--purple); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--purple),var(--purple-soft));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--purple);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--purple); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--purple); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--purple);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--purple-soft);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--purple);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--purple);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(90,74,106,.02); }
+.td-hi { color:var(--purple)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(90,74,106,.04);border-color:var(--purple);color:var(--muted); }
+.co-key strong { color:var(--purple); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(106,90,122,.05);border-color:var(--purple-soft);color:var(--muted); }
+.co-fact strong { color:var(--purple-soft); }
+.co-purple { background:rgba(90,74,106,.06);border-color:var(--purple);color:var(--muted); }
+.co-purple strong { color:var(--purple); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--purple);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--purple);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-purple { border-color:var(--purple);color:var(--purple); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--purple-soft);color:var(--purple-soft); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--purple);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--purple); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--purple);font-size:.9rem;font-weight:700; }
+
+/* ─── ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--purple);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--purple-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--purple);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── DIVIDER ─── */
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Physiology · Anaesthesia · Critical Care · Pain Medicine</div>
+  <h1>Pain: From Alarm <em>to Aftermath</em></h1>
+  <p class="hero-sub">
+    The nociceptive signal that protects us — and the maladaptive process that outlives its purpose. <strong>Nine modules. Basic to advanced. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>09</span></div>
+    <div class="meta-item">Arc <span>Alarm → Response → Aftermath</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Alarm: Nociception</button>
+  <button onclick="showMod(1)">02 · Transmission</button>
+  <button onclick="showMod(2)">03 · Perception & Modulation</button>
+  <button onclick="showMod(3)">04 · Classification</button>
+  <button onclick="showMod(4)">05 · Assessment</button>
+  <button onclick="showMod(5)">06 · Pharmacology</button>
+  <button onclick="showMod(6)">07 · Regional Anaesthesia</button>
+  <button onclick="showMod(7)">08 · Aftermath: Chronic Pain</button>
+  <button onclick="showMod(8)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:11.1%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: ALARM — NOCICEPTION -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 09 · Act I — The Alarm</div>
+      <div class="mod-title">Nociception & <em>Transduction</em></div>
+      <div class="mod-intro">Pain is not a single event. It is a process — beginning with the detection of a threat and ending, sometimes, in a self-sustaining disease. This module begins at the beginning: the alarm.</div>
+    </div>
+
+    <div class="callout co-purple">
+      <strong>IASP Definition of Pain (2020 revision)</strong>
+      "An unpleasant sensory and emotional experience associated with, or resembling that associated with, actual or potential tissue damage." 
+      <br><br>
+      <strong>Six key notes:</strong>
+      <ul class="clist" style="margin-top:.5rem">
+        <li>Pain is always a personal experience influenced by biological, psychological, and social factors</li>
+        <li>Pain and nociception are different phenomena. Pain cannot be inferred solely from activity in sensory neurons</li>
+        <li>Through their life experiences, individuals learn the concept of pain</li>
+        <li>A person's report of an experience as pain should be respected</li>
+        <li>Although pain usually serves an adaptive role, it may have adverse effects on function and social and psychological well-being</li>
+        <li>Verbal description is only one of several behaviors to express pain; inability to communicate does not negate the possibility that a human or a nonhuman animal experiences pain</li>
+      </ul>
+    </div>
+
+    <h2 class="subhead">Nociception vs Pain</h2>
+    <div class="compare-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--purple)">Nociception</h4>
+        <ul>
+          <li>The neural process of encoding noxious stimuli</li>
+          <li>Occurs in the periphery, spinal cord, brainstem, and brain</li>
+          <li>Can occur without conscious perception (e.g., under general anaesthesia)</li>
+          <li>Is measurable via physiological markers</li>
+          <li>Is <em>not</em> pain</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--purple-deep)">Pain</h4>
+        <ul>
+          <li>A subjective, conscious experience</li>
+          <li>Requires cortical processing and awareness</li>
+          <li>Influenced by context, emotion, culture, memory</li>
+          <li>Is what the patient says it is</li>
+          <li>Can occur without identifiable nociceptive input (e.g., phantom limb)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="subhead">The Four Steps of Nociception</h2>
+    <div class="flow-row">
+      <div class="flow-box">1 · <strong>Transduction</strong><br>Noxious stimulus → electrical signal</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2 · <strong>Transmission</strong><br>Signal travels to CNS</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3 · <strong>Modulation</strong><br>Signal altered at spinal/brainstem</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">4 · <strong>Perception</strong><br>Conscious experience of pain</div>
+    </div>
+
+    <h2 class="subhead">Step 1 — Transduction: The Molecular Alarm</h2>
+    <p>Nociceptors are free nerve endings in peripheral tissues — skin, muscle, joints, viscera, and bone. They are activated by noxious mechanical, thermal, or chemical stimuli. The process of converting these stimuli into electrical signals is <strong>transduction</strong>. </p>
+
+    <h3 class="subsubhead">The Inflammatory Soup</h3>
+    <p>Tissue injury releases a cocktail of mediators that sensitise and activate nociceptors. This is the origin of peripheral sensitisation. </p>
+
+    <table class="data-table">
+      <tr><th>Mediator</th><th>Source</th><th>Effect on Nociceptor</th></tr>
+      <tr><td><strong>Protons (H⁺)</strong></td><td>Ischaemia, inflammation</td><td>Activate ASICs and TRPV1 → direct depolarisation</td></tr>
+      <tr><td><strong>ATP</strong></td><td>Damaged cells</td><td>Activates P2X₃ receptors → direct excitation</td></tr>
+      <tr><td><strong>Bradykinin</strong></td><td>Plasma (kinin system)</td><td>Activates B₂ receptors → sensitisation</td></tr>
+      <tr><td><strong>Prostaglandins (PGE₂, PGI₂)</strong></td><td>COX pathway</td><td>Sensitise nociceptors → hyperalgesia</td></tr>
+      <tr><td><strong>Substance P</strong></td><td>Primary afferents</td><td>Neurogenic inflammation, mast cell activation</td></tr>
+      <tr><td><strong>CGRP</strong></td><td>Primary afferents</td><td>Vasodilation, neurogenic inflammation</td></tr>
+      <tr><td><strong>NGF</strong></td><td>Inflammatory cells</td><td>TrkA activation → long-term sensitisation</td></tr>
+      <tr><td><strong>Cytokines (TNF-α, IL-1β, IL-6)</strong></td><td>Immune cells, glia</td><td>Sensitise nociceptors and central neurons</td></tr>
+      <tr><td><strong>Endothelins</strong></td><td>Endothelium</td><td>Excite nociceptors via ETA receptors</td></tr>
+      <tr><td><strong>Serotonin (5-HT)</strong></td><td>Platelets, mast cells</td><td>Sensitise via 5-HT₃ receptors</td></tr>
+      <tr><td><strong>Histamine</strong></td><td>Mast cells</td><td>Itch and nociceptor sensitisation</td></tr>
+      <tr><td><strong>Lactate</strong></td><td>Ischaemia, anaerobic metabolism</td><td>Acidosis → nociceptor activation</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Key Receptors and Ion Channels</h3>
+    <table class="data-table">
+      <tr><th>Channel/Receptor</th><th>Stimulus</th><th>Clinical Relevance</th></tr>
+      <tr><td><strong>TRPV1</strong> (capsaicin receptor)</td><td>Heat >43°C, protons, capsaicin</td><td>Target of topical capsaicin; sensitised in inflammation</td></tr>
+      <tr><td><strong>TRPM8</strong></td><td>Cold, menthol</td><td>Cold allodynia in neuropathic pain</td></tr>
+      <tr><td><strong>TRPA1</strong></td><td>Mustard oil, cold, irritants</td><td>Neurogenic inflammation; target of investigational drugs</td></tr>
+      <tr><td><strong>ASICs</strong></td><td>Acidosis (H⁺)</td><td>Ischaemic pain, muscle pain</td></tr>
+      <tr><td><strong>P2X₃</strong></td><td>ATP</td><td>Visceral and neuropathic pain; target of investigational drugs</td></tr>
+      <tr><td><strong>Nav1.7, Nav1.8, Nav1.9</strong></td><td>Voltage-gated sodium channels</td><td>Nav1.7 gain-of-function → inherited erythromelalgia; loss-of-function → congenital insensitivity to pain</td></tr>
+      <tr><td><strong>Kv channels</strong></td><td>Voltage-gated potassium</td><td>Regulate excitability; opened by retigabine (anticonvulsant)</td></tr>
+      <tr><td><strong>CB1/CB2</strong></td><td>Endocannabinoids</td><td>Analgesic targets; THC/CBD pharmacology</td></tr>
+    </table>
+
+    <h2 class="subhead">Nociceptor Types — The Two Fibres</h2>
+    <table class="data-table">
+      <tr><th>Property</th><th>Aδ Fibres</th><th>C Fibres</th></tr>
+      <tr><td><strong>Myelination</strong></td><td>Thinly myelinated</td><td>Unmyelinated</td></tr>
+      <tr><td><strong>Conduction velocity</strong></td><td>5–30 m/s (fast)</td><td>0.5–2 m/s (slow)</td></tr>
+      <tr><td><strong>Sensation</strong></td><td>Sharp, pricking, well-localised ("first pain")</td><td>Dull, burning, aching, poorly localised ("second pain")</td></tr>
+      <tr><td><strong>Diameter</strong></td><td>1–5 μm</td><td>0.2–1.5 μm</td></tr>
+      <tr><td><strong>Neurotransmitters</strong></td><td>Glutamate</td><td>Glutamate, substance P, CGRP</td></tr>
+      <tr><td><strong>Clinical block order</strong></td><td>Blocked before C fibres by pressure/ischaemia</td><td>Blocked first by local anaesthetics (smaller diameter)</td></tr>
+      <tr><td><strong>Receptive field</strong></td><td>Smaller, more precise</td><td>Larger, diffuse</td></tr>
+      <tr><td><strong>Silent nociceptors</strong></td><td>Rare</td><td>Common — recruited in inflammation</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Clinical Pearl — Why Local Anaesthetics Work First on C Fibres</strong>
+      Local anaesthetics block small, unmyelinated fibres before large, myelinated ones. This is why patients lose <strong>pain and temperature</strong> before <strong>touch and motor</strong> function during a spinal or epidural. The order of block: sympathetic → pain/temperature (C and Aδ) → touch/proprioception (Aβ) → motor (Aα).
+    </div>
+
+    <h2 class="subhead">Silent Nociceptors</h2>
+    <ul class="clist">
+      <li>Some nociceptors are <strong>silent</strong> under normal conditions — unresponsive to even noxious mechanical stimuli</li>
+      <li>They become active only after inflammation or tissue injury ("sleeping" or "silent" nociceptors)</li>
+      <li>Their recruitment contributes to <strong>primary hyperalgesia</strong> — increased pain sensitivity at the site of injury</li>
+      <li>This is one reason pain can be disproportionate to the apparent injury</li>
+      <li>Silent nociceptors are thought to play a role in visceral pain and functional pain disorders</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>Transduction — The Takeaway</strong>
+      Transduction is the <strong>molecular alarm</strong>. It is where the body first detects a threat. It is also the target of <strong>NSAIDs</strong> (reduce prostaglandin synthesis), <strong>local anaesthetics</strong> (block sodium channels), and <strong>topical agents</strong> (capsaicin depletes substance P). Understanding this step explains why these drugs work.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: TRANSMISSION -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 09 · Act I — The Alarm</div>
+      <div class="mod-title">Transmission — <em>Periphery to CNS</em></div>
+      <div class="mod-intro">The signal travels from the site of injury, through the dorsal root ganglion, into the dorsal horn of the spinal cord, and up to the brain.</div>
+    </div>
+
+    <h2 class="subhead">The Dorsal Horn — First Synapse</h2>
+    <p>The dorsal horn of the spinal cord is the first relay station. Primary afferents synapse with second-order neurons. This is where the signal can be amplified, dampened, or redirected — and where sensitisation begins. </p>
+
+    <h3 class="subsubhead">Rexed Laminae</h3>
+    <table class="data-table">
+      <tr><th>Lamina</th><th>Location</th><th>Function</th></tr>
+      <tr><td><strong>Lamina I</strong> (marginal zone)</td><td>Superficial dorsal horn</td><td>Nociceptive-specific projection neurons (NS)</td></tr>
+      <tr><td><strong>Lamina II</strong> (substantia gelatinosa)</td><td>Superficial dorsal horn</td><td>Interneurons; key site of modulation and sensitisation</td></tr>
+      <tr><td><strong>Lamina III–IV</strong></td><td>Nucleus proprius</td><td>Wide dynamic range (WDR) neurons; receive Aβ, Aδ, C input</td></tr>
+      <tr><td><strong>Lamina V</strong></td><td>Deep dorsal horn</td><td>WDR neurons; visceral and somatic convergence</td></tr>
+      <tr><td><strong>Lamina VI</strong></td><td>Deep dorsal horn</td><td>Proprioceptive input</td></tr>
+      <tr><td><strong>Lamina VII–IX</strong></td><td>Ventral horn</td><td>Motor neurons (not nociceptive)</td></tr>
+      <tr><td><strong>Lamina X</strong></td><td>Around central canal</td><td>Visceral nociception</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Second-Order Neuron Types</h3>
+    <table class="data-table">
+      <tr><th>Type</th><th>Input</th><th>Output</th><th>Role</th></tr>
+      <tr><td><strong>Nociceptive-specific (NS)</strong></td><td>Aδ and C fibres only</td><td>Sharp, well-localised pain</td><td>Discriminative pain</td></tr>
+      <tr><td><strong>Wide dynamic range (WDR)</strong></td><td>Aβ, Aδ, C fibres</td><td>Responds to touch and noxious stimuli</td><td>Central sensitisation; allodynia</td></tr>
+      <tr><td><strong>Low-threshold (LT)</strong></td><td>Aβ fibres</td><td>Innocuous input</td><td>Normally non-nociceptive</td></tr>
+      <tr><td><strong>NK1R neurons</strong></td><td>Substance P, glutamate</td><td>Project to parabrachial area</td><td>Affective-motivational dimension</td></tr>
+    </table>
+
+    <div class="callout co-purple">
+      <strong>The WDR Neuron — Why Allodynia Happens</strong>
+      WDR neurons receive input from both <strong>low-threshold mechanoreceptors (Aβ)</strong> and <strong>nociceptors (Aδ/C)</strong>. Under normal conditions, Aβ input alone does not cause pain. But after central sensitisation, the WDR neuron's threshold drops — and now <strong>light touch activates a pain-signalling neuron</strong>. This is the mechanism of <strong>mechanical allodynia</strong>.
+    </div>
+
+    <h2 class="subhead">Ascending Pathways</h2>
+    <table class="data-table">
+      <tr><th>Pathway</th><th>Origin</th><th>Destination</th><th>Function</th></tr>
+      <tr><td><strong>Spinothalamic tract</strong> (neospinothalamic)</td><td>Lamina I, V</td><td>Thalamus (VPL/VPM) → somatosensory cortex</td><td>Sensory-discriminative: location, intensity, quality</td></tr>
+      <tr><td><strong>Spinoreticular tract</strong></td><td>Lamina V, VII, VIII</td><td>Reticular formation → thalamus → cortex</td><td>Arousal, autonomic response, affective dimension</td></tr>
+      <tr><td><strong>Spinomesencephalic tract</strong></td><td>Lamina I, V</td><td>PAG, superior colliculus</td><td>Activates descending modulation</td></tr>
+      <tr><td><strong>Spinoparabrachial tract</strong></td><td>Lamina I (NK1R neurons)</td><td>Parabrachial area → amygdala</td><td>Affective-motivational: unpleasantness, fear, avoidance</td></tr>
+      <tr><td><strong>Spinohypothalamic tract</strong></td><td>Lamina I, V</td><td>Hypothalamus</td><td>Neuroendocrine and autonomic responses</td></tr>
+      <tr><td><strong>Spinocervical tract</strong></td><td>Lamina IV–V</td><td>Lateral cervical nucleus → thalamus</td><td>Discriminative touch (minor pain role)</td></tr>
+    </table>
+
+    <h2 class="subhead">The Pain Matrix — Cortical Processing</h2>
+    <p>Pain is not processed in a single "pain centre." It is distributed across a network of cortical and subcortical regions — the <strong>pain matrix</strong>. </p>
+
+    <table class="data-table">
+      <tr><th>Region</th><th>Role</th></tr>
+      <tr><td><strong>Primary somatosensory cortex (S1)</strong></td><td>Sensory-discriminative: location, intensity, quality</td></tr>
+      <tr><td><strong>Secondary somatosensory cortex (S2)</strong></td><td>Pain intensity, attention to pain</td></tr>
+      <tr><td><strong>Insula</strong></td><td>Autonomic integration, interoception, pain intensity</td></tr>
+      <tr><td><strong>Anterior cingulate cortex (ACC)</strong></td><td>Affective-motivational: unpleasantness, suffering</td></tr>
+      <tr><td><strong>Prefrontal cortex</strong></td><td>Cognitive evaluation, reappraisal, placebo analgesia</td></tr>
+      <tr><td><strong>Amygdala</strong></td><td>Fear, anxiety, emotional learning</td></tr>
+      <tr><td><strong>Thalamus</strong></td><td>Relay and modulation; VPL/VPM for sensory, medial for affective</td></tr>
+      <tr><td><strong>PAG</strong></td><td>Descending modulation; opioid-mediated analgesia</td></tr>
+      <tr><td><strong>Basal ganglia</strong></td><td>Motor responses, avoidance learning</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Two Dimensions of Pain</strong>
+      <strong>Sensory-discriminative</strong> (S1, S2, insula): "Where, what, how much?" <strong>Affective-motivational</strong> (ACC, amygdala): "How bad is it? How much do I hate it?" This distinction explains why two patients with identical injuries can have vastly different pain experiences — and why treatments targeting one dimension may not touch the other. 
+    </div>
+
+    <h2 class="subhead">Visceral Pain — A Different Beast</h2>
+    <ul class="clist">
+      <li><strong>Poorly localised:</strong> lower density of nociceptors on viscera; less cortical representation</li>
+      <li><strong>Referred:</strong> visceral afferents converge on the same second-order neurons as somatic afferents (convergence-projection theory) — e.g., cardiac ischaemia → left arm pain</li>
+      <li><strong>Associated features:</strong> nausea, sweating, hypotension, changes in heart rate</li>
+      <li><strong>Types:</strong> true visceral (from the organ), parietal (from the peritoneum), referred (to somatic structures)</li>
+      <li><strong>Clinical note:</strong> Visceral pain is often poorly responsive to NSAIDs and opioids; it may respond to <strong>visceral analgesics</strong> (e.g., paracetamol, dipyrone, ketamine, alpha-2 agonists)</li>
+    </ul>
+
+    <h2 class="subhead">The Dorsal Root Ganglion (DRG)</h2>
+    <ul class="clist">
+      <li><strong>Location:</strong> In the intervertebral foramen, just outside the spinal cord</li>
+      <li><strong>Function:</strong> Cell bodies of primary afferent neurons; no synapse here — signals pass through</li>
+      <li><strong>Clinical relevance:</strong> Target for dorsal root ganglion stimulation (DRGS) — a form of neuromodulation for focal neuropathic pain</li>
+      <li><strong>DRG is a site of:</strong> Ectopic firing in neuropathic pain, sympathetic coupling, and immune activation</li>
+    </ul>
+
+    <h2 class="subhead">The Transmission Pathway — At a Glance</h2>
+    <p>From the periphery to the cortex, the nociceptive signal passes through six stations. Each is a potential target for analgesia — and each is a site where the signal can be amplified or dampened.</p>
+
+    <div class="diagram-box">
+      <svg viewBox="0 0 560 620" width="100%" style="display:block;max-width:560px;">
+        <!-- Header -->
+        <text x="280" y="16" fill="#5a4a6a" font-family="Instrument Sans" font-size="8" text-anchor="middle" letter-spacing="1.5">THE TRANSMISSION PATHWAY</text>
+
+        <!-- Station 1: PERIPHERY -->
+        <rect x="80" y="32" width="400" height="56" rx="2" fill="#ede7da" stroke="#5a4a6a" stroke-width="1"/>
+        <text x="280" y="50" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">PERIPHERY</text>
+        <text x="280" y="66" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Noxious stimulus → nociceptor (free nerve ending)</text>
+        <text x="280" y="80" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-style="italic">Aδ (fast, sharp)  ·  C (slow, dull)</text>
+
+        <!-- Arrow 1 -->
+        <line x1="280" y1="88" x2="280" y2="106" stroke="#5a4a6a" stroke-width="1.2"/>
+        <polygon points="280,112 276,104 284,104" fill="#5a4a6a"/>
+
+        <!-- Station 2: DRG -->
+        <rect x="80" y="112" width="400" height="52" rx="2" fill="#e8e1d4" stroke="#6a5a7a" stroke-width="1"/>
+        <text x="280" y="130" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">DORSAL ROOT GANGLION</text>
+        <text x="280" y="146" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Cell body of primary afferent — no synapse</text>
+        <text x="280" y="158" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-style="italic">Signal passes through unchanged</text>
+
+        <!-- Arrow 2 -->
+        <line x1="280" y1="164" x2="280" y2="182" stroke="#5a4a6a" stroke-width="1.2"/>
+        <polygon points="280,188 276,180 284,180" fill="#5a4a6a"/>
+
+        <!-- Station 3: DORSAL HORN -->
+        <rect x="80" y="188" width="400" height="72" rx="2" fill="#ede7da" stroke="#5a4a6a" stroke-width="1.5"/>
+        <text x="280" y="206" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">DORSAL HORN (SPINAL CORD)</text>
+        <text x="280" y="222" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">First synapse: primary afferent → second-order neuron</text>
+        <text x="280" y="236" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Lamina I (NS) · II (interneurons) · V (WDR)</text>
+        <text x="280" y="250" fill="#5a4a6a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-style="italic">Modulation: gate control · descending inhibition</text>
+
+        <!-- Arrow 3 -->
+        <line x1="280" y1="260" x2="280" y2="278" stroke="#5a4a6a" stroke-width="1.2"/>
+        <polygon points="280,284 276,276 284,276" fill="#5a4a6a"/>
+
+        <!-- Station 4: ASCENDING TRACTS -->
+        <rect x="80" y="284" width="400" height="72" rx="2" fill="#e8e1d4" stroke="#6a5a7a" stroke-width="1"/>
+        <text x="280" y="302" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">ASCENDING TRACTS</text>
+        <text x="280" y="318" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Spinothalamic · Spinoreticular · Spinomesencephalic</text>
+        <text x="280" y="332" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Spinoparabrachial · Spinohypothalamic</text>
+        <text x="280" y="346" fill="#5a4a6a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-style="italic">Crosses midline → contralateral side</text>
+
+        <!-- Arrow 4 -->
+        <line x1="280" y1="356" x2="280" y2="374" stroke="#5a4a6a" stroke-width="1.2"/>
+        <polygon points="280,380 276,372 284,372" fill="#5a4a6a"/>
+
+        <!-- Station 5: THALAMUS -->
+        <rect x="80" y="380" width="400" height="56" rx="2" fill="#ede7da" stroke="#5a4a6a" stroke-width="1"/>
+        <text x="280" y="398" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">THALAMUS</text>
+        <text x="280" y="414" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">VPL/VPM (sensory relay) · Medial nuclei (affective)</text>
+        <text x="280" y="428" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-style="italic">Gatekeeper to cortex</text>
+
+        <!-- Arrow 5 -->
+        <line x1="280" y1="436" x2="280" y2="454" stroke="#5a4a6a" stroke-width="1.2"/>
+        <polygon points="280,460 276,452 284,452" fill="#5a4a6a"/>
+
+        <!-- Station 6: CORTICAL PAIN MATRIX -->
+        <rect x="80" y="460" width="400" height="76" rx="2" fill="#e8e1d4" stroke="#6a5a7a" stroke-width="1"/>
+        <text x="280" y="478" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">CORTICAL PAIN MATRIX</text>
+        <text x="280" y="494" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">S1/S2 (location, intensity) · Insula (autonomic)</text>
+        <text x="280" y="508" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">ACC (suffering) · PFC (meaning) · Amygdala (fear)</text>
+        <text x="280" y="524" fill="#5a4a6a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-style="italic">Distributed processing — no single pain centre</text>
+
+        <!-- Arrow 6 -->
+        <line x1="280" y1="536" x2="280" y2="554" stroke="#5a4a6a" stroke-width="1.2"/>
+        <polygon points="280,560 276,552 284,552" fill="#5a4a6a"/>
+
+        <!-- Final station: PERCEPTION -->
+        <rect x="140" y="560" width="280" height="46" rx="2" fill="#5a4a6a" opacity="0.15" stroke="#5a4a6a" stroke-width="1.5"/>
+        <text x="280" y="580" fill="#3e3348" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1.2">PERCEPTION</text>
+        <text x="280" y="596" fill="#3e3348" font-family="Instrument Sans" font-size="8" text-anchor="middle">Conscious experience of pain</text>
+      </svg>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Three Sites of Modulation</strong>
+      The signal is not simply relayed — it is modulated at three levels: <strong>(1) Dorsal horn</strong> — gate control, local interneurons, descending inhibition. <strong>(2) Brainstem</strong> — PAG-RVM descending pathways that can inhibit or facilitate. <strong>(3) Cortex</strong> — attention, expectation, emotion, and meaning all shape the final experience. This is why the same injury can hurt differently on different days.
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ Clinical Correlates — Where Drugs Act</strong>
+      <strong>Periphery:</strong> NSAIDs, local anaesthetics, capsaicin. <strong>DRG:</strong> DRG stimulation, some sodium channel blockers. <strong>Dorsal horn:</strong> opioids, gabapentinoids, ketamine, alpha-2 agonists, local anaesthetics (neuraxial). <strong>Ascending tracts:</strong> surgical ablation (rare), spinal cord stimulation. <strong>Thalamus &amp; cortex:</strong> opioids, TCAs, SNRIs, psychological therapies, neuromodulation. Understanding the pathway is understanding the targets.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: PERCEPTION & MODULATION -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 09 · Act I — The Alarm</div>
+      <div class="mod-title">Modulation & <em>Perception</em></div>
+      <div class="mod-intro">The brain does not passively receive pain. It modulates it — up or down. This is where the gate control theory lives, and where endogenous opioids do their work.</div>
+    </div>
+
+    <h2 class="subhead">The Gate Control Theory</h2>
+    <p>Proposed by Melzack and Wall (1965), the gate control theory states that <strong>non-noxious input can inhibit nociceptive transmission</strong> at the dorsal horn. This is why rubbing a painful area helps. </p>
+
+    <div class="diagram-box">
+      <svg viewBox="0 0 500 180" width="100%" style="display:block;">
+        <text x="250" y="15" fill="#5a4a6a" font-family="Instrument Sans" font-size="8" text-anchor="middle" letter-spacing="1.5">THE GATE CONTROL THEORY</text>
+        
+        <rect x="20" y="40" width="100" height="40" rx="2" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="70" y="57" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Aβ (touch)</text>
+        <text x="70" y="68" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Inhibitory</text>
+        
+        <rect x="20" y="100" width="100" height="40" rx="2" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="70" y="117" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Aδ/C (pain)</text>
+        <text x="70" y="128" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Excitatory</text>
+
+        <rect x="200" y="55" width="100" height="70" rx="2" fill="#e8e1d4" stroke="#5a4a6a" stroke-width="1.5"/>
+        <text x="250" y="85" fill="#5a4a6a" font-family="Cormorant Garamond" font-size="14" font-style="italic" text-anchor="middle">Gate</text>
+        <text x="250" y="100" fill="#5a4a6a" font-family="Instrument Sans" font-size="7" text-anchor="middle">(dorsal horn)</text>
+
+        <rect x="380" y="55" width="100" height="70" rx="2" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="430" y="85" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Perception</text>
+        <text x="430" y="98" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">of Pain</text>
+
+        <line x1="120" y1="60" x2="198" y2="75" stroke="#4a7c59" stroke-width="1.5"/>
+        <polygon points="198,75 188,69 190,81" fill="#4a7c59"/>
+        <line x1="120" y1="120" x2="198" y2="100" stroke="#7a2020" stroke-width="1.5"/>
+        <polygon points="198,100 188,94 190,106" fill="#7a2020"/>
+        <line x1="300" y1="90" x2="378" y2="90" stroke="#5a4a6a" stroke-width="1.5"/>
+        <polygon points="378,90 368,84 368,96" fill="#5a4a6a"/>
+        
+        <text x="250" y="160" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">Aβ input closes the gate (inhibition) · Aδ/C input opens the gate (excitation)</text>
+      </svg>
+    </div>
+
+    <ul class="clist">
+      <li><strong>Aβ activation</strong> (touch, pressure, vibration) inhibits WDR neurons → <strong>closes the gate</strong></li>
+      <li><strong>Aδ/C activation</strong> (pain) excites WDR neurons → <strong>opens the gate</strong></li>
+      <li><strong>Descending modulation</strong> from the brainstem can also close the gate</li>
+      <li><strong>Clinical applications:</strong> TENS, massage, acupuncture, rubbing a bumped elbow</li>
+    </ul>
+
+    <h2 class="subhead">Descending Modulation — The Brain's Own Analgesia</h2>
+    <p>The brainstem contains powerful descending pathways that can suppress nociceptive transmission at the dorsal horn. This is the basis of <strong>stress-induced analgesia</strong> — the soldier who doesn't feel a wound until the battle is over. </p>
+
+    <h3 class="subsubhead">The Key Players</h3>
+    <table class="data-table">
+      <tr><th>Structure</th><th>Role</th><th>Neurotransmitter</th></tr>
+      <tr><td><strong>Periaqueductal grey (PAG)</strong></td><td>Receives input from cortex, amygdala, hypothalamus; activates RVM</td><td>Opioids (endorphins, enkephalins)</td></tr>
+      <tr><td><strong>Rostroventromedial medulla (RVM)</strong></td><td>Projects to dorsal horn; can inhibit or facilitate</td><td>Serotonin, noradrenaline</td></tr>
+      <tr><td><strong>Nucleus raphe magnus (NRM)</strong></td><td>Serotonergic inhibition of dorsal horn</td><td>5-HT</td></tr>
+      <tr><td><strong>Locus coeruleus</strong></td><td>Noradrenergic inhibition</td><td>Noradrenaline</td></tr>
+      <tr><td><strong>Dorsolateral funiculus</strong></td><td>Descending pathway to dorsal horn</td><td>Serotonin, noradrenaline</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Descending Inhibition vs Facilitation</strong>
+      The RVM can both <strong>inhibit</strong> and <strong>facilitate</strong> pain. Under normal conditions, inhibition predominates. In chronic pain states, the balance shifts toward facilitation — the descending system becomes <strong>pronociceptive</strong>. This is one mechanism of central sensitisation and explains why chronic pain is not just "more acute pain."
+    </div>
+
+    <h2 class="subhead">Endogenous Opioid System</h2>
+    <table class="data-table">
+      <tr><th>Peptide</th><th>Precursor</th><th>Primary Receptor</th><th>Location</th></tr>
+      <tr><td><strong>β-Endorphin</strong></td><td>POMC</td><td>μ (MOR)</td><td>Pituitary, hypothalamus, PAG</td></tr>
+      <tr><td><strong>Enkephalins</strong></td><td>Proenkephalin</td><td>δ (DOR)</td><td>Dorsal horn, brainstem, adrenal medulla</td></tr>
+      <tr><td><strong>Dynorphins</strong></td><td>Prodynorphin</td><td>κ (KOR)</td><td>Dorsal horn, hypothalamus, hippocampus</td></tr>
+      <tr><td><strong>Endomorphins</strong></td><td>—</td><td>μ (MOR)</td><td>Brain, spinal cord</td></tr>
+      <tr><td><strong>Nociceptin/orphanin FQ</strong></td><td>Prepronociceptin</td><td>NOP</td><td>Brain, spinal cord; modulates pain and stress</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Opioid Receptor Effects</h3>
+    <table class="data-table">
+      <tr><th>Receptor</th><th>Effect</th><th>Clinical Relevance</th></tr>
+      <tr><td><strong>μ (MOR)</strong></td><td>Analgesia, respiratory depression, euphoria, constipation, dependence</td><td>Target of morphine, fentanyl, most opioids</td></tr>
+      <tr><td><strong>δ (DOR)</strong></td><td>Analgesia, mood effects</td><td>Investigational targets; may reduce tolerance</td></tr>
+      <tr><td><strong>κ (KOR)</strong></td><td>Analgesia, dysphoria, sedation, diuresis</td><td>Target of butorphanol, nalbuphine; dysphoria limits use</td></tr>
+      <tr><td><strong>NOP</strong></td><td>Modulates pain, anxiety, stress</td><td>Investigational; complex pharmacology</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Why Opioids Work — and Why They Sometimes Don't</strong>
+      Exogenous opioids act on the same receptors as endogenous opioids. They inhibit neurotransmitter release (presynaptic) and hyperpolarise neurons (postsynaptic). In <strong>neuropathic pain</strong>, the system is altered — opioid responsiveness is reduced, and NMDA receptor activation drives central sensitisation. This is why neuropathic pain often requires <strong>adjuvants</strong> (gabapentinoids, TCAs, SNRIs, ketamine) rather than opioids alone. 
+    </div>
+
+    <h2 class="subhead">Perception — The Conscious Experience</h2>
+    <p>Perception is the final step: the integration of nociceptive input with context, emotion, memory, and expectation. It is subjective, private, and impossible to measure directly.</p>
+
+    <ul class="clist">
+      <li><strong>Sensory-discriminative:</strong> location, intensity, quality (S1, S2, insula)</li>
+      <li><strong>Affective-motivational:</strong> unpleasantness, suffering (ACC, amygdala)</li>
+      <li><strong>Cognitive-evaluative:</strong> meaning, threat, catastrophising (prefrontal cortex)</li>
+      <li><strong>Behavioural:</strong> withdrawal, guarding, facial expression, vocalisation</li>
+    </ul>
+
+    <div class="callout co-purple">
+      <strong>McCaffery's Classic Definition</strong>
+      "Pain is whatever the experiencing person says it is, existing whenever he says it does." This remains the most clinically useful definition — because pain cannot be objectively verified, and the patient's report is the gold standard.
+    </div>
+
+    <h2 class="subhead">Placebo and Nocebo — The Power of Expectation</h2>
+    <ul class="clist">
+      <li><strong>Placebo analgesia:</strong> Real physiological effect — endogenous opioid release, dopamine activation in nucleus accumbens, prefrontal cortex modulation</li>
+      <li><strong>Nocebo effect:</strong> Negative expectations increase pain — hyperalgesia, anxiety, increased side effects</li>
+      <li><strong>Clinical relevance:</strong> How we frame treatment, communicate risk, and set expectations matters. Positive framing can enhance analgesia; negative framing can worsen it</li>
+      <li><strong>Mechanism:</strong> Descending modulation via PAG-RVM pathway; placebo analgesia is partially reversed by naloxone</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: CLASSIFICATION -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 09 · Act II — The Response</div>
+      <div class="mod-title">Classification of <em>Pain</em></div>
+      <div class="mod-intro">Nociceptive, neuropathic, nociplastic — three mechanistic categories. Each has a different pathophysiology, a different clinical signature, and a different treatment strategy.</div>
+    </div>
+
+    <div class="callout co-purple">
+      <strong>The Three Mechanistic Descriptors (IASP)</strong>
+      <strong>Nociceptive:</strong> pain arising from actual or threatened damage to non-neural tissue, due to activation of nociceptors.<br>
+      <strong>Neuropathic:</strong> pain caused by a lesion or disease of the somatosensory nervous system.<br>
+      <strong>Nociplastic:</strong> pain arising from altered nociception despite no clear evidence of actual or threatened tissue damage or disease of the somatosensory system. 
+    </div>
+
+    <h2 class="subhead">The Three Types — At a Glance</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Nociceptive</th><th>Neuropathic</th><th>Nociplastic</th></tr>
+      <tr><td><strong>Cause</strong></td><td>Tissue injury/inflammation</td><td>Nerve lesion/disease</td><td>Altered central processing</td></tr>
+      <tr><td><strong>Quality</strong></td><td>Aching, throbbing, sharp</td><td>Burning, shooting, electric</td><td>Variable, diffuse, deep</td></tr>
+      <tr><td><strong>Distribution</strong></td><td>Localised to injury</td><td>Neuroanatomically plausible</td><td>Widespread, non-dermatomal</td></tr>
+      <tr><td><strong>Sensory signs</strong></td><td>Hyperalgesia at site</td><td>Allodynia, hyperalgesia, numbness</td><td>Hyperalgesia, allodynia</td></tr>
+      <tr><td><strong>Responds to NSAIDs?</strong></td><td class="td-good">✓ Yes</td><td class="td-bad">✗ Poor</td><td class="td-bad">✗ Poor</td></tr>
+      <tr><td><strong>Responds to opioids?</strong></td><td class="td-good">✓ Yes</td><td class="td-mid">Partial</td><td class="td-bad">✗ Poor</td></tr>
+      <tr><td><strong>First-line drugs</strong></td><td>NSAIDs, paracetamol, opioids</td><td>Gabapentinoids, TCAs, SNRIs</td><td>Multimodal, neuromodulators</td></tr>
+      <tr><td><strong>Examples</strong></td><td>Post-op, arthritis, trauma</td><td>Diabetic neuropathy, PHN, radiculopathy</td><td>Fibromyalgia, IBS, chronic low back pain</td></tr>
+    </table>
+
+    <h2 class="subhead">Neuropathic Pain — Diagnostic Algorithm (NeuPSIG)</h2>
+    <p>The NeuPSIG algorithm grades the certainty of neuropathic pain: </p>
+    <div class="flow-row">
+      <div class="flow-box">1 · History suggests nerve lesion</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2 · Pain in neuroanatomically plausible distribution</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3 · Signs of conduction loss or hypersensitivity</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">4 · Confirmatory test (if needed)</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Possible neuropathic pain:</strong> Criteria 1 only</li>
+      <li><strong>Probable neuropathic pain:</strong> Criteria 1 + 2 + 3</li>
+      <li><strong>Definite neuropathic pain:</strong> Criteria 1 + 2 + 3 + 4</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>NeuPSIG Grading — Clinical Use</strong>
+      The grading system is designed to enhance diagnostic certainty. A finding of <strong>probable neuropathic pain</strong> should prompt treatment according to neuropathic pain guidelines. The system is not intended for medico-legal purposes. 
+    </div>
+
+    <h2 class="subhead">Acute vs Chronic Pain</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Acute Pain</th><th>Chronic Pain</th></tr>
+      <tr><td><strong>Duration</strong></td><td><3 months (usually <7 days)</td><td>>3 months</td></tr>
+      <tr><td><strong>Function</strong></td><td>Protective, adaptive</td><td>Maladaptive, no protective role</td></tr>
+      <tr><td><strong>Mechanism</strong></td><td>Nociceptive (usually)</td><td>Nociceptive, neuropathic, or nociplastic</td></tr>
+      <tr><td><strong>Autonomic features</strong></td><td>Tachycardia, hypertension, diaphoresis</td><td>Often absent</td></tr>
+      <tr><td><strong>Psychological</strong></td><td>Anxiety</td><td>Depression, catastrophising, fear-avoidance</td></tr>
+      <tr><td><strong>Treatment</strong></td><td>Analgesics, treat cause</td><td>Multidisciplinary, biopsychosocial</td></tr>
+      <tr><td><strong>Response to opioids</strong></td><td class="td-good">Usually good</td><td class="td-bad">Variable; risk of OIH</td></tr>
+    </table>
+
+    <h2 class="subhead">Other Classifications</h2>
+    <table class="data-table">
+      <tr><th>Category</th><th>Definition</th><th>Example</th></tr>
+      <tr><td><strong>Somatic</strong></td><td>From skin, muscle, bone, joint</td><td>Fracture, arthritis</td></tr>
+      <tr><td><strong>Visceral</strong></td><td>From internal organs</td><td>Angina, biliary colic</td></tr>
+      <tr><td><strong>Referred</strong></td><td>Perceived at site distant from origin</td><td>Cardiac → left arm</td></tr>
+      <tr><td><strong>Breakthrough</strong></td><td>Transient exacerbation on background controlled pain</td><td>Cancer pain on stable opioids</td></tr>
+      <tr><td><strong>Incident</strong></td><td>Predictable, movement-related</td><td>Post-thoracotomy cough</td></tr>
+      <tr><td><strong>Phantom</strong></td><td>Perceived in absent body part</td><td>Post-amputation</td></tr>
+      <tr><td><strong>Central</strong></td><td>From CNS lesion</td><td>Post-stroke pain, MS</td></tr>
+      <tr><td><strong>Peripheral</strong></td><td>From PNS lesion</td><td>Diabetic neuropathy, radiculopathy</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Mixed Pain — The Rule, Not the Exception</strong>
+      Most chronic pain is <strong>mixed</strong> — components of nociceptive, neuropathic, and nociplastic mechanisms coexist. Low back pain with radiculopathy has both nociceptive (disc, facet) and neuropathic (nerve root) components. Treating only one mechanism often fails.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: ASSESSMENT -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 09 · Act II — The Response</div>
+      <div class="mod-title">Assessment of <em>Pain</em></div>
+      <div class="mod-intro">If pain is subjective, how do we measure it? Through self-report, behavioural observation, and — in the uncommunicative patient — physiological surrogates.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Primacy of Self-Report</strong>
+      Pain assessment is always <strong>self-assessment</strong>, except when the patient cannot communicate (sedated, cognitively impaired, neonates). In those cases, behavioural tools are used — but they are surrogates, not substitutes. 
+    </div>
+
+    <h2 class="subhead">Unidimensional Scales — Acute Pain</h2>
+    <table class="data-table">
+      <tr><th>Scale</th><th>Method</th><th>Range</th><th>Strengths</th><th>Weaknesses</th></tr>
+      <tr><td><strong>Visual Analogue Scale (VAS)</strong></td><td>100 mm line; mark pain intensity</td><td>0–100 mm</td><td>Validated, quantifiable, sensitive</td><td>Requires vision and motor control; not useful in elderly or cognitively impaired </td></tr>
+      <tr><td><strong>Numerical Rating Scale (NRS)</strong></td><td>0–10 verbal or written</td><td>0–10</td><td>Quick, no equipment, correlates with VAS</td><td>Language barriers; unidimensional </td></tr>
+      <tr><td><strong>Verbal Rating Scale (VRS)</strong></td><td>None / Mild / Moderate / Severe</td><td>4-point</td><td>Simple, good for screening</td><td>Lacks discrimination </td></tr>
+      <tr><td><strong>Faces Pain Scale</strong></td><td>Series of faces</td><td>0–10</td><td>Useful in children ≥5 years, language-independent</td><td>Not useful in vision impairment </td></tr>
+      <tr><td><strong>Wong-Baker FACES</strong></td><td>6 faces</td><td>0–10</td><td>Widely used in paediatrics</td><td>Same limitations as Faces</td></tr>
+    </table>
+
+    <h2 class="subhead">Multidimensional Scales — Chronic Pain</h2>
+    <table class="data-table">
+      <tr><th>Tool</th><th>Dimensions Assessed</th><th>Use</th></tr>
+      <tr><td><strong>McGill Pain Questionnaire (MPQ)</strong></td><td>Sensory, affective, evaluative, miscellaneous</td><td>Research; comprehensive pain quality assessment </td></tr>
+      <tr><td><strong>Brief Pain Inventory (BPI)</strong></td><td>Pain severity + functional interference</td><td>Chronic pain, cancer pain </td></tr>
+      <tr><td><strong>Leeds Assessment of Neuropathic Symptoms and Signs (LANSS)</strong></td><td>Neuropathic features</td><td>Screening for neuropathic pain </td></tr>
+      <tr><td><strong>PainDETECT</strong></td><td>Neuropathic features</td><td>Neuropathic pain screening </td></tr>
+      <tr><td><strong>DN4</strong></td><td>Neuropathic features</td><td>Neuropathic pain diagnosis</td></tr>
+      <tr><td><strong>Pain Catastrophizing Scale (PCS)</strong></td><td>Rumination, magnification, helplessness</td><td>Chronic pain; predicts outcomes</td></tr>
+    </table>
+
+    <h2 class="subhead">Assessment in the Uncommunicative Patient</h2>
+    <p>Sedated, critically ill, or cognitively impaired patients cannot self-report. Behavioural tools are essential.</p>
+
+    <table class="data-table">
+      <tr><th>Tool</th><th>Population</th><th>Domains</th></tr>
+      <tr><td><strong>CPOT</strong> (Critical-Care Pain Observation Tool)</td><td>ICU adults</td><td>Facial expression, body movements, muscle tension, compliance with ventilator</td></tr>
+      <tr><td><strong>BPS</strong> (Behavioral Pain Scale)</td><td>ICU adults</td><td>Facial expression, upper limb movements, compliance with ventilator</td></tr>
+      <tr><td><strong>PAINAD</strong></td><td>Dementia</td><td>Breathing, negative vocalisation, facial expression, body language, consolability</td></tr>
+      <tr><td><strong>FLACC</strong></td><td>Children <3 years</td><td>Face, Legs, Activity, Cry, Consolability</td></tr>
+      <tr><td><strong>NIPS</strong> (Neonatal Infant Pain Scale)</td><td>Neonates</td><td>Facial expression, cry, breathing, arms, legs, state of arousal</td></tr>
+      <tr><td><strong>PIPP</strong> (Premature Infant Pain Profile)</td><td>Preterm infants</td><td>Gestational age, behavioural, physiological</td></tr>
+    </table>
+
+    <h2 class="subhead">Physiological Surrogates — Emerging Tools</h2>
+    <ul class="clist">
+      <li><strong>Pupillometry:</strong> Pupil dilation reflects sympathetic activation; opioid effects cause miosis</li>
+      <li><strong>Nociception Level (NOL) index:</strong> Multimodal index (heart rate, heart rate variability, photoplethysmography, skin conductance, temperature, accelerometry) — validated for intraoperative nociception monitoring</li>
+      <li><strong>Analgesia Nociception Index (ANI):</strong> Based on heart rate variability; reflects parasympathetic tone</li>
+      <li><strong>Skin conductance:</strong> Reflects sympathetic cholinergic activity</li>
+      <li><strong>Pupillary Pain Index (PPI):</strong> Response to tetanic stimulation</li>
+    </ul>
+    <div class="callout co-warn">
+      <strong>⚠ These are Nociception Monitors, Not Pain Monitors</strong>
+      NOL, ANI, and pupillometry measure <strong>nociception</strong> — the physiological response to noxious stimuli — not <strong>pain</strong> — the subjective experience. They are useful under general anaesthesia, where the patient cannot report pain. They do not replace self-report in the awake patient.
+    </div>
+
+    <h2 class="subhead">Functional Assessment in Chronic Pain</h2>
+    <ul class="clist">
+      <li><strong>Pain interference:</strong> BPI, PROMIS Pain Interference</li>
+      <li><strong>Disability:</strong> Oswestry Disability Index (low back), Neck Disability Index</li>
+      <li><strong>Psychological:</strong> Pain Catastrophizing Scale (PCS), Tampa Scale of Kinesiophobia (TSK), PHQ-9 for depression, GAD-7 for anxiety</li>
+      <li><strong>Sleep:</strong> Pittsburgh Sleep Quality Index (PSQI)</li>
+      <li><strong>Global impression:</strong> PGIC (Patient Global Impression of Change)</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Golden Rule of Pain Assessment</strong>
+      Ask the patient to describe their pain <strong>in their own words</strong>. Listen for quality, location, radiation, timing, aggravating/relieving factors, and impact on function and sleep. A number on a scale is useful for tracking — but it does not capture the experience.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: PHARMACOLOGY -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 09 · Act II — The Response</div>
+      <div class="mod-title">Pharmacology of <em>Analgesia</em></div>
+      <div class="mod-intro">Multimodal analgesia is the standard of care. Different drugs, different mechanisms, different sites — additive or synergistic effects, reduced side effects.</div>
+    </div>
+
+    <h2 class="subhead">The WHO Analgesic Ladder</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 400 180" width="100%" style="display:block;">
+        <text x="200" y="15" fill="#5a4a6a" font-family="Instrument Sans" font-size="8" text-anchor="middle" letter-spacing="1.5">WHO ANALGESIC LADDER</text>
+        
+        <rect x="60" y="25" width="280" height="35" rx="2" fill="#5a4a6a" opacity="0.15" stroke="#5a4a6a"/>
+        <text x="200" y="46" fill="#3e3348" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Step 3 — Severe Pain (8–10)</text>
+        <text x="200" y="56" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Strong opioids: morphine, oxycodone, fentanyl, methadone</text>
+
+        <rect x="100" y="70" width="200" height="35" rx="2" fill="#6a5a7a" opacity="0.12" stroke="#6a5a7a"/>
+        <text x="200" y="91" fill="#3e3348" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Step 2 — Moderate Pain (4–7)</text>
+        <text x="200" y="101" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Weak opioids: tramadol, codeine, dihydrocodeine</text>
+
+        <rect x="140" y="115" width="120" height="35" rx="2" fill="#8a7a9a" opacity="0.12" stroke="#8a7a9a"/>
+        <text x="200" y="136" fill="#3e3348" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Step 1 — Mild Pain (1–3)</text>
+        <text x="200" y="146" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Non-opioids: paracetamol, NSAIDs</text>
+
+        <line x1="200" y1="60" x2="200" y2="68" stroke="#5a4a6a" stroke-width="1"/>
+        <line x1="200" y1="105" x2="200" y2="113" stroke="#5a4a6a" stroke-width="1"/>
+        
+        <text x="200" y="175" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">Add adjuvants at any step · "By the ladder, by the clock, by the mouth"</text>
+      </svg>
+    </div>
+    <p>The WHO ladder remains the framework for cancer pain management. For non-cancer pain, the principle of <strong>multimodal analgesia</strong> applies — combining drugs with different mechanisms to maximise efficacy and minimise toxicity. </p>
+
+    <h2 class="subhead">Non-Opioid Analgesics</h2>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Mechanism</th><th>Dose</th><th>Key Points</th></tr>
+      <tr><td><strong>Paracetamol</strong></td><td>Central COX inhibition; TRPA1 activation</td><td>1 g q6h IV/PO (max 4 g/day; reduce in hepatic impairment)</td><td>Opioid-sparing; hepatotoxic in overdose; IV form useful in NPO patients</td></tr>
+      <tr><td><strong>NSAIDs</strong> (ibuprofen, diclofenac, ketorolac)</td><td>COX-1/COX-2 inhibition → ↓ prostaglandins</td><td>Variable; ketorolac 15–30 mg IV q6h</td><td>GI, renal, cardiovascular risks; avoid in CKD, PUD, cardiac disease</td></tr>
+      <tr><td><strong>COX-2 inhibitors</strong> (celecoxib, parecoxib)</td><td>Selective COX-2 inhibition</td><td>Celecoxib 200 mg PO; parecoxib 40 mg IV</td><td>Less GI risk; cardiovascular risk still present</td></tr>
+      <tr><td><strong>Dipyrone (metamizole)</strong></td><td>COX inhibition + central effects</td><td>1–2 g IV/PO</td><td>Widely used outside US; risk of agranulocytosis (rare)</td></tr>
+    </table>
+
+    <h2 class="subhead">Opioid Analgesics</h2>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Equianalgesic IV Dose</th><th>Duration</th><th>Metabolism</th><th>Notes</th></tr>
+      <tr><td><strong>Morphine</strong></td><td>10 mg</td><td>3–4 h</td><td>Hepatic glucuronidation; M6G active (renal)</td><td>Histamine release; pruritus; renal accumulation</td></tr>
+      <tr><td><strong>Fentanyl</strong></td><td>100 μg</td><td>30–60 min</td><td>Hepatic CYP3A4</td><td>Rapid onset; chest wall rigidity with fast bolus</td></tr>
+      <tr><td><strong>Remifentanil</strong></td><td>100 μg (bolus)</td><td>3–5 min</td><td>Plasma esterases</td><td>Ultra-short; no accumulation; must transition to longer-acting opioid </td></tr>
+      <tr><td><strong>Oxycodone</strong></td><td>10 mg</td><td>3–4 h</td><td>Hepatic CYP2D6, CYP3A4</td><td>Good oral bioavailability; used in OIH rotation </td></tr>
+      <tr><td><strong>Hydromorphone</strong></td><td>1.5 mg</td><td>3–4 h</td><td>Hepatic glucuronidation</td><td>Potent; used in OIH rotation </td></tr>
+      <tr><td><strong>Tramadol</strong></td><td>100 mg</td><td>4–6 h</td><td>Hepatic CYP2D6 (active M1)</td><td>Weak μ agonist + SNRI; seizure risk; serotonin syndrome</td></tr>
+      <tr><td><strong>Methadone</strong></td><td>1 mg</td><td>24–36 h</td><td>Hepatic CYP3A4, CYP2B6</td><td>μ agonist + NMDA antagonist + SNRI; QT prolongation; complex titration</td></tr>
+      <tr><td><strong>Buprenorphine</strong></td><td>0.3 mg</td><td>6–8 h</td><td>Hepatic CYP3A4</td><td>Partial μ agonist + κ antagonist; ceiling effect on respiratory depression</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Opioid-Induced Hyperalgesia (OIH)</strong>
+      A paradoxical state where <strong>opioid therapy increases pain sensitivity</strong>. Presents with worsening pain despite escalating doses, burning allodynia, and poor functional improvement. Risk factors: high-dose opioids, rapid escalation, renal impairment, psychological stressors. Management: <strong>opioid rotation</strong> (switching to a different opioid), dose reduction, and addition of adjuvants. 
+    </div>
+
+    <h2 class="subhead">Adjuvant Analgesics</h2>
+    <table class="data-table">
+      <tr><th>Drug Class</th><th>Examples</th><th>Mechanism</th><th>Indication</th><th>Key Side Effects</th></tr>
+      <tr><td><strong>Gabapentinoids</strong></td><td>Gabapentin, pregabalin</td><td>α₂δ subunit of voltage-gated Ca²⁺ channels</td><td>Neuropathic pain, post-op</td><td>Sedation, dizziness, peripheral oedema</td></tr>
+      <tr><td><strong>Tricyclic antidepressants</strong></td><td>Amitriptyline, nortriptyline</td><td>Serotonin + noradrenaline reuptake inhibition; NMDA antagonism</td><td>Neuropathic pain, chronic pain</td><td>Anticholinergic effects, cardiac conduction delay</td></tr>
+      <tr><td><strong>SNRIs</strong></td><td>Duloxetine, venlafaxine</td><td>Serotonin + noradrenaline reuptake inhibition</td><td>Neuropathic pain, fibromyalgia</td><td>Nausea, hypertension, discontinuation syndrome</td></tr>
+      <tr><td><strong>Ketamine</strong></td><td>—</td><td>NMDA receptor antagonist</td><td>Acute pain, opioid tolerance, OIH</td><td>Dissociation, hallucinations, hypertension</td></tr>
+      <tr><td><strong>Alpha-2 agonists</strong></td><td>Clonidine, dexmedetomidine</td><td>Presynaptic α₂ receptor activation</td><td>Adjuvant in regional, ICU sedation</td><td>Bradycardia, hypotension, sedation</td></tr>
+      <tr><td><strong>Topical agents</strong></td><td>Lidocaine 5% patch, capsaicin</td><td>Local sodium channel block / TRPV1 depletion</td><td>Localised neuropathic pain</td><td>Local irritation; capsaicin causes burning</td></tr>
+      <tr><td><strong>Corticosteroids</strong></td><td>Dexamethasone</td><td>Anti-inflammatory; perineural</td><td>Post-op, cancer pain, nerve compression</td><td>Hyperglycaemia, immunosuppression</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Multimodal Analgesia — The Evidence</strong>
+      Combining paracetamol + NSAID + opioid + regional technique provides <strong>superior analgesia with fewer opioid side effects</strong> compared to any single agent. This is the foundation of <strong>ERAS</strong> (Enhanced Recovery After Surgery) protocols. The goal is not to eliminate opioids, but to use them judiciously alongside other modalities.
+    </div>
+
+    <h2 class="subhead">Local Anaesthetics — Systemic Toxicity (LAST)</h2>
+    <div class="formula-box">
+      <span class="flabel">Maximum Doses (Single Injection)</span>
+      Lidocaine: 3 mg/kg (7 mg/kg with adrenaline) · Bupivacaine: 2 mg/kg (2.5 mg/kg with adrenaline)
+      <div class="fexpl">Ropivacaine: ~3 mg/kg · Levobupivacaine: ~2 mg/kg · Always calculate BEFORE injection</div>
+    </div>
+
+    <h3 class="subsubhead">LAST — Recognition and Management</h3>
+    <table class="data-table">
+      <tr><th>Stage</th><th>Features</th></tr>
+      <tr><td><strong>Prodromal</strong></td><td>Circumoral tingling, metallic taste, tinnitus, dizziness, visual disturbance</td></tr>
+      <tr><td><strong>Excitation</strong></td><td>Muscle twitching, seizures, hypertension, tachycardia</td></tr>
+      <tr><td><strong>Depression</strong></td><td>CNS depression, coma, bradycardia, hypotension, ventricular arrhythmias, cardiac arrest</td></tr>
+    </table>
+    <ul class="clist">
+      <li><strong>Stop injection immediately</strong></li>
+      <li><strong>Airway, 100% O₂, ventilation</strong></li>
+      <li><strong>Seizure control:</strong> benzodiazepines (midazolam 2–5 mg IV)</li>
+      <li><strong>Cardiac arrest:</strong> Lipid emulsion 20% — 1.5 mL/kg bolus, then 0.25 mL/kg/min infusion; continue CPR; avoid vasopressin, calcium channel blockers, beta-blockers</li>
+      <li><strong>Cardiopulmonary bypass</strong> for refractory cases</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: REGIONAL ANAESTHESIA -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 09 · Act II — The Response</div>
+      <div class="mod-title">Regional <em>Anaesthesia</em></div>
+      <div class="mod-intro">The most effective analgesic technique available — blocking pain at its source, before it ever reaches the CNS.</div>
+    </div>
+
+    <h2 class="subhead">Why Regional?</h2>
+    <ul class="clist">
+      <li><strong>Superior analgesia:</strong> Dense block of nociceptive input before central sensitisation occurs</li>
+      <li><strong>Opioid-sparing:</strong> Reduced systemic opioid requirements and side effects</li>
+      <li><strong>Sympathetic block:</strong> Improved perfusion (useful in limb salvage)</li>
+      <li><strong>Potential to reduce chronic postsurgical pain:</strong> Early, effective analgesia may prevent central sensitisation and CPSP development </li>
+      <li><strong>Facilitates early mobilisation and recovery</strong> (ERAS protocols)</li>
+    </ul>
+
+    <h2 class="subhead">Neuraxial Blocks</h2>
+    <table class="data-table">
+      <tr><th>Technique</th><th>Level</th><th>Drug</th><th>Duration</th><th>Key Points</th></tr>
+      <tr><td><strong>Spinal (subarachnoid)</strong></td><td>L2–3, L3–4, L4–5</td><td>Bupivacaine 0.5% (heavy/plain)</td><td>2–4 h</td><td>Rapid onset; profound block; risk of PDPH, hypotension</td></tr>
+      <tr><td><strong>Epidural</strong></td><td>Any level</td><td>Bupivacaine 0.125–0.25%</td><td>Continuous</td><td>Catheter allows titration; slower onset; risk of dural puncture</td></tr>
+      <tr><td><strong>CSE (combined spinal-epidural)</strong></td><td>—</td><td>Spinal dose + epidural catheter</td><td>Rapid onset + continuous</td><td>Best of both; used in obstetrics and major surgery</td></tr>
+      <tr><td><strong>Caudal</strong></td><td>Sacral hiatus</td><td>Bupivacaine 0.125–0.25%</td><td>2–4 h</td><td>Paediatric; perineal/inguinal surgery</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Complications of Neuraxial Blocks</h3>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Presentation</th><th>Management</th></tr>
+      <tr><td><strong>Post-dural puncture headache (PDPH)</strong></td><td>0.5–1% (epidural)</td><td>Postural headache 24–48h after</td><td>Hydration, caffeine, blood patch</td></tr>
+      <tr><td><strong>Hypotension</strong></td><td>Common</td><td>Sympathectomy</td><td>Fluids, vasopressors</td></tr>
+      <tr><td><strong>Urinary retention</strong></td><td>Common</td><td>Sacral block</td><td>Catheterisation if needed</td></tr>
+      <tr><td><strong>Epidural haematoma</strong></td><td>1:150,000–1:200,000</td><td>Back pain, progressive deficit</td><td>Emergency MRI, decompression</td></tr>
+      <tr><td><strong>Epidural abscess</strong></td><td>1:10,000–1:20,000</td><td>Fever, back pain, deficit</td><td>Antibiotics, drainage</td></tr>
+      <tr><td><strong>Nerve injury</strong></td><td>Rare</td><td>Persistent deficit</td><td>Neurology referral, rehabilitation</td></tr>
+    </table>
+
+    <h2 class="subhead">Peripheral Nerve Blocks</h2>
+    <table class="data-table">
+      <tr><th>Block</th><th>Indication</th><th>Key Nerves</th><th>Notes</th></tr>
+      <tr><td><strong>Interscalene</strong></td><td>Shoulder surgery</td><td>C5–6 roots</td><td>Phrenic nerve block (100% ipsilateral hemidiaphragm paralysis) — avoid in severe respiratory disease</td></tr>
+      <tr><td><strong>Supraclavicular</strong></td><td>Upper limb</td><td>Brachial plexus trunks</td><td>Complete block; pneumothorax risk (rare with ultrasound)</td></tr>
+      <tr><td><strong>Axillary</strong></td><td>Forearm/hand</td><td>Brachial plexus cords</td><td>Spares musculocutaneous nerve sometimes</td></tr>
+      <tr><td><strong>Femoral</strong></td><td>Knee, femur</td><td>Femoral nerve</td><td>Quadriceps weakness — falls risk</td></tr>
+      <tr><td><strong>Adductor canal</strong></td><td>Knee (ACL, TKA)</td><td>Saphenous nerve</td><td>Motor-sparing (preserves quadriceps) — increasingly preferred over femoral</td></tr>
+      <tr><td><strong>Sciatic</strong></td><td>Foot, ankle, below knee</td><td>Sciatic nerve</td><td>Often combined with femoral/adductor canal</td></tr>
+      <tr><td><strong>TAP block</strong></td><td>Abdominal surgery</td><td>T6–L1</td><td>Fascial plane block; useful for laparotomy, Caesarean, hernia</td></tr>
+      <tr><td><strong>Erector spinae plane</strong></td><td>Thoracic/abdominal</td><td>Dorsal/ventral rami</td><td>Fascial plane; emerging evidence; opioid-sparing</td></tr>
+      <tr><td><strong>Paravertebral</strong></td><td>Thoracic surgery, rib fractures</td><td>Spinal nerves</td><td>Unilateral; comparable to epidural for thoracotomy</td></tr>
+    </table>
+
+    <h2 class="subhead">Continuous Perineural Catheters (CPNB)</h2>
+    <ul class="clist">
+      <li><strong>Indication:</strong> Prolonged analgesia where single-shot block duration is insufficient — major limb surgery, rib fractures, complex regional pain</li>
+      <li><strong>Advantages:</strong> Avoids rebound pain as single-shot block wears off; allows extended rehabilitation </li>
+      <li><strong>Infusate:</strong> Low-concentration ropivacaine (0.1–0.2%) or bupivacaine (0.1–0.125%) — sensorimotor discrimination; minimal motor block </li>
+      <li><strong>Complications:</strong> Catheter dislodgement, leakage, infection (rare), local anaesthetic toxicity</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Rebound Pain Phenomenon</strong>
+      When a single-shot peripheral nerve block wears off, patients may experience <strong>severe rebound pain</strong> — often worse than expected. This is thought to reflect the sudden return of nociceptive input after a period of complete blockade. <strong>Continuous catheters</strong> or <strong>multimodal analgesia</strong> with pre-emptive dosing can mitigate this.
+    </div>
+
+    <h2 class="subhead">Anticoagulation & Regional Anaesthesia</h2>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Timing for Neuraxial (ASRA)</th><th>Timing for Peripheral</th></tr>
+      <tr><td><strong>LMWH (prophylactic)</strong></td><td>≥12 h after last dose</td><td>Less risk; still observe guidelines</td></tr>
+      <tr><td><strong>LMWH (therapeutic)</strong></td><td>≥24 h</td><td>Consult guidelines</td></tr>
+      <tr><td><strong>Warfarin</strong></td><td>INR ≤1.4</td><td>INR ≤1.4</td></tr>
+      <tr><td><strong>DOACs</strong></td><td>72 h (or per renal function)</td><td>48–72 h</td></tr>
+      <tr><td><strong>Clopidogrel</strong></td><td>5–7 days</td><td>5–7 days</td></tr>
+      <tr><td><strong>Aspirin</strong></td><td>No need to stop (usually)</td><td>No need to stop</td></tr>
+    </table>
+
+    <div class="callout co-danger">
+      <strong>⚠ Neuraxial Block in Anticoagulated Patients</strong>
+      Neuraxial techniques carry higher risk because bleeding occurs in a <strong>non-expansive space</strong> (spinal canal) — leading to epidural haematoma and potential permanent paralysis. Peripheral blocks are safer as bleeding can decompress into surrounding tissue. Always follow ASRA guidelines and document neurological examination before and after the block. 
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: AFTERMATH — CHRONIC PAIN -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 09 · Act III — The Aftermath</div>
+      <div class="mod-title">The Aftermath — <em>Chronic Pain</em></div>
+      <div class="mod-intro">When the alarm doesn't switch off. Central sensitisation, chronic postsurgical pain, and the transition from acute to chronic — the most important frontier in pain medicine.</div>
+    </div>
+
+    <h2 class="subhead">The Transition — Acute to Chronic</h2>
+    <p>Acute pain is protective. Chronic pain is a disease. The transition involves <strong>peripheral and central sensitisation</strong> — maladaptive plasticity that outlives the original injury. </p>
+
+    <div class="flow-row">
+      <div class="flow-box">Tissue injury<br>Nociceptor activation</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Peripheral sensitisation<br>Inflammatory soup</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Central sensitisation<br>NMDA activation, glia</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Descending facilitation<br>RVM pronociceptive</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">Chronic pain<br>Self-sustaining</div>
+    </div>
+
+    <h2 class="subhead">Peripheral Sensitisation</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Inflammatory mediators (prostaglandins, bradykinin, NGF, cytokines) reduce nociceptor threshold and increase responsiveness</li>
+      <li><strong>Receptors upregulated:</strong> TRPV1, ASICs, Nav1.7, Nav1.8</li>
+      <li><strong>Effect:</strong> Primary hyperalgesia — increased pain at the site of injury</li>
+      <li><strong>Clinical example:</strong> Sunburned skin — normally innocuous warmth becomes painful</li>
+    </ul>
+
+    <h2 class="subhead">Central Sensitisation</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Sustained nociceptive input → dorsal horn neurons become hyperexcitable</li>
+      <li><strong>Key players:</strong> NMDA receptor activation, AMPA receptors, glial activation (microglia, astrocytes), proinflammatory cytokines </li>
+      <li><strong>Effect:</strong> Secondary hyperalgesia (spread beyond injury), mechanical allodynia (light touch → pain), wind-up (progressive increase in response to repeated stimuli)</li>
+      <li><strong>Clinical example:</strong> Post-herpetic neuralgia — pain persists long after the rash has healed</li>
+    </ul>
+
+    <div class="callout co-purple">
+      <strong>The NMDA Receptor — The Central Sensitisation Switch</strong>
+      Under normal conditions, the NMDA receptor is blocked by Mg²⁺. Sustained depolarisation removes the Mg²⁺ block, allowing glutamate to activate the receptor. This triggers <strong>long-term potentiation (LTP)</strong> — a persistent increase in synaptic strength. This is why <strong>ketamine</strong> (NMDA antagonist) is used for opioid tolerance and OIH. 
+    </div>
+
+    <h2 class="subhead">Chronic Postsurgical Pain (CPSP)</h2>
+    <div class="formula-box">
+      <span class="flabel">Definition</span>
+      Pain persisting ≥3 months after surgery, excluding other causes, with the pain either continuing from the acute post-op period or developing after a pain-free interval. 
+    </div>
+
+    <h3 class="subsubhead">Incidence by Procedure</h3>
+    <table class="data-table">
+      <tr><th>Procedure</th><th>CPSP Incidence</th><th>Risk Factors</th></tr>
+      <tr><td><strong>Thoracotomy</strong></td><td>30–40%</td><td>Intercostal nerve injury, rib retraction, drainage tubes</td></tr>
+      <tr><td><strong>Mastectomy</strong></td><td>20–30%</td><td>Axillary dissection, intercostobrachial nerve injury</td></tr>
+      <tr><td><strong>Inguinal hernia repair</strong></td><td>10–20%</td><td>Nerve entrapment, mesh, open vs laparoscopic</td></tr>
+      <tr><td><strong>Amputation</strong></td><td>50–80%</td><td>Pre-amputation pain, nerve section, phantom limb</td></tr>
+      <tr><td><strong>Coronary bypass (CABG)</strong></td><td>20–30%</td><td>Internal mammary harvest, sternotomy</td></tr>
+      <tr><td><strong>Caesarean section</strong></td><td>10–15%</td><td>Nerve entrapment, adhesions</td></tr>
+      <tr><td><strong>Breast surgery (pooled)</strong></td><td>35% any severity</td><td>Axillary dissection, radiotherapy, younger age</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Prevention — The Evidence</h3>
+    <ul class="clist">
+      <li><strong>Effective acute pain management:</strong> Early, sustained analgesia may reduce CPSP incidence </li>
+      <li><strong>Regional anaesthesia:</strong> Epidural, paravertebral, and peripheral nerve blocks reduce CPSP after thoracotomy and major limb surgery</li>
+      <li><strong>Multimodal analgesia:</strong> Ketamine, gabapentinoids, and NSAIDs may reduce central sensitisation</li>
+      <li><strong>Psychological interventions:</strong> Pre-operative education, cognitive-behavioural techniques</li>
+      <li><strong>Surgical technique:</strong> Nerve-sparing approaches reduce CPSP (e.g., intercostobrachial nerve preservation during breast surgery)</li>
+      <li><strong>Limitations:</strong> Evidence is mixed; no single intervention reliably prevents CPSP</li>
+    </ul>
+
+    <h2 class="subhead">Neuropathic Pain — Mechanisms and Management</h2>
+    <table class="data-table">
+      <tr><th>Mechanism</th><th>Location</th><th>Clinical Feature</th></tr>
+      <tr><td><strong>Ectopic firing</strong></td><td>Injured nerve</td><td>Spontaneous shooting pain</td></tr>
+      <tr><td><strong>Central sensitisation</strong></td><td>Dorsal horn</td><td>Allodynia, hyperalgesia</td></tr>
+      <tr><td><strong>Sympathetic coupling</strong></td><td>DRG, nerve</td><td>Sympathetically maintained pain (CRPS)</td></tr>
+      <tr><td><strong>Deafferentation</strong></td><td>CNS</td><td>Phantom limb pain, anaesthesia dolorosa</td></tr>
+      <tr><td><strong>Descending facilitation</strong></td><td>RVM</td><td>Widespread pain, poor opioid response</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Pharmacological Management of Neuropathic Pain</h3>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Starting Dose</th><th>Titration</th><th>Maximum</th><th>NNT (approx)</th></tr>
+      <tr><td><strong>Amitriptyline</strong></td><td>10 mg nocte</td><td>10 mg weekly</td><td>125 mg </td><td>~3</td></tr>
+      <tr><td><strong>Gabapentin</strong></td><td>300 mg nocte</td><td>300 mg weekly to TDS</td><td>3600 mg/day </td><td>~6</td></tr>
+      <tr><td><strong>Pregabalin</strong></td><td>75 mg BD</td><td>75 mg weekly</td><td>600 mg/day </td><td>~6</td></tr>
+      <tr><td><strong>Duloxetine</strong></td><td>30 mg OD</td><td>30 mg weekly</td><td>120 mg/day </td><td>~5</td></tr>
+      <tr><td><strong>Carbamazepine</strong></td><td>100–200 mg OD</td><td>100–200 mg biweekly</td><td>1600 mg/day </td><td>~2 (trigeminal neuralgia)</td></tr>
+      <tr><td><strong>Lidocaine 5% patch</strong></td><td>1–3 patches</td><td>—</td><td>12h on/12h off</td><td>~4</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Opioids in Neuropathic Pain</strong>
+      Opioids have <strong>limited efficacy</strong> in neuropathic pain. They should be used only after first-line agents (gabapentinoids, TCAs, SNRIs) have failed, and always with a clear exit strategy. <strong>If not effective, wean off</strong> — do not escalate indefinitely. 
+    </div>
+
+    <h2 class="subhead">Complex Regional Pain Syndrome (CRPS)</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>CRPS Type I</th><th>CRPS Type II</th></tr>
+      <tr><td><strong>Cause</strong></td><td>No identifiable nerve injury</td><td>Identifiable major nerve injury</td></tr>
+      <tr><td><strong>Precipitant</strong></td><td>Minor trauma, fracture, surgery</td><td>Nerve laceration, compression</td></tr>
+      <tr><td><strong>Symptoms</strong></td><td>Disproportionate pain, oedema, colour change, temperature change, sweating, motor changes</td><td>Same</td></tr>
+      <tr><td><strong>Diagnosis</strong></td><td>Budapest criteria</td><td>Budapest criteria + nerve lesion</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Budapest Criteria for CRPS</h3>
+    <ul class="clist">
+      <li><strong>Continuing pain disproportionate to any inciting event</strong></li>
+      <li><strong>At least one symptom in three of four categories:</strong> sensory, vasomotor, sudomotor/oedema, motor/trophic</li>
+      <li><strong>At least one sign in two of four categories</strong></li>
+      <li><strong>No other diagnosis better explains the symptoms</strong></li>
+    </ul>
+
+    <h3 class="subsubhead">Management</h3>
+    <ul class="clist">
+      <li><strong>Early recognition</strong> — CRPS is easier to treat in the acute phase</li>
+      <li><strong>Physiotherapy</strong> — graded motor imagery, desensitisation, mobilisation</li>
+      <li><strong>Pharmacological:</strong> Gabapentinoids, TCAs, NSAIDs, bisphosphonates, ketamine</li>
+      <li><strong>Interventional:</strong> Sympathetic blocks, spinal cord stimulation (SCS), intrathecal baclofen</li>
+      <li><strong>Psychological:</strong> CBT, pain education</li>
+    </ul>
+
+    <h2 class="subhead">Nociplastic Pain — The Third Descriptor</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Pain arising from altered nociception despite no clear evidence of actual or threatened tissue damage or disease of the somatosensory system </li>
+      <li><strong>Features:</strong> Widespread, disproportionate to examination findings, often with fatigue, sleep disturbance, cognitive fog, and psychological distress</li>
+      <li><strong>Examples:</strong> Fibromyalgia, irritable bowel syndrome, chronic low back pain, temporomandibular disorder, chronic pelvic pain</li>
+      <li><strong>Mechanism:</strong> Central amplification, descending facilitation, altered brain connectivity, neuroinflammation</li>
+      <li><strong>Treatment:</strong> Multidisciplinary — pain education, graded exercise, CBT, SNRIs, gabapentinoids, avoidance of opioids</li>
+    </ul>
+
+    <div class="callout co-purple">
+      <strong>The Biopsychosocial Model — The Only Model That Explains Chronic Pain</strong>
+      Chronic pain is never purely biological. It is shaped by <strong>biological</strong> (sensitisation, genetics), <strong>psychological</strong> (catastrophising, anxiety, depression), and <strong>social</strong> (work, relationships, culture, compensation) factors. Effective treatment addresses all three. This is why multidisciplinary pain programs outperform single-modality interventions.
+    </div>
+
+    <h2 class="subhead">Interventional Options for Chronic Pain</h2>
+    <table class="data-table">
+      <tr><th>Intervention</th><th>Indication</th><th>Mechanism</th></tr>
+      <tr><td><strong>Epidural steroid injection</strong></td><td>Radicular pain, spinal stenosis</td><td>Reduce inflammation at nerve root</td></tr>
+      <tr><td><strong>Facet joint blocks / radiofrequency</strong></td><td>Facet-mediated low back pain</td><td>Block or denervate medial branch nerves</td></tr>
+      <tr><td><strong>Spinal cord stimulation (SCS)</strong></td><td>Failed back surgery syndrome, CRPS, refractory neuropathic pain</td><td>Electrical stimulation of dorsal columns → gate control</td></tr>
+      <tr><td><strong>Intrathecal drug delivery</strong></td><td>Refractory cancer pain, spasticity</td><td>Direct delivery of opioids/baclofen to CSF</td></tr>
+      <tr><td><strong>Nerve blocks / neurolysis</strong></td><td>Cancer pain, neuralgia</td><td>Temporary or permanent nerve ablation</td></tr>
+      <tr><td><strong>Dorsal root ganglion stimulation</strong></td><td>Focal neuropathic pain</td><td>Stimulation at the DRG</td></tr>
+      <tr><td><strong>Peripheral nerve stimulation (PNS)</strong></td><td>Focal peripheral neuropathic pain</td><td>Electrical stimulation of peripheral nerve</td></tr>
+    </table>
+
+    <h2 class="subhead">The Opioid Epidemic — Lessons Learned</h2>
+    <ul class="clist">
+      <li><strong>Overprescribing:</strong> Opioids were marketed as safe for chronic non-cancer pain — a claim not supported by evidence</li>
+      <li><strong>Consequences:</strong> Addiction, overdose deaths, diversion, opioid-induced hyperalgesia</li>
+      <li><strong>Current approach:</strong> Opioid stewardship — risk assessment, prescription monitoring, urine drug screening, functional goals, clear exit strategies</li>
+      <li><strong>Principles:</strong> Opioids are for <strong>acute</strong> severe pain and <strong>cancer</strong> pain. For chronic non-cancer pain, they are rarely first-line and should be used with caution, if at all</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>The Aftermath — A Summary</strong>
+      The alarm protects. The response resolves. But when the alarm doesn't switch off — when central sensitisation takes hold, when descending facilitation replaces inhibition, when the pain becomes self-sustaining — we have entered the aftermath. This is chronic pain. It is not "more acute pain." It is a different disease, requiring a different approach: multimodal, multidisciplinary, and grounded in the biopsychosocial model.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twenty-five questions across all modules — from basic physiology to advanced clinical reasoning. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--purple-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--purple)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/9)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  // ── BASIC ──
+  {q:"According to the IASP definition, pain is:",opts:["A purely sensory experience caused by tissue damage","An unpleasant sensory and emotional experience associated with, or resembling that associated with, actual or potential tissue damage","A reflex response to noxious stimuli","The same as nociception"],ans:1,exp:"The 2020 IASP revision defines pain as 'An unpleasant sensory and emotional experience associated with, or resembling that associated with, actual or potential tissue damage.' It emphasises that pain is a personal experience influenced by biological, psychological, and social factors. "},
+  {q:"Which fibre type transmits sharp, well-localised 'first pain'?",opts:["Aβ fibres","Aδ fibres","C fibres","Sympathetic fibres"],ans:1,exp:"Aδ fibres are thinly myelinated, conduct at 5–30 m/s, and transmit sharp, pricking, well-localised pain. C fibres are unmyelinated, conduct slowly, and transmit dull, burning, poorly localised 'second pain'."},
+  {q:"The gate control theory states that:",opts:["Pain is always proportional to tissue damage","Non-noxious input can inhibit nociceptive transmission at the dorsal horn","Opioids close the gate","Pain is processed only in the thalamus"],ans:1,exp:"Melzack and Wall's gate control theory (1965) proposes that Aβ (touch) input inhibits WDR neurons in the dorsal horn, closing the gate to nociceptive transmission. This is why rubbing a painful area helps."},
+  {q:"Which type of pain is defined as 'caused by a lesion or disease of the somatosensory nervous system'?",opts:["Nociceptive","Neuropathic","Nociplastic","Visceral"],ans:1,exp:"Neuropathic pain is defined as pain caused by a lesion or disease of the somatosensory nervous system. Nociceptive pain arises from tissue injury; nociplastic pain arises from altered nociception without clear evidence of tissue or nerve damage. "},
+  {q:"Which WHO analgesic ladder step is for moderate pain (4–7)?",opts:["Step 1 — Non-opioids","Step 2 — Weak opioids","Step 3 — Strong opioids","Step 4 — Interventional"],ans:1,exp:"The WHO ladder: Step 1 (mild, 1–3) = non-opioids; Step 2 (moderate, 4–7) = weak opioids (tramadol, codeine); Step 3 (severe, 8–10) = strong opioids (morphine, oxycodone, fentanyl). Adjuvants can be added at any step. "},
+  {q:"Which receptor is the primary target of most clinically used opioids?",opts:["δ (DOR)","κ (KOR)","μ (MOR)","NMDA"],ans:2,exp:"The μ-opioid receptor (MOR) mediates analgesia, respiratory depression, euphoria, constipation, and dependence. Morphine, fentanyl, oxycodone, and most clinical opioids are primarily μ agonists."},
+  {q:"What is the first-line treatment for local anaesthetic systemic toxicity (LAST) with cardiac arrest?",opts:["Sodium bicarbonate","Lipid emulsion 20%","Calcium chloride","Naloxone"],ans:1,exp:"Lipid emulsion 20% (Intralipid) is the specific antidote for LAST. Dose: 1.5 mL/kg bolus, then 0.25 mL/kg/min infusion. Continue CPR. Avoid vasopressin, calcium channel blockers, and beta-blockers."},
+  // ── INTERMEDIATE ──
+  {q:"Which of the following is a characteristic of central sensitisation?",opts:["Increased pain threshold","Mechanical allodynia (light touch → pain)","Reduced NMDA receptor activity","Decreased dorsal horn excitability"],ans:1,exp:"Central sensitisation involves hyperexcitability of dorsal horn neurons, driven by NMDA receptor activation and glial mediators. It produces mechanical allodynia (light touch becomes painful), secondary hyperalgesia (spread beyond injury), and wind-up. "},
+  {q:"A patient on escalating morphine has worsening pain, burning allodynia, and poor function. What is the likely diagnosis?",opts:["Opioid tolerance","Opioid-induced hyperalgesia (OIH)","Opioid withdrawal","Progression of disease"],ans:1,exp:"Opioid-induced hyperalgesia (OIH) is a paradoxical state where opioid therapy increases pain sensitivity. Key features: worsening pain despite escalating doses, burning allodynia, poor functional improvement. Management: opioid rotation, dose reduction, adjuvants. "},
+  {q:"Which drug is first-line for neuropathic pain according to NHS guidelines?",opts:["Morphine","Amitriptyline","Oxycodone","Ibuprofen"],ans:1,exp:"Amitriptyline (a TCA) is first-line for neuropathic pain, starting at 10 mg nocte and titrating weekly to a maximum of 125 mg. Alternatives include gabapentin, pregabalin, and duloxetine. Opioids are not first-line. "},
+  {q:"Which of the following is NOT a risk factor for chronic postsurgical pain (CPSP)?",opts:["Severe acute postoperative pain","Nerve injury during surgery","Preoperative anxiety","Young age"],ans:3,exp:"Risk factors for CPSP include severe acute postoperative pain, nerve injury, preoperative anxiety, depression, and certain procedures (thoracotomy, mastectomy, amputation). Young age is not a risk factor — in fact, younger patients may have better recovery in some contexts. "},
+  {q:"Which regional block is associated with 100% ipsilateral phrenic nerve blockade?",opts:["Axillary block","Interscalene block","Femoral block","Adductor canal block"],ans:1,exp:"Interscalene block consistently causes ipsilateral phrenic nerve blockade (hemidiaphragm paralysis) due to spread to the C3–5 nerve roots. This is why it should be avoided in patients with severe respiratory disease or contralateral phrenic palsy."},
+  {q:"What is the recommended time to wait for neuraxial block after therapeutic LMWH?",opts:["4 hours","12 hours","24 hours","48 hours"],ans:2,exp:"ASRA guidelines recommend waiting at least 24 hours after a therapeutic dose of LMWH before neuraxial block. For prophylactic LMWH, wait at least 12 hours. Neuraxial techniques carry higher risk because bleeding occurs in a non-expansive space. "},
+  // ── ADVANCED ──
+  {q:"Which mechanism explains mechanical allodynia in neuropathic pain?",opts:["Increased C fibre firing","Aβ fibres activating sensitised WDR neurons","Reduced descending inhibition only","Decreased substance P release"],ans:1,exp:"Under normal conditions, Aβ (touch) fibres do not cause pain. After central sensitisation, WDR neurons become hyperexcitable — and now Aβ input activates them, producing pain in response to light touch. This is mechanical allodynia."},
+  {q:"Which NMDA receptor phenomenon contributes to chronic pain?",opts:["Mg²⁺ block enhancement","Long-term potentiation (LTP) at dorsal horn synapses","Reduced glutamate release","Increased GABAergic inhibition"],ans:1,exp:"Sustained nociceptive input removes the Mg²⁺ block from NMDA receptors, allowing glutamate to trigger long-term potentiation (LTP) — a persistent increase in synaptic strength. This is a key mechanism of central sensitisation and explains why ketamine (NMDA antagonist) is used for opioid tolerance and OIH. "},
+  {q:"In the NeuPSIG algorithm, 'probable neuropathic pain' requires:",opts:["History only","History + neuroanatomically plausible distribution","History + distribution + signs of conduction loss/hypersensitivity","All criteria including confirmatory test"],ans:2,exp:"The NeuPSIG algorithm grades neuropathic pain: Possible (criterion 1 only), Probable (criteria 1+2+3), Definite (criteria 1+2+3+4). Criterion 2 is neuroanatomically plausible pain distribution; criterion 3 is signs of conduction loss or sensory hypersensitivity. "},
+  {q:"Which of the following is TRUE about nociplastic pain?",opts:["It is caused by nerve lesions","It responds well to opioids","It arises from altered nociception without clear tissue or nerve damage","It is the same as nociceptive pain"],ans:2,exp:"Nociplastic pain is defined as pain arising from altered nociception despite no clear evidence of actual or threatened tissue damage or disease of the somatosensory system. Examples include fibromyalgia and IBS. It responds poorly to opioids and NSAIDs; treatment is multidisciplinary. "},
+  {q:"Which of the following is a mechanism of opioid-induced hyperalgesia (OIH)?",opts:["Reduced NMDA receptor activity","Increased descending inhibition","NMDA receptor activation and central sensitisation","Enhanced endogenous opioid release"],ans:2,exp:"OIH is thought to involve NMDA receptor activation and central sensitisation — the same mechanisms as neuropathic pain. Sustained opioid exposure may activate pronociceptive systems and sensitise dorsal horn neurons. Management includes opioid rotation and NMDA antagonists (ketamine). "},
+  {q:"What is the maximum recommended dose of gabapentin for neuropathic pain?",opts:["600 mg/day","1200 mg/day","2400 mg/day","3600 mg/day"],ans:3,exp:"Gabapentin should be started at 300 mg nocte and titrated weekly in 300 mg increments to a minimum effective dose of 1200 mg/day and a maximum recommended dose of 3600 mg/day. "},
+  {q:"Which statement about chronic postsurgical pain (CPSP) prevention is TRUE?",opts:["Opioids reliably prevent CPSP","Effective acute pain management may reduce CPSP incidence","Regional anaesthesia has no role in CPSP prevention","Psychological factors do not influence CPSP"],ans:1,exp:"Evidence suggests that early, effective acute pain management — including regional anaesthesia and multimodal analgesia — may reduce the incidence and severity of CPSP by preventing central sensitisation. However, no single intervention reliably prevents CPSP. "},
+  {q:"What is the approximate NNT for amitriptyline in neuropathic pain?",opts:["1","3","10","20"],ans:1,exp:"The NNT for amitriptyline in neuropathic pain is approximately 3 — meaning about 1 in 3 patients will achieve meaningful pain relief. Gabapentin and pregabalin have NNTs of approximately 6, and duloxetine approximately 5. "},
+  {q:"Which of the following is a key feature of complex regional pain syndrome (CRPS)?",opts:["Symptoms are always proportional to the inciting injury","Pain is always localised to a single dermatome","Disproportionate pain with vasomotor, sudomotor, and motor changes","It is always caused by a major nerve injury"],ans:2,exp:"CRPS is characterised by continuing pain disproportionate to any inciting event, with sensory, vasomotor, sudomotor/oedema, and motor/trophic changes. Type I has no identifiable nerve injury; Type II involves a major nerve injury. Diagnosis uses the Budapest criteria. "},
+  {q:"What is the mechanism of action of gabapentinoids in neuropathic pain?",opts:["Sodium channel blockade","NMDA receptor antagonism","Binding to the α₂δ subunit of voltage-gated calcium channels","Serotonin reuptake inhibition"],ans:2,exp:"Gabapentin and pregabalin bind to the α₂δ subunit of voltage-gated calcium channels, reducing calcium influx and subsequent neurotransmitter release. This reduces neuronal excitability and is the basis of their efficacy in neuropathic pain. "},
+  {q:"A patient with a history of opioid use disorder requires surgery. Which strategy is most appropriate?",opts:["Avoid all opioids entirely","Use regional anaesthesia and multimodal analgesia to minimise opioid requirements","Prescribe high-dose opioids to prevent withdrawal","Delay surgery until the patient is opioid-free"],ans:1,exp:"For patients with opioid use disorder, the optimal strategy is multimodal analgesia with regional techniques to minimise opioid requirements. Complete opioid avoidance is often impractical; high-dose opioids risk relapse. Perioperative planning should involve addiction medicine where possible. "},
+  {q:"What is the 'rebound pain' phenomenon after peripheral nerve block?",opts:["Pain during block insertion","Severe pain that occurs when a single-shot block wears off","Pain caused by local anaesthetic toxicity","Chronic pain that develops months later"],ans:1,exp:"Rebound pain is a severe, often unexpected pain that occurs when a single-shot peripheral nerve block wears off. It is thought to reflect the sudden return of nociceptive input after complete blockade. Continuous catheters or pre-emptive multimodal analgesia can mitigate it. "},
+  {q:"Which statement about the biopsychosocial model of chronic pain is TRUE?",opts:["Chronic pain is purely biological","Psychological factors are secondary to biological ones","Biological, psychological, and social factors interact to shape the pain experience","Social factors only matter in work-related injuries"],ans:2,exp:"The biopsychosocial model recognises that chronic pain is shaped by interacting biological (sensitisation, genetics), psychological (catastrophising, anxiety, depression), and social (work, relationships, culture) factors. Effective treatment addresses all three — which is why multidisciplinary programs outperform single-modality interventions. "}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--purple);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — the pain pathway is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
