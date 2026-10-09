@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Monitoring & Regulation — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to temperature monitoring and regulation — from physiology and measurement to perioperative management and therapeutic hypothermia. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  /* NEW ACCENT — warm amber-gold for temperature */
+  --accent:      #b8831a;
+  --accent-soft: #d4a22e;
+  --accent-deep: #8a5e0a;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--accent-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── BACK LINK ─── */
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--accent-deep); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(184,131,26,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(184,131,26,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(184,131,26,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(184,131,26,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(154,108,26,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--accent); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--accent);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:640px;font-weight:300; }
+.hero-sub strong { color:var(--accent);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--accent-soft);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--accent);border-bottom-color:var(--accent); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--accent); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--accent);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-soft);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--accent);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--accent);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(184,131,26,.02); }
+.td-hi { color:var(--accent)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(184,131,26,.04);border-color:var(--accent);color:var(--muted); }
+.co-key strong { color:var(--accent); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(154,108,26,.05);border-color:var(--accent-soft);color:var(--muted); }
+.co-fact strong { color:var(--accent-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--accent);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-accent { border-color:var(--accent);color:var(--accent); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--accent-soft);color:var(--accent-soft); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--accent);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--accent); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--accent);font-size:.9rem;font-weight:700; }
+
+/* ─── ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--accent);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--accent-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--accent);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── DIVIDER ─── */
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Physiology · Monitoring · Perioperative Care · Critical Care</div>
+  <h1>Temperature <em>Monitoring & Regulation</em></h1>
+  <p class="hero-sub">
+    The balance between heat production and heat loss — and why every anaesthetist must be a thermoregulator. <strong>Nine modules. Basic to advanced. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>09</span></div>
+    <div class="meta-item">Arc <span>Physiology → Measurement → Perioperative → Therapy</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Physiology</button>
+  <button onclick="showMod(1)">02 · Measurement</button>
+  <button onclick="showMod(2)">03 · Perioperative Changes</button>
+  <button onclick="showMod(3)">04 · Hypothermia</button>
+  <button onclick="showMod(4)">05 · Hyperthermia</button>
+  <button onclick="showMod(5)">06 · Malignant Hyperthermia</button>
+  <button onclick="showMod(6)">07 · Therapeutic Temperature</button>
+  <button onclick="showMod(7)">08 · Special Populations</button>
+  <button onclick="showMod(8)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:11.1%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: PHYSIOLOGY -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 09 · Core</div>
+      <div class="mod-title">Thermoregulatory <em>Physiology</em></div>
+      <div class="mod-intro">The human body is a furnace with a sophisticated thermostat. Understanding the balance of heat production and loss is the foundation of perioperative temperature management.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>Core Concept</strong>
+      Humans are <strong>homeotherms</strong> — we maintain a nearly constant core temperature (~37°C) despite wide fluctuations in environmental temperature. This is achieved by a balance between <strong>heat production</strong> and <strong>heat loss</strong>, controlled by the <strong>hypothalamic thermostat</strong>.
+    </div>
+
+    <h2 class="subhead">Normal Body Temperature</h2>
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">Core Temperature</div><div class="val-num">36.5–37.5</div><div class="val-unit">°C (97.7–99.5°F)</div></div>
+      <div class="val-item"><div class="val-label">Oral</div><div class="val-num">36.3–37.3</div><div class="val-unit">°C</div></div>
+      <div class="val-item"><div class="val-label">Rectal</div><div class="val-num">36.6–37.7</div><div class="val-unit">°C (0.3–0.5 higher than oral)</div></div>
+      <div class="val-item"><div class="val-label">Axillary</div><div class="val-num">35.8–36.8</div><div class="val-unit">°C (0.3–0.5 lower than oral)</div></div>
+      <div class="val-item"><div class="val-label">Tympanic</div><div class="val-num">36.5–37.5</div><div class="val-unit">°C (reflects core)</div></div>
+      <div class="val-item"><div class="val-label">Oesophageal</div><div class="val-num">36.5–37.5</div><div class="val-unit">°C (gold standard for core)</div></div>
+      <div class="val-item"><div class="val-label">Pulmonary Artery</div><div class="val-num">36.5–37.5</div><div class="val-unit">°C (true core)</div></div>
+      <div class="val-item"><div class="val-label">Skin (mean)</div><div class="val-num">33–35</div><div class="val-unit">°C (varies widely)</div></div>
+    </div>
+
+    <h2 class="subhead">The Hypothalamic Thermostat</h2>
+    <p>The <strong>preoptic area of the anterior hypothalamus</strong> is the primary thermoregulatory centre. It receives input from peripheral thermoreceptors (skin, deep tissues) and central thermoreceptors (spinal cord, viscera, hypothalamus itself), and orchestrates the response.</p>
+    <ul class="clist">
+      <li><strong>Anterior hypothalamus:</strong> Heat loss centre — activates when core temperature rises</li>
+      <li><strong>Posterior hypothalamus:</strong> Heat conservation centre — activates when core temperature falls</li>
+      <li><strong>Set point:</strong> The reference temperature (~37°C) around which the system defends</li>
+      <li><strong>Interthreshold range:</strong> The range of temperatures between the thresholds for heat production and heat loss — normally ~0.4°C. Within this range, no thermoregulatory response occurs.</li>
+      <li><strong>Gain:</strong> The intensity of the response per degree deviation from the threshold</li>
+    </ul>
+
+    <h2 class="subhead">Thermoregulatory Effector Responses</h2>
+    <table class="data-table">
+      <tr><th>Response</th><th>Stimulus</th><th>Mechanism</th><th>Effect</th></tr>
+      <tr><td><strong>Cutaneous vasoconstriction</strong></td><td>Cold</td><td>Sympathetic α₁-adrenergic</td><td>Reduces convective heat loss from skin</td></tr>
+      <tr><td><strong>Non-shivering thermogenesis</strong></td><td>Cold (neonates, some adults)</td><td>Brown adipose tissue; uncoupling protein 1 (UCP1)</td><td>Increases heat production without shivering</td></tr>
+      <tr><td><strong>Shivering</strong></td><td>Cold</td><td>Skeletal muscle contraction; increased metabolic rate 2–5×</td><td>Increases heat production</td></tr>
+      <tr><td><strong>Behavioural</strong></td><td>Cold or heat</td><td>Voluntary actions — clothing, shelter, posture</td><td>Most important in daily life; abolished under anaesthesia</td></tr>
+      <tr><td><strong>Cutaneous vasodilation</strong></td><td>Heat</td><td>Sympathetic withdrawal; active vasodilation</td><td>Increases convective heat loss</td></tr>
+      <tr><td><strong>Sweating</strong></td><td>Heat</td><td>Sympathetic cholinergic</td><td>Evaporative heat loss (up to 1.5 L/h)</td></tr>
+      <tr><td><strong>Panting / tachypnoea</strong></td><td>Heat (animals)</td><td>Increased respiratory evaporative loss</td><td>Limited in humans</td></tr>
+    </table>
+
+    <h2 class="subhead">Heat Production</h2>
+    <ul class="clist">
+      <li><strong>Basal metabolic rate (BMR):</strong> ~70 kcal/h in a 70 kg adult — the minimum heat production at rest</li>
+      <li><strong>Muscular activity:</strong> Can increase heat production 10–20× during exercise</li>
+      <li><strong>Shivering:</strong> Increases heat production 2–5×; can raise metabolic rate to 200–300% of BMR</li>
+      <li><strong>Non-shivering thermogenesis:</strong> Brown adipose tissue; important in neonates and hibernating mammals</li>
+      <li><strong>Specific dynamic action (SDA):</strong> Heat produced by digestion and metabolism of food</li>
+      <li><strong>Fever:</strong> Cytokine-mediated increase in the hypothalamic set point → heat production and conservation</li>
+      <li><strong>Thyroid hormones, catecholamines:</strong> Increase metabolic rate and heat production</li>
+    </ul>
+
+    <h2 class="subhead">Heat Loss</h2>
+    <p>Heat is lost from the body via four mechanisms. Under normal conditions, the skin is the primary site (90%), with the respiratory tract accounting for ~10%.</p>
+    <table class="data-table">
+      <tr><th>Mechanism</th><th>Description</th><th>Percentage (rest)</th><th>Modifiers</th></tr>
+      <tr><td><strong>Radiation</strong></td><td>Transfer of heat via infrared radiation to cooler objects</td><td>~60%</td><td>Large surface area; cold environment; vasodilation</td></tr>
+      <tr><td><strong>Convection</strong></td><td>Heat transfer to air or water moving over the skin</td><td>~15%</td><td>Air currents; fans; water immersion (25× faster)</td></tr>
+      <tr><td><strong>Conduction</strong></td><td>Direct transfer to cooler surfaces in contact with skin</td><td>~3%</td><td>Cold operating table; ice packs; conductive mats</td></tr>
+      <tr><td><strong>Evaporation</strong></td><td>Insensible loss from skin and lungs; sweating</td><td>~22%</td><td>Sweating; dry air; tachypnoea; open wounds</td></tr>
+    </table>
+    <div class="callout co-pearl">
+      <strong>✦ Clinical Pearl — The Cold OR</strong>
+      The operating room is a hostile thermal environment: cold ambient temperature (18–21°C), high airflow, cold IV fluids, cold skin prep, and large exposed surface area. Under general anaesthesia, behavioural responses are abolished and thermoregulatory vasoconstriction is impaired — leading to rapid heat loss.
+    </div>
+
+    <h2 class="subhead">The Interthreshold Range</h2>
+    <ul class="clist">
+      <li><strong>Normal:</strong> ~0.4°C — the range of core temperature within which no thermoregulatory effector response is activated</li>
+      <li><strong>Under general anaesthesia:</strong> The interthreshold range widens dramatically (up to 4°C) — thermoregulation is impaired</li>
+      <li><strong>Under regional anaesthesia:</strong> Interthreshold range widens to ~1–2°C; below the block, vasoconstriction and shivering are impaired</li>
+      <li><strong>Neonates:</strong> Narrower interthreshold range; larger surface area to volume ratio; limited shivering ability</li>
+      <li><strong>Elderly:</strong> Impaired thermoregulation; reduced shivering; delayed vasoconstriction</li>
+      <li><strong>Drugs:</strong> Opioids, volatile anaesthetics, propofol, and muscle relaxants all widen the interthreshold range</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>Why Perioperative Thermoregulation Fails</strong>
+      <strong>1. Anaesthetic-induced impairment:</strong> Volatile agents, propofol, and opioids widen the interthreshold range and inhibit vasoconstriction and shivering. <strong>2. Redistribution hypothermia:</strong> Core-to-periphery heat redistribution after induction. <strong>3. Heat loss:</strong> Exposure, cold IV fluids, dry gases. <strong>4. Reduced heat production:</strong> Muscle relaxation, decreased metabolic rate.
+    </div>
+
+    <h2 class="subhead">Fever — A Regulated Rise in Set Point</h2>
+    <p>Fever is <strong>not</strong> the same as hyperthermia. Fever is a regulated rise in the hypothalamic set point, mediated by endogenous pyrogens (IL-1, IL-6, TNF-α) and prostaglandin E₂ (PGE₂) in the hypothalamus. The body actively defends the new, higher temperature.</p>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Fever</th><th>Hyperthermia</th></tr>
+      <tr><td>Set point</td><td>Elevated</td><td>Normal</td></tr>
+      <tr><td>Body's defence</td><td>Actively defends higher temperature (shivering, vasoconstriction)</td><td>Attempts to dissipate heat (sweating, vasodilation)</td></tr>
+      <tr><td>Response to antipyretics</td><td class="td-good">Effective</td><td class="td-bad">Ineffective</td></tr>
+      <tr><td>Examples</td><td>Infection, inflammation, malignancy</td><td>Heat stroke, malignant hyperthermia, NMS</td></tr>
+      <tr><td>Skin</td><td>Cool, vasoconstricted (early)</td><td>Hot, vasodilated, dry (late)</td></tr>
+    </table>
+    <div class="callout co-fact">
+      <strong>Key Point</strong>
+      Antipyretics work in fever by lowering the elevated set point (inhibiting COX-2 → PGE₂). They are ineffective in hyperthermia where the set point is normal — cooling and treating the cause are required.
+    </div>
+
+    <h2 class="subhead">Fever vs Hyperthermia — The Critical Distinction</h2>
+    <ul class="clist">
+      <li><strong>Fever:</strong> The body is actively heating — the patient may feel cold and shiver. Core temperature is defended at the new, higher set point. Skin may be cool and mottled.</li>
+      <li><strong>Hyperthermia:</strong> The body is overheating — the patient feels hot, sweats profusely (early), and vasodilates. The set point is normal; the body is failing to dissipate heat.</li>
+      <li><strong>Malignant hyperthermia:</strong> A pharmacogenetic hypermetabolic crisis triggered by volatile anaesthetics and succinylcholine. Core temperature rises rapidly (1–2°C every 5 min). It is a form of hyperthermia, not fever. Dantrolene is the specific antidote.</li>
+      <li><strong>Neuroleptic malignant syndrome (NMS):</strong> A hyperthermic syndrome triggered by dopamine antagonists. It is a form of hyperthermia, not fever. Dantrolene may be used but is less effective; bromocriptine and supportive care are key.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: MEASUREMENT -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 09 · Core</div>
+      <div class="mod-title">Temperature <em>Measurement</em></div>
+      <div class="mod-intro">Core, peripheral, and surrogate sites — the devices, the accuracy, and the pitfalls. What to use, when, and why it matters.</div>
+    </div>
+
+    <h2 class="subhead">Core vs Peripheral Temperature</h2>
+    <ul class="clist">
+      <li><strong>Core temperature:</strong> The temperature of the deep tissues — brain, heart, abdominal organs. It is the temperature that the hypothalamus defends and the one that matters for metabolic function.</li>
+      <li><strong>Peripheral temperature:</strong> The temperature of the skin, subcutaneous tissue, and limbs. It is lower than core, varies with ambient temperature, and is subject to vasoconstriction.</li>
+      <li><strong>Gradient:</strong> Normally 2–4°C between core and skin. The gradient widens with vasoconstriction (cold) and narrows with vasodilation (heat).</li>
+      <li><strong>Clinical relevance:</strong> In shock and hypothermia, peripheral temperature falls before core — a widened core-peripheral gradient is a marker of poor perfusion.</li>
+    </ul>
+
+    <h2 class="subhead">Measurement Sites — Accuracy and Applicability</h2>
+    <table class="data-table">
+      <tr><th>Site</th><th>Type</th><th>Accuracy</th><th>Lag</th><th>Clinical Use</th><th>Limitations</th></tr>
+      <tr><td><strong>Pulmonary artery (PA)</strong></td><td>Core</td><td class="td-good">Gold standard</td><td>None</td><td>ICU, cardiac surgery; true core</td><td>Requires PAC; invasive; not for routine</td></tr>
+      <tr><td><strong>Oesophageal</strong></td><td>Core</td><td class="td-good">Excellent</td><td>Minimal</td><td>Anaesthesia, cardiac surgery; reflects core if tip in lower third</td><td>Position-dependent; risk of malposition; contraindicated in oesophageal disease</td></tr>
+      <tr><td><strong>Tympanic</strong></td><td>Core (surrogate)</td><td class="td-good">Good</td><td>Small</td><td>Routine clinical; reflects hypothalamic temperature</td><td>Operator-dependent; cerumen; otitis; perforation risk; infrared devices less accurate</td></tr>
+      <tr><td><strong>Nasopharyngeal</strong></td><td>Core (surrogate)</td><td class="td-good">Good</td><td>Small</td><td>Anaesthesia; reflects brain temperature</td><td>Position-dependent; epistaxis; discomfort</td></tr>
+      <tr><td><strong>Rectal</strong></td><td>Core (surrogate)</td><td class="td-mid">Acceptable</td><td>Significant</td><td>Historical; paediatrics</td><td>Lag behind core; risk of perforation; contraindicated in neutropenia, rectal surgery</td></tr>
+      <tr><td><strong>Bladder (urinary catheter)</strong></td><td>Core (surrogate)</td><td class="td-mid">Good</td><td>Moderate</td><td>ICU, post-operative; convenient if catheter in situ</td><td>Requires adequate urine output; lag if low flow</td></tr>
+      <tr><td><strong>Oral</strong></td><td>Peripheral</td><td class="td-mid">Acceptable</td><td>Moderate</td><td>Ward; screening</td><td>Affected by hot/cold drinks, mouth breathing, tachypnoea</td></tr>
+      <tr><td><strong>Axillary</strong></td><td>Peripheral</td><td class="td-bad">Poor</td><td>Large</td><td>Neonates, children; screening</td><td>Underestimates core; affected by ambient; poor sensitivity</td></tr>
+      <tr><td><strong>Skin (surface probe)</strong></td><td>Peripheral</td><td class="td-bad">Poor</td><td>Large</td><td>Trending; gradient calculation</td><td>Not a measure of core; affected by ambient and vasoconstriction</td></tr>
+      <tr><td><strong>Temporal artery (TA)</strong></td><td>Surrogate</td><td class="td-mid">Variable</td><td>Minimal</td><td>Non-invasive screening</td><td>Affected by sweating, ambient, technique</td></tr>
+    </table>
+
+    <h2 class="subhead">Devices and Principles</h2>
+    <table class="data-table">
+      <tr><th>Device</th><th>Principle</th><th>Sites</th><th>Notes</th></tr>
+      <tr><td><strong>Thermistor</strong></td><td>Resistance changes with temperature</td><td>PA, oesophageal, bladder, rectal</td><td>Most accurate; requires probe; reusable or disposable</td></tr>
+      <tr><td><strong>Thermocouple</strong></td><td>Voltage generated at junction of two dissimilar metals</td><td>Surface probes, needle probes</td><td>Fast response; less accurate than thermistor; reference junction needed</td></tr>
+      <tr><td><strong>Infrared (IR) tympanic</strong></td><td>Infrared emission from tympanic membrane</td><td>Tympanic</td><td>Quick, non-invasive; accuracy variable; operator-dependent</td></tr>
+      <tr><td><strong>Infrared temporal artery</strong></td><td>Infrared emission from temporal artery</td><td>Forehead</td><td>Non-invasive; affected by sweating, ambient; variable accuracy</td></tr>
+      <tr><td><strong>Liquid crystal</strong></td><td>Colour change with temperature</td><td>Skin</td><td>Continuous visual; poor accuracy; screening only</td></tr>
+      <tr><td><strong>Chemical dot</strong></td><td>Colour change</td><td>Oral, axillary</td><td>Single-use; screening only; poor accuracy</td></tr>
+      <tr><td><strong>Zero-heat-flux</strong></td><td>Insulated probe; heat flux zeroed</td><td>Forehead</td><td>Non-invasive; correlates well with core; useful for continuous monitoring</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Accuracy Matters</strong>
+      Not all thermometers are equal. Axillary and oral measurements can differ from core by 0.5–1.0°C. For clinical decisions — especially in perioperative and critical care — use a <strong>core site</strong> (PA, oesophageal, tympanic, nasopharyngeal, or bladder).
+    </div>
+
+    <h2 class="subhead">Choosing a Site — Practical Guidance</h2>
+    <table class="data-table">
+      <tr><th>Setting</th><th>Preferred Site</th><th>Alternative</th></tr>
+      <tr><td>General anaesthesia (routine)</td><td>Oesophageal or nasopharyngeal</td><td>Tympanic, bladder</td></tr>
+      <tr><td>Cardiac surgery / CPB</td><td>PA, oesophageal, nasopharyngeal</td><td>Bladder, rectal</td></tr>
+      <tr><td>ICU (general)</td><td>Bladder (if catheter), PA (if PAC)</td><td>Oesophageal, rectal, tympanic</td></tr>
+      <tr><td>ICU (shock / hypothermia)</td><td>PA or oesophageal</td><td>Bladder (with caution if low urine output)</td></tr>
+      <tr><td>Ward (routine)</td><td>Tympanic</td><td>Oral</td></tr>
+      <tr><td>Neonates / children</td><td>Axillary (screening), oesophageal (intubated)</td><td>Rectal (historical), tympanic</td></tr>
+      <tr><td>Outpatient / screening</td><td>Oral, tympanic, temporal artery</td><td>Axillary</td></tr>
+    </table>
+
+    <h2 class="subhead">Monitoring During Anaesthesia — Standards</h2>
+    <ul class="clist">
+      <li><strong>When to monitor:</strong> Any procedure with expected duration >30 minutes, any major surgery, any patient at risk of hypothermia or hyperthermia, all paediatric cases, all cardiac surgery, all patients receiving large fluid volumes or blood products.</li>
+      <li><strong>Minimum frequency:</strong> Continuous or at least every 15 minutes. The AAGBI recommends continuous monitoring during anaesthesia.</li>
+      <li><strong>Core site preferred:</strong> Oesophageal, nasopharyngeal, tympanic, or bladder — not axillary or skin alone.</li>
+      <li><strong>Documentation:</strong> Record temperature at regular intervals, along with all warming interventions.</li>
+      <li><strong>Alarms:</strong> Set upper and lower limits (e.g., 35.5–37.8°C) to alert the team.</li>
+      <li><strong>Reference:</strong> AAGBI, ASA, and NICE guidelines all recommend temperature monitoring and active warming for procedures >30 minutes.</li>
+    </ul>
+
+    <h2 class="subhead">Special Considerations</h2>
+    <ul class="clist">
+      <li><strong>Cardiac surgery with CPB:</strong> Multiple sites (PA, oesophageal, nasopharyngeal, bladder) to monitor core and gradient; temperature is manipulated (hypothermia and rewarming).</li>
+      <li><strong>Neurosurgery:</strong> Core temperature directly affects cerebral metabolic rate and ICP; maintain normothermia (or mild hypothermia if indicated).</li>
+      <li><strong>Paediatrics:</strong> High surface area to volume ratio; rapid heat loss; monitor closely; use forced-air warming and fluid warmers.</li>
+      <li><strong>Burns:</strong> Loss of skin barrier; evaporative losses can be massive; monitor core temperature and warm aggressively.</li>
+      <li><strong>Trauma:</strong> The "trauma triad" (hypothermia, acidosis, coagulopathy) — hypothermia is an independent predictor of mortality; warm all fluids, use external warming, and monitor core temperature.</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Takeaway</strong>
+      For accurate core temperature measurement, use a <strong>core site</strong> — oesophageal, nasopharyngeal, tympanic, bladder, or PA. Peripheral sites (oral, axillary) are acceptable for screening but not for clinical decisions. The choice of site depends on the setting, the patient, and the required accuracy.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: PERIOPERATIVE CHANGES -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 09 · Applied</div>
+      <div class="mod-title">Perioperative <em>Temperature Changes</em></div>
+      <div class="mod-intro">Why every surgical patient becomes hypothermic — and the consequences that follow. The three phases of perioperative hypothermia and the physiological insult.</div>
+    </div>
+
+    <h2 class="subhead">The Three Phases of Perioperative Hypothermia</h2>
+    <div class="flow-row">
+      <div class="flow-box">1 · Redistribution<br>Core → periphery</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2 · Heat loss<br>Exceeds heat production</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3 · Plateau<br>Vasoconstriction</div>
+    </div>
+    <p>Perioperative hypothermia develops in three distinct phases, each with different mechanisms and management implications.</p>
+
+    <h3 class="subsubhead">Phase 1 — Redistribution (First 30–60 Minutes)</h3>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Anaesthetic-induced vasodilation and inhibition of tonic thermoregulatory vasoconstriction → core heat redistributes to the periphery</li>
+      <li><strong>Result:</strong> Rapid fall in core temperature (0.5–1.5°C in the first hour)</li>
+      <li><strong>Note:</strong> This is <strong>not</strong> heat loss to the environment — it is internal redistribution of heat</li>
+      <li><strong>Prevention:</strong> Pre-warming (before induction) — increases peripheral tissue temperature, reducing the core-to-periphery gradient</li>
+      <li><strong>Drugs:</strong> Propofol, volatile agents, opioids, and muscle relaxants all contribute</li>
+      <li><strong>Magnitude:</strong> The larger the core-to-periphery gradient, the greater the redistribution</li>
+    </ul>
+
+    <h3 class="subsubhead">Phase 2 — Heat Loss (Hours 1–3)</h3>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Heat loss to the environment exceeds metabolic heat production</li>
+      <li><strong>Contributors:</strong> Radiation (60%), convection (15%), conduction (3%), evaporation (22%)</li>
+      <li><strong>Magnitude:</strong> Core temperature falls more slowly than Phase 1 (0.5–1.0°C per hour)</li>
+      <li><strong>Result:</strong> Continued cooling until thermoregulatory vasoconstriction is triggered (at ~36.5°C in the anaesthetised patient)</li>
+      <li><strong>Prevention:</strong> Forced-air warming, warm IV fluids, humidified gases, increased ambient temperature, insulation</li>
+    </ul>
+
+    <h3 class="subsubhead">Phase 3 — Plateau (After 2–4 Hours)</h3>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Core temperature reaches the vasoconstriction threshold → active vasoconstriction in the periphery reduces further heat loss</li>
+      <li><strong>Result:</strong> Core temperature stabilises at a lower-than-normal level (typically 34.5–36.0°C) — the <strong>plateau</strong></li>
+      <li><strong>Note:</strong> The plateau is not normothermia — it is a new, lower steady state</li>
+      <li><strong>Risk:</strong> Patients remain hypothermic; shivering is inhibited by anaesthesia</li>
+      <li><strong>Management:</strong> Continue active warming throughout surgery; monitor core temperature; aim for normothermia by the end of surgery</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Redistribution Problem</strong>
+      Redistribution hypothermia is the most important cause of early perioperative hypothermia. Pre-warming for 15–30 minutes before induction can significantly reduce the core-to-periphery gradient and prevent the initial rapid fall in core temperature.
+    </div>
+
+    <h2 class="subhead">Consequences of Perioperative Hypothermia</h2>
+    <table class="data-table">
+      <tr><th>System</th><th>Effect</th><th>Mechanism</th><th>Clinical Impact</th></tr>
+      <tr><td><strong>Cardiovascular</strong></td><td>Arrhythmias, myocardial ischaemia, increased SVR</td><td>Sympathetic activation, shivering, coronary vasoconstriction</td><td>Increased cardiac morbidity (MI, arrhythmias)</td></tr>
+      <tr><td><strong>Coagulation</strong></td><td>Impaired platelet function, reduced clotting factor activity</td><td>Enzymatic slowing, platelet dysfunction</td><td>Increased bleeding, transfusion requirements, re-operation</td></tr>
+      <tr><td><strong>Immune</strong></td><td>Impaired neutrophil function, reduced oxidative killing</td><td>Impaired phagocytosis, cytokine production</td><td>Increased surgical site infection</td></tr>
+      <tr><td><strong>Wound healing</strong></td><td>Delayed collagen deposition, reduced tensile strength</td><td>Impaired oxygen delivery, fibroblast function</td><td>Dehiscence, poor cosmetic outcome</td></tr>
+      <tr><td><strong>Metabolic</strong></td><td>Increased oxygen consumption (shivering), acidosis</td><td>Shivering increases VO₂ by 200–500%</td><td>Myocardial strain, hypoxaemia</td></tr>
+      <tr><td><strong>Drug metabolism</strong></td><td>Prolonged action of anaesthetics and muscle relaxants</td><td>Reduced hepatic metabolism, renal excretion</td><td>Delayed recovery, prolonged ventilation</td></tr>
+      <tr><td><strong>Thermoregulation</strong></td><td>Shivering, discomfort, delayed recovery</td><td>Post-anaesthetic shivering</td><td>Increased oxygen consumption, patient distress</td></tr>
+      <tr><td><strong>Coagulopathy</strong></td><td>Impaired clot formation</td><td>Reduced platelet function and enzyme activity</td><td>Bleeding, haematoma, transfusion</td></tr>
+      <tr><td><strong>Length of stay</strong></td><td>Increased hospital stay</td><td>All of the above</td><td>Increased cost, morbidity</td></tr>
+    </table>
+
+    <h2 class="subhead">Post-Anaesthetic Shivering (PAS)</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Involuntary shivering during recovery from anaesthesia, typically within 30 minutes of emergence</li>
+      <li><strong>Incidence:</strong> 5–65% depending on anaesthetic technique (higher with volatile agents, lower with propofol/TIVA)</li>
+      <li><strong>Mechanism:</strong> Multifactorial — thermoregulatory (hypothermia), non-thermoregulatory (pain, sympathetic activation, opioid reversal, volatile agents)</li>
+      <li><strong>Consequences:</strong> Increased oxygen consumption (200–500%), increased cardiac output, myocardial strain, wound pain, patient distress</li>
+      <li><strong>Treatment:</strong> Active warming (forced-air), opioids (meperidine/pethidine is most effective — 12.5–25 mg IV), clonidine, nefopam, magnesium, ondansetron, dexmedetomidine</li>
+      <li><strong>Prevention:</strong> Maintain normothermia intraoperatively; use TIVA instead of volatile; pre-warming; opioid-sparing techniques</li>
+    </ul>
+
+    <h2 class="subhead">Risk Factors for Perioperative Hypothermia</h2>
+    <table class="data-table">
+      <tr><th>Patient Factors</th><th>Surgical Factors</th><th>Anaesthetic Factors</th></tr>
+      <tr><td>Extremes of age (neonates, elderly)</td><td>Prolonged surgery (>2 hours)</td><td>General anaesthesia (vs regional)</td></tr>
+      <tr><td>Low BMI / cachexia</td><td>Large exposed surface area</td><td>Volatile agents (dose-dependent)</td></tr>
+      <tr><td>Pre-existing hypothermia</td><td>Cold skin prep (alcohol, chlorhexidine)</td><td>Propofol (vasodilation, redistribution)</td></tr>
+      <tr><td>Endocrine disease (hypothyroidism, adrenal insufficiency)</td><td>Open body cavities (evaporative loss)</td><td>Muscle relaxants (abolish shivering)</td></tr>
+      <tr><td>Burns / skin loss</td><td>Cold IV fluids / blood products</td><td>Opioids (widen interthreshold range)</td></tr>
+      <tr><td>Trauma</td><td>Cold irrigating solutions</td><td>Regional anaesthesia (blocks thermoregulation)</td></tr>
+      <tr><td>Spinal cord injury</td><td>Low ambient OR temperature</td><td>Prolonged anaesthesia</td></tr>
+      <tr><td>Malnutrition</td><td>Tourniquet use</td><td>Neuraxial anaesthesia</td></tr>
+    </table>
+
+    <h2 class="subhead">Prevention and Management</h2>
+    <table class="data-table">
+      <tr><th>Intervention</th><th>Mechanism</th><th>Evidence</th><th>Notes</th></tr>
+      <tr><td><strong>Pre-warming</strong> (forced-air, 15–30 min before induction)</td><td>Increases peripheral temperature; reduces core-to-periphery gradient</td><td>Strong — reduces redistribution hypothermia</td><td>Most effective for Phase 1; apply to whole body or lower body</td></tr>
+      <tr><td><strong>Forced-air warming</strong> (intraoperative)</td><td>Convective warming; most effective method</td><td>Strong — reduces hypothermia and its complications</td><td>Apply to upper body or whole body; avoid direct contact with skin</td></tr>
+      <tr><td><strong>Warm IV fluids</strong> (37°C)</td><td>Prevents conductive heat loss from cold fluids</td><td>Strong — especially for large volumes</td><td>Use fluid warmer for >500 mL/h</td></tr>
+      <tr><td><strong>Humidified, warmed gases</strong></td><td>Reduces respiratory heat loss</td><td>Moderate — small contribution</td><td>Use HME or heated humidifier</td></tr>
+      <tr><td><strong>Increased ambient temperature</strong></td><td>Reduces radiative and convective loss</td><td>Moderate — raises OR temperature to 24–26°C</td><td>Uncomfortable for staff; use selectively</td></tr>
+      <tr><td><strong>Insulation</strong> (blankets, hats, socks)</td><td>Reduces radiative and convective loss</td><td>Weak — alone insufficient</td><td>Use as adjunct; cover head and extremities</td></tr>
+      <tr><td><strong>Conductive warming</strong> (water-circulating mattress)</td><td>Direct conduction</td><td>Moderate — can cause burns if >40°C</td><td>Monitor skin; avoid pressure points</td></tr>
+      <tr><td><strong>Forced-air warming gowns</strong></td><td>Pre-operative and intraoperative warming</td><td>Strong — improves patient comfort and reduces hypothermia</td><td>Can be used pre-operatively on the ward</td></tr>
+      <tr><td><strong>Pharmacological</strong> (opioids, clonidine)</td><td>Reduce shivering threshold; do not actively warm</td><td>Weak — for shivering prevention, not warming</td><td>Meperidine 12.5–25 mg IV for PAS</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Bottom Line</strong>
+      Every surgical patient is at risk of hypothermia. Pre-warm before induction, warm actively during surgery, and continue warming in recovery. Maintain core temperature ≥36.0°C. This reduces surgical site infections, bleeding, cardiac events, and length of stay.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: HYPOTHERMIA -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 09 · Applied</div>
+      <div class="mod-title">Hypothermia — <em>Accidental & Therapeutic</em></div>
+      <div class="mod-intro">From the cold operating room to the cold water immersion — the stages, consequences, and management of hypothermia.</div>
+    </div>
+
+    <h2 class="subhead">Classification of Hypothermia</h2>
+    <table class="data-table">
+      <tr><th>Stage</th><th>Core Temperature</th><th>Clinical Features</th><th>Management</th></tr>
+      <tr><td><strong>Mild</strong></td><td>32–35°C</td><td>Shivering, vasoconstriction, tachypnoea, tachycardia, confusion, dysarthria, cold diuresis</td><td>Passive warming, active external warming (forced-air), warm fluids</td></tr>
+      <tr><td><strong>Moderate</strong></td><td>28–32°C</td><td>Shivering stops, bradycardia, hypotension, reduced consciousness, hyporeflexia, dilated pupils, J waves on ECG, atrial fibrillation</td><td>Active core warming: warm IV fluids, humidified gases, bladder irrigation, peritoneal/pleural lavage, extracorporeal rewarming</td></tr>
+      <tr><td><strong>Severe</strong></td><td>24–28°C</td><td>Coma, areflexia, fixed dilated pupils, bradycardia, ventricular arrhythmias, asystole, pulmonary oedema, oliguria</td><td>Extracorporeal rewarming (CPB, ECMO), active core warming, ACLS with prolonged resuscitation</td></tr>
+      <tr><td><strong>Profound</strong></td><td><24°C</td><td>Asystole, areflexia, flat EEG, "apparent death"</td><td>Extracorporeal rewarming — "not dead until warm and dead"</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The Swiss Staging System for Hypothermia</strong>
+      <strong>Stage I:</strong> Conscious, shivering — mild. <strong>Stage II:</strong> Impaired consciousness, no shivering — moderate. <strong>Stage III:</strong> Unconscious, vital signs present — severe. <strong>Stage IV:</strong> Vital signs absent — profound. <strong>Stage V:</strong> Death from irreversible hypothermia.
+    </div>
+
+    <h2 class="subhead">Clinical Features by System</h2>
+    <table class="data-table">
+      <tr><th>System</th><th>Mild (32–35°C)</th><th>Moderate (28–32°C)</th><th>Severe (<28°C)</th></tr>
+      <tr><td><strong>CNS</strong></td><td>Confusion, dysarthria, amnesia, apathy</td><td>Stupor, hyporeflexia, dilated pupils</td><td>Coma, areflexia, flat EEG</td></tr>
+      <tr><td><strong>Cardiovascular</strong></td><td>Tachycardia, hypertension, shivering</td><td>Bradycardia, hypotension, AF, J waves</td><td>Ventricular arrhythmias, asystole</td></tr>
+      <tr><td><strong>Respiratory</strong></td><td>Tachypnoea, bronchorrhoea</td><td>Bradypnoea, hypoventilation</td><td>Apnoea, pulmonary oedema</td></tr>
+      <tr><td><strong>Renal</strong></td><td>Cold diuresis</td><td>Oliguria</td><td>Anuria</td></tr>
+      <tr><td><strong>Metabolic</strong></td><td>Increased metabolic rate (shivering)</td><td>Decreased metabolic rate</td><td>Severe acidosis, hyperkalaemia</td></tr>
+      <tr><td><strong>Coagulation</strong></td><td>Mild impairment</td><td>Coagulopathy</td><td>DIC-like picture</td></tr>
+    </table>
+
+    <h2 class="subhead">ECG Changes in Hypothermia</h2>
+    <ul class="clist">
+      <li><strong>J waves (Osborn waves):</strong> Positive deflection at the QRS–ST junction — characteristic of moderate hypothermia (often at <32°C)</li>
+      <li><strong>Prolonged PR, QRS, QT intervals:</strong> Slowed conduction</li>
+      <li><strong>Atrial fibrillation:</strong> Common at <32°C</li>
+      <li><strong>Ventricular arrhythmias:</strong> Ventricular fibrillation, asystole — risk increases below 28°C</li>
+      <li><strong>Bradycardia:</strong> Progressive, often unresponsive to atropine</li>
+    </ul>
+
+    <h2 class="subhead">Management of Hypothermia</h2>
+    <h3 class="subsubhead">General Principles</h3>
+    <ul class="clist">
+      <li><strong>Remove from cold environment</strong> — move to warm, dry area; remove wet clothing</li>
+      <li><strong>Handle gently</strong> — rough handling can precipitate ventricular arrhythmias in severe hypothermia</li>
+      <li><strong>ABC assessment</strong> — airway, breathing, circulation; assess for associated trauma, drowning, or medical cause</li>
+      <li><strong>Monitor core temperature</strong> — use a low-reading thermometer (not standard clinical thermometer, which stops at 34°C)</li>
+      <li><strong>Monitor ECG continuously</strong> — for arrhythmias</li>
+      <li><strong>Bloods:</strong> ABG (corrected for temperature), glucose, electrolytes, coagulation, lactate, toxicology</li>
+    </ul>
+
+    <h3 class="subsubhead">Rewarming Techniques</h3>
+    <table class="data-table">
+      <tr><th>Technique</th><th>Rewarming Rate</th><th>Indications</th><th>Notes</th></tr>
+      <tr><td><strong>Passive external</strong></td><td>0.5–1.0°C/h</td><td>Mild hypothermia (conscious, shivering)</td><td>Warm environment, blankets, remove wet clothes; shivering generates heat</td></tr>
+      <tr><td><strong>Active external</strong></td><td>1.0–2.5°C/h</td><td>Mild–moderate; not shivering</td><td>Forced-air warming, warm water immersion, heating pads</td></tr>
+      <tr><td><strong>Active core</strong></td><td>0.5–2.0°C/h</td><td>Moderate–severe</td><td>Warm IV fluids (40–42°C), humidified gases, bladder irrigation, peritoneal/pleural lavage</td></tr>
+      <tr><td><strong>Extracorporeal</strong></td><td>2–5°C/h</td><td>Severe, profound, cardiac arrest</td><td>CPB, ECMO, haemodialysis, arteriovenous rewarming</td></tr>
+      <tr><td><strong>Airway rewarming</strong></td><td>—</td><td>Adjuvant</td><td>Humidified oxygen (40–45°C) — limited effect</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ The "Not Dead Until Warm and Dead" Principle</strong>
+      In severe hypothermia with apparent death (asystole, areflexia, fixed pupils), resuscitation should continue until the patient is rewarmed to at least 32–35°C. Survival with full neurological recovery has been reported after prolonged hypothermic cardiac arrest. Extracorporeal rewarming (CPB or ECMO) is the gold standard for severe hypothermia with cardiac arrest.
+    </div>
+
+    <h2 class="subhead">Complications of Rewarming</h2>
+    <ul class="clist">
+      <li><strong>Rewarming shock:</strong> Peripheral vasodilation → hypotension; may need fluid and vasopressors</li>
+      <li><strong>Afterdrop:</strong> Continued fall in core temperature after rewarming begins — due to return of cold peripheral blood to the core. Prevent by active core warming.</li>
+      <li><strong>Arrhythmias:</strong> Ventricular fibrillation may occur during rewarming — be prepared for defibrillation (often refractory until >30°C)</li>
+      <li><strong>Coagulopathy:</strong> Rewarming can unmask or worsen coagulopathy</li>
+      <li><strong>Hyperkalaemia:</strong> Can develop during rewarming — monitor and treat</li>
+      <li><strong>Rhabdomyolysis:</strong> From prolonged hypothermia and shivering — monitor CK, renal function</li>
+    </ul>
+
+    <h2 class="subhead">Therapeutic Hypothermia</h2>
+    <p>Deliberate cooling of the body to 32–36°C for neuroprotection. It is used in specific clinical situations where it has proven benefit.</p>
+    <table class="data-table">
+      <tr><th>Indication</th><th>Target Temperature</th><th>Duration</th><th>Evidence</th></tr>
+      <tr><td><strong>Post-cardiac arrest</strong> (witnessed, shockable rhythm)</td><td>32–36°C</td><td>12–24 h</td><td>Strong — improves neurological outcome and survival</td></tr>
+      <tr><td><strong>Neonatal hypoxic-ischaemic encephalopathy</strong></td><td>33.5–34.5°C</td><td>72 h</td><td>Strong — reduces mortality and neurodevelopmental disability</td></tr>
+      <tr><td><strong>Traumatic brain injury</strong> (refractory ICP)</td><td>32–35°C</td><td>Variable</td><td>Moderate — can reduce ICP; no clear mortality benefit</td></tr>
+      <tr><td><strong>Cardiac surgery (CPB)</strong></td><td>28–32°C (or deep 18–20°C)</td><td>Duration of CPB</td><td>Standard — reduces metabolic demand and ischaemic injury</td></tr>
+      <tr><td><strong>Acute liver failure</strong> (selected)</td><td>32–35°C</td><td>Variable</td><td>Weak — may reduce ICP; limited evidence</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: HYPERTHERMIA -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 09 · Applied</div>
+      <div class="mod-title">Hyperthermia — <em>Fever & Hyperthermic Syndromes</em></div>
+      <div class="mod-intro">When the body gets too hot — the distinction between fever and hyperthermia, the hyperthermic syndromes, and the management of heat stroke.</div>
+    </div>
+
+    <h2 class="subhead">Fever vs Hyperthermia — A Revisit</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Fever</th><th>Hyperthermia</th></tr>
+      <tr><td><strong>Set point</strong></td><td>Elevated (hypothalamus)</td><td>Normal</td></tr>
+      <tr><td><strong>Body's response</strong></td><td>Actively raises temperature (shivering, vasoconstriction)</td><td>Attempts to dissipate heat (sweating, vasodilation)</td></tr>
+      <tr><td><strong>Response to antipyretics</strong></td><td class="td-good">Effective</td><td class="td-bad">Ineffective</td></tr>
+      <tr><td><strong>Response to cooling</strong></td><td>Body defends the new set point</td><td>Cooling is effective</td></tr>
+      <tr><td><strong>Skin</strong></td><td>Cool, vasoconstricted (early)</td><td>Hot, vasodilated, dry (late)</td></tr>
+      <tr><td><strong>Examples</strong></td><td>Infection, inflammation, malignancy</td><td>Heat stroke, MH, NMS, serotonin syndrome, thyroid storm</td></tr>
+    </table>
+
+    <h2 class="subhead">Hyperthermic Syndromes</h2>
+    <table class="data-table">
+      <tr><th>Syndrome</th><th>Trigger</th><th>Mechanism</th><th>Core Features</th><th>Treatment</th></tr>
+      <tr><td><strong>Malignant hyperthermia (MH)</strong></td><td>Volatile anaesthetics, succinylcholine</td><td>Ryanodine receptor (RYR1) mutation → uncontrolled Ca²⁺ release</td><td>Masseter spasm, hypercarbia, tachycardia, rigidity, hyperthermia, rhabdomyolysis</td><td>Dantrolene 2.5 mg/kg IV, stop trigger, cool, supportive</td></tr>
+      <tr><td><strong>Neuroleptic malignant syndrome (NMS)</strong></td><td>Dopamine antagonists (haloperidol, metoclopramide, antipsychotics)</td><td>Central dopamine blockade → rigidity, hyperthermia</td><td>Rigidity ("lead-pipe"), hyperthermia, autonomic instability, altered mental status</td><td>Stop drug, dantrolene, bromocriptine, cooling, supportive</td></tr>
+      <tr><td><strong>Serotonin syndrome</strong></td><td>Serotonergic drugs (SSRIs, SNRIs, MAOIs, tramadol, triptans)</td><td>Excess serotonin → hyperthermia, rigidity, clonus</td><td>Clonus, hyperreflexia, agitation, hyperthermia, diarrhoea</td><td>Stop drug, cyproheptadine, benzodiazepines, cooling</td></tr>
+      <tr><td><strong>Thyroid storm</strong></td><td>Untreated hyperthyroidism + stress/surgery</td><td>Excess thyroid hormone → hypermetabolism</td><td>Hyperthermia, tachycardia, agitation, heart failure</td><td>Beta-blockers, propylthiouracil, iodine, steroids, cooling</td></tr>
+      <tr><td><strong>Phaeochromocytoma</strong></td><td>Catecholamine-secreting tumour + stress</td><td>Excess catecholamines → vasoconstriction, hypermetabolism</td><td>Hyperthermia, hypertension, sweating, tachycardia</td><td>Alpha-blockade (phenoxybenzamine), beta-blockade, surgery</td></tr>
+      <tr><td><strong>Heat stroke</strong></td><td>Environmental heat + exertion</td><td>Failure of thermoregulation → core >40°C</td><td>Hyperthermia, hot dry skin, CNS dysfunction (coma, seizures)</td><td>Rapid cooling (ice, cold water), supportive; no antipyretics</td></tr>
+    </table>
+
+    <h2 class="subhead">Heat Stroke</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Core temperature >40°C with CNS dysfunction (delirium, coma, seizures) in the setting of environmental heat exposure or exertion</li>
+      <li><strong>Classic (non-exertional):</strong> Elderly, infants, chronic illness, medications (anticholinergics, diuretics, beta-blockers) — passive exposure to heat</li>
+      <li><strong>Exertional:</strong> Young, healthy individuals during strenuous activity in heat (athletes, military, labourers)</li>
+      <li><strong>Pathophysiology:</strong> Thermoregulatory failure → uncontrolled heat gain → protein denaturation, cellular damage, multi-organ failure, DIC</li>
+      <li><strong>Clinical features:</strong> Hyperthermia (>40°C), hot dry skin (classic), CNS dysfunction, tachycardia, hypotension, coagulopathy, rhabdomyolysis, AKI, ARDS</li>
+      <li><strong>Treatment:</strong> Rapid cooling — ice water immersion (most effective), evaporative cooling, cold IV fluids, ice packs to groin/axilla/neck; supportive care; avoid antipyretics (ineffective and may worsen hepatic injury)</li>
+      <li><strong>Mortality:</strong> Up to 50% in severe cases; rapid cooling improves outcome</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ Heat Stroke is an Emergency</strong>
+      Every minute of hyperthermia increases organ damage and mortality. Cool aggressively — "cool first, transport second." Target core temperature <39°C within 30 minutes. Do not use antipyretics (they do not work and may worsen liver injury).
+    </div>
+
+    <h2 class="subhead">Malignant Hyperthermia — A Focused Review</h2>
+    <p>Malignant hyperthermia (MH) is a <strong>pharmacogenetic disorder</strong> of skeletal muscle triggered by volatile anaesthetics and succinylcholine. It is the most important hyperthermic crisis in anaesthesia.</p>
+
+    <h3 class="subsubhead">Pathophysiology</h3>
+    <ul class="clist">
+      <li><strong>Genetic basis:</strong> Mutation in the <strong>RYR1 gene</strong> (ryanodine receptor) on chromosome 19 — accounts for ~70% of cases; CACNA1S mutations in others</li>
+      <li><strong>Mechanism:</strong> Uncontrolled calcium release from the sarcoplasmic reticulum → sustained muscle contraction → hypermetabolism → heat production, oxygen consumption, CO₂ production, and rhabdomyolysis</li>
+      <li><strong>Trigger agents:</strong> All volatile anaesthetics (sevoflurane, desflurane, isoflurane, enflurane, halothane) and succinylcholine</li>
+      <li><strong>Safe agents:</strong> Propofol, opioids, nitrous oxide, non-depolarising muscle relaxants, local anaesthetics (except high-dose bupivacaine — but this is not a trigger)</li>
+      <li><strong>Inheritance:</strong> Autosomal dominant with variable penetrance</li>
+      <li><strong>Incidence:</strong> 1 in 10,000–50,000 anaesthetics; higher in children</li>
+    </ul>
+
+    <h3 class="subsubhead">Clinical Features</h3>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Mechanism</th><th>Notes</th></tr>
+      <tr><td><strong>Masseter spasm</strong></td><td>Succinylcholine-induced</td><td>May be the first sign; may be isolated or progress to MH</td></tr>
+      <tr><td><strong>Hypercarbia (ETCO₂ rise)</strong></td><td>Increased CO₂ production</td><td>Most sensitive early sign; unexplained rise despite increased ventilation</td></tr>
+      <tr><td><strong>Tachycardia</strong></td><td>Sympathetic activation</td><td>Often the first cardiovascular sign</td></tr>
+      <tr><td><strong>Hyperthermia</strong></td><td>Uncontrolled heat production</td><td>Late sign — temperature rises rapidly (1–2°C every 5 min); may exceed 42°C</td></tr>
+      <tr><td><strong>Muscle rigidity</strong></td><td>Sustained contraction</td><td>Generalised rigidity; may be masked by muscle relaxants</td></tr>
+      <tr><td><strong>Rhabdomyolysis</strong></td><td>Muscle breakdown</td><td>Myoglobinuria, elevated CK, risk of AKI</td></tr>
+      <tr><td><strong>Hyperkalaemia</strong></td><td>Muscle breakdown</td><td>Can cause arrhythmias</td></tr>
+      <tr><td><strong>Metabolic acidosis</strong></td><td>Anaerobic metabolism</td><td>Elevated lactate; mixed respiratory and metabolic acidosis</td></tr>
+      <tr><td><strong>Arrhythmias</strong></td><td>Electrolyte disturbance, acidosis</td><td>Ventricular tachycardia, fibrillation</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Management of Malignant Hyperthermia</h3>
+    <div class="flow-row">
+      <div class="flow-box">1. Stop triggers<br>Discontinue volatile + succinylcholine</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2. Call for help<br>MH kit / dantrolene</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3. Hyperventilate<br>100% O₂, high flow</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">4. Dantrolene<br>2.5 mg/kg IV bolus</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">5. Cool<br>Active cooling</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">6. Treat complications<br>Arrhythmias, hyperkalaemia, acidosis</div>
+    </div>
+
+    <table class="data-table">
+      <tr><th>Intervention</th><th>Dose / Detail</th><th>Notes</th></tr>
+      <tr><td><strong>Dantrolene</strong></td><td>2.5 mg/kg IV bolus; repeat every 5–10 min until stable; up to 10 mg/kg</td><td>Specific antidote; inhibits Ca²⁺ release from sarcoplasmic reticulum; prepare 20 mg in 60 mL sterile water (difficult to dissolve)</td></tr>
+      <tr><td><strong>Hyperventilation</strong></td><td>100% O₂, 2–3× minute ventilation</td><td>Wash out CO₂; treat respiratory acidosis</td></tr>
+      <tr><td><strong>Cooling</strong></td><td>Cold IV fluids, ice packs, surface cooling, bladder lavage</td><td>Target core <38.5°C; stop cooling at 38°C to avoid overshoot</td></tr>
+      <tr><td><strong>Sodium bicarbonate</strong></td><td>1–2 mEq/kg IV</td><td>For metabolic acidosis; guided by ABG</td></tr>
+      <tr><td><strong>Arrhythmia management</strong></td><td>Standard ACLS; avoid calcium channel blockers (interact with dantrolene)</td><td>Treat hyperkalaemia (calcium, insulin/dextrose, bicarbonate)</td></tr>
+      <tr><td><strong>Urine output</strong></td><td>Target >1–2 mL/kg/h</td><td>Prevent myoglobinuric AKI; consider mannitol, furosemide</td></tr>
+      <tr><td><strong>ICU admission</strong></td><td>All patients</td><td>Monitor for recrudescence (can occur up to 24–48 h after initial episode)</td></tr>
+    </table>
+
+    <div class="callout co-danger">
+      <strong>⚠ Dantrolene — The Life-Saving Drug</strong>
+      Dantrolene is the specific antidote for MH. Every anaesthetising location must have a <strong>MH kit</strong> with at least 36 vials of dantrolene (20 mg each) immediately available. The traditional formulation is difficult to reconstitute (requires sterile water and vigorous shaking) — new formulations (Ryanodex) are easier. Mortality from MH has fallen from >70% to <5% with early dantrolene.
+    </div>
+
+    <h3 class="subsubhead">Prevention in Susceptible Patients</h3>
+    <ul class="clist">
+      <li><strong>Pre-operative assessment:</strong> Personal or family history of MH, unexplained hyperthermia during anaesthesia, masseter spasm, elevated CK</li>
+      <li><strong>Trigger-free anaesthesia:</strong> Use propofol, opioids, nitrous oxide, non-depolarising muscle relaxants (avoid succinylcholine)</li>
+      <li><strong>Avoid volatile agents:</strong> Use TIVA (propofol + remifentanil)</li>
+      <li><strong>Machine preparation:</strong> Flush anaesthetic machine with 100% O₂ at high flow for 10–15 minutes; remove vaporisers; change CO₂ absorbent; use new breathing circuit</li>
+      <li><strong>Monitoring:</strong> Continuous temperature, ETCO₂, ECG, SpO₂; avoid triggers throughout</li>
+      <li><strong>Dantrolene prophylaxis:</strong> Not routinely recommended; reserve for therapeutic use</li>
+      <li><strong>Genetic testing:</strong> Refer to MH centre for caffeine-halothane contracture test or genetic testing (RYR1)</li>
+    </ul>
+
+    <h2 class="subhead">Neuroleptic Malignant Syndrome (NMS)</h2>
+    <ul class="clist">
+      <li><strong>Trigger:</strong> Dopamine antagonists (haloperidol, chlorpromazine, metoclopramide, prochlorperazine) or withdrawal of dopamine agonists</li>
+      <li><strong>Mechanism:</strong> Central dopamine blockade → rigidity, hyperthermia, autonomic instability</li>
+      <li><strong>Clinical features:</strong> "Lead-pipe" rigidity, hyperthermia, altered mental status, autonomic instability (labile BP, tachycardia, diaphoresis), elevated CK</li>
+      <li><strong>Onset:</strong> Hours to days after starting or increasing the offending drug</li>
+      <li><strong>Treatment:</strong> Stop the offending drug; dantrolene (for rigidity and hyperthermia); bromocriptine (dopamine agonist); supportive care; cooling</li>
+      <li><strong>Difference from MH:</strong> NMS is not triggered by anaesthetics; it is triggered by dopamine antagonists. Dantrolene is less effective than in MH; bromocriptine is more important.</li>
+    </ul>
+
+    <h2 class="subhead">Serotonin Syndrome</h2>
+    <ul class="clist">
+      <li><strong>Trigger:</strong> Serotonergic drugs — SSRIs, SNRIs, MAOIs, tramadol, triptans, lithium, St John's wort</li>
+      <li><strong>Mechanism:</strong> Excess serotonin → hyperthermia, rigidity, clonus, autonomic instability</li>
+      <li><strong>Clinical features:</strong> Clonus (especially lower limbs), hyperreflexia, agitation, confusion, hyperthermia, diarrhoea, dilated pupils</li>
+      <li><strong>Onset:</strong> Within 24 hours of starting or increasing a serotonergic drug</li>
+      <li><strong>Treatment:</strong> Stop the offending drug; cyproheptadine (serotonin antagonist); benzodiazepines; cooling; supportive care</li>
+      <li><strong>Difference from NMS:</strong> Serotonin syndrome has rapid onset (hours), clonus and hyperreflexia prominent, and responds to cyproheptadine; NMS has slower onset (days), rigidity more prominent, and responds to dantrolene/bromocriptine.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: MALIGNANT HYPERTHERMIA -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 09 · Crisis</div>
+      <div class="mod-title">Malignant Hyperthermia <em>— In Depth</em></div>
+      <div class="mod-intro">The most important inherited disorder in anaesthesia. Pathophysiology, recognition, dantrolene, and the MH kit.</div>
+    </div>
+
+    <div class="callout co-danger">
+      <strong>⚠ Time-Critical Emergency</strong>
+      Malignant hyperthermia is a life-threatening hypermetabolic crisis. Early recognition and immediate dantrolene administration are the keys to survival. Mortality has fallen from >70% to <5% with modern management.
+    </div>
+
+    <h2 class="subhead">Genetics & Pathophysiology</h2>
+    <ul class="clist">
+      <li><strong>Inheritance:</strong> Autosomal dominant with variable penetrance</li>
+      <li><strong>Genes:</strong> <strong>RYR1</strong> (ryanodine receptor 1) on chromosome 19q13.1 — ~70% of cases; <strong>CACNA1S</strong> (dihydropyridine receptor) — ~1% of cases</li>
+      <li><strong>Mechanism:</strong> Mutated ryanodine receptor → uncontrolled calcium release from sarcoplasmic reticulum in response to triggers → sustained muscle contraction → ATP hydrolysis → heat, CO₂, and lactate production</li>
+      <li><strong>Triggers:</strong> All volatile anaesthetics (halothane, isoflurane, sevoflurane, desflurane, enflurane) and succinylcholine</li>
+      <li><strong>Safe agents:</strong> Propofol, opioids, nitrous oxide, non-depolarising muscle relaxants, local anaesthetics, ketamine, benzodiazepines</li>
+      <li><strong>Exertional heat illness / rhabdomyolysis:</strong> Some RYR1 mutations also predispose to exertional heat stroke and rhabdomyolysis</li>
+    </ul>
+
+    <h2 class="subhead">Clinical Presentation — The MH Score</h2>
+    <p>The <strong>Clinical Grading Scale (CGS)</strong> or <strong>MH Score</strong> helps estimate the likelihood of MH. It includes:</p>
+    <table class="data-table">
+      <tr><th>Category</th><th>Feature</th><th>Points</th></tr>
+      <tr><td><strong>Rigidity</strong></td><td>Generalised rigidity; masseter spasm</td><td>15 (generalised), 5 (masseter)</td></tr>
+      <tr><td><strong>Muscle breakdown</strong></td><td>CK >20,000; myoglobinuria; cola-coloured urine</td><td>15, 10, 5</td></tr>
+      <tr><td><strong>Respiratory</strong></td><td>ETCO₂ >55 mmHg; unexplained tachypnoea</td><td>15, 10</td></tr>
+      <tr><td><strong>Cardiac</strong></td><td>Unexplained tachycardia; ventricular arrhythmias</td><td>10, 15</td></tr>
+      <tr><td><strong>Temperature</strong></td><td>Rapid rise >2°C/h; >38.8°C</td><td>15, 10</td></tr>
+      <tr><td><strong>Family history</strong></td><td>MH in first-degree relative</td><td>10</td></tr>
+      <tr><td><strong>Other</strong></td><td>Acidosis, hyperkalaemia</td><td>5 each</td></tr>
+    </table>
+    <p><strong>Interpretation:</strong> Score >50 = almost certainly MH; 35–49 = probably MH; 20–34 = some likelihood; <20 = unlikely.</p>
+
+    <h2 class="subhead">Early vs Late Signs</h2>
+    <table class="data-table">
+      <tr><th>Early Signs</th><th>Late Signs</th></tr>
+      <tr><td>Unexplained rise in ETCO₂ (most sensitive)</td><td>Hyperthermia (may be late; rapid rise)</td></tr>
+      <tr><td>Tachycardia (often first cardiovascular sign)</td><td>Generalised muscle rigidity</td></tr>
+      <tr><td>Masseter spasm (after succinylcholine)</td><td>Rhabdomyolysis (myoglobinuria, high CK)</td></tr>
+      <tr><td>Tachypnoea (spontaneous ventilation)</td><td>Hyperkalaemia</td></tr>
+      <tr><td>Metabolic acidosis (lactate)</td><td>Ventricular arrhythmias</td></tr>
+      <tr><td>Skin mottling</td><td>DIC</td></tr>
+      <tr><td>Unexplained tachycardia</td><td>Cardiac arrest</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Classic Presentation</strong>
+      The classic MH crisis: unexplained rise in ETCO₂ despite increased ventilation → tachycardia → masseter spasm (if succinylcholine used) → generalised rigidity → hyperthermia (late) → rhabdomyolysis → arrhythmias. <strong>Do not wait for hyperthermia to start treatment.</strong> The earliest sign is usually hypercarbia, not hyperthermia.
+    </div>
+
+    <h2 class="subhead">Dantrolene — The Specific Antidote</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Inhibits calcium release from the sarcoplasmic reticulum by binding to the ryanodine receptor (RYR1)</li>
+      <li><strong>Dose:</strong> 2.5 mg/kg IV bolus, repeated every 5–10 minutes until stable (max 10 mg/kg)</li>
+      <li><strong>Preparation:</strong> Each 20 mg vial must be reconstituted with 60 mL sterile water — difficult and time-consuming; new formulations (Ryanodex) are easier</li>
+      <li><strong>Side effects:</strong> Muscle weakness, phlebitis, nausea, diarrhoea, dizziness; rare hepatotoxicity</li>
+      <li><strong>Monitoring:</strong> Continue dantrolene for at least 24–48 hours after stabilisation to prevent recrudescence; monitor CK, urine output, electrolytes</li>
+      <li><strong>Availability:</strong> Every anaesthetising location must have an MH kit with at least 36 vials (720 mg) of dantrolene immediately available</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>The MH Kit — Essential Contents</strong>
+      <strong>Dantrolene:</strong> ≥36 vials (20 mg each) · <strong>Sterile water:</strong> 60 mL per vial (for reconstitution) · <strong>Large syringes:</strong> 60 mL · <strong>IV tubing:</strong> For dantrolene infusion · <strong>Cooling equipment:</strong> Ice packs, cold IV fluids, cooling blankets · <strong>Sodium bicarbonate:</strong> 1–2 mEq/kg · <strong>Antiarrhythmics:</strong> Amiodarone, lidocaine (avoid calcium channel blockers) · <strong>Insulin/dextrose:</strong> For hyperkalaemia · <strong>Mannitol/furosemide:</strong> For urine output · <strong>ABG/electrolyte kits:</strong> For monitoring · <strong>Checklist:</strong> MH management protocol
+    </div>
+
+    <h2 class="subhead">Management Algorithm — Step by Step</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 760 600" width="100%" style="display:block; max-width:760px;">
+        <defs>
+          <marker id="ar2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#b8831a"/>
+          </marker>
+        </defs>
+
+        <text x="380" y="18" fill="#b8831a" font-family="Instrument Sans" font-size="8" text-anchor="middle" letter-spacing="1.5">MALIGNANT HYPERTHERMIA — MANAGEMENT ALGORITHM</text>
+
+        <!-- Step 1 -->
+        <rect x="240" y="30" width="280" height="38" fill="#ede7da" stroke="#b8831a" stroke-width="1.5"/>
+        <text x="380" y="53" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">1. STOP TRIGGERS</text>
+        <text x="380" y="64" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Discontinue volatile agents and succinylcholine</text>
+
+        <line x1="380" y1="68" x2="380" y2="92" stroke="#b8831a" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+        <!-- Step 2 -->
+        <rect x="200" y="96" width="360" height="38" fill="#e8e1d4" stroke="#b8831a" stroke-width="1.5"/>
+        <text x="380" y="119" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">2. CALL FOR HELP &amp; MH KIT</text>
+        <text x="380" y="130" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Activate MH protocol; bring dantrolene, cooling equipment, lab kits</text>
+
+        <line x1="380" y1="134" x2="380" y2="158" stroke="#b8831a" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+        <!-- Step 3 -->
+        <rect x="200" y="162" width="360" height="38" fill="#ede7da" stroke="#b8831a" stroke-width="1.5"/>
+        <text x="380" y="185" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">3. HYPERVENTILATE WITH 100% O₂</text>
+        <text x="380" y="196" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Increase minute ventilation 2–3× to wash out CO₂</text>
+
+        <line x1="380" y1="200" x2="380" y2="224" stroke="#b8831a" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+        <!-- Step 4 -->
+        <rect x="180" y="228" width="400" height="48" fill="#b8831a" opacity="0.15" stroke="#b8831a" stroke-width="2"/>
+        <text x="380" y="250" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="700">4. DANTROLENE 2.5 mg/kg IV</text>
+        <text x="380" y="264" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Repeat every 5–10 min until stable (max 10 mg/kg)</text>
+        <text x="380" y="274" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-style="italic">Reconstitute with 60 mL sterile water per 20 mg vial</text>
+
+        <line x1="380" y1="276" x2="380" y2="300" stroke="#b8831a" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+        <!-- Step 5 -->
+        <rect x="200" y="304" width="360" height="38" fill="#ede7da" stroke="#b8831a" stroke-width="1.5"/>
+        <text x="380" y="327" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">5. ACTIVE COOLING</text>
+        <text x="380" y="338" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Cold IV fluids, ice packs (groin, axilla, neck), surface cooling</text>
+
+        <line x1="380" y1="342" x2="380" y2="366" stroke="#b8831a" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+        <!-- Step 6 -->
+        <rect x="180" y="370" width="400" height="48" fill="#e8e1d4" stroke="#b8831a" stroke-width="1.5"/>
+        <text x="380" y="393" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">6. TREAT COMPLICATIONS</text>
+        <text x="380" y="406" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Arrhythmias (amiodarone/lidocaine), hyperkalaemia (insulin/dextrose),</text>
+        <text x="380" y="417" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">acidosis (bicarbonate), maintain urine output >1–2 mL/kg/h</text>
+
+        <line x1="380" y1="418" x2="380" y2="442" stroke="#b8831a" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+        <!-- Step 7 -->
+        <rect x="220" y="446" width="320" height="38" fill="#ede7da" stroke="#b8831a" stroke-width="1.5"/>
+        <text x="380" y="469" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">7. ICU ADMISSION</text>
+        <text x="380" y="480" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Monitor for recrudescence (24–48 h); continue dantrolene; monitor CK, urine</text>
+
+        <!-- Side notes -->
+        <rect x="20" y="446" width="180" height="70" fill="#f5f0e8" stroke="#7a2020" stroke-width="1"/>
+        <text x="110" y="465" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">⚠ AVOID</text>
+        <text x="110" y="480" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">Calcium channel blockers</text>
+        <text x="110" y="492" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">(interact with dantrolene)</text>
+        <text x="110" y="504" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">Succinylcholine</text>
+        <text x="110" y="516" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">Volatile agents</text>
+
+        <rect x="560" y="446" width="180" height="70" fill="#f5f0e8" stroke="#b8831a" stroke-width="1"/>
+        <text x="650" y="465" fill="#b8831a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">✓ MONITOR</text>
+        <text x="650" y="480" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">Core temperature</text>
+        <text x="650" y="492" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">ETCO₂</text>
+        <text x="650" y="504" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">CK, myoglobinuria</text>
+        <text x="650" y="516" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">Urine output, K⁺</text>
+      </svg>
+    </div>
+
+    <h2 class="subhead">Prevention in Susceptible Patients</h2>
+    <ul class="clist">
+      <li><strong>Pre-operative assessment:</strong> Personal or family history of MH, unexplained hyperthermia during anaesthesia, masseter spasm, elevated CK</li>
+      <li><strong>Trigger-free anaesthesia:</strong> TIVA (propofol + remifentanil) + nitrous oxide + non-depolarising muscle relaxants (avoid succinylcholine)</li>
+      <li><strong>Machine preparation:</strong> Remove vaporisers; flush with 100% O₂ at 10 L/min for 10–15 minutes; change CO₂ absorbent and breathing circuit</li>
+      <li><strong>Monitoring:</strong> Continuous temperature, ETCO₂, ECG, SpO₂; avoid triggers throughout</li>
+      <li><strong>Dantrolene prophylaxis:</strong> Not routinely recommended; reserve for therapeutic use</li>
+      <li><strong>Genetic testing:</strong> Refer to MH centre for caffeine-halothane contracture test (CHCT) or genetic testing (RYR1)</li>
+      <li><strong>Patient education:</strong> Advise patient to inform all future anaesthetists; provide MH information card; consider MedicAlert bracelet</li>
+    </ul>
+
+    <h2 class="subhead">Exertional Heat Illness & Rhabdomyolysis</h2>
+    <ul class="clist">
+      <li>Some RYR1 mutations also predispose to <strong>exertional heat stroke</strong> and <strong>exertional rhabdomyolysis</strong></li>
+      <li>Patients may present with hyperthermia, muscle pain, weakness, and dark urine after strenuous exercise</li>
+      <li>Management is similar to MH — cooling, dantrolene if severe, supportive care</li>
+      <li>Consider MH susceptibility in any patient with unexplained exertional heat illness or rhabdomyolysis</li>
+      <li>Genetic counselling and testing may be indicated</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: THERAPEUTIC TEMPERATURE -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 09 · Advanced</div>
+      <div class="mod-title">Therapeutic <em>Temperature Management</em></div>
+      <div class="mod-intro">Deliberate cooling and warming — the evidence, the methods, and the clinical applications from cardiac arrest to cardiac surgery.</div>
+    </div>
+
+    <h2 class="subhead">Targeted Temperature Management (TTM)</h2>
+    <p>The term <strong>TTM</strong> replaced "therapeutic hypothermia" to reflect the fact that different patients may benefit from different target temperatures — not all need to be cooled to 33°C.</p>
+    <table class="data-table">
+      <tr><th>Condition</th><th>Target Temperature</th><th>Duration</th><th>Evidence</th></tr>
+      <tr><td><strong>Post-cardiac arrest</strong> (shockable rhythm, witnessed)</td><td>32–36°C</td><td>12–24 h</td><td>Strong — improves neurological outcome and survival</td></tr>
+      <tr><td><strong>Post-cardiac arrest</strong> (non-shockable rhythm)</td><td>32–36°C</td><td>12–24 h</td><td>Moderate — may benefit; individualise</td></tr>
+      <tr><td><strong>Neonatal hypoxic-ischaemic encephalopathy</strong></td><td>33.5–34.5°C</td><td>72 h</td><td>Strong — reduces mortality and neurodevelopmental disability</td></tr>
+      <tr><td><strong>Traumatic brain injury</strong> (refractory ICP)</td><td>32–35°C</td><td>Variable</td><td>Moderate — reduces ICP; no clear mortality benefit</td></tr>
+      <tr><td><strong>Cardiac surgery with CPB</strong></td><td>28–32°C (or 18–20°C for circulatory arrest)</td><td>Duration of CPB</td><td>Standard — reduces metabolic demand and ischaemic injury</td></tr>
+      <tr><td><strong>Acute liver failure</strong> (selected)</td><td>32–35°C</td><td>Variable</td><td>Weak — may reduce ICP; limited evidence</td></tr>
+      <tr><td><strong>Fever control in ICU</strong> (e.g., sepsis, stroke)</td><td>36.5–37.5°C</td><td>Until source controlled</td><td>Moderate — may improve outcomes; avoid fever</td></tr>
+    </table>
+
+    <h2 class="subhead">Methods of Cooling</h2>
+    <table class="data-table">
+      <tr><th>Method</th><th>Rate</th><th>Advantages</th><th>Disadvantages</th></tr>
+      <tr><td><strong>Ice packs</strong> (groin, axilla, neck)</td><td>Slow</td><td>Available everywhere; cheap</td><td>Labour-intensive; uneven cooling; skin injury; shivering</td></tr>
+      <tr><td><strong>Cold IV fluids</strong> (4°C, 30 mL/kg)</td><td>Moderate</td><td>Rapid; easy; also resuscitative</td><td>Risk of volume overload; not effective for maintenance</td></tr>
+      <tr><td><strong>Surface cooling</strong> (water-circulating blankets, pads)</td><td>Moderate</td><td>Effective; widely used; controlled</td><td>Skin injury; shivering; slow to initiate</td></tr>
+      <tr><td><strong>Forced-air warming</strong> (can also cool)</td><td>Moderate</td><td>Same device for warming and cooling</td><td>Less effective for cooling than dedicated devices</td></tr>
+      <tr><td><strong>Intravascular cooling</strong> (endovascular catheter)</td><td>Fast</td><td>Precise; rapid; less shivering</td><td>Invasive; requires CVC; expensive; thrombosis risk</td></tr>
+      <tr><td><strong>Extracorporeal cooling</strong> (CPB, ECMO)</td><td>Very fast</td><td>Fastest; used for severe hypothermia and cardiac arrest</td><td>Requires specialised equipment and team; invasive</td></tr>
+      <tr><td><strong>Nasopharyngeal cooling</strong></td><td>Moderate</td><td>Rapid brain cooling</td><td>Limited evidence; special device required</td></tr>
+      <tr><td><strong>Selective brain cooling</strong> (helmet, nasal)</td><td>Variable</td><td>Targets brain</td><td>Not widely used; limited evidence</td></tr>
+    </table>
+
+    <h2 class="subhead">Shivering Management During TTM</h2>
+    <ul class="clist">
+      <li><strong>Why treat shivering:</strong> Increases metabolic rate and oxygen consumption (200–500%), counteracts cooling, increases ICP, and causes patient distress</li>
+      <li><strong>Non-pharmacological:</strong> Warm blankets over extremities, forced-air warming of face and hands, skin counterwarming</li>
+      <li><strong>Pharmacological:</strong> Opioids (fentanyl, meperidine/pethidine), dexmedetomidine, clonidine, magnesium, buspirone, ondansetron</li>
+      <li><strong>Surface counterwarming:</strong> Apply forced-air warming to face and hands — reduces shivering threshold without affecting core cooling</li>
+      <li><strong>Neuromuscular blockade:</strong> For refractory shivering — use only in intubated patients; monitor with TOF</li>
+      <li><strong>Monitoring:</strong> Continuous core temperature, ECG, SpO₂, ETCO₂; watch for arrhythmias and coagulopathy</li>
+    </ul>
+
+    <h2 class="subhead">Complications of Therapeutic Hypothermia</h2>
+    <table class="data-table">
+      <tr><th>System</th><th>Complication</th><th>Management</th></tr>
+      <tr><td><strong>Cardiovascular</strong></td><td>Bradycardia, hypotension, arrhythmias</td><td>Usually tolerated; treat if symptomatic; avoid rewarming too fast</td></tr>
+      <tr><td><strong>Coagulation</strong></td><td>Coagulopathy, bleeding</td><td>Monitor coagulation; transfuse if needed; be aware of impaired platelet function</td></tr>
+      <tr><td><strong>Metabolic</strong></td><td>Hyperglycaemia, electrolyte disturbance (K⁺, Mg²⁺, Ca²⁺)</td><td>Monitor and correct; insulin for hyperglycaemia</td></tr>
+      <tr><td><strong>Immune</strong></td><td>Increased infection risk</td><td>Surveillance cultures; treat infections promptly</td></tr>
+      <tr><td><strong>Renal</strong></td><td>Cold diuresis, hypovolaemia</td><td>Monitor urine output; replace fluids as needed</td></tr>
+      <tr><td><strong>Drug metabolism</strong></td><td>Prolonged drug action</td><td>Reduce doses; monitor effect; avoid drugs with narrow therapeutic index</td></tr>
+      <tr><td><strong>Skin</strong></td><td>Pressure ulcers, cold injury</td><td>Regular skin checks; avoid direct ice contact; use protective barriers</td></tr>
+      <tr><td><strong>Rewarming</strong></td><td>Afterdrop, rewarming shock, hyperkalaemia</td><td>Rewarm slowly (0.25–0.5°C/h); monitor electrolytes and haemodynamics</td></tr>
+    </table>
+
+    <h2 class="subhead">Rewarming — The Critical Phase</h2>
+    <ul class="clist">
+      <li><strong>Rate:</strong> 0.25–0.5°C/h — slow rewarming to avoid complications</li>
+      <li><strong>Afterdrop:</strong> Continued fall in core temperature after rewarming begins — due to return of cold peripheral blood to the core. Prevent by active core warming.</li>
+      <li><strong>Rewarming shock:</strong> Peripheral vasodilation → hypotension; may need fluid and vasopressors</li>
+      <li><strong>Hyperkalaemia:</strong> Can develop during rewarming — monitor and treat</li>
+      <li><strong>Arrhythmias:</strong> Ventricular fibrillation may occur during rewarming — be prepared for defibrillation (often refractory until >30°C)</li>
+      <li><strong>Coagulopathy:</strong> Rewarming can unmask or worsen coagulopathy</li>
+      <li><strong>Target:</strong> Rewarm to 36.5–37.5°C — avoid hyperthermia</li>
+    </ul>
+
+    <h2 class="subhead">The Evidence — Key Trials</h2>
+    <table class="data-table">
+      <tr><th>Trial</th><th>Population</th><th>Intervention</th><th>Finding</th></tr>
+      <tr><td><strong>HACA (2002)</strong></td><td>Post-cardiac arrest (shockable rhythm)</td><td>33°C vs normothermia</td><td>Improved neurological outcome and survival</td></tr>
+      <tr><td><strong>Bernard (2002)</strong></td><td>Post-cardiac arrest (shockable rhythm)</td><td>33°C vs normothermia</td><td>Improved neurological outcome</td></tr>
+      <tr><td><strong>TTM (2013)</strong></td><td>Post-cardiac arrest (all rhythms)</td><td>33°C vs 36°C</td><td>No difference — both are acceptable</td></tr>
+      <tr><td><strong>HYPERION (2019)</strong></td><td>Post-cardiac arrest (non-shockable rhythm)</td><td>33°C vs normothermia</td><td>Improved neurological outcome with 33°C</td></tr>
+      <tr><td><strong>CoolCap (2005)</strong></td><td>Neonatal HIE</td><td>33.5°C vs normothermia</td><td>Reduced mortality and disability</td></tr>
+      <tr><td><strong>TOBY (2009)</strong></td><td>Neonatal HIE</td><td>33.5°C vs normothermia</td><td>Reduced mortality and disability</td></tr>
+      <tr><td><strong>NICHD (2005)</strong></td><td>Neonatal HIE</td><td>33.5°C vs normothermia</td><td>Reduced mortality and disability</td></tr>
+    </table>
+
+    <h2 class="subhead">Practical Protocol — Post-Cardiac Arrest TTM</h2>
+    <div class="flow-row">
+      <div class="flow-box">1. Assess<br>Inclusion/exclusion</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2. Initiate cooling<br>Target 32–36°C</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3. Maintain<br>12–24 h</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">4. Rewarm<br>0.25–0.5°C/h</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">5. Maintain normothermia<br>36.5–37.5°C</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Inclusion:</strong> ROSC after cardiac arrest, comatose, haemodynamically stable (or stabilisable)</li>
+      <li><strong>Exclusion:</strong> Pre-existing coma, terminal illness, severe coagulopathy, pregnancy (relative), cardiogenic shock with severe instability (relative)</li>
+      <li><strong>Cooling:</strong> Start as soon as possible; cold IV fluids + surface cooling; target 32–36°C (institutional protocol)</li>
+      <li><strong>Maintenance:</strong> 12–24 hours; monitor core temperature continuously</li>
+      <li><strong>Rewarming:</strong> 0.25–0.5°C/h; avoid hyperthermia</li>
+      <li><strong>Post-rewarming:</strong> Maintain normothermia (36.5–37.5°C) for at least 72 hours — fever is associated with worse outcomes</li>
+      <li><strong>Prognostication:</strong> Delay until ≥72 hours after rewarming; use multimodal assessment (clinical examination, EEG, biomarkers, imaging)</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: SPECIAL POPULATIONS -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 09 · Applied</div>
+      <div class="mod-title">Special <em>Populations</em></div>
+      <div class="mod-intro">Neonates, children, the elderly, pregnant patients, burns, trauma, and spinal cord injury — where thermoregulation is different.</div>
+    </div>
+
+    <h2 class="subhead">Neonates and Infants</h2>
+    <ul class="clist">
+      <li><strong>High surface area to volume ratio:</strong> ~3× that of adults — rapid heat loss</li>
+      <li><strong>Limited shivering ability:</strong> Rely on non-shivering thermogenesis (brown adipose tissue) — cannot mount a sustained shivering response</li>
+      <li><strong>Thin skin, poor insulation:</strong> Subcutaneous fat is limited, especially in preterm infants</li>
+      <li><strong>High metabolic rate:</strong> Oxygen consumption is 6 mL/kg/min (vs 3–4 in adults)</li>
+      <li><strong>Narrow interthreshold range:</strong> Thermoregulation is less precise</li>
+      <li><strong>Consequences:</strong> Hypothermia → increased oxygen consumption, hypoglycaemia, acidosis, pulmonary vasoconstriction, apnoea, bradycardia, poor weight gain</li>
+      <li><strong>Management:</strong> Warm delivery room (26°C), skin-to-skin contact, radiant warmers, incubators, warmed humidified gases, warm IV fluids, hat, plastic wrap for preterm</li>
+      <li><strong>Target:</strong> Core temperature 36.5–37.5°C</li>
+    </ul>
+
+    <h2 class="subhead">Children</h2>
+    <ul class="clist">
+      <li><strong>Higher surface area to volume ratio than adults:</strong> Greater heat loss</li>
+      <li><strong>Shivering ability:</strong> Present but less efficient than adults; may not shiver until core temperature is significantly reduced</li>
+      <li><strong>Higher metabolic rate:</strong> More heat production but also more heat loss</li>
+      <li><strong>Consequences of hypothermia:</strong> Similar to neonates — increased oxygen consumption, acidosis, delayed recovery, increased infection risk</li>
+      <li><strong>Management:</strong> Forced-air warming, warm IV fluids, humidified gases, increased ambient temperature, hats, pre-warming</li>
+      <li><strong>Target:</strong> Core temperature 36.5–37.5°C</li>
+    </ul>
+
+    <h2 class="subhead">The Elderly</h2>
+    <ul class="clist">
+      <li><strong>Impaired thermoregulation:</strong> Reduced ability to detect temperature changes and mount a response</li>
+      <li><strong>Reduced shivering:</strong> Decreased muscle mass and efficiency</li>
+      <li><strong>Delayed vasoconstriction:</strong> Reduced sympathetic response</li>
+      <li><strong>Comorbidities:</strong> Diabetes, hypothyroidism, malnutrition, medications (beta-blockers, antipsychotics, diuretics)</li>
+      <li><strong>Consequences:</strong> Greater risk of perioperative hypothermia and its complications</li>
+      <li><strong>Management:</strong> Pre-warming, active warming throughout, monitoring core temperature, avoiding cold fluids, warm environment</li>
+      <li><strong>Target:</strong> Core temperature ≥36.0°C</li>
+    </ul>
+
+    <h2 class="subhead">Pregnancy</h2>
+    <ul class="clist">
+      <li><strong>Physiological changes:</strong> Increased metabolic rate (~20%), increased oxygen consumption, reduced FRC, increased minute ventilation</li>
+      <li><strong>Thermoregulation:</strong> Generally intact, but the fetus is dependent on maternal temperature — maternal hyperthermia can cause fetal distress</li>
+      <li><strong>Perioperative:</strong> Pregnant patients lose heat rapidly under anaesthesia; fetal monitoring important</li>
+      <li><strong>Management:</strong> Active warming, warm IV fluids, left lateral tilt, monitoring maternal core temperature (target 36.5–37.5°C), fetal heart rate monitoring</li>
+      <li><strong>Avoid:</strong> Hyperthermia (>38°C) — associated with fetal malformations (neural tube defects) in the first trimester and fetal distress later</li>
+      <li><strong>Note:</strong> Maternal fever during labour is common (epidural-related or inflammatory) — distinguish from infection</li>
+    </ul>
+
+    <h2 class="subhead">Burns</h2>
+    <ul class="clist">
+      <li><strong>Loss of skin barrier:</strong> Massive evaporative heat loss — can be >5000 kcal/day in major burns</li>
+      <li><strong>Thermoregulatory failure:</strong> Loss of sweat glands and vasomotor control in burned areas</li>
+      <li><strong>Increased metabolic rate:</strong> Hypermetabolic response — up to 2× normal</li>
+      <li><strong>Risk of hypothermia:</strong> During resuscitation, transport, and surgery — especially during dressing changes and debridement</li>
+      <li><strong>Management:</strong> Warm environment (28–32°C), warmed IV fluids, heated humidified gases, forced-air warming, occlusive dressings, early excision and grafting</li>
+      <li><strong>Target:</strong> Core temperature 36.5–37.5°C; avoid both hypothermia and hyperthermia</li>
+    </ul>
+
+    <h2 class="subhead">Trauma</h2>
+    <ul class="clist">
+      <li><strong>The trauma triad:</strong> Hypothermia, acidosis, coagulopathy — each worsens the others</li>
+      <li><strong>Hypothermia in trauma:</strong> Common (up to 66% of major trauma patients); caused by exposure, cold fluids, impaired thermoregulation from shock, and alcohol/drugs</li>
+      <li><strong>Consequences:</strong> Increased mortality, coagulopathy, arrhythmias, delayed recovery</li>
+      <li><strong>Management:</strong> Warm environment, warm IV fluids, forced-air warming, humidified gases, warm blankets, remove wet clothes</li>
+      <li><strong>Damage control resuscitation:</strong> Includes active warming — warm all fluids and blood products</li>
+      <li><strong>Target:</strong> Core temperature ≥36.0°C — active warming is a priority in major trauma</li>
+    </ul>
+
+    <h2 class="subhead">Spinal Cord Injury</h2>
+    <ul class="clist">
+      <li><strong>Thermoregulatory failure:</strong> Interruption of descending sympathetic pathways → impaired vasoconstriction, shivering, and sweating below the level of injury</li>
+      <li><strong>Poikilothermia:</strong> Body temperature tends to follow environmental temperature — patients become hypothermic in cold environments and hyperthermic in hot environments</li>
+      <li><strong>Risk during surgery:</strong> High risk of hypothermia; impaired ability to mount a thermoregulatory response</li>
+      <li><strong>Management:</strong> Warm environment, active warming, monitoring core temperature, avoid cold fluids, careful monitoring for hyperthermia in warm environments</li>
+      <li><strong>Autonomic dysreflexia:</strong> Can cause severe hypertension and hyperthermia — a separate emergency</li>
+      <li><strong>Target:</strong> Core temperature 36.5–37.5°C</li>
+    </ul>
+
+    <h2 class="subhead">Other Populations</h2>
+    <ul class="clist">
+      <li><strong>Obese patients:</strong> Increased insulation (adipose tissue) but also increased heat loss from large surface area; risk of hypothermia is similar to non-obese; warming is important</li>
+      <li><strong>Malnourished patients:</strong> Reduced metabolic rate and subcutaneous fat → increased risk of hypothermia</li>
+      <li><strong>Hypothyroid patients:</strong> Reduced metabolic rate → increased risk of hypothermia; may need higher ambient temperature and active warming</li>
+      <li><strong>Patients on beta-blockers:</strong> Impaired thermoregulatory response (reduced shivering, vasoconstriction); increased risk of hypothermia</li>
+      <li><strong>Patients on antipsychotics:</strong> Impaired thermoregulation; risk of NMS and hyperthermia</li>
+      <li><strong>Patients on alcohol or drugs:</strong> Impaired thermoregulation, vasodilation, increased heat loss; common in trauma and emergency settings</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Thirty questions across all modules — from thermoregulatory physiology to malignant hyperthermia and therapeutic temperature management. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--accent-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--accent)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/9)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  // ── BASIC ──
+  {q:"What is the normal range for core body temperature?",opts:["35.5–36.5°C","36.5–37.5°C","37.5–38.5°C","38.5–39.5°C"],ans:1,exp:"Normal core body temperature is 36.5–37.5°C. Rectal temperature is typically 0.3–0.5°C higher than oral; axillary is 0.3–0.5°C lower."},
+  {q:"Which hypothalamic region is the primary thermoregulatory centre?",opts:["Posterior hypothalamus","Anterior hypothalamus (preoptic area)","Lateral hypothalamus","Ventromedial hypothalamus"],ans:1,exp:"The preoptic area of the anterior hypothalamus is the primary thermoregulatory centre. It integrates input from peripheral and central thermoreceptors and orchestrates the response."},
+  {q:"What is the interthreshold range in a normal, awake adult?",opts:["~0.1°C","~0.4°C","~2.0°C","~4.0°C"],ans:1,exp:"The interthreshold range is the range of core temperatures within which no thermoregulatory response occurs. It is normally ~0.4°C. Under general anaesthesia, it widens dramatically (up to 4°C)."},
+  {q:"Which of the following is the most accurate site for core temperature measurement?",opts:["Axillary","Oral","Pulmonary artery","Rectal"],ans:2,exp:"Pulmonary artery temperature is the gold standard for core temperature. Oesophageal, nasopharyngeal, tympanic, and bladder are good surrogates. Axillary and oral are peripheral and less accurate."},
+  {q:"What is the recommended SpO₂ target for a post-cardiac arrest patient?",opts:["88–92%","92–96%","94–98%","100%"],ans:2,exp:"Post-cardiac arrest, target SpO₂ 94–98% and PaCO₂ 35–45 mmHg. Avoid both hypoxaemia and hyperoxia. The BOX trial showed no benefit from higher oxygen targets."},
+  {q:"Which mechanism is responsible for the initial rapid fall in core temperature after induction of general anaesthesia?",opts:["Heat loss to the environment","Redistribution of heat from core to periphery","Decreased metabolic rate","Cold IV fluids"],ans:1,exp:"The initial rapid fall in core temperature (first 30–60 minutes) is due to redistribution — anaesthetic-induced vasodilation causes core heat to move to the periphery. Pre-warming before induction reduces this."},
+  {q:"What is the specific antidote for malignant hyperthermia?",opts:["Dantrolene","Bromocriptine","Cyproheptadine","Methylene blue"],ans:0,exp:"Dantrolene is the specific antidote for malignant hyperthermia. It inhibits calcium release from the sarcoplasmic reticulum by binding to the ryanodine receptor (RYR1). Dose: 2.5 mg/kg IV bolus, repeated as needed."},
+  // ── INTERMEDIATE ──
+  {q:"Which of the following is NOT a trigger for malignant hyperthermia?",opts:["Sevoflurane","Succinylcholine","Propofol","Desflurane"],ans:2,exp:"Propofol is SAFE in malignant hyperthermia. Trigger agents are all volatile anaesthetics (sevoflurane, desflurane, isoflurane, halothane, enflurane) and succinylcholine. Safe agents include propofol, opioids, nitrous oxide, and non-depolarising muscle relaxants."},
+  {q:"What is the most sensitive early sign of malignant hyperthermia?",opts:["Hyperthermia","Unexplained rise in ETCO₂","Masseter spasm","Tachycardia"],ans:1,exp:"An unexplained rise in ETCO₂ despite increased ventilation is the most sensitive early sign of MH. Hyperthermia is a late sign — do not wait for it to start treatment. Tachycardia and masseter spasm may also be early."},
+  {q:"Which of the following is a consequence of perioperative hypothermia?",opts:["Decreased surgical site infection","Improved wound healing","Increased bleeding and transfusion requirements","Shorter hospital stay"],ans:2,exp:"Perioperative hypothermia impairs platelet function and clotting factor activity → increased bleeding and transfusion requirements. It also increases surgical site infection, delays wound healing, and prolongs hospital stay."},
+  {q:"What is the target core temperature for a patient undergoing therapeutic hypothermia after cardiac arrest?",opts:["30–32°C","32–36°C","36–37°C","37–38°C"],ans:1,exp:"Targeted temperature management (TTM) after cardiac arrest: target 32–36°C for 12–24 hours. The TTM trial (2013) showed no difference between 33°C and 36°C — both are acceptable."},
+  {q:"Which rewarming method is most effective for severe hypothermia with cardiac arrest?",opts:["Forced-air warming","Warm IV fluids","Extracorporeal rewarming (CPB/ECMO)","Heated humidified oxygen"],ans:2,exp:"Extracorporeal rewarming (cardiopulmonary bypass or ECMO) is the gold standard for severe hypothermia with cardiac arrest. It provides rapid core rewarming and circulatory support. 'Not dead until warm and dead.'"},
+  {q:"What is the recommended dose of dantrolene for malignant hyperthermia?",opts:["0.5 mg/kg","1 mg/kg","2.5 mg/kg","10 mg/kg"],ans:2,exp:"Dantrolene 2.5 mg/kg IV bolus, repeated every 5–10 minutes until stable (max 10 mg/kg). Each 20 mg vial must be reconstituted with 60 mL sterile water."},
+  {q:"Which of the following is TRUE about fever vs hyperthermia?",opts:["Antipyretics are effective in both","Fever has an elevated set point; hyperthermia has a normal set point","Fever responds to cooling; hyperthermia does not","Hyperthermia is always infectious in origin"],ans:1,exp:"Fever has an elevated hypothalamic set point (the body actively defends the higher temperature); hyperthermia has a normal set point (the body tries to dissipate heat). Antipyretics work in fever (lowering the set point) but not in hyperthermia."},
+  {q:"What is the first-line treatment for heat stroke?",opts:["Antipyretics","Rapid cooling (ice water immersion)","Dantrolene","Bromocriptine"],ans:1,exp:"Heat stroke is a medical emergency. Treatment is rapid cooling — ice water immersion is the most effective. Antipyretics are ineffective (normal set point) and may worsen liver injury. Dantrolene is for MH, not heat stroke."},
+  // ── ADVANCED ──
+  {q:"Which of the following is a key difference between malignant hyperthermia (MH) and neuroleptic malignant syndrome (NMS)?",opts:["MH is triggered by dopamine antagonists; NMS by volatile anaesthetics","MH is triggered by volatile anaesthetics and succinylcholine; NMS by dopamine antagonists","MH has a normal set point; NMS has an elevated set point","MH responds to bromocriptine; NMS responds to dantrolene"],ans:1,exp:"MH is triggered by volatile anaesthetics and succinylcholine. NMS is triggered by dopamine antagonists. Both are hyperthermic syndromes with a normal set point. Dantrolene is effective in MH (less so in NMS); bromocriptine is more important in NMS."},
+  {q:"A patient with a RYR1 mutation develops hyperthermia, rigidity, and hypercarbia during sevoflurane anaesthesia. What is the immediate management?",opts:["Switch to propofol and continue surgery","Stop triggers, hyperventilate with 100% O₂, give dantrolene 2.5 mg/kg IV","Give bromocriptine 2.5 mg IV","Cool with ice packs only"],ans:1,exp:"Immediate management of MH: STOP triggers (sevoflurane and succinylcholine), hyperventilate with 100% O₂, call for help/MH kit, give dantrolene 2.5 mg/kg IV, actively cool, and treat complications. Do not delay dantrolene."},
+  {q:"What is the mechanism of action of dantrolene?",opts:["Inhibits calcium release from sarcoplasmic reticulum","Blocks sodium channels","Stimulates dopamine receptors","Inhibits serotonin reuptake"],ans:0,exp:"Dantrolene inhibits calcium release from the sarcoplasmic reticulum by binding to the ryanodine receptor (RYR1). This reduces the sustained muscle contraction and hypermetabolism of malignant hyperthermia."},
+  {q:"Which of the following is NOT a recommended treatment for shivering during therapeutic hypothermia?",opts:["Fentanyl","Dexmedetomidine","Meperidine (pethidine)","Active warming of the whole body"],ans:3,exp:"Active warming of the whole body would counteract the therapeutic hypothermia. For shivering during TTM, use surface counterwarming (face/hands), opioids (fentanyl, meperidine), dexmedetomidine, clonidine, magnesium, or neuromuscular blockade."},
+  {q:"What is the target temperature for therapeutic hypothermia in neonatal hypoxic-ischaemic encephalopathy?",opts:["30–32°C","33.5–34.5°C","35–36°C","36.5–37.5°C"],ans:1,exp:"Neonatal HIE: target 33.5–34.5°C for 72 hours. This reduces mortality and neurodevelopmental disability. Cooling should be started within 6 hours of birth."},
+  {q:"Which of the following is a recognised complication of therapeutic hypothermia?",opts:["Hyperkalaemia","Coagulopathy","Hyperglycaemia","All of the above"],ans:3,exp:"Therapeutic hypothermia can cause coagulopathy (impaired platelet function and clotting factors), hyperglycaemia (insulin resistance), electrolyte disturbances, bradycardia, and increased infection risk. Hyperkalaemia can occur during rewarming."},
+  {q:"What is the 'afterdrop' phenomenon during rewarming?",opts:["A further fall in core temperature after rewarming begins","A rise in core temperature after rewarming begins","A fall in peripheral temperature","A rise in peripheral temperature"],ans:0,exp:"Afterdrop is a continued fall in core temperature after rewarming begins, due to the return of cold peripheral blood to the core. Prevent by active core warming (warm IV fluids, humidified gases, extracorporeal rewarming)."},
+  {q:"Which of the following is TRUE about the Swiss staging system for hypothermia?",opts:["Stage I is unconscious, no shivering","Stage II is conscious, shivering","Stage III is unconscious, vital signs present","Stage IV is conscious, shivering"],ans:2,exp:"Swiss staging: Stage I = conscious, shivering (mild); Stage II = impaired consciousness, no shivering (moderate); Stage III = unconscious, vital signs present (severe); Stage IV = vital signs absent (profound); Stage V = death."},
+  {q:"What is the recommended rewarming rate for therapeutic hypothermia?",opts:["0.1–0.2°C/h","0.25–0.5°C/h","1.0–2.0°C/h","2.0–5.0°C/h"],ans:1,exp:"Rewarming should be slow — 0.25–0.5°C/h — to avoid complications such as afterdrop, rewarming shock, hyperkalaemia, and arrhythmias. Faster rewarming is associated with worse outcomes."},
+  {q:"A patient on haloperidol develops rigidity, hyperthermia, and autonomic instability. What is the most likely diagnosis?",opts:["Malignant hyperthermia","Neuroleptic malignant syndrome","Serotonin syndrome","Thyroid storm"],ans:1,exp:"Neuroleptic malignant syndrome (NMS) is triggered by dopamine antagonists (e.g., haloperidol). Features: 'lead-pipe' rigidity, hyperthermia, autonomic instability, altered mental status, elevated CK. Treatment: stop drug, dantrolene, bromocriptine, cooling."},
+  {q:"Which of the following is NOT a risk factor for perioperative hypothermia?",opts:["Prolonged surgery","General anaesthesia","Young age (20–30 years)","Low BMI"],ans:2,exp:"Young healthy adults (20–30 years) are at LOWER risk of perioperative hypothermia compared to neonates, the elderly, and those with low BMI. Risk factors include extremes of age, low BMI, prolonged surgery, general anaesthesia, and large exposed surface area."},
+  {q:"What is the target core temperature for a patient undergoing cardiac surgery with cardiopulmonary bypass?",opts:["32–34°C","28–32°C (or 18–20°C for circulatory arrest)","34–36°C","36–37°C"],ans:1,exp:"Cardiac surgery with CPB typically uses moderate hypothermia (28–32°C) to reduce metabolic demand and ischaemic injury. Deep hypothermic circulatory arrest (DHCA) uses 18–20°C for procedures requiring circulatory arrest."},
+  {q:"Which of the following is a key difference between serotonin syndrome and neuroleptic malignant syndrome?",opts:["Serotonin syndrome has slower onset (days); NMS has rapid onset (hours)","Serotonin syndrome has rapid onset (hours); NMS has slower onset (days)","Serotonin syndrome is triggered by dopamine antagonists; NMS by serotonergic drugs","Serotonin syndrome responds to dantrolene; NMS responds to cyproheptadine"],ans:1,exp:"Serotonin syndrome has a rapid onset (within 24 hours of starting/increasing a serotonergic drug), with clonus and hyperreflexia prominent. NMS has a slower onset (days), with rigidity more prominent. Treatment: serotonin syndrome → cyproheptadine; NMS → dantrolene/bromocriptine."},
+  {q:"A patient with a high spinal cord injury (T4) is undergoing surgery. What is the primary thermoregulatory concern?",opts:["Hyperthermia in cold environments","Poikilothermia and hypothermia","Increased shivering ability","Normal thermoregulation below the level of injury"],ans:1,exp:"Spinal cord injury above T6 causes thermoregulatory failure below the level of injury — impaired vasoconstriction, shivering, and sweating. Patients become poikilothermic (body temperature follows environmental temperature) and are at high risk of hypothermia in cold environments."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--accent);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — thermoregulation is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
