@@ -204,6 +204,10 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
         <button class="tbtn" data-topic="cardiac">Cardiac Drugs</button>
         <button class="tbtn" data-topic="pediatric">Pediatric Dosing</button>
         <button class="tbtn" data-topic="obstetric">Obstetric Use</button>
+        <button class="tbtn" data-topic="volatile">Volatile Agents</button>
+        <button class="tbtn" data-topic="icu">ICU</button>
+        <button class="tbtn" data-topic="airway">Airway</button>
+        <button class="tbtn" data-topic="trauma">Trauma</button>
       </div>
       <div class="filter-status" id="filter-status">
         <span id="filter-status-text">Filtering: —</span>
@@ -225,7 +229,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
       </div>
 
       <!-- 001: Dexmedetomidine -->
-      <a href="drugs/drug-001-dexmedetomidine.html" class="cc" data-topics="sedatives,pediatric" data-title="Dexmedetomidine" data-date="2026-08-01" data-keywords="alpha-2 agonist, sedation, ICU, awake fibreoptic, premedication, bradycardia, sympatholysis, cooperative sedation, opioid sparing, delirium, intranasal, loading dose">
+      <a href="drugs/drug-001-dexmedetomidine.html" class="cc" data-topics="sedatives,pediatric,icu" data-title="Dexmedetomidine" data-date="2026-08-01" data-keywords="alpha-2 agonist, sedation, ICU, awake fibreoptic, premedication, bradycardia, sympatholysis, cooperative sedation, opioid sparing, delirium, intranasal, loading dose">
         <div class="cc-left">
           <span class="cc-num">001</span>
           <span class="cc-date">Aug 2026</span>
@@ -289,7 +293,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
       </a>
 
       <!-- 004: Ketamine -->
-      <a href="drugs/drug-004-ketamine.html" class="cc" data-topics="induction,sedatives,pediatric" data-title="Ketamine" data-date="2026-09-06" data-keywords="dissociative anaesthetic, NMDA antagonist, trauma, hypovolaemia, bronchodilator, emergence phenomena, sub-dissociative analgesia, ICU, depression, paediatric IM">
+      <a href="drugs/drug-004-ketamine.html" class="cc" data-topics="induction,sedatives,pediatric,trauma,icu" data-title="Ketamine" data-date="2026-09-06" data-keywords="dissociative anaesthetic, NMDA antagonist, trauma, hypovolaemia, bronchodilator, emergence phenomena, sub-dissociative analgesia, ICU, depression, paediatric IM">
         <div class="cc-left">
           <span class="cc-num">004</span>
           <span class="cc-date">Sep 2026</span>
@@ -311,7 +315,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
       </a>
 
       <!-- 005: Sevoflurane -->
-      <a href="drugs/drug-005-sevoflurane.html" class="cc" data-topics="induction,maintenance,pediatric,neuro,volatile" data-title="Sevoflurane" data-date="2026-09-14" data-keywords="sevoflurane, volatile anaesthetic, inhalational induction, MAC, blood gas coefficient, compound A, malignant hyperthermia, emergence agitation, pediatric, neuroanaesthesia, maintenance, day-case, bronchodilator, low flow, fresh gas flow">
+      <a href="drugs/drug-005-sevoflurane.html" class="cc" data-topics="induction,volatile,pediatric" data-title="Sevoflurane" data-date="2026-09-14" data-keywords="sevoflurane, volatile anaesthetic, inhalational induction, MAC, blood gas coefficient, compound A, malignant hyperthermia, emergence agitation, pediatric, neuroanaesthesia, maintenance, day-case, bronchodilator, low flow, fresh gas flow">
         <div class="cc-left">
           <span class="cc-num">005</span>
           <span class="cc-date">Sep 2026</span>
@@ -333,7 +337,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
       </a>
 
       <!-- 006: Magnesium Sulfate -->
-      <a href="drugs/drug-006-magnesium.html" class="cc" data-topics="obstetric,cardiac,icu,resuscitation" data-title="Magnesium Sulfate" data-date="2026-09-21" data-keywords="magnesium, electrolyte, eclampsia, pre-eclampsia, torsades de pointes, antiarrhythmic, obstetric, neuroprotection, analgesic adjunct, neuromuscular blockade, calcium gluconate, toxicity, deep tendon reflexes, renal impairment, hypomagnesaemia">
+      <a href="drugs/drug-006-magnesium.html" class="cc" data-topics="obstetric,cardiac,icu" data-title="Magnesium Sulfate" data-date="2026-09-21" data-keywords="magnesium, electrolyte, eclampsia, pre-eclampsia, torsades de pointes, antiarrhythmic, obstetric, neuroprotection, analgesic adjunct, neuromuscular blockade, calcium gluconate, toxicity, deep tendon reflexes, renal impairment, hypomagnesaemia">
         <div class="cc-left">
           <span class="cc-num">006</span>
           <span class="cc-date">Sep 2026</span>
@@ -349,6 +353,72 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
             <span class="tag tk">ICU</span>
             <span class="tag tp">Analgesic</span>
             <span class="tag tt">Resuscitation</span>
+          </div>
+          <span class="cc-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- 007: Rocuronium -->
+      <a href="drugs/drug-007-rocuronium.html" class="cc" data-topics="nmba,airway,pediatric,reversal" data-title="Rocuronium" data-date="2026-09-28" data-keywords="rocuronium, aminosteroid, non-depolarising, neuromuscular blocker, RSI, rapid sequence intubation, sugammadex, neostigmine, reversal, airway, difficult airway, paediatric dosing, volatile interaction, magnesium">
+        <div class="cc-left">
+          <span class="cc-num">007</span>
+          <span class="cc-date">Sep 2026</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-title">Rocuronium</div>
+          <div class="cc-exc">Fast enough for a rapid sequence intubation, and — since the arrival of its dedicated reversal agent — genuinely reversible at almost any depth of block. The default non-depolarising relaxant, re-examined.</div>
+        </div>
+        <div class="cc-right">
+          <div class="cc-tags">
+            <span class="tag ta">NMBA</span>
+            <span class="tag tc">RSI</span>
+            <span class="tag tk">Airway</span>
+            <span class="tag tp">Pediatric</span>
+            <span class="tag tt">Reversal</span>
+          </div>
+          <span class="cc-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- 008: Desflurane -->
+      <a href="drugs/drug-008-desflurane.html" class="cc" data-topics="volatile,pediatric,icu" data-title="Desflurane" data-date="2026-10-05" data-keywords="desflurane, volatile anaesthetic, MAC, blood gas coefficient, fast onset, fast offset, sympathetic activation, pungency, carbon monoxide, desiccated absorbent, malignant hyperthermia, environmental impact, global warming potential, F-gas regulation, bariatric, neuroanaesthesia, day-case">
+        <div class="cc-left">
+          <span class="cc-num">008</span>
+          <span class="cc-date">Oct 2026</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-title">Desflurane</div>
+          <div class="cc-exc">The fastest volatile agent to titrate in either direction — and, increasingly, the one whose place in the cupboard is being decided as much by regulation as by pharmacology.</div>
+        </div>
+        <div class="cc-right">
+          <div class="cc-tags">
+            <span class="tag ta">Volatile</span>
+            <span class="tag tc">Maintenance</span>
+            <span class="tag tk">Neuro</span>
+            <span class="tag tp">Bariatric</span>
+            <span class="tag tt">Environment</span>
+          </div>
+          <span class="cc-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- 009: Atracurium -->
+      <a href="drugs/drug-009-atracurium.html" class="cc" data-topics="nmba,icu,pediatric" data-title="Atracurium" data-date="2026-10-12" data-keywords="atracurium, benzylisoquinolinium, non-depolarising, neuromuscular blocker, Hofmann elimination, laudanosine, histamine release, organ-independent, renal failure, hepatic failure, ICU infusion, neostigmine, sugammadex does not reverse, paediatric dosing">
+        <div class="cc-left">
+          <span class="cc-num">009</span>
+          <span class="cc-date">Oct 2026</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-title">Atracurium</div>
+          <div class="cc-exc">A muscle relaxant that breaks itself down in the bloodstream regardless of how the liver or kidneys are doing — genuinely useful in exactly the patients where that independence matters most.</div>
+        </div>
+        <div class="cc-right">
+          <div class="cc-tags">
+            <span class="tag ta">NMBA</span>
+            <span class="tag tc">ICU</span>
+            <span class="tag tk">Renal / Hepatic</span>
+            <span class="tag tp">Pediatric</span>
+            <span class="tag tt">Histamine Release</span>
           </div>
           <span class="cc-arrow">→</span>
         </div>
