@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desflurane — Drug Deep Dive | Ode to the OR</title>
+<meta name="description" content="A deep dive into desflurane — mechanism, pharmacokinetics, clinical uses, dosing, the environmental debate, and the honest bedside reality of the fastest volatile anaesthetic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --plum:    #7a5abf;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:66px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+.back-link{position:fixed;top:80px;left:5vw;z-index:500;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.back-link:hover{color:var(--rust);}
+
+.wrap{max-width:820px;margin:0 auto;padding:9rem 5vw 6rem;}
+
+.ey{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.ey::before{content:'';width:30px;height:1px;background:var(--sage);}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.03;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;}
+h1 em{font-style:italic;color:var(--rust);}
+
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:2.2rem;line-height:1.4;}
+
+.meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .68rem;border:1px solid;text-decoration:none;display:inline-block;}
+.ta{border-color:var(--sage);color:var(--sage);}
+.tc{border-color:var(--rust);color:var(--rust);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.tp{border-color:var(--plum);color:var(--plum);}
+.tt{border-color:var(--teal);color:var(--teal);}
+
+/* Quick facts strip */
+.quickfacts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);
+  border:1px solid var(--border);margin:2.2rem 0 2.8rem;
+}
+@media(max-width:700px){.quickfacts{grid-template-columns:repeat(2,1fr);}}
+.qf{background:var(--surface);padding:1.1rem 1.2rem;}
+.qf-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block;}
+.qf-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);line-height:1.2;}
+
+.divider{height:1px;background:var(--border);margin:2.8rem 0;}
+
+h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--rust);margin-bottom:1rem;letter-spacing:-.01em;}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin:1.6rem 0 .6rem;}
+
+p{font-size:.94rem;color:var(--muted);margin-bottom:1rem;}
+p strong{color:var(--text);font-weight:500;}
+ul, ol{margin:0 0 1.2rem 1.3rem;color:var(--muted);font-size:.94rem;}
+li{margin-bottom:.5rem;}
+li strong{color:var(--text);font-weight:500;}
+
+/* Table of contents */
+.toc{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.7rem;margin:0 0 2.8rem;}
+.toc h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem;}
+@media(max-width:700px){.toc-grid{grid-template-columns:1fr;}}
+.toc a{font-size:.8rem;color:var(--sage);text-decoration:none;display:flex;gap:.5rem;align-items:baseline;transition:color .2s;}
+.toc a:hover{color:var(--rust);}
+.toc a::before{content:'—';color:var(--faint);font-size:.75rem;}
+
+/* Mechanism panel */
+.mech-panel{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;
+}
+.mech-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--rust), var(--gold));}
+.mech-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--rust);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+
+/* Receptor comparison bars (repurposed for agent comparisons) */
+.receptor-bars{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.rb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:1rem;align-items:center;}
+.rb-label{font-size:.78rem;color:var(--text);font-weight:500;}
+.rb-track{height:20px;background:var(--card);border-radius:2px;overflow:hidden;position:relative;}
+.rb-fill{height:100%;background:linear-gradient(90deg,var(--rust),var(--gold));border-radius:2px;}
+.rb-val{font-size:.75rem;color:var(--muted);text-align:right;}
+
+/* Dosing table */
+.dose-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.84rem;}
+.dose-table th{background:var(--surface);border:1px solid var(--border);padding:.7rem 1rem;text-align:left;font-weight:600;color:var(--text);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.dose-table td{border:1px solid var(--border);padding:.7rem 1rem;color:var(--muted);vertical-align:top;}
+.dose-table tr:hover td{background:var(--deep);}
+.dose-table td strong{color:var(--text);}
+
+/* Pearl / alert / caution boxes */
+.pearl-box{background:var(--card);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.pearl-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.pearl-box p:last-child{margin-bottom:0;}
+
+.alert-box{background:rgba(122,32,32,.06);border:1px solid rgba(122,32,32,.2);border-left:3px solid var(--rust);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.alert-box h3{margin-top:0;color:var(--rust);font-size:1.05rem;}
+.alert-box p:last-child{margin-bottom:0;}
+
+.caution-box{background:rgba(154,108,26,.07);border:1px solid rgba(154,108,26,.22);border-left:3px solid var(--gold);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.caution-box h3{margin-top:0;color:var(--gold);font-size:1.05rem;}
+.caution-box p:last-child{margin-bottom:0;}
+
+.honest-box{background:var(--surface);border:1px dashed var(--faint);padding:1.4rem 1.6rem;margin:1.6rem 0;}
+.honest-box h3{margin-top:0;color:var(--sage);font-size:1.05rem;}
+.honest-box p:last-child{margin-bottom:0;}
+
+/* Comparison grid for clinical uses */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0;}
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;}}
+.use-card{background:var(--deep);padding:1.4rem 1.6rem;}
+.use-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--rust);margin-bottom:.4rem;}
+.use-card p{font-size:.8rem;margin-bottom:0;line-height:1.65;}
+
+/* Quote box */
+.quote-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text);border-left:3px solid var(--sage);padding-left:1.4rem;margin:1.8rem 0;line-height:1.55;}
+.quote-box .src{display:block;font-family:'Instrument Sans',sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* Ref box */
+.refbox{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.6rem;margin-top:2rem;font-size:.78rem;color:var(--muted);}
+.refbox h3{margin-top:0;font-size:.95rem;}
+.refbox ol{margin-left:1.1rem;}
+.refbox li{margin-bottom:.4rem;}
+
+.cc-meta-end{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.62rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;flex-wrap:wrap;gap:.5rem;}
+
+.disclaim{font-size:.72rem;color:var(--faint);margin-top:2.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1.2rem;}
+
+footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.18rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.mech-panel, .pearl-box, .alert-box, .use-card{animation:fadeUp .6s both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../drug-deep-dives.html">Drug Deep Dives</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../updates-guidelines.html">Updates</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<a href="../drug-deep-dives.html" class="back-link">← Back to Drug Deep Dives</a>
+
+<div class="wrap">
+
+  <div class="ey">Drug Deep Dive · Volatile Anaesthetic · No. 008</div>
+  <h1>Desflurane</h1>
+  <p class="subtitle">The fastest volatile agent to titrate in either direction — and, increasingly, the one whose place in the cupboard is being decided as much by regulation as by pharmacology.</p>
+
+  <div class="meta-row">
+    <span class="tag ta">Volatile Anaesthetic</span>
+    <span class="tag tc">Maintenance</span>
+    <span class="tag tk">Neuroanaesthesia</span>
+    <span class="tag tp">Bariatric / Day-Case</span>
+    <span class="tag tt">Environmental Impact</span>
+  </div>
+
+  <div class="quickfacts">
+    <div class="qf"><span class="qf-label">Class</span><span class="qf-val">Halogenated Volatile Anaesthetic (Ether)</span></div>
+    <div class="qf"><span class="qf-label">MAC (adult, O₂)</span><span class="qf-val">~6.0–7.0%</span></div>
+    <div class="qf"><span class="qf-label">Blood:Gas Coefficient</span><span class="qf-val">~0.42</span></div>
+    <div class="qf"><span class="qf-label">Reversal Agent</span><span class="qf-val">None — terminate delivery, ventilate</span></div>
+  </div>
+
+  <p>Desflurane occupies a genuinely unusual position among the volatile agents: pharmacologically it is arguably the most controllable of the halogenated anaesthetics, with the fastest onset and offset of any potent inhalational agent in routine use — and yet its clinical footprint has been shrinking, not through any newly discovered safety concern, but because of its environmental impact. It requires a dedicated heated vaporiser owing to a boiling point close to room temperature, it is too pungent for inhalational induction, and it has recently gone from a mainstream default in some settings to a restricted or decommissioned agent in others. All of that is worth understanding together, not as separate trivia. Here is what matters about desflurane, from the physical chemistry up to the current regulatory picture.</p>
+
+  <div class="toc">
+    <h4>In This Deep Dive</h4>
+    <div class="toc-grid">
+      <a href="#mechanism">1. Mechanism of Action</a>
+      <a href="#pharmacokinetics">2. Pharmacokinetics</a>
+      <a href="#effects">3. Physiological Effects, System by System</a>
+      <a href="#uses">4. Clinical Uses</a>
+      <a href="#dosing">5. Dosing &amp; MAC</a>
+      <a href="#cautions">6. Cautions, Contraindications &amp; Interactions</a>
+      <a href="#environment">7. The Environmental Question</a>
+      <a href="#pediatric">8. Paediatric Considerations</a>
+      <a href="#bedside">9. What Actually Happens at the Bedside</a>
+      <a href="#pearls">10. Pearls &amp; Pitfalls</a>
+      <a href="#references">11. References</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="mechanism">1. Mechanism of Action</h2>
+  <p>Desflurane is a fluorinated methyl ethyl ether, structurally very similar to isoflurane (differing by a single fluorine substitution in place of a chlorine atom) but with markedly different physical properties as a direct consequence of that substitution.</p>
+
+  <div class="mech-panel">
+    <div class="mech-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rust);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Where It Acts, and Why
+    </div>
+    <p style="margin-bottom:1rem;"><strong>GABA-A receptor potentiation and related ion channels:</strong> like the other modern volatile agents, desflurane produces general anaesthesia through a combination of GABA-A receptor potentiation, glycine receptor effects contributing to spinally-mediated immobility, and background potassium channel activation — the same broad multi-receptor mechanism shared across the halogenated ethers, with anaesthetic potency correlating with lipid solubility (the Meyer-Overton relationship) as much as with any single receptor-binding profile.</p>
+    <p style="margin-bottom:0;"><strong>Physical chemistry, not receptor pharmacology, defines desflurane's clinical identity:</strong> desflurane's single fluorine-for-chlorine substitution relative to isoflurane dramatically lowers its boiling point (~23°C, versus isoflurane's ~48°C) and its blood:gas solubility (~0.42, the lowest of the halogenated agents in clinical use, comparable to nitrous oxide). These two physical properties — not any difference in receptor mechanism — are responsible for almost everything that makes desflurane clinically distinctive: its exceptionally fast titratability, its requirement for a specialised vaporiser, and its airway pungency.</p>
+  </div>
+
+  <h3>Why a Special Vaporiser Is Required</h3>
+  <p>Desflurane's boiling point of roughly 22.8–23.5°C sits close enough to typical ambient room temperature that, in a conventional variable-bypass vaporiser, it would boil unpredictably depending on the theatre environment, producing dangerously inconsistent and potentially massive overdosing. To deliver desflurane safely, a dedicated electrically heated and pressurised vaporiser (maintaining the liquid at approximately 39°C and roughly two atmospheres) injects a precisely metered vapour directly into the fresh gas flow, independent of ambient temperature — a genuinely different delivery mechanism from the variable-bypass vaporisers used for sevoflurane or isoflurane.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pharmacokinetics">2. Pharmacokinetics</h2>
+  <p>Desflurane's pharmacokinetics are dominated by its exceptionally low blood:gas solubility, which is what produces its signature speed of onset and, more clinically important, its speed of offset — a genuine advantage for rapid emergence and precise titration of depth throughout a case.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Clinical relevance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Boiling point</strong></td><td>~22.8–23.5°C</td><td>Close to room temperature — the reason a special heated vaporiser is required</td></tr>
+      <tr><td><strong>Blood:gas partition coefficient</strong></td><td>~0.42</td><td>The lowest among clinically used volatile anaesthetics — fastest onset/offset of the group</td></tr>
+      <tr><td><strong>Oil:gas partition coefficient</strong></td><td>~19–29</td><td>Lower than sevoflurane/isoflurane, correlating with desflurane's comparatively low potency</td></tr>
+      <tr><td><strong>MAC (adult, in 100% O₂)</strong></td><td>~6.0–7.0%</td><td>The least potent of the commonly used volatile agents on a per-percent basis</td></tr>
+      <tr><td><strong>Hepatic metabolism</strong></td><td>&lt;0.1% of absorbed dose</td><td>The lowest metabolic fraction of the modern volatile agents; minimal hepatorenal biotransformation burden</td></tr>
+      <tr><td><strong>Elimination</strong></td><td>Almost entirely pulmonary, unchanged</td><td>Recovery is governed overwhelmingly by ventilation/washout rather than metabolism</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Onset, Offset, and Titratability Compared</h3>
+  <p>Desflurane's low blood solubility gives it the fastest equilibration of the halogenated agents in routine use — meaningful both for a faster wake-up at the end of a case and for a more immediately responsive depth of anaesthesia throughout, since adjustments to the vaporiser setting translate into alveolar (and therefore effect-site) concentration changes more quickly than with a more soluble agent.</p>
+  <div class="receptor-bars">
+    <div class="rb-row">
+      <span class="rb-label">Desflurane</span>
+      <div class="rb-track"><div class="rb-fill" style="width:22%;"></div></div>
+      <span class="rb-val">~0.42</span>
+    </div>
+    <div class="rb-row">
+      <span class="rb-label">Sevoflurane</span>
+      <div class="rb-track"><div class="rb-fill" style="width:36%;"></div></div>
+      <span class="rb-val">~0.65–0.69</span>
+    </div>
+    <div class="rb-row">
+      <span class="rb-label">Isoflurane</span>
+      <div class="rb-track"><div class="rb-fill" style="width:74%;"></div></div>
+      <span class="rb-val">~1.4</span>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--faint);margin-top:-.5rem;">Blood:gas partition coefficients — lower values mean faster equilibration (onset and offset). Bar length is illustrative of relative solubility, not to a strict linear scale.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="effects">3. Physiological Effects, System by System</h2>
+
+  <h3>Cardiovascular</h3>
+  <p>Produces dose-dependent reduction in systemic vascular resistance and mild-to-moderate blood pressure reduction, broadly similar to isoflurane. A distinctive feature: <strong>rapid increases in inspired desflurane concentration can transiently activate the sympathetic nervous system</strong>, producing tachycardia, hypertension, and elevated catecholamine levels — most pronounced when concentration is increased quickly, particularly above roughly 1 MAC, and more marked in smokers and younger patients. This effect is specific to the rate of concentration increase rather than the absolute concentration itself, and is generally attenuated by gradual titration or pre-treatment with opioids, beta-blockers, or alpha-2 agonists.</p>
+
+  <h3>Respiratory</h3>
+  <p>Produces dose-dependent respiratory depression similar in overall pattern to the other volatile agents. Desflurane is <strong>notably pungent</strong> — it reliably irritates the airway at concentrations sufficient for induction, provoking coughing, breath-holding, laryngospasm, and salivation — which is precisely why it is not used for inhalational induction and is instead introduced only after the airway is already secured via an IV agent, typically once an endotracheal tube or supraglottic device is in place.</p>
+
+  <h3>Central Nervous System</h3>
+  <p>Reduces cerebral metabolic rate of oxygen consumption in a broadly dose-dependent fashion, with cerebral vasodilation and potential intracranial pressure effects at higher MAC values analogous to the other volatile agents — relevant to careful titration in neuroanaesthetic cases. Its fast offset is a genuine advantage where rapid neurological assessment after surgery is a priority, a consideration that has made it a historically favoured agent in some neurosurgical and bariatric practice specifically for this reason.</p>
+
+  <h3>Neuromuscular</h3>
+  <p>Produces dose-dependent skeletal muscle relaxation and potentiates non-depolarising neuromuscular blocking agents, consistent with the volatile agents as a class.</p>
+
+  <h3>Other</h3>
+  <p>Minimal hepatic metabolism translates to a very low theoretical burden of metabolite-related toxicity. Does trigger malignant hyperthermia in susceptible individuals, the same absolute contraindication that applies across the halogenated volatile agents as a class.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="uses">4. Clinical Uses</h2>
+  <p>Desflurane's combination of exceptionally fast titratability and rapid emergence made it a strong choice in specific clinical scenarios, even as its overall use has declined for the environmental reasons discussed below.</p>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>Maintenance of General Anaesthesia (Post-Induction)</h4>
+      <p>Used for maintenance once the airway is secured by another agent, never for inhalational induction, owing to its pungency.</p>
+    </div>
+    <div class="use-card">
+      <h4>Bariatric and Obesity Anaesthesia</h4>
+      <p>Rapid offset even after prolonged cases has historically made desflurane a favoured choice in this population, where faster emergence and reduced context-sensitive accumulation are genuinely valuable.</p>
+    </div>
+    <div class="use-card">
+      <h4>Long or Complex Cases Where Fast Emergence Matters</h4>
+      <p>Minimal accumulation with prolonged administration (low context-sensitive effect) supports predictable emergence even after extended anaesthesia duration.</p>
+    </div>
+    <div class="use-card">
+      <h4>Neuroanaesthesia (Selected Cases)</h4>
+      <p>Fast offset supports prompt post-operative neurological assessment, a genuine historical rationale for its use in some neurosurgical practice.</p>
+    </div>
+    <div class="use-card">
+      <h4>Cases Requiring Precise, Rapid Titration of Depth</h4>
+      <p>Low blood solubility allows anaesthetic depth to be adjusted and to take effect more quickly than with a more soluble agent — useful where rapid changes in depth are anticipated.</p>
+    </div>
+    <div class="use-card">
+      <h4>Day-Case / Ambulatory Anaesthesia (Where Still in Use)</h4>
+      <p>Historically valued for supporting faster recovery room throughput, though this advantage over sevoflurane is generally modest in practice and is now weighed against environmental considerations in many centres.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="dosing">5. Dosing &amp; MAC</h2>
+  <p>As with all volatile agents, desflurane "dosing" is expressed as inspired or end-tidal concentration relative to MAC rather than as a weight-based milligram dose.</p>
+
+  <table class="dose-table">
+    <thead><tr><th>Population / Context</th><th>Typical MAC value</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Adult, healthy, 100% O₂</strong></td>
+        <td>~6.0–7.0%</td>
+        <td>Substantially higher than sevoflurane or isoflurane — reflects desflurane's comparatively low potency</td>
+      </tr>
+      <tr>
+        <td><strong>Children</strong></td>
+        <td>Higher than adult values, similar age-related pattern to other volatiles</td>
+        <td>Not used for induction in children regardless, owing to pungency</td>
+      </tr>
+      <tr>
+        <td><strong>Elderly</strong></td>
+        <td>Reduced, consistent with the general age-related MAC decline seen across all volatile agents</td>
+        <td>Titrate to lower end-tidal targets</td>
+      </tr>
+      <tr>
+        <td><strong>With concurrent N₂O or opioid</strong></td>
+        <td>Significant MAC reduction</td>
+        <td>Anticipate and adjust rather than discover the interaction</td>
+      </tr>
+      <tr>
+        <td><strong>Maintenance (typical)</strong></td>
+        <td>0.7–1.3 MAC (~4–8% end-tidal, individualised)</td>
+        <td>Titrate to clinical signs and, where available, processed EEG monitoring, and introduce gradually (see cautions) rather than as a rapid step increase</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:var(--faint);">Figures are illustrative and drawn from commonly cited ranges in the anaesthesia literature. Always confirm against your institution's protocol, vaporiser calibration, and current product labelling — MAC and dosing figures here are not a substitute for local guidelines or individualised titration.</p>
+
+  <div class="caution-box">
+    <h3>Introduce Gradually, Not as a Step Change</h3>
+    <p>Because rapid increases in inspired desflurane concentration can transiently activate the sympathetic nervous system, increasing the concentration gradually — rather than dialling straight to a target percentage — meaningfully reduces the tachycardia and hypertension this can otherwise provoke, particularly above roughly 1 MAC. This is a genuinely desflurane-specific consideration, more pronounced than with sevoflurane or isoflurane, and worth building into routine practice rather than treating as a rare edge case.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="cautions">6. Cautions, Contraindications &amp; Interactions</h2>
+
+  <h3>Absolute Contraindications</h3>
+  <ul>
+    <li><strong>Known or suspected malignant hyperthermia susceptibility</strong> — desflurane is a recognised MH trigger agent, addressed further below</li>
+    <li><strong>Known hypersensitivity</strong> to desflurane or other halogenated agents</li>
+    <li><strong>Inhalational induction</strong> — not a true contraindication in the safety sense, but functionally excluded by its pungency; attempting mask induction with desflurane reliably provokes airway irritation and should not be attempted</li>
+  </ul>
+
+  <h3>Use With Caution</h3>
+  <ul>
+    <li>Coronary artery disease or conditions poorly tolerant of tachycardia — the sympathetic activation with rapid concentration increases is a genuine consideration in this population</li>
+    <li>Significantly reduced intracranial compliance — titrate carefully as with other volatile agents given dose-dependent cerebral vasodilation at higher MAC values</li>
+    <li>Reactive airway disease — desflurane's pungency can provoke airway irritation and bronchospasm more readily than sevoflurane, even once the airway is secured, particularly with rapid concentration increases</li>
+  </ul>
+
+  <h3>Interactions</h3>
+  <ul>
+    <li><strong>Opioids and other sedative-hypnotics:</strong> significant MAC-sparing effect, as with the other volatile agents</li>
+    <li><strong>Nitrous oxide:</strong> MAC-additive</li>
+    <li><strong>Neuromuscular blocking agents:</strong> potentiated by desflurane</li>
+    <li><strong>Beta-blockers, opioids, alpha-2 agonists:</strong> pre-treatment with these agents attenuates the sympathetic activation associated with rapid desflurane concentration increases</li>
+  </ul>
+
+  <div class="alert-box">
+    <h3>Malignant Hyperthermia and Desiccated Absorbent Carbon Monoxide Formation</h3>
+    <p>Like other volatile agents, desflurane is a recognised MH trigger in susceptible individuals; management follows the same current MHAUS protocol described for other volatile agents — stop the trigger, hyperventilate on 100% oxygen via a non-triggering circuit, give dantrolene promptly, and manage the metabolic derangements that follow. Separately, desflurane (along with isoflurane and enflurane) can be degraded by significantly <strong>desiccated CO2 absorbent</strong> containing strong base (particularly older absorbents like Baralyme, and to a lesser extent soda lime containing KOH/NaOH) to form carbon monoxide — a distinct chemical reaction from sevoflurane's Compound A pathway, and one that specifically requires desiccated (dried-out) absorbent rather than normally hydrated absorbent to occur to a clinically relevant degree. This is why fresh gas flow should never be left running through a circuit over a break between cases (which dries out the absorbent), and why unusually rapid discoloration or unexpectedly high absorbent temperature should prompt absorbent replacement. Modern absorbents formulated without strong base (KOH/NaOH-free) substantially reduce or eliminate this risk regardless of desiccation state.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="environment">7. The Environmental Question</h2>
+  <p>Desflurane's environmental impact has become one of the more actively debated and rapidly evolving aspects of anaesthetic practice, and the numbers involved are worth knowing precisely rather than in vague terms.</p>
+  <p>Desflurane is exhaled almost entirely unchanged and acts as a potent greenhouse gas once released into the atmosphere. Comparative analyses have put its global warming potential meaningfully higher than sevoflurane's — a full 240 mL bottle of desflurane has been estimated at roughly 886 kg of CO2-equivalent emissions, compared with roughly 49 kg CO2-equivalent for a 250 mL bottle of sevoflurane, a difference driven both by desflurane's higher intrinsic global warming potential per molecule and by its considerably lower potency (roughly one-third that of sevoflurane), meaning a larger volume must be administered to achieve an equivalent anaesthetic depth. Different published estimates place desflurane's overall climate impact per case at somewhere in the range of twenty to fifty times that of sevoflurane, depending on the specific methodology and clinical conditions modelled.</p>
+  <p>This has translated into concrete regulatory and institutional change rather than remaining a purely academic debate. The UK's NHS decommissioned routine desflurane use in 2024, and European Union F-gas regulation restricts desflurane use from January 2026 onward, permitting it only where no other anaesthetic can be used on medical grounds. The World Federation of Societies of Anaesthesiologists has issued a statement prioritising lower-global-warming-potential volatile agents such as sevoflurane over desflurane where clinically equivalent options exist. Many institutions worldwide have independently reduced or eliminated routine desflurane use as part of broader sustainable anaesthesia initiatives, with documented reductions in institutional greenhouse gas emissions as a direct result.</p>
+
+  <div class="caution-box">
+    <h3>A Genuine Practice Shift, Not a Fringe Concern</h3>
+    <p>This is not a marginal environmental talking point — it represents an active, ongoing shift in mainstream anaesthetic practice, with real regulatory teeth in some jurisdictions already, and is likely to keep evolving. Whatever the local availability and institutional stance where you practise, it is worth knowing the current regulatory and society-level guidance in your own setting specifically, since this is genuinely a moving target across different countries and healthcare systems at present.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="pediatric">8. Paediatric Considerations</h2>
+  <p>Desflurane's role in paediatric anaesthesia is narrower than sevoflurane's, constrained directly by the same pungency that rules it out of adult inhalational induction.</p>
+  <ul>
+    <li><strong>Not used for inhalational induction in children</strong> for the same reason it is avoided in adults — airway irritation, coughing, and a significantly increased risk of laryngospasm at induction-relevant concentrations.</li>
+    <li>Can be used for maintenance once the airway is secured via IV induction or after mask induction with a non-pungent agent such as sevoflurane, analogous to its adult use pattern.</li>
+    <li>Emergence agitation has been reported with desflurane in children, similarly to sevoflurane, though the comparative incidence and relevant risk factors are less extensively characterised than for sevoflurane specifically.</li>
+    <li>Given desflurane's overall declining use and the specific pungency-related restriction on induction, sevoflurane remains the dominant agent in most paediatric anaesthetic practice, with desflurane reserved for specific maintenance scenarios where its titratability offers a genuine advantage.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 id="bedside">9. What Actually Happens at the Bedside</h2>
+  <p>The textbook version of desflurane use is a vaporiser that responds almost instantly to dial changes and a patient who wakes up fast and clear-headed at the end of the case. The bedside version has more texture than that.</p>
+  <p>The first thing worth genuine attention is that the speed advantage desflurane offers on emergence can tempt a rushed concentration increase mid-case when a sudden increase in surgical stimulus demands deeper anaesthesia quickly. Stepping the dial straight up rather than titrating gradually is exactly the scenario most likely to provoke the transient tachycardia and hypertension associated with rapid concentration increases — the drug's fast responsiveness is a genuine strength, but it rewards deliberate, incremental titration rather than large abrupt adjustments, even when the clinical situation feels urgent.</p>
+  <p>The second thing is that the vaporiser itself is a piece of equipment worth actually understanding rather than treating as an interchangeable box. A desflurane vaporiser that has been recently moved, is warming up from a cold start, or has been used inconsistently can behave differently from one that has been running steadily — checking that the vaporiser has reached and is maintaining its operating temperature before relying on it for a time-critical induction sequence is a genuine, practical habit worth having, not an excessive precaution.</p>
+  <p>The third thing is that the environmental conversation is increasingly a genuine part of the clinical decision, not a separate administrative concern to be handled elsewhere. Choosing sevoflurane over desflurane where either would serve the case equally well is now, in many settings, treated as an active clinical decision with its own rationale — worth being able to explain and apply consistently, rather than defaulting to whichever vaporiser happens to be plugged in that day out of habit.</p>
+
+  <div class="divider"></div>
+
+  <h2 id="pearls">10. Pearls &amp; Pitfalls</h2>
+
+  <div class="pearl-box">
+    <h3>The Core Takeaway</h3>
+    <p>Desflurane's pharmacology is genuinely excellent by several measures — fastest titratability, lowest metabolic burden, most predictable emergence even after long cases. Its declining use reflects an external factor (environmental impact) rather than any newly discovered clinical shortcoming, and understanding that distinction matters: this is not a drug that has become less safe, but one whose overall footprint has become harder to justify where an equally effective, lower-impact alternative exists.</p>
+  </div>
+
+  <div class="honest-box">
+    <h3>The Honest Bit</h3>
+    <p>Desflurane is, by most narrow clinical measures, an excellent drug — arguably the best-titrating volatile agent available. The environmental case against it is real, well-quantified, and has already produced concrete regulatory change in some jurisdictions, and that is worth taking seriously rather than dismissing as an abstraction. At the same time, in the specific clinical scenarios where its properties offer a genuine, meaningful advantage — certain bariatric, prolonged, or precision-titration cases — it remains a legitimate clinical choice where locally available and permitted, and that legitimacy shouldn't be lost in a blanket "never use this" framing either. Both things are true at once, and the honest position holds both.</p>
+  </div>
+
+  <ul>
+    <li><strong>Pitfall:</strong> Increasing desflurane concentration as a rapid step change in response to a sudden stimulus, rather than titrating gradually to avoid the sympathetic activation this can provoke.</li>
+    <li><strong>Pitfall:</strong> Attempting or considering desflurane for inhalational induction — its pungency makes this unsuitable regardless of the patient or clinical scenario.</li>
+    <li><strong>Pearl:</strong> The fast offset genuinely matters in prolonged cases and specific populations (bariatric, some neurosurgical) — know when this advantage is clinically meaningful rather than simply a matter of habit or convenience.</li>
+    <li><strong>Pearl:</strong> Never leave fresh gas flow running unattended through a circuit between cases — desiccated absorbent is the specific precondition for clinically relevant carbon monoxide formation with this drug.</li>
+    <li><strong>Pitfall:</strong> Treating the environmental impact conversation as outside the scope of clinical decision-making — in many current settings, it is now a genuine, active part of the choice between otherwise clinically equivalent agents.</li>
+  </ul>
+
+  <div class="quote-box">
+    The best-titrating volatile agent in the cupboard is currently being weighed against a global-warming-potential figure most other drugs never have to answer to. Both facts are true, and neither cancels the other out.
+    <span class="src">— A closing thought</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="refbox" id="references">
+    <h3>References</h3>
+    <ol>
+      <li>Eger EI 2nd. Characteristics of anesthetic agents used for induction and maintenance of general anesthesia. <em>Am J Health Syst Pharm.</em> 2004;61 Suppl 4:S3–S10.</li>
+      <li>Andrews JJ, Johnston RV Jr, Kramer GC. Consequences of misfilling contemporary vaporizers with desflurane. <em>Can J Anaesth.</em> 1993;40(11):1059–1064.</li>
+      <li>Ebert TJ, Muzi M. Sympathetic hyperactivity during desflurane anesthesia in healthy volunteers: a comparison with isoflurane. <em>Anesthesiology.</em> 1993;79(3):444–453.</li>
+      <li>Weiskopf RB, Eger EI 2nd, Noorani M, Daniel M. Fentanyl and sufentanil inhibit sympathetic responses to the rapid increase in desflurane concentration. <em>Anesthesiology.</em> 1994;81(5):1350–1355.</li>
+      <li>Coppens MJ, Versichelen LF, Rolly G, et al. The mechanisms of carbon monoxide production by inhalational agents. <em>Anaesthesia.</em> 2006;61(5):462–468.</li>
+      <li>Fang ZX, Eger EI 2nd, Laster MJ, et al. Carbon monoxide production from degradation of desflurane, enflurane, isoflurane, halothane, and sevoflurane by soda lime and Baralyme. <em>Anesth Analg.</em> 1995;80(6):1187–1193.</li>
+      <li>Sherman J, Le C, Lamers V, Eckelman M. Life cycle greenhouse gas emissions of anesthetic drugs. <em>Anesth Analg.</em> 2012;114(5):1086–1090.</li>
+      <li>Varughese S, Ahmed R. Environmental and occupational considerations of anesthesia: a narrative review and update. <em>Anesth Analg.</em> 2021;133(4):826–835.</li>
+      <li>Charlesworth M, Swinton F. Anaesthetic gases, climate change, and sustainable practice. <em>Lancet Planet Health.</em> 2017;1(6):e216–e217.</li>
+      <li>Devlin-Hegedus JA, McGain F, Harris RD, Sherman JD. Action guidance for addressing pollution from inhalational anaesthetics. <em>Anaesthesia.</em> 2022;77(9):1023–1029.</li>
+      <li>Global warming potential of inhaled anesthetics: application to clinical use. <em>Anesth Analg.</em> 2010;111(1):92–98.</li>
+      <li>McGain F, Sheridan N, Wickramarachchi K, et al. Carbon footprint of general, regional, and combined anesthesia for total knee replacements. <em>Anesthesiology.</em> 2021;135(6):976–991.</li>
+    </ol>
+  </div>
+
+  <div class="cc-meta-end">
+    <span>Drug Deep Dive · No. 008</span>
+    <span>Volatile Anaesthetic · Neuroanaesthesia · Bariatric · Environmental Impact</span>
+  </div>
+
+  <p class="disclaim">This content is intended for educational reflection and discussion among clinicians and trainees. MAC values, dosing ranges, and environmental impact figures reflect commonly cited figures in the anaesthesia and sustainability literature and are not a substitute for institutional protocols, current product labelling, current regulatory guidance in your jurisdiction, or independent clinical judgment. The views expressed are the author's own and do not represent any institution, employer, or training program.</p>
+
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
