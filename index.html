@@ -67,8 +67,7 @@ nav{
   background-image:linear-gradient(rgba(122,32,32,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(122,32,32,.035) 1px,transparent 1px);
   background-size:58px 58px;
 }
-.hglow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(122,32,32,.06) 0%,transparent 68%);top:-180px;right:-120px;animation:breathe 7s ease-in-out infinite;}
-.hglow2{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(154,108,26,.07) 0%,transparent 68%);bottom:12%;left:28%;animation:breathe 10s ease-in-out infinite reverse;}
+.hglow{position:absolute;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(255,250,238,.55) 0%,rgba(184,131,26,.045) 40%,transparent 70%);top:2%;right:-6%;animation:breathe 8s ease-in-out infinite;}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.15);opacity:1;}}
 .capno-wrap{position:absolute;left:0;right:0;bottom:2vh;height:64px;overflow:hidden;opacity:.15;pointer-events:none;}
 .capno-wrap svg{width:200%;height:100%;display:block;animation:capnoScroll 16s linear infinite;}
@@ -95,17 +94,27 @@ h1 .l3::before{content:'';flex:none;width:34px;height:1px;background:var(--gold)
 .scroll-hint::after{content:'';width:1px;height:55px;background:linear-gradient(to bottom,var(--faint),transparent);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
-/* HERO VITALS (decorative) */
-.vitals{position:absolute;right:9vw;top:36%;z-index:10;width:210px;padding-left:1.6rem;border-left:1px solid var(--border);animation:fadeUp 1s both 1s;pointer-events:none;}
-.v-head{font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.7rem;margin-bottom:1.6rem;}
-.v-row{display:flex;align-items:baseline;gap:.55rem;margin-bottom:1.15rem;opacity:.8;}
-.v-l{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);width:46px;}
-.v-n{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:300;line-height:1;color:var(--rust);font-variant-numeric:tabular-nums;}
-.v-row:nth-child(3) .v-n{color:var(--gold);}
-.v-row:nth-child(4) .v-n{color:var(--sage);}
-.v-row:nth-child(5) .v-n{color:var(--indigo);}
-.v-u{font-size:.58rem;letter-spacing:.1em;color:var(--faint);}
-@media(max-width:1100px){.vitals{display:none;}}
+/* HERO MONITOR (decorative, large screens only) */
+.vitals{position:absolute;right:6vw;top:26%;z-index:10;width:min(410px,29vw);animation:fadeUp 1s both 1s;}
+.v-inner{transition:transform .9s cubic-bezier(.2,.7,.2,1);}
+.v-head{font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem;transition:color .4s;}
+.v-head #v-stat{transition:color .4s;}
+.vitals.stim .v-head #v-stat{color:var(--rust);}
+.v-row{display:flex;align-items:center;gap:1.1rem;padding:.6rem 0;border-bottom:1px solid var(--border);}
+.v-row:last-child{border-bottom:none;}
+.v-info{width:96px;flex:none;}
+.v-l{display:block;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+.v-n{display:inline-block;font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;line-height:1;font-variant-numeric:tabular-nums;transition:transform .14s ease-out;}
+.v-n.beat{transform:scale(1.12);}
+.v-u{font-size:.54rem;letter-spacing:.1em;color:var(--faint);margin-left:.15rem;}
+.v-temp{margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.04em;text-transform:none;font-style:italic;color:var(--faint);}
+.v-bp .v-n{color:var(--text);font-size:1.7rem;}
+.v-bp .v-u{margin:0;font-size:.58rem;letter-spacing:.18em;}
+.v-hr .v-n{color:var(--rust);}
+.v-sp .v-n{color:var(--indigo);}
+.v-et .v-n{color:var(--gold);}
+.v-row canvas{flex:1;min-width:0;height:56px;display:block;}
+@media(max-width:1200px){.vitals{display:none;}}
 
 /* STATS BAR */
 .stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 5vw;display:grid;grid-template-columns:repeat(5,1fr);}
@@ -357,7 +366,6 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
   <div class="hbg">
     <div class="hgrid"></div>
     <div class="hglow"></div>
-    <div class="hglow2"></div>
     <div class="capno-wrap" aria-hidden="true">
       <svg viewBox="0 0 2400 76" preserveAspectRatio="none">
         <path class="capno-path" d="M0,62 L16,62 C26,62 36,14 42,14 C92,12 110,9 150,9 C158,9 166,62 172,62 L200,62 L216,62 C226,62 236,14 242,14 C292,12 310,9 350,9 C358,9 366,62 372,62 L400,62 L416,62 C426,62 436,14 442,14 C492,12 510,9 550,9 C558,9 566,62 572,62 L600,62 L616,62 C626,62 636,14 642,14 C692,12 710,9 750,9 C758,9 766,62 772,62 L800,62 L816,62 C826,62 836,14 842,14 C892,12 910,9 950,9 C958,9 966,62 972,62 L1000,62 L1016,62 C1026,62 1036,14 1042,14 C1092,12 1110,9 1150,9 C1158,9 1166,62 1172,62 L1200,62 L1216,62 C1226,62 1236,14 1242,14 C1292,12 1310,9 1350,9 C1358,9 1366,62 1372,62 L1400,62 L1416,62 C1426,62 1436,14 1442,14 C1492,12 1510,9 1550,9 C1558,9 1566,62 1572,62 L1600,62 L1616,62 C1626,62 1636,14 1642,14 C1692,12 1710,9 1750,9 C1758,9 1766,62 1772,62 L1800,62 L1816,62 C1826,62 1836,14 1842,14 C1892,12 1910,9 1950,9 C1958,9 1966,62 1972,62 L2000,62 L2016,62 C2026,62 2036,14 2042,14 C2092,12 2110,9 2150,9 C2158,9 2166,62 2172,62 L2200,62 L2216,62 C2226,62 2236,14 2242,14 C2292,12 2310,9 2350,9 C2358,9 2366,62 2372,62 L2400,62"/>
@@ -383,11 +391,13 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
     </div>
   </div>
   <div class="vitals" aria-hidden="true">
-    <div class="v-head"><span class="pulse"></span>Vitals &middot; stable</div>
-    <div class="v-row"><span class="v-l">HR</span><span class="v-n" id="v-hr">72</span><span class="v-u">bpm</span></div>
-    <div class="v-row"><span class="v-l">SpO&#8322;</span><span class="v-n">99</span><span class="v-u">%</span></div>
-    <div class="v-row"><span class="v-l">EtCO&#8322;</span><span class="v-n" id="v-et">35</span><span class="v-u">mmHg</span></div>
-    <div class="v-row"><span class="v-l">NIBP</span><span class="v-n">118/76</span></div>
+    <div class="v-inner">
+      <div class="v-head"><span class="pulse"></span>Vitals &middot; <span id="v-stat">stable</span><span class="v-temp">T 36.7&deg;C</span></div>
+      <div class="v-row v-hr"><div class="v-info"><span class="v-l">HR</span><span class="v-n" id="v-hr">72</span><span class="v-u">bpm</span></div><canvas id="v-ecg"></canvas></div>
+      <div class="v-row v-sp"><div class="v-info"><span class="v-l">SpO&#8322;</span><span class="v-n" id="v-sp">99</span><span class="v-u">%</span></div><canvas id="v-ple"></canvas></div>
+      <div class="v-row v-et"><div class="v-info"><span class="v-l">EtCO&#8322;</span><span class="v-n" id="v-et">35</span><span class="v-u">mmHg</span></div><canvas id="v-cap"></canvas></div>
+      <div class="v-row v-bp"><div class="v-info"><span class="v-l">NIBP</span><span class="v-n" id="v-bpn">118/76</span></div><span class="v-u" id="v-map">MAP 90</span></div>
+    </div>
   </div>
   <div class="scroll-hint">Scroll</div>
 </section>
@@ -417,35 +427,7 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
     <a href="cases.html" class="archive-link">Explore the Case Archives</a>
   </div>
   <div class="sidebar">
-    <div class="sbox" id="topics-box">
-      <h4>Topics</h4>
-      <div class="topic-grid" id="topic-grid">
-        <a class="tbtn" href="cases.html?topic=airway">Airway</a>
-        <a class="tbtn" href="cases.html?topic=cardiac">Cardiac</a>
-        <a class="tbtn" href="cases.html?topic=regional">Regional</a>
-        <a class="tbtn" href="cases.html?topic=pediatric">Pediatric</a>
-        <a class="tbtn" href="cases.html?topic=obstetric">Obstetric</a>
-        <a class="tbtn" href="cases.html?topic=neuro">Neuro</a>
-        <a class="tbtn" href="cases.html?topic=crisis">Crisis</a>
-        <a class="tbtn" href="cases.html?topic=pharmacology">Pharmacology</a>
-        <a class="tbtn" href="cases.html?topic=tiva">TIVA</a>
-        <a class="tbtn" href="cases.html?topic=pain">Pain</a>
-        <a class="tbtn" href="cases.html?topic=icu">ICU</a>
-        <a class="tbtn" href="cases.html?topic=oncology">Surg. Oncology</a>
-        <a class="tbtn" href="cases.html?topic=gastro">Surg. Gastro</a>
-        <a class="tbtn" href="cases.html?topic=urology">Urology</a>
-        <a class="tbtn" href="cases.html?topic=vascular">Vascular</a>
-        <a class="tbtn" href="cases.html?topic=plastic">Plastic</a>
-        <a class="tbtn" href="cases.html?topic=orthopaedics">Orthopaedics</a>
-        <a class="tbtn" href="cases.html?topic=thoracic">Thoracic</a>
-        <a class="tbtn" href="cases.html?topic=transplant">Transplant</a>
-        <a class="tbtn" href="cases.html?topic=robotic">Robotic</a>
-        <a class="tbtn" href="cases.html?topic=nephrology">Nephrology</a>
-        <a class="tbtn" href="cases.html?topic=ultrasound">POCUS</a>
-        <a class="tbtn" href="cases.html?topic=vats">VATS</a>
-      </div>
-      <a href="cases.html" class="archive-link archive-link--sm">Explore the Case Archives</a>
-    </div>
+    <!-- Topic box removed per request -->
   </div>
 </section>
 
@@ -531,11 +513,11 @@ footer{padding:2.8rem 5vw;border-top:1px solid var(--border);display:grid;grid-t
     <p>Recent guidelines, landmark evidence, and practice-changing updates — simplified for a quick, practical read.</p>
     <span class="sb-cta">See what's new</span>
   </a>
-  <a href="core-modules.html" class="sb" style="text-decoration:none;color:inherit;">
-    <span class="sb-icon">🧠</span>
-    <h3>Core Modules</h3>
-    <p>Structured learning modules that break down complex anaesthesia concepts into practical, navigable knowledge — built to be studied, revisited, and referred back to.</p>
-    <span class="sb-cta">Explore modules</span>
+  <a href="reading-corner.html" class="sb" style="text-decoration:none;color:inherit;">
+    <span class="sb-icon">📖</span>
+    <h3>The Reading Corner</h3>
+    <p>Annotated paper summaries. One paper at a time, in plain language — what it says, what it means for practice, and what I actually thought about it after reading it twice.</p>
+    <span class="sb-cta">Read the paper</span>
   </a>
   <a href="academic-conversations.html" class="sb" style="text-decoration:none;color:inherit;">
     <span class="sb-icon">🎤</span>
@@ -709,14 +691,121 @@ document.querySelectorAll('a,button,.cc,.lc,.sb,.cb,.di').forEach(el=>{
   });
 });
 
-// Decorative vitals: tiny, realistic drift
+// Hero monitor: sweeping ECG / pleth / capnography, synced numbers
 (function(){
-  const hr=document.getElementById('v-hr'),et=document.getElementById('v-et');
-  if(!hr||!et)return;
-  setInterval(()=>{
-    hr.textContent=70+Math.floor(Math.random()*5);
-    et.textContent=34+Math.floor(Math.random()*3);
-  },2600);
+  const box=document.querySelector('.vitals'); if(!box) return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const inner=box.querySelector('.v-inner');
+  const hrEl=document.getElementById('v-hr'), etEl=document.getElementById('v-et'), stEl=document.getElementById('v-stat');
+  const g=(p,m,s,a)=>a*Math.exp(-Math.pow((p-m)/s,2)/2);
+  const sstep=(a,b,x)=>{x=Math.min(1,Math.max(0,(x-a)/(b-a)));return x*x*(3-2*x);};
+  const wrap=p=>((p%1)+1)%1;
+  const ecg=p=>{p=wrap(p);return Math.max(0,(g(p,.12,.028,.13)+g(p,.265,.009,-.14)+g(p,.30,.0125,1)+g(p,.335,.012,-.24)+g(p,.58,.055,.30)+.25)/1.3);};
+  const ple=(p,a)=>{p=wrap(p-.14);return Math.min(1,(g(p,.2,.085,1)+g(p,.52,.07,.28))/1.15*a);};
+  const cap=q=>{q=wrap(q);return sstep(.36,.42,q)*(1-sstep(.64,.70,q))*(.86+.14*Math.min(1,Math.max(0,(q-.42)/.22)));};
+
+  const ch=[['v-ecg','#7a2020'],['v-ple','#3a3a6a'],['v-cap','#9a6c1a']].map(([id,color])=>{
+    const c=document.getElementById(id);return {c,x:c.getContext('2d'),color,w:0,h:0,v:[]};
+  });
+  const bpEl=document.getElementById('v-bpn'), mapEl=document.getElementById('v-map');
+  let bpS=118,bpD=76,tS=118,tD=76,ct=99;
+  const CYC=17;
+  const SPEED=62, GAP=24;
+  let hr=72,hrT=72,phase=0,bph=0,rr=14,etBase=35,head=0,run=false,last=0,acc=0;
+
+  function size(){
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    ch.forEach(o=>{
+      const r=o.c.getBoundingClientRect();
+      o.w=Math.round(r.width); o.h=Math.round(r.height);
+      if(!o.w) return;
+      o.c.width=o.w*dpr; o.c.height=o.h*dpr; o.x.setTransform(dpr,0,0,dpr,0,0);
+      o.v=new Array(o.w).fill(null);
+    });
+  }
+  function beat(){
+    hrEl.textContent=Math.round(hr+(Math.random()<.35?(Math.random()<.5?-1:1):0));
+    hrEl.classList.add('beat'); setTimeout(()=>hrEl.classList.remove('beat'),140);
+  }
+  function breath(){ etEl.textContent=etBase+Math.round((Math.random()-.5)*2); }
+  function step(dt){
+    hr+=(hrT-hr)*Math.min(1,dt*1.1);
+    const pp=phase, pb=bph;
+    phase+=dt*hr/60; bph+=dt*rr/60;
+    if(Math.floor(phase-.30)>Math.floor(pp-.30)) beat();
+    if(Math.floor(bph)>Math.floor(pb)) breath();
+  }
+  function sample(){
+    const amp=1+Math.max(0,(hr-72)/72)*.5, n=()=>(Math.random()-.5)*.012;
+    return [ecg(phase)+n(),ple(phase,amp)+n(),cap(bph)+n()];
+  }
+  function prefill(){
+    const w=ch[0].w; if(!w) return;
+    phase=Math.random(); bph=Math.random();
+    for(let i=0;i<w;i++){ step(1/SPEED); const s=sample(); ch.forEach((o,k)=>o.v[i]=s[k]); }
+    head=w-1;
+  }
+  function draw(o){
+    const {x,w,h,v}=o; if(!w) return;
+    x.clearRect(0,0,w,h); x.lineWidth=1.5; x.strokeStyle=o.color; x.lineJoin='round'; x.lineCap='butt';
+    const pad=h*.12, span=h-2*pad; let py=null;
+    for(let i=0;i<w;i++){
+      const age=(head-i+w)%w, val=v[i];
+      if(val==null||age>=w-GAP){py=null;continue;}
+      const y=pad+(1-Math.min(1,Math.max(0,val)))*span;
+      if(py!==null){x.globalAlpha=1-.72*(age/w);x.beginPath();x.moveTo(i-1,py);x.lineTo(i,y);x.stroke();}
+      py=y;
+    }
+    if(v[head]!=null){
+      const hy=pad+(1-Math.min(1,Math.max(0,v[head])))*span;
+      x.fillStyle=o.color; x.globalAlpha=.16; x.beginPath(); x.arc(head,hy,7,0,6.283); x.fill();
+      x.globalAlpha=1; x.beginPath(); x.arc(head,hy,2.4,0,6.283); x.fill();
+    }
+    x.globalAlpha=1;
+  }
+  function cuffReading(){
+    bpS=tS+Math.round((Math.random()-.5)*4); bpD=tD+Math.round((Math.random()-.5)*4);
+    bpEl.textContent=bpS+'/'+bpD; mapEl.textContent='MAP '+Math.round((bpS+2*bpD)/3);
+    bpEl.classList.add('beat'); setTimeout(()=>bpEl.classList.remove('beat'),220);
+  }
+  function cuffStep(dt){
+    ct+=dt;
+    if(ct>=CYC){ ct=0; cuffReading(); }
+  }
+  function frame(now){
+    if(!run) return;
+    const dt=Math.min(.05,(now-last)/1000); last=now;
+    acc+=SPEED*dt; const n=Math.floor(acc); acc-=n;
+    if(n===0) step(dt);
+    for(let k=0;k<n;k++){
+      step(dt/n); head=(head+1)%ch[0].w;
+      const s=sample(); ch.forEach((o,i)=>o.v[head]=s[i]);
+    }
+    ch.forEach(draw);
+    cuffStep(dt);
+    requestAnimationFrame(frame);
+  }
+  function start(){ if(run||reduce||!ch[0].w) return; run=true; last=performance.now(); requestAnimationFrame(frame); }
+  function stop(){ run=false; }
+
+  function init(){ size(); prefill(); ch.forEach(draw); }
+  init();
+
+  if(!reduce){
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(es=>{ es[0].isIntersecting ? (ch[0].w||init(), start()) : stop(); },{threshold:.05}).observe(box);
+    } else start();
+    window.addEventListener('resize',()=>{ stop(); init(); if(box.offsetWidth) start(); });
+
+    // Hover = laryngoscopy: a little pressor response, then it settles
+    box.addEventListener('mouseenter',()=>{hrT=84;rr=17;etBase=37;tS=124;tD=80;ct=0;setTimeout(cuffReading,900);stEl.textContent='pressor response';box.classList.add('stim');});
+    box.addEventListener('mouseleave',()=>{hrT=72;rr=14;etBase=35;tS=118;tD=76;ct=0;setTimeout(cuffReading,900);stEl.textContent='stable';box.classList.remove('stim');});
+
+    // Soft parallax drift
+    document.addEventListener('mousemove',e=>{
+      inner.style.transform='translate('+((.5-e.clientX/innerWidth)*14).toFixed(1)+'px,'+((.5-e.clientY/innerHeight)*10).toFixed(1)+'px)';
+    });
+  }
 })();
 
 // Contact form handler
