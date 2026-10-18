@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Oxygen Cascade — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to the oxygen cascade — from atmosphere to mitochondria. Hypoxia, hypoxaemia, oxygen content, delivery, extraction, venous oximetry, and clinical applications. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  --o2blue:  #2a5a7a;
+  --o2teal:  #2a6a6a;
+  --o2deep:  #1e4258;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--o2blue);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--o2teal);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── BACK LINK ─── */
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--rust); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(42,90,122,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(42,90,122,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(42,90,122,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(42,90,122,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(42,106,106,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--o2blue);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--o2blue); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--o2blue);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:620px;font-weight:300; }
+.hero-sub strong { color:var(--o2blue);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--o2teal);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--o2blue);border-bottom-color:var(--o2blue); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--o2blue),var(--o2teal));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--o2blue);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--o2blue); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--o2blue); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--o2blue);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--o2teal);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--o2blue);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--o2blue);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(42,90,122,.02); }
+.td-hi { color:var(--o2blue)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(42,90,122,.04);border-color:var(--o2blue);color:var(--muted); }
+.co-key strong { color:var(--o2blue); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(42,106,106,.05);border-color:var(--o2teal);color:var(--muted); }
+.co-fact strong { color:var(--o2teal); }
+.co-o2 { background:rgba(42,90,122,.06);border-color:var(--o2blue);color:var(--muted); }
+.co-o2 strong { color:var(--o2blue); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--o2blue);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--o2blue);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-o2 { border-color:var(--o2blue);color:var(--o2blue); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-teal { border-color:var(--o2teal);color:var(--o2teal); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--o2blue);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--o2blue); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--o2blue);font-size:.9rem;font-weight:700; }
+
+/* ─── SHOCK TABLE ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--o2blue);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--o2blue);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--o2teal);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--o2blue);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── DIVIDER ─── */
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Physiology · Gas Exchange · Critical Care · Anaesthesia</div>
+  <h1>The Oxygen<br><em>Cascade</em></h1>
+  <p class="hero-sub">
+    From the atmosphere to the mitochondrion — the complete partial-pressure journey of oxygen. Every step, every failure point, every clinical implication. <strong>Eight modules. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>08</span></div>
+    <div class="meta-item">Pathway <span>Atmosphere → Alveolus → Artery → Capillary → Mitochondrion</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · The Cascade</button>
+  <button onclick="showMod(1)">02 · Content & Delivery</button>
+  <button onclick="showMod(2)">03 · The ODC</button>
+  <button onclick="showMod(3)">04 · Hypoxaemia</button>
+  <button onclick="showMod(4)">05 · Types of Hypoxia</button>
+  <button onclick="showMod(5)">06 · A-a & Venous O₂</button>
+  <button onclick="showMod(6)">07 · Clinical Applications</button>
+  <button onclick="showMod(7)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:12.5%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: THE CASCADE -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 08</div>
+      <div class="mod-title">The Oxygen Cascade <em>Step by Step</em></div>
+      <div class="mod-intro">Oxygen moves passively down a partial-pressure gradient from dry atmospheric air to its point of use in the mitochondria. At each step, the PO₂ falls.</div>
+    </div>
+
+    <div class="callout co-o2">
+      <strong>Definition</strong>
+      The <strong>oxygen cascade</strong> describes the sequential fall in partial pressure of oxygen (PO₂) as it travels from the atmosphere → humidified tracheal gas → alveolar gas → arterial blood → systemic capillaries → tissues → mitochondria.
+    </div>
+
+    <h2 class="subhead">The Six Steps</h2>
+
+    <div class="diagram-box">
+      <svg viewBox="0 0 700 280" width="100%" style="display:block;">
+        <!-- Axes -->
+        <line x1="60" y1="250" x2="660" y2="250" stroke="#d0c8b8" stroke-width="1.5"/>
+        <line x1="60" y1="250" x2="60" y2="20" stroke="#d0c8b8" stroke-width="1.5"/>
+        <text x="55" y="16" fill="#a89880" font-family="Instrument Sans" font-size="8" text-anchor="end">PO₂ (mmHg)</text>
+
+        <!-- Y-axis ticks -->
+        <text x="52" y="253" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">0</text>
+        <text x="52" y="193" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">40</text>
+        <text x="52" y="133" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">80</text>
+        <text x="52" y="73" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">120</text>
+        <text x="52" y="13" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">160</text>
+
+        <!-- Horizontal guide lines -->
+        <line x1="60" y1="193" x2="660" y2="193" stroke="#d0c8b8" stroke-width=".4" stroke-dasharray="3,4"/>
+        <line x1="60" y1="133" x2="660" y2="133" stroke="#d0c8b8" stroke-width=".4" stroke-dasharray="3,4"/>
+        <line x1="60" y1="73" x2="660" y2="73" stroke="#d0c8b8" stroke-width=".4" stroke-dasharray="3,4"/>
+        <line x1="60" y1="13" x2="660" y2="13" stroke="#d0c8b8" stroke-width=".4" stroke-dasharray="3,4"/>
+
+        <!-- Step data points: x positions, y values -->
+        <circle cx="100" cy="13" r="5" fill="#2a5a7a"/>
+        <circle cx="195" cy="29" r="5" fill="#2a5a7a"/>
+        <circle cx="290" cy="96" r="5" fill="#2a5a7a"/>
+        <circle cx="385" cy="110" r="5" fill="#2a6a6a"/>
+        <circle cx="480" cy="193" r="5" fill="#2a6a6a"/>
+        <circle cx="575" cy="244" r="5" fill="#7a2020"/>
+
+        <!-- Connecting line -->
+        <path d="M100,13 L195,29 L290,96 L385,110 L480,193 L575,244" stroke="#2a5a7a" stroke-width="2" fill="none"/>
+
+        <!-- Labels -->
+        <text x="100" y="8" fill="#2a5a7a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">160</text>
+        <text x="195" y="24" fill="#2a5a7a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">149</text>
+        <text x="290" y="91" fill="#2a5a7a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">104</text>
+        <text x="385" y="105" fill="#2a6a6a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">95</text>
+        <text x="480" y="188" fill="#2a6a6a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">40</text>
+        <text x="575" y="239" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">1–10</text>
+
+        <!-- X-axis labels -->
+        <text x="100" y="268" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Atmosphere</text>
+        <text x="195" y="268" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Trachea</text>
+        <text x="290" y="268" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Alveolus</text>
+        <text x="385" y="268" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Artery</text>
+        <text x="480" y="268" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Capillary</text>
+        <text x="575" y="268" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Mitochondria</text>
+      </svg>
+    </div>
+
+    <h3 class="subsubhead">Step 1 — Dry Atmospheric Gas</h3>
+    <div class="formula-box">
+      <span class="flabel">Atmospheric PO₂</span>
+      P<sub>atm</sub>O₂ = P<sub>B</sub> × F<sub>I</sub>O₂
+      <div class="fexpl">At sea level: 760 mmHg × 0.21 = <strong>160 mmHg</strong></div>
+    </div>
+    <p>Dry air at sea level contains 20.9% oxygen. Barometric pressure determines the partial pressure. At altitude, P<sub>B</sub> falls — the fraction remains 0.21 but the partial pressure falls proportionally.</p>
+
+    <h3 class="subsubhead">Step 2 — Humidified Tracheal Gas</h3>
+    <div class="formula-box">
+      <span class="flabel">Humidified PO₂</span>
+      P<sub>I</sub>O₂ = (P<sub>B</sub> − P<sub>H₂O</sub>) × F<sub>I</sub>O₂
+      <div class="fexpl">P<sub>H₂O</sub> at 37°C = 47 mmHg · (760 − 47) × 0.21 = <strong>149 mmHg</strong></div>
+    </div>
+    <p>Inspired gas is fully humidified at body temperature by the time it reaches the trachea. This "dilutes" the oxygen partial pressure by approximately 11 mmHg.</p>
+
+    <h3 class="subsubhead">Step 3 — Alveolar Gas</h3>
+    <div class="formula-box">
+      <span class="flabel">Ideal Alveolar Gas Equation</span>
+      P<sub>A</sub>O₂ = P<sub>I</sub>O₂ − (PaCO₂ / R)
+      <div class="fexpl">R (respiratory quotient) ≈ 0.8 for mixed diet · Normal P<sub>A</sub>O₂ ≈ 100–104 mmHg</div>
+    </div>
+    <p>Alveolar oxygen is determined by:</p>
+    <ul class="clist">
+      <li><strong>P<sub>I</sub>O₂</strong> — inspired partial pressure (affected by FiO₂ and barometric pressure)</li>
+      <li><strong>Alveolar ventilation</strong> — inversely related: P<sub>A</sub>O₂ ∝ 1 / V̇<sub>A</sub></li>
+      <li><strong>CO₂ production and elimination</strong> — PaCO₂ in the numerator; a rise in PaCO₂ lowers P<sub>A</sub>O₂</li>
+    </ul>
+
+    <h3 class="subsubhead">Step 4 — Arterial Blood</h3>
+    <p>The difference between alveolar and arterial PO₂ is the <strong>A-a gradient</strong>. Normal arterial PO₂ at sea level: <strong>75–100 mmHg</strong> (declining with age).</p>
+
+    <div class="callout co-key">
+      <strong>The A-a gradient has three sources</strong>
+      (1) <strong>Shunt</strong> — bronchial and thebesian veins drain deoxygenated blood directly into the left atrium (2–5% of cardiac output). (2) <strong>V/Q scatter</strong> — even in health, V/Q ratios vary across the lung. (3) <strong>Diffusion limitation</strong> — normally minimal at rest, but manifests during exercise or at altitude.
+    </div>
+
+    <h3 class="subsubhead">Step 5 — Systemic Capillary / Tissue</h3>
+    <p>Oxygen diffuses from arterial blood to the tissue across the capillary wall. The <strong>Krogh cylinder</strong> model describes the radius of tissue supplied by a single capillary. Mixed venous PO₂ (Pv̄O₂) = <strong>38–42 mmHg</strong>.</p>
+
+    <h3 class="subsubhead">Step 6 — Mitochondria</h3>
+    <p>Mitochondrial PO₂ is typically <strong>1–10 mmHg</strong>, varying by tissue and metabolic activity.</p>
+    <ul class="clist">
+      <li><strong>Pasteur point:</strong> ~1 mmHg — below this, oxidative phosphorylation ceases and anaerobic metabolism supervenes</li>
+      <li>Oxygen is the terminal electron acceptor in the respiratory chain, forming H₂O</li>
+      <li>Incomplete reduction generates reactive oxygen species (ROS), normally scavenged by antioxidants</li>
+    </ul>
+
+    <h2 class="subhead">Normal Values Across the Cascade</h2>
+    <table class="data-table">
+      <tr><th>Step</th><th>PO₂ (mmHg)</th><th>Key Determinant</th></tr>
+      <tr><td>Dry atmospheric gas</td><td class="td-hi">~160</td><td>Barometric pressure × FiO₂</td></tr>
+      <tr><td>Humidified tracheal gas</td><td class="td-hi">~149</td><td>Water vapour pressure (47 mmHg)</td></tr>
+      <tr><td>Alveolar gas</td><td class="td-hi">~100–104</td><td>Alveolar gas equation</td></tr>
+      <tr><td>Arterial blood</td><td class="td-hi">~80–100</td><td>V/Q matching, shunt, diffusion</td></tr>
+      <tr><td>Mixed venous blood</td><td class="td-hi">~38–42</td><td>O₂ extraction by tissues</td></tr>
+      <tr><td>Mitochondria</td><td class="td-hi">1–10</td><td>Metabolic rate, capillary density</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Tissue PO₂ varies widely</strong>
+      Brain: 30–48 mmHg · Liver: ~55 mmHg · Renal cortex: ~70 mmHg · Small bowel: ~61 mmHg. Each organ extracts oxygen according to its metabolic demand.
+    </div>
+
+    <h2 class="subhead">Altitude Physiology</h2>
+    <p>At altitude, the fraction of oxygen in air remains constant (0.21), but barometric pressure falls — so each breath contains fewer oxygen molecules. This is a <strong>low inspired PO₂</strong> hypoxia.</p>
+
+    <table class="data-table">
+      <tr><th>Altitude</th><th>Barometric Pressure</th><th>P<sub>I</sub>O₂</th><th>P<sub>A</sub>O₂</th><th>Physiological Effect</th></tr>
+      <tr><td>Sea level</td><td>760 mmHg</td><td>149 mmHg</td><td>~100 mmHg</td><td>Baseline</td></tr>
+      <tr><td>1500 m (Denver)</td><td>~640 mmHg</td><td>~125 mmHg</td><td>~80 mmHg</td><td>Minimal; mild hyperventilation</td></tr>
+      <tr><td>2500 m (Bogotá)</td><td>~560 mmHg</td><td>~108 mmHg</td><td>~65 mmHg</td><td>Hyperventilation; SpO₂ ~90%</td></tr>
+      <tr><td>3500 m (Lhasa)</td><td>~500 mmHg</td><td>~95 mmHg</td><td>~55 mmHg</td><td>Acute mountain sickness risk</td></tr>
+      <tr><td>5500 m (Everest BC)</td><td>~380 mmHg</td><td>~70 mmHg</td><td>~40 mmHg</td><td>Severe hypoxaemia; acclimatisation essential</td></tr>
+      <tr><td>8848 m (Everest summit)</td><td>~253 mmHg</td><td>~43 mmHg</td><td>~25 mmHg</td><td>Near limits of human tolerance (with O₂)</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Acclimatisation Mechanisms</strong>
+      <strong>Immediate:</strong> hyperventilation (via carotid body) → respiratory alkalosis → renal bicarbonate excretion. <strong>Hours–days:</strong> ↑2,3-DPG (right shift), diuresis, ↑erythropoietin. <strong>Weeks–months:</strong> ↑Hb, ↑capillary density, ↑mitochondrial efficiency. <strong>Maladaptation:</strong> high-altitude pulmonary oedema (HAPE), high-altitude cerebral oedema (HACE).
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: CONTENT & DELIVERY -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 08</div>
+      <div class="mod-title">Oxygen Content, Delivery <em>& Extraction</em></div>
+      <div class="mod-intro">Partial pressure drives saturation. Saturation determines content. Content × cardiac output = delivery. Delivery ÷ consumption = extraction.</div>
+    </div>
+
+    <h2 class="subhead">Arterial Oxygen Content (CaO₂)</h2>
+    <div class="formula-box">
+      <span class="flabel">The Master Equation</span>
+      CaO₂ = (1.34 × Hb × SaO₂) + (0.003 × PaO₂)
+      <div class="fexpl">Hb-bound oxygen (mL O₂/g Hb) + dissolved oxygen (mL O₂/dL/mmHg) · Normal: 18–20 mL O₂/dL</div>
+    </div>
+
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">Hüfner constant</div><div class="val-num">1.34</div><span class="val-unit">mL O₂ / g Hb</span></div>
+      <div class="val-item"><div class="val-label">Dissolved O₂ coefficient</div><div class="val-num">0.003</div><span class="val-unit">mL O₂ / dL / mmHg</span></div>
+      <div class="val-item"><div class="val-label">Normal Hb</div><div class="val-num">12–16</div><span class="val-unit">g/dL</span></div>
+      <div class="val-item"><div class="val-label">Normal CaO₂</div><div class="val-num">18–20</div><span class="val-unit">mL O₂/dL</span></div>
+    </div>
+
+    <div class="callout co-fact">
+      <strong>Key Insight</strong>
+      At PaO₂ 100 mmHg with normal Hb and SaO₂ 97%: bound O₂ ≈ 19.5 mL/dL, dissolved O₂ ≈ 0.3 mL/dL. <strong>Dissolved oxygen contributes only ~1.5% of total content</strong>. This is why increasing PaO₂ above 100 mmHg adds almost nothing to content — but increasing Hb or SaO₂ adds substantially.
+    </div>
+
+    <h2 class="subhead">Oxygen Delivery (DO₂)</h2>
+    <div class="formula-box">
+      <span class="flabel">Global Oxygen Delivery</span>
+      DO₂ = CO × CaO₂ × 10
+      <div class="fexpl">CO in L/min · CaO₂ in mL/dL · ×10 converts dL to L · Normal: 520–720 mL/min/m² (or ~1000 mL/min)</div>
+    </div>
+    <p>DO₂ is the product of <strong>cardiac output</strong> and <strong>arterial oxygen content</strong>. A fall in either can compromise tissue oxygenation. The body compensates by increasing extraction or increasing cardiac output.</p>
+
+    <div class="callout co-key">
+      <strong>The DO₂–VO₂ Relationship</strong>
+      At rest, DO₂ is approximately <strong>4×</strong> VO₂ — a substantial reserve. As DO₂ falls, extraction increases to maintain VO₂. Below a critical threshold (<strong>DO₂crit</strong>), VO₂ becomes supply-dependent and anaerobic metabolism begins (lactate rises).
+    </div>
+
+    <h2 class="subhead">Oxygen Consumption (VO₂)</h2>
+    <div class="formula-box">
+      <span class="flabel">Fick Principle</span>
+      VO₂ = CO × (CaO₂ − Cv̄O₂) × 10
+      <div class="fexpl">Normal: 100–180 mL/min/m² (~250 mL/min whole body) · Increases with fever, shivering, sepsis, exercise</div>
+    </div>
+    <table class="data-table">
+      <tr><th>Factor</th><th>Effect on VO₂</th><th>Clinical Scenario</th></tr>
+      <tr><td>Fever (↑1°C)</td><td class="td-bad">↑ ~10–13%</td><td>Sepsis, SIRS</td></tr>
+      <tr><td>Shivering</td><td class="td-bad">↑ 100–200%</td><td>Post-anaesthesia, rewarming</td></tr>
+      <tr><td>Sepsis</td><td class="td-bad">↑ variable</td><td>Inflammatory hypermetabolism</td></tr>
+      <tr><td>Hypothermia</td><td class="td-good">↓</td><td>Therapeutic cooling, cardiac surgery</td></tr>
+      <tr><td>Anaesthesia</td><td class="td-good">↓ 20–30%</td><td>Reduced metabolic demand</td></tr>
+      <tr><td>Exercise</td><td class="td-bad">↑ 10–20×</td><td>Athletes can achieve VO₂ >4000 mL/min</td></tr>
+      <tr><td>Thyrotoxicosis</td><td class="td-bad">↑</td><td>Increased metabolic rate</td></tr>
+      <tr><td>Malignant hyperthermia</td><td class="td-bad">↑↑↑</td><td>Hypermetabolic crisis; dantrolene</td></tr>
+    </table>
+
+    <h2 class="subhead">Oxygen Extraction Ratio (O₂ER)</h2>
+    <div class="formula-box">
+      <span class="flabel">Extraction Ratio</span>
+      O₂ER = VO₂ / DO₂ × 100 = (CaO₂ − Cv̄O₂) / CaO₂ × 100
+      <div class="fexpl">Normal: 22–30% · Maximum: ~70–80% (critical extraction threshold)</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Normal:</strong> 20–30% of delivered oxygen is extracted at rest</li>
+      <li><strong>Increased extraction:</strong> low CO, anaemia, hypoxaemia — tissues compensate by extracting more</li>
+      <li><strong>Decreased extraction:</strong> sepsis, cyanide toxicity — cellular inability to utilise oxygen despite adequate delivery</li>
+      <li><strong>ScvO₂</strong> is a mirror of extraction: ↓ScvO₂ = ↑extraction; ↑ScvO₂ (with high lactate) = extraction failure</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Critical DO₂ Threshold</strong>
+      When DO₂ falls below approximately <strong>330 mL/min/m²</strong>, VO₂ becomes supply-dependent — tissues can no longer extract enough oxygen. Lactate rises. This is the physiological basis of goal-directed therapy targeting DO₂ >600 mL/min/m² in high-risk surgical patients.
+    </div>
+
+    <h2 class="subhead">Determinants of Oxygen Delivery — The Five Pillars</h2>
+    <table class="data-table">
+      <tr><th>Variable</th><th>Normal</th><th>Effect on DO₂</th><th>Clinical Target</th></tr>
+      <tr><td>Haemoglobin</td><td>12–16 g/dL</td><td class="td-bad">Direct linear</td><td>7–9 g/dL (restrictive) or 9–10 g/dL (ischaemic)</td></tr>
+      <tr><td>SaO₂</td><td>95–100%</td><td class="td-bad">Direct linear</td><td>>92–94% (COPD: 88–92%)</td></tr>
+      <tr><td>PaO₂</td><td>80–100 mmHg</td><td class="td-mid">Minimal (via SaO₂)</td><td>>60 mmHg (steep part of ODC)</td></tr>
+      <tr><td>Cardiac Output</td><td>4–8 L/min</td><td class="td-bad">Direct linear</td><td>>4.5 L/min or CI >2.5 L/min/m²</td></tr>
+      <tr><td>Position of ODC</td><td>P50 = 27 mmHg</td><td class="td-mid">Modifies unloading</td><td>Right shift favourable in tissues</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Anaesthesia Considerations</strong>
+      General anaesthesia reduces DO₂ by: ↓CO (volatile agents, PPV), ↓VO₂ (hypothermia, reduced metabolic demand), and potentially ↓CaO₂ (if Hb falls from dilution or blood loss). The net effect is a <strong>reduced DO₂–VO₂ reserve</strong> — the patient is closer to the critical threshold.
+    </div>
+
+    <h2 class="subhead">Worked Example — Putting It All Together</h2>
+    <div class="callout co-key">
+      <strong>Case:</strong> A 70 kg patient in septic shock. Hb 9 g/dL, SaO₂ 96%, PaO₂ 85 mmHg, CO 7.5 L/min. Lactate 4.2 mmol/L. ScvO₂ 78%.<br><br>
+      <strong>Step 1 — CaO₂:</strong> (1.34 × 9 × 0.96) + (0.003 × 85) = 11.6 + 0.26 = <strong>11.9 mL/dL</strong> (low — anaemia)<br>
+      <strong>Step 2 — DO₂:</strong> 7.5 × 11.9 × 10 = <strong>892 mL/min</strong> (or ~509 mL/min/m² — low)<br>
+      <strong>Step 3 — VO₂:</strong> assume normal ~250 mL/min (elevated in sepsis)<br>
+      <strong>Step 4 — O₂ER:</strong> 250/892 × 100 = <strong>28%</strong> (appears normal)<br>
+      <strong>Step 5 — Interpretation:</strong> Despite normal-looking extraction, ScvO₂ 78% with lactate 4.2 suggests <strong>microvascular shunting / extraction failure</strong>. The problem is not delivery alone — it is distribution and cellular utilisation. Target: transfuse to Hb 9–10 g/dL, optimise CO, consider inotrope if CI <2.5, treat source.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: THE ODC -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 08</div>
+      <div class="mod-title">The Oxyhaemoglobin <em>Dissociation Curve</em></div>
+      <div class="mod-intro">The sigmoid relationship between PaO₂ and SaO₂ — the single most important graph in oxygen physiology.</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ODC CURVE — CORRECTED FOR ACCURACY
+         Key data points (PaO₂ mmHg, SaO₂ %):
+           0   →   0%
+          10  →  10%
+          20  →  35%
+          27  →  50%   (P50)
+          40  →  75%
+          50  →  85%
+          60  →  90%   ← critical inflection point
+          70  →  93%
+          80  →  95%
+          90  →  96.5%
+         100  →  97.5%
+         150  →  99%
+         ═══════════════════════════════════════════════════════════════════ -->
+    <div class="diagram-box">
+      <svg viewBox="0 0 520 300" width="100%" style="display:block;">
+        <!-- Axes -->
+        <line x1="70" y1="260" x2="490" y2="260" stroke="#d0c8b8" stroke-width="1.5"/>
+        <line x1="70" y1="260" x2="70" y2="20" stroke="#d0c8b8" stroke-width="1.5"/>
+        <text x="65" y="16" fill="#a89880" font-family="Instrument Sans" font-size="8" text-anchor="end">SaO₂ (%)</text>
+        <text x="490" y="282" fill="#a89880" font-family="Instrument Sans" font-size="8" text-anchor="end">PaO₂ (mmHg)</text>
+
+        <!-- Y-axis labels -->
+        <text x="62" y="263" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">0</text>
+        <text x="62" y="203" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">25</text>
+        <text x="62" y="143" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">50</text>
+        <text x="62" y="83" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">75</text>
+        <text x="62" y="23" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end">100</text>
+
+        <!-- X-axis labels -->
+        <text x="70" y="278" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">0</text>
+        <text x="175" y="278" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">20</text>
+        <text x="280" y="278" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">40</text>
+        <text x="385" y="278" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">60</text>
+        <text x="490" y="278" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle">80</text>
+
+        <!-- Guide lines -->
+        <line x1="70" y1="143" x2="490" y2="143" stroke="#d0c8b8" stroke-width=".4" stroke-dasharray="3,4"/>
+        <line x1="70" y1="83" x2="490" y2="83" stroke="#d0c8b8" stroke-width=".4" stroke-dasharray="3,4"/>
+
+        <!-- ── NORMAL CURVE (solid blue) ──
+             Coordinates: x = 70 + (PaO2/80)*420  ;  y = 260 - (SaO2/100)*240
+             PaO2 0  → x=70,   SaO2 0   → y=260
+             PaO2 10 → x=122,  SaO2 10  → y=236
+             PaO2 20 → x=175,  SaO2 35  → y=176
+             PaO2 27 → x=212,  SaO2 50  → y=140
+             PaO2 40 → x=280,  SaO2 75  → y=80
+             PaO2 50 → x=333,  SaO2 85  → y=56
+             PaO2 60 → x=385,  SaO2 90  → y=44
+             PaO2 70 → x=438,  SaO2 93  → y=37
+             PaO2 80 → x=490,  SaO2 95  → y=32
+        -->
+        <path d="M70,260 C90,258 110,250 122,236 C140,215 155,195 175,176 C192,160 200,152 212,140 C230,122 250,100 280,80 C305,64 320,58 333,56 C350,52 370,46 385,44 C405,41 425,38 438,37 C460,35 475,33 490,32"
+              stroke="#2a5a7a" stroke-width="2.5" fill="none"/>
+
+        <!-- ── RIGHT SHIFT (dashed rust) ──
+             PaO2 0  → x=70,   SaO2 0   → y=260
+             PaO2 10 → x=122,  SaO2 5   → y=248
+             PaO2 20 → x=175,  SaO2 20  → y=212
+             PaO2 30 → x=228,  SaO2 45  → y=152
+             PaO2 40 → x=280,  SaO2 65  → y=104
+             PaO2 50 → x=333,  SaO2 80  → y=68
+             PaO2 60 → x=385,  SaO2 88  → y=49
+             PaO2 70 → x=438,  SaO2 92  → y=39
+             PaO2 80 → x=490,  SaO2 94  → y=34
+        -->
+        <path d="M70,260 C95,258 115,252 122,248 C145,235 160,225 175,212 C195,195 215,170 228,152 C245,130 260,115 280,104 C305,92 320,80 333,68 C355,58 370,53 385,49 C410,44 450,38 490,34"
+              stroke="#7a2020" stroke-width="1.5" fill="none" stroke-dasharray="5,4"/>
+
+        <!-- ── LEFT SHIFT (dotted green) ──
+             PaO2 0  → x=70,   SaO2 0   → y=260
+             PaO2 10 → x=122,  SaO2 20  → y=212
+             PaO2 20 → x=175,  SaO2 50  → y=140
+             PaO2 30 → x=228,  SaO2 75  → y=80
+             PaO2 40 → x=280,  SaO2 88  → y=49
+             PaO2 50 → x=333,  SaO2 94  → y=34
+             PaO2 60 → x=385,  SaO2 96  → y=30
+             PaO2 70 → x=438,  SaO2 97  → y=27
+             PaO2 80 → x=490,  SaO2 98  → y=25
+        -->
+        <path d="M70,260 C95,255 110,240 122,212 C140,180 160,155 175,140 C195,120 215,98 228,80 C245,62 260,54 280,49 C305,43 320,38 333,34 C355,31 370,30 385,30 C410,28 450,26 490,25"
+              stroke="#4a7c59" stroke-width="1.5" fill="none" stroke-dasharray="2,4"/>
+
+        <!-- ── P50 MARKER (PaO2 27, SaO2 50) ── -->
+        <circle cx="212" cy="140" r="5" fill="#b8831a"/>
+        <line x1="212" y1="140" x2="212" y2="260" stroke="#b8831a" stroke-width=".8" stroke-dasharray="2,2"/>
+        <line x1="70" y1="140" x2="212" y2="140" stroke="#b8831a" stroke-width=".8" stroke-dasharray="2,2"/>
+        <text x="218" y="135" fill="#b8831a" font-family="Cormorant Garamond" font-size="12" font-weight="600">P50 = 27</text>
+
+        <!-- ── CRITICAL POINT (PaO2 60, SaO2 90%) ── -->
+        <circle cx="385" cy="44" r="5" fill="#7a2020"/>
+        <text x="392" y="40" fill="#7a2020" font-family="Instrument Sans" font-size="7" font-weight="600">PaO₂ 60 → SaO₂ 90%</text>
+
+        <!-- ── LEGEND ── -->
+        <line x1="320" y1="200" x2="350" y2="200" stroke="#2a5a7a" stroke-width="2.5"/>
+        <text x="355" y="203" fill="#7a6455" font-family="Instrument Sans" font-size="7">Normal</text>
+        <line x1="320" y1="215" x2="350" y2="215" stroke="#7a2020" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="355" y="218" fill="#7a6455" font-family="Instrument Sans" font-size="7">Right shift (↓affinity)</text>
+        <line x1="320" y1="230" x2="350" y2="230" stroke="#4a7c59" stroke-width="1.5" stroke-dasharray="2,4"/>
+        <text x="355" y="233" fill="#7a6455" font-family="Instrument Sans" font-size="7">Left shift (↑affinity)</text>
+      </svg>
+    </div>
+
+    <h2 class="subhead">The Sigmoid Shape — Why It Matters</h2>
+    <ul class="clist">
+      <li><strong>Upper flat portion (PaO₂ >60 mmHg):</strong> Large changes in PaO₂ produce small changes in SaO₂. This provides a safety margin — even if PaO₂ falls from 100 to 70, SaO₂ remains >90%.</li>
+      <li><strong>Steep portion (PaO₂ 20–60 mmHg):</strong> Small changes in PaO₂ produce large changes in SaO₂. This is where oxygen unloading occurs in tissues.</li>
+      <li><strong>PaO₂ 60 mmHg = the critical inflection point:</strong> SaO₂ ~90%. Below this, saturation falls precipitously.</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>The Clinical Target: PaO₂ >60 mmHg</strong>
+      Above 60 mmHg, the curve is flat — increasing PaO₂ adds little to saturation or content. Below 60 mmHg, the curve is steep — small further falls cause rapid desaturation. This is why 60 mmHg is the therapeutic threshold.
+    </div>
+
+    <h2 class="subhead">P50 — The Position Marker</h2>
+    <div class="formula-box">
+      <span class="flabel">Definition</span>
+      P50 = the PaO₂ at which haemoglobin is 50% saturated
+      <div class="fexpl">Normal P50 = 27 mmHg (range 24–28) · ↑P50 = right shift · ↓P50 = left shift</div>
+    </div>
+
+    <h2 class="subhead">Factors Shifting the Curve</h2>
+    <table class="data-table">
+      <tr><th>Shift</th><th>Effect</th><th>Mechanism</th><th>Factors</th></tr>
+      <tr><td class="td-bad"><strong>RIGHT</strong> (↓affinity, ↑unloading)</td><td>O₂ released more readily to tissues</td><td>↓pH, ↑CO₂, ↑temp, ↑2,3-DPG</td><td>Acidosis, hypercapnia, fever, exercise, anaemia, altitude, hyperthyroidism</td></tr>
+      <tr><td class="td-good"><strong>LEFT</strong> (↑affinity, ↓unloading)</td><td>O₂ held more tightly by Hb</td><td>↑pH, ↓CO₂, ↓temp, ↓2,3-DPG</td><td>Alkalosis, hypocapnia, hypothermia, stored blood, fetal Hb, CO poisoning, methaemoglobinaemia</td></tr>
+    </table>
+
+    <div class="mnemonic-box">
+      <div class="mnemonic-word">CADET, face Right!</div>
+      <div class="mnem-row"><span class="mnem-l">C</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">C</strong>O₂ — ↑CO₂ → right shift</span></div>
+      <div class="mnem-row"><span class="mnem-l">A</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">A</strong>cid — ↓pH → right shift</span></div>
+      <div class="mnem-row"><span class="mnem-l">D</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">D</strong>PG — ↑2,3-DPG → right shift (anaemia, altitude)</span></div>
+      <div class="mnem-row"><span class="mnem-l">E</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">E</strong>xercise — right shift (temperature, CO₂, acidosis)</span></div>
+      <div class="mnem-row"><span class="mnem-l">T</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">T</strong>emperature — ↑temp → right shift</span></div>
+    </div>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Bohr Effect</strong>
+      Active tissues produce CO₂, H⁺, and heat. These shift the curve <strong>right</strong>, decreasing haemoglobin's affinity for O₂ and promoting unloading exactly where it's needed most. This is physiological elegance — the tissues signal their demand by altering the local environment.
+    </div>
+
+    <div class="callout co-fact">
+      <strong>✦ 2,3-DPG in Stored Blood</strong>
+      Banked blood loses 2,3-DPG over 1–2 weeks → left shift → impaired oxygen unloading. Massive transfusion can paradoxically <strong>reduce tissue oxygenation</strong> despite improving Hb. 2,3-DPG regenerates within 6–24 hours in vivo.
+    </div>
+
+    <h2 class="subhead">Haemoglobin Variants & Abnormalities</h2>
+    <table class="data-table">
+      <tr><th>Haemoglobin</th><th>Affinity</th><th>P50</th><th>Clinical Significance</th></tr>
+      <tr><td><strong>HbA (adult)</strong></td><td>Normal</td><td>27 mmHg</td><td>Standard reference</td></tr>
+      <tr><td><strong>HbF (fetal)</strong></td><td class="td-good">↑ (left shift)</td><td>~20 mmHg</td><td>Higher affinity → better placental O₂ uptake; impaired unloading to tissues</td></tr>
+      <tr><td><strong>HbS (sickle)</strong></td><td class="td-mid">Variable</td><td>Variable</td><td>Polymerisation on deoxygenation → sickling; right shift of whole blood ODC</td></tr>
+      <tr><td><strong>Methaemoglobin (MetHb)</strong></td><td class="td-good">↑ (left shift)</td><td>↓</td><td>Fe³⁺ cannot bind O₂; SpO₂ reads ~85% regardless of PaO₂; treat with methylene blue</td></tr>
+      <tr><td><strong>Carboxyhaemoglobin (COHb)</strong></td><td class="td-good">↑↑ (left shift)</td><td>↓</td><td>CO binds 200–250× affinity of O₂; shifts curve left; standard SpO₂ falsely high; treat with 100% O₂ ± hyperbaric</td></tr>
+      <tr><td><strong>Glycated Hb (HbA1c)</strong></td><td class="td-good">↑ (left shift)</td><td>↓</td><td>In diabetes — slight impairment of unloading</td></tr>
+    </table>
+
+    <h2 class="subhead">The Hill Equation</h2>
+    <div class="formula-box">
+      <span class="flabel">Hill Equation</span>
+      SaO₂ = P<sup>n</sup> / (P<sup>n</sup> + P50<sup>n</sup>)
+      <div class="fexpl">n = Hill coefficient ≈ 2.8 for human Hb · describes positive cooperativity of O₂ binding</div>
+    </div>
+    <p>The sigmoid shape arises from <strong>cooperative binding</strong>: each O₂ molecule bound increases the affinity for the next. This is why the curve is not hyperbolic (like myoglobin) but sigmoid — and why it is so efficient at both loading in the lung and unloading in the tissues.</p>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: HYPOXAEMIA -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 08</div>
+      <div class="mod-title">Mechanisms of <em>Hypoxaemia</em></div>
+      <div class="mod-intro">Five mechanisms — four common, one rare. Each has a characteristic A-a gradient and oxygen response.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>Hypoxaemia vs Hypoxia</strong>
+      <strong>Hypoxaemia</strong> = low PaO₂ or SaO₂ in arterial blood. <strong>Hypoxia</strong> = inadequate oxygen at the tissue level, which may occur with normal PaO₂ (e.g., anaemia, circulatory failure, cyanide toxicity).
+    </div>
+
+    <h2 class="subhead">The Five Mechanisms</h2>
+
+    <table class="data-table">
+      <tr><th>Mechanism</th><th>A-a Gradient</th><th>PaCO₂</th><th>O₂ Response</th><th>Classic Causes</th></tr>
+      <tr><td><strong>1. V/Q Mismatch</strong> (most common)</td><td class="td-bad">↑</td><td class="eq">N/↓</td><td class="td-good">Good</td><td>Asthma, COPD, PE, pneumonia</td></tr>
+      <tr><td><strong>2. Hypoventilation</strong></td><td class="td-good">Normal</td><td class="td-bad">↑</td><td class="td-good">Good</td><td>Opioids, obesity, neuromuscular</td></tr>
+      <tr><td><strong>3. Shunt</strong></td><td class="td-bad">↑</td><td class="eq">N/↓</td><td class="td-bad">Poor (>30% shunt)</td><td>ARDS, atelectasis, pneumonia, intracardiac</td></tr>
+      <tr><td><strong>4. Diffusion Limitation</strong></td><td class="td-bad">↑</td><td class="eq">N/↓</td><td class="td-good">Good</td><td>Interstitial lung disease, exercise at altitude</td></tr>
+      <tr><td><strong>5. Low Inspired PO₂</strong></td><td class="td-good">Normal</td><td class="td-good">↓ (hyperventilation)</td><td class="td-good">Good</td><td>Altitude, anaesthetic circuit failure</td></tr>
+    </table>
+
+    <h2 class="subhead">Mechanism 1 — V/Q Mismatch</h2>
+    <p>Regional differences in ventilation and perfusion create lung units with high V/Q (dead space) and low V/Q (shunt-like). Low V/Q units contribute most to hypoxaemia because they are perfused but poorly ventilated.</p>
+    <ul class="clist">
+      <li><strong>Normal V/Q:</strong> ~0.8 overall (4 L/min ventilation / 5 L/min perfusion)</li>
+      <li><strong>Low V/Q (→0):</strong> shunt-like — blood passes poorly ventilated alveoli</li>
+      <li><strong>High V/Q (→∞):</strong> dead space — ventilated but not perfused (PE, emphysema)</li>
+      <li><strong>Response to O₂:</strong> Good — high FiO₂ converts low V/Q units to higher P<sub>A</sub>O₂</li>
+    </ul>
+
+    <h2 class="subhead">Mechanism 2 — Hypoventilation</h2>
+    <div class="formula-box">
+      <span class="flabel">Alveolar Gas Equation Rearranged</span>
+      ↓V̇<sub>A</sub> → ↑PaCO₂ → ↓P<sub>A</sub>O₂
+      <div class="fexpl">For every 1 mmHg rise in PaCO₂, P<sub>A</sub>O₂ falls by ~1.25 mmHg (assuming R = 0.8)</div>
+    </div>
+    <p>The A-a gradient is <strong>normal</strong> — the problem is not gas exchange across the membrane but inadequate delivery of fresh gas to the alveoli.</p>
+
+    <h2 class="subhead">Mechanism 3 — Shunt</h2>
+    <div class="formula-box">
+      <span class="flabel">Shunt Fraction</span>
+      Q̇<sub>s</sub>/Q̇<sub>t</sub> = (C<sub>c</sub>O₂ − CaO₂) / (C<sub>c</sub>O₂ − Cv̄O₂)
+      <div class="fexpl">C<sub>c</sub>O₂ = end-capillary content (calculated) · Normal shunt <5%</div>
+    </div>
+    <ul class="clist">
+      <li>Blood bypasses ventilated alveoli entirely — no gas exchange occurs</li>
+      <li><strong>Does not respond to supplemental O₂</strong> when shunt >30%: the shunted blood never sees the increased FiO₂</li>
+      <li><strong>Two types:</strong> (1) Anatomical — intracardiac (ASD, VSD), pulmonary AV malformations; (2) Physiological — atelectasis, consolidation, ARDS</li>
+      <li>Treatment: recruit the shunt (PEEP, positioning, secretion clearance) or reduce shunt fraction (prone positioning)</li>
+    </ul>
+
+    <h2 class="subhead">Mechanism 4 — Diffusion Limitation</h2>
+    <ul class="clist">
+      <li>Alveolar–capillary membrane thickening (interstitial fibrosis, oedema) or shortened transit time (exercise, high output)</li>
+      <li>Normal transit time: ~0.75 seconds at rest — equilibration complete by 0.25 seconds (3× reserve)</li>
+      <li>During exercise: transit time falls to ~0.25 seconds — reserve eliminated</li>
+      <li>At altitude: reduced driving pressure compounds the problem</li>
+      <li><strong>Responds well to O₂</strong> — increased P<sub>A</sub>O₂ restores the diffusion gradient</li>
+    </ul>
+
+    <h2 class="subhead">Mechanism 5 — Low Inspired PO₂</h2>
+    <ul class="clist">
+      <li>Altitude: P<sub>B</sub> falls → P<sub>I</sub>O₂ falls (fraction unchanged)</li>
+      <li>Anaesthetic circuit failure: hypoxic gas mixture, disconnected O₂ supply</li>
+      <li><strong>Response:</strong> Normal A-a gradient; responds to increased FiO₂ (if available)</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ Anaesthesia-Specific Causes</strong>
+      <strong>Atelectasis</strong> (most common): from supine position, muscle relaxation, PPV, O₂ resorption. <strong>Diffusion hypoxia:</strong> N₂O washout after cessation dilutes alveolar O₂ — give 100% O₂ for 5–10 minutes. <strong>Reduced FRC:</strong> from anaesthesia, obesity, Trendelenburg, pneumoperitoneum.
+    </div>
+
+    <h2 class="subhead">Quick Reference — Response to O₂</h2>
+    <table class="data-table">
+      <tr><th>Mechanism</th><th>Responds to O₂?</th><th>Mechanism of Response</th></tr>
+      <tr><td>V/Q mismatch</td><td class="td-good">✓ Yes</td><td>High P<sub>A</sub>O₂ in low V/Q units</td></tr>
+      <tr><td>Hypoventilation</td><td class="td-good">✓ Yes</td><td>Raises P<sub>A</sub>O₂ despite unchanged V̇<sub>A</sub></td></tr>
+      <tr><td>Shunt (&lt;30%)</td><td class="td-mid">Partial</td><td>Some improvement from dissolved O₂</td></tr>
+      <tr><td>Shunt (&gt;30%)</td><td class="td-bad">✗ Poor</td><td>Shunted blood never sees high FiO₂</td></tr>
+      <tr><td>Diffusion limitation</td><td class="td-good">✓ Yes</td><td>Restores diffusion gradient</td></tr>
+      <tr><td>Low inspired PO₂</td><td class="td-good">✓ Yes</td><td>Raises P<sub>I</sub>O₂ directly</td></tr>
+    </table>
+
+    <h2 class="subhead">Clinical Scenarios</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Scenario 1 — Post-operative hypoxaemia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <strong>Patient:</strong> 65-year-old, BMI 38, 4 hours post-laparotomy. SpO₂ 89% on 4L nasal cannula. RR 22, shallow. PaCO₂ 52 mmHg (baseline 40).<br><br>
+        <strong>Analysis:</strong> A-a gradient = elevated (calculate: P<sub>A</sub>O₂ = 149 − 52/0.8 = 84; PaO₂ ~55 → A-a = 29). Elevated A-a + elevated PaCO₂ = mixed <strong>hypoventilation + V/Q mismatch + atelectasis</strong>. The post-operative triad: residual anaesthetic → hypoventilation → atelectasis → shunt.<br><br>
+        <strong>Management:</strong> Sit up, incentive spirometry, CPAP/HFNC, escalate analgesia, consider reversal agents if applicable. Avoid excessive FiO₂ which worsens resorption atelectasis.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Scenario 2 — ARDS hypoxaemia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <strong>Patient:</strong> 45-year-old with severe pancreatitis. PaO₂ 58 on FiO₂ 1.0, PEEP 15. Bilateral infiltrates. P/F ratio = 58.<br><br>
+        <strong>Analysis:</strong> Severe <strong>shunt</strong> — consolidation, oedema, and derecruitment create true shunt physiology. Not responding to high FiO₂ confirms shunt >30%.<br><br>
+        <strong>Management:</strong> Lung-protective ventilation (Vt 6 mL/kg IBW, Pplat <30), PEEP titration, prone positioning, neuromuscular blockade if P/F <150, ECMO if P/F <80 despite optimisation.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Scenario 3 — Opioid-induced hypoventilation <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <strong>Patient:</strong> 30-year-old post-op, PCA morphine. RR 6, SpO₂ 84% on room air. PaCO₂ 68 mmHg.<br><br>
+        <strong>Analysis:</strong> PaO₂ ~45, A-a gradient = 149 − 85 = 64... but wait, at PaCO₂ 68, P<sub>A</sub>O₂ = 149 − 68/0.8 = 64. PaO₂ 45 → A-a = 19 → normal for age. Pure <strong>hypoventilation</strong>.<br><br>
+        <strong>Management:</strong> Naloxone titrated, supplemental O₂ (responds well), reduce opioid dose, consider multimodal analgesia.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: TYPES OF HYPOXIA -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 08</div>
+      <div class="mod-title">Types of <em>Hypoxia</em></div>
+      <div class="mod-intro">The classic Barcroft classification — four types plus the anaesthetic-specific fifth. Each has a distinct physiological signature.</div>
+    </div>
+
+    <h2 class="subhead">The Classification</h2>
+    <table class="data-table">
+      <tr><th>Type</th><th>PaO₂</th><th>CaO₂</th><th>SaO₂</th><th>CaO₂ − Cv̄O₂</th><th>Classic Causes</th></tr>
+      <tr><td><strong>Hypoxic</strong> (hypoxaemic)</td><td class="td-bad">↓</td><td class="td-bad">↓</td><td class="td-bad">↓</td><td class="td-bad">↓/N</td><td>Altitude, lung disease, shunt</td></tr>
+      <tr><td><strong>Anaemic</strong> (hypaemic)</td><td class="td-good">N</td><td class="td-bad">↓</td><td class="td-good">N</td><td class="td-bad">↓</td><td>Haemorrhage, anaemia, CO, methaemoglobin</td></tr>
+      <tr><td><strong>Stagnant</strong> (circulatory)</td><td class="td-good">N</td><td class="td-good">N</td><td class="td-good">N</td><td class="td-bad">↑↑</td><td>Shock, heart failure, venous obstruction</td></tr>
+      <tr><td><strong>Histotoxic</strong></td><td class="td-good">N</td><td class="td-good">N</td><td class="td-good">N</td><td class="td-good">↓ (narrow)</td><td>Cyanide, sepsis, alcohol</td></tr>
+      <tr><td><strong>Fulminating</strong></td><td class="td-bad">↓↓↓</td><td class="td-bad">↓↓↓</td><td class="td-bad">↓↓↓</td><td class="td-bad">↓</td><td>N₂O without O₂, inert gas inhalation</td></tr>
+    </table>
+
+    <h2 class="subhead">1 · Hypoxic (Hypoxaemic) Hypoxia</h2>
+    <p>The arterial blood itself is poorly oxygenated — PaO₂ is low, and haemoglobin saturation falls accordingly. This is the classic "low oxygen in the blood" state.</p>
+    <ul class="clist">
+      <li><strong>Low inspired PO₂:</strong> altitude, anaesthetic circuit with low FiO₂</li>
+      <li><strong>Alveolar hypoventilation:</strong> opioids, neuromuscular blockade, obesity</li>
+      <li><strong>V/Q mismatch:</strong> COPD, asthma, pneumonia</li>
+      <li><strong>Shunt:</strong> ARDS, atelectasis, congenital heart disease</li>
+      <li><strong>Diffusion limitation:</strong> interstitial lung disease</li>
+    </ul>
+    <div class="callout co-key">
+      <strong>Treatment</strong> Increase FiO₂. Treat the underlying cause (bronchodilators, recruitment, drainage). Shunt >30% will not respond well to O₂.
+    </div>
+
+    <h2 class="subhead">2 · Anaemic (Hypaemic) Hypoxia</h2>
+    <p>PaO₂ and SaO₂ are normal, but the <strong>oxygen-carrying capacity is reduced</strong> — either because there is less haemoglobin or because the haemoglobin that exists cannot bind oxygen normally.</p>
+    <ul class="clist">
+      <li><strong>Quantity problem:</strong> haemorrhage, iron-deficiency anaemia, chronic kidney disease</li>
+      <li><strong>Quality problem:</strong> carboxyhaemoglobin (CO binds Hb with 200× affinity), methaemoglobinaemia (Fe²⁺ → Fe³⁺), sulphhaemoglobinaemia</li>
+    </ul>
+    <div class="callout co-warn">
+      <strong>⚠ Pulse Oximetry Trap</strong>
+      In CO poisoning, SpO₂ reads falsely high — standard pulse oximeters cannot distinguish carboxyhaemoglobin from oxyhaemoglobin. A patient with SpO₂ 98% may be profoundly hypoxic. Use co-oximetry if suspected.
+    </div>
+
+    <h2 class="subhead">3 · Stagnant (Circulatory) Hypoxia</h2>
+    <p>PaO₂, SaO₂, and CaO₂ are all normal. The problem is <strong>blood flow</strong> — oxygen is delivered too slowly to meet metabolic demand.</p>
+    <ul class="clist">
+      <li><strong>Global:</strong> cardiogenic shock, hypovolaemic shock, cardiac arrest</li>
+      <li><strong>Local:</strong> arterial occlusion, venous thrombosis, compartment syndrome, tourniquet</li>
+      <li><strong>Signature:</strong> widened a-v O₂ difference (↑↑ extraction) — tissues pull more O₂ from each unit of blood</li>
+      <li><strong>ScvO₂ falls</strong> — the hallmark of stagnant hypoxia</li>
+    </ul>
+    <div class="callout co-pearl">
+      <strong>✦ Anaesthesia Relevance</strong>
+      Positioning (lithotomy, prone, Trendelenburg) can impair venous return and create regional stagnant hypoxia. Tourniquet use creates a controlled local stagnant hypoxia. Always assess perfusion (CRT, mottling, urine output) alongside SpO₂.
+    </div>
+
+    <h2 class="subhead">4 · Histotoxic Hypoxia</h2>
+    <p>The oxygen is delivered to the tissue, but the cells <strong>cannot use it</strong>. Cytochrome oxidase is poisoned — oxidative phosphorylation fails despite normal delivery.</p>
+    <ul class="clist">
+      <li><strong>Cyanide:</strong> binds cytochrome c oxidase — classic histotoxic poison. Antidote: hydroxocobalamin</li>
+      <li><strong>Sepsis:</strong> mitochondrial dysfunction, "cytopathic hypoxia"</li>
+      <li><strong>Alcohol, barbiturates:</strong> depress cellular respiration</li>
+      <li><strong>Signature:</strong> <strong>narrow</strong> a-v O₂ difference — tissues cannot extract oxygen. ScvO₂ is <strong>high</strong> (often >80%) despite elevated lactate</li>
+    </ul>
+    <div class="callout co-warn">
+      <strong>⚠ The Paradox</strong>
+      High ScvO₂ + high lactate = histotoxic hypoxia. The blood is well-oxygenated and returns to the heart still well-oxygenated — because the tissues couldn't use it. This is not reassuring; it is a sign of cellular failure.
+    </div>
+
+    <h2 class="subhead">5 · Fulminating Hypoxia</h2>
+    <p>A rapidly induced, severe hypoxic hypoxia caused by inhalation of <strong>undiluted inert gases</strong> — nitrogen, methane, helium, or nitrous oxide — displacing oxygen from the alveoli.</p>
+    <div class="callout co-key">
+      <strong>Anaesthetic Context</strong>
+      Administering N₂O without oxygen (e.g., during induction with a hypoxic mixture) can cause fulminating hypoxia within seconds. This is why <strong>100% O₂ is always given before and after N₂O</strong>, and why inspired oxygen concentration is continuously monitored.
+    </div>
+
+    <h2 class="subhead">Special Considerations — Cyanide & CO Poisoning</h2>
+
+    <h3 class="subsubhead">Cyanide Poisoning</h3>
+    <table class="data-table">
+      <tr><th>Aspect</th><th>Detail</th></tr>
+      <tr><td><strong>Mechanism</strong></td><td>Binds cytochrome c oxidase (Complex IV) → blocks electron transport chain → cells cannot use O₂</td></tr>
+      <tr><td><strong>Sources</strong></td><td>Industrial (metal plating, mining), smoke inhalation (house fires), sodium nitroprusside infusion, apricot kernels, bitter almonds</td></tr>
+      <tr><td><strong>Presentation</strong></td><td>Altered mental status, seizures, cardiovascular collapse, lactic acidosis, bright red venous blood, high ScvO₂</td></tr>
+      <tr><td><strong>Diagnosis</strong></td><td>High clinical suspicion; blood cyanide level (send before antidote); high lactate + high ScvO₂</td></tr>
+      <tr><td><strong>Treatment</strong></td><td><strong>Hydroxocobalamin</strong> 5 g IV (first line) — binds cyanide to form cyanocobalamin (excreted in urine). Sodium thiosulphate as adjunct. Avoid nitrite-based antidotes if CO co-poisoning suspected</td></tr>
+    </table>
+
+    <h3 class="subsubhead">Carbon Monoxide Poisoning</h3>
+    <table class="data-table">
+      <tr><th>Aspect</th><th>Detail</th></tr>
+      <tr><td><strong>Mechanism</strong></td><td>CO binds Hb with 200–250× affinity of O₂ → left-shifts ODC → impairs release at tissues; also binds cytochrome c oxidase and myoglobin</td></tr>
+      <tr><td><strong>Sources</strong></td><td>Incomplete combustion (heaters, generators, fires), smoking, methylene chloride</td></tr>
+      <tr><td><strong>Presentation</strong></td><td>Headache, nausea, confusion, seizures, coma; cherry-red skin (rare); delayed neuropsychiatric sequelae</td></tr>
+      <tr><td><strong>Diagnosis</strong></td><td>COHb on co-oximetry (>10% smokers, >5% non-smokers significant); standard SpO₂ is falsely normal</td></tr>
+      <tr><td><strong>Treatment</strong></td><td>100% O₂ (reduces CO half-life from 4–6 h to ~60–90 min); hyperbaric O₂ if COHb >25%, neurological symptoms, pregnancy, or persistent acidosis</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: A-a & VENOUS O2 -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 08</div>
+      <div class="mod-title">A-a Gradient & <em>Venous Oximetry</em></div>
+      <div class="mod-intro">The two most useful bedside tools for distinguishing mechanisms of hypoxaemia and assessing tissue oxygenation.</div>
+    </div>
+
+    <h2 class="subhead">The Alveolar–Arterial (A-a) Oxygen Gradient</h2>
+    <div class="formula-box">
+      <span class="flabel">A-a Gradient</span>
+      P(A-a)O₂ = P<sub>A</sub>O₂ − PaO₂
+      <div class="fexpl">P<sub>A</sub>O₂ = P<sub>I</sub>O₂ − (PaCO₂ / R) · Normal: 5–20 mmHg (increases with age)</div>
+    </div>
+
+    <div class="formula-box">
+      <span class="flabel">Age-Adjusted Normal</span>
+      Expected A-a = (Age / 4) + 4
+      <div class="fexpl">Age 20: ~9 mmHg · Age 40: ~14 mmHg · Age 60: ~19 mmHg · Age 80: ~24 mmHg</div>
+    </div>
+
+    <h2 class="subhead">Interpreting the A-a Gradient</h2>
+    <table class="data-table">
+      <tr><th>A-a Gradient</th><th>Mechanism</th><th>Conditions</th></tr>
+      <tr><td class="td-good"><strong>Normal</strong></td><td>No gas exchange defect</td><td>Hypoventilation · Low inspired PO₂</td></tr>
+      <tr><td class="td-bad"><strong>Elevated</strong></td><td>Gas exchange defect</td><td>V/Q mismatch · Shunt · Diffusion limitation</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The Diagnostic Power</strong>
+      A patient with hypoxaemia and a <strong>normal</strong> A-a gradient has a problem with <strong>ventilation or inspired gas</strong> — not with the lung's gas exchange surface. Check PaCO₂ (elevated = hypoventilation) and consider altitude or circuit failure.
+      <br><br>
+      A patient with hypoxaemia and an <strong>elevated</strong> A-a gradient has a problem with the <strong>lung itself</strong> — V/Q mismatch, shunt, or diffusion limitation. The A-a gradient cannot distinguish among these three; clinical context and O₂ response are needed.
+    </div>
+
+    <h2 class="subhead">The P/F Ratio and S/F Ratio</h2>
+    <div class="formula-box">
+      <span class="flabel">P/F Ratio (Horowitz Index)</span>
+      P/F = PaO₂ / FiO₂
+      <div class="fexpl">Normal >400 · Mild ARDS 200–300 · Moderate 100–200 · Severe <100 (Berlin criteria, on PEEP ≥5)</div>
+    </div>
+    <div class="formula-box">
+      <span class="flabel">S/F Ratio</span>
+      S/F = SpO₂ / FiO₂
+      <div class="fexpl">Normal >400 · <315 suggests ARDS · Useful when ABG unavailable</div>
+    </div>
+    <ul class="clist">
+      <li>P/F ratio is the standard for ARDS severity classification (Berlin definition)</li>
+      <li>Requires ABG — cannot be calculated from SpO₂ alone</li>
+      <li>S/F ratio is a non-invasive surrogate; acceptable for trending and screening</li>
+      <li><strong>ROX index:</strong> (SpO₂/FiO₂)/RR — predicts HFNC failure; >4.88 at 2h, 12h suggests success</li>
+    </ul>
+
+    <h2 class="subhead">Venous Oximetry</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Sample Site</th><th>Normal</th><th>Interpretation</th></tr>
+      <tr><td><strong>Sv̄O₂</strong> (mixed venous)</td><td>Pulmonary artery (PAC)</td><td class="td-hi">65–75%</td><td>Global O₂ balance; requires PAC</td></tr>
+      <tr><td><strong>ScvO₂</strong> (central venous)</td><td>SVC (CVC)</td><td class="td-hi">>70%</td><td>Upper body O₂ balance; +5–7% vs Sv̄O₂</td></tr>
+      <tr><td><strong>Pv̄O₂</strong></td><td>Pulmonary artery</td><td class="td-hi">38–42 mmHg</td><td>Mixed venous PO₂</td></tr>
+    </table>
+
+    <div class="formula-box">
+      <span class="flabel">Fick-Derived Relationship</span>
+      Sv̄O₂ = SaO₂ − VO₂ / (CO × Hb × 1.34)
+      <div class="fexpl">↓ Sv̄O₂ = ↑ extraction (low CO, anaemia, hypoxaemia, ↑VO₂) · ↑ Sv̄O₂ = ↓ extraction (sepsis, cyanide, shunting)</div>
+    </div>
+
+    <h2 class="subhead">Clinical Scenarios — ScvO₂ Patterns</h2>
+    <table class="data-table">
+      <tr><th>Clinical State</th><th>ScvO₂</th><th>Lactate</th><th>Interpretation</th></tr>
+      <tr><td>Normal</td><td class="td-good">>70%</td><td class="td-good">Normal</td><td>Adequate balance</td></tr>
+      <tr><td>Cardiogenic shock</td><td class="td-bad"><50%</td><td class="td-bad">↑</td><td>Low CO, high extraction</td></tr>
+      <tr><td>Haemorrhagic shock</td><td class="td-bad"><60%</td><td class="td-bad">↑</td><td>Low CaO₂, high extraction</td></tr>
+      <tr><td>Early sepsis</td><td class="td-good">>80%</td><td class="td-bad">↑</td><td>Microvascular shunting, extraction failure</td></tr>
+      <tr><td>Cyanide toxicity</td><td class="td-good">>80%</td><td class="td-bad">↑</td><td>Histotoxic — cells cannot extract</td></tr>
+      <tr><td>Hypothermia</td><td class="td-good">↑</td><td class="td-good">Normal</td><td>↓VO₂, less extraction</td></tr>
+      <tr><td>Exercise</td><td class="td-bad">↓ (40–50%)</td><td class="td-bad">↑</td><td>↑VO₂, high extraction in muscle</td></tr>
+    </table>
+
+    <h2 class="subhead">The Pv-aCO₂ Gap</h2>
+    <div class="formula-box">
+      <span class="flabel">Venoarterial CO₂ Difference</span>
+      Pv-aCO₂ = PvCO₂ − PaCO₂
+      <div class="fexpl">Normal: 2–6 mmHg · >6 mmHg = inadequate CO₂ washout (low flow)</div>
+    </div>
+    <ul class="clist">
+      <li>Elevated Pv-aCO₂ indicates <strong>inadequate cardiac output relative to metabolic demand</strong></li>
+      <li>Valuable when ScvO₂ appears normalised but lactate remains high — "cryptic shock"</li>
+      <li>Pv-aCO₂ / Ca-vO₂ ratio >1.4 suggests anaerobic CO₂ production</li>
+      <li>Also useful to distinguish low-flow from cytopathic causes of high lactate</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Integrated Assessment</strong>
+      <strong>Low ScvO₂ + high lactate:</strong> low delivery (stagnant or hypoxic hypoxia) → increase CO, Hb, or SaO₂.
+      <br><br>
+      <strong>High ScvO₂ + high lactate:</strong> extraction failure (histotoxic or septic) → source control, mitochondrial support — not more oxygen.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: CLINICAL APPLICATIONS -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 08</div>
+      <div class="mod-title">Clinical Applications <em>& Monitoring</em></div>
+      <div class="mod-intro">From oxygen devices and monitoring to special situations — bringing the cascade to the bedside.</div>
+    </div>
+
+    <h2 class="subhead">Oxygen Delivery Devices</h2>
+    <table class="data-table">
+      <tr><th>Device</th><th>Flow</th><th>FiO₂</th><th>Notes</th></tr>
+      <tr><td><strong>Nasal cannula</strong></td><td>1–6 L/min</td><td>0.24–0.44</td><td>Each L/min adds ~4% FiO₂; comfortable, allows speech/eating</td></tr>
+      <tr><td><strong>Simple face mask</strong></td><td>5–10 L/min</td><td>0.35–0.60</td><td>Minimum 5 L/min to prevent CO₂ rebreathing; variable FiO₂</td></tr>
+      <tr><td><strong>Venturi mask</strong></td><td>Variable</td><td>0.24–0.60</td><td>Precise FiO₂ via colour-coded adaptors; good for COPD</td></tr>
+      <tr><td><strong>Non-rebreather mask</strong></td><td>10–15 L/min</td><td>0.60–0.95</td><td>Reservoir bag; highest FiO₂ among simple masks</td></tr>
+      <tr><td><strong>HFNC</strong></td><td>30–60 L/min</td><td>0.21–1.0</td><td>Heated, humidified; flow-dependent PEEP ~1 cmH₂O per 10 L/min; excellent comfort</td></tr>
+      <tr><td><strong>CPAP/BiPAP</strong></td><td>Variable</td><td>Variable</td><td>Positive pressure; improves recruitment; NIV for hypercapnic respiratory failure</td></tr>
+      <tr><td><strong>Mechanical ventilation</strong></td><td>—</td><td>0.21–1.0</td><td>Full control; lung-protective strategies essential</td></tr>
+      <tr><td><strong>ECMO</strong></td><td>—</td><td>—</td><td>VV (respiratory) or VA (cardiac + respiratory); for refractory failure</td></tr>
+    </table>
+
+    <h2 class="subhead">Monitoring Oxygenation</h2>
+    <table class="data-table">
+      <tr><th>Modality</th><th>Measures</th><th>Advantages</th><th>Limitations</th></tr>
+      <tr><td><strong>Pulse oximetry (SpO₂)</strong></td><td>Haemoglobin saturation</td><td>Continuous, non-invasive</td><td>Falsely high in CO poisoning; poor in low perfusion, motion, methaemoglobin</td></tr>
+      <tr><td><strong>ABG (PaO₂, SaO₂)</strong></td><td>Arterial partial pressure + saturation</td><td>Gold standard; also pH, CO₂, lactate</td><td>Intermittent; invasive; painful</td></tr>
+      <tr><td><strong>Co-oximetry</strong></td><td>COHb, MetHb, total Hb</td><td>Distinguishes abnormal haemoglobins</td><td>Requires specialised analyser</td></tr>
+      <tr><td><strong>Capnography (ETCO₂)</strong></td><td>End-tidal CO₂</td><td>Confirms tube placement, ventilation, CPR quality</td><td>Indirect oxygenation marker; affected by dead space</td></tr>
+      <tr><td><strong>Venous oximetry (ScvO₂, Sv̄O₂)</strong></td><td>O₂ extraction balance</td><td>Reflects DO₂/VO₂ relationship</td><td>Requires CVC or PAC</td></tr>
+      <tr><td><strong>Transcutaneous O₂</strong></td><td>Skin surface PO₂</td><td>Non-invasive trending</td><td>Affected by perfusion, temperature</td></tr>
+      <tr><td><strong>NIRS</strong></td><td>Regional tissue O₂ saturation</td><td>Cerebral/somatic monitoring</td><td>Skin pigment, subcutaneous fat interference</td></tr>
+      <tr><td><strong>P/F ratio</strong></td><td>ARDS severity</td><td>Standardised, validated</td><td>Requires ABG</td></tr>
+    </table>
+
+    <h2 class="subhead">Pulse Oximetry — Principles & Pitfalls</h2>
+    <ul class="clist">
+      <li>Based on differential absorption of red (660 nm) and infrared (940 nm) light by oxy- and deoxyhaemoglobin</li>
+      <li><strong>Pitfalls:</strong> CO poisoning (SpO₂ falsely high), methaemoglobinaemia (SpO₂ ~85% regardless), poor perfusion, motion, nail polish, intravenous dyes, severe anaemia (SpO₂ may be normal despite low CaO₂)</li>
+      <li><strong>Accuracy:</strong> ±2–3% within 70–100% range; less accurate below 70%</li>
+      <li><strong>PaO₂ vs SaO₂:</strong> Above PaO₂ 60 mmHg, changes in PaO₂ produce minimal change in SaO₂ — pulse oximetry is a poor detector of hyperoxia but excellent for hypoxaemia</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ Oxygen Toxicity</strong>
+      Prolonged high FiO₂ (>0.6 for >24–48h) causes: absorption atelectasis, tracheobronchitis, diffuse alveolar damage, retinopathy of prematurity in neonates. Target SpO₂ 92–96% (88–92% in COPD) — avoid unnecessary hyperoxia.
+    </div>
+
+    <h2 class="subhead">Special Situations</h2>
+
+    <h3 class="subsubhead">One-Lung Ventilation (OLV)</h3>
+    <ul class="clist">
+      <li>Hypoxaemia occurs in ~5–10% of cases — due to shunt through the non-ventilated lung</li>
+      <li><strong>Hypoxic pulmonary vasoconstriction (HPV):</strong> compensatory mechanism redirecting blood to the ventilated lung; inhibited by volatile agents, vasodilators, and alkalosis</li>
+      <li><strong>Management of OLV hypoxaemia:</strong> check tube position, suction, ensure FiO₂ 1.0, apply CPAP to non-dependent lung, PEEP to dependent lung, intermittent reinflation of non-ventilated lung, clamp pulmonary artery (rare)</li>
+    </ul>
+
+    <h3 class="subsubhead">Cardiopulmonary Bypass (CPB)</h3>
+    <ul class="clist">
+      <li>Whole-body inflammatory response → capillary leak → interstitial oedema → diffusion limitation</li>
+      <li>Atelectasis common post-bypass — from cardioplegia, retraction, CPB itself</li>
+      <li>Post-CPB hypoxaemia: shunt from atelectasis, V/Q mismatch, reduced FRC, diaphragmatic dysfunction</li>
+      <li><strong>Management:</strong> recruitment manoeuvres, PEEP titration, early extubation protocols, physiotherapy</li>
+    </ul>
+
+    <h3 class="subsubhead">Obstructive Sleep Apnoea (OSA)</h3>
+    <ul class="clist">
+      <li>Chronic intermittent hypoxaemia → oxidative stress, systemic inflammation, endothelial dysfunction</li>
+      <li>Peri-operative risk: difficult airway, sensitivity to opioids/sedatives, post-operative hypoxaemia</li>
+      <li><strong>Management:</strong> CPAP peri-operatively, regional techniques where possible, cautious opioid titration, monitoring in high-dependency setting</li>
+    </ul>
+
+    <h3 class="subsubhead">High-Altitude & Aerospace Physiology</h3>
+    <ul class="clist">
+      <li>Commercial aircraft cruise at 30,000–40,000 ft — cabin altitude ~6000–8000 ft (P<sub>B</sub> ~560–640 mmHg)</li>
+      <li>Healthy passengers: SpO₂ ~90–94% — usually asymptomatic</li>
+      <li><strong>At-risk:</strong> COPD (may need in-flight O₂), recent pneumothorax, decompression sickness susceptibility, pregnancy >36 weeks</li>
+      <li>Supplemental O₂ recommended if PaO₂ <70 mmHg at sea level or SpO₂ <92% predicted</li>
+    </ul>
+
+    <h2 class="subhead">Targets & Goals</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Target</th><th>Rationale</th></tr>
+      <tr><td>PaO₂</td><td>>60 mmHg (ideally 80–100)</td><td>>60 mmHg = SaO₂ >90% (flat part of ODC)</td></tr>
+      <tr><td>SpO₂</td><td>92–96% (88–92% in COPD)</td><td>Avoid hypoxaemia; avoid hyperoxia</td></tr>
+      <tr><td>FiO₂</td><td>Lowest to maintain target SpO₂</td><td>Minimise absorption atelectasis and O₂ toxicity</td></tr>
+      <tr><td>P/F ratio</td><td>>300 (or improvement)</td><td>Marker of gas exchange efficiency</td></tr>
+      <tr><td>Lactate</td><td>Normal or clearance ≥10%/2h</td><td>Marker of tissue oxygenation</td></tr>
+      <tr><td>ScvO₂</td><td>>70%</td><td>Marker of DO₂/VO₂ balance</td></tr>
+      <tr><td>Pv-aCO₂</td><td><6 mmHg</td><td>Marker of adequate flow</td></tr>
+      <tr><td>CRT</td><td><2 seconds</td><td>Peripheral perfusion marker</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Anaesthetist's Rule</strong>
+      Give oxygen for a reason, not by habit. Target SpO₂ 92–96% in most patients, 88–92% in COPD. Wean FiO₂ as soon as feasible. Avoid both hypoxaemia and hyperoxia — both cause harm.
+    </div>
+
+    <h2 class="subhead">Emerging & Advanced Concepts</h2>
+    <ul class="clist">
+      <li><strong>Mitochondrial oxygen tension (mitoPO₂):</strong> measured by protoporphyrin IX fluorescence — direct assessment of cellular oxygenation; research tool</li>
+      <li><strong>Sublingual microcirculation (SDF/IDF):</strong> direct visualisation of capillary flow — research and increasingly clinical</li>
+      <li><strong>Artificial oxygen carriers:</strong> haemoglobin-based oxygen carriers (HBOCs) and perfluorocarbons — investigational</li>
+      <li><strong>Hyperbaric oxygen therapy:</strong> for CO poisoning, decompression sickness, non-healing wounds, radiation injury</li>
+      <li><strong>ECMO oxygenation:</strong> VV-ECMO provides gas exchange independent of native lung; target PaO₂ 60–80, SaO₂ 85–92% to avoid hyperoxia</li>
+      <li><strong>Personalised PEEP:</strong> electrical impedance tomography (EIT) and pressure–volume curve analysis to optimise recruitment</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twenty questions across all seven modules — from basic definitions to advanced clinical reasoning. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--o2blue);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--o2teal)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--o2blue)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/8)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  // ── BASIC ──
+  {q:"What is the PO₂ of dry atmospheric gas at sea level?",opts:["100 mmHg","120 mmHg","160 mmHg","47 mmHg"],ans:2,exp:"PO₂ = P_B × FiO₂ = 760 × 0.21 = 160 mmHg. After humidification at 37°C (subtracting 47 mmHg water vapour pressure), the tracheal PO₂ falls to 149 mmHg."},
+  {q:"Which equation calculates arterial oxygen content (CaO₂)?",opts:["CO × CaO₂ × 10","(1.34 × Hb × SaO₂) + (0.003 × PaO₂)","VO₂ / (CaO₂ − Cv̄O₂)","PaO₂ / FiO₂"],ans:1,exp:"CaO₂ = (1.34 × Hb × SaO₂) + (0.003 × PaO₂). The first term is haemoglobin-bound oxygen; the second is dissolved oxygen (which contributes only ~1.5% of total content). CO × CaO₂ × 10 is the DO₂ equation."},
+  {q:"Which mechanism of hypoxaemia responds POORLY to supplemental oxygen?",opts:["V/Q mismatch","Hypoventilation","Shunt >30%","Diffusion limitation"],ans:2,exp:"Shunt >30% responds poorly because shunted blood bypasses ventilated alveoli entirely — it never sees the increased FiO₂. V/Q mismatch, hypoventilation, and diffusion limitation all respond well to supplemental oxygen."},
+  {q:"What is the normal P50 of the oxyhaemoglobin dissociation curve?",opts:["20 mmHg","27 mmHg","40 mmHg","60 mmHg"],ans:1,exp:"P50 = the PaO₂ at which haemoglobin is 50% saturated. Normal = 27 mmHg (range 24–28). ↑P50 = right shift (decreased affinity). ↓P50 = left shift (increased affinity)."},
+  {q:"Which factor shifts the oxyhaemoglobin dissociation curve to the RIGHT?",opts:["Alkalosis","Hypothermia","Increased 2,3-DPG","Carbon monoxide"],ans:2,exp:"Increased 2,3-DPG shifts the curve right (decreased affinity, enhanced unloading). Alkalosis, hypothermia, and CO all shift LEFT. Remember: CADET, face Right — CO₂, Acid, DPG, Exercise, Temperature."},
+  {q:"A patient has hypoxaemia with a NORMAL A-a gradient. What is the mechanism?",opts:["V/Q mismatch","Shunt","Hypoventilation or low inspired PO₂","Diffusion limitation"],ans:2,exp:"A normal A-a gradient with hypoxaemia points to hypoventilation (check PaCO₂ — should be elevated) or low inspired PO₂ (altitude, circuit failure). The gas exchange surface itself is working normally."},
+  {q:"In which type of hypoxia is the a-v O₂ difference NARROWED?",opts:["Hypoxic hypoxia","Anaemic hypoxia","Stagnant hypoxia","Histotoxic hypoxia"],ans:3,exp:"Histotoxic hypoxia: cells cannot extract oxygen, so venous blood returns still well-oxygenated — the a-v difference narrows. Stagnant hypoxia does the opposite: extraction increases, widening the a-v difference."},
+  {q:"What is the normal oxygen extraction ratio (O₂ER)?",opts:["5–10%","22–30%","50–60%","70–80%"],ans:1,exp:"Normal O₂ER = 22–30%. The maximum extraction threshold is ~70–80%. When DO₂ falls below the critical threshold (~330 mL/min/m²), extraction is maximised and VO₂ becomes supply-dependent."},
+  {q:"The 'Pasteur point' represents:",opts:["The PaO₂ at which cyanosis appears","The PO₂ at which oxidative phosphorylation ceases (~1 mmHg)","The P50 of fetal haemoglobin","The threshold for oxygen toxicity"],ans:1,exp:"The Pasteur point is the mitochondrial PO₂ (~1 mmHg) below which oxidative phosphorylation ceases and anaerobic metabolism supervenes. Mitochondria normally function at PO₂ 1–10 mmHg."},
+  {q:"Which of the following causes a LEFT shift of the oxyhaemoglobin dissociation curve?",opts:["Fever","Acidosis","Carbon monoxide poisoning","Increased 2,3-DPG"],ans:2,exp:"Carbon monoxide shifts the curve left — it binds haemoglobin with 200× the affinity of oxygen, preventing oxygen binding and impairing unloading at tissues. Fever, acidosis, and increased 2,3-DPG all shift RIGHT."},
+  // ── INTERMEDIATE ──
+  {q:"Which hypoxaemia mechanism is MOST common in clinical practice?",opts:["Shunt","V/Q mismatch","Hypoventilation","Diffusion limitation"],ans:1,exp:"V/Q mismatch is the most common mechanism of hypoxaemia. It occurs in asthma, COPD, pneumonia, PE, and virtually all parenchymal lung disease. Shunt is second most common."},
+  {q:"A patient in septic shock has ScvO₂ of 84% and lactate of 5.2 mmol/L. What does this indicate?",opts:["Excellent resuscitation — stop fluids","Microvascular shunting / extraction failure","Measurement error","Hypovolaemia"],ans:1,exp:"High ScvO₂ + high lactate = extraction failure. In sepsis, microvascular shunting causes blood to bypass metabolically active tissues, and mitochondrial dysfunction impairs oxygen utilisation. The blood returns well-oxygenated because the cells couldn't use the oxygen."},
+  {q:"What is the normal P/F ratio?",opts:["<100","100–200","200–300",">400"],ans:3,exp:"Normal P/F ratio >400. ARDS severity: mild 200–300, moderate 100–200, severe <100 (Berlin criteria, on PEEP ≥5 cmH₂O). P/F = PaO₂ / FiO₂ — requires ABG."},
+  {q:"Which of the following is the FIRST-LINE antidote for cyanide poisoning?",opts:["Sodium nitrite","Hydroxocobalamin","Methylene blue","Naloxone"],ans:1,exp:"Hydroxocobalamin 5 g IV is first-line for cyanide poisoning — it binds cyanide to form cyanocobalamin (vitamin B12), which is excreted in urine. Sodium nitrite (older antidote) can worsen CO co-poisoning. Methylene blue is for methaemoglobinaemia."},
+  {q:"A patient on mechanical ventilation has FiO₂ 0.6, PaO₂ 70 mmHg, and PEEP 10. What is the P/F ratio and ARDS classification?",opts:[">300 — no ARDS","117 — moderate ARDS","233 — mild ARDS","70 — severe ARDS"],ans:1,exp:"P/F = 70 / 0.6 = 117. This falls in the moderate ARDS range (100–200). Severe ARDS is <100. Note: Berlin criteria require PEEP ≥5 cmH₂O and bilateral infiltrates not fully explained by cardiac failure."},
+  {q:"Which statement about the A-a gradient is TRUE?",opts:["A normal A-a gradient excludes lung disease","An elevated A-a gradient always means shunt","A normal A-a gradient with hypoxaemia suggests hypoventilation or low inspired PO₂","The A-a gradient is independent of age"],ans:2,exp:"A normal A-a gradient with hypoxaemia points to hypoventilation (elevated PaCO₂) or low inspired PO₂ (altitude, circuit failure). The A-a gradient normally increases with age: expected = (Age/4) + 4."},
+  {q:"In a patient with CO poisoning, which of the following is TRUE?",opts:["Standard pulse oximetry accurately reflects severity","PaO₂ is typically low","COHb causes a left shift of the ODC","Arterial blood appears cyanotic"],ans:2,exp:"CO binds haemoglobin with 200–250× the affinity of oxygen, causing a LEFT shift of the ODC and impairing tissue unloading. PaO₂ is typically normal (dissolved oxygen unaffected). Standard SpO₂ reads falsely high — co-oximetry is required."},
+  // ── ADVANCED ──
+  {q:"In early sepsis, which combination best represents the pathophysiology of oxygen utilisation?",opts:["Low ScvO₂, high lactate, low CO","High ScvO₂, high lactate, normal/high CO","High ScvO₂, normal lactate, low CO","Low ScvO₂, normal lactate, high SVR"],ans:1,exp:"Early septic shock: microvascular shunting + mitochondrial dysfunction → high ScvO₂ (extraction failure) + high lactate (anaerobic metabolism despite adequate delivery) + normal-to-high CO (warm shock). This is the 'cryptic shock' pattern."},
+  {q:"A patient with severe ARDS on VV-ECMO has PaO₂ 55 mmHg on FiO₂ 1.0. Which of the following is the BEST interpretation?",opts:["ECMO is failing — increase sweep gas","Shunt physiology — native lung not contributing","Normal for ECMO — target PaO₂ 60–80","Measurement error"],ans:2,exp:"On VV-ECMO, target PaO₂ is 60–80 mmHg with SaO₂ 85–92%. PaO₂ 55 is slightly below target — may need increased ECMO blood flow or FiO₂. However, the concept is that ECMO provides gas exchange independent of native lung; higher PaO₂ targets are not required and may cause hyperoxia."},
+  {q:"In one-lung ventilation, which factor IMPAIRS hypoxic pulmonary vasoconstriction (HPV)?",opts:["Hypoxia","Hypercapnia","Volatile anaesthetics","Acidosis"],ans:2,exp:"Volatile anaesthetics (isoflurane, sevoflurane, desflurane) inhibit HPV in a dose-dependent manner, worsening shunt during OLV. Hypoxia, hypercapnia, and acidosis actually ENHANCE HPV. This is why TIVA (propofol/remifentanil) may be preferred in patients at risk of OLV hypoxaemia."},
+  {q:"Which of the following is NOT a mechanism by which general anaesthesia causes hypoxaemia?",opts:["Reduced functional residual capacity","Atelectasis","Increased hypoxic pulmonary vasoconstriction","Diffusion hypoxia from N₂O"],ans:2,exp:"General anaesthesia REDUCES hypoxic pulmonary vasoconstriction (via volatile agents), not increases it. The other options are all valid mechanisms: ↓FRC (supine, muscle relaxation), atelectasis (resorption, compression), and diffusion hypoxia (N₂O washout diluting alveolar O₂)."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--o2blue);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — the oxygen cascade is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
