@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Neuraxial Blockade — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to central neuraxial blockade — spinal, epidural, and combined techniques. Anatomy, physiology, pharmacology, complications, and anticoagulation guidelines. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  /* NEW ACCENT — Deep Olive / Forest Sage for Neuraxial */
+  --olive:       #4a5e3a;
+  --olive-soft:  #6a7e5a;
+  --olive-deep:  #33422a;
+  --olive-light: #8a9e7a;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--olive);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--olive-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── BACK LINK ─── */
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--olive-deep); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(74,94,58,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(74,94,58,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(74,94,58,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(74,94,58,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(106,126,90,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--olive);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--olive); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--olive);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:640px;font-weight:300; }
+.hero-sub strong { color:var(--olive);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--olive-soft);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--olive);border-bottom-color:var(--olive); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--olive),var(--olive-soft));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--olive);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--olive); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--olive); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--olive);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--olive-soft);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--olive);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--olive);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(74,94,58,.02); }
+.td-hi { color:var(--olive)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(74,94,58,.04);border-color:var(--olive);color:var(--muted); }
+.co-key strong { color:var(--olive); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(106,126,90,.05);border-color:var(--olive-soft);color:var(--muted); }
+.co-fact strong { color:var(--olive-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--olive);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--olive);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-olive { border-color:var(--olive);color:var(--olive); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--olive-soft);color:var(--olive-soft); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--olive);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--olive); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--olive);font-size:.9rem;font-weight:700; }
+
+/* ─── ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--olive);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--olive);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--olive-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--olive);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── DIVIDER ─── */
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Regional Anaesthesia · Obstetrics · Acute Pain · Perioperative Medicine</div>
+  <h1>Central Neuraxial <em>Blockade</em></h1>
+  <p class="hero-sub">
+    Spinal, epidural, and combined techniques — the anatomy, physiology, pharmacology, and safety frameworks that define modern neuraxial practice. <strong>Nine modules. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>09</span></div>
+    <div class="meta-item">Scope <span>Spinal · Epidural · CSE · Safety · Complications</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Anatomy</button>
+  <button onclick="showMod(1)">02 · Dermatomes</button>
+  <button onclick="showMod(2)">03 · Technique</button>
+  <button onclick="showMod(3)">04 · Physiology</button>
+  <button onclick="showMod(4)">05 · Pharmacology</button>
+  <button onclick="showMod(5)">06 · Spinal vs Epidural</button>
+  <button onclick="showMod(6)">07 · Complications</button>
+  <button onclick="showMod(7)">08 · Anticoagulation</button>
+  <button onclick="showMod(8)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:11.1%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: ANATOMY -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 09</div>
+      <div class="mod-title">Anatomy of the <em>Neuraxis</em></div>
+      <div class="mod-intro">The vertebral column, the meninges, and the spaces between them. A sound anatomical model is the foundation of safe neuraxial access.</div>
+    </div>
+
+    <h2 class="subhead">The Vertebral Column — Surface Landmarks</h2>
+    <p>Identifying the correct level is the first step. The conus medullaris typically terminates at <strong>L1–L2</strong> in adults, making the lumbar interspaces below L2 safe for spinal anaesthesia.</p>
+    <table class="data-table">
+      <tr><th>Landmark</th><th>Vertebral Level</th><th>Clinical Note</th></tr>
+      <tr><td><strong>C7</strong></td><td>Vertebra prominens</td><td>Most prominent spinous process at the base of the neck</td></tr>
+      <tr><td><strong>T3</strong></td><td>Spine of scapula</td><td>Approximate level in the sitting position</td></tr>
+      <tr><td><strong>T7</strong></td><td>Inferior angle of scapula</td><td>Approximate level in the sitting position</td></tr>
+      <tr><td><strong>T10</strong></td><td>Xiphoid process</td><td>Dermatome T10 — umbilicus</td></tr>
+      <tr><td><strong>L1</strong></td><td>Lowest rib / T12</td><td>Conus medullaris typically ends here</td></tr>
+      <tr><td><strong>L4</strong></td><td>Iliac crests (Tuffier's line)</td><td>The classic landmark for lumbar puncture; the line may be higher than L4 in obese patients</td></tr>
+      <tr><td><strong>L3–L4 or L4–L5</strong></td><td>Common spinal/epidural insertion sites</td><td>Below the conus; safe in adults</td></tr>
+      <tr><td><strong>S2</strong></td><td>Posterior superior iliac spines</td><td>Level of the sacral hiatus (caudal approach)</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Tuffier's Line Is Not Always L4</strong>
+      Studies show the line connecting the iliac crests may intersect the spine at L3–L4 or higher, especially in obese patients and pregnant women. <strong>Ultrasound</strong> can accurately identify the level and is recommended in patients with difficult landmarks.
+    </div>
+
+    <h2 class="subhead">The Meninges and Neuraxial Spaces</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 720 420" width="100%" style="display:block;">
+        <text x="360" y="18" fill="#4a5e3a" font-family="Instrument Sans" font-size="10" text-anchor="middle" letter-spacing="2">CROSS-SECTION — NEURAXIAL SPACES</text>
+
+        <!-- Skin -->
+        <rect x="40" y="40" width="640" height="22" fill="#e8e1d4" stroke="#d0c8b8"/>
+        <text x="360" y="55" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Skin / Subcutaneous tissue</text>
+
+        <!-- Supraspinous / Interspinous -->
+        <rect x="40" y="62" width="640" height="28" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="360" y="80" fill="#7a6455" font-family="Instrument Sans" font-size="8" text-anchor="middle">Supraspinous / Interspinous ligaments</text>
+
+        <!-- Ligamentum flavum -->
+        <rect x="40" y="90" width="640" height="18" fill="#d0c8b8" stroke="#a89880" stroke-width="1.5"/>
+        <text x="360" y="103" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">Ligamentum flavum</text>
+
+        <!-- Epidural space -->
+        <rect x="40" y="108" width="640" height="52" fill="#4a5e3a" opacity="0.08" stroke="#4a5e3a" stroke-width="1.5"/>
+        <text x="360" y="128" fill="#4a5e3a" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="700" letter-spacing="1">EPIDURAL SPACE</text>
+        <text x="360" y="144" fill="#7a6455" font-family="Instrument Sans" font-size="7.5" text-anchor="middle">Contains epidural fat, internal vertebral venous plexus</text>
+        <text x="360" y="156" fill="#7a6455" font-family="Instrument Sans" font-size="7.5" text-anchor="middle">(Batson's plexus), spinal nerve roots, lymphatics</text>
+
+        <!-- Dura -->
+        <rect x="40" y="160" width="640" height="14" fill="#a89880" stroke="#7a6455"/>
+        <text x="360" y="171" fill="#f5f0e8" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">DURA MATER</text>
+
+        <!-- Subdural (potential) -->
+        <rect x="40" y="174" width="640" height="10" fill="#ede7da" stroke="#d0c8b8" stroke-dasharray="2,2"/>
+        <text x="360" y="182" fill="#a89880" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">Subdural (potential space)</text>
+
+        <!-- Arachnoid -->
+        <rect x="40" y="184" width="640" height="10" fill="#d0c8b8" stroke="#a89880"/>
+        <text x="360" y="192" fill="#2e2018" font-family="Instrument Sans" font-size="7.5" text-anchor="middle">Arachnoid mater</text>
+
+        <!-- Subarachnoid space -->
+        <rect x="40" y="194" width="640" height="80" fill="#6a7e5a" opacity="0.1" stroke="#6a7e5a" stroke-width="1.5"/>
+        <text x="360" y="220" fill="#4a5e3a" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="700" letter-spacing="1">SUBARACHNOID SPACE</text>
+        <text x="360" y="238" fill="#7a6455" font-family="Instrument Sans" font-size="7.5" text-anchor="middle">Cerebrospinal fluid (CSF) · Spinal cord / cauda equina</text>
+        <text x="360" y="252" fill="#7a6455" font-family="Instrument Sans" font-size="7.5" text-anchor="middle">Spinal nerve roots · Arachnoid trabeculae</text>
+
+        <!-- Pia -->
+        <rect x="40" y="274" width="640" height="10" fill="#a89880"/>
+        <text x="360" y="282" fill="#f5f0e8" font-family="Instrument Sans" font-size="7" text-anchor="middle">Pia mater</text>
+
+        <!-- Spinal cord -->
+        <rect x="250" y="284" width="220" height="60" rx="10" fill="#e2dace" stroke="#7a6455" stroke-width="1.5"/>
+        <text x="360" y="318" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="600">Spinal cord / cauda equina</text>
+
+        <!-- Needle paths -->
+        <line x1="120" y1="40" x2="120" y2="108" stroke="#7a2020" stroke-width="2" stroke-dasharray="4,3"/>
+        <circle cx="120" cy="108" r="3" fill="#7a2020"/>
+        <text x="132" y="76" fill="#7a2020" font-family="Instrument Sans" font-size="8">Epidural needle</text>
+        <text x="132" y="88" fill="#7a2020" font-family="Instrument Sans" font-size="8">stops at flavum</text>
+
+        <line x1="600" y1="40" x2="600" y2="210" stroke="#4a5e3a" stroke-width="2" stroke-dasharray="4,3"/>
+        <circle cx="600" cy="210" r="3" fill="#4a5e3a"/>
+        <text x="612" y="120" fill="#4a5e3a" font-family="Instrument Sans" font-size="8">Spinal needle</text>
+        <text x="612" y="132" fill="#4a5e3a" font-family="Instrument Sans" font-size="8">enters CSF</text>
+
+        <!-- Distance markers -->
+        <line x1="20" y1="40" x2="20" y2="108" stroke="#a89880" stroke-width=".8"/>
+        <line x1="15" y1="40" x2="25" y2="40" stroke="#a89880" stroke-width=".8"/>
+        <line x1="15" y1="108" x2="25" y2="108" stroke="#a89880" stroke-width=".8"/>
+        <text x="12" y="78" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="end" transform="rotate(-90, 12, 78)">~4–6 cm</text>
+      </svg>
+    </div>
+
+    <h2 class="subhead">The Epidural Space</h2>
+    <ul class="clist">
+      <li><strong>Boundaries:</strong> Ligamentum flavum (posterior), dura mater (anterior), pedicles and intervertebral foramina (lateral)</li>
+      <li><strong>Contents:</strong> Epidural fat, internal vertebral venous plexus (Batson's plexus), spinal nerve roots, lymphatics</li>
+      <li><strong>Depth:</strong> Variable — typically 4–6 cm in the lumbar region in non-obese adults; deeper in obesity</li>
+      <li><strong>Loss of resistance:</strong> The ligamentum flavum provides resistance to injection; entering the epidural space causes a sudden loss of resistance (LOR)</li>
+      <li><strong>Segmental spread:</strong> Epidural anaesthesia spreads segmentally; the level of insertion determines the dermatomes affected</li>
+      <li><strong>Negative pressure:</strong> The epidural space has a slightly negative pressure (especially in the thoracic region), which is the basis of the "hanging drop" technique</li>
+    </ul>
+
+    <h2 class="subhead">The Subarachnoid Space</h2>
+    <ul class="clist">
+      <li><strong>Contents:</strong> Cerebrospinal fluid (CSF), spinal cord (cervical to L1–L2), cauda equina (below L2), arachnoid trabeculae</li>
+      <li><strong>CSF volume:</strong> ~150 mL total; ~30–40 mL in the lumbar subarachnoid space</li>
+      <li><strong>CSF density:</strong> 1.000–1.007 g/mL at 37°C; hyperbaric solutions (with dextrose) sink; isobaric solutions remain at the injection level</li>
+      <li><strong>CSF pressure:</strong> 5–15 cmH₂O (lumbar, lateral decubitus); higher in obesity, pregnancy, and raised ICP</li>
+      <li><strong>Spinal needle endpoint:</strong> Free flow of CSF confirms subarachnoid placement</li>
+      <li><strong>CSF composition:</strong> Clear, colourless; glucose 50–80 mg/dL (60% of plasma); protein 15–45 mg/dL; pH 7.33–7.35</li>
+    </ul>
+
+    <h2 class="subhead">Approaches</h2>
+    <table class="data-table">
+      <tr><th>Approach</th><th>Technique</th><th>Indications</th><th>Notes</th></tr>
+      <tr><td><strong>Midline</strong></td><td>Needle through midline interspinous ligament</td><td>Most common; standard spinal and epidural</td><td>Landmarks: spinous processes; needle angled slightly cephalad</td></tr>
+      <tr><td><strong>Paramedian</strong></td><td>Needle 1–1.5 cm lateral to midline, angled medially and cephalad</td><td>Difficult landmarks, obesity, calcified ligaments, degenerative spine</td><td>Useful when midline approach fails; ultrasound can guide</td></tr>
+      <tr><td><strong>Caudal</strong></td><td>Sacral hiatus (S2–S4)</td><td>Paediatric anaesthesia, perineal surgery, chronic pain</td><td>Lower risk of dural puncture; limited segmental spread</td></tr>
+    </table>
+
+    <h2 class="subhead">Loss of Resistance (LOR) Technique</h2>
+    <ul class="clist">
+      <li><strong>Saline LOR:</strong> Most common; continuous pressure on plunger; loss of resistance when entering epidural space</li>
+      <li><strong>Air LOR:</strong> Less commonly used; risk of false LOR if air is compressed; may cause patchy block if air enters epidural space</li>
+      <li><strong>Hanging drop:</strong> A drop of saline is placed on the needle hub; it is sucked in when the epidural space (negative pressure) is entered</li>
+      <li><strong>Ultrasound guidance:</strong> Can identify the level, estimate depth to the epidural space, and visualise the needle path — especially useful in difficult anatomy</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ Ultrasound for Neuraxial</strong>
+      Ultrasound can visualise the ligamentum flavum, dura, and epidural space. It helps identify the correct intervertebral level (especially in obesity where Tuffier's line is unreliable), measure depth to the epidural space, and guide paramedian approaches. It does not replace tactile LOR but improves first-pass success.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: DERMATOMES -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 09</div>
+      <div class="mod-title">Dermatomes & <em>Block Levels</em></div>
+      <div class="mod-intro">The dermatome map is the language of neuraxial anaesthesia. Knowing which level blocks which part of the body is essential for planning and assessing a block.</div>
+    </div>
+
+    <h2 class="subhead">Dermatome Map — Key Levels</h2>
+    <table class="data-table">
+      <tr><th>Dermatome</th><th>Landmark</th><th>Clinical Relevance</th></tr>
+      <tr><td><strong>C3–C5</strong></td><td>Supraclavicular fossa, shoulder</td><td>Phrenic nerve (C3–5) — diaphragm; interscalene block target</td></tr>
+      <tr><td><strong>C5–T1</strong></td><td>Upper limb</td><td>Brachial plexus; supraclavicular/axillary blocks</td></tr>
+      <tr><td><strong>T4</strong></td><td>Nipple line</td><td>Level for Caesarean delivery (T4 sensory block)</td></tr>
+      <tr><td><strong>T6</strong></td><td>Xiphisternum</td><td>Upper abdominal surgery</td></tr>
+      <tr><td><strong>T10</strong></td><td>Umbilicus</td><td>Mid-abdominal surgery; labour analgesia (T10–L1)</td></tr>
+      <tr><td><strong>L1</strong></td><td>Inguinal ligament</td><td>Lower abdominal surgery; TAP block target</td></tr>
+      <tr><td><strong>L2–L4</strong></td><td>Anterior thigh, knee</td><td>Femoral nerve; knee surgery</td></tr>
+      <tr><td><strong>L4–S1</strong></td><td>Posterior thigh, calf, foot</td><td>Sciatic nerve; lower limb surgery</td></tr>
+      <tr><td><strong>S2–S4</strong></td><td>Perineum, genitalia</td><td>Saddle block; perineal surgery; urinary retention</td></tr>
+    </table>
+
+    <h2 class="subhead">Assessing Block Height</h2>
+    <ul class="clist">
+      <li><strong>Pinprick:</strong> Use a short-bevel needle; test from caudad to cephalad; the level at which sharp sensation is lost is the sensory level</li>
+      <li><strong>Cold sensation:</strong> Ethyl chloride spray or ice — tests temperature (C and Aδ fibres)</li>
+      <li><strong>Light touch:</strong> Cotton wool — tests Aβ fibres (later to be blocked)</li>
+      <li><strong>Motor block:</strong> Bromage scale (0–3) — assesses quadriceps strength</li>
+      <li><strong>Documentation:</strong> Record the sensory level (bilateral), motor block, and any asymmetry</li>
+    </ul>
+
+    <h2 class="subhead">Bromage Scale — Motor Blockade</h2>
+    <table class="data-table">
+      <tr><th>Grade</th><th>Criteria</th><th>Interpretation</th></tr>
+      <tr><td><strong>0</strong></td><td>Free movement of legs and feet</td><td>No motor block</td></tr>
+      <tr><td><strong>1</strong></td><td>Just able to flex knees with free movement of feet</td><td>Partial block — can lift leg but not against resistance</td></tr>
+      <tr><td><strong>2</strong></td><td>Unable to flex knees, but free movement of feet</td><td>Almost complete block</td></tr>
+      <tr><td><strong>3</strong></td><td>Unable to move legs or feet</td><td>Complete motor block</td></tr>
+    </table>
+
+    <h2 class="subhead">Target Block Levels</h2>
+    <table class="data-table">
+      <tr><th>Procedure</th><th>Target Sensory Level</th><th>Notes</th></tr>
+      <tr><td><strong>Caesarean delivery</strong></td><td>T4</td><td>Aim T4 to ensure peritoneal traction is painless</td></tr>
+      <tr><td><strong>Labour analgesia</strong></td><td>T10–L1</td><td>Epidural or CSE; low-concentration LA + opioid</td></tr>
+      <tr><td><strong>Hip surgery</strong></td><td>T10–T12</td><td>Spinal or CSE; may need higher block for surgical approach</td></tr>
+      <tr><td><strong>Knee surgery</strong></td><td>L2–L4</td><td>Spinal or femoral/adductor canal block</td></tr>
+      <tr><td><strong>Inguinal hernia</strong></td><td>T10–L1</td><td>Spinal or TAP block</td></tr>
+      <tr><td><strong>Perineal surgery</strong></td><td>S2–S4 (saddle block)</td><td>Low spinal with hyperbaric bupivacaine in sitting position</td></tr>
+      <tr><td><strong>Lower limb amputation</strong></td><td>T10</td><td>Spinal or combined femoral/sciatic block</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Documenting the Block</strong>
+      Always document the sensory level (bilateral), motor block (Bromage), and any asymmetry. A block that is higher than intended or asymmetric may indicate catheter migration, subdural placement, or other complications.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: TECHNIQUE -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 09</div>
+      <div class="mod-title">Technique — <em>Spinal, Epidural, CSE</em></div>
+      <div class="mod-intro">Step-by-step technique for the three central neuraxial blocks — positioning, equipment, endpoints, and troubleshooting.</div>
+    </div>
+
+    <h2 class="subhead">Spinal Anaesthesia — Step by Step</h2>
+    <ol class="clist" style="list-style-type:decimal;padding-left:1.3rem">
+      <li><strong>Preparation:</strong> IV access, monitoring (ECG, SpO₂, NIBP), resuscitation equipment, vasopressors drawn up</li>
+      <li><strong>Position:</strong> Sitting or lateral decubitus; back flexed to open interspinous spaces</li>
+      <li><strong>Landmarks:</strong> Identify L3–L4 or L4–L5 (Tuffier's line); mark the site</li>
+      <li><strong>Aseptic technique:</strong> Chlorhexidine 2% in 70% alcohol; sterile drape; gloves; mask</li>
+      <li><strong>Local anaesthetic:</strong> 1% lidocaine skin wheal at the puncture site</li>
+      <li><strong>Needle insertion:</strong> 25–27G pencil-point needle; midline or paramedian; advance slowly</li>
+      <li><strong>Endpoint:</strong> Free flow of CSF — confirm by aspiration</li>
+      <li><strong>Injection:</strong> Hyperbaric bupivacaine 0.5% (2.5–3 mL for Caesarean; 2–3 mL for lower limb); inject slowly (10–15 seconds)</li>
+      <li><strong>Positioning:</strong> Immediately position patient (supine, sitting, lateral) to determine spread</li>
+      <li><strong>Assessment:</strong> Sensory level (pinprick), motor block (Bromage), haemodynamics</li>
+    </ol>
+
+    <h2 class="subhead">Epidural Anaesthesia — Step by Step</h2>
+    <ol class="clist" style="list-style-type:decimal;padding-left:1.3rem">
+      <li><strong>Preparation:</strong> As for spinal; ensure epidural kit, catheter, filter, and test dose drugs are ready</li>
+      <li><strong>Position:</strong> Sitting or lateral; back flexed</li>
+      <li><strong>Landmarks:</strong> Identify level; mark; infiltrate with local anaesthetic</li>
+      <li><strong>Needle:</strong> 16–18G Tuohy needle; bevel directed cephalad</li>
+      <li><strong>Loss of resistance:</strong> Advance needle through ligaments; continuous pressure on plunger; LOR confirms epidural space</li>
+      <li><strong>Catheter:</strong> Thread 3–5 cm into epidural space; withdraw needle; secure catheter</li>
+      <li><strong>Aspiration:</strong> Check for blood or CSF — if positive, reposition</li>
+      <li><strong>Test dose:</strong> 3 mL lidocaine 1.5% with epinephrine 1:200,000; observe 3–5 minutes for HR rise or block</li>
+      <li><strong>Loading dose:</strong> 10–20 mL bupivacaine 0.25–0.5% (or ropivacaine) in incremental doses (3–5 mL at a time)</li>
+      <li><strong>Assessment:</strong> Sensory level, motor block, haemodynamics</li>
+    </ol>
+
+    <h2 class="subhead">Combined Spinal-Epidural (CSE) — Step by Step</h2>
+    <ol class="clist" style="list-style-type:decimal;padding-left:1.3rem">
+      <li><strong>Epidural needle placement:</strong> As for standard epidural (LOR to epidural space)</li>
+      <li><strong>Spinal needle:</strong> Pass a 25–27G pencil-point spinal needle through the Tuohy needle until CSF is obtained</li>
+      <li><strong>Spinal injection:</strong> Inject the spinal dose (e.g., bupivacaine 2–2.5 mL + fentanyl 10–25 μg)</li>
+      <li><strong>Needle withdrawal:</strong> Withdraw spinal needle; thread epidural catheter 3–5 cm</li>
+      <li><strong>Test dose:</strong> As for epidural</li>
+      <li><strong>Assessment:</strong> Rapid onset (spinal component) + titratable duration (epidural catheter)</li>
+    </ol>
+
+    <h2 class="subhead">Troubleshooting</h2>
+    <table class="data-table">
+      <tr><th>Problem</th><th>Possible Cause</th><th>Solution</th></tr>
+      <tr><td><strong>No CSF on spinal</strong></td><td>Needle not in subarachnoid; blocked needle; wrong level</td><td>Withdraw slightly, rotate needle, re-advance; check level; use paramedian; consider ultrasound</td></tr>
+      <tr><td><strong>Bloody tap</strong></td><td>Epidural venous plexus puncture</td><td>Withdraw, reposition; if persistent, abandon and use alternative technique</td></tr>
+      <tr><td><strong>Failed LOR</strong></td><td>Needle not in epidural space; calcified ligaments; wrong level</td><td>Reposition; use paramedian; consider ultrasound; do not inject if unsure</td></tr>
+      <tr><td><strong>Patchy block</strong></td><td>Catheter malposition; air in epidural space; septa</td><td>Withdraw catheter 1–2 cm; inject additional LA; consider replacing catheter</td></tr>
+      <tr><td><strong>High block</strong></td><td>Excessive spread; subdural placement; obesity; pregnancy</td><td>Stop injection; airway support; vasopressors; reassure; monitor</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Never Inject Against Resistance</strong>
+      If there is resistance to injection through an epidural catheter, <strong>do not force</strong>. It may be kinked, knotted, or intravascular. Withdraw slightly and reassess. Forcing can cause catheter rupture, intravascular injection, or epidural haematoma.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: PHYSIOLOGY -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 09</div>
+      <div class="mod-title">Physiology of <em>Neuraxial Blockade</em></div>
+      <div class="mod-intro">Sympathetic blockade, sensory blockade, motor blockade — the physiological consequences of interrupting neural transmission at the spinal cord level.</div>
+    </div>
+
+    <h2 class="subhead">Order of Blockade</h2>
+    <p>Local anaesthetics block small, unmyelinated fibres first. This determines the sequence of clinical effects.</p>
+    <table class="data-table">
+      <tr><th>Fibre Type</th><th>Function</th><th>Block Order</th><th>Clinical Effect</th></tr>
+      <tr><td><strong>B fibres</strong> (preganglionic sympathetic)</td><td>Vasomotor tone, sudomotor</td><td class="td-bad">1st</td><td>Vasodilation, hypotension, warmth, dry skin</td></tr>
+      <tr><td><strong>C fibres</strong> (pain, temperature)</td><td>Nociception, temperature</td><td class="td-mid">2nd</td><td>Loss of pain and temperature sensation</td></tr>
+      <tr><td><strong>Aδ fibres</strong> (pain, touch)</td><td>Sharp pain, touch</td><td class="td-mid">3rd</td><td>Loss of sharp pain and crude touch</td></tr>
+      <tr><td><strong>Aβ fibres</strong> (touch, pressure)</td><td>Light touch, proprioception</td><td class="td-good">4th</td><td>Loss of light touch and proprioception</td></tr>
+      <tr><td><strong>Aα fibres</strong> (motor)</td><td>Skeletal muscle</td><td class="td-good">5th</td><td>Motor blockade (last to be affected)</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The Sympathetic Level is Higher Than the Sensory Level</strong>
+      Sympathetic blockade extends <strong>2–6 dermatomes above</strong> the sensory level. This is why hypotension occurs even with a sensory level that seems "low" — the sympathectomy is more extensive than the sensory block.
+    </div>
+
+    <h2 class="subhead">Haemodynamic Effects</h2>
+    <ul class="clist">
+      <li><strong>Hypotension:</strong> From sympathetic blockade → arterial and venous dilation → reduced SVR and preload. Incidence: 30–50% in spinal anaesthesia; higher in obstetrics and the elderly.</li>
+      <li><strong>Bradycardia:</strong> From blockade of cardiac accelerator fibres (T1–T4) and reduced venous return (Bezold–Jarisch reflex). Risk is higher with high blocks, young age, and β-blockers.</li>
+      <li><strong>Compensatory mechanisms:</strong> Upper body vasoconstriction (if block is below T4), increased heart rate (if cardiac sympathetics are spared), renin-angiotensin activation.</li>
+      <li><strong>Management:</strong> Preload/co-load with crystalloid (limited evidence), vasopressors (phenylephrine, norepinephrine, ephedrine), left uterine displacement in obstetrics, Trendelenburg position.</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ Prevention of Spinal Hypotension</strong>
+      <strong>Ondansetron/Granisetron</strong> (5-HT₃ antagonists) have been studied for prevention of spinal-induced hypotension in Caesarean delivery, with some evidence of reduced incidence and vasopressor requirement. However, <strong>vasopressors remain the mainstay</strong>. Phenylephrine infusion is first-line in obstetrics; norepinephrine is an alternative.
+    </div>
+
+    <h2 class="subhead">Respiratory Effects</h2>
+    <ul class="clist">
+      <li><strong>Low blocks:</strong> Minimal effect on ventilation; intercostal muscles may be affected with high thoracic blocks</li>
+      <li><strong>High blocks (T4 and above):</strong> Intercostal muscle paralysis → reduced FRC and vital capacity; diaphragm (C3–5) is usually spared</li>
+      <li><strong>Apnoea:</strong> Rare; occurs with very high blocks (cervical) or when local anaesthetic spreads to the brainstem (total spinal)</li>
+      <li><strong>Clinical note:</strong> Patients with severe respiratory disease may not tolerate high blocks; consider the risk-benefit ratio</li>
+    </ul>
+
+    <h2 class="subhead">Gastrointestinal Effects</h2>
+    <ul class="clist">
+      <li><strong>Nausea and vomiting:</strong> From hypotension, vagal activation, and gastrointestinal hypomotility</li>
+      <li><strong>Reduced bowel motility:</strong> Sympathetic blockade → unopposed parasympathetic activity → increased peristalsis (often beneficial)</li>
+      <li><strong>Stress response attenuation:</strong> Neuraxial blocks reduce the surgical stress response (cortisol, catecholamines) — may improve outcomes in high-risk patients</li>
+    </ul>
+
+    <h2 class="subhead">Thermoregulatory Effects</h2>
+    <ul class="clist">
+      <li><strong>Vasodilation below the block:</strong> Increased heat loss from vasodilated skin</li>
+      <li><strong>Impaired shivering:</strong> Below the block, shivering is blocked; the patient cannot generate heat through shivering in the affected dermatomes</li>
+      <li><strong>Redistribution:</strong> Core heat redistributes to the periphery</li>
+      <li><strong>Result:</strong> Neuraxial anaesthesia is associated with <strong>hypothermia</strong> — active warming is required</li>
+    </ul>
+
+    <h2 class="subhead">Neuroendocrine Effects</h2>
+    <ul class="clist">
+      <li><strong>Attenuation of surgical stress response:</strong> Reduced cortisol, catecholamines, ADH, and renin-angiotensin activation</li>
+      <li><strong>Benefit:</strong> May reduce cardiac morbidity in high-risk patients (especially with thoracic epidural for abdominal/thoracic surgery)</li>
+      <li><strong>Limitation:</strong> The benefit is less clear in modern era with multimodal analgesia and minimally invasive surgery</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: PHARMACOLOGY -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 09</div>
+      <div class="mod-title">Pharmacology of <em>Neuraxial Agents</em></div>
+      <div class="mod-intro">Local anaesthetics, opioids, and adjuvants — the drugs that make neuraxial blockade possible, and the principles that govern their safe use.</div>
+    </div>
+
+    <h2 class="subhead">Local Anaesthetics — Key Agents</h2>
+    <table class="data-table">
+      <tr><th>Agent</th><th>Onset</th><th>Duration (Spinal)</th><th>Duration (Epidural)</th><th>Notes</th></tr>
+      <tr><td><strong>Bupivacaine</strong></td><td>5–10 min</td><td>2–4 h (hyperbaric)</td><td>2–4 h (with epinephrine)</td><td>Most common for spinal; cardiotoxic in overdose; hyperbaric and isobaric forms</td></tr>
+      <tr><td><strong>Ropivacaine</strong></td><td>5–15 min</td><td>Not commonly used for spinal</td><td>2–4 h</td><td>Less cardiotoxic than bupivacaine; more sensory-motor separation at low concentrations</td></tr>
+      <tr><td><strong>Lidocaine</strong></td><td>2–5 min</td><td>1–2 h</td><td>1–2 h</td><td>Fast onset; useful for short procedures; transient neurological symptoms (TNS) with spinal use</td></tr>
+      <tr><td><strong>Levobupivacaine</strong></td><td>5–10 min</td><td>2–4 h</td><td>2–4 h</td><td>S-enantiomer of bupivacaine; less cardiotoxic</td></tr>
+      <tr><td><strong>Chloroprocaine</strong></td><td>2–5 min</td><td>60–90 min</td><td>—</td><td>Ultra-short; used for ambulatory spinal; preservative-free only</td></tr>
+      <tr><td><strong>Prilocaine</strong></td><td>5–10 min</td><td>60–90 min</td><td>—</td><td>Used for spinal; risk of methaemoglobinaemia at high doses</td></tr>
+    </table>
+
+    <h2 class="subhead">Baricity — Spinal Anaesthesia</h2>
+    <ul class="clist">
+      <li><strong>Hyperbaric:</strong> Local anaesthetic mixed with dextrose (density > CSF). Sinks to the dependent portion of the subarachnoid space. Position determines spread.</li>
+      <li><strong>Isobaric:</strong> Density ≈ CSF. Remains at the level of injection; minimal position effect.</li>
+      <li><strong>Hypobaric:</strong> Density < CSF. Rises to the non-dependent portion; used for specific procedures (e.g., hip surgery in lateral position).</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>Hyperbaric Bupivacaine — The Workhorse</strong>
+      Most spinal anaesthetics use <strong>0.5% hyperbaric bupivacaine</strong> (5 mg/mL with 8% dextrose). The patient's position after injection determines the spread: sitting → saddle block; lateral → unilateral; Trendelenburg → high block.
+    </div>
+
+    <h2 class="subhead">Opioids — Neuraxial</h2>
+    <table class="data-table">
+      <tr><th>Opioid</th><th>Route</th><th>Dose</th><th>Duration</th><th>Notes</th></tr>
+      <tr><td><strong>Fentanyl</strong></td><td>Spinal / Epidural</td><td>10–25 μg (spinal); 50–100 μg (epidural)</td><td>2–4 h</td><td>Lipophilic; rapid onset; minimal rostral spread; pruritus, nausea</td></tr>
+      <tr><td><strong>Sufentanil</strong></td><td>Spinal / Epidural</td><td>5–10 μg (spinal); 10–20 μg (epidural)</td><td>2–4 h</td><td>More potent than fentanyl; similar profile</td></tr>
+      <tr><td><strong>Morphine</strong></td><td>Spinal / Epidural</td><td>0.1–0.3 mg (spinal); 2–5 mg (epidural)</td><td>12–24 h</td><td>Hydrophilic; slow onset; rostral spread → delayed respiratory depression (monitor 12–24 h)</td></tr>
+      <tr><td><strong>Diamorphine</strong></td><td>Spinal</td><td>0.2–0.5 mg</td><td>12–24 h</td><td>Prodrug of morphine; used in UK obstetric practice</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Delayed Respiratory Depression</strong>
+      <strong>Neuraxial morphine</strong> can cause delayed respiratory depression (peak 6–12 hours after spinal; 12–24 hours after epidural) due to rostral spread to the brainstem. Patients must be monitored with respiratory rate, sedation scores, and continuous pulse oximetry for at least 12–24 hours.
+    </div>
+
+    <h2 class="subhead">Adjuvants</h2>
+    <table class="data-table">
+      <tr><th>Adjuvant</th><th>Route</th><th>Dose</th><th>Effect</th><th>Notes</th></tr>
+      <tr><td><strong>Epinephrine (adrenaline)</strong></td><td>Epidural</td><td>1:200,000 (5 μg/mL)</td><td>Prolongs block; reduces systemic absorption</td><td>May cause tachycardia; not for spinal use</td></tr>
+      <tr><td><strong>Clonidine</strong></td><td>Spinal / Epidural</td><td>15–30 μg (spinal); 1–2 μg/kg (epidural)</td><td>Prolongs analgesia; reduces opioid requirement</td><td>Sedation, bradycardia, hypotension</td></tr>
+      <tr><td><strong>Dexmedetomidine</strong></td><td>Spinal / Epidural</td><td>5–10 μg (spinal); 0.5–1 μg/kg (epidural)</td><td>Prolongs block; analgesia</td><td>Sedation, bradycardia; emerging evidence</td></tr>
+      <tr><td><strong>Neostigmine</strong></td><td>Spinal</td><td>50–100 μg</td><td>Analgesia</td><td>Nausea, vomiting; limited use</td></tr>
+      <tr><td><strong>Midazolam</strong></td><td>Spinal</td><td>1–2 mg</td><td>Sedation; unclear analgesic benefit</td><td>Not routine; neurotoxicity concerns</td></tr>
+    </table>
+
+    <h2 class="subhead">Maximum Doses — Local Anaesthetics (Single Injection)</h2>
+    <div class="formula-box">
+      <span class="flabel">Maximum Doses (Peripheral / Epidural — NOT Spinal)</span>
+      Lidocaine: 3 mg/kg (7 mg/kg with adrenaline) · Bupivacaine: 2 mg/kg (2.5 mg/kg with adrenaline)
+      <div class="fexpl">Spinal doses are much smaller (e.g., 10–15 mg bupivacaine) — always calculate and document</div>
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ Ropivacaine — Sensory-Motor Separation</strong>
+      Ropivacaine produces less motor blockade than bupivacaine at equianalgesic concentrations. This is advantageous for <strong>labour epidural analgesia</strong> — the patient can mobilise and push effectively. Low concentrations (0.1–0.2%) are commonly used for maintenance.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: SPINAL vs EPIDURAL -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 09</div>
+      <div class="mod-title">Spinal vs Epidural <em>vs CSE</em></div>
+      <div class="mod-intro">Three techniques, three profiles. Understanding the differences is essential for choosing the right block for the right patient.</div>
+    </div>
+
+    <h2 class="subhead">Comparison Table</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Spinal</th><th>Epidural</th><th>CSE</th></tr>
+      <tr><td><strong>Site of injection</strong></td><td>Subarachnoid (CSF)</td><td>Epidural space</td><td>Both (spinal dose + epidural catheter)</td></tr>
+      <tr><td><strong>Onset</strong></td><td class="td-good">Fast (5–10 min)</td><td class="td-mid">Slow (15–30 min)</td><td class="td-good">Fast (spinal component)</td></tr>
+      <tr><td><strong>Dose required</strong></td><td>Small (10–15 mg bupivacaine)</td><td>Large (10–20 mL bupivacaine 0.25–0.5%)</td><td>Small spinal + large epidural</td></tr>
+      <tr><td><strong>Density of block</strong></td><td class="td-good">Dense, reliable</td><td class="td-mid">Variable, may be patchy</td><td class="td-good">Dense (spinal component)</td></tr>
+      <tr><td><strong>Duration</strong></td><td>Fixed (2–4 h with bupivacaine)</td><td class="td-good">Titratable; continuous catheter</td><td>Spinal duration + epidural extension</td></tr>
+      <tr><td><strong>Hypotension</strong></td><td class="td-bad">More common, rapid onset</td><td class="td-mid">Gradual, titratable</td><td class="td-bad">Rapid (spinal component)</td></tr>
+      <tr><td><strong>PDPH risk</strong></td><td class="td-mid">~1% (with fine pencil-point needle)</td><td class="td-mid">~0.5–1% (accidental dural puncture)</td><td class="td-mid">Similar to spinal</td></tr>
+      <tr><td><strong>Catheter</strong></td><td>No</td><td>Yes (continuous)</td><td>Yes</td></tr>
+      <tr><td><strong>Best for</strong></td><td>Short procedures (<3 h), Caesarean, day surgery</td><td>Prolonged surgery, labour, post-op analgesia</td><td>Labour, difficult anatomy, combined needs</td></tr>
+    </table>
+
+    <h2 class="subhead">Spinal Anaesthesia — Technique</h2>
+    <ul class="clist">
+      <li><strong>Needle:</strong> 25–27G pencil-point (Whitacre, Sprotte) — reduces PDPH risk compared to cutting needles</li>
+      <li><strong>Position:</strong> Sitting or lateral decubitus; hyperbaric solution → position determines spread</li>
+      <li><strong>Endpoint:</strong> Free flow of CSF</li>
+      <li><strong>Injection:</strong> Slow injection (over 10–15 seconds) to avoid turbulence; barbotage only if necessary</li>
+      <li><strong>Level:</strong> L3–L4 or L4–L5 (below conus)</li>
+      <li><strong>Common doses:</strong> Hyperbaric bupivacaine 0.5% — 2.5–3 mL (12.5–15 mg) for Caesarean; 2–3 mL for lower limb; 1–2 mL for perineal</li>
+    </ul>
+
+    <h2 class="subhead">Epidural Anaesthesia — Technique</h2>
+    <ul class="clist">
+      <li><strong>Needle:</strong> 16–18G Tuohy needle (blunt, curved tip)</li>
+      <li><strong>Endpoint:</strong> Loss of resistance (LOR) — saline or air</li>
+      <li><strong>Catheter:</strong> Threaded 3–5 cm into the epidural space</li>
+      <li><strong>Test dose:</strong> 3 mL lidocaine 1.5% with epinephrine 1:200,000 — to detect intravascular or intrathecal placement</li>
+      <li><strong>Loading dose:</strong> 10–20 mL bupivacaine 0.25–0.5% (or ropivacaine) in incremental doses</li>
+      <li><strong>Maintenance:</strong> Continuous infusion, PCEA, or programmed intermittent epidural boluses (PIEB)</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Test Dose</strong>
+      A test dose of <strong>lidocaine 1.5% 3 mL with epinephrine 1:200,000</strong> is given to detect:
+      <br>• <strong>Intravascular placement:</strong> Heart rate increases >20 bpm within 1–2 minutes.
+      <br>• <strong>Intrathecal placement:</strong> Rapid onset of sensory/motor block within 3–5 minutes.
+      <br><br>
+      The test dose is not 100% sensitive but remains standard practice.
+    </div>
+
+    <h2 class="subhead">Combined Spinal-Epidural (CSE)</h2>
+    <ul class="clist">
+      <li><strong>Technique:</strong> Epidural needle placed, then a spinal needle passed through it (needle-through-needle) to inject the spinal dose; epidural catheter then threaded</li>
+      <li><strong>Advantages:</strong> Rapid onset (spinal) + titratable duration (epidural catheter)</li>
+      <li><strong>Indications:</strong> Labour analgesia, Caesarean delivery, difficult anatomy where epidural alone may fail</li>
+      <li><strong>Dural puncture epidural (DPE):</strong> A modification where the dura is punctured but no spinal drug is injected — allows confirmation of epidural placement and may improve block quality</li>
+      <li><strong>Note:</strong> CSE is associated with a higher incidence of pruritus (from intrathecal opioid) and foetal bradycardia in obstetrics</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ Labour Analgesia — Current Best Practice</strong>
+      Low-concentration local anaesthetic (bupivacaine 0.0625–0.125% or ropivacaine 0.1–0.2%) combined with a lipophilic opioid (fentanyl 2 μg/mL or sufentanil) provides excellent analgesia with minimal motor block. Maintenance with <strong>PCEA + PIEB</strong> improves analgesia quality and reduces clinician workload compared to continuous infusion alone.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: COMPLICATIONS -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 09</div>
+      <div class="mod-title">Complications of <em>Neuraxial Blockade</em></div>
+      <div class="mod-intro">Common, uncommon, and rare — from hypotension to epidural haematoma. Recognition and management.</div>
+    </div>
+
+    <h2 class="subhead">Common Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Hypotension</strong></td><td>30–50% (spinal)</td><td>Sympathetic blockade → vasodilation</td><td>Fluids, vasopressors (phenylephrine, ephedrine), left uterine displacement</td></tr>
+      <tr><td><strong>Bradycardia</strong></td><td>5–15% (spinal)</td><td>Block of cardiac accelerators (T1–T4), Bezold–Jarisch reflex</td><td>Atropine 0.5–1 mg IV; ephedrine; epinephrine if severe</td></tr>
+      <tr><td><strong>Nausea / vomiting</strong></td><td>20–30%</td><td>Hypotension, vagal activation, GI hypomotility</td><td>Treat hypotension; ondansetron; avoid triggers</td></tr>
+      <tr><td><strong>Urinary retention</strong></td><td>10–20%</td><td>Sacral block (S2–S4)</td><td>Catheterisation if needed; usually resolves</td></tr>
+      <tr><td><strong>Back pain</strong></td><td>10–20%</td><td>Needle trauma, ligament strain</td><td>Reassurance, simple analgesia</td></tr>
+      <tr><td><strong>Pruritus</strong></td><td>Common (neuraxial opioids)</td><td>Opioid receptor activation</td><td>Nalbuphine, ondansetron, low-dose naloxone</td></tr>
+    </table>
+
+    <h2 class="subhead">Post-Dural Puncture Headache (PDPH)</h2>
+    <ul class="clist">
+      <li><strong>Incidence:</strong> ~1% with fine pencil-point spinal needles; 0.5–1% with accidental dural puncture during epidural (higher with large-bore needles)</li>
+      <li><strong>Mechanism:</strong> CSF leak through dural hole → intracranial hypotension → traction on pain-sensitive structures</li>
+      <li><strong>Presentation:</strong> Postural headache (worse upright, relieved supine), onset within 24–48 hours, often frontal/occipital, may be associated with neck stiffness, photophobia, nausea</li>
+      <li><strong>Diagnosis:</strong> Clinical; MRI may show intracranial hypotension (pachymeningeal enhancement, sagging brain)</li>
+      <li><strong>Treatment:</strong> Conservative (hydration, caffeine, simple analgesia) → <strong>Epidural blood patch (EBP)</strong> — gold standard; 10–20 mL autologous blood into epidural space; effective in >70%</li>
+      <li><strong>Newer monitoring:</strong> Optic nerve sheath diameter (ONSD) ultrasound may predict EBP response; ΔONSD ≥0.40 mm associated with improvement</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>Epidural Blood Patch — The Gold Standard</strong>
+      For persistent PDPH, EBP is the definitive treatment. Aseptic technique; 10–20 mL autologous blood drawn from the patient's arm; injected into the epidural space at or below the level of dural puncture. Success rate >70% after first patch; >90% after second.
+    </div>
+
+    <h2 class="subhead">Uncommon but Serious Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Presentation</th><th>Management</th></tr>
+      <tr><td><strong>Epidural haematoma</strong></td><td>1:150,000–1:200,000 (higher with anticoagulation)</td><td>Back pain, progressive motor/sensory deficit, bladder dysfunction</td><td>Emergency MRI → surgical decompression within 6–8 hours</td></tr>
+      <tr><td><strong>Epidural abscess</strong></td><td>1:10,000–1:20,000</td><td>Fever, back pain, neurological deficit</td><td>Antibiotics + surgical drainage</td></tr>
+      <tr><td><strong>Meningitis</strong></td><td>Rare (aseptic technique)</td><td>Fever, headache, neck stiffness, photophobia</td><td>Antibiotics, supportive care</td></tr>
+      <tr><td><strong>Total spinal</strong></td><td>Rare</td><td>Rapid loss of consciousness, apnoea, profound hypotension, bradycardia</td><td>Airway, ventilation, vasopressors, CPR if needed</td></tr>
+      <tr><td><strong>High block / Horner's</strong></td><td>Uncommon</td><td>Arm weakness, ptosis, miosis, anhidrosis</td><td>Reassurance; usually resolves</td></tr>
+      <tr><td><strong>Nerve injury</strong></td><td>Rare (transient: 0.1–0.5%; permanent: <0.01%)</td><td>Persistent sensory/motor deficit</td><td>Neurology referral; MRI; rehabilitation</td></tr>
+      <tr><td><strong>Cauda equina syndrome</strong></td><td>Very rare</td><td>Saddle anaesthesia, bladder/bowel dysfunction, lower limb weakness</td><td>Emergency MRI → surgical decompression</td></tr>
+    </table>
+
+    <div class="callout co-danger">
+      <strong>⚠ Epidural Haematoma — Time is Neurological Function</strong>
+      Epidural haematoma is a surgical emergency. If suspected, <strong>MRI immediately</strong>. Decompression within <strong>6–8 hours</strong> offers the best chance of neurological recovery. Risk is increased with anticoagulation, traumatic puncture, and indwelling catheters during anticoagulation.
+    </div>
+
+    <h2 class="subhead">Post-Dural Puncture Headache — Prevention</h2>
+    <ul class="clist">
+      <li><strong>Pencil-point needles:</strong> 25–27G Whitacre or Sprotte — significantly reduce PDPH compared to cutting (Quincke) needles</li>
+      <li><strong>Orientation of needle bevel:</strong> Parallel to dural fibres (for cutting needles) — reduces CSF leak</li>
+      <li><strong>Minimise dural punctures:</strong> Use pencil-point; avoid multiple attempts</li>
+      <li><strong>Epidural blood patch at time of dural puncture:</strong> Not routinely recommended; consider if high-risk (large-bore needle, young, obstetric)</li>
+      <li><strong>Conservative measures:</strong> Hydration, caffeine, bed rest (limited evidence)</li>
+    </ul>
+
+    <h2 class="subhead">Management of Total Spinal</h2>
+    <ul class="clist">
+      <li><strong>Recognition:</strong> Rapid onset of profound hypotension, bradycardia, apnoea, loss of consciousness</li>
+      <li><strong>Airway:</strong> Intubate and ventilate with 100% O₂</li>
+      <li><strong>Circulation:</strong> Vasopressors (epinephrine, phenylephrine), IV fluids, CPR if cardiac arrest</li>
+      <li><strong>Position:</strong> Trendelenburg (may limit further spread, but evidence limited)</li>
+      <li><strong>Reassurance:</strong> The block will wear off — supportive care until recovery</li>
+      <li><strong>Documentation:</strong> Incident report; review technique; consider alternative for future</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: ANTICOAGULATION -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 09</div>
+      <div class="mod-title">Anticoagulation & <em>Neuraxial Safety</em></div>
+      <div class="mod-intro">The ASRA and ESAIC/ESRA guidelines — the evidence-based framework for performing neuraxial blocks in patients on antithrombotic drugs.</div>
+    </div>
+
+    <div class="callout co-danger">
+      <strong>⚠ The Core Principle</strong>
+      Neuraxial bleeding occurs in a <strong>non-expansive space</strong> (the spinal canal). Even small haematomas can cause permanent paralysis. The risk is increased by anticoagulants, traumatic puncture, and indwelling catheters during anticoagulation. Strict adherence to time intervals is mandatory.
+    </div>
+
+    <h2 class="subhead">ASRA 5th Edition (2025) — Key Principles</h2>
+    <ul class="clist">
+      <li><strong>Risk stratification:</strong> Consider patient factors (age, spinal pathology, coagulopathy), procedural factors (traumatic vs atraumatic, catheter vs single-shot), and drug factors (half-life, renal clearance, reversibility)</li>
+      <li><strong>Time intervals:</strong> Specific intervals must be observed before and after neuraxial procedures — these vary by drug, dose, and renal function</li>
+      <li><strong>Traumatic puncture:</strong> If a traumatic (bloody) puncture occurs, the interval before restarting anticoagulation should be extended, and the patient monitored closely</li>
+      <li><strong>Catheter management:</strong> The same intervals apply to catheter removal as to insertion — do not remove a catheter during peak anticoagulant effect</li>
+      <li><strong>Ultrasound guidance:</strong> Does NOT modify the time intervals — it reduces the number of attempts but not the bleeding risk once a haematoma forms</li>
+    </ul>
+
+    <h2 class="subhead">Time Intervals — Common Anticoagulants</h2>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Interval Before Neuraxial (After Last Dose)</th><th>Interval After Neuraxial (Before Next Dose)</th><th>Notes</th></tr>
+      <tr><td><strong>Heparin (prophylactic SC)</strong></td><td>4–6 h</td><td>1–2 h</td><td>Low risk; monitor platelet count</td></tr>
+      <tr><td><strong>Heparin (therapeutic IV)</strong></td><td>4–6 h; normal aPTT</td><td>1–2 h</td><td>Higher risk; consider catheter removal timing</td></tr>
+      <tr><td><strong>LMWH (prophylactic)</strong></td><td>12 h</td><td>4 h</td><td>Enoxaparin 40 mg; dalteparin 5000 units</td></tr>
+      <tr><td><strong>LMWH (therapeutic)</strong></td><td>24 h</td><td>4 h</td><td>Higher dose; renal impairment may require longer</td></tr>
+      <tr><td><strong>Warfarin</strong></td><td>INR ≤1.4</td><td>INR ≤1.4</td><td>Check INR before procedure; reverse if necessary</td></tr>
+      <tr><td><strong>DOACs (Apixaban, Rivaroxaban)</strong></td><td>72 h (or per renal function)</td><td>6 h</td><td>Renal impairment → longer interval; check drug-specific guidance</td></tr>
+      <tr><td><strong>Dabigatran</strong></td><td>72–96 h (renal function dependent)</td><td>6 h</td><td>Reversal with idarucizumab available</td></tr>
+      <tr><td><strong>Clopidogrel</strong></td><td>5–7 days</td><td>6 h</td><td>Irreversible platelet inhibition</td></tr>
+      <tr><td><strong>Aspirin</strong></td><td>No need to stop (usually)</td><td>No restriction</td><td>Low-dose aspirin alone is not a contraindication</td></tr>
+      <tr><td><strong>NSAIDs</strong></td><td>No need to stop (usually)</td><td>No restriction</td><td>Reversible COX inhibition; low risk</td></tr>
+      <tr><td><strong>Thrombolytics (tPA)</strong></td><td>Absolute contraindication</td><td>—</td><td>Do not perform neuraxial block within 10 days of thrombolysis</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Renal Impairment</strong>
+      For DOACs and LMWH, <strong>renal function determines the time interval</strong>. In patients with CrCl <50 mL/min, intervals should be extended. Always check the most recent eGFR and follow drug-specific guidance.
+    </div>
+
+    <h2 class="subhead">Traumatic Puncture — What to Do</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Bloody tap or multiple attempts (>3) at neuraxial access</li>
+      <li><strong>Action:</strong> Consider cancelling the procedure if anticoagulation is planned; if a catheter is in situ, remove it and observe neurologically</li>
+      <li><strong>Documentation:</strong> Record the number of attempts, presence of blood, and any patient concerns</li>
+      <li><strong>Monitoring:</strong> Neurological observations for 24 hours; educate the patient to report new back pain or weakness</li>
+      <li><strong>Restarting anticoagulation:</strong> Delay until haemostasis is assured; consider imaging if symptoms develop</li>
+    </ul>
+
+    <h2 class="subhead">ESAIC/ESRA Guidelines (2022)</h2>
+    <ul class="clist">
+      <li>Joint European guidelines with similar principles to ASRA</li>
+      <li>Emphasise <strong>shared decision-making</strong> — consider the risk of bleeding vs the benefit of neuraxial technique</li>
+      <li>Provide specific intervals for a wider range of drugs (including newer anticoagulants)</li>
+      <li>Recommend <strong>ultrasound guidance</strong> to reduce traumatic puncture — but note it does not change the pharmacological time intervals</li>
+      <li>Advise that <strong>drug measurement</strong> (e.g., anti-Xa for LMWH) may guide timing in selected patients</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twenty questions across all modules — from anatomy to anticoagulation. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--olive-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--olive)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/9)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  {q:"At what vertebral level does the conus medullaris typically terminate in adults?",opts:["T12","L1–L2","L3–L4","L5–S1"],ans:1,exp:"The conus medullaris terminates at L1–L2 in most adults. This is why lumbar puncture and spinal anaesthesia are performed below L2 (usually L3–L4 or L4–L5) — to avoid direct needle trauma to the spinal cord."},
+  {q:"Which fibres are blocked FIRST during neuraxial anaesthesia?",opts:["Motor Aα fibres","Sensory C fibres","Preganglionic sympathetic B fibres","Touch Aβ fibres"],ans:2,exp:"Small, unmyelinated fibres are blocked first. Preganglionic sympathetic B fibres are the most sensitive to local anaesthetics, followed by C fibres (pain/temperature), then Aδ, Aβ, and finally Aα (motor). This is why hypotension occurs before sensory loss is complete."},
+  {q:"The sympathetic block level is typically how many dermatomes above the sensory level?",opts:["0–1","2–6","8–10","12+"],ans:1,exp:"Sympathetic blockade extends 2–6 dermatomes above the sensory level. This is why hypotension can occur even with a seemingly 'low' sensory block — the sympathectomy is more extensive than the sensory block."},
+  {q:"Which spinal needle type reduces the risk of post-dural puncture headache?",opts:["Quincke (cutting) needle","Whitacre (pencil-point) needle","Tuohy needle","Crawford needle"],ans:1,exp:"Pencil-point needles (Whitacre, Sprotte) separate dural fibres rather than cutting them, reducing CSF leak and PDPH risk. The incidence of PDPH with a 25–27G pencil-point needle is ~1%, compared to higher rates with cutting needles."},
+  {q:"What is the recommended test dose for an epidural?",opts:["1 mL saline","3 mL lidocaine 1.5% with epinephrine 1:200,000","10 mL bupivacaine 0.5%","5 mL fentanyl 50 μg"],ans:1,exp:"The standard test dose is 3 mL lidocaine 1.5% with epinephrine 1:200,000. It detects intravascular placement (heart rate increases >20 bpm) and intrathecal placement (rapid sensory/motor block). It is not 100% sensitive but remains standard practice."},
+  {q:"Which local anaesthetic provides the best sensory-motor separation for labour epidural analgesia?",opts:["Bupivacaine 0.5%","Ropivacaine 0.1–0.2%","Lidocaine 2%","Chloroprocaine 3%"],ans:1,exp:"Ropivacaine at low concentrations (0.1–0.2%) provides effective sensory analgesia with minimal motor blockade, allowing mobilisation and effective pushing during labour. This sensory-motor separation is more pronounced than with bupivacaine."},
+  {q:"What is the incidence of PDPH with a fine pencil-point spinal needle?",opts:["~0.01%","~0.1%","~1%","~10%"],ans:2,exp:"The incidence of PDPH with a 25–27G pencil-point needle is approximately 1%. This is significantly lower than with cutting needles (Quincke) or larger-bore needles. Accidental dural puncture with a Tuohy needle during epidural carries a much higher risk (~50–80%)."},
+  {q:"Which of the following is the gold standard treatment for persistent PDPH?",opts:["Intravenous caffeine","Epidural blood patch","Bed rest for 7 days","High-dose steroids"],ans:1,exp:"Epidural blood patch (EBP) is the gold standard for persistent PDPH. 10–20 mL of autologous blood is injected into the epidural space, sealing the dural leak. Success rate is >70% after the first patch and >90% after a second."},
+  {q:"According to ASRA guidelines, how long should LMWH (prophylactic dose) be stopped before neuraxial block?",opts:["4 hours","12 hours","24 hours","48 hours"],ans:1,exp:"For prophylactic LMWH (e.g., enoxaparin 40 mg), the ASRA-recommended interval is at least 12 hours before neuraxial block. For therapeutic LMWH, the interval is 24 hours. Renal impairment may require longer intervals."},
+  {q:"Which anticoagulant is an ABSOLUTE contraindication to neuraxial blockade?",opts:["Aspirin","Clopidogrel","Thrombolytics (tPA)","Prophylactic LMWH"],ans:2,exp:"Thrombolytic therapy (tPA, streptokinase) is an absolute contraindication to neuraxial blockade. Do not perform neuraxial block within 10 days of thrombolysis. Aspirin alone is not a contraindication; clopidogrel requires a 5–7 day interval; prophylactic LMWH requires 12 hours."},
+  {q:"What is the first-line vasopressor for spinal-induced hypotension during Caesarean delivery?",opts:["Ephedrine","Phenylephrine","Dopamine","Adrenaline"],ans:1,exp:"Phenylephrine is first-line for spinal-induced hypotension in Caesarean delivery. It is a pure α₁ agonist that maintains maternal blood pressure without causing foetal acidosis (unlike ephedrine, which crosses the placenta and can cause foetal tachycardia and acidosis). Norepinephrine is an acceptable alternative."},
+  {q:"Which of the following is a contraindication to spinal anaesthesia?",opts:["Patient on aspirin","Raised intracranial pressure","Obesity","Diabetes"],ans:1,exp:"Raised intracranial pressure is an absolute contraindication to spinal anaesthesia due to the risk of tonsillar herniation when CSF is released. Aspirin alone is not a contraindication; obesity and diabetes require dose adjustment but are not contraindications."},
+  {q:"What is the typical dose of hyperbaric bupivacaine 0.5% for Caesarean delivery?",opts:["1–2 mL (5–10 mg)","2–3 mL (10–15 mg)","4–5 mL (20–25 mg)","6–8 mL (30–40 mg)"],ans:1,exp:"The typical spinal dose for Caesarean delivery is 2–3 mL of 0.5% hyperbaric bupivacaine (10–15 mg). This provides a reliable block to T4–T6 for the duration of surgery. Higher doses increase the risk of hypotension and high block."},
+  {q:"Which of the following is TRUE about combined spinal-epidural (CSE)?",opts:["It has a slower onset than epidural alone","It provides rapid onset (spinal) with titratable duration (epidural catheter)","It is associated with a lower incidence of pruritus than spinal alone","It cannot be used for labour analgesia"],ans:1,exp:"CSE combines the rapid onset of spinal anaesthesia with the titratable duration of an epidural catheter. It is commonly used for labour analgesia and Caesarean delivery. It is associated with a HIGHER incidence of pruritus (from intrathecal opioid) and foetal bradycardia."},
+  {q:"A patient develops a severe postural headache 48 hours after an epidural. What is the most likely diagnosis?",opts:["Meningitis","Epidural haematoma","Post-dural puncture headache (PDPH)","Migraine"],ans:2,exp:"PDPH is characterised by a postural headache — worse when upright, relieved when supine — occurring within 24–48 hours of dural puncture. It is caused by CSF leak through the dural hole. First-line treatment is conservative; EBP for persistent cases."},
+  {q:"What is the recommended monitoring duration after neuraxial morphine?",opts:["2 hours","6 hours","12–24 hours","48 hours"],ans:2,exp:"Neuraxial morphine can cause delayed respiratory depression (peak 6–12 hours after spinal; 12–24 hours after epidural) due to rostral spread to the brainstem. Monitor respiratory rate, sedation scores, and continuous pulse oximetry for at least 12–24 hours."},
+  {q:"Which of the following is a risk factor for epidural haematoma?",opts:["Difficult/traumatic puncture","Use of aspirin","Young age","Female sex"],ans:0,exp:"Traumatic puncture (multiple attempts, bloody tap) is a major risk factor for epidural haematoma. Other risk factors include anticoagulation, indwelling catheters during anticoagulation, spinal pathology, and advanced age. Aspirin alone is not a significant risk factor."},
+  {q:"What is the first sign of local anaesthetic systemic toxicity (LAST) during neuraxial block?",opts:["Cardiac arrest","Circumoral tingling and metallic taste","Hypertension","Muscle rigidity"],ans:1,exp:"The prodromal signs of LAST include circumoral tingling, metallic taste, tinnitus, and dizziness. These are followed by excitation (seizures) and then depression (coma, cardiovascular collapse). Stop injection immediately and manage according to LAST protocol (lipid emulsion for cardiac arrest)."},
+  {q:"Which of the following statements about ultrasound for neuraxial blockade is TRUE?",opts:["It replaces the need for loss of resistance","It can identify the correct intervertebral level and estimate depth to the epidural space","It modifies the anticoagulation time intervals","It is only useful in paediatric patients"],ans:1,exp:"Ultrasound can identify the correct level (especially when Tuffier's line is unreliable), estimate depth to the epidural space, and guide paramedian approaches. It does NOT replace loss of resistance, and it does NOT modify anticoagulation time intervals."},
+  {q:"A patient on apixaban for atrial fibrillation requires a spinal anaesthetic. What is the recommended interval after the last dose?",opts:["12 hours","24 hours","72 hours","7 days"],ans:2,exp:"For apixaban and rivaroxaban, the ASRA/ESAIC recommended interval is at least 72 hours after the last dose before neuraxial block (and longer in renal impairment). Always check renal function and follow drug-specific guidance."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--olive);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — neuraxial safety is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
