@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arterial Blood Gas Analysis — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to arterial blood gas analysis — physiology, pre-analytical errors, stepwise interpretation, compensation, anion gap, delta ratio, electrolyte corrections, and a memory and revision tool. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  /* ACCENT — Deep Indigo / Midnight for ABG */
+  --abg:       #3a3a6a;
+  --abg-soft:  #5a5a8a;
+  --abg-deep:  #2a2a4a;
+  --abg-light: #7a7aaa;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+#cur { width:7px;height:7px;background:var(--abg);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--abg-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--abg);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--abg-deep); }
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(58,58,106,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(58,58,106,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(58,58,106,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(58,58,106,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(90,90,138,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--abg);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--abg); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--abg);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:640px;font-weight:300; }
+.hero-sub strong { color:var(--abg);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--abg-soft);font-weight:600; }
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--abg);border-bottom-color:var(--abg); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--abg),var(--abg-soft));transition:width .4s; }
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--abg);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--abg); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--abg); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+h2.subhead { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--text);margin:2rem 0 .8rem;padding-left:.9rem;border-left:2px solid var(--abg); }
+h3.subsubhead { font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--abg-soft);margin:1.4rem 0 .5rem; }
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--abg);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--abg);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(58,58,106,.02); }
+.td-hi { color:var(--abg)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(58,58,106,.04);border-color:var(--abg);color:var(--muted); }
+.co-key strong { color:var(--abg); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(90,90,138,.05);border-color:var(--abg-soft);color:var(--muted); }
+.co-fact strong { color:var(--abg-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--abg);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--abg);width:22px;flex-shrink:0;font-size:1.1rem; }
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-abg { border-color:var(--abg);color:var(--abg); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--abg-soft);color:var(--abg-soft); }
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--abg);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--abg); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--abg);font-size:.9rem;font-weight:700; }
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--abg);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--abg);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--abg-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--abg);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Physiology · Acid–Base · Oxygenation · Electrolytes · Critical Care</div>
+  <h1>Arterial Blood <em>Gas Analysis</em></h1>
+  <p class="hero-sub">
+    The complete reference — from pre-analytical errors and the Henderson–Hasselbalch equation to stepwise interpretation, compensation formulas, anion gap, delta ratio, electrolyte corrections, and a dedicated memory and revision tool. <strong>Ten modules. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>10</span></div>
+    <div class="meta-item">Scope <span>Physiology · Pre-analytical · Interpretation · Compensation · Electrolytes · Revision</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Physiology</button>
+  <button onclick="showMod(1)">02 · Pre-Analytical</button>
+  <button onclick="showMod(2)">03 · Stepwise Interpretation</button>
+  <button onclick="showMod(3)">04 · Compensation</button>
+  <button onclick="showMod(4)">05 · Anion Gap</button>
+  <button onclick="showMod(5)">06 · Delta Ratio</button>
+  <button onclick="showMod(6)">07 · Electrolytes</button>
+  <button onclick="showMod(7)">08 · Special Situations</button>
+  <button onclick="showMod(8)">09 · Memory & Synthesis</button>
+  <button onclick="showMod(9)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:10%"></div></div>
+
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: PHYSIOLOGY -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 10</div>
+      <div class="mod-title">Physiology of <em>Acid–Base Balance</em></div>
+      <div class="mod-intro">The Henderson–Hasselbalch equation, the bicarbonate buffer system, and the three defence systems against pH disturbance.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Henderson–Hasselbalch Equation</strong>
+      pH = 6.1 + log ([HCO₃⁻] / (0.03 × PaCO₂))
+      <br><br>
+      At normal values: HCO₃⁻ 24 mmol/L, PaCO₂ 40 mmHg → pH = 6.1 + log (24 / 1.2) = 6.1 + log 20 = <strong>7.40</strong>.
+    </div>
+
+    <h2 class="subhead">The Bicarbonate Buffer System</h2>
+    <p>The bicarbonate system is the most important extracellular buffer. It consists of carbon dioxide (CO₂) and bicarbonate (HCO₃⁻), linked by the reaction:</p>
+    <div class="formula-box">
+      <span class="flabel">Carbonic Anhydrase–Catalysed Reaction</span>
+      CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻
+      <div class="fexpl">Carbonic anhydrase accelerates this reaction in red blood cells; the reaction is slow in plasma</div>
+    </div>
+    <ul class="clist">
+      <li><strong>HCO₃⁻ is the most abundant buffer base</strong> in blood — normal 22–26 mmol/L</li>
+      <li><strong>PaCO₂ is controlled by ventilation</strong> — the lungs are the rapid responder</li>
+      <li><strong>HCO₃⁻ is controlled by the kidneys</strong> — the slow responder (hours to days)</li>
+      <li>The ratio of HCO₃⁻ to dissolved CO₂ (0.03 × PaCO₂) must remain <strong>20:1</strong> to maintain pH 7.40</li>
+    </ul>
+
+    <h2 class="subhead">Normal Arterial Blood Gas Values</h2>
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">pH</div><div class="val-num">7.35–7.45</div><span class="val-unit">[H⁺] 35–45 nmol/L</span></div>
+      <div class="val-item"><div class="val-label">PaCO₂</div><div class="val-num">35–45</div><span class="val-unit">mmHg</span></div>
+      <div class="val-item"><div class="val-label">PaO₂</div><div class="val-num">80–100</div><span class="val-unit">mmHg (room air)</span></div>
+      <div class="val-item"><div class="val-label">HCO₃⁻</div><div class="val-num">22–26</div><span class="val-unit">mmol/L</span></div>
+      <div class="val-item"><div class="val-label">Base Excess</div><div class="val-num">−2 to +2</div><span class="val-unit">mmol/L</span></div>
+      <div class="val-item"><div class="val-label">SaO₂</div><div class="val-num">95–100</div><span class="val-unit">%</span></div>
+      <div class="val-item"><div class="val-label">Lactate</div><div class="val-num">&lt;2</div><span class="val-unit">mmol/L</span></div>
+      <div class="val-item"><div class="val-label">Anion Gap</div><div class="val-num">8–12</div><span class="val-unit">mmol/L (varies by lab)</span></div>
+    </div>
+    <div class="callout co-warn">
+      <strong>⚠ Normal Ranges Vary by Laboratory</strong>
+      The ranges above are widely used reference values. Many laboratories use slightly wider ranges (e.g., pH 7.33–7.45, HCO₃⁻ 22–29, BE −3 to +3) depending on the analyser and population. Always use your local laboratory's reference range when interpreting a specific result.
+    </div>
+
+    <h2 class="subhead">The Three Defence Systems</h2>
+    <table class="data-table">
+      <tr><th>System</th><th>Mechanism</th><th>Onset</th><th>Capacity</th></tr>
+      <tr><td><strong>Chemical buffers</strong></td><td>Bicarbonate, haemoglobin, proteins, phosphate</td><td>Immediate (seconds)</td><td>Limited — cannot eliminate acid</td></tr>
+      <tr><td><strong>Respiratory</strong></td><td>Changes in alveolar ventilation alter PaCO₂</td><td>Minutes</td><td>Rapid but limited by CO₂ production</td></tr>
+      <tr><td><strong>Renal</strong></td><td>Excretion of H⁺; reabsorption/regeneration of HCO₃⁻</td><td>Hours to days</td><td>Powerful — eliminates fixed acid</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ The 20:1 Ratio</strong>
+      The pH depends on the <strong>ratio</strong> of HCO₃⁻ to PaCO₂, not the absolute value of either. A patient with HCO₃⁻ 40 and PaCO₂ 80 has a normal pH (ratio 20:1) — this is chronic compensated respiratory acidosis. The ratio is what matters.
+    </div>
+
+    <h2 class="subhead">Oxygenation Parameters</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Formula / Normal</th><th>Interpretation</th></tr>
+      <tr><td><strong>P/F Ratio</strong></td><td>PaO₂ / FiO₂</td><td>Normal >400; ARDS ≤300 (mild), ≤200 (moderate), ≤100 (severe)</td></tr>
+      <tr><td><strong>A–a Gradient</strong></td><td>P<sub>A</sub>O₂ − PaO₂</td><td>Normal: 5–20 mmHg (increases with age: Age/4 + 4)</td></tr>
+      <tr><td><strong>P<sub>A</sub>O₂</strong></td><td>FiO₂ × (P<sub>atm</sub> − 47) − (PaCO₂ / 0.8)</td><td>Alveolar oxygen tension</td></tr>
+      <tr><td><strong>Expected PaO₂</strong></td><td>~5 × FiO₂</td><td>Rough bedside estimate (e.g., FiO₂ 0.4 → expected PaO₂ ~200)</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Hypoventilation Does NOT Increase the A–a Gradient</strong>
+      If hypoxaemia is due to pure hypoventilation (e.g., opioid overdose), the A–a gradient is <strong>normal</strong>. An elevated A–a gradient indicates a gas exchange defect (V/Q mismatch, shunt, diffusion limitation).
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: PRE-ANALYTICAL -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 10</div>
+      <div class="mod-title">Pre-Analytical <em>Errors</em></div>
+      <div class="mod-intro">The sample is only as good as the technique. Air bubbles, delayed analysis, and heparin dilution are the most common sources of error.</div>
+    </div>
+
+    <h2 class="subhead">The Pre-Analytical Phase — The Leading Source of Error</h2>
+    <p>Studies show that <strong>25% of requisition forms</strong> are incomplete, and pre-analytical errors are the primary source of inaccurate blood gas results. The most important variables are:</p>
+
+    <table class="data-table">
+      <tr><th>Error</th><th>Effect on Results</th><th>Prevention</th></tr>
+      <tr><td><strong>Air bubbles</strong></td><td>PaO₂ falsely <span class="up">↑</span>; PaCO₂ falsely <span class="dn">↓</span>; pH falsely <span class="up">↑</span></td><td>Expel all bubbles immediately; cap syringe; do not shake</td></tr>
+      <tr><td><strong>Delayed analysis</strong></td><td>PaCO₂ <span class="up">↑</span>; pH <span class="dn">↓</span>; PaO₂ <span class="dn">↓</span> (at room temp); PaO₂ <span class="up">↑</span> (on ice)</td><td>Analyse within 15 minutes (ice) or 30 minutes (room temp, plastic syringe)</td></tr>
+      <tr><td><strong>Excess heparin</strong></td><td>Dilutional effect: PaCO₂ <span class="dn">↓</span>; HCO₃⁻ <span class="dn">↓</span>; pH altered</td><td>Use pre-heparinised syringes; heparin <10% of total volume; mix gently</td></tr>
+      <tr><td><strong>Haemolysis</strong></td><td>K⁺ falsely <span class="up">↑↑</span>; PaCO₂ <span class="dn">↓</span>; pH <span class="up">↑</span></td><td>Avoid vigorous shaking; do not use negative pressure; use appropriate needle size</td></tr>
+      <tr><td><strong>Venous admixture</strong></td><td>PaO₂ <span class="dn">↓↓</span>; PaCO₂ <span class="up">↑</span>; pH <span class="dn">↓</span></td><td>Confirm arterial puncture; avoid tourniquet for arterial samples; check for pulsatile flow</td></tr>
+      <tr><td><strong>Improper mixing</strong></td><td>Clotting; inconsistent results</td><td>Roll syringe between palms gently; do not shake</td></tr>
+    </table>
+
+    <div class="callout co-danger">
+      <strong>⚠ Air Bubbles — The Most Critical Error</strong>
+      Even a <strong>micro-bubble</strong> can falsely elevate PaO₂ and falsely lower PaCO₂. The sample must be sealed immediately and all air expelled. This is the single most important pre-analytical step.
+    </div>
+
+    <h2 class="subhead">Transport and Storage</h2>
+    <ul class="clist">
+      <li><strong>Ideal:</strong> Analyse within <strong>15 minutes</strong> on ice (slows metabolism)</li>
+      <li><strong>Acceptable:</strong> Plastic syringe at room temperature — clinically acceptable for up to <strong>30 minutes</strong></li>
+      <li><strong>Delayed:</strong> PaCO₂ rises progressively, pH falls; temperature amplifies these changes</li>
+      <li><strong>On ice:</strong> PaO₂ may increase (due to reduced metabolism) — note this when interpreting</li>
+    </ul>
+
+    <h2 class="subhead">Patient-Related Pre-Analytical Factors</h2>
+    <ul class="clist">
+      <li><strong>Stability:</strong> Patient should be at rest for 5–10 minutes; agitation or crying causes hyperventilation → falsely low PaCO₂, falsely high pH</li>
+      <li><strong>Oxygen therapy:</strong> Document FiO₂, flow rate, and ventilator settings; do not change oxygen immediately before sampling — wait 15–30 minutes for steady state</li>
+      <li><strong>Temperature:</strong> Record patient temperature — results should be corrected to 37°C for accurate interpretation</li>
+      <li><strong>Haemoglobin:</strong> Record Hb — required for calculating oxygen content and delivery</li>
+    </ul>
+
+    <h2 class="subhead">Venous vs Arterial Blood Gas</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Arterial</th><th>Peripheral Venous</th><th>Central Venous</th></tr>
+      <tr><td><strong>pH</strong></td><td>7.35–7.45</td><td>0.02–0.04 lower</td><td>0.03–0.05 lower</td></tr>
+      <tr><td><strong>PaCO₂</strong></td><td>35–45 mmHg</td><td>3–8 mmHg higher</td><td>4–5 mmHg higher</td></tr>
+      <tr><td><strong>PaO₂</strong></td><td>80–100 mmHg</td><td>Not comparable</td><td>Not comparable</td></tr>
+      <tr><td><strong>HCO₃⁻</strong></td><td>22–26 mmol/L</td><td>Slightly higher (1–2)</td><td>Slightly higher (1–2)</td></tr>
+    </table>
+    <div class="callout co-key">
+      <strong>VBG as a Surrogate</strong>
+      A venous blood gas can estimate arterial pH and PaCO₂ with reasonable accuracy. For pH: arterial ≈ venous + 0.02–0.04. For PaCO₂: arterial ≈ venous − 3–8 mmHg. However, <strong>PaO₂ cannot be estimated from venous blood</strong>.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: STEPWISE INTERPRETATION -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 10</div>
+      <div class="mod-title">Stepwise <em>Interpretation</em></div>
+      <div class="mod-intro">A systematic approach — from pH to compensation to anion gap. Never interpret an ABG without a structured method.</div>
+    </div>
+
+    <h2 class="subhead">The Six-Step Method</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 700 400" width="100%" style="display:block;">
+        <text x="350" y="20" fill="#3a3a6a" font-family="Instrument Sans" font-size="10" text-anchor="middle" letter-spacing="2">SIX-STEP ABG INTERPRETATION</text>
+
+        <rect x="150" y="40" width="400" height="45" rx="4" fill="#3a3a6a" opacity="0.1" stroke="#3a3a6a" stroke-width="1.5"/>
+        <text x="170" y="60" fill="#3a3a6a" font-family="Instrument Sans" font-size="9" font-weight="700">STEP 1 — pH</text>
+        <text x="170" y="76" fill="#7a6455" font-family="Instrument Sans" font-size="7">Acidaemia (&lt;7.35) or alkalaemia (&gt;7.45)?</text>
+        <line x1="350" y1="85" x2="350" y2="100" stroke="#3a3a6a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+        <rect x="150" y="100" width="400" height="45" rx="4" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="170" y="120" fill="#2e2018" font-family="Instrument Sans" font-size="9" font-weight="700">STEP 2 — Primary Disorder</text>
+        <text x="170" y="136" fill="#7a6455" font-family="Instrument Sans" font-size="7">Is PaCO₂ or HCO₃⁻ the primary driver?</text>
+        <line x1="350" y1="145" x2="350" y2="160" stroke="#3a3a6a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+        <rect x="150" y="160" width="400" height="45" rx="4" fill="#3a3a6a" opacity="0.1" stroke="#3a3a6a" stroke-width="1.5"/>
+        <text x="170" y="180" fill="#3a3a6a" font-family="Instrument Sans" font-size="9" font-weight="700">STEP 3 — Compensation</text>
+        <text x="170" y="196" fill="#7a6455" font-family="Instrument Sans" font-size="7">Is the compensatory response appropriate? Use formulas.</text>
+        <line x1="350" y1="205" x2="350" y2="220" stroke="#3a3a6a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+        <rect x="150" y="220" width="400" height="45" rx="4" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="170" y="240" fill="#2e2018" font-family="Instrument Sans" font-size="9" font-weight="700">STEP 4 — Anion Gap</text>
+        <text x="170" y="256" fill="#7a6455" font-family="Instrument Sans" font-size="7">If metabolic acidosis: calculate AG = Na − (Cl + HCO₃)</text>
+        <line x1="350" y1="265" x2="350" y2="280" stroke="#3a3a6a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+        <rect x="150" y="280" width="400" height="45" rx="4" fill="#3a3a6a" opacity="0.1" stroke="#3a3a6a" stroke-width="1.5"/>
+        <text x="170" y="300" fill="#3a3a6a" font-family="Instrument Sans" font-size="9" font-weight="700">STEP 5 — Delta Ratio</text>
+        <text x="170" y="316" fill="#7a6455" font-family="Instrument Sans" font-size="7">If elevated AG: ΔAG / ΔHCO₃ — assesses mixed disorders</text>
+        <line x1="350" y1="325" x2="350" y2="340" stroke="#3a3a6a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+        <rect x="150" y="340" width="400" height="45" rx="4" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="170" y="360" fill="#2e2018" font-family="Instrument Sans" font-size="9" font-weight="700">STEP 6 — Oxygenation</text>
+        <text x="170" y="376" fill="#7a6455" font-family="Instrument Sans" font-size="7">PaO₂, P/F ratio, A–a gradient, FiO₂</text>
+
+        <defs><marker id="arrow1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#3a3a6a"/></marker></defs>
+      </svg>
+    </div>
+
+    <h2 class="subhead">Step 1 — Assess pH</h2>
+    <ul class="clist">
+      <li><strong>Acidaemia:</strong> pH &lt;7.35</li>
+      <li><strong>Alkalaemia:</strong> pH &gt;7.45</li>
+      <li><strong>Normal pH:</strong> May still have a mixed disorder (e.g., metabolic acidosis + respiratory alkalosis)</li>
+    </ul>
+
+    <h2 class="subhead">Step 2 — Identify the Primary Disorder</h2>
+    <table class="data-table">
+      <tr><th>pH</th><th>PaCO₂</th><th>HCO₃⁻</th><th>Primary Disorder</th></tr>
+      <tr><td class="td-bad">↓</td><td class="td-bad">↑</td><td>Normal/↑</td><td><strong>Respiratory Acidosis</strong></td></tr>
+      <tr><td class="td-good">↑</td><td class="td-bad">↓</td><td>Normal/↓</td><td><strong>Respiratory Alkalosis</strong></td></tr>
+      <tr><td class="td-bad">↓</td><td>Normal/↓</td><td class="td-bad">↓</td><td><strong>Metabolic Acidosis</strong></td></tr>
+      <tr><td class="td-good">↑</td><td>Normal/↑</td><td class="td-good">↑</td><td><strong>Metabolic Alkalosis</strong></td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The Primary Driver</strong>
+      Look at which parameter is most abnormal relative to its normal range. If PaCO₂ is the primary abnormality, it is a respiratory disorder. If HCO₃⁻ is the primary abnormality, it is a metabolic disorder.
+    </div>
+
+    <h2 class="subhead">Step 6 — Assess Oxygenation</h2>
+    <ul class="clist">
+      <li><strong>PaO₂:</strong> Normal 80–100 mmHg on room air</li>
+      <li><strong>P/F ratio:</strong> PaO₂ / FiO₂ — normal &gt;400; &lt;300 suggests significant shunt/V-Q mismatch</li>
+      <li><strong>A–a gradient:</strong> Normal 5–20 mmHg; elevated indicates gas exchange defect</li>
+      <li><strong>Expected PaO₂:</strong> ~5 × FiO₂ (rough estimate)</li>
+      <li><strong>SpO₂:</strong> Normal 95–100%; correlates with PaO₂ via the oxyhaemoglobin dissociation curve</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: COMPENSATION -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 10</div>
+      <div class="mod-title">Compensation <em>Formulas</em></div>
+      <div class="mod-intro">The expected responses — and when they are inappropriate, indicating a mixed disorder.</div>
+    </div>
+
+    <h2 class="subhead">Expected Compensation — The Formulas</h2>
+    <table class="data-table">
+      <tr><th>Disorder</th><th>Expected Compensation</th><th>Formula</th><th>Interpretation</th></tr>
+      <tr><td><strong>Metabolic Acidosis</strong></td><td>Respiratory (↓PaCO₂)</td><td>PaCO₂ = (1.5 × HCO₃⁻) + 8 ± 2</td><td>Winter's formula. If measured PaCO₂ is higher → concurrent respiratory acidosis; if lower → concurrent respiratory alkalosis</td></tr>
+      <tr><td><strong>Metabolic Alkalosis</strong></td><td>Respiratory (↑PaCO₂)</td><td>PaCO₂ = (0.7 × HCO₃⁻) + 20 (range ±5)</td><td>If measured PaCO₂ is outside range → mixed disorder</td></tr>
+      <tr><td><strong>Acute Respiratory Acidosis</strong></td><td>Metabolic (↑HCO₃⁻)</td><td>HCO₃⁻ ↑ 1 mmol/L for every 10 mmHg ↑ PaCO₂</td><td>Compensation is small and immediate</td></tr>
+      <tr><td><strong>Chronic Respiratory Acidosis</strong></td><td>Metabolic (↑HCO₃⁻)</td><td>HCO₃⁻ ↑ <strong>3.5</strong> mmol/L for every 10 mmHg ↑ PaCO₂</td><td>Renal compensation; takes 3–5 days (some sources use 4 mmol/L)</td></tr>
+      <tr><td><strong>Acute Respiratory Alkalosis</strong></td><td>Metabolic (↓HCO₃⁻)</td><td>HCO₃⁻ ↓ 2 mmol/L for every 10 mmHg ↓ PaCO₂</td><td>Compensation is small</td></tr>
+      <tr><td><strong>Chronic Respiratory Alkalosis</strong></td><td>Metabolic (↓HCO₃⁻)</td><td>HCO₃⁻ ↓ 5 mmol/L for every 10 mmHg ↓ PaCO₂</td><td>Renal compensation</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Winter's Formula — The Most Important</strong>
+      Expected PaCO₂ = (1.5 × HCO₃⁻) + 8 ± 2
+      <br><br>
+      Example: HCO₃⁻ 16 → expected PaCO₂ = (1.5 × 16) + 8 = <strong>32 ± 2</strong> (range 30–34). If measured PaCO₂ is 45 → concurrent respiratory acidosis. If measured PaCO₂ is 22 → concurrent respiratory alkalosis.
+    </div>
+
+    <h2 class="subhead">Acute vs Chronic — Respiratory Disorders</h2>
+    <table class="data-table">
+      <tr><th>Disorder</th><th>Expected HCO₃⁻ Change (Acute)</th><th>Expected HCO₃⁻ Change (Chronic)</th></tr>
+      <tr><td><strong>Respiratory Acidosis</strong></td><td>↑ 1 for every 10 mmHg ↑ PaCO₂</td><td>↑ 3.5 for every 10 mmHg ↑ PaCO₂</td></tr>
+      <tr><td><strong>Respiratory Alkalosis</strong></td><td>↓ 2 for every 10 mmHg ↓ PaCO₂</td><td>↓ 5 for every 10 mmHg ↓ PaCO₂</td></tr>
+    </table>
+    <p>Example: PaCO₂ 60 (↑20 from normal). Acute expected HCO₃⁻ = 24 + 2 = 26. Chronic expected HCO₃⁻ = 24 + 7 = 31. If measured HCO₃⁻ is 32 → chronic respiratory acidosis.</p>
+
+    <h2 class="subhead">When Compensation is Inappropriate</h2>
+    <ul class="clist">
+      <li><strong>Measured value outside expected range:</strong> A second disorder is present</li>
+      <li><strong>Example:</strong> Metabolic acidosis with PaCO₂ higher than Winter's formula predicts → concurrent respiratory acidosis (e.g., respiratory muscle fatigue)</li>
+      <li><strong>Example:</strong> Respiratory acidosis with HCO₃⁻ higher than expected for chronicity → concurrent metabolic alkalosis (e.g., diuretic use)</li>
+      <li><strong>Normal pH with abnormal PaCO₂ and HCO₃⁻:</strong> Mixed disorder — the two abnormalities are opposing</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ Compensation is Never Complete for Metabolic Alkalosis</strong>
+      Respiratory compensation for metabolic alkalosis is limited by hypoventilation — the body will not tolerate significant hypoxaemia. A normal pH with elevated HCO₃⁻ and elevated PaCO₂ suggests a mixed disorder, not full compensation.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: ANION GAP -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 10</div>
+      <div class="mod-title">The Anion <em>Gap</em></div>
+      <div class="mod-intro">The cornerstone of metabolic acidosis evaluation — and the albumin correction that is too often forgotten.</div>
+    </div>
+
+    <h2 class="subhead">Calculating the Anion Gap</h2>
+    <div class="formula-box">
+      <span class="flabel">Anion Gap</span>
+      AG = Na⁺ − (Cl⁻ + HCO₃⁻)
+      <div class="fexpl">Normal: 8–12 mmol/L (±2) in most laboratories; some cite up to 16 — use your local reference range</div>
+    </div>
+
+    <h2 class="subhead">The Albumin Correction</h2>
+    <p>Albumin is the major unmeasured anion. In hypoalbuminaemia, the anion gap is falsely low. Correct the normal range:</p>
+    <div class="formula-box">
+      <span class="flabel">Albumin-Corrected Anion Gap</span>
+      Corrected AG = AG + 0.25 × (44 − Albumin)  [albumin in g/L]
+      <div class="fexpl">Alternative convention: for every 10 g/L decrease in albumin, reduce the normal AG by 3. Coefficients vary — use your local formula</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Example:</strong> Na 140, Cl 105, HCO₃ 18 → AG = 17. Albumin 20 g/L (down 24 from 44). Corrected normal AG = 12 − (24 × 0.3) ≈ 4.8. So the measured AG of 17 is even more elevated relative to the corrected normal</li>
+      <li><strong>Always correct the AG for albumin</strong> — a "normal" AG in a hypoalbuminaemic patient may be a hidden high AG acidosis</li>
+    </ul>
+
+    <h2 class="subhead">High Anion Gap Metabolic Acidosis — Causes</h2>
+    <div class="mnemonic-box">
+      <div class="mnemonic-word">GOLD MARK</div>
+      <div class="mnem-row"><span class="mnem-l">G</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">G</strong>lycols (ethylene glycol, propylene glycol)</span></div>
+      <div class="mnem-row"><span class="mnem-l">O</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">O</strong>xoproline (acetaminophen/paracetamol toxicity)</span></div>
+      <div class="mnem-row"><span class="mnem-l">L</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">L</strong>-lactate (shock, hypoxia, sepsis)</span></div>
+      <div class="mnem-row"><span class="mnem-l">D</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">D</strong>-lactate (short bowel syndrome)</span></div>
+      <div class="mnem-row"><span class="mnem-l">M</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">M</strong>ethanol</span></div>
+      <div class="mnem-row"><span class="mnem-l">A</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">A</strong>spirin (salicylate toxicity)</span></div>
+      <div class="mnem-row"><span class="mnem-l">R</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">R</strong>enal failure (uraemia)</span></div>
+      <div class="mnem-row"><span class="mnem-l">K</span><span style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">K</strong>etoacidosis (diabetic, alcoholic, starvation)</span></div>
+    </div>
+    <p>The mnemonic <strong>GOLD MARK</strong> is increasingly preferred over the older MUDPILES because it includes oxoproline and D-lactate.</p>
+
+    <h2 class="subhead">Normal Anion Gap Metabolic Acidosis — Causes</h2>
+    <ul class="clist">
+      <li><strong>GI losses of HCO₃⁻:</strong> Diarrhoea, ileostomy, fistula, acetazolamide</li>
+      <li><strong>Renal tubular acidosis:</strong> Types 1, 2, and 4</li>
+      <li><strong>Hyperchloraemia:</strong> Large-volume normal saline resuscitation</li>
+      <li><strong>Recovery from DKA:</strong> Ketones excreted, Cl⁻ retained</li>
+      <li><strong>Carbonic anhydrase inhibitors:</strong> Acetazolamide, topiramate</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: DELTA RATIO -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 10</div>
+      <div class="mod-title">The Delta <em>Ratio</em></div>
+      <div class="mod-intro">When the anion gap is elevated — does the change in AG explain the change in HCO₃⁻? Or is there a second disorder?</div>
+    </div>
+
+    <h2 class="subhead">Calculating the Delta Ratio</h2>
+    <div class="formula-box">
+      <span class="flabel">Delta Ratio</span>
+      Delta Ratio = ΔAG / ΔHCO₃⁻ = (AG − 12) / (24 − HCO₃⁻)
+      <div class="fexpl">Normal AG = 12; normal HCO₃⁻ = 24</div>
+    </div>
+
+    <h2 class="subhead">Interpretation</h2>
+    <table class="data-table">
+      <tr><th>Delta Ratio</th><th>Interpretation</th><th>Clinical Significance</th></tr>
+      <tr><td class="td-bad"><strong>&lt;0.8</strong></td><td>Combined High AG + Normal AG Metabolic Acidosis</td><td>Both HAGMA and NAGMA present — e.g., DKA + diarrhoea</td></tr>
+      <tr><td class="td-good"><strong>1–2</strong></td><td>Uncomplicated High AG Metabolic Acidosis</td><td>Pure HAGMA — the AG rise explains the HCO₃⁻ fall</td></tr>
+      <tr><td class="td-bad"><strong>&gt;2</strong></td><td>High AG Metabolic Acidosis + Metabolic Alkalosis</td><td>HCO₃⁻ is higher than expected — concurrent metabolic alkalosis (e.g., vomiting, diuretics)</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Worked Example</strong>
+      Na 140, Cl 100, HCO₃⁻ 16 → AG = 24. ΔAG = 24 − 12 = 12. ΔHCO₃⁻ = 24 − 16 = 8. Delta ratio = 12/8 = 1.5. Interpretation: uncomplicated high AG metabolic acidosis (e.g., lactic acidosis).
+    </div>
+
+    <h2 class="subhead">Osmolar Gap — When to Calculate</h2>
+    <p>If a high AG metabolic acidosis is present with an unexplained cause, calculate the osmolar gap:</p>
+    <div class="formula-box">
+      <span class="flabel">Osmolar Gap</span>
+      Osmolar Gap = Measured Osmolality − Calculated Osmolality
+      <br><br>
+      Calculated Osmolality = 2[Na⁺] + Urea + Glucose  (all in mmol/L)
+      <div class="fexpl">Normal &lt;10 mOsm/kg. Elevated gap suggests toxic alcohol (methanol, ethylene glycol)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: ELECTROLYTES -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 10</div>
+      <div class="mod-title">Electrolytes on <em>Blood Gas Analysis</em></div>
+      <div class="mod-intro">Sodium and potassium from the blood gas analyser — and why they may disagree with the laboratory.</div>
+    </div>
+
+    <h2 class="subhead">Sodium and Potassium — Point-of-Care vs Laboratory</h2>
+    <p>Blood gas analysers use <strong>direct potentiometry (DP)</strong> on whole blood, while central laboratories use <strong>indirect potentiometry (IP)</strong> on diluted plasma/serum. This fundamental difference explains most discrepancies.</p>
+
+    <table class="data-table">
+      <tr><th>Method</th><th>Sample</th><th>Dilution</th><th>Interference</th></tr>
+      <tr><td><strong>Direct Potentiometry (POC)</strong></td><td>Whole blood</td><td>None</td><td>Not affected by protein/lipid; affected by haemolysis (K⁺)</td></tr>
+      <tr><td><strong>Indirect Potentiometry (Lab)</strong></td><td>Plasma/serum</td><td>Yes</td><td>Falsely low Na⁺ in hyperproteinaemia/hyperlipidaemia (pseudohyponatraemia)</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Pseudohyperkalaemia from Haemolysis</strong>
+      The most common POC potassium error is <strong>haemolysis</strong> — red cells release K⁺, falsely elevating the result. Unlike the laboratory, POC analysers cannot inspect the sample for haemolysis. If K⁺ is unexpectedly high, repeat with a fresh, carefully collected sample.
+    </div>
+
+    <h2 class="subhead">Correcting Sodium for Hyperglycaemia</h2>
+    <p>In hyperglycaemia, sodium is diluted by osmotic water shift. Corrected sodium:</p>
+    <div class="formula-box">
+      <span class="flabel">Corrected Na⁺</span>
+      Corrected Na⁺ = Measured Na⁺ + 0.3 × (Glucose − 5.5)  [glucose in mmol/L]
+      <div class="fexpl">Or: add 1.6 mmol/L to Na⁺ for every 5.5 mmol/L glucose above normal</div>
+    </div>
+
+    <h2 class="subhead">Potassium — Artefactual Elevation</h2>
+    <ul class="clist">
+      <li><strong>Haemolysis:</strong> Most common cause — repeat sample</li>
+      <li><strong>Prolonged tourniquet:</strong> Venous stasis → K⁺ rises — not relevant for arterial samples</li>
+      <li><strong>Delayed processing:</strong> Cellular K⁺ leaks — analyse promptly</li>
+      <li><strong>Thrombocytosis/leucocytosis:</strong> Cells release K⁺ during clotting — use heparinised sample</li>
+      <li><strong>True hyperkalaemia:</strong> Renal failure, acidosis (K⁺ shifts out of cells), tissue breakdown</li>
+    </ul>
+
+    <h2 class="subhead">Chloride and the Strong Ion Gap</h2>
+    <ul class="clist">
+      <li><strong>Chloride:</strong> Normal 96–106 mmol/L</li>
+      <li><strong>Hyperchloraemic acidosis:</strong> Large-volume 0.9% saline → normal AG metabolic acidosis</li>
+      <li><strong>Strong Ion Difference (SID):</strong> Na⁺ + K⁺ − Cl⁻ — an alternative approach to acid–base; normal ~40</li>
+      <li><strong>Strong Ion Gap (SIG):</strong> Unmeasured anions — elevated in lactic acidosis, ketoacidosis, uraemia</li>
+    </ul>
+
+    <h2 class="subhead">Lactate — Type A vs Type B</h2>
+    <table class="data-table">
+      <tr><th>Type</th><th>Mechanism</th><th>Causes</th></tr>
+      <tr><td><strong>Type A</strong></td><td>Tissue hypoxia — anaerobic metabolism</td><td>Shock, cardiac arrest, severe anaemia, CO poisoning</td></tr>
+      <tr><td><strong>Type B</strong></td><td>Normal oxygen delivery — aerobic glycolysis or impaired clearance</td><td>Sepsis, liver failure, thiamine deficiency, metformin, malignancy, post-cardiac surgery</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Lactate Clearance</strong>
+      Lactate clearance ≥10–20% over 2–6 hours indicates adequate resuscitation. Persistent hyperlactataemia is associated with worse outcomes.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: SPECIAL SITUATIONS -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 10</div>
+      <div class="mod-title">Special <em>Situations</em></div>
+      <div class="mod-intro">Temperature correction, venous blood gases, mixed disorders, and the traps that catch the unwary.</div>
+    </div>
+
+    <h2 class="subhead">Temperature Correction</h2>
+    <ul class="clist">
+      <li>ABG analysers report values at <strong>37°C</strong> by default</li>
+      <li>In hypothermia, PaCO₂ and PaO₂ are <strong>falsely low</strong> (gas is more soluble at lower temperature); pH is <strong>falsely high</strong></li>
+      <li>In hyperthermia, the opposite occurs</li>
+      <li><strong>Clinical relevance:</strong> In therapeutic hypothermia or severe accidental hypothermia, uncorrected values may mislead. However, most guidelines recommend interpreting at 37°C for consistency, and correcting only when the discrepancy would change management</li>
+    </ul>
+
+    <h2 class="subhead">Venous Blood Gas — What It Can and Cannot Tell You</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Can Be Estimated?</th><th>Formula / Rule</th></tr>
+      <tr><td><strong>pH</strong></td><td class="td-good">Yes</td><td>Arterial ≈ venous + 0.02–0.04</td></tr>
+      <tr><td><strong>PaCO₂</strong></td><td class="td-good">Yes</td><td>Arterial ≈ venous − 3–8 mmHg</td></tr>
+      <tr><td><strong>HCO₃⁻</strong></td><td class="td-good">Yes</td><td>Reliable within 1–2 mmol/L</td></tr>
+      <tr><td><strong>PaO₂</strong></td><td class="td-bad">No</td><td>No reliable correlation</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Modern Conversion Formulas</strong>
+      A 2026 study of 5,419 paired samples derived formulas to transform VBG to ABG. For pCO₂: linear regression (r = 0.93) with 95% limits of agreement −5.6 to +5.5 mmHg. For pH: r = 0.94, limits −0.05 to +0.04. These formulas provide reasonable estimates but do not replace ABG when accurate PaO₂ is required.
+    </div>
+
+    <h2 class="subhead">Mixed Disorders — Recognising the Patterns</h2>
+    <table class="data-table">
+      <tr><th>Pattern</th><th>Example</th><th>Clue</th></tr>
+      <tr><td><strong>Metabolic acidosis + respiratory acidosis</strong></td><td>Cardiac arrest; severe COPD with lactic acidosis</td><td>PaCO₂ higher than Winter's formula predicts</td></tr>
+      <tr><td><strong>Metabolic acidosis + respiratory alkalosis</strong></td><td>Sepsis; salicylate toxicity</td><td>PaCO₂ lower than Winter's formula predicts</td></tr>
+      <tr><td><strong>Metabolic alkalosis + respiratory acidosis</strong></td><td>Diuretic use + COPD</td><td>HCO₃⁻ elevated, PaCO₂ elevated, pH variable</td></tr>
+      <tr><td><strong>High AG + normal AG acidosis</strong></td><td>DKA + diarrhoea</td><td>Delta ratio <0.8</td></tr>
+      <tr><td><strong>High AG acidosis + metabolic alkalosis</strong></td><td>Lactic acidosis + vomiting</td><td>Delta ratio >2</td></tr>
+    </table>
+
+    <h2 class="subhead">The "Normal pH" Trap</h2>
+    <ul class="clist">
+      <li>A normal pH does <strong>not</strong> exclude a serious acid–base disorder</li>
+      <li>Mixed disorders can cancel out — e.g., metabolic acidosis (pH ↓) + respiratory alkalosis (pH ↑) = normal pH</li>
+      <li>Always check the anion gap, delta ratio, and compensation formulas even when pH is normal</li>
+      <li>If pH is normal but PaCO₂ and HCO₃⁻ are both abnormal → <strong>mixed disorder</strong></li>
+    </ul>
+
+    <h2 class="subhead">Clinical Scenarios — Putting It Together</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Scenario 1 — DKA <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <strong>ABG:</strong> pH 7.15, PaCO₂ 22, HCO₃⁻ 8, Na 132, Cl 98, Glucose 28 mmol/L, Ketones +++.<br><br>
+        <strong>Step 1:</strong> Acidaemia.<br>
+        <strong>Step 2:</strong> HCO₃⁻ 8 (low) → metabolic acidosis. PaCO₂ 22 (low) → respiratory compensation.<br>
+        <strong>Step 3:</strong> Winter's: expected PaCO₂ = 1.5×8 + 8 = 20 ± 2. Measured 22 → appropriate compensation.<br>
+        <strong>Step 4:</strong> AG = 132 − (98+8) = 26. High AG metabolic acidosis.<br>
+        <strong>Step 5:</strong> Delta ratio = (26−12)/(24−8) = 14/16 = 0.875. Uncomplicated HAGMA (close to 1).<br>
+        <strong>Diagnosis:</strong> Diabetic ketoacidosis with appropriate respiratory compensation.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Scenario 2 — Salicylate Toxicity <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <strong>ABG:</strong> pH 7.48, PaCO₂ 20, HCO₃⁻ 15, Na 140, Cl 105.<br><br>
+        <strong>Step 1:</strong> Alkalaemia.<br>
+        <strong>Step 2:</strong> HCO₃⁻ 15 (low) → metabolic acidosis. PaCO₂ 20 (low) → respiratory alkalosis. <strong>Both primary.</strong><br>
+        <strong>Step 3:</strong> Winter's: expected PaCO₂ = 1.5×15 + 8 = 30.5 ± 2. Measured 20 → much lower → concurrent respiratory alkalosis.<br>
+        <strong>Step 4:</strong> AG = 140 − (105+15) = 20. High AG metabolic acidosis.<br>
+        <strong>Step 5:</strong> Delta ratio = (20−12)/(24−15) = 8/9 = 0.89. HAGMA.<br>
+        <strong>Diagnosis:</strong> Mixed high AG metabolic acidosis + respiratory alkalosis. Classic for salicylate toxicity.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Scenario 3 — COPD with Acute Exacerbation <span class="arr">▼</span></button>
+      <div class="acc-body">
+        <strong>ABG:</strong> pH 7.28, PaCO₂ 70, HCO₃⁻ 32, PaO₂ 55.<br><br>
+        <strong>Step 1:</strong> Acidaemia.<br>
+        <strong>Step 2:</strong> PaCO₂ 70 (high) → respiratory acidosis. HCO₃⁻ 32 (high) → metabolic compensation.<br>
+        <strong>Step 3:</strong> Expected HCO₃⁻ for chronic respiratory acidosis: 24 + (30/10)×3.5 = 34.5. Measured 32 → less than chronic expectation, more than acute (24+3=27). <strong>Acute-on-chronic.</strong><br>
+        <strong>Step 4:</strong> AG normal.<br>
+        <strong>Diagnosis:</strong> Acute-on-chronic respiratory acidosis. The HCO₃⁻ is elevated but not fully compensated for the degree of hypercapnia.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 09: MEMORY & SYNTHESIS -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Module 09 of 10</div>
+      <div class="mod-title">Memory, Pitfalls & <em>Synthesis</em></div>
+      <div class="mod-intro">The revision tool — a single-page algorithm, the formula sheet, the top traps, and a synthesis case that uses every step.</div>
+    </div>
+
+    <h2 class="subhead">1 · The One-Page Algorithm</h2>
+    <div class="callout co-key">
+      <ul class="clist" style="margin-top:.5rem">
+        <li><strong>1. pH</strong> — Acidaemia (&lt;7.35) or alkalaemia (&gt;7.45)?</li>
+        <li><strong>2. Primary</strong> — Is PaCO₂ or HCO₃⁻ the primary driver?</li>
+        <li><strong>3. Compensation</strong> — Winter's formula for metabolic acidosis; expected HCO₃⁻ for respiratory disorders (acute vs chronic).</li>
+        <li><strong>4. Anion gap</strong> — If metabolic acidosis: AG = Na − (Cl + HCO₃); correct for albumin.</li>
+        <li><strong>5. Delta ratio</strong> — If elevated AG: ΔAG / ΔHCO₃⁻; 1–2 = uncomplicated HAGMA; &lt;0.8 = mixed HAGMA + NAGMA; &gt;2 = HAGMA + metabolic alkalosis.</li>
+        <li><strong>6. Oxygenation</strong> — PaO₂, P/F ratio, A–a gradient, FiO₂.</li>
+      </ul>
+    </div>
+
+    <h2 class="subhead">2 · The Formula Sheet</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Use</th></tr>
+      <tr><td><strong>Henderson–Hasselbalch</strong></td><td>pH = 6.1 + log ([HCO₃⁻] / (0.03 × PaCO₂))</td><td>Relationship between pH, HCO₃⁻, PaCO₂</td></tr>
+      <tr><td><strong>Winter's</strong></td><td>PaCO₂ = (1.5 × HCO₃⁻) + 8 ± 2</td><td>Expected respiratory compensation in metabolic acidosis</td></tr>
+      <tr><td><strong>Metabolic alkalosis</strong></td><td>PaCO₂ = (0.7 × HCO₃⁻) + 20 (±5)</td><td>Expected respiratory compensation in metabolic alkalosis</td></tr>
+      <tr><td><strong>Acute resp acidosis</strong></td><td>HCO₃⁻ ↑ 1 per 10 mmHg ↑ PaCO₂</td><td>Expected metabolic compensation (acute)</td></tr>
+      <tr><td><strong>Chronic resp acidosis</strong></td><td>HCO₃⁻ ↑ 3.5 per 10 mmHg ↑ PaCO₂</td><td>Expected metabolic compensation (chronic)</td></tr>
+      <tr><td><strong>Acute resp alkalosis</strong></td><td>HCO₃⁻ ↓ 2 per 10 mmHg ↓ PaCO₂</td><td>Expected metabolic compensation (acute)</td></tr>
+      <tr><td><strong>Chronic resp alkalosis</strong></td><td>HCO₃⁻ ↓ 5 per 10 mmHg ↓ PaCO₂</td><td>Expected metabolic compensation (chronic)</td></tr>
+      <tr><td><strong>Anion gap</strong></td><td>AG = Na⁺ − (Cl⁻ + HCO₃⁻)</td><td>Classify metabolic acidosis</td></tr>
+      <tr><td><strong>Albumin-corrected AG</strong></td><td>Corrected AG = AG + 0.25 × (44 − Albumin)</td><td>Adjust for hypoalbuminaemia</td></tr>
+      <tr><td><strong>Delta ratio</strong></td><td>(AG − 12) / (24 − HCO₃⁻)</td><td>Assess mixed disorders</td></tr>
+      <tr><td><strong>Osmolar gap</strong></td><td>Measured − Calculated (2Na + Urea + Glucose)</td><td>Toxic alcohol screen</td></tr>
+      <tr><td><strong>P/F ratio</strong></td><td>PaO₂ / FiO₂</td><td>ARDS severity</td></tr>
+      <tr><td><strong>A–a gradient</strong></td><td>P<sub>A</sub>O₂ − PaO₂</td><td>Gas exchange defect</td></tr>
+      <tr><td><strong>P<sub>A</sub>O₂</strong></td><td>FiO₂ × (P<sub>atm</sub> − 47) − (PaCO₂ / 0.8)</td><td>Alveolar oxygen tension</td></tr>
+      <tr><td><strong>Corrected Na⁺</strong></td><td>Na⁺ + 0.3 × (Glucose − 5.5)</td><td>Hyperglycaemia</td></tr>
+    </table>
+
+    <h2 class="subhead">3 · The Top 10 Traps</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 1 — Normal pH does not exclude a mixed disorder <span class="arr">▼</span></button>
+      <div class="acc-body">
+        A normal pH with abnormal PaCO₂ and HCO₃⁻ in opposite directions = mixed disorder. Always calculate the anion gap and delta ratio even when pH is normal.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 2 — Uncorrected anion gap in hypoalbuminaemia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        A "normal" AG in a hypoalbuminaemic patient may be a hidden high AG acidosis. Always correct the AG for albumin (or lower the expected normal range).
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 3 — Delta ratio &lt;0.8 means a second acidosis <span class="arr">▼</span></button>
+      <div class="acc-body">
+        If the AG rise does not explain the HCO₃⁻ fall (delta ratio &lt;0.8), there is a concurrent normal AG metabolic acidosis (e.g., DKA + diarrhoea).
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 4 — Delta ratio &gt;2 means a metabolic alkalosis <span class="arr">▼</span></button>
+      <div class="acc-body">
+        If the HCO₃⁻ is higher than expected for the degree of AG elevation (delta ratio &gt;2), there is a concurrent metabolic alkalosis (e.g., vomiting, diuretics).
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 5 — Haemolysis falsely raises K⁺ <span class="arr">▼</span></button>
+      <div class="acc-body">
+        The most common POC potassium error. If K⁺ is unexpectedly high, repeat with a fresh, carefully collected sample. POC analysers cannot detect haemolysis.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 6 — Air bubbles falsely raise PaO₂ and lower PaCO₂ <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Even a micro-bubble can distort the result. Expel all air immediately, cap the syringe, and analyse promptly.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 7 — Venous admixture mimics hypoxaemia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        A venous sample shows low PaO₂, high PaCO₂, and low pH. Confirm arterial puncture; check for pulsatile flow; avoid tourniquet for arterial samples.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 8 — Chronic vs acute respiratory compensation <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Acute respiratory acidosis raises HCO₃⁻ by 1 per 10 mmHg; chronic raises it by 3.5 per 10 mmHg. Misclassifying acute as chronic (or vice versa) changes the interpretation.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 9 — Pseudohyponatraemia on indirect potentiometry <span class="arr">▼</span></button>
+      <div class="acc-body">
+        In hyperproteinaemia or hyperlipidaemia, laboratory (indirect) sodium is falsely low. POC (direct) sodium is not affected. If the lab and POC disagree, consider this.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 10 — Type B lactate is not always hypoxia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Type B lactate occurs with normal oxygen delivery — sepsis, liver failure, thiamine deficiency, metformin, malignancy. Do not assume all lactate elevation is hypoperfusion.
+      </div>
+    </div>
+
+    <h2 class="subhead">4 · The Synthesis Case</h2>
+    <div class="callout co-key">
+      <strong>A patient with vomiting and sepsis</strong><br><br>
+      <strong>ABG:</strong> pH 7.36, PaCO₂ 30, HCO₃⁻ 16, Na 138, Cl 98, Albumin 22 g/L, Lactate 6.2.<br><br>
+      <strong>Step 1:</strong> pH 7.36 — within normal range, but at the lower end.<br>
+      <strong>Step 2:</strong> HCO₃⁻ 16 (low) → metabolic acidosis. PaCO₂ 30 (low) → respiratory compensation. But pH is nearly normal — this suggests a mixed disorder.<br>
+      <strong>Step 3:</strong> Winter's: expected PaCO₂ = (1.5 × 16) + 8 = 32 ± 2. Measured 30 → slightly lower → concurrent respiratory alkalosis (or appropriate compensation at the lower end).<br>
+      <strong>Step 4:</strong> AG = 138 − (98 + 16) = 24. High AG metabolic acidosis.<br>
+      <strong>Step 5:</strong> Albumin 22 → corrected normal AG ≈ 12 − (22 × 0.3) ≈ 5.4. Measured AG 24 is markedly elevated even after correction.<br>
+      <strong>Step 6:</strong> Delta ratio = (24 − 12) / (24 − 16) = 12 / 8 = 1.5. Uncomplicated HAGMA.<br>
+      <strong>Step 7:</strong> But the pH is nearly normal — how? The metabolic acidosis (from lactate) is offset by a metabolic alkalosis (from vomiting). The delta ratio of 1.5 suggests the AG rise is greater than the HCO₃⁻ fall — consistent with a concurrent metabolic alkalosis.<br><br>
+      <strong>Diagnosis:</strong> Mixed high AG metabolic acidosis (lactic acidosis from sepsis) + metabolic alkalosis (vomiting) + respiratory compensation. The near-normal pH is deceptive — two opposing disorders are cancelling out.
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Final Rule</strong>
+      Never interpret a single number in isolation. The pH, PaCO₂, HCO₃⁻, anion gap, albumin, delta ratio, and clinical context must all be read together. A normal pH can hide a serious mixed disorder — and a normal anion gap can hide a high AG acidosis in a hypoalbuminaemic patient.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod9">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twenty questions across all modules — from physiology to clinical interpretation. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--abg);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--abg-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--abg)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/10)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  {q:"What is the normal PaCO₂ range on an arterial blood gas?",opts:["22–26 mmHg","35–45 mmHg","80–100 mmHg","7.35–7.45 mmHg"],ans:1,exp:"Normal PaCO₂ is 35–45 mmHg. HCO₃⁻ normal is 22–26 mmol/L. PaO₂ normal is 80–100 mmHg on room air. pH normal is 7.35–7.45."},
+  {q:"Which pre-analytical error falsely elevates PaO₂ and falsely lowers PaCO₂?",opts:["Excess heparin","Air bubbles in the sample","Delayed analysis","Haemolysis"],ans:1,exp:"Air bubbles in the sample falsely elevate PaO₂ and falsely lower PaCO₂. This is the most critical pre-analytical error — all bubbles must be expelled immediately."},
+  {q:"According to the Henderson–Hasselbalch equation, what is the normal ratio of HCO₃⁻ to dissolved CO₂?",opts:["10:1","20:1","30:1","40:1"],ans:1,exp:"The normal ratio is 20:1. At HCO₃⁻ 24 and PaCO₂ 40 (dissolved CO₂ = 1.2), the ratio is 24/1.2 = 20, giving pH 7.40."},
+  {q:"A patient has pH 7.30, PaCO₂ 50, HCO₃⁻ 24. What is the primary disorder?",opts:["Metabolic acidosis","Respiratory acidosis","Metabolic alkalosis","Respiratory alkalosis"],ans:1,exp:"Acidaemia with elevated PaCO₂ and normal HCO₃⁻ = acute respiratory acidosis. The HCO₃⁻ has not yet risen (renal compensation takes days)."},
+  {q:"What is Winter's formula for expected PaCO₂ in metabolic acidosis?",opts:["PaCO₂ = (1.5 × HCO₃⁻) + 8 ± 2","PaCO₂ = (0.7 × HCO₃⁻) + 20","PaCO₂ = HCO₃⁻ + 15","PaCO₂ = 1.5 × HCO₃⁻ − 8"],ans:0,exp:"Winter's formula: PaCO₂ = (1.5 × HCO₃⁻) + 8 ± 2. It predicts the expected respiratory compensation for metabolic acidosis."},
+  {q:"In chronic respiratory acidosis, how much does HCO₃⁻ rise for every 10 mmHg rise in PaCO₂?",opts:["1 mmol/L","2 mmol/L","3.5 mmol/L","5 mmol/L"],ans:2,exp:"In chronic respiratory acidosis, HCO₃⁻ rises approximately 3.5 mmol/L for every 10 mmHg rise in PaCO₂ (renal compensation). In acute respiratory acidosis, the rise is only 1 mmol/L."},
+  {q:"How is the anion gap calculated?",opts:["Na⁺ + Cl⁻ − HCO₃⁻","Na⁺ − (Cl⁻ + HCO₃⁻)","Cl⁻ − (Na⁺ + HCO₃⁻)","HCO₃⁻ − (Na⁺ + Cl⁻)"],ans:1,exp:"Anion gap = Na⁺ − (Cl⁻ + HCO₃⁻). Normal is 8–12 mmol/L (±2) in most laboratories, though some cite up to 16."},
+  {q:"A patient with hypoalbuminaemia (20 g/L) has a measured anion gap of 10. How should this be interpreted?",opts:["Normal anion gap","Elevated anion gap when corrected for albumin","Low anion gap","Cannot be determined"],ans:1,exp:"Albumin is the major unmeasured anion. With albumin 20 (down 24 from normal 44), the normal AG should be reduced by ~7 (0.25 × 24). Corrected normal AG ≈ 5. A measured AG of 10 is therefore elevated relative to the corrected normal — suggesting a hidden high AG acidosis."},
+  {q:"What does a delta ratio of 0.6 indicate?",opts:["Uncomplicated high AG metabolic acidosis","Combined high AG and normal AG metabolic acidosis","High AG metabolic acidosis + metabolic alkalosis","Normal acid-base status"],ans:1,exp:"Delta ratio <0.8 indicates combined high AG and normal AG metabolic acidosis. Ratio 1–2 = uncomplicated HAGMA. Ratio >2 = HAGMA + metabolic alkalosis."},
+  {q:"Which of the following is a cause of normal anion gap metabolic acidosis?",opts:["Lactic acidosis","Diabetic ketoacidosis","Diarrhoea","Methanol poisoning"],ans:2,exp:"Diarrhoea causes normal anion gap (hyperchloraemic) metabolic acidosis due to GI loss of HCO₃⁻. Lactic acidosis, DKA, and methanol poisoning all cause high anion gap acidosis."},
+  {q:"What is the most common cause of falsely elevated potassium on a point-of-care blood gas analyser?",opts:["Delayed analysis","Haemolysis","Excess heparin","Air bubbles"],ans:1,exp:"Haemolysis is the most common cause of falsely elevated potassium on POC analysers. Red cells release K⁺ when damaged. POC analysers cannot detect haemolysis visually, unlike laboratory plasma/serum samples."},
+  {q:"Which parameter CANNOT be estimated from a venous blood gas?",opts:["pH","PaCO₂","HCO₃⁻","PaO₂"],ans:3,exp:"PaO₂ cannot be reliably estimated from venous blood gas. There is no consistent correlation between venous and arterial PO₂. pH and PaCO₂ can be estimated with correction factors."},
+  {q:"What is the expected PaO₂ on FiO₂ 0.4 (rough estimate)?",opts:["40 mmHg","100 mmHg","200 mmHg","400 mmHg"],ans:2,exp:"A rough bedside estimate is PaO₂ ≈ 5 × FiO₂. For FiO₂ 0.4: 5 × 0.4 = 2.0, which represents 200 mmHg (the formula is often expressed as 5 × FiO₂ × 100)."},
+  {q:"Which condition causes a falsely low measured sodium on indirect potentiometry (laboratory) but not on direct potentiometry (POC)?",opts:["Haemolysis","Hyperproteinaemia","Hyperkalaemia","Air bubbles"],ans:1,exp:"Indirect potentiometry dilutes the sample before measurement. In hyperproteinaemia or hyperlipidaemia, the aqueous phase is reduced, causing falsely low sodium (pseudohyponatraemia). Direct potentiometry on whole blood is not affected."},
+  {q:"A patient has pH 7.50, PaCO₂ 30, HCO₃⁻ 24. What is the disorder?",opts:["Metabolic alkalosis","Respiratory alkalosis","Metabolic acidosis","Respiratory acidosis"],ans:1,exp:"Alkalaemia with low PaCO₂ and normal HCO₃⁻ = acute respiratory alkalosis. The HCO₃⁻ has not yet fallen (renal compensation takes days)."},
+  {q:"What is the normal A–a gradient on room air in a young adult?",opts:["0–5 mmHg","5–20 mmHg","20–40 mmHg","40–60 mmHg"],ans:1,exp:"Normal A–a gradient is 5–20 mmHg and increases with age (Age/4 + 4). An elevated A–a gradient indicates a gas exchange defect (V/Q mismatch, shunt, diffusion limitation). Hypoventilation alone does not increase the A–a gradient."},
+  {q:"Which mnemonic includes oxoproline and D-lactate as causes of high anion gap acidosis?",opts:["MUDPILES","GOLD MARK","CAT MUDPILES","KULT"],ans:1,exp:"GOLD MARK is the modern mnemonic: Glycols, Oxoproline, L-lactate, D-lactate, Methanol, Aspirin, Renal failure, Ketoacidosis. It includes oxoproline (paracetamol toxicity) and D-lactate (short bowel syndrome)."},
+  {q:"In a patient with metabolic acidosis, measured PaCO₂ is 50 but Winter's formula predicts 28. What does this indicate?",opts:["Appropriate compensation","Concurrent respiratory acidosis","Concurrent respiratory alkalosis","Laboratory error"],ans:1,exp:"The measured PaCO₂ is higher than Winter's formula predicts, meaning there is inadequate respiratory compensation — a concurrent respiratory acidosis (e.g., respiratory muscle fatigue)."},
+  {q:"What is the maximum acceptable time for analysis of a blood gas sample at room temperature in a plastic syringe?",opts:["5 minutes","15 minutes","30 minutes","60 minutes"],ans:2,exp:"At room temperature in a plastic syringe, clinically acceptable results can be obtained for up to 30 minutes. On ice, the sample should be analysed within 15 minutes."},
+  {q:"A patient has pH 7.38, PaCO₂ 65, HCO₃⁻ 38. What is the most likely interpretation?",opts:["Acute respiratory acidosis","Chronic respiratory acidosis","Metabolic alkalosis","Mixed disorder"],ans:1,exp:"pH is near normal with elevated PaCO₂ and elevated HCO₃⁻. Expected HCO₃⁻ for chronic respiratory acidosis: 24 + (25/10)×3.5 = 32.75. Measured 38 is close — consistent with chronic compensated respiratory acidosis."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--abg);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — ABG interpretation is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
