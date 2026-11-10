@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrolyte Imbalances: Assessment & Correction — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to electrolyte imbalances — assessment, formulas, units, and correction for sodium, potassium, calcium, magnesium, bicarbonate, and phosphate. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  --mauve:       #6a4a6a;
+  --mauve-soft:  #8a6a8a;
+  --mauve-deep:  #4a2a4a;
+  --mauve-light: #aa8aaa;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+#cur { width:7px;height:7px;background:var(--mauve);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--mauve-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mauve);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--mauve-deep); }
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(106,74,106,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(106,74,106,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(106,74,106,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(106,74,106,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(138,106,138,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mauve);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--mauve); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--mauve);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:640px;font-weight:300; }
+.hero-sub strong { color:var(--mauve);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--mauve-soft);font-weight:600; }
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--mauve);border-bottom-color:var(--mauve); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--mauve),var(--mauve-soft));transition:width .4s; }
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mauve);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--mauve); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mauve); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+h2.subhead { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--text);margin:2rem 0 .8rem;padding-left:.9rem;border-left:2px solid var(--mauve); }
+h3.subsubhead { font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mauve-soft);margin:1.4rem 0 .5rem; }
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--mauve);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--mauve);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(106,74,106,.02); }
+.td-hi { color:var(--mauve)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(106,74,106,.04);border-color:var(--mauve);color:var(--muted); }
+.co-key strong { color:var(--mauve); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(138,106,138,.05);border-color:var(--mauve-soft);color:var(--muted); }
+.co-fact strong { color:var(--mauve-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--mauve);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--mauve);width:22px;flex-shrink:0;font-size:1.1rem; }
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-mauve { border-color:var(--mauve);color:var(--mauve); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--mauve-soft);color:var(--mauve-soft); }
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--mauve);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--mauve); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--mauve);font-size:.9rem;font-weight:700; }
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mauve);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--mauve);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--mauve-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--mauve);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Nephrology · Critical Care · Perioperative Medicine · Fluids & Electrolytes</div>
+  <h1>Electrolyte Imbalances: <em>Assessment & Correction</em></h1>
+  <p class="hero-sub">
+    Sodium, potassium, calcium, magnesium, bicarbonate, and phosphate — with every formula, unit conversion, and correction sequence embedded in its own section. <strong>Ten modules. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>10</span></div>
+    <div class="meta-item">Scope <span>Na · K · Ca · Mg · HCO₃ · PO₄ · Formulas · Units · Memory</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Assessment Framework</button>
+  <button onclick="showMod(1)">02 · Sodium</button>
+  <button onclick="showMod(2)">03 · Potassium</button>
+  <button onclick="showMod(3)">04 · Calcium</button>
+  <button onclick="showMod(4)">05 · Magnesium</button>
+  <button onclick="showMod(5)">06 · Bicarbonate</button>
+  <button onclick="showMod(6)">07 · Phosphate</button>
+  <button onclick="showMod(7)">08 · Mixed & Special</button>
+  <button onclick="showMod(8)">09 · Memory & Synthesis</button>
+  <button onclick="showMod(9)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:10%"></div></div>
+
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: ASSESSMENT FRAMEWORK -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 10</div>
+      <div class="mod-title">Assessment <em>Framework</em></div>
+      <div class="mod-intro">Serum concentration vs total body stores, the rate of correction, unit conversions, and the principle that correcting too fast is often worse than the disturbance itself.</div>
+    </div>
+
+    <h2 class="subhead">Normal Serum Values — mmol/L and Conventional Units</h2>
+    <table class="data-table">
+      <tr><th>Electrolyte</th><th>Normal (mmol/L)</th><th>Normal (mEq/L)</th><th>Conventional (mg/dL)</th><th>Conversion</th></tr>
+      <tr><td><strong>Sodium</strong></td><td>135–145</td><td>135–145</td><td>310–334</td><td>mmol/L × 23 = mg/dL</td></tr>
+      <tr><td><strong>Potassium</strong></td><td>3.5–5.0</td><td>3.5–5.0</td><td>13.7–19.5</td><td>mmol/L × 3.91 = mg/dL</td></tr>
+      <tr><td><strong>Ionised calcium</strong></td><td>1.15–1.30</td><td>2.30–2.60</td><td>4.6–5.2</td><td>mmol/L × 4 = mg/dL</td></tr>
+      <tr><td><strong>Total calcium</strong></td><td>2.20–2.60</td><td>4.40–5.20</td><td>8.8–10.4</td><td>mmol/L × 4 = mg/dL</td></tr>
+      <tr><td><strong>Magnesium</strong></td><td>0.70–1.00</td><td>1.40–2.00</td><td>1.7–2.4</td><td>mmol/L × 2 = mEq/L; mmol/L × 2.43 = mg/dL</td></tr>
+      <tr><td><strong>Bicarbonate</strong></td><td>22–26</td><td>22–26</td><td>—</td><td>1 mmol/L = 1 mEq/L</td></tr>
+      <tr><td><strong>Phosphate</strong></td><td>0.8–1.5</td><td>1.6–3.0</td><td>2.5–4.6</td><td>mmol/L × 3.1 = mg/dL (elemental phosphorus)</td></tr>
+      <tr><td><strong>Chloride</strong></td><td>96–106</td><td>96–106</td><td>340–376</td><td>mmol/L × 3.55 = mg/dL</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Serum Values Do Not Equal Total Body Stores</strong>
+      Serum potassium reflects only ~2% of total body potassium. Serum magnesium is a poor marker of total body magnesium — a normal level does not exclude deficiency. Serum calcium must be interpreted with albumin (or measured as ionised calcium). Sodium measured by indirect potentiometry (laboratory chemistry) is falsely low in hyperproteinaemia/hyperlipidaemia; direct potentiometry (blood gas) is not affected [citation:6][citation:13].
+    </div>
+
+    <h2 class="subhead">The Rate of Correction — The Central Principle</h2>
+    <p>The most important principle in electrolyte correction is that <strong>the rate matters as much as the target</strong>. Correcting too slowly prolongs the disturbance; correcting too rapidly can cause permanent neurological injury or cardiac arrest.</p>
+    <table class="data-table">
+      <tr><th>Electrolyte</th><th>Maximum Correction Rate</th><th>Consequence of Over-Correction</th></tr>
+      <tr><td><strong>Sodium</strong></td><td>6–8 mmol/L per 24 h (chronic hyponatraemia; some sources allow up to 10)</td><td>Osmotic demyelination syndrome (ODS)</td></tr>
+      <tr><td><strong>Potassium</strong></td><td>10–20 mmol/h (peripheral); up to 40 mmol/h (central, monitored)</td><td>Cardiac arrhythmia; rebound hypokalaemia [citation:14]</td></tr>
+      <tr><td><strong>Calcium</strong></td><td>Do not exceed 0.5 mmol/L/h in hypercalcaemia correction</td><td>Cardiac arrhythmia; soft tissue calcification</td></tr>
+      <tr><td><strong>Magnesium</strong></td><td>1–2 g/h (routine); faster only in emergencies</td><td>Hypotension, respiratory depression, loss in urine</td></tr>
+      <tr><td><strong>Phosphate</strong></td><td>Do not exceed 0.5 mmol/kg over 6–12 h</td><td>Hypocalcaemia, metastatic calcification</td></tr>
+    </table>
+
+    <h2 class="subhead">Total Body Water — The Foundation of Deficit Calculations</h2>
+    <div class="formula-box">
+      <span class="flabel">Total Body Water (TBW)</span>
+      Adult male: 0.6 × Weight (kg) · Adult female: 0.5 × Weight (kg) · Elderly: 0.45 × Weight (kg)
+      <div class="fexpl">TBW in litres. Used for sodium deficit and free water deficit calculations.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Golden Rule</strong>
+      <strong>Correct the underlying cause first, and the electrolyte second.</strong> Hyponatraemia from SIADH will not stay corrected if the SIADH persists. Hyperkalaemia from renal failure will recur unless dialysis is initiated. Hypercalcaemia from malignancy requires treating the malignancy — fluids and bisphosphonates buy time.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: SODIUM -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 10</div>
+      <div class="mod-title">Sodium — <em>Hyponatraemia & Hypernatraemia</em></div>
+      <div class="mod-intro">The most common electrolyte disorder — and the one where the rate of correction determines whether the patient walks out or is locked in.</div>
+    </div>
+
+    <h2 class="subhead">Formulas & Units — Sodium</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th><th>Use</th></tr>
+      <tr><td><strong>Corrected Na⁺ (hyperglycaemia)</strong></td><td>Na⁺ + 0.3 × (Glucose − 5.5)</td><td>Na⁺ mmol/L; glucose mmol/L</td><td>Hyperglycaemia dilutes sodium</td></tr>
+      <tr><td><strong>Sodium deficit</strong></td><td>TBW × (Desired Na⁺ − Current Na⁺)</td><td>TBW L; Na⁺ mmol/L; result mmol</td><td>Hyponatraemia planning</td></tr>
+      <tr><td><strong>Free water deficit</strong></td><td>TBW × [(Current Na⁺ / 140) − 1]</td><td>TBW L; Na⁺ mmol/L; result L</td><td>Hypernatraemia planning</td></tr>
+      <tr><td><strong>3% saline bolus</strong></td><td>100 mL over 10 min; repeat up to 3× if seizures persist</td><td>—</td><td>Acute symptomatic hyponatraemia</td></tr>
+      <tr><td><strong>Rule of 6</strong></td><td>6 mmol/L in 6 h for severe symptoms; ≤6 mmol/L in 24 h for safety</td><td>mmol/L</td><td>ODS prevention [citation:10]</td></tr>
+      <tr><td><strong>Protein-corrected Na⁺ (indirect potentiometry)</strong></td><td>Na⁺(indirect) − 10.53 + (0.1316 × total protein g/L)</td><td>Na⁺ mmol/L; protein g/L</td><td>Hyperproteinaemia [citation:6]</td></tr>
+    </table>
+
+    <h2 class="subhead">Hyponatraemia — Classification by Volume Status</h2>
+    <table class="data-table">
+      <tr><th>Type</th><th>Urine Na⁺</th><th>Common Causes</th><th>Management</th></tr>
+      <tr><td><strong>Hypovolaemic</strong></td><td>&lt;10 mmol/L (extrarenal loss)</td><td>Vomiting, diarrhoea, third-spacing, diuretics (late)</td><td>0.9% saline; treat cause</td></tr>
+      <tr><td><strong>Euvolaemic</strong></td><td>&gt;20–30 mmol/L</td><td>SIADH, hypothyroidism, adrenal insufficiency</td><td>Fluid restriction; treat cause; consider tolvaptan</td></tr>
+      <tr><td><strong>Hypervolaemic</strong></td><td>&gt;20 mmol/L (renal) or &lt;10 (cardiac/ hepatic)</td><td>Heart failure, cirrhosis, nephrotic syndrome, CKD</td><td>Fluid restriction, diuretics; treat underlying disease</td></tr>
+    </table>
+
+    <h2 class="subhead">SIADH — A Diagnosis of Exclusion</h2>
+    <ul class="clist">
+      <li><strong>Essential criteria:</strong> Serum osmolality &lt;275 mOsm/kg; urine osmolality &gt;100 mOsm/kg; clinical euvolaemia; urine Na⁺ &gt;30 mmol/L (on normal salt intake); normal thyroid and adrenal function</li>
+      <li><strong>Exclude adrenal insufficiency:</strong> Early morning cortisol &lt;140 nmol/L is diagnostic; &lt;420 nmol/L requires a corticotropin stimulation test; &gt;300 nmol/L excludes glucocorticoid-induced adrenal insufficiency</li>
+      <li><strong>Causes:</strong> Malignancy (especially lung), pulmonary disease, CNS disorders, drugs (SSRIs, carbamazepine, cyclophosphamide), idiopathic</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ Osmotic Demyelination Syndrome (ODS)</strong>
+      Rapid correction of <strong>chronic</strong> hyponatraemia can cause ODS (central pontine myelinolysis) — presenting days after correction with dysarthria, dysphagia, quadriparesis, and "locked-in" syndrome. Risk is highest with chronic hyponatraemia (&lt;120 mmol/L for &gt;48 h), alcoholism, malnutrition, hypokalaemia, and liver disease. The "rule of 6" is a practical safety framework: 6 mmol/L in 6 hours for severe symptoms, then stop; ≤6 mmol/L per day for safety [citation:10].
+    </div>
+
+    <h2 class="subhead">Hypernatraemia</h2>
+    <p>Hypernatraemia (&gt;145 mmol/L) reflects a deficit of total body water relative to sodium. It almost always involves impaired thirst or limited access to water.</p>
+    <table class="data-table">
+      <tr><th>Type</th><th>Causes</th><th>Management</th></tr>
+      <tr><td><strong>Hypovolaemic</strong></td><td>Diarrhoea, vomiting, osmotic diuresis, diuretics</td><td>0.9% saline first if haemodynamically unstable; then hypotonic fluid</td></tr>
+      <tr><td><strong>Euvolaemic</strong></td><td>Diabetes insipidus (central or nephrogenic), pure water loss</td><td>Free water replacement (oral/NG or 5% dextrose); treat DI</td></tr>
+      <tr><td><strong>Hypervolaemic</strong></td><td>Hypertonic saline, sodium administration, mineralocorticoid excess</td><td>Stop sodium; diuretics; dialysis if renal failure</td></tr>
+    </table>
+    <div class="callout co-warn">
+      <strong>⚠ Correct Hypernatraemia Slowly</strong>
+      Chronic hypernatraemia must be corrected at ≤0.5 mmol/L/h (≤10–12 mmol/L/day) to avoid cerebral oedema. Use the free water deficit formula to plan the volume; replace half in the first 24 h, the remainder over the next 24–48 h.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: POTASSIUM -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 10</div>
+      <div class="mod-title">Potassium — <em>Hyperkalaemia & Hypokalaemia</em></div>
+      <div class="mod-intro">The electrolyte that kills fastest. ECG changes, membrane stabilisation, and the shifting-versus-elimination distinction.</div>
+    </div>
+
+    <h2 class="subhead">Formulas & Units — Potassium</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th><th>Use</th></tr>
+      <tr><td><strong>Potassium deficit estimate</strong></td><td>~100 mmol total body deficit per 1 mmol/L fall in serum K⁺ (rough; some use 200–400 per 1 mmol/L) [citation:14]</td><td>mmol</td><td>Planning replacement (not precise)</td></tr>
+      <tr><td><strong>Max peripheral IV rate</strong></td><td>10 mmol/h (without monitoring); 20 mmol/h with cardiac monitoring</td><td>mmol/h</td><td>Peripheral line safety [citation:8]</td></tr>
+      <tr><td><strong>Max central IV rate</strong></td><td>Up to 40 mmol/h with continuous cardiac monitoring and hourly K⁺</td><td>mmol/h</td><td>Severe/critical hypokalaemia [citation:14]</td></tr>
+      <tr><td><strong>Unit conversion</strong></td><td>1 mmol/L = 1 mEq/L; mmol/L × 3.91 = mg/dL</td><td>—</td><td>—</td></tr>
+    </table>
+
+    <h2 class="subhead">Hyperkalaemia — Severity and ECG</h2>
+    <table class="data-table">
+      <tr><th>Severity</th><th>K⁺ (mmol/L)</th><th>ECG Changes</th><th>Action</th></tr>
+      <tr><td><strong>Mild</strong></td><td>5.5–5.9</td><td>Peaked T waves (early)</td><td>Stop K⁺ sources; review drugs; dietary advice; potassium binder</td></tr>
+      <tr><td><strong>Moderate</strong></td><td>6.0–6.4</td><td>Peaked T, flattened P, prolonged PR</td><td>Shift K⁺ intracellularly (insulin/glucose, salbutamol); binder; treat cause</td></tr>
+      <tr><td><strong>Severe</strong></td><td>≥6.5 or any ECG changes</td><td>Wide QRS, sine wave, bradycardia, ventricular arrhythmia</td><td><strong>Calcium first</strong> (membrane stabilisation), then shift, then eliminate</td></tr>
+    </table>
+
+    <div class="callout co-danger">
+      <strong>⚠ Calcium First — Always</strong>
+      In hyperkalaemia with ECG changes, the first action is <strong>calcium gluconate 10% 10–30 mL IV</strong> (or calcium chloride 10% 5–10 mL via central line). Calcium does not lower potassium — it stabilises the myocardium. It buys time for the other measures to work.
+    </div>
+
+    <h2 class="subhead">Hyperkalaemia — The Three-Step Approach</h2>
+    <div class="flow-row">
+      <div class="flow-box">1. Stabilise<br>Calcium gluconate</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2. Shift<br>Insulin/glucose, salbutamol</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3. Eliminate<br>Binder, diuresis, dialysis</div>
+    </div>
+    <table class="data-table">
+      <tr><th>Intervention</th><th>Dose</th><th>Onset</th><th>Duration</th><th>Notes</th></tr>
+      <tr><td><strong>Calcium gluconate 10%</strong></td><td>10–30 mL IV</td><td>1–3 min</td><td>30–60 min</td><td>Membrane stabilisation; does not lower K⁺</td></tr>
+      <tr><td><strong>Insulin 10 units + glucose 25 g</strong></td><td>IV bolus</td><td>15–30 min</td><td>4–6 h</td><td>Monitor glucose; risk of hypoglycaemia</td></tr>
+      <tr><td><strong>Salbutamol nebulised</strong></td><td>10–20 mg</td><td>15–30 min</td><td>2–4 h</td><td>Additive with insulin; tachycardia</td></tr>
+      <tr><td><strong>Sodium bicarbonate</strong></td><td>50–100 mmol IV</td><td>30–60 min</td><td>1–2 h</td><td>Only if metabolic acidosis; less effective</td></tr>
+      <tr><td><strong>Potassium binder</strong></td><td>SZC 10 g or patiromer 8.4 g</td><td>Hours</td><td>—</td><td>For elimination; not for acute crisis</td></tr>
+      <tr><td><strong>Dialysis</strong></td><td>—</td><td>Immediate</td><td>—</td><td>Definitive for refractory or renal failure</td></tr>
+    </table>
+
+    <h2 class="subhead">Hypokalaemia</h2>
+    <ul class="clist">
+      <li><strong>Severity:</strong> Mild 3.0–3.4; moderate 2.5–2.9; severe &lt;2.5 mmol/L</li>
+      <li><strong>ECG:</strong> U waves, flattened T waves, ST depression, prolonged QT, arrhythmias</li>
+      <li><strong>Correction:</strong> Oral KCl preferred if tolerated (40–80 mmol/day in divided doses); IV KCl for severe or symptomatic (20–40 mmol over 1–2 h via peripheral line, max 10 mmol/h; central line for up to 40 mmol/h with monitoring) [citation:14]</li>
+      <li><strong>Always check magnesium:</strong> Hypomagnesaemia causes refractory hypokalaemia — replace Mg first (0.5–1 g/h) [citation:14]</li>
+      <li><strong>Causes:</strong> GI loss (vomiting, diarrhoea, NG suction), renal loss (diuretics, Conn's, RTA), insulin, β-agonists, alkalosis</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: CALCIUM -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 10</div>
+      <div class="mod-title">Calcium — <em>Hypercalcaemia & Hypocalcaemia</em></div>
+      <div class="mod-intro">The electrolyte that controls the heart, the nerves, and the bones — and the one where the ionised fraction is what matters.</div>
+    </div>
+
+    <h2 class="subhead">Formulas & Units — Calcium</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th><th>Use</th></tr>
+      <tr><td><strong>Corrected calcium</strong></td><td>Ca²⁺ + 0.02 × (40 − Albumin)</td><td>Ca²⁺ mmol/L; albumin g/L</td><td>Hypoalbuminaemia</td></tr>
+      <tr><td><strong>Alternative correction</strong></td><td>Add 0.2 mmol/L for every 10 g/L albumin below 40</td><td>mmol/L; g/L</td><td>Quick bedside estimate</td></tr>
+      <tr><td><strong>Unit conversion</strong></td><td>mmol/L × 4 = mg/dL; mg/dL ÷ 4 = mmol/L</td><td>—</td><td>Total or ionised</td></tr>
+      <tr><td><strong>Calcium gluconate conversion</strong></td><td>1 g calcium gluconate = 2.2 mmol Ca²⁺</td><td>—</td><td>Dose calculation</td></tr>
+      <tr><td><strong>Calcium chloride conversion</strong></td><td>1 g calcium chloride = 6.8 mmol Ca²⁺</td><td>—</td><td>Dose calculation (central line)</td></tr>
+    </table>
+
+    <h2 class="subhead">Hypercalcaemia</h2>
+    <table class="data-table">
+      <tr><th>Severity</th><th>Corrected Ca²⁺ (mmol/L)</th><th>Corrected Ca²⁺ (mg/dL)</th><th>Symptoms</th><th>Management</th></tr>
+      <tr><td><strong>Mild</strong></td><td>2.6–3.0</td><td>10.4–12.0</td><td>Often asymptomatic</td><td>Treat cause; hydration; monitor</td></tr>
+      <tr><td><strong>Moderate</strong></td><td>3.0–3.5</td><td>12.0–14.0</td><td>Polyuria, constipation, confusion, fatigue</td><td>IV saline 0.9% (2–4 L/day); bisphosphonate</td></tr>
+      <tr><td><strong>Severe / crisis</strong></td><td>&gt;3.5</td><td>&gt;14.0</td><td>Drowsiness, coma, arrhythmia, renal failure</td><td>Aggressive IV saline; calcitonin; bisphosphonate; treat cause</td></tr>
+    </table>
+    <ul class="clist">
+      <li><strong>First step:</strong> IV 0.9% saline — restore volume, dilute calcium, promote renal excretion (up to 3–5 L/24 h in severe cases)</li>
+      <li><strong>Bisphosphonates:</strong> Zoledronic acid 4 mg IV or pamidronate 60–90 mg IV — onset 12–24 h, effect lasts weeks</li>
+      <li><strong>Calcitonin:</strong> 4 IU/kg SC/IM q12h — rapid onset (hours), but tachyphylaxis within 48 h; used for severe/crisis</li>
+      <li><strong>Steroids:</strong> For granulomatous disease or lymphoma-associated hypercalcaemia</li>
+      <li><strong>Dialysis:</strong> For refractory hypercalcaemia with renal failure or cardiac instability</li>
+    </ul>
+
+    <h2 class="subhead">Hypocalcaemia</h2>
+    <ul class="clist">
+      <li><strong>Symptoms:</strong> Perioral tingling, carpopedal spasm, Chvostek's sign, Trousseau's sign, laryngospasm, seizures, QT prolongation, ventricular arrhythmia</li>
+      <li><strong>Severe/crisis (&lt;1.0 mmol/L ionised or symptomatic):</strong> Calcium gluconate 10% 10–30 mL IV over 10 min (provides 2.2–6.6 mmol Ca²⁺), then infusion; calcium chloride 10% 5–10 mL via central line for cardiac arrest (provides 3.4–6.8 mmol Ca²⁺)</li>
+      <li><strong>Chronic:</strong> Oral calcium carbonate + vitamin D (alfacalcidol or calcitriol if renal failure)</li>
+      <li><strong>Always check magnesium:</strong> Hypomagnesaemia causes refractory hypocalcaemia — replace Mg first</li>
+      <li><strong>Causes:</strong> Hypoparathyroidism (post-surgical), vitamin D deficiency, CKD, pancreatitis, massive transfusion (citrate binding), respiratory alkalosis (ionised Ca falls)</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: MAGNESIUM -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 10</div>
+      <div class="mod-title">Magnesium — <em>Hypomagnesaemia & Hypermagnesaemia</em></div>
+      <div class="mod-intro">The forgotten electrolyte — and the one that makes potassium and calcium correction fail if ignored.</div>
+    </div>
+
+    <h2 class="subhead">Formulas & Units — Magnesium</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th><th>Use</th></tr>
+      <tr><td><strong>MgSO₄ conversion</strong></td><td>1 g MgSO₄ = 4 mmol Mg²⁺ = 8 mEq Mg²⁺</td><td>—</td><td>Dose calculation</td></tr>
+      <tr><td><strong>Unit conversion</strong></td><td>mmol/L × 2 = mEq/L; mmol/L × 2.43 = mg/dL; mg/dL ÷ 2.43 = mmol/L</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>Max routine infusion rate</strong></td><td>2 g/h (8 mmol/h)</td><td>g/h</td><td>Outside emergencies</td></tr>
+      <tr><td><strong>Emergency rate (torsades)</strong></td><td>1–2 g IV over 2–15 min; then 0.5–1 g/h</td><td>g</td><td>Cardiac emergency</td></tr>
+    </table>
+
+    <h2 class="subhead">Hypomagnesaemia</h2>
+    <table class="data-table">
+      <tr><th>Severity</th><th>Mg²⁺ (mmol/L)</th><th>Mg²⁺ (mEq/L)</th><th>Management</th></tr>
+      <tr><td><strong>Mild</strong></td><td>0.5–0.7 (asymptomatic)</td><td>1.0–1.4</td><td>Oral magnesium citrate/chloride/lactate 12–24 mmol/day; continue 2 days after normalising</td></tr>
+      <tr><td><strong>Moderate</strong></td><td>0.5–0.7 (symptomatic) or IV needed</td><td>1.0–1.4</td><td>2–4 g IV MgSO₄ over 4–12 h</td></tr>
+      <tr><td><strong>Severe</strong></td><td>&lt;0.5 or symptomatic</td><td>&lt;1.0</td><td>1–2 g IV over 1 h; repeat every 6–12 h if needed</td></tr>
+      <tr><td><strong>Torsades / emergency</strong></td><td>—</td><td>—</td><td>1–2 g IV over 2–15 min; up to 4 g total; then 0.5–1 g/h</td></tr>
+    </table>
+    <div class="callout co-warn">
+      <strong>⚠ Magnesium and Potassium — The Refractory Link</strong>
+      Hypomagnesaemia causes renal potassium wasting and impaired cellular K⁺ uptake. <strong>Hypokalaemia will not correct until magnesium is replaced.</strong> The same applies to hypocalcaemia — low Mg impairs PTH secretion and action. When repleting potassium, co-administer magnesium 0.5–1 g/h [citation:14].
+    </div>
+    <ul class="clist">
+      <li><strong>Causes:</strong> GI loss (diarrhoea, malabsorption, pancreatitis, PPIs), renal loss (diuretics, aminoglycosides, amphotericin, cisplatin, calcineurin inhibitors), alcohol, uncontrolled diabetes</li>
+      <li><strong>ECG:</strong> Prolonged QT, torsades de pointes, ST depression, U waves</li>
+      <li><strong>In CKD:</strong> Reduce dose by 25–50%; monitor closely; specialist input in AKI or severe CKD</li>
+    </ul>
+
+    <h2 class="subhead">Hypermagnesaemia</h2>
+    <ul class="clist">
+      <li><strong>Causes:</strong> Usually renal failure or iatrogenic (Mg therapy, Mg-containing antacids/laxatives)</li>
+      <li><strong>Features:</strong> Hyporeflexia, weakness, hypotension, bradycardia; severe → respiratory depression, cardiac arrest</li>
+      <li><strong>Management:</strong> Stop all magnesium sources; calcium gluconate 1 g IV (antagonises cardiac/neuromuscular effects); IV fluids ± loop diuretic if renal function adequate; dialysis if severe or renal failure</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: BICARBONATE -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 10</div>
+      <div class="mod-title">Bicarbonate — <em>Metabolic Acidosis & Alkalosis</em></div>
+      <div class="mod-intro">The buffer that defines the metabolic component — and the therapy that is overused and under-evidenced.</div>
+    </div>
+
+    <h2 class="subhead">Formulas & Units — Bicarbonate</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th><th>Use</th></tr>
+      <tr><td><strong>Bicarbonate deficit</strong></td><td>0.3 × Weight (kg) × (24 − HCO₃⁻)</td><td>Weight kg; HCO₃⁻ mmol/L; result mmol</td><td>Severe acidosis (selected)</td></tr>
+      <tr><td><strong>Bicarbonate dose</strong></td><td>1–2 mmol/kg IV (usually 50–100 mmol) slowly; recheck ABG</td><td>mmol</td><td>pH &lt;7.1 with instability</td></tr>
+      <tr><td><strong>Unit conversion</strong></td><td>1 mmol/L = 1 mEq/L</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>Anion gap</strong></td><td>Na⁺ − (Cl⁻ + HCO₃⁻)</td><td>mmol/L</td><td>Classify metabolic acidosis</td></tr>
+      <tr><td><strong>Albumin-corrected AG</strong></td><td>AG + 0.25 × (44 − Albumin g/L)</td><td>mmol/L</td><td>Hypoalbuminaemia</td></tr>
+    </table>
+
+    <h2 class="subhead">Bicarbonate Therapy — When to Use</h2>
+    <ul class="clist">
+      <li><strong>Not routinely recommended</strong> for metabolic acidosis with pH &gt;7.1 — the evidence does not support improved outcomes and there are risks (hypernatraemia, hypercapnia, hypokalaemia, intracellular acidosis, overshoot alkalosis)</li>
+      <li><strong>Consider</strong> for pH &lt;7.1 with haemodynamic instability, severe hyperkalaemia, or certain toxin ingestions (salicylate, tricyclic)</li>
+      <li><strong>In cardiac arrest:</strong> Not routinely recommended; may be considered for prolonged arrest or hyperkalaemia</li>
+      <li><strong>In renal failure:</strong> Sodium bicarbonate is preferred over trometamol (which contains phosphate)</li>
+    </ul>
+
+    <h2 class="subhead">Metabolic Alkalosis</h2>
+    <ul class="clist">
+      <li><strong>Causes:</strong> Vomiting/NG suction (loss of H⁺ and Cl⁻), diuretics, hypokalaemia, mineralocorticoid excess, alkali administration</li>
+      <li><strong>Assessment:</strong> Urine Cl⁻ &lt;20 mmol/L = chloride-responsive (volume depletion); &gt;20 = chloride-resistant (mineralocorticoid excess, severe hypokalaemia)</li>
+      <li><strong>Chloride-responsive:</strong> 0.9% saline + KCl replacement</li>
+      <li><strong>Chloride-resistant:</strong> Treat cause; KCl; spironolactone; acetazolamide (if fluid overload)</li>
+      <li><strong>Severe (pH &gt;7.55):</strong> Acetazolamide 250–500 mg IV; or dilute HCl via central line in extreme cases; dialysis</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: PHOSPHATE -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 10</div>
+      <div class="mod-title">Phosphate — <em>Hypophosphataemia & Hyperphosphataemia</em></div>
+      <div class="mod-intro">The electrolyte of refeeding, respiratory failure, and the dialysis patient.</div>
+    </div>
+
+    <h2 class="subhead">Formulas & Units — Phosphate</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th><th>Use</th></tr>
+      <tr><td><strong>Unit conversion</strong></td><td>mmol/L × 3.1 = mg/dL (elemental phosphorus); mg/dL ÷ 3.1 = mmol/L</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>IV phosphate dose</strong></td><td>10–30 mmol over 6–24 h depending on severity; monitor Ca²⁺ and K⁺</td><td>mmol</td><td>Moderate to severe hypophosphataemia</td></tr>
+      <tr><td><strong>Max rate</strong></td><td>Do not exceed 0.5 mmol/kg over 6–12 h</td><td>mmol/kg</td><td>Avoid hypocalcaemia</td></tr>
+      <tr><td><strong>Oral phosphate</strong></td><td>Phosphate Sandoz 2 tablets BD/TDS (each tablet = 16.1 mmol phosphate)</td><td>mmol</td><td>Mild hypophosphataemia</td></tr>
+    </table>
+
+    <h2 class="subhead">Hypophosphataemia</h2>
+    <table class="data-table">
+      <tr><th>Severity</th><th>PO₄ (mmol/L)</th><th>PO₄ (mg/dL)</th><th>Management</th></tr>
+      <tr><td><strong>Mild</strong></td><td>0.6–0.8</td><td>1.9–2.5</td><td>Oral phosphate (Phosphate Sandoz 2 tablets BD/TDS)</td></tr>
+      <tr><td><strong>Moderate</strong></td><td>0.3–0.6</td><td>0.9–1.9</td><td>Oral if tolerated; IV if not (e.g., 10–20 mmol over 6–12 h)</td></tr>
+      <tr><td><strong>Severe</strong></td><td>&lt;0.3 or symptomatic</td><td>&lt;0.9</td><td>IV phosphate (e.g., 20–30 mmol over 12–24 h); monitor Ca²⁺ and K⁺; risk of hypocalcaemia</td></tr>
+    </table>
+    <ul class="clist">
+      <li><strong>Causes:</strong> Refeeding syndrome, alcohol withdrawal, DKA treatment, respiratory alkalosis, hyperparathyroidism, renal tubular disorders, antacids (aluminium hydroxide)</li>
+      <li><strong>Features:</strong> Weakness, respiratory failure (diaphragmatic weakness), rhabdomyolysis, confusion, seizures, heart failure</li>
+      <li><strong>Refeeding syndrome:</strong> Start feeding slowly (10–20 kcal/kg/day); check PO₄, K⁺, Mg²⁺ daily; replace aggressively in first 72 h</li>
+    </ul>
+
+    <h2 class="subhead">Hyperphosphataemia</h2>
+    <ul class="clist">
+      <li><strong>Causes:</strong> Renal failure (most common), tumour lysis syndrome, rhabdomyolysis, excessive phosphate administration</li>
+      <li><strong>Consequences:</strong> Hypocalcaemia (precipitation), metastatic calcification, vascular calcification</li>
+      <li><strong>Management:</strong> Phosphate binders (calcium acetate, sevelamer) with meals; dietary restriction; dialysis for severe or renal failure; treat tumour lysis/rhabdomyolysis</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: MIXED & SPECIAL -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 10</div>
+      <div class="mod-title">Mixed Disorders & <em>Special Situations</em></div>
+      <div class="mod-intro">When electrolytes fall together — refeeding, DKA, massive transfusion, and the dialysis patient.</div>
+    </div>
+
+    <h2 class="subhead">Refeeding Syndrome</h2>
+    <ul class="clist">
+      <li><strong>At-risk:</strong> BMI &lt;16, unintentional weight loss &gt;15% in 3–6 months, negligible intake &gt;10 days, low K⁺/PO₄/Mg²⁺ before feeding</li>
+      <li><strong>Pathophysiology:</strong> Insulin surge → intracellular shift of PO₄, K⁺, Mg²⁺ → severe hypophosphataemia, hypokalaemia, hypomagnesaemia → cardiac failure, arrhythmias, rhabdomyolysis, respiratory failure</li>
+      <li><strong>Management:</strong> Start feeding at 10–20 kcal/kg/day; check electrolytes daily for first 72 h; replace PO₄, K⁺, Mg²⁺ aggressively; thiamine 200–300 mg IV/PO before feeding</li>
+    </ul>
+
+    <h2 class="subhead">Diabetic Ketoacidosis (DKA)</h2>
+    <ul class="clist">
+      <li><strong>Total body deficits:</strong> Water ~5–7 L, Na⁺ ~5–10 mmol/kg, K⁺ ~3–5 mmol/kg, PO₄ ~1 mmol/kg, Mg²⁺ ~1 mmol/kg</li>
+      <li><strong>Potassium:</strong> Serum K⁺ may be normal or high despite total body depletion — insulin will drive K⁺ intracellularly; replace when K⁺ &lt;5.5 and urine output adequate</li>
+      <li><strong>Phosphate:</strong> Routine replacement not recommended unless PO₄ &lt;0.3 or symptomatic (respiratory/cardiac)</li>
+      <li><strong>Bicarbonate:</strong> Not recommended unless pH &lt;6.9 (and even then, controversial)</li>
+    </ul>
+
+    <h2 class="subhead">Massive Transfusion</h2>
+    <ul class="clist">
+      <li><strong>Citrate toxicity:</strong> Citrate in stored blood chelates calcium → ionised hypocalcaemia → prolonged QT, arrhythmia, hypotension</li>
+      <li><strong>Management:</strong> Monitor ionised Ca²⁺; replace calcium gluconate 10–20 mL per 2–4 units transfused if ionised Ca²⁺ &lt;1.0 mmol/L or ECG changes</li>
+      <li><strong>Potassium:</strong> Stored blood contains K⁺ (leaks from cells) — hyperkalaemia risk in massive transfusion, especially in renal failure</li>
+    </ul>
+
+    <h2 class="subhead">The Dialysis Patient</h2>
+    <ul class="clist">
+      <li><strong>Potassium:</strong> Hyperkalaemia common; manage with dialysis, binders, dietary restriction; avoid succinylcholine (raises K⁺)</li>
+      <li><strong>Calcium:</strong> Hypocalcaemia from reduced 1α-hydroxylation; use active vitamin D (alfacalcidol/calcitriol); phosphate binders</li>
+      <li><strong>Magnesium:</strong> Hypermagnesaemia possible from reduced excretion — reduce Mg-containing laxatives/antacids</li>
+      <li><strong>Phosphate:</strong> Hyperphosphataemia — binders with meals, dietary restriction, dialysis</li>
+      <li><strong>Sodium:</strong> Hyponatraemia may reflect volume status or "sick cell" — assess with osmolality and volume</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 09: MEMORY & SYNTHESIS -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Module 09 of 10</div>
+      <div class="mod-title">Memory, Pitfalls & <em>Synthesis</em></div>
+      <div class="mod-intro">The revision tool — a unified formula sheet, the order of correction at a glance, the master correction table, the top traps, and a synthesis case.</div>
+    </div>
+
+    <h2 class="subhead">1 · Unified Formula Sheet</h2>
+    <table class="data-table">
+      <tr><th>Formula</th><th>Equation</th><th>Units</th></tr>
+      <tr><td><strong>Total body water</strong></td><td>0.6 × Weight (male); 0.5 × Weight (female); 0.45 × Weight (elderly)</td><td>L</td></tr>
+      <tr><td><strong>Sodium deficit</strong></td><td>TBW × (Desired Na⁺ − Current Na⁺)</td><td>mmol</td></tr>
+      <tr><td><strong>Free water deficit</strong></td><td>TBW × [(Current Na⁺ / 140) − 1]</td><td>L</td></tr>
+      <tr><td><strong>Corrected Na⁺</strong></td><td>Na⁺ + 0.3 × (Glucose − 5.5)</td><td>mmol/L</td></tr>
+      <tr><td><strong>Corrected Ca²⁺</strong></td><td>Ca²⁺ + 0.02 × (40 − Albumin g/L)</td><td>mmol/L</td></tr>
+      <tr><td><strong>Bicarbonate deficit</strong></td><td>0.3 × Weight × (24 − HCO₃⁻)</td><td>mmol</td></tr>
+      <tr><td><strong>Anion gap</strong></td><td>Na⁺ − (Cl⁻ + HCO₃⁻)</td><td>mmol/L</td></tr>
+      <tr><td><strong>Albumin-corrected AG</strong></td><td>AG + 0.25 × (44 − Albumin g/L)</td><td>mmol/L</td></tr>
+      <tr><td><strong>Osmolality (calculated)</strong></td><td>2[Na⁺] + Glucose + Urea</td><td>mOsm/kg</td></tr>
+      <tr><td><strong>MgSO₄ conversion</strong></td><td>1 g MgSO₄ = 4 mmol Mg²⁺ = 8 mEq Mg²⁺</td><td>—</td></tr>
+      <tr><td><strong>Calcium gluconate conversion</strong></td><td>1 g = 2.2 mmol Ca²⁺</td><td>—</td></tr>
+      <tr><td><strong>Calcium chloride conversion</strong></td><td>1 g = 6.8 mmol Ca²⁺</td><td>—</td></tr>
+    </table>
+
+    <h2 class="subhead">2 · Order of Correction — At a Glance</h2>
+    <table class="data-table">
+      <tr><th>Disorder</th><th>Order of Correction</th><th>First Action</th></tr>
+      <tr><td><strong>Hyperkalaemia with ECG changes</strong></td><td>1. Stabilise → 2. Shift → 3. Eliminate</td><td class="td-bad">Calcium gluconate first — always</td></tr>
+      <tr><td><strong>Hyperkalaemia without ECG changes</strong></td><td>1. Shift → 2. Eliminate → 3. Treat cause</td><td>Insulin/glucose + salbutamol</td></tr>
+      <tr><td><strong>Refractory hypokalaemia</strong></td><td>1. Magnesium → 2. Potassium → 3. Treat cause</td><td class="td-bad">Replace magnesium first</td></tr>
+      <tr><td><strong>Refractory hypocalcaemia</strong></td><td>1. Magnesium → 2. Calcium → 3. Vitamin D</td><td class="td-bad">Replace magnesium first</td></tr>
+      <tr><td><strong>Severe hypercalcaemia</strong></td><td>1. Saline → 2. Bisphosphonate → 3. Calcitonin → 4. Dialysis</td><td>IV 0.9% saline first</td></tr>
+      <tr><td><strong>Hypermagnesaemia</strong></td><td>1. Stop Mg → 2. Calcium → 3. Fluids/diuretic → 4. Dialysis</td><td>Stop all magnesium sources</td></tr>
+      <tr><td><strong>Severe hyponatraemia (symptomatic)</strong></td><td>1. 3% saline bolus → 2. Stop at 4–6 mmol/L rise → 3. Rule of 6</td><td class="td-bad">Hypertonic saline; do not over-correct</td></tr>
+      <tr><td><strong>Chronic hyponatraemia</strong></td><td>1. Treat cause → 2. Fluid restrict → 3. Correct slowly</td><td>≤6–8 mmol/L/24 h</td></tr>
+      <tr><td><strong>Hypernatraemia</strong></td><td>1. Restore volume → 2. Free water → 3. Treat cause</td><td>≤0.5 mmol/L/h</td></tr>
+      <tr><td><strong>Severe hypophosphataemia</strong></td><td>1. IV phosphate → 2. Monitor Ca²⁺/K⁺ → 3. Treat cause</td><td>Slow infusion; watch for hypocalcaemia</td></tr>
+      <tr><td><strong>Metabolic acidosis (pH &lt;7.1)</strong></td><td>1. Treat cause → 2. Bicarbonate (selected) → 3. Recheck ABG</td><td>Bicarbonate is not routine</td></tr>
+    </table>
+
+    <h2 class="subhead">3 · The Top 10 Traps</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 1 — Correcting chronic hyponatraemia too fast <span class="arr">▼</span></button>
+      <div class="acc-body">
+        ODS is devastating and preventable. Limit correction to 6–8 mmol/L/24 h (some sources allow 10). If exceeded, stop active correction and consider desmopressin. The "rule of 6" — 6 mmol/L in 6 hours for severe symptoms, then stop — is a practical safety framework [citation:10].
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 2 — Giving calcium last in hyperkalaemia with ECG changes <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Calcium is the first drug — it stabilises the myocardium while the other measures take effect. Do not wait for insulin/glucose to work before giving calcium.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 3 — Ignoring magnesium when potassium won't correct <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Hypomagnesaemia causes renal K⁺ wasting and impairs cellular uptake. Replace Mg first (0.5–1 g/h) — the K⁺ will then respond [citation:14].
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 4 — Ignoring magnesium when calcium won't correct <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Low Mg impairs PTH secretion and action. Refractory hypocalcaemia should prompt a magnesium check and replacement.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 5 — Interpreting total calcium without albumin <span class="arr">▼</span></button>
+      <div class="acc-body">
+        In hypoalbuminaemia, total calcium is falsely low. Correct for albumin or measure ionised calcium. The ionised fraction is what matters physiologically.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 6 — Assuming SIADH without excluding adrenal insufficiency <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Adrenal insufficiency mimics SIADH and requires glucocorticoid treatment. Check early morning cortisol before diagnosing SIADH.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 7 — Overlooking refeeding syndrome <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Malnourished patients can crash within 24–72 h of feeding. Check PO₄, K⁺, Mg²⁺ daily; start feeding slowly; give thiamine.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 8 — Forgetting citrate in massive transfusion <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Citrate chelates calcium. Monitor ionised Ca²⁺ and replace calcium gluconate if low or if ECG changes develop.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 9 — Giving bicarbonate routinely in metabolic acidosis <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Bicarbonate is not routine for pH &gt;7.1. It causes hypernatraemia, hypercapnia, hypokalaemia, and intracellular acidosis. Reserve for pH &lt;7.1 with instability or specific toxins.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 10 — Correcting hypernatraemia too fast <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Rapid correction of chronic hypernatraemia causes cerebral oedema. Limit to ≤0.5 mmol/L/h (≤10–12 mmol/L/day). Use the free water deficit formula to plan.
+      </div>
+    </div>
+
+    <h2 class="subhead">4 · The Synthesis Case</h2>
+    <div class="callout co-key">
+      <strong>A 58-year-old with small cell lung cancer, confusion, and seizures</strong><br><br>
+      <strong>Bloods:</strong> Na 116 mmol/L, K 3.1, Mg 0.55, corrected Ca 2.05, osmolality 248 mOsm/kg, urine osmolality 520, urine Na 65.<br><br>
+      <strong>Step 1 — Sodium:</strong> Severe hyponatraemia (116). Euvolaemic, urine osmolality &gt;100, urine Na &gt;30 → consistent with SIADH. Seizures = symptomatic → needs 3% saline.<br>
+      <strong>Step 2 — Rate:</strong> Chronic hyponatraemia → rule of 6. Give 100 mL 3% saline over 10 min, repeat up to 3 times until seizures stop. Target 4–6 mmol/L rise in first 6 h; do not exceed 6–8 mmol/L in 24 h [citation:10].<br>
+      <strong>Step 3 — Potassium:</strong> 3.1 (low). But Mg is 0.55 (low). <strong>Replace magnesium first</strong> (0.5–1 g/h) — potassium will not correct until Mg is repleted [citation:14].<br>
+      <strong>Step 4 — Calcium:</strong> Corrected Ca 2.05 (low-normal). Check ionised calcium; correct Mg first (low Mg impairs PTH).<br>
+      <strong>Step 5 — Cause:</strong> Small cell lung cancer is a classic cause of SIADH. Treat the cancer; consider tolvaptan if SIADH persists.<br><br>
+      <strong>Diagnosis:</strong> SIADH from small cell lung cancer causing severe symptomatic hyponatraemia, with concurrent hypokalaemia and hypomagnesaemia. The magnesium is the key to correcting the potassium.
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Final Rule</strong>
+      Electrolytes do not exist in isolation. Sodium, potassium, magnesium, and calcium are interlinked. Correcting one without checking the others often fails — or causes harm. Always check the full panel, convert units correctly, correct the rate, and treat the cause.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod9">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twenty questions across all modules — from assessment to synthesis. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mauve);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--mauve-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--mauve)';
+  });
+});
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/10)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+const qs = [
+  {q:"What is the maximum recommended correction rate for chronic hyponatraemia?",opts:["20 mmol/L/24 h","6–8 mmol/L/24 h (up to 10 in some protocols)","15 mmol/L/8 h","No limit if symptomatic"],ans:1,exp:"Chronic hyponatraemia should be corrected at ≤6–8 mmol/L in 24 hours (some protocols allow up to 10) to avoid osmotic demyelination syndrome. The 'rule of 6' — 6 mmol/L in 6 hours for severe symptoms, then stop — is a practical safety framework [citation:10]."},
+  {q:"Which electrolyte must be replaced first when hypokalaemia is refractory?",opts:["Calcium","Sodium","Magnesium","Phosphate"],ans:2,exp:"Hypomagnesaemia causes renal potassium wasting and impairs cellular K⁺ uptake. Potassium will not correct until magnesium is replaced. Co-administer magnesium 0.5–1 g/h when repleting potassium [citation:14]."},
+  {q:"What is the first drug to give in hyperkalaemia with ECG changes?",opts:["Insulin/glucose","Salbutamol","Calcium gluconate","Sodium bicarbonate"],ans:2,exp:"Calcium gluconate 10% stabilises the myocardium and should be given first. It does not lower potassium but prevents arrhythmia while other measures take effect."},
+  {q:"Which of the following is a criterion for SIADH?",opts:["Serum osmolality >290 mOsm/kg","Urine osmolality <100 mOsm/kg","Clinical euvolaemia with urine Na >30 mmol/L","Elevated serum potassium"],ans:2,exp:"SIADH requires clinical euvolaemia, serum osmolality <275, urine osmolality >100, and urine Na >30 on normal salt intake, with normal thyroid and adrenal function."},
+  {q:"What is the maximum correction rate for chronic hypernatraemia?",opts:["1 mmol/L/h","≤0.5 mmol/L/h","2 mmol/L/h","No limit"],ans:1,exp:"Chronic hypernatraemia should be corrected at ≤0.5 mmol/L/h (≤10–12 mmol/L/day) to avoid cerebral oedema. Use the free water deficit formula to plan the volume."},
+  {q:"Which calcium preparation is preferred for cardiac arrest from hypocalcaemia?",opts:["Oral calcium carbonate","Calcium gluconate 10%","Calcium chloride 10% via central line","Calcium lactate"],ans:2,exp:"Calcium chloride provides more elemental calcium (6.8 mmol/g vs 2.2 mmol/g for gluconate) and is preferred in cardiac arrest, but must be given via a central line to avoid severe vein injury."},
+  {q:"Which of the following causes refractory hypocalcaemia?",opts:["Hypernatraemia","Hypomagnesaemia","Hyperkalaemia","Hyperphosphataemia"],ans:1,exp:"Hypomagnesaemia impairs PTH secretion and action, causing refractory hypocalcaemia. Replace magnesium first."},
+  {q:"What is the maximum recommended infusion rate for magnesium sulfate outside emergencies?",opts:["1 g/h","2 g/h","4 g/h","8 g/h"],ans:1,exp:"The maximum rate outside emergencies is 8 mmol/h (2 g/h). Faster infusion risks hypotension, respiratory depression, and loss in urine."},
+  {q:"In which situation is sodium bicarbonate recommended for metabolic acidosis?",opts:["pH 7.25 with normal haemodynamics","pH <7.1 with haemodynamic instability","pH 7.30 in DKA","Routine use in all metabolic acidosis"],ans:1,exp:"Bicarbonate is not routine. It may be considered for pH <7.1 with haemodynamic instability, severe hyperkalaemia, or specific toxin ingestions."},
+  {q:"What is the key risk of over-correction of chronic hyponatraemia?",opts:["Cerebral oedema","Osmotic demyelination syndrome","Hyperkalaemia","Seizures"],ans:1,exp:"Rapid correction of chronic hyponatraemia causes osmotic demyelination syndrome (ODS), a devastating neurological injury presenting days after correction."},
+  {q:"Which electrolyte disturbance is characteristic of refeeding syndrome?",opts:["Hypernatraemia","Hypophosphataemia","Hypercalcaemia","Hyperkalaemia"],ans:1,exp:"Refeeding syndrome causes intracellular shift of phosphate, potassium, and magnesium, leading to severe hypophosphataemia, hypokalaemia, and hypomagnesaemia."},
+  {q:"What is the first step in managing severe hypercalcaemia?",opts:["Bisphosphonate","Calcitonin","IV 0.9% saline","Steroids"],ans:2,exp:"IV 0.9% saline restores volume, dilutes calcium, and promotes renal excretion. Bisphosphonates and calcitonin follow."},
+  {q:"Which of the following is a trap in electrolyte correction?",opts:["Checking magnesium before correcting potassium","Giving calcium first in hyperkalaemia with ECG changes","Correcting hyponatraemia too rapidly","Treating the underlying cause"],ans:2,exp:"Correcting hyponatraemia too rapidly causes ODS. The other options are correct practice."},
+  {q:"In massive transfusion, which electrolyte disturbance is caused by citrate?",opts:["Hypercalcaemia","Hypocalcaemia","Hyperkalaemia","Hypernatraemia"],ans:1,exp:"Citrate chelates calcium, causing ionised hypocalcaemia. Monitor ionised Ca²⁺ and replace calcium gluconate if low or if ECG changes develop."},
+  {q:"Which potassium binder is used for chronic hyperkalaemia?",opts:["Calcium gluconate","Sodium zirconium cyclosilicate","Insulin/glucose","Salbutamol"],ans:1,exp:"Sodium zirconium cyclosilicate (SZC) and patiromer are potassium binders used for elimination in chronic or subacute hyperkalaemia. They are not for acute crisis."},
+  {q:"What is the maximum correction rate for potassium via peripheral IV line without cardiac monitoring?",opts:["5 mmol/h","10 mmol/h","20 mmol/h","40 mmol/h"],ans:1,exp:"Peripheral IV potassium without monitoring should not exceed 10 mmol/h. With continuous cardiac monitoring and hourly K⁺ checks, rates up to 20–40 mmol/h via central line may be used in severe cases [citation:14]."},
+  {q:"Which of the following is a cause of hypermagnesaemia?",opts:["Diarrhoea","Renal failure","PPI use","Alcohol"],ans:1,exp:"Hypermagnesaemia usually occurs in renal failure or from iatrogenic magnesium administration. Diarrhoea, PPIs, and alcohol cause hypomagnesaemia."},
+  {q:"What is the first step in managing hypermagnesaemia with haemodynamic instability?",opts:["Dialysis","Calcium gluconate 1 g IV","Loop diuretic","Stop magnesium sources only"],ans:1,exp:"Calcium gluconate 1 g IV antagonises the cardiac and neuromuscular effects of magnesium. Stop all magnesium sources and consider dialysis if severe or renal failure."},
+  {q:"Which electrolyte should be checked before diagnosing SIADH?",opts:["Calcium and phosphate","Thyroid function and cortisol","Magnesium and potassium","Chloride and bicarbonate"],ans:1,exp:"SIADH is a diagnosis of exclusion. Adrenal insufficiency and hypothyroidism must be excluded before confirming SIADH."},
+  {q:"A patient with DKA has K⁺ 5.2 on arrival. What is the appropriate action?",opts:["Give potassium immediately","Do not give potassium until K⁺ <5.5 and urine output adequate","Give calcium gluconate","Start bicarbonate"],ans:1,exp:"In DKA, total body potassium is depleted despite normal or high serum K⁺. Insulin will drive K⁺ intracellularly. Replace potassium when K⁺ <5.5 and urine output is adequate."}
+];
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--mauve);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — electrolyte assessment and correction is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
