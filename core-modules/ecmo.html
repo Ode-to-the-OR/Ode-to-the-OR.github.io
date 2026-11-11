@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECMO — Extracorporeal Membrane Oxygenation — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to ECMO — VV and VA configurations, physiology, cannulation, anticoagulation, complications, weaning, and special situations. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  /* NEW ACCENT — deep aubergine / dark plum for ECMO */
+  --accent:      #4a2545;
+  --accent-soft: #6b3a63;
+  --accent-deep: #2e152b;
+  --accent-pale: #e0d4de;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--accent-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── BACK LINK ─── */
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--accent-deep); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(74,37,69,.04) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(74,37,69,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(74,37,69,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(74,37,69,.07) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(107,58,99,.06) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--accent); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--accent);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:680px;font-weight:300; }
+.hero-sub strong { color:var(--accent);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--accent-soft);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--accent);border-bottom-color:var(--accent); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--accent); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:680px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--accent);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-soft);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--accent);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--accent);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(74,37,69,.02); }
+.td-hi { color:var(--accent)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(74,37,69,.05);border-color:var(--accent);color:var(--muted); }
+.co-key strong { color:var(--accent); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(107,58,99,.05);border-color:var(--accent-soft);color:var(--muted); }
+.co-fact strong { color:var(--accent-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--accent);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-accent { border-color:var(--accent);color:var(--accent); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--accent-soft);color:var(--accent-soft); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--accent);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--accent); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--accent);font-size:.9rem;font-weight:700; }
+
+/* ─── ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--accent);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--accent-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--accent);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Critical Care · Mechanical Circulatory Support · Cardiac ICU · Respiratory Failure</div>
+  <h1>Extra­corporeal<br><em>Membrane Oxygenation</em></h1>
+  <p class="hero-sub">
+    The therapy that lives for days to weeks — VV and VA configurations, circuit physiology, cannulation strategy, anticoagulation, complications, weaning, and the evidence. <strong>Twelve modules. Definitive reference, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>12</span></div>
+    <div class="meta-item">Scope <span>VV · VA · ECPR · Anticoagulation · Weaning · Special Populations</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Foundations</button>
+  <button onclick="showMod(1)">02 · Configurations</button>
+  <button onclick="showMod(2)">03 · Circuit</button>
+  <button onclick="showMod(3)">04 · Physiology</button>
+  <button onclick="showMod(4)">05 · Cannulation</button>
+  <button onclick="showMod(5)">06 · Anticoagulation</button>
+  <button onclick="showMod(6)">07 · Complications</button>
+  <button onclick="showMod(7)">08 · VV-ECMO</button>
+  <button onclick="showMod(8)">09 · VA-ECMO</button>
+  <button onclick="showMod(9)">10 · ECPR</button>
+  <button onclick="showMod(10)">11 · Weaning</button>
+  <button onclick="showMod(11)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:8.3%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: FOUNDATIONS -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 12 · Foundations</div>
+      <div class="mod-title">What ECMO <em>Is — and Is Not</em></div>
+      <div class="mod-intro">A therapy defined by its limits. Patient selection, indications, contraindications, and the ethical framework that governs its use.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Core Definition</strong>
+      ECMO is a form of <strong>extracorporeal life support</strong> that provides prolonged gas exchange (and, in VA configuration, circulatory support) outside the body for <strong>days to weeks</strong>. It is not a treatment — it is a <strong>bridge</strong>: to recovery, to transplant, or to a decision. The underlying pathology must be potentially reversible, and the patient must have a reasonable chance of meaningful survival [citation:1].
+    </div>
+
+    <h2 class="subhead">The Central Principle of Patient Selection</h2>
+    <p>ECMO is considered when a patient has a <strong>potentially reversible pathology</strong> that is not improving despite maximal conventional intensive care, and without ECMO there is a <strong>high risk of mortality</strong> [citation:1]. This is a deceptively simple statement that demands difficult judgment: the reversibility must be real, the conventional care must be genuinely maximal, and the risk must be high enough to justify the intervention.</p>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Selection Problem</strong>
+      ECMO does not create reversibility. It buys time for the body to heal — or for a decision to be made. If the pathology is not reversible (severe brain injury, advanced malignancy, irreversible lung fibrosis), ECMO prolongs dying, not life. The most difficult decisions are not about who can be cannulated — they are about who should not be.
+    </div>
+
+    <h2 class="subhead">Absolute and Relative Contraindications</h2>
+    <table class="data-table">
+      <tr><th>Contraindication</th><th>Category</th><th>Rationale</th></tr>
+      <tr><td><strong>Severe irreversible brain injury</strong></td><td>Absolute</td><td>No meaningful neurological recovery possible; ECMO cannot alter outcome [citation:1]</td></tr>
+      <tr><td><strong>Advanced malignancy with poor prognosis</strong></td><td>Absolute</td><td>ECMO cannot alter the underlying disease trajectory [citation:1]</td></tr>
+      <tr><td><strong>Irreversible lung fibrosis</strong></td><td>Absolute</td><td>No potential for native lung recovery</td></tr>
+      <tr><td><strong>Severe cerebral bleed / recent stroke</strong></td><td>Absolute (VA) / Relative (VV)</td><td>Anticoagulation would worsen intracranial bleeding [citation:9]</td></tr>
+      <tr><td><strong>Uncontrolled bleeding</strong></td><td>Absolute</td><td>Anticoagulation required for circuit; bleeding cannot be managed</td></tr>
+      <tr><td><strong>Advanced multi-organ failure (irreversible)</strong></td><td>Relative / Absolute</td><td>ECMO may not change outcome if other organs are irreversibly failed</td></tr>
+      <tr><td><strong>Vascular trauma (for VA-ECMO)</strong></td><td>Relative</td><td>Cannulation site may be compromised [citation:9]</td></tr>
+      <tr><td><strong>Poor baseline quality of life</strong></td><td>Relative</td><td>Outcome may not be acceptable to patient/family</td></tr>
+      <tr><td><strong>Refusal of blood transfusion</strong></td><td>Relative (ethical)</td><td>ECMO often requires transfusion; must be respected [citation:9]</td></tr>
+    </table>
+
+    <h2 class="subhead">The Two Fundamental Configurations</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>VV-ECMO</th><th>VA-ECMO</th></tr>
+      <tr><td><strong>Support provided</strong></td><td>Lung support only</td><td>Heart + lung support</td></tr>
+      <tr><td><strong>Native cardiac function required</strong></td><td>Yes — heart must pump</td><td>No — ECMO provides flow</td></tr>
+      <tr><td><strong>Cannulation</strong></td><td>Venous drainage → venous return (RA)</td><td>Venous drainage → arterial return (aorta)</td></tr>
+      <tr><td><strong>Primary indication</strong></td><td>Severe ARDS, respiratory failure</td><td>Cardiogenic shock, cardiac arrest (ECPR)</td></tr>
+      <tr><td><strong>Haemodynamic effect</strong></td><td>Alters venous return and right-sided pressures [citation:2]</td><td>Alters afterload and pulsatility [citation:2]</td></tr>
+      <tr><td><strong>Left ventricular loading</strong></td><td>Unchanged (native LV function)</td><td>Increased afterload — LV may distend (requires venting)</td></tr>
+      <tr><td><strong>AKI incidence</strong></td><td>50–75% [citation:2]</td><td>40–70% [citation:2]</td></tr>
+    </table>
+
+    <div class="callout co-fact">
+      <strong>The Nomenclature</strong>
+      "VV" and "VA" describe the <strong>drainage and return sites</strong> — not the organs supported. VV = venous drainage, venous return. VA = venous drainage, arterial return. A third configuration, VVA, provides both respiratory and cardiac support by returning blood to both venous and arterial systems.
+    </div>
+
+    <h2 class="subhead">When ECMO Is Considered — By Configuration</h2>
+    <table class="data-table">
+      <tr><th>Configuration</th><th>Indications</th><th>Key Thresholds / Criteria</th></tr>
+      <tr><td><strong>VV-ECMO (adult respiratory)</strong></td><td>Severe ARDS, refractory hypoxaemia, hypercapnic acidosis</td><td>P/F <80 despite optimal ventilation; pH <7.25 with PaCO₂ >60; Murray score >3 [citation:1]</td></tr>
+      <tr><td><strong>VV-ECMO (neonatal)</strong></td><td>Congenital diaphragmatic hernia, sepsis, congenital heart disease</td><td>OI >40, weight >2 kg, reversible disease, no lethal anomaly [citation:1]</td></tr>
+      <tr><td><strong>VA-ECMO (cardiogenic shock)</strong></td><td>Refractory shock, post-cardiotomy shock, myocarditis, bridge to transplant</td><td>MAP <65 despite vasopressors + inotropes; CI <2.0; lactate rising</td></tr>
+      <tr><td><strong>VA-ECMO (ECPR)</strong></td><td>Refractory cardiac arrest</td><td>Witnessed arrest, bystander CPR, shockable rhythm, short low-flow time (<20–30 min)</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: CONFIGURATIONS -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 12 · Core</div>
+      <div class="mod-title">Configurations — <em>VV, VA, and Hybrids</em></div>
+      <div class="mod-intro">The anatomy of extracorporeal support. Each configuration has distinct physiology, indications, and complications.</div>
+    </div>
+
+    <h2 class="subhead">VV-ECMO — Lung Support Only</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 760 340" width="100%" style="display:block; max-width:760px;">
+        <defs>
+          <marker id="vvflow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#4a2545"/>
+          </marker>
+        </defs>
+        <text x="380" y="18" fill="#4a2545" font-family="Instrument Sans" font-size="9" text-anchor="middle" letter-spacing="1.5">VV-ECMO — VENOUS DRAINAGE → VENOUS RETURN</text>
+
+        <!-- Patient silhouette -->
+        <rect x="280" y="50" width="200" height="220" rx="10" fill="#e8e1d4" stroke="#d0c8b8" stroke-width="1"/>
+        <text x="380" y="75" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="600">PATIENT</text>
+
+        <!-- Heart -->
+        <path d="M355,110 C340,95 320,110 330,130 C335,140 355,155 375,170 C395,155 415,140 420,130 C430,110 410,95 395,110 C390,105 385,100 375,105 C365,100 360,105 355,110 Z" fill="#7a2020" opacity="0.15" stroke="#7a2020" stroke-width="1.2"/>
+        <text x="375" y="140" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">HEART</text>
+
+        <!-- Lungs -->
+        <ellipse cx="350" cy="195" rx="18" ry="25" fill="#4a2545" opacity="0.12" stroke="#4a2545" stroke-width="1"/>
+        <ellipse cx="400" cy="195" rx="18" ry="25" fill="#4a2545" opacity="0.12" stroke="#4a2545" stroke-width="1"/>
+        <text x="375" y="200" fill="#4a2545" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">LUNGS</text>
+
+        <!-- Drainage cannula from RA -->
+        <line x1="330" y1="130" x2="180" y2="130" stroke="#4a2545" stroke-width="2" marker-end="url(#vvflow)"/>
+        <text x="255" y="123" fill="#4a2545" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Drainage</text>
+        <text x="255" y="143" fill="#4a2545" font-family="Instrument Sans" font-size="7" text-anchor="middle">(from IVC/SVC)</text>
+
+        <!-- Circuit -->
+        <rect x="60" y="105" width="100" height="50" rx="4" fill="#ede7da" stroke="#4a2545" stroke-width="1.5"/>
+        <text x="110" y="125" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Pump +</text>
+        <text x="110" y="140" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Oxygenator</text>
+
+        <!-- Return to RA -->
+        <line x1="160" y1="130" x2="330" y2="130" stroke="#7a2020" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#vvflow)"/>
+        <text x="245" y="165" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Return</text>
+        <text x="245" y="178" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle">(to RA)</text>
+
+        <!-- Note -->
+        <text x="380" y="295" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle" letter-spacing=".5">Blood returns to the right atrium → native heart pumps it through the body</text>
+      </svg>
+    </div>
+    <ul class="clist">
+      <li><strong>Drainage:</strong> Femoral vein (IVC) or internal jugular (SVC)</li>
+      <li><strong>Return:</strong> Internal jugular (SVC/RA) or femoral vein</li>
+      <li><strong>Double-lumen cannula:</strong> Single insertion site (right IJ) — drainage from SVC/IVC, return to RA [citation:10]</li>
+      <li><strong>Physiology:</strong> ECMO blood mixes with native venous blood in the RA → right ventricle → lungs (variable contribution) → left heart → systemic circulation</li>
+      <li><strong>Key limitation:</strong> Recirculation — oxygenated blood from the return cannula is drawn back into the drainage cannula, reducing effective gas exchange</li>
+      <li><strong>Native cardiac function must be adequate</strong> — VV-ECMO does not support the heart</li>
+    </ul>
+
+    <h2 class="subhead">VA-ECMO — Heart and Lung Support</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 760 340" width="100%" style="display:block; max-width:760px;">
+        <defs>
+          <marker id="vaflow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#4a2545"/>
+          </marker>
+        </defs>
+        <text x="380" y="18" fill="#4a2545" font-family="Instrument Sans" font-size="9" text-anchor="middle" letter-spacing="1.5">VA-ECMO — VENOUS DRAINAGE → ARTERIAL RETURN</text>
+
+        <!-- Patient silhouette -->
+        <rect x="280" y="50" width="200" height="220" rx="10" fill="#e8e1d4" stroke="#d0c8b8" stroke-width="1"/>
+        <text x="380" y="75" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="600">PATIENT</text>
+
+        <!-- Heart -->
+        <path d="M355,110 C340,95 320,110 330,130 C335,140 355,155 375,170 C395,155 415,140 420,130 C430,110 410,95 395,110 C390,105 385,100 375,105 C365,100 360,105 355,110 Z" fill="#7a2020" opacity="0.15" stroke="#7a2020" stroke-width="1.2"/>
+        <text x="375" y="140" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">HEART</text>
+
+        <!-- Lungs (bypassed) -->
+        <ellipse cx="350" cy="195" rx="18" ry="25" fill="#a89880" opacity="0.12" stroke="#a89880" stroke-width="1"/>
+        <ellipse cx="400" cy="195" rx="18" ry="25" fill="#a89880" opacity="0.12" stroke="#a89880" stroke-width="1"/>
+        <text x="375" y="200" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">LUNGS</text>
+        <text x="375" y="215" fill="#a89880" font-family="Instrument Sans" font-size="6" text-anchor="middle">(bypassed)</text>
+
+        <!-- Drainage cannula from RA -->
+        <line x1="330" y1="130" x2="180" y2="130" stroke="#4a2545" stroke-width="2" marker-end="url(#vaflow)"/>
+        <text x="255" y="123" fill="#4a2545" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Drainage</text>
+        <text x="255" y="143" fill="#4a2545" font-family="Instrument Sans" font-size="7" text-anchor="middle">(from RA/IVC)</text>
+
+        <!-- Circuit -->
+        <rect x="60" y="105" width="100" height="50" rx="4" fill="#ede7da" stroke="#4a2545" stroke-width="1.5"/>
+        <text x="110" y="125" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Pump +</text>
+        <text x="110" y="140" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Oxygenator</text>
+
+        <!-- Return to aorta -->
+        <path d="M160,130 L200,130 L200,250 L350,250 L350,220" stroke="#7a2020" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#vaflow)"/>
+        <text x="280" y="270" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Return to aorta (ascending or femoral)</text>
+
+        <!-- Note -->
+        <text x="380" y="310" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle" letter-spacing=".5">ECMO provides systemic flow; the native heart may eject against increased afterload</text>
+      </svg>
+    </div>
+    <ul class="clist">
+      <li><strong>Drainage:</strong> Femoral vein (RA/IVC) — most common</li>
+      <li><strong>Return:</strong> Femoral artery (retrograde to aorta) or ascending aorta (central)</li>
+      <li><strong>Physiology:</strong> ECMO blood enters the arterial system → competes with native cardiac output → mixing point depends on native LV function</li>
+      <li><strong>Afterload:</strong> ECMO flow increases arterial pressure → increased LV afterload → LV may distend if native ejection is inadequate → requires venting (IABP, Impella, surgical vent)</li>
+      <li><strong>Differential hypoxaemia (Harlequin syndrome):</strong> Native LV ejecting poorly oxygenated blood into the upper body (coronaries, brain) while ECMO provides oxygenated blood to the lower body — monitor right radial PaO₂</li>
+      <li><strong>Limb ischaemia:</strong> Femoral arterial cannulation can compromise distal perfusion — distal perfusion catheter (DPC) recommended [citation:3]</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ The Afterload Problem in VA-ECMO</strong>
+      VA-ECMO increases left ventricular afterload. If the native LV cannot eject against this increased pressure, the LV distends, subendocardial ischaemia develops, and pulmonary oedema can occur. <strong>Venting strategies</strong> — IABP, Impella, surgical LV vent — may be required. This is not a complication of ECMO per se, but a consequence of its physiology.
+    </div>
+
+    <h2 class="subhead">Hybrid Configurations</h2>
+    <table class="data-table">
+      <tr><th>Configuration</th><th>Description</th><th>Indication</th></tr>
+      <tr><td><strong>VVA-ECMO</strong></td><td>Venous drainage; return to both venous and arterial systems</td><td>Combined respiratory + cardiac failure; differential hypoxaemia</td></tr>
+      <tr><td><strong>VAV-ECMO</strong></td><td>Dual return — one venous, one arterial</td><td>Same as VVA; allows titration of respiratory vs cardiac support</td></tr>
+      <tr><td><strong>VV-ECMO + IABP</strong></td><td>Respiratory ECMO with balloon counterpulsation</td><td>VV-ECMO with LV dysfunction — IABP reduces afterload</td></tr>
+      <tr><td><strong>ECMO + Impella (ECMELLA)</strong></td><td>VA-ECMO + transaortic LV unloading</td><td>VA-ECMO with LV distension — Impella vents the LV</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: CIRCUIT -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 12 · Core</div>
+      <div class="mod-title">The ECMO <em>Circuit</em></div>
+      <div class="mod-intro">Pumps, oxygenators, cannulae, and the components that keep blood flowing — and the circuit emergencies that demand immediate action.</div>
+    </div>
+
+    <h2 class="subhead">Circuit Components</h2>
+    <table class="data-table">
+      <tr><th>Component</th><th>Function</th><th>Key Details</th></tr>
+      <tr><td><strong>Drainage cannula</strong></td><td>Removes deoxygenated blood from the venous system</td><td>Large bore (21–29 Fr); femoral or jugular; position critical for adequate flow</td></tr>
+      <tr><td><strong>Centrifugal pump</strong></td><td>Propels blood through the circuit</td><td>Non-occlusive — cannot generate excessive pressure; flow depends on afterload</td></tr>
+      <tr><td><strong>Membrane oxygenator</strong></td><td>Gas exchange (O₂ in, CO₂ out)</td><td>Microporous polypropylene; sweep gas flow controls CO₂ removal</td></tr>
+      <tr><td><strong>Heat exchanger</strong></td><td>Controls blood temperature</td><td>Integrated into oxygenator; maintains normothermia or targeted temperature</td></tr>
+      <tr><td><strong>Return cannula</strong></td><td>Returns oxygenated blood to the patient</td><td>Arterial (VA) or venous (VV); size determines flow capacity</td></tr>
+      <tr><td><strong>Console</strong></td><td>Controls pump speed, monitors flow and pressures</td><td>Displays flow, RPM, circuit pressures, battery status</td></tr>
+      <tr><td><strong>Gas blender</strong></td><td>Mixes O₂ and air; controls sweep gas flow</td><td>Sweep gas flow determines CO₂ clearance; FiO₂ determines oxygenation</td></tr>
+      <tr><td><strong>Pressure monitors</strong></td><td>Detect circuit obstruction or cannula malposition</td><td>Pre-membrane (negative), post-membrane (positive); delta-P indicates membrane thrombosis</td></tr>
+    </table>
+
+    <h2 class="subhead">Flow, Sweep Gas, and Gas Exchange</h2>
+    <div class="callout co-key">
+      <strong>The Two Independent Controls</strong>
+      <strong>Blood flow</strong> (L/min) determines <strong>oxygenation</strong> — the volume of blood passing through the oxygenator per minute. <strong>Sweep gas flow</strong> (L/min) determines <strong>CO₂ removal</strong> — the rate at which gas passes through the oxygenator. These are independent: increasing blood flow improves oxygenation but not necessarily CO₂ clearance; increasing sweep gas improves CO₂ clearance but not oxygenation.
+    </div>
+
+    <table class="data-table">
+      <tr><th>Parameter</th><th>Target / Typical Range</th><th>Notes</th></tr>
+      <tr><td><strong>Blood flow (VV-ECMO)</strong></td><td>3–6 L/min (60–80% of native CO)</td><td>Higher flows for severe hypoxaemia; depends on cannula size and preload</td></tr>
+      <tr><td><strong>Blood flow (VA-ECMO)</strong></td><td>3–6 L/min</td><td>Adjusted to MAP, lactate clearance, end-organ perfusion</td></tr>
+      <tr><td><strong>Sweep gas flow</strong></td><td>2–10 L/min</td><td>Start low (2 L/min) and titrate to PaCO₂; avoid rapid CO₂ changes [citation:6]</td></tr>
+      <tr><td><strong>FiO₂ (sweep gas)</strong></td><td>0.21–1.0</td><td>Target post-oxygenator PaO₂ >200 mmHg; avoid hyperoxia</td></tr>
+      <tr><td><strong>Delta-P (membrane pressure drop)</strong></td><td><80 mmHg</td><td>Rising delta-P suggests membrane thrombosis — consider exchange </td></tr>
+      <tr><td><strong>Pre-membrane pressure</strong></td><td>−20 to −80 mmHg</td><td>More negative = higher drainage resistance (hypovolaemia, cannula malposition)</td></tr>
+    </table>
+
+    <h2 class="subhead">Circuit Emergencies</h2>
+    <table class="data-table">
+      <tr><th>Emergency</th><th>Recognition</th><th>Immediate Action</th></tr>
+      <tr><td><strong>Air embolism</strong></td><td>Air in circuit; sudden haemodynamic collapse; neurological signs</td><td>Clamp circuit, stop pump, Trendelenburg, 100% O₂, aspirate air from circuit, call for help</td></tr>
+      <tr><td><strong>Circuit rupture / leak</strong></td><td>Blood loss, pressure alarm, visible leak</td><td>Clamp lines, stop pump, replace circuit, resuscitate</td></tr>
+      <tr><td><strong>Pump failure</strong></td><td>Flow zero, alarm, no RPM</td><td>Hand-crank (if available), check power/battery, replace pump</td></tr>
+      <tr><td><strong>Oxygenator failure</strong></td><td>Rising delta-P, falling PaO₂ despite FiO₂ 1.0, falling PaCO₂ clearance</td><td>Replace oxygenator (elective if possible; emergency if gas exchange failing)</td></tr>
+      <tr><td><strong>Cannula dislodgement</strong></td><td>Sudden flow loss, bleeding at site</td><td>Stop pump, compress site, resuscitate, re-cannulate</td></tr>
+      <tr><td><strong>Recirculation (VV)</strong></td><td>Low effective gas exchange despite high flow; low SaO₂</td><td>Reposition cannulae; adjust flow; consider dual-lumen cannula</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ The ECMO Emergency Checklist</strong>
+      Every ECMO centre should have a <strong>crisis checklist</strong> and a <strong>circuit emergency drill</strong>. The most common circuit emergencies are air embolism, oxygenator failure, and pump failure. Simulation-based training is mandatory in ELSO-endorsed centres [citation:8].
+    </div>
+
+    <h2 class="subhead">Circuit Longevity and Exchange</h2>
+    <ul class="clist">
+      <li><strong>Oxygenator lifespan:</strong> Typically 7–14 days, but varies with patient factors (thrombosis, inflammation, haemolysis)</li>
+      <li><strong>Indications for oxygenator exchange:</strong> Delta-P >80 mmHg, falling gas exchange despite FiO₂ 1.0, visible clot, plasma leak </li>
+      <li><strong>Indications for circuit exchange:</strong> Thrombosis, infection (catheter-related bloodstream infection), rupture</li>
+      <li><strong>Prophylactic exchange:</strong> Some centres exchange circuits routinely (e.g., every 7–10 days); evidence is limited</li>
+      <li><strong>During exchange:</strong> Maintain anticoagulation, prepare new circuit, have blood products available, monitor haemodynamics</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: PHYSIOLOGY -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 12 · Core</div>
+      <div class="mod-title">Physiology of <em>Extracorporeal Support</em></div>
+      <div class="mod-intro">What ECMO does to haemodynamics, gas exchange, and the native circulation — and why VV and VA are physiologically distinct.</div>
+    </div>
+
+    <h2 class="subhead">Haemodynamic Effects</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>VV-ECMO</th><th>VA-ECMO</th></tr>
+      <tr><td><strong>Cardiac output</strong></td><td>Unchanged (native CO + ECMO flow)</td><td>Native CO + ECMO flow — but native CO may fall due to increased afterload</td></tr>
+      <tr><td><strong>Afterload</strong></td><td>Unchanged</td><td>Increased — LV must eject against ECMO pressure</td></tr>
+      <tr><td><strong>Pulsatility</strong></td><td>Preserved (native heart)</td><td>May be reduced — depends on native ejection</td></tr>
+      <tr><td><strong>Right-sided pressures</strong></td><td>Reduced (drainage from RA/IVC)</td><td>Reduced (drainage from RA/IVC)</td></tr>
+      <tr><td><strong>LV distension risk</strong></td><td>Low</td><td>High — requires venting if native ejection inadequate</td></tr>
+      <tr><td><strong>Coronary oxygenation</strong></td><td>Depends on native lungs</td><td>Depends on mixing — right radial PaO₂ reflects coronary/cerebral oxygenation</td></tr>
+    </table>
+
+    <h2 class="subhead">Gas Exchange Physiology</h2>
+    <div class="formula-box">
+      <span class="flabel">ECMO Oxygen Delivery</span>
+      DO₂ = ECMO flow × (CaO₂_ECMO − CvO₂_drainage) × 10
+      <div class="fexpl">ECMO flow is the primary determinant of oxygen delivery in VV-ECMO. In VA-ECMO, native CO also contributes.</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Oxygenation:</strong> Determined by ECMO blood flow and the oxygenator's gas exchange capacity. In VV-ECMO, the native lungs also contribute — the proportion depends on the degree of lung injury.</li>
+      <li><strong>CO₂ removal:</strong> Determined by sweep gas flow. High sweep gas → more CO₂ removed → lower PaCO₂.</li>
+      <li><strong>Recirculation (VV):</strong> Oxygenated blood from the return cannula is drawn back into the drainage cannula — reduces effective gas exchange. Fraction of recirculation = (return cannula saturation − drainage cannula saturation) / (return cannula saturation − pre-ECMO venous saturation).</li>
+      <li><strong>Shunt (VA):</strong> Native blood from the LV mixes with ECMO blood in the aorta — the mixing point determines regional oxygenation.</li>
+    </ul>
+
+    <h2 class="subhead">The CO₂ Problem — Avoid Rapid Correction</h2>
+    <div class="callout co-danger">
+      <strong>⚠ Rapid CO₂ Reduction in VV-ECMO</strong>
+      When VV-ECMO is initiated in a patient with severe hypercapnia, rapid CO₂ removal (via high sweep gas) can cause a sudden fall in PaCO₂. This alters cerebrovascular tone and has been associated with <strong>seizures, intracranial haemorrhage, and brain death</strong> [citation:6]. ELSO guidelines recommend <strong>starting sweep gas at 2 L/min</strong> and titrating to allow <strong>gradual correction of CO₂</strong> — avoid reducing PaCO₂ by >50% in the first 24 hours [citation:6].
+    </div>
+
+    <h2 class="subhead">Native Cardiac Function During ECMO</h2>
+    <ul class="clist">
+      <li><strong>VV-ECMO:</strong> Native CO must be adequate. If cardiac function deteriorates (e.g., sepsis-induced cardiomyopathy, right heart failure), VV-ECMO alone may be insufficient — consider VA-ECMO or VVA-ECMO.</li>
+      <li><strong>VA-ECMO:</strong> Native CO may be zero (no ejection) or may compete with ECMO flow. The balance between native and ECMO flow determines the mixing point and regional oxygenation.</li>
+      <li><strong>Right heart failure:</strong> Common in ARDS (cor pulmonale) — VV-ECMO can improve right heart function by correcting hypoxaemia and hypercapnia [citation:6].</li>
+      <li><strong>LV recovery:</strong> In VA-ECMO, native ejection may return as the heart recovers — monitor with echocardiography and arterial waveform pulsatility.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: CANNULATION -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 12 · Core</div>
+      <div class="mod-title">Cannulation <em>Strategies</em></div>
+      <div class="mod-intro">Site selection, cannula sizing, and the complications of access — the technical foundation of ECMO.</div>
+    </div>
+
+    <h2 class="subhead">Cannulation Sites</h2>
+    <table class="data-table">
+      <tr><th>Configuration</th><th>Drainage Site</th><th>Return Site</th><th>Notes</th></tr>
+      <tr><td><strong>VV (femoro-jugular)</strong></td><td>Femoral vein (IVC)</td><td>Internal jugular (SVC/RA)</td><td>Most common VV configuration; allows mobilisation</td></tr>
+      <tr><td><strong>VV (femoro-femoral)</strong></td><td>Femoral vein</td><td>Contralateral femoral vein</td><td>Recirculation risk; less comfortable for awake patients</td></tr>
+      <tr><td><strong>VV (dual-lumen)</strong></td><td>Right IJ (single cannula)</td><td>Right IJ (same cannula)</td><td>Single site; requires precise positioning; less recirculation [citation:10]</td></tr>
+      <tr><td><strong>VA (peripheral)</strong></td><td>Femoral vein</td><td>Femoral artery</td><td>Most common for emergency; distal perfusion catheter recommended [citation:3]</td></tr>
+      <tr><td><strong>VA (central)</strong></td><td>Right atrium (surgical)</td><td>Ascending aorta (surgical)</td><td>Post-cardiotomy; higher flow; requires sternotomy</td></tr>
+      <tr><td><strong>VA (axillary)</strong></td><td>Femoral vein</td><td>Axillary artery</td><td>Allows mobilisation; avoids femoral arterial complications</td></tr>
+    </table>
+
+    <h2 class="subhead">Cannula Sizing</h2>
+    <ul class="clist">
+      <li><strong>Drainage cannula:</strong> Larger is better for flow — typically 21–29 Fr. Undersized drainage cannula limits flow and causes negative pressure (chugging).</li>
+      <li><strong>Return cannula:</strong> Sized to match required flow — 15–21 Fr for arterial (VA); 19–25 Fr for venous (VV).</li>
+      <li><strong>VA-ECMO arterial cannula:</strong> ELSO suggests up to 21 Fr for patients requiring more support [citation:3]. Smaller cannulae (15–17 Fr) may be adequate for lower flow requirements and reduce limb ischaemia risk.</li>
+      <li><strong>Distal perfusion catheter (DPC):</strong> A 6–8 Fr introducer sheath or paediatric arterial cannula placed distal to the arterial cannula to perfuse the limb [citation:3]. Limb ischaemia during VA-ECMO has been reported in 10–70% of patients [citation:3].</li>
+    </ul>
+
+    <div class="callout co-key">
+      <strong>The Distal Perfusion Catheter</strong>
+      Femoral arterial cannulation can obstruct flow to the ipsilateral limb. A distal perfusion catheter (DPC) — placed in the superficial femoral artery distal to the cannula — provides antegrade flow to the limb. ELSO recommends a wire-reinforced 6–8 Fr introducer sheath as a DPC, though it may not be needed with smaller arterial cannulae (15–17 Fr) [citation:3]. Recent evidence suggests a paediatric arterial cannula as DPC may provide better flow than an introducer sheath [citation:3].
+    </div>
+
+    <h2 class="subhead">Cannulation Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Prevention / Management</th></tr>
+      <tr><td><strong>Limb ischaemia</strong></td><td>10–70% (VA-ECMO) [citation:3]</td><td>Distal perfusion catheter; regular limb assessment; fasciotomy if compartment syndrome</td></tr>
+      <tr><td><strong>Vessel injury / dissection</strong></td><td>1–5%</td><td>Ultrasound guidance; careful technique; surgical repair if needed</td></tr>
+      <tr><td><strong>Bleeding at cannulation site</strong></td><td>Common</td><td>Pressure, suture, topical haemostatics; reverse anticoagulation if severe</td></tr>
+      <tr><td><strong>Cannula malposition</strong></td><td>5–10%</td><td>Ultrasound or fluoroscopy guidance; reposition if flow inadequate</td></tr>
+      <tr><td><strong>Recirculation (VV)</strong></td><td>Variable</td><td>Cannula position; dual-lumen cannula; adjust flow</td></tr>
+      <tr><td><strong>Infection (cannula site)</strong></td><td>5–10%</td><td>Aseptic technique; daily review; remove when no longer needed</td></tr>
+      <tr><td><strong>Air embolism</strong></td><td>Rare but catastrophic</td><td>Careful de-airing; clamp circuit if suspected</td></tr>
+    </table>
+
+    <h2 class="subhead">Cannulation in Special Situations</h2>
+    <ul class="clist">
+      <li><strong>ECPR (cardiac arrest):</strong> Femoral cannulation is standard; ultrasound or landmark technique; minimal interruption of CPR</li>
+      <li><strong>Post-cardiotomy:</strong> Central cannulation may be possible (chest already open); peripheral cannulation if chest closed</li>
+      <li><strong>Awake ECMO:</strong> Femoro-jugular or dual-lumen; allows mobilisation and rehabilitation</li>
+      <li><strong>Difficult anatomy:</strong> Ultrasound guidance is essential; consider alternative sites (axillary, cervical)</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: ANTICOAGULATION -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 12 · Core</div>
+      <div class="mod-title">Anticoagulation & <em>Haemostasis</em></div>
+      <div class="mod-intro">The perpetual balance — preventing circuit thrombosis while avoiding bleeding. A moving target that defines ECMO management.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The ECMO Paradox</strong>
+      The circuit is thrombogenic — blood contacts artificial surfaces, and stasis in the oxygenator promotes clot formation. Anticoagulation is required. But the patient is often critically ill, coagulopathic, and at risk of bleeding. Every ECMO patient is managed on a <strong>sliding scale between thrombosis and haemorrhage</strong>.
+    </div>
+
+    <h2 class="subhead">Anticoagulation Strategies</h2>
+    <table class="data-table">
+      <tr><th>Strategy</th><th>Description</th><th>Use</th></tr>
+      <tr><td><strong>Systemic heparin</strong></td><td>Unfractionated heparin infusion; target aPTT 1.5–2.5× normal or anti-Xa 0.3–0.7 IU/mL</td><td>Standard for most ECMO; titrated to bleeding risk</td></tr>
+      <tr><td><strong>No heparin (VV-ECMO)</strong></td><td>Withhold heparin in patients with severe bleeding risk</td><td>Selective; some centres use heparin-free VV-ECMO in trauma or post-operative bleeding</td></tr>
+      <tr><td><strong>Low-dose heparin</strong></td><td>Lower target aPTT (e.g., 40–50 s)</td><td>Bleeding-prone patients; evidence from HEART-ECMO suggests withholding bolus may reduce bleeding without increasing thrombosis [citation:4]</td></tr>
+      <tr><td><strong>Direct thrombin inhibitors</strong></td><td>Argatroban, bivalirudin</td><td>Heparin-induced thrombocytopenia (HIT)</td></tr>
+      <tr><td><strong>Regional anticoagulation</strong></td><td>Citrate in circuit; systemic anticoagulation avoided</td><td>High bleeding risk; requires careful monitoring</td></tr>
+    </table>
+
+    <h2 class="subhead">Monitoring Anticoagulation</h2>
+    <table class="data-table">
+      <tr><th>Test</th><th>Target (Typical)</th><th>Limitations</th></tr>
+      <tr><td><strong>aPTT</strong></td><td>1.5–2.5× normal (or 50–80 s)</td><td>Affected by coagulopathy, heparin resistance; not specific</td></tr>
+      <tr><td><strong>Anti-Xa</strong></td><td>0.3–0.7 IU/mL</td><td>More specific for heparin effect; not universally available</td></tr>
+      <tr><td><strong>ACT</strong></td><td>180–220 s</td><td>Less precise than aPTT/anti-Xa; useful for bedside monitoring</td></tr>
+      <tr><td><strong>TEG/ROTEM</strong></td><td>Assess overall clot strength and fibrinolysis</td><td>Guides transfusion; not for heparin titration alone</td></tr>
+      <tr><td><strong>Platelet count</strong></td><td>Monitor for HIT</td><td>Falling platelets → investigate HIT</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Bleeding-Thrombosis Balance</strong>
+      A recent observational study (HEART-ECMO) found that <strong>withholding the heparin bolus at cannulation</strong> resulted in comparable aPTT values, <strong>less major bleeding</strong> (42.9% vs 25.0%), and <strong>similar thrombotic events</strong> [citation:4]. This suggests that a limited heparin exposure strategy may be safe — but this is observational and requires RCT validation. The optimal anticoagulation strategy remains uncertain.
+    </div>
+
+    <h2 class="subhead">Heparin-Induced Thrombocytopenia (HIT)</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> IgG antibodies against heparin-PF4 complexes → platelet activation → thrombosis (not just bleeding)</li>
+      <li><strong>Recognition:</strong> Falling platelets (>50% from baseline) 5–10 days after heparin exposure; thrombosis despite heparin</li>
+      <li><strong>Diagnosis:</strong> 4Ts score; anti-PF4 antibody assay; serotonin release assay (confirmatory)</li>
+      <li><strong>Management:</strong> <strong>Stop heparin immediately.</strong> Use alternative anticoagulants: argatroban (direct thrombin inhibitor), bivalirudin, danaparoid. Do not use LMWH (cross-reactivity).</li>
+      <li><strong>ECMO circuit:</strong> Argatroban or bivalirudin can be used for circuit anticoagulation — requires monitoring with aPTT or specific assays.</li>
+    </ul>
+
+    <h2 class="subhead">Bleeding Management</h2>
+    <ul class="clist">
+      <li><strong>Assessment:</strong> Identify source (cannulation site, surgical site, GI, intracranial, pulmonary)</li>
+      <li><strong>Anticoagulation:</strong> Reduce or temporarily hold heparin; consider reversal with protamine (for heparin)</li>
+      <li><strong>Blood products:</strong> Platelets (if <50,000 or bleeding with platelet dysfunction), FFP (if coagulopathic), cryoprecipitate (fibrinogen <150), RBC (target Hb 7–9 g/dL)</li>
+      <li><strong>Point-of-care testing:</strong> TEG/ROTEM to guide targeted transfusion</li>
+      <li><strong>Surgical/interventional:</strong> Embolisation, packing, surgical exploration</li>
+      <li><strong>Intracranial haemorrhage:</strong> Emergency neurosurgical consultation; reverse anticoagulation; consider ECMO weaning/decannulation if survival unlikely</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: COMPLICATIONS -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 12 · Applied</div>
+      <div class="mod-title">Complications of <em>ECMO</em></div>
+      <div class="mod-intro">Bleeding, thrombosis, infection, neurological injury, renal failure — the full spectrum of ECMO-related morbidity.</div>
+    </div>
+
+    <h2 class="subhead">Haemorrhagic Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Major bleeding (any site)</strong></td><td>30–50%</td><td>Anticoagulation, coagulopathy, cannulation</td><td>Reduce anticoagulation, blood products, surgical control</td></tr>
+      <tr><td><strong>Intracranial haemorrhage</strong></td><td>2–5%</td><td>Anticoagulation, rapid CO₂ changes, hypertension</td><td>Reverse anticoagulation, neurosurgical consultation, consider decannulation</td></tr>
+      <tr><td><strong>Cannulation site bleeding</strong></td><td>Common</td><td>Vessel injury, anticoagulation</td><td>Pressure, suture, topical haemostatics</td></tr>
+      <tr><td><strong>Pulmonary haemorrhage</strong></td><td>5–10%</td><td>Anticoagulation, lung injury, suction trauma</td><td>Reduce anticoagulation, bronchoscopy, protective ventilation</td></tr>
+      <tr><td><strong>GI bleeding</strong></td><td>5–10%</td><td>Anticoagulation, stress ulceration</td><td>PPI, endoscopy, reduce anticoagulation</td></tr>
+    </table>
+
+    <h2 class="subhead">Thrombotic Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Circuit thrombosis</strong></td><td>10–20%</td><td>Inadequate anticoagulation, stasis</td><td>Increase anticoagulation; exchange circuit if severe</td></tr>
+      <tr><td><strong>Oxygenator thrombosis</strong></td><td>10–20%</td><td>Membrane clot formation</td><td>Monitor delta-P; exchange oxygenator if failing </td></tr>
+      <tr><td><strong>Deep vein thrombosis</strong></td><td>10–20%</td><td>Venous stasis, cannula</td><td>Anticoagulation; surveillance ultrasound</td></tr>
+      <tr><td><strong>Arterial thrombosis / limb ischaemia</strong></td><td>10–70% (VA-ECMO) [citation:3]</td><td>Cannula obstruction, emboli</td><td>Distal perfusion catheter; thrombectomy; fasciotomy</td></tr>
+      <tr><td><strong>Pulmonary embolism</strong></td><td>2–5%</td><td>DVT, hypercoagulability</td><td>Anticoagulation; consider thrombectomy</td></tr>
+    </table>
+
+    <h2 class="subhead">Neurological Complications</h2>
+    <ul class="clist">
+      <li><strong>Intracranial haemorrhage:</strong> 2–5%; associated with anticoagulation, rapid CO₂ changes, hypertension, cerebral autoregulation loss</li>
+      <li><strong>Ischaemic stroke:</strong> 2–5%; emboli from circuit, native heart, or cannula</li>
+      <li><strong>Seizures:</strong> 5–10%; associated with rapid CO₂ changes, hypoperfusion, emboli [citation:6]</li>
+      <li><strong>Delirium:</strong> Common; multifactorial (inflammation, sleep deprivation, sedation)</li>
+      <li><strong>Brain death:</strong> Rare but catastrophic; associated with rapid CO₂ correction in severe hypercapnia [citation:6]</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ Rapid CO₂ Correction and Neurological Injury</strong>
+      In VV-ECMO for severe hypercapnia, rapid CO₂ removal can cause cerebral vasoconstriction, ischaemia, and haemorrhage. <strong>Start sweep gas low (2 L/min)</strong> and titrate slowly — avoid reducing PaCO₂ by >50% in the first 24 hours [citation:6]. This is one of the most important safety lessons in ECMO.
+    </div>
+
+    <h2 class="subhead">Renal Complications</h2>
+    <ul class="clist">
+      <li><strong>Acute kidney injury (AKI):</strong> 40–70% in VA-ECMO; 50–75% in VV-ECMO [citation:2]</li>
+      <li><strong>Mechanisms:</strong> Hypoperfusion, inflammation, haemolysis (free haemoglobin), emboli, nephrotoxins</li>
+      <li><strong>Renal replacement therapy (RRT):</strong> Required in 40–50% of patients with AKI [citation:2]</li>
+      <li><strong>ECMO-CRRT connection:</strong> Can connect CRRT to ECMO circuit (post-oxygenator, pre-pump) — requires careful pressure management </li>
+      <li><strong>Prognosis:</strong> AKI is associated with increased mortality; recovery is possible but may be prolonged</li>
+    </ul>
+
+    <h2 class="subhead">Infectious Complications</h2>
+    <ul class="clist">
+      <li><strong>Catheter-related bloodstream infection (CRBSI):</strong> 5–10%; cannula site, circuit</li>
+      <li><strong>Ventilator-associated pneumonia:</strong> Common in VV-ECMO patients</li>
+      <tr><td><strong>Bloodstream infection:</strong> 10–20%; associated with cannula duration, circuit exchange</td></tr>
+      <li><strong>Prevention:</strong> Aseptic technique, daily review of cannula necessity, surveillance cultures, circuit exchange if infected</li>
+    </ul>
+
+    <h2 class="subhead">Other Complications</h2>
+    <ul class="clist">
+      <li><strong>Haemolysis:</strong> From pump shear stress, oxygenator, cannula — monitor free haemoglobin, LDH, haptoglobin</li>
+      <li><strong>Differential hypoxaemia (Harlequin syndrome):</strong> VA-ECMO — native LV ejecting deoxygenated blood to upper body; monitor right radial PaO₂</li>
+      <li><strong>LV distension:</strong> VA-ECMO — requires venting (IABP, Impella, surgical vent)</li>
+      <li><strong>Acquired von Willebrand syndrome:</strong> Loss of high-molecular-weight vWF multimers → bleeding; associated with high shear stress</li>
+      <li><strong>Nutritional depletion:</strong> Catabolism, poor enteral intake; consider parenteral nutrition if needed</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: VV-ECMO -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 12 · Applied</div>
+      <div class="mod-title">VV-ECMO — <em>Respiratory Support</em></div>
+      <div class="mod-intro">The six phases of prolonged VV support — from ultra-lung-protective ventilation to liberation. A conceptual framework for the ICU course.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Six Phases of Prolonged VV-ECMO</strong>
+      A 2026 conceptual framework describes VV-ECMO support in six phases: (1) Ultra-lung-protective ventilation; (2) Stabilisation; (3) Recovery; (4) Weaning; (5) Liberation trial; (6) Decannulation [citation:6]. Each phase has distinct priorities and risks.
+    </div>
+
+    <h2 class="subhead">Phase 1 — Ultra-Lung-Protective Ventilation</h2>
+    <ul class="clist">
+      <li><strong>Goal:</strong> Prevent further ventilator-induced lung injury (VILI) in the highly inflamed lung [citation:6]</li>
+      <li><strong>Ventilator settings:</strong> Low tidal volume (4–6 mL/kg IBW), low plateau pressure (<25 cmH₂O), low driving pressure (<15 cmH₂O), PEEP to maintain recruitment</li>
+      <li><strong>ECMO support:</strong> High blood flow (>5 L/min) to support gas exchange and allow minimal ventilator support [citation:6]</li>
+      <li><strong>Avoid:</strong> Routine recruitment manoeuvres — no demonstrated benefit, risk of barotrauma [citation:6]</li>
+      <li><strong>CO₂ management:</strong> Start sweep gas low (2 L/min); gradual correction of hypercapnia [citation:6]</li>
+    </ul>
+
+    <h2 class="subhead">Phase 2 — Stabilisation</h2>
+    <ul class="clist">
+      <li><strong>Haemodynamic support:</strong> Fluids, vasopressors, inotropes as needed</li>
+      <li><strong>Right heart function:</strong> VV-ECMO corrects hypoxaemia and hypercapnia → reduces pulmonary vasoconstriction → improves right heart function [citation:6]</li>
+      <li><strong>Sedation:</strong> Minimise — allow awakening and mobilisation if possible</li>
+      <li><strong>Nutrition:</strong> Enteral nutrition early; parenteral if not tolerated</li>
+      <li><strong>Monitoring:</strong> Daily echocardiography, ABG, chest X-ray, inflammatory markers</li>
+    </ul>
+
+    <h2 class="subhead">Phase 3 — Recovery</h2>
+    <ul class="clist">
+      <li><strong>Lung recovery:</strong> Improvement in compliance, gas exchange, radiology</li>
+      <li><strong>ECMO weaning:</strong> Gradually reduce sweep gas and blood flow as native lung function improves</li>
+      <li><strong>Ventilator weaning:</strong> Increase tidal volume, reduce PEEP, assess spontaneous breathing</li>
+      <li><strong>Mobilisation:</strong> Awake ECMO allows physical rehabilitation — important for long-term outcomes</li>
+    </ul>
+
+    <h2 class="subhead">Phase 4–6 — Weaning, Liberation Trial, Decannulation</h2>
+    <ul class="clist">
+      <li><strong>Weaning:</strong> Progressive reduction in sweep gas flow (SGF) and ECMO blood flow over several days [citation:6]</li>
+      <li><strong>Liberation trial:</strong> Sweep gas off trial (SGOT) — SGF turned off for a variable observation period; assess native gas exchange [citation:6]</li>
+      <li><strong>Unsafe liberation:</strong> Death, re-cannulation, or significant deterioration within 48 hours of decannulation [citation:6]</li>
+      <li><strong>Predictors of unsafe weaning:</strong> Elevated ventilatory ratio during SGOT; high PaCO₂; high respiratory rate [citation:14]</li>
+      <li><strong>Decannulation:</strong> Remove cannulae after successful liberation trial; monitor for deterioration</li>
+    </ul>
+
+    <h2 class="subhead">VV-ECMO in ARDS — Key Evidence</h2>
+    <table class="data-table">
+      <tr><th>Trial</th><th>Population</th><th>Intervention</th><th>Finding</th></tr>
+      <tr><td><strong>CESAR (2009)</strong></td><td>Severe ARDS</td><td>ECMO referral vs conventional</td><td>Improved survival without severe disability in ECMO referral group</td></tr>
+      <tr><td><strong>EOLIA (2018)</strong></td><td>Severe ARDS</td><td>Early ECMO vs conventional</td><td>No significant mortality difference; post-hoc analysis favoured ECMO</td></tr>
+      <tr><td><strong>ELSO Registry</strong></td><td>All VV-ECMO</td><td>Observational</td><td>Survival to discharge ~60% (varies by indication and centre)</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 09: VA-ECMO -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Module 09 of 12 · Applied</div>
+      <div class="mod-title">VA-ECMO — <em>Cardiac Support</em></div>
+      <div class="mod-intro">Cardiogenic shock, post-cardiotomy support, and the haemodynamic consequences of extracorporeal circulation.</div>
+    </div>
+
+    <h2 class="subhead">Indications for VA-ECMO</h2>
+    <table class="data-table">
+      <tr><th>Indication</th><th>Typical Scenario</th><th>Notes</th></tr>
+      <tr><td><strong>Refractory cardiogenic shock</strong></td><td>AMI, myocarditis, cardiomyopathy, post-cardiotomy</td><td>MAP <65 despite vasopressors + inotropes; CI <2.0; rising lactate</td></tr>
+      <tr><td><strong>Post-cardiotomy shock</strong></td><td>Failure to wean from CPB; post-operative cardiac arrest</td><td>Central or peripheral cannulation; high mortality (~60–70%) [citation:7]</td></tr>
+      <tr><td><strong>ECPR (extracorporeal CPR)</strong></td><td>Refractory cardiac arrest</td><td>Witnessed arrest, bystander CPR, shockable rhythm, short low-flow time</td></tr>
+      <tr><td><strong>Bridge to transplant</strong></td><td>Refractory heart failure awaiting transplant</td><td>Temporary support; may need VAD if prolonged</td></tr>
+      <tr><td><strong>Bridge to recovery</strong></td><td>Myocarditis, post-cardiotomy stunning</td><td>Weaning assessment daily</td></tr>
+    </table>
+
+    <h2 class="subhead">Haemodynamic Management on VA-ECMO</h2>
+    <ul class="clist">
+      <li><strong>Flow:</strong> 3–6 L/min; titrated to MAP >65, lactate clearance, end-organ perfusion</li>
+      <li><strong>Afterload:</strong> Increased by ECMO flow — monitor for LV distension (echocardiography, arterial waveform pulsatility)</li>
+      <li><strong>LV venting:</strong> IABP, Impella, surgical vent if LV distension or pulmonary oedema</li>
+      <li><strong>Inotropes:</strong> May be needed to maintain native ejection (prevents stasis and thrombosis)</li>
+      <li><strong>Differential hypoxaemia:</strong> Monitor right radial PaO₂ — if low, increase ECMO flow or consider VVA-ECMO</li>
+      <li><strong>Haemolysis:</strong> Monitor free Hb, LDH — optimise cannula position, reduce RPM if possible</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ The LV Distension Problem</strong>
+      VA-ECMO increases afterload. If the native LV cannot eject, blood stagnates in the LV → distension → subendocardial ischaemia → pulmonary oedema → worsening cardiac function. <strong>Venting is essential</strong> if native ejection is inadequate. Monitor with echocardiography (LV dimensions, aortic valve opening) and arterial waveform pulsatility.
+    </div>
+
+    <h2 class="subhead">Post-Cardiotomy VA-ECMO</h2>
+    <ul class="clist">
+      <li><strong>Incidence:</strong> 0.5–2% of cardiac surgery; mortality 60–70% [citation:7]</li>
+      <li><strong>Indications:</strong> Failure to wean from CPB, post-operative cardiac arrest, refractory shock</li>
+      <li><strong>Cannulation:</strong> Central (chest open) or peripheral (femoral)</li>
+      <li><strong>Complications:</strong> Bleeding (most common), multi-organ failure, neurological injury [citation:7]</li>
+      <li><strong>Left ventricular unloading:</strong> IABP used in ~47% of post-cardiotomy ECMO patients [citation:7]</li>
+      <li><strong>Outcomes:</strong> In-hospital mortality ~69%; one-year survival ~30% [citation:7]</li>
+    </ul>
+
+    <h2 class="subhead">VA-ECMO vs VV-ECMO — Key Differences</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>VA-ECMO</th><th>VV-ECMO</th></tr>
+      <tr><td><strong>Support</strong></td><td>Heart + lungs</td><td>Lungs only</td></tr>
+      <tr><td><strong>Native cardiac function</strong></td><td>Not required</td><td>Required</td></tr>
+      <tr><td><strong>Afterload</strong></td><td>Increased</td><td>Unchanged</td></tr>
+      <tr><td><strong>LV distension risk</strong></td><td>High</td><td>Low</td></tr>
+      <tr><td><strong>Differential hypoxaemia</strong></td><td>Yes (Harlequin)</td><td>No</td></tr>
+      <tr><td><strong>AKI incidence</strong></td><td>40–70% [citation:2]</td><td>50–75% [citation:2]</td></tr>
+      <tr><td><strong>Primary indication</strong></td><td>Cardiogenic shock, ECPR</td><td>ARDS, respiratory failure</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 10: ECPR -->
+  <div class="module" id="mod9">
+    <div class="mod-head">
+      <div class="mod-num">Module 10 of 12 · Applied</div>
+      <div class="mod-title">ECPR — <em>Extracorporeal CPR</em></div>
+      <div class="mod-intro">The most time-critical application of ECMO — and the one with the narrowest window for benefit.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The ECPR Window</strong>
+      ECPR is the initiation of ECMO during cardiac arrest refractory to conventional CPR. The benefit is <strong>time-dependent</strong>: the shorter the low-flow time (arrest to ECMO flow), the better the neurological outcome. Beyond 20–30 minutes of conventional CPR, the probability of meaningful survival falls precipitously.
+    </div>
+
+    <h2 class="subhead">Selection Criteria for ECPR</h2>
+    <table class="data-table">
+      <tr><th>Criterion</th><th>Favourable</th><th>Unfavourable</th></tr>
+      <tr><td><strong>Witnessed arrest</strong></td><td>Yes</td><td>No / unwitnessed</td></tr>
+      <tr><td><strong>Bystander CPR</strong></td><td>Yes</td><td>No</td></tr>
+      <tr><td><strong>Initial rhythm</strong></td><td>Shockable (VF/VT)</td><td>Asystole / PEA</td></tr>
+      <tr><td><strong>Low-flow time</strong></td><td><20–30 minutes</td><td>>30–40 minutes</td></tr>
+      <tr><td><strong>ETCO₂ during CPR</strong></td><td>>10–20 mmHg</td><td><10 mmHg (poor prognosis)</td></tr>
+      <tr><td><strong>Age</strong></td><td>Younger</td><td>Elderly (>70–75)</td></tr>
+      <tr><td><strong>Comorbidities</strong></td><td>None / minimal</td><td>Severe multi-organ disease</td></tr>
+      <tr><td><strong>Cause</strong></td><td>Reversible (AMI, PE, hypothermia, drug overdose)</td><td>Irreversible (advanced malignancy, severe brain injury)</td></tr>
+    </table>
+
+    <h2 class="subhead">ECPR Algorithm</h2>
+    <div class="flow-row">
+      <div class="flow-box">1. Cardiac arrest<br>Refractory to ACLS</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2. Assess<br>eligibility</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3. Call ECMO<br>team</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">4. Cannulate<br>femoral</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">5. Initiate<br>ECMO flow</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">6. Treat<br>cause</div>
+    </div>
+
+    <h2 class="subhead">ECPR Outcomes</h2>
+    <ul class="clist">
+      <li><strong>Survival to discharge:</strong> 20–40% in selected patients (witnessed, shockable, short low-flow time)</li>
+      <li><strong>Neurological outcome:</strong> Favourable in ~70–80% of survivors</li>
+      <li><strong>Predictors of poor outcome:</strong> Prolonged low-flow time, non-shockable rhythm, high lactate, renal failure, neurological injury</li>
+      <li><strong>ELSO registry:</strong> ECPR survival ~30% overall — highly dependent on selection and centre experience</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ The ECPR Decision</strong>
+      ECPR is resource-intensive and requires a team available 24/7. The decision to initiate must be made rapidly, often with incomplete information. The most important predictors of benefit are <strong>witnessed arrest, bystander CPR, shockable rhythm, and short low-flow time</strong>. If these are absent, the probability of meaningful survival is low.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 11: WEANING -->
+  <div class="module" id="mod10">
+    <div class="mod-head">
+      <div class="mod-num">Module 11 of 12 · Applied</div>
+      <div class="mod-title">Weaning & <em>Liberation</em></div>
+      <div class="mod-intro">The transition from extracorporeal to native support — criteria, trials, and the predictors of safe decannulation.</div>
+    </div>
+
+    <h2 class="subhead">Readiness Criteria</h2>
+    <table class="data-table">
+      <tr><th>Parameter</th><th>VV-ECMO</th><th>VA-ECMO</th></tr>
+      <tr><td><strong>Native gas exchange</strong></td><td>Improving PaO₂/FiO₂; resolving hypercapnia</td><td>N/A (respiratory support not primary)</td></tr>
+      <tr><td><strong>Lung compliance</strong></td><td>Improving; tolerating lower PEEP</td><td>N/A</td></tr>
+      <tr><td><strong>Cardiac function</strong></td><td>Stable (VV requires native CO)</td><td>Improving ejection fraction; aortic valve opening</td></tr>
+      <tr><td><strong>Haemodynamics</strong></td><td>Stable</td><td>MAP >65 on low ECMO flow; reducing inotrope/vasopressor requirements</td></tr>
+      <tr><td><strong>Ventilator settings</strong></td><td>FiO₂ <0.5; PEEP <10; tolerating spontaneous breathing</td><td>N/A</td></tr>
+      <tr><td><strong>Neurological status</strong></td><td>Awake, following commands (if sedation allows)</td><td>Awake, following commands</td></tr>
+    </table>
+
+    <h2 class="subhead">Weaning Trials</h2>
+    <ul class="clist">
+      <li><strong>VV-ECMO — Sweep Gas Off Trial (SGOT):</strong> Turn off sweep gas; observe for 1–4 hours; assess PaCO₂, pH, respiratory rate, work of breathing [citation:6]</li>
+      <li><strong>Predictors of SGOT failure:</strong> Elevated ventilatory ratio, high PaCO₂, high respiratory rate, increased work of breathing [citation:14]</li>
+      <li><strong>VA-ECMO — Flow reduction trial:</strong> Reduce ECMO flow to 1–1.5 L/min; assess MAP, cardiac output, echocardiography, lactate</li>
+      <li><strong>Trial failure:</strong> Deterioration in gas exchange, haemodynamics, or clinical status → resume full support</li>
+      <li><strong>Unsafe liberation:</strong> Death, re-cannulation, or significant deterioration within 48 hours of decannulation [citation:6]</li>
+    </ul>
+
+    <h2 class="subhead">Decannulation</h2>
+    <ul class="clist">
+      <li><strong>VV-ECMO:</strong> Remove cannulae after successful SGOT; monitor for respiratory deterioration; consider high-flow nasal cannula or NIV</li>
+      <li><strong>VA-ECMO:</strong> Remove cannulae after successful flow reduction trial; monitor for haemodynamic deterioration; maintain inotropes/vasopressors if needed</li>
+      <li><strong>Post-decannulation:</strong> Monitor cannulation site for bleeding; assess limb perfusion (if femoral); continue anticoagulation if indicated</li>
+      <li><strong>Rehabilitation:</strong> Early mobilisation; respiratory physiotherapy; nutritional support</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Goal of Weaning</strong>
+      Weaning is not a race. The goal is <strong>safe liberation</strong> — not the earliest possible decannulation. A failed trial prolongs ECMO duration and increases complications. Patience, protocolised assessment, and daily readiness evaluation are the keys.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod11">
+    <div class="mod-head">
+      <div class="mod-num">Module 12 of 12 · Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Thirty questions across all eleven modules — from configuration to weaning. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--accent-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--accent)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/12)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  // ── FOUNDATIONS ──
+  {q:"What is the central principle of patient selection for ECMO?",opts:["The patient must be young","The patient has a potentially reversible pathology not improving despite maximal ICU care","The patient has a high SOFA score","The patient is awaiting transplant"],ans:1,exp:"ECMO is considered when there is a potentially reversible pathology that is not improving despite maximal conventional intensive care, and without ECMO there is a high risk of mortality [citation:1]."},
+  {q:"Which of the following is an absolute contraindication to ECMO?",opts:["Age >70","Severe irreversible brain injury","Renal failure","Vasopressor requirement"],ans:1,exp:"Severe irreversible brain injury is an absolute contraindication — no meaningful neurological recovery is possible, and ECMO cannot alter the outcome [citation:1]."},
+  {q:"What does VV-ECMO support?",opts:["Heart and lungs","Lungs only","Heart only","Kidneys only"],ans:1,exp:"VV-ECMO provides lung support only. The native heart must function adequately to pump blood through the body [citation:10]."},
+  {q:"What is the fundamental physiological difference between VV and VA-ECMO?",opts:["VV affects afterload; VA affects venous return","VA affects afterload; VV affects venous return","Both affect afterload equally","Neither affects haemodynamics"],ans:1,exp:"VA-ECMO alters afterload and pulsatility (returns blood to arterial system); VV-ECMO alters venous return and right-sided pressures (returns blood to venous system) [citation:2]."},
+
+  // ── CONFIGURATIONS ──
+  {q:"In VV-ECMO, where does oxygenated blood return?",opts:["Aorta","Right atrium","Left atrium","Pulmonary artery"],ans:1,exp:"In VV-ECMO, oxygenated blood returns to the venous system (right atrium or SVC/IVC), mixes with native venous blood, and passes through the native lungs before reaching the left heart [citation:10]."},
+  {q:"What is differential hypoxaemia (Harlequin syndrome) in VA-ECMO?",opts:["Low oxygen in the lower body","Native LV ejecting deoxygenated blood to the upper body","High oxygen in the pulmonary artery","Anaemia"],ans:1,exp:"In VA-ECMO, if the native LV is ejecting poorly oxygenated blood, the upper body (coronaries, brain) may receive deoxygenated blood while ECMO provides oxygenated blood to the lower body. Monitor right radial PaO₂."},
+  {q:"What is the purpose of a distal perfusion catheter (DPC) in VA-ECMO?",opts:["To increase ECMO flow","To perfuse the limb distal to the arterial cannula","To drain the left ventricle","To monitor arterial pressure"],ans:1,exp:"A DPC provides antegrade flow to the limb distal to the femoral arterial cannula, preventing limb ischaemia — a complication reported in 10–70% of VA-ECMO patients [citation:3]."},
+
+  // ── CIRCUIT ──
+  {q:"What determines CO₂ removal in ECMO?",opts:["Blood flow","Sweep gas flow","FiO₂","Pump speed"],ans:1,exp:"Sweep gas flow determines CO₂ removal. Blood flow primarily determines oxygenation. These are independent controls."},
+  {q:"What does a rising delta-P (membrane pressure drop) across the oxygenator suggest?",opts:["Improved gas exchange","Membrane thrombosis","High blood flow","Low sweep gas"],ans:1,exp:"A rising delta-P (>80 mmHg) suggests membrane thrombosis — the oxygenator is becoming obstructed. Consider exchange ."},
+  {q:"What is the recommended starting sweep gas flow in VV-ECMO for severe hypercapnia?",opts:["10 L/min","5 L/min","2 L/min","0.5 L/min"],ans:2,exp:"ELSO recommends starting sweep gas at 2 L/min and titrating to allow gradual correction of CO₂ — rapid correction is associated with neurological complications [citation:6]."},
+
+  // ── PHYSIOLOGY ──
+  {q:"Why is rapid CO₂ correction dangerous in VV-ECMO?",opts:["It causes hyperoxia","It alters cerebrovascular tone and can cause seizures or haemorrhage","It increases afterload","It causes haemolysis"],ans:1,exp:"Rapid CO₂ removal alters cerebrovascular tone and has been associated with seizures, intracranial haemorrhage, and brain death. Avoid reducing PaCO₂ by >50% in the first 24 hours [citation:6]."},
+  {q:"What is the primary determinant of oxygenation in VV-ECMO?",opts:["Sweep gas flow","ECMO blood flow","Native lung function","Haemoglobin"],ans:1,exp:"ECMO blood flow is the primary determinant of oxygenation. Sweep gas flow primarily determines CO₂ removal. Native lung function also contributes but is variable."},
+
+  // ── CANNULATION ──
+  {q:"What is the most common cannulation configuration for emergency VA-ECMO?",opts:["Central (sternotomy)","Femoral-femoral","Axillary-femoral","Jugular-femoral"],ans:1,exp:"Femoral-femoral cannulation is the most common for emergency VA-ECMO — rapid access, can be performed at the bedside, and allows for ECPR."},
+  {q:"What is the recommended DPC size for femoral VA-ECMO?",opts:["2–4 Fr","6–8 Fr","12–14 Fr","18–20 Fr"],ans:1,exp:"ELSO recommends a wire-reinforced 6–8 Fr introducer sheath as a distal perfusion catheter, though it may not be needed with smaller arterial cannulae (15–17 Fr) [citation:3]."},
+
+  // ── ANTICOAGULATION ──
+  {q:"What is the standard anticoagulation target for ECMO?",opts:["aPTT 1.5–2.5× normal","INR 2–3","ACT <150 s","No anticoagulation"],ans:0,exp:"Standard target is aPTT 1.5–2.5× normal (or anti-Xa 0.3–0.7 IU/mL). Some centres use lower targets in bleeding-prone patients, and some use no heparin in selected VV-ECMO patients."},
+  {q:"What does the HEART-ECMO study suggest about heparin bolus at cannulation?",opts:["It is essential for preventing thrombosis","Withholding it may reduce bleeding without increasing thrombosis","It should be doubled","It has no effect"],ans:1,exp:"The HEART-ECMO observational study found that withholding the heparin bolus at cannulation resulted in comparable aPTT, less major bleeding, and similar thrombotic events [citation:4]."},
+  {q:"What is the anticoagulant of choice in heparin-induced thrombocytopenia (HIT) on ECMO?",opts:["LMWH","Argatroban or bivalirudin","Warfarin","Aspirin"],ans:1,exp:"In HIT, heparin must be stopped. Direct thrombin inhibitors (argatroban, bivalirudin) or danaparoid are used. LMWH is contraindicated due to cross-reactivity."},
+
+  // ── COMPLICATIONS ──
+  {q:"What is the incidence of acute kidney injury (AKI) in VV-ECMO?",opts:["10–20%","30–40%","50–75%","90–100%"],ans:2,exp:"AKI occurs in 50–75% of patients receiving VV-ECMO, of whom 40–50% require renal replacement therapy [citation:2]."},
+  {q:"What is the most common cause of death in post-cardiotomy VA-ECMO?",opts:["Neurological injury","Bleeding","Infection","Renal failure"],ans:1,exp:"Bleeding is the most common cause of death in post-cardiotomy VA-ECMO, followed by multi-organ failure and lack of recovery [citation:7]."},
+  {q:"What is the target right radial PaO₂ in VA-ECMO?",opts:["40–50 mmHg","60–80 mmHg","100–150 mmHg","200–300 mmHg"],ans:1,exp:"The right radial artery reflects coronary and cerebral oxygenation. Target PaO₂ 60–80 mmHg — avoid hyperoxia and detect differential hypoxaemia."},
+  {q:"What is the risk of limb ischaemia with femoral VA-ECMO?",opts:["<1%","5–10%","10–70%","Always occurs"],ans:2,exp:"Limb ischaemia during VA-ECMO has been reported in 10–70% of patients and is associated with greater in-hospital morbidity and mortality [citation:3]."},
+
+  // ── VV-ECMO ──
+  {q:"What is the target P/F ratio for considering VV-ECMO in ARDS?",opts:["<200","<150","<80","<300"],ans:2,exp:"VV-ECMO is considered for severe ARDS with P/F <80 despite optimal ventilation, or pH <7.25 with PaCO₂ >60 [citation:1]."},
+  {q:"What is the 'sweep gas off trial' (SGOT)?",opts:["A test of oxygenator function","A weaning trial where sweep gas is turned off to assess native lung function","A test of circuit integrity","A method of anticoagulation"],ans:1,exp:"SGOT is a liberation trial in VV-ECMO where sweep gas is turned off for a variable observation period to assess whether native lungs can maintain gas exchange [citation:6]."},
+
+  // ── VA-ECMO ──
+  {q:"What is the primary indication for VA-ECMO?",opts:["ARDS","Refractory cardiogenic shock","Pulmonary embolism","Asthma"],ans:1,exp:"VA-ECMO is primarily indicated for refractory cardiogenic shock or cardiac arrest (ECPR). It provides both cardiac and respiratory support."},
+  {q:"What is the LV distension problem in VA-ECMO?",opts:["The LV empties too quickly","Increased afterload prevents LV ejection, causing distension and pulmonary oedema","The LV becomes hypertrophied","The LV valve ruptures"],ans:1,exp:"VA-ECMO increases afterload. If the native LV cannot eject against this pressure, blood stagnates, the LV distends, subendocardial ischaemia develops, and pulmonary oedema occurs. Venting (IABP, Impella, surgical vent) may be required."},
+
+  // ── ECPR ──
+  {q:"What is the most important predictor of favourable outcome in ECPR?",opts:["Patient age","Short low-flow time","High lactate","Vasopressor dose"],ans:1,exp:"Low-flow time (arrest to ECMO flow) is the most important predictor. Beyond 20–30 minutes, the probability of meaningful survival falls precipitously."},
+  {q:"Which rhythm is most favourable for ECPR?",opts:["Asystole","PEA","Ventricular fibrillation / pulseless VT","Sinus bradycardia"],ans:2,exp:"Shockable rhythms (VF/VT) are associated with better ECPR outcomes than asystole or PEA, likely because they indicate a primary cardiac cause with potential for recovery."},
+
+  // ── WEANING ──
+  {q:"What is 'unsafe liberation' from VV-ECMO?",opts:["Any decannulation","Death, re-cannulation, or significant deterioration within 48 hours of decannulation","Removal of the oxygenator","Stopping heparin"],ans:1,exp:"Unsafe liberation is defined as death, re-cannulation, or clinically significant deterioration attributable to premature removal of VV-ECMO support within 48 hours of decannulation [citation:6]."},
+  {q:"What is a predictor of SGOT failure in VV-ECMO?",opts:["Low ventilatory ratio","High ventilatory ratio","High PaO₂","Low respiratory rate"],ans:1,exp:"Elevated ventilatory ratio during SGOT is associated with unsafe weaning — it reflects increased dead space and inadequate native gas exchange [citation:14]."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--accent);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — ECMO is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
