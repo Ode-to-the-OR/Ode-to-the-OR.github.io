@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardiopulmonary Bypass — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to cardiopulmonary bypass — circuit, physiology, hypothermia, cardioplegia, anticoagulation, complications, and weaning. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  /* NEW ACCENT — deep slate-steel blue for CPB */
+  --accent:      #2c4a6e;
+  --accent-soft: #4a6a8e;
+  --accent-deep: #1e3450;
+  --accent-pale: #d6e0ea;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--accent-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── BACK LINK ─── */
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--accent-deep); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(44,74,110,.04) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(44,74,110,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(44,74,110,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(44,74,110,.07) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(74,106,142,.06) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--accent); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--accent);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:660px;font-weight:300; }
+.hero-sub strong { color:var(--accent);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--accent-soft);font-weight:600; }
+
+/* ─── MODULE NAV ─── */
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--accent);border-bottom-color:var(--accent); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));transition:width .4s; }
+
+/* ─── MAIN LAYOUT ─── */
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+
+/* ─── MODULE HEADER ─── */
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--accent); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+
+/* ─── SECTION HEADS ─── */
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+
+h2.subhead {
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--text);margin:2rem 0 .8rem;
+  padding-left:.9rem;border-left:2px solid var(--accent);
+}
+h3.subsubhead {
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-soft);margin:1.4rem 0 .5rem;
+}
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+
+/* ─── NORMAL VALUES BOX ─── */
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--accent);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+
+/* ─── TABLES ─── */
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--accent);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(44,74,110,.02); }
+.td-hi { color:var(--accent)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+
+/* ─── CALLOUTS ─── */
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(44,74,110,.05);border-color:var(--accent);color:var(--muted); }
+.co-key strong { color:var(--accent); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(74,106,142,.05);border-color:var(--accent-soft);color:var(--muted); }
+.co-fact strong { color:var(--accent-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+
+/* ─── FORMULA BOXES ─── */
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+
+/* ─── MNEMONIC ─── */
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--accent);width:22px;flex-shrink:0;font-size:1.1rem; }
+
+/* ─── TAGS ─── */
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-accent { border-color:var(--accent);color:var(--accent); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--accent-soft);color:var(--accent-soft); }
+
+/* ─── ACCORDION ─── */
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--accent);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+
+/* ─── LISTS ─── */
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--accent); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+
+/* ─── DIAGRAM BOXES ─── */
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+
+/* ─── FLOW ROW ─── */
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--accent);font-size:.9rem;font-weight:700; }
+
+/* ─── ARROWS ─── */
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+
+/* ─── QUIZ ─── */
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--accent);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--accent-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--accent);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+
+/* ─── FOOTER ─── */
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- BACK LINK -->
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Cardiothoracic Anaesthesia · Perfusion · Critical Care · Haematology</div>
+  <h1>Cardiopulmonary<br><em>Bypass</em></h1>
+  <p class="hero-sub">
+    The extracorporeal circuit that stops the heart and keeps the body alive. Circuit design, physiology, hypothermia, cardioplegia, anticoagulation, complications, and the art of weaning. <strong>Ten modules. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>10</span></div>
+    <div class="meta-item">Scope <span>Circuit · Physiology · Protection · Safety · Weaning</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · History</button>
+  <button onclick="showMod(1)">02 · Circuit</button>
+  <button onclick="showMod(2)">03 · Physiology</button>
+  <button onclick="showMod(3)">04 · Hypothermia</button>
+  <button onclick="showMod(4)">05 · Cardioplegia</button>
+  <button onclick="showMod(5)">06 · Anticoagulation</button>
+  <button onclick="showMod(6)">07 · Inflammatory Response</button>
+  <button onclick="showMod(7)">08 · Complications</button>
+  <button onclick="showMod(8)">09 · Weaning</button>
+  <button onclick="showMod(9)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:10%"></div></div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: HISTORY -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 10 · Foundations</div>
+      <div class="mod-title">A Brief <em>History</em></div>
+      <div class="mod-intro">From cross-circulation to the modern membrane oxygenator — the milestones that made open-heart surgery possible.</div>
+    </div>
+
+    <div class="callout co-fact">
+      <strong>The Central Problem</strong>
+      To operate on the inside of the heart, you must stop it. But a stopped heart cannot circulate blood or exchange gas. CPB was invented to solve both problems simultaneously — a mechanical heart (pump) and mechanical lungs (oxygenator).
+    </div>
+
+    <h2 class="subhead">Key Milestones</h2>
+    <table class="data-table">
+      <tr><th>Year</th><th>Milestone</th><th>Significance</th></tr>
+      <tr><td><strong>1812</strong></td><td>LeGallois — concept of extracorporeal circulation</td><td>First proposal that life could be sustained by artificial circulation</td></tr>
+      <tr><td><strong>1885</strong></td><td>von Frey & Gruber — first oxygenator</td><td>Film oxygenator concept — thin film of blood exposed to gas</td></tr>
+      <tr><td><strong>1937</strong></td><td>John Gibbon — first successful CPB in animals</td><td>Using a rotating drum oxygenator</td></tr>
+      <tr><td><strong>1953</strong></td><td>John Gibbon — first successful human open-heart surgery using CPB</td><td>Closure of an ASD in an 18-year-old; 45 minutes of bypass</td></tr>
+      <tr><td><strong>1954</strong></td><td>Lillehei — cross-circulation</td><td>Using a parent as the "oxygenator" — first series of open-heart repairs</td></tr>
+      <tr><td><strong>1956</strong></td><td>Kolff & Wolvington — disposable bubble oxygenator</td><td>Made CPB practical and widely available</td></tr>
+      <tr><td><strong>1959</strong></td><td>Shumway & Lower — hypothermic cardioplegia</td><td>Myocardial protection during aortic cross-clamping</td></tr>
+      <tr><td><strong>1960s–70s</strong></td><td>Membrane oxygenators replace bubble oxygenators</td><td>Less blood trauma, less microemboli, longer safe duration</td></tr>
+      <tr><td><strong>1970s</strong></td><td>Roller pump and centrifugal pump refinement</td><td>Improved flow control and safety</td></tr>
+      <tr><td><strong>1978</strong></td><td>Buckberg — blood cardioplegia</td><td>Improved myocardial protection; substrate enhancement</td></tr>
+      <tr><td><strong>1980s–90s</strong></td><td>Heparin-bonded circuits; miniaturised circuits</td><td>Reduced anticoagulation and inflammatory response</td></tr>
+      <tr><td><strong>2000s–present</strong></td><td>ECMO, minimal-access CPB, biocompatible circuits</td><td>Extended indications, reduced morbidity</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ Historical Note</strong>
+      Gibbon's first successful operation in 1953 was the culmination of over 20 years of animal research. His patient, Cecilia Bavolek, survived and lived for decades. The story is one of the great translational research achievements in medicine.
+    </div>
+
+    <h2 class="subhead">CPB vs ECMO — A Note</h2>
+    <p>CPB and ECMO share the same core technology — a pump and an oxygenator. The differences are in configuration, duration, and anticoagulation intensity. CPB is designed for <strong>hours</strong> (intraoperative), ECMO for <strong>days to weeks</strong> (ICU). CPB typically uses <strong>high-dose heparin</strong> and a <strong>cardiotomy suction</strong>; ECMO uses <strong>lower-dose heparin</strong> and a more biocompatible circuit.</p>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: CIRCUIT -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 10 · Core</div>
+      <div class="mod-title">The Bypass <em>Circuit</em></div>
+      <div class="mod-intro">Every component of the CPB circuit — pumps, oxygenators, cannulae, reservoirs, and the flow paths that connect them.</div>
+    </div>
+
+    <h2 class="subhead">Circuit Diagram — The Complete Flow Path</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 760 520" width="100%" style="display:block; max-width:760px;">
+        <defs>
+          <marker id="flow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#2c4a6e"/>
+          </marker>
+          <marker id="flowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#7a2020"/>
+          </marker>
+        </defs>
+
+        <text x="380" y="18" fill="#2c4a6e" font-family="Instrument Sans" font-size="9" text-anchor="middle" letter-spacing="1.5">CARDIOPULMONARY BYPASS — CIRCUIT FLOW PATH</text>
+
+        <!-- Patient -->
+        <rect x="40" y="60" width="130" height="180" rx="6" fill="#e8e1d4" stroke="#d0c8b8" stroke-width="1.5"/>
+        <text x="105" y="80" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="600">PATIENT</text>
+
+        <!-- Heart icon -->
+        <path d="M85,110 C70,95 50,110 60,130 C65,140 85,155 105,170 C125,155 145,140 150,130 C160,110 140,95 125,110 C120,105 115,100 105,105 C95,100 90,105 85,110 Z" fill="#7a2020" opacity="0.15" stroke="#7a2020" stroke-width="1.2"/>
+        <text x="105" y="140" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">HEART</text>
+
+        <!-- Lungs icon -->
+        <ellipse cx="80" cy="190" rx="18" ry="25" fill="#2c4a6e" opacity="0.12" stroke="#2c4a6e" stroke-width="1"/>
+        <ellipse cx="130" cy="190" rx="18" ry="25" fill="#2c4a6e" opacity="0.12" stroke="#2c4a6e" stroke-width="1"/>
+        <text x="105" y="195" fill="#2c4a6e" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">LUNGS</text>
+        <text x="105" y="220" fill="#a89880" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">(bypassed)</text>
+
+        <!-- Venous cannula -->
+        <line x1="170" y1="100" x2="230" y2="100" stroke="#2c4a6e" stroke-width="2" marker-end="url(#flow)"/>
+        <text x="200" y="93" fill="#2c4a6e" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Venous</text>
+        <text x="200" y="114" fill="#2c4a6e" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">cannula</text>
+
+        <!-- Venous reservoir -->
+        <rect x="240" y="70" width="90" height="70" rx="4" fill="#ede7da" stroke="#2c4a6e" stroke-width="1.5"/>
+        <text x="285" y="90" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Venous</text>
+        <text x="285" y="102" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Reservoir</text>
+        <text x="285" y="118" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">(cardiotomy + venous)</text>
+
+        <line x1="330" y1="105" x2="370" y2="105" stroke="#2c4a6e" stroke-width="2" marker-end="url(#flow)"/>
+
+        <!-- Pump -->
+        <circle cx="410" cy="105" r="32" fill="#e8e1d4" stroke="#2c4a6e" stroke-width="2"/>
+        <text x="410" y="100" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">PUMP</text>
+        <text x="410" y="114" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">roller/centrifugal</text>
+
+        <line x1="442" y1="105" x2="480" y2="105" stroke="#2c4a6e" stroke-width="2" marker-end="url(#flow)"/>
+
+        <!-- Oxygenator -->
+        <rect x="490" y="70" width="100" height="70" rx="4" fill="#e8e1d4" stroke="#2c4a6e" stroke-width="1.5"/>
+        <text x="540" y="90" fill="#2e2018" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">Oxygenator</text>
+        <text x="540" y="104" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">(membrane)</text>
+        <text x="540" y="118" fill="#7a6455" font-family="Instrument Sans" font-size="6.5" text-anchor="middle">+ heat exchanger</text>
+
+        <!-- Gas line -->
+        <line x1="540" y1="70" x2="540" y2="40" stroke="#4a7c59" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="555" y="50" fill="#4a7c59" font-family="Instrument Sans" font-size="7">Gas in</text>
+        <text x="555" y="62" fill="#4a7c59" font-family="Instrument Sans" font-size="7">(O₂/air)</text>
+
+        <line x1="590" y1="105" x2="640" y2="105" stroke="#2c4a6e" stroke-width="2" marker-end="url(#flow)"/>
+
+        <!-- Arterial cannula -->
+        <line x1="640" y1="105" x2="700" y2="105" stroke="#2c4a6e" stroke-width="2" marker-end="url(#flow)"/>
+        <text x="670" y="98" fill="#2c4a6e" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Arterial</text>
+        <text x="670" y="118" fill="#2c4a6e" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">cannula</text>
+
+        <!-- Return to patient -->
+        <path d="M700,105 C730,105 740,140 740,180 C740,240 700,270 600,270 L170,270 C150,270 140,250 140,230 L140,190" stroke="#7a2020" stroke-width="1.8" fill="none" stroke-dasharray="6,3" marker-end="url(#flowR)"/>
+        <text x="400" y="285" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle">Oxygenated blood returned to systemic circulation (aorta)</text>
+
+        <!-- Cardiotomy suction -->
+        <rect x="240" y="330" width="110" height="50" rx="4" fill="#ede7da" stroke="#a89880" stroke-width="1"/>
+        <text x="295" y="350" fill="#2e2018" font-family="Instrument Sans" font-size="7.5" text-anchor="middle" font-weight="600">Cardiotomy</text>
+        <text x="295" y="362" fill="#2e2018" font-family="Instrument Sans" font-size="7.5" text-anchor="middle" font-weight="600">Suction</text>
+        <text x="295" y="374" fill="#a89880" font-family="Instrument Sans" font-size="6" text-anchor="middle">(shed blood → reservoir)</text>
+
+        <line x1="295" y1="330" x2="295" y2="145" stroke="#a89880" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#flow)"/>
+
+        <!-- Vent line -->
+        <rect x="480" y="330" width="110" height="50" rx="4" fill="#ede7da" stroke="#a89880" stroke-width="1"/>
+        <text x="535" y="350" fill="#2e2018" font-family="Instrument Sans" font-size="7.5" text-anchor="middle" font-weight="600">Vent</text>
+        <text x="535" y="362" fill="#2e2018" font-family="Instrument Sans" font-size="7.5" text-anchor="middle" font-weight="600">(LV/ aortic root)</text>
+        <text x="535" y="374" fill="#a89880" font-family="Instrument Sans" font-size="6" text-anchor="middle">Decompresses LV</text>
+
+        <line x1="535" y1="330" x2="535" y2="145" stroke="#a89880" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#flow)"/>
+
+        <!-- Labels -->
+        <text x="380" y="440" fill="#a89880" font-family="Instrument Sans" font-size="7" text-anchor="middle" letter-spacing=".5">Blue = oxygenated circuit · Red dashed = return to patient · Grey = suction/vent lines</text>
+      </svg>
+    </div>
+
+    <h2 class="subhead">Circuit Components</h2>
+    <table class="data-table">
+      <tr><th>Component</th><th>Function</th><th>Key Details</th></tr>
+      <tr><td><strong>Venous cannula(e)</strong></td><td>Drains deoxygenated blood from RA/SVC/IVC</td><td>Single two-stage (RA/IVC) or bicaval (SVC + IVC); gravity drainage or vacuum-assisted</td></tr>
+      <tr><td><strong>Venous reservoir</strong></td><td>Collects venous return and cardiotomy suction</td><td>Hard-shell or collapsible; allows volume assessment and air handling</td></tr>
+      <tr><td><strong>Pump</strong></td><td>Propels blood through circuit</td><td>Roller (positive displacement) or centrifugal (kinetic); centrifugal is safer (non-occlusive)</td></tr>
+      <tr><td><strong>Oxygenator</strong></td><td>Gas exchange (O₂ in, CO₂ out)</td><td>Membrane (microporous polypropylene) — blood and gas separated by membrane; avoids direct blood-gas interface</td></tr>
+      <tr><td><strong>Heat exchanger</strong></td><td>Controls blood temperature</td><td>Integrated into oxygenator; water bath circulates warm or cold water</td></tr>
+      <tr><td><strong>Arterial filter</strong></td><td>Removes microemboli (particulate, air)</td><td>40 µm filter; essential to prevent neurological injury</td></tr>
+      <tr><td><strong>Arterial cannula</strong></td><td>Returns oxygenated blood to systemic circulation</td><td>Ascending aorta (standard) or femoral/axillary (alternative)</td></tr>
+      <tr><td><strong>Cardiotomy suction</strong></td><td>Returns shed blood from surgical field to reservoir</td><td>Major source of inflammatory activation and fat/air emboli; use judiciously</td></tr>
+      <tr><td><strong>Vent</strong></td><td>Decompresses LV during aortic cross-clamp</td><td>Prevents LV distension and pulmonary oedema; placed in LV apex or aortic root</td></tr>
+      <tr><td><strong>Gas blender</strong></td><td>Mixes O₂, air, and CO₂ to control PaO₂ and PaCO₂</td><td>Adjust FiO₂ and sweep gas flow</td></tr>
+      <tr><td><strong>Activated clotting time (ACT) monitor</strong></td><td>Monitors heparin effect</td><td>Target ACT >400–480 s during CPB</td></tr>
+    </table>
+
+    <h2 class="subhead">Pumps — Roller vs Centrifugal</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Roller Pump</th><th>Centrifugal Pump</th></tr>
+      <tr><td>Mechanism</td><td>Positive displacement — rollers compress tubing</td><td>Kinetic — spinning impeller or cone</td></tr>
+      <tr><td>Flow</td><td>Fixed (flow = RPM × stroke volume)</td><td>Afterload-dependent (higher resistance = lower flow)</td></tr>
+      <tr><td>Occlusiveness</td><td>Occlusive — can generate high pressure if line blocked</td><td>Non-occlusive — cannot generate excessive pressure; safer</td></tr>
+      <tr><td>Blood trauma</td><td>Higher (compression, tubing wear)</td><td>Lower (gentle, continuous flow)</td></tr>
+      <tr><td>Risk of air embolism</td><td>Can pump air if reservoir empty</td><td>Less likely to pump air (cavitation risk if empty)</td></tr>
+      <tr><td>Use in CPB</td><td>Common; simple, reliable</td><td>Increasingly used; preferred for longer bypass and ECMO</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>Why Centrifugal Pumps Are Safer</strong>
+      Centrifugal pumps are non-occlusive — if the outflow line is clamped or blocked, the pump cannot generate unlimited pressure. Flow simply stops. Roller pumps, being positive displacement, can generate very high pressures and cause circuit rupture or massive air embolism if not carefully monitored.
+    </div>
+
+    <h2 class="subhead">Cannulation Strategies</h2>
+    <table class="data-table">
+      <tr><th>Strategy</th><th>Site</th><th>Indications</th><th>Notes</th></tr>
+      <tr><td><strong>Standard (aortic + bicaval)</strong></td><td>Ascending aorta; SVC + IVC</td><td>Most cardiac surgery</td><td>Optimal drainage; allows opening right atrium</td></tr>
+      <tr><td><strong>Single two-stage venous</strong></td><td>RA → IVC</td><td>Simple procedures (CABG, AVR)</td><td>Less invasive; may not drain SVC adequately</td></tr>
+      <tr><td><strong>Femoral-femoral</strong></td><td>Femoral artery + vein</td><td>Redo surgery, aortic dissection, emergency</td><td>Avoids sternotomy; risk of limb ischaemia (distal perfusion cannula needed)</td></tr>
+      <tr><td><strong>Axillary artery</strong></td><td>Right axillary artery</td><td>Aortic dissection, redo, porcelain aorta</td><td>Allows antegrade cerebral perfusion; avoids aortic manipulation</td></tr>
+      <tr><td><strong>Minimal-access (mini-thoracotomy)</strong></td><td>Femoral or axillary + femoral vein</td><td>Minimally invasive cardiac surgery</td><td>Reduced surgical trauma; technically demanding</td></tr>
+    </table>
+
+    <h2 class="subhead">Prime Solution</h2>
+    <ul class="clist">
+      <li><strong>Purpose:</strong> Fill the circuit and de-air it before connecting to the patient</li>
+      <li><strong>Composition:</strong> Crystalloid (usually balanced salt solution), ± albumin, ± mannitol, ± heparin, ± sodium bicarbonate</li>
+      <li><strong>Volume:</strong> 1.0–1.5 L in adults (varies with circuit size); mini-circuits use less (~500–700 mL)</li>
+      <li><strong>Effect:</strong> Haemodilution — reduces haematocrit (target Hct 25–30% on CPB); improves flow characteristics but reduces oxygen-carrying capacity</li>
+      <li><strong>Retrograde autologous prime (RAP):</strong> Uses patient's own blood to prime the circuit — reduces haemodilution and transfusion requirements</li>
+      <li><strong>Miniaturised circuits:</strong> Reduce prime volume and surface area — less haemodilution, less inflammation</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ Haemodilution</strong>
+      The prime volume dilutes the patient's blood. A 70 kg patient (5 L blood volume) with a 1.5 L prime will have a haematocrit reduced by ~23%. Target Hct on CPB is 25–30% — below 20% increases the risk of neurological injury and organ dysfunction. Monitor and transfuse if necessary.
+    </div>
+
+    <h2 class="subhead">Flow Rates and Perfusion Targets</h2>
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">Normal Cardiac Index</div><div class="val-num">2.5–4.0</div><div class="val-unit">L/min/m²</div></div>
+      <div class="val-item"><div class="val-label">CPB Flow (normothermia)</div><div class="val-num">2.2–2.4</div><div class="val-unit">L/min/m²</div></div>
+      <div class="val-item"><div class="val-label">CPB Flow (moderate hypothermia)</div><div class="val-num">1.8–2.0</div><div class="val-unit">L/min/m²</div></div>
+      <div class="val-item"><div class="val-label">CPB Flow (deep hypothermia)</div><div class="val-num">1.0–1.2</div><div class="val-unit">L/min/m²</div></div>
+      <div class="val-item"><div class="val-label">Target MAP on CPB</div><div class="val-num">50–70</div><div class="val-unit">mmHg (higher in elderly, HTN)</div></div>
+      <div class="val-item"><div class="val-label">Target Haematocrit</div><div class="val-num">25–30</div><div class="val-unit">% on CPB</div></div>
+      <div class="val-item"><div class="val-label">Target PaO₂</div><div class="val-num">150–250</div><div class="val-unit">mmHg (avoid hyperoxia)</div></div>
+      <div class="val-item"><div class="val-label">Target PaCO₂</div><div class="val-num">35–45</div><div class="val-unit">mmHg (alpha-stat)</div></div>
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ Flow vs Pressure</strong>
+      CPB flow is the <strong>primary determinant of oxygen delivery</strong>. MAP is secondary — it is a surrogate for organ perfusion but is influenced by SVR. A high MAP with low flow is worse than a moderate MAP with adequate flow. Aim for CI 2.2–2.4 L/min/m² at normothermia and adjust for temperature.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: PHYSIOLOGY -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 10 · Core</div>
+      <div class="mod-title">Physiology of <em>Bypass</em></div>
+      <div class="mod-intro">What happens to the body when the heart and lungs are bypassed — haemodynamics, coagulation, inflammation, and the end-organ effects.</div>
+    </div>
+
+    <h2 class="subhead">Haemodynamic Changes on CPB</h2>
+    <ul class="clist">
+      <li><strong>Non-pulsatile flow:</strong> The pump generates continuous, non-pulsatile flow — unlike the native heart. This reduces the pulsatile energy that helps maintain microcirculation, lymphatic flow, and baroreceptor function.</li>
+      <li><strong>Reduced SVR:</strong> Haemodilution, hypothermia, and inflammatory mediators cause vasodilation → hypotension. Managed with vasopressors (phenylephrine, norepinephrine) and flow adjustment.</li>
+      <li><strong>Altered autoregulation:</strong> Cerebral, renal, and mesenteric autoregulation are impaired — organ perfusion becomes more pressure-dependent.</li>
+      <li><strong>Loss of hypoxic pulmonary vasoconstriction:</strong> The lungs are bypassed — no longer participate in gas exchange or V/Q matching.</li>
+      <li><strong>Venous return:</strong> Gravity drainage or vacuum-assisted venous drainage (VAVD) — must be carefully monitored to avoid air entrainment or excessive negative pressure.</li>
+      <li><strong>Cardiac output:</strong> Zero — the heart is stopped (cross-clamped) or fibrillating. The pump is the sole source of flow.</li>
+    </ul>
+
+    <h2 class="subhead">Coagulation and Haematological Changes</h2>
+    <table class="data-table">
+      <tr><th>Change</th><th>Mechanism</th><th>Clinical Impact</th></tr>
+      <tr><td><strong>Haemodilution</strong></td><td>Prime volume</td><td>Reduced clotting factor concentration, anaemia</td></tr>
+      <tr><td><strong>Platelet activation and dysfunction</strong></td><td>Contact with circuit, shear stress, heparin</td><td>Thrombocytopenia, impaired aggregation → bleeding</td></tr>
+      <tr><td><strong>Coagulopathy</strong></td><td>Consumption, fibrinolysis, hypothermia</td><td>Bleeding, transfusion requirements</td></tr>
+      <tr><td><strong>Fibrinolysis</strong></td><td>tPA release, contact activation</td><td>Post-operative bleeding</td></tr>
+      <tr><td><strong>Heparin rebound</strong></td><td>Heparin release from tissues</td><td>Bleeding hours after protamine</td></tr>
+      <tr><td><strong>Haemolysis</strong></td><td>Shear stress, roller pump, cardiotomy suction</td><td>Anaemia, jaundice, renal injury</td></tr>
+      <tr><td><strong>Inflammatory activation</strong></td><td>Contact activation, ischaemia-reperfusion, complement</td><td>SIRS, capillary leak, organ dysfunction</td></tr>
+    </table>
+
+    <h2 class="subhead">The Inflammatory Response</h2>
+    <ul class="clist">
+      <li><strong>Contact activation:</strong> Blood contacts the artificial surface → factor XII activation, complement, and platelets</li>
+      <li><strong>Ischaemia-reperfusion:</strong> Aortic cross-clamp → ischaemia; clamp release → reperfusion → oxidative stress, cytokine release</li>
+      <li><strong>Cardiotomy suction:</strong> Shed blood is activated by tissue factor, fat, and air — major contributor to inflammation</li>
+      <li><strong>Endotoxin:</strong> Gut hypoperfusion → bacterial translocation → endotoxaemia</li>
+      <li><strong>Result:</strong> Systemic inflammatory response syndrome (SIRS) — fever, vasodilation, capillary leak, leukocytosis</li>
+      <li><strong>Consequences:</strong> Post-perfusion syndrome, acute lung injury, renal dysfunction, coagulopathy</li>
+      <li><strong>Mitigation:</strong> Heparin-bonded circuits, mini-circuits, leukocyte filtration, steroids (selected), aprotinin (now restricted), off-pump surgery</li>
+    </ul>
+
+    <h2 class="subhead">End-Organ Effects</h2>
+    <table class="data-table">
+      <tr><th>Organ</th><th>Effect of CPB</th><th>Mechanism</th></tr>
+      <tr><td><strong>Brain</strong></td><td>Embolic stroke, cognitive dysfunction, seizures</td><td>Microemboli, hypoperfusion, inflammation, hyperthermia</td></tr>
+      <tr><td><strong>Heart</strong></td><td>Myocardial stunning, arrhythmias, low cardiac output</td><td>Ischaemia-reperfusion injury, cardioplegia, inflammation</td></tr>
+      <tr><td><strong>Lungs</strong></td><td>Post-perfusion lung injury, atelectasis, ARDS</td><td>Ischaemia, complement activation, surfactant dysfunction</td></tr>
+      <tr><td><strong>Kidneys</strong></td><td>Acute kidney injury (AKI) — up to 30%</td><td>Hypoperfusion, emboli, haemolysis, inflammation</td></tr>
+      <tr><td><strong>Gut</strong></td><td>Ischaemia, ileus, translocation of endotoxin</td><td>Hypoperfusion, non-pulsatile flow</td></tr>
+      <tr><td><strong>Liver</strong></td><td>Transient dysfunction, reduced drug metabolism</td><td>Hypoperfusion, inflammation</td></tr>
+      <tr><td><strong>Coagulation</strong></td><td>Coagulopathy, bleeding</td><td>Haemodilution, platelet dysfunction, fibrinolysis</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The "Post-Perfusion Syndrome"</strong>
+      A constellation of findings after CPB: fever, vasodilation, capillary leak, leukocytosis, and organ dysfunction. It is a form of SIRS triggered by the extracorporeal circuit and ischaemia-reperfusion. Severity correlates with bypass duration and is a major cause of post-operative morbidity.
+    </div>
+
+    <h2 class="subhead">Acid-Base Management — Alpha-Stat vs pH-Stat</h2>
+    <table class="data-table">
+      <tr><th>Strategy</th><th>Principle</th><th>Temperature Correction</th><th>Use</th></tr>
+      <tr><td><strong>Alpha-stat</strong></td><td>Maintain PaCO₂ at 40 mmHg <em>uncorrected</em> for temperature</td><td>Not corrected — PaCO₂ measured at 37°C remains 40</td><td>Standard in adults; preserves cerebral autoregulation</td></tr>
+      <tr><td><strong>pH-stat</strong></td><td>Maintain PaCO₂ at 40 mmHg <em>corrected</em> for temperature</td><td>Corrected — adds CO₂ at hypothermia</td><td>Paediatrics; may improve cerebral cooling but impairs autoregulation</td></tr>
+    </table>
+    <div class="callout co-pearl">
+      <strong>✦ Clinical Choice</strong>
+      <strong>Alpha-stat</strong> is standard for adult cardiac surgery — it preserves cerebral autoregulation and avoids hyperaemia. <strong>pH-stat</strong> is sometimes used in paediatric cardiac surgery because it promotes more uniform brain cooling and may improve outcomes in complex congenital repairs.
+    </div>
+
+    <h2 class="subhead">Non-Pulsatile vs Pulsatile Flow</h2>
+    <ul class="clist">
+      <li><strong>Non-pulsatile:</strong> Standard CPB — continuous flow. Simpler, less haemolysis, but may impair microcirculation and lymphatic return.</li>
+      <li><strong>Pulsatile:</strong> Some systems generate a pulse (e.g., intra-aortic balloon pump or modified roller pump). May improve microcirculation and reduce SIRS, but evidence for improved clinical outcomes is weak.</li>
+      <li><strong>Physiological difference:</strong> Pulsatility helps maintain endothelial function and nitric oxide release. Non-pulsatile flow may increase SVR and reduce organ perfusion.</li>
+      <li><strong>Current practice:</strong> Most adult CPB is non-pulsatile. Pulsatile flow is used selectively (e.g., paediatric, prolonged bypass, renal protection).</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: HYPOTHERMIA -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 10 · Core</div>
+      <div class="mod-title">Hypothermia & <em>Organ Protection</em></div>
+      <div class="mod-intro">Why we cool the body — the metabolic, neurological, and myocardial benefits of hypothermia during CPB, and the evidence behind it.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>Core Concept</strong>
+      Hypothermia reduces metabolic rate and oxygen consumption, providing <strong>organ protection</strong> during ischaemia. It is the single most important protective strategy in cardiac surgery — used universally in CPB, even when not strictly necessary for the procedure.
+    </div>
+
+    <h2 class="subhead">Temperature Targets</h2>
+    <table class="data-table">
+      <tr><th>Strategy</th><th>Temperature</th><th>Use</th><th>Metabolic Rate (CMRO₂)</th></tr>
+      <tr><td><strong>Normothermia</strong></td><td>36–37°C</td><td>Some procedures (e.g., off-pump, short cases)</td><td>Baseline (100%)</td></tr>
+      <tr><td><strong>Mild hypothermia</strong></td><td>32–35°C</td><td>Most adult cardiac surgery</td><td>~75–85%</td></tr>
+      <tr><td><strong>Moderate hypothermia</strong></td><td>26–31°C</td><td>Complex procedures, valve + CABG</td><td>~50–60%</td></tr>
+      <tr><td><strong>Deep hypothermia</strong></td><td>18–25°C</td><td>Aortic arch surgery, circulatory arrest</td><td>~20–30%</td></tr>
+      <tr><td><strong>Profound hypothermia</strong></td><td><18°C</td><td>Rare; experimental</td><td><20%</td></tr>
+    </table>
+
+    <h2 class="subhead">The Q10 Effect</h2>
+    <div class="formula-box">
+      <span class="flabel">Q10 Temperature Coefficient</span>
+      Q10 = (Rate at T+10°C) / (Rate at T) ≈ 2–3
+      <div class="fexpl">For every 10°C reduction in temperature, metabolic rate falls by 50–70%. At 18–20°C, CMRO₂ is ~20–30% of normal.</div>
+    </div>
+    <ul class="clist">
+      <li><strong>Clinical implication:</strong> At 28°C, cerebral metabolic rate is ~50% of normal — allowing circulatory arrest for a limited time.</li>
+      <li><strong>Caveat:</strong> The Q10 effect is not linear — it is greatest in the mild-to-moderate range and flattens at deep hypothermia.</li>
+      <li><strong>Oxygen consumption:</strong> Falls from ~250 mL/min at 37°C to ~50 mL/min at 20°C — the basis of hypothermic protection.</li>
+    </ul>
+
+    <h2 class="subhead">Hypothermic Circulatory Arrest (DHCA)</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Deep hypothermia (18–20°C) with complete cessation of circulation — used for aortic arch surgery when the arch must be opened.</li>
+      <li><strong>Safe duration:</strong> ~30–40 minutes at 18–20°C; longer durations require adjunctive cerebral perfusion.</li>
+      <li><strong>Cerebral protection:</strong> Deep hypothermia reduces CMRO₂ to ~20% of baseline — allowing tolerance of ischaemia.</li>
+      <li><strong>Adjuncts:</strong> Antegrade cerebral perfusion (ACP), retrograde cerebral perfusion (RCP), pH-stat strategy, barbiturates, steroids, topical cooling.</li>
+      <li><strong>Rewarming:</strong> Slow rewarming (0.25–0.5°C/h) — rapid rewarming can cause cerebral hyperthermia, worsened neurological injury.</li>
+      <li><strong>Complications:</strong> Neurological injury (stroke, cognitive dysfunction), coagulopathy, renal injury, spinal cord ischaemia.</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ The Danger of Rewarming</strong>
+      Cerebral hyperthermia during rewarming (even mild, >37°C) is associated with worse neurological outcomes. Rewarm slowly, monitor core temperature (PA or oesophageal), and avoid overshoot. Target 36.5–37.0°C at the end of bypass.
+    </div>
+
+    <h2 class="subhead">Cerebral Protection Adjuncts</h2>
+    <table class="data-table">
+      <tr><th>Technique</th><th>Mechanism</th><th>Use</th><th>Notes</th></tr>
+      <tr><td><strong>Antegrade cerebral perfusion (ACP)</strong></td><td>Oxygenated blood via axillary/innominate artery into cerebral circulation</td><td>Aortic arch surgery</td><td>Preferred over RCP; maintains cerebral oxygenation</td></tr>
+      <tr><td><strong>Retrograde cerebral perfusion (RCP)</strong></td><td>Oxygenated blood via SVC in retrograde direction</td><td>Aortic arch surgery (alternative)</td><td>Less physiological; may not adequately oxygenate brain; used when ACP not possible</td></tr>
+      <tr><td><strong>pH-stat strategy</strong></td><td>Adds CO₂ at hypothermia — promotes cerebral vasodilation and cooling</td><td>Paediatric, DHCA</td><td>May improve cooling uniformity but impairs autoregulation</td></tr>
+      <tr><td><strong>Barbiturates</strong></td><td>Reduce CMRO₂, improve tolerance to ischaemia</td><td>Selected DHCA cases</td><td>Limited evidence; may cause hypotension</td></tr>
+      <tr><td><strong>Steroids</strong></td><td>Anti-inflammatory; reduce cerebral oedema</td><td>Selected DHCA</td><td>Controversial; some evidence for improved neurological outcomes</td></tr>
+      <tr><td><strong>Topical cooling</strong></td><td>Ice packs to head</td><td>DHCA</td><td>Adjunct; helps maintain cerebral hypothermia</td></tr>
+    </table>
+
+    <h2 class="subhead">Myocardial Protection — The Role of Hypothermia</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Hypothermia reduces myocardial oxygen demand, preserving ATP and limiting ischaemic injury during aortic cross-clamping.</li>
+      <li><strong>Cardioplegia:</strong> Hypothermic (4–8°C) or warm blood cardioplegia — delivered antegrade (aortic root) or retrograde (coronary sinus).</li>
+      <li><strong>Topical cooling:</strong> Ice slush or cold saline applied to the heart surface — maintains local hypothermia.</li>
+      <li><strong>Systemic hypothermia:</strong> Contributes to myocardial protection by reducing whole-body metabolic rate and oxygen demand.</li>
+      <li><strong>Combined approach:</strong> Systemic hypothermia + cardioplegia + topical cooling — the standard of care.</li>
+    </ul>
+
+    <h2 class="subhead">Rewarming and Afterdrop</h2>
+    <ul class="clist">
+      <li><strong>Rewarming rate:</strong> 0.25–0.5°C/h — slow to avoid cerebral hyperthermia and afterdrop.</li>
+      <li><strong>Gradient:</strong> Keep the temperature gradient between blood and patient <10°C to avoid gas embolism and haemolysis.</li>
+      <li><strong>Afterdrop:</strong> Continued fall in core temperature after rewarming begins — due to cold peripheral blood returning to the core.</li>
+      <li><strong>Target:</strong> Core temperature 36.5–37.0°C at the end of CPB; avoid hyperthermia (>37.5°C).</li>
+      <li><strong>Monitoring:</strong> Core temperature (PA, oesophageal, bladder) and skin temperature; watch for shivering during weaning.</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Thermal Window</strong>
+      Hypothermia protects by reducing metabolic demand, but it also impairs coagulation, immune function, and drug metabolism. The goal is to use <strong>the minimum degree of hypothermia</strong> needed for the procedure, then rewarm to normothermia. "Mild hypothermia for most cases, deep only when necessary."
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: CARDIOPLEGIA -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 10 · Core</div>
+      <div class="mod-title">Cardioplegia & <em>Myocardial Protection</em></div>
+      <div class="mod-intro">Stopping the heart safely — the composition, delivery, and evidence behind cardioplegic solutions. The cornerstone of myocardial protection.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Problem</strong>
+      During aortic cross-clamping, the heart is ischaemic. Without protection, the myocardium sustains irreversible injury within 20–40 minutes. Cardioplegia is the solution — it arrests the heart in diastole and protects it during ischaemia.
+    </div>
+
+    <h2 class="subhead">Principles of Cardioplegia</h2>
+    <ul class="clist">
+      <li><strong>Rapid diastolic arrest:</strong> Stop the heart in diastole — reduces metabolic demand and avoids ischaemic contracture.</li>
+      <li><strong>Hypothermia:</strong> Cool the myocardium (4–8°C) — reduces metabolic rate and oxygen demand.</li>
+      <li><strong>Buffering:</strong> Maintain physiological pH — avoid intracellular acidosis.</li>
+      <li><strong>Substrate enhancement:</strong> Provide glucose, glutamate, aspartate — fuel for ATP production.</li>
+      <li><strong>Oxygenation:</strong> Blood cardioplegia delivers oxygen and nutrients — superior to crystalloid in many studies.</li>
+      <li><strong>Repeated delivery:</strong> Re-dose every 15–20 minutes to maintain arrest and wash out metabolites.</li>
+      <li><strong>Avoiding oedema:</strong> Hyperosmolar solutions (mannitol) reduce myocardial oedema.</li>
+    </ul>
+
+    <h2 class="subhead">Cardioplegia Solutions</h2>
+    <table class="data-table">
+      <tr><th>Solution</th><th>Composition</th><th>Type</th><th>Key Features</th></tr>
+      <tr><td><strong>St Thomas' (Plegisol)</strong></td><td>High K⁺ (16–20 mmol/L), Mg²⁺, procaine, buffer</td><td>Crystalloid</td><td>Most widely used; inexpensive; no blood needed</td></tr>
+      <tr><td><strong>Bretschneider (HTK)</strong></td><td>Low Na⁺, low Ca²⁺, histidine buffer, tryptophan, ketoglutarate</td><td>Crystalloid</td><td>Longer protection (up to 3 h); single dose; low K⁺ (no depolarising arrest)</td></tr>
+      <tr><td><strong>Buckberg (blood cardioplegia)</strong></td><td>Blood + K⁺ + glutamate + aspartate + citrate + THAM</td><td>Blood</td><td>Oxygenated; substrate-enhanced; superior for high-risk patients</td></tr>
+      <tr><td><strong>Del Nido</strong></td><td>Blood + K⁺ + Mg²⁺ + mannitol + bicarbonate + lidocaine</td><td>Blood</td><td>Single-dose; used in paediatric and some adult surgery</td></tr>
+      <tr><td><strong>Custodiol (HTK)</strong></td><td>Histidine-tryptophan-ketoglutarate</td><td>Crystalloid</td><td>Long-acting; used for heart transplantation</td></tr>
+      <tr><td><strong>Microplegia</strong></td><td>Blood + small volume of concentrated K⁺ and additives</td><td>Blood</td><td>Minimal haemodilution; used with mini-circuits</td></tr>
+    </table>
+
+    <h2 class="subhead">Delivery Routes</h2>
+    <ul class="clist">
+      <li><strong>Antegrade:</strong> Via aortic root (after cross-clamp) or directly into coronary ostia (after aortotomy). Preferred route — delivers solution to the myocardium through the coronary arteries.</li>
+      <li><strong>Retrograde:</strong> Via the coronary sinus — delivers solution retrogradely through the venous system. Used when antegrade delivery is inadequate (aortic regurgitation, severe coronary disease, redo surgery).</li>
+      <li><strong>Combined:</strong> Antegrade + retrograde — improves distribution to all myocardial territories.</li>
+      <li><strong>Topical:</strong> Cold saline or ice slush applied to the heart surface — maintains local hypothermia.</li>
+      <li><strong>Continuous vs intermittent:</strong> Continuous delivery maintains arrest but obscures the surgical field; intermittent (every 15–20 min) is standard.</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ Danger of Inadequate Delivery</strong>
+      Incomplete cardioplegic delivery (e.g., in severe coronary stenosis, aortic regurgitation) results in inadequate myocardial protection and post-operative myocardial dysfunction. Use retrograde delivery, combined routes, or direct ostial cannulation to ensure complete protection.
+    </div>
+
+    <h2 class="subhead">Monitoring Myocardial Protection</h2>
+    <ul class="clist">
+      <li><strong>ECG:</strong> Absence of electrical activity (asystole) — confirms arrest.</li>
+      <li><strong>Myocardial temperature:</strong> Target <15°C — use a myocardial temperature probe.</li>
+      <li><strong>Cardioplegia volume:</strong> Document volume delivered and effluent quality.</li>
+      <li><strong>Coronary sinus effluent:</strong> Clear, not bloody — indicates adequate delivery and washout of metabolites.</li>
+      <li><strong>Blood gases:</strong> Monitor acid-base and electrolytes during delivery.</li>
+      <li><strong>Post-operative:</strong> Cardiac enzymes (troponin, CK-MB), ECG, echocardiography — assess for myocardial injury.</li>
+    </ul>
+
+    <h2 class="subhead">Reperfusion Injury</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Restoration of blood flow to ischaemic myocardium → oxidative stress, calcium overload, inflammation, apoptosis.</li>
+      <li><strong>Consequences:</strong> Myocardial stunning (reversible dysfunction), arrhythmias, cell death.</li>
+      <li><strong>Mitigation:</strong> Controlled reperfusion (warm blood cardioplegia before cross-clamp release), antioxidants, ischemic preconditioning, postconditioning.</li>
+      <li><strong>Warm reperfusion:</strong> Infuse warm blood cardioplegia (37°C) for 3–5 minutes before cross-clamp release — "hot shot" — improves recovery.</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The "Hot Shot"</strong>
+      Before releasing the aortic cross-clamp, deliver a warm (37°C) blood cardioplegia solution — "hot shot" — to restore metabolic substrates, wash out metabolites, and reduce reperfusion injury. This is a standard practice in many centres and is associated with improved myocardial recovery.
+    </div>
+
+    <h2 class="subhead">Cardioplegia in Special Situations</h2>
+    <table class="data-table">
+      <tr><th>Situation</th><th>Consideration</th></tr>
+      <tr><td><strong>Aortic regurgitation</strong></td><td>Antegrade cardioplegia may not be delivered effectively (solution leaks into LV) — use retrograde or direct ostial delivery.</td></tr>
+      <tr><td><strong>Severe coronary disease</strong></td><td>Antegrade delivery may not reach all territories — use retrograde or combined delivery.</td></tr>
+      <tr><td><strong>Redo surgery</strong></td><td>Adhesions make antegrade delivery difficult — retrograde is preferred; direct ostial cannulation may be needed.</td></tr>
+      <tr><td><strong>Heart transplantation</strong></td><td>Single-dose, long-acting crystalloid (HTK) — donor heart is arrested at retrieval and transported.</td></tr>
+      <tr><td><strong>Paediatric</strong></td><td>Del Nido or blood cardioplegia; single-dose strategies are common; immature myocardium is more tolerant of ischaemia.</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: ANTICOAGULATION -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 10 · Core</div>
+      <div class="mod-title">Anticoagulation & <em>Haemostasis</em></div>
+      <div class="mod-intro">Heparin, protamine, and the coagulation cascade — preventing thrombosis during CPB while avoiding bleeding after it.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Paradox</strong>
+      CPB requires <strong>intense anticoagulation</strong> (high-dose heparin) to prevent clotting in the circuit — yet <strong>bleeding</strong> is a major complication after bypass. The balance between anticoagulation and haemostasis is the central haematological challenge of CPB.
+    </div>
+
+    <h2 class="subhead">Heparin — Mechanism and Monitoring</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Binds to antithrombin III (ATIII) → conformational change → accelerates ATIII-mediated inactivation of thrombin (factor IIa) and factor Xa by 1000–10,000×.</li>
+      <li><strong>Limitation:</strong> Heparin does not inhibit clot-bound thrombin or factor Xa bound to platelets — hence the need for high doses during CPB.</li>
+      <li><strong>Dose for CPB:</strong> 300–400 IU/kg IV (typically 300 IU/kg) — target ACT >400–480 seconds.</li>
+      <li><strong>Monitoring:</strong> Activated clotting time (ACT) — bedside test; target >400–480 s for CPB. Some centres use heparin concentration monitoring (Hepcon) for more precise dosing.</li>
+      <li><strong>Heparin resistance:</strong> ATIII deficiency (congenital, consumptive), high doses needed — consider ATIII concentrate or fresh frozen plasma.</li>
+      <li><strong>Heparin-induced thrombocytopenia (HIT):</strong> Immune-mediated (anti-PF4 antibodies) → thrombosis risk. Alternative anticoagulants: argatroban, bivalirudin, danaparoid.</li>
+    </ul>
+
+    <h2 class="subhead">Activated Clotting Time (ACT)</h2>
+    <div class="val-grid">
+      <div class="val-item"><div class="val-label">Baseline ACT</div><div class="val-num">100–140</div><div class="val-unit">seconds</div></div>
+      <div class="val-item"><div class="val-label">Target ACT for CPB</div><div class="val-num">400–480</div><div class="val-unit">seconds</div></div>
+      <div class="val-item"><div class="val-label">Target ACT for DHCA</div><div class="val-num">>480</div><div class="val-unit">seconds</div></div>
+      <div class="val-item"><div class="val-label">Post-protamine ACT</div><div class="val-num"><140</div><div class="val-unit">seconds (within 10% of baseline)</div></div>
+    </div>
+    <div class="callout co-warn">
+      <strong>⚠ ACT is a Point-of-Care Test</strong>
+      ACT measures the time to clot formation in whole blood — it is influenced by heparin, temperature, haemodilution, and platelet function. It is a useful bedside test but does not measure heparin concentration. For complex cases or heparin resistance, use heparin concentration monitoring (Hepcon) and anti-Xa levels.
+    </div>
+
+    <h2 class="subhead">Protamine — Reversal of Heparin</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Positively charged protamine binds negatively charged heparin → inactive complex → removed by the reticuloendothelial system.</li>
+      <li><strong>Dose:</strong> 1 mg protamine per 100 IU heparin (or based on total heparin dose). Give slowly (over 5–10 min) to avoid hypotension and anaphylaxis.</li>
+      <li><strong>Monitoring:</strong> ACT after protamine — target within 10% of baseline. Repeat ACT 10–15 min after protamine to detect heparin rebound.</li>
+      <li><strong>Side effects:</strong> Hypotension (histamine release, rapid injection), anaphylaxis (fish allergy, prior protamine exposure), pulmonary hypertension, coagulopathy (excess protamine is anticoagulant).</li>
+      <li><strong>Heparin rebound:</strong> Heparin released from tissues hours after protamine — monitor ACT and bleeding; re-dose protamine if needed.</li>
+      <li><strong>Protamine alternatives:</strong> Hexadimethrine (rarely used), heparinase (investigational).</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ Protamine Reaction</strong>
+      Protamine can cause catastrophic anaphylaxis — especially in patients with prior protamine exposure (e.g., cardiac surgery, insulin users, vasectomy). Risk factors: fish allergy, NPH insulin, previous protamine reaction. Management: stop injection, epinephrine, fluids, vasopressors, and cardiopulmonary support if severe. Slow injection reduces the risk of histamine-mediated hypotension.
+    </div>
+
+    <h2 class="subhead">Coagulopathy After CPB</h2>
+    <table class="data-table">
+      <tr><th>Cause</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Haemodilution</strong></td><td>Reduced clotting factor and platelet concentration</td><td>Blood transfusion, FFP, platelet transfusion</td></tr>
+      <tr><td><strong>Platelet dysfunction</strong></td><td>Activation, consumption, heparin effect</td><td>Platelet transfusion, desmopressin (DDAVP)</td></tr>
+      <tr><td><strong>Fibrinolysis</strong></td><td>tPA release, contact activation</td><td>Antifibrinolytics (tranexamic acid, epsilon-aminocaproic acid)</td></tr>
+      <tr><td><strong>Residual heparin</strong></td><td>Inadequate protamine reversal</td><td>Additional protamine, ACT monitoring</td></tr>
+      <tr><td><strong>Hypothermia</strong></td><td>Impaired enzyme and platelet function</td><td>Rewarm to >36°C</td></tr>
+      <tr><td><strong>Hypocalcaemia</strong></td><td>Citrate in transfused blood</td><td>Calcium supplementation</td></tr>
+      <tr><td><strong>Disseminated intravascular coagulation (DIC)</strong></td><td>Severe inflammation, shock</td><td>Treat cause; blood products</td></tr>
+    </table>
+
+    <h2 class="subhead">Antifibrinolytics — Tranexamic Acid</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> Lysine analogue — blocks plasminogen binding to fibrin → inhibits fibrinolysis.</li>
+      <li><strong>Dose:</strong> 10–30 mg/kg IV (varies by centre); often given as a loading dose before CPB and/or added to pump prime.</li>
+      <li><strong>Benefit:</strong> Reduces bleeding and transfusion requirements — strongest evidence for high-risk cases (redo, complex, dual antiplatelet therapy).</li>
+      <li><strong>Risk:</strong> Theoretical risk of thrombosis; no clear evidence of increased thrombotic events in cardiac surgery. Avoid in patients with active thrombosis or severe renal impairment (dose adjust).</li>
+      <li><strong>Aprotinin:</strong> Serine protease inhibitor — effective but associated with renal injury and mortality in the BART trial (2008); now restricted to selected high-risk cases.</li>
+    </ul>
+
+    <h2 class="subhead">Point-of-Care Coagulation Testing</h2>
+    <ul class="clist">
+      <li><strong>TEG (Thromboelastography) / ROTEM (Rotational Thromboelastometry):</strong> Whole-blood viscoelastic tests — assess clot initiation, strength, and lysis in real time.</li>
+      <li><strong>Parameters:</strong> R time (clot initiation), K time (clot kinetics), alpha angle (fibrin formation), MA (maximum amplitude — clot strength), LY30 (fibrinolysis).</li>
+      <li><strong>Use:</strong> Guides targeted transfusion (platelets, FFP, cryoprecipitate, antifibrinolytics) — reduces unnecessary transfusion.</li>
+      <li><strong>Limitations:</strong> Does not assess platelet function fully; requires trained operator; results take time.</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ Blood Conservation Strategies</strong>
+      <strong>Pre-operative:</strong> Correct anaemia (iron, erythropoietin), stop antiplatelet agents if safe, cell salvage. <strong>Intra-operative:</strong> Acute normovolaemic haemodilution (ANH), retrograde autologous prime (RAP), antifibrinolytics, meticulous surgical haemostasis, point-of-care testing, mini-circuits. <strong>Post-operative:</strong> Cell salvage, restrictive transfusion thresholds (Hb 7–8 g/dL), avoid hypothermia.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: INFLAMMATORY RESPONSE -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 10 · Core</div>
+      <div class="mod-title">The Inflammatory <em>Response</em></div>
+      <div class="mod-intro">The systemic inflammatory response to CPB — mechanisms, consequences, and strategies to mitigate it. The hidden cost of extracorporeal circulation.</div>
+    </div>
+
+    <div class="callout co-fact">
+      <strong>Historical Note</strong>
+      The inflammatory response to CPB was first described in the 1980s as "post-perfusion syndrome" — a constellation of fever, vasodilation, capillary leak, and organ dysfunction. It remains a major cause of morbidity after cardiac surgery.
+    </div>
+
+    <h2 class="subhead">Triggers of the Inflammatory Response</h2>
+    <table class="data-table">
+      <tr><th>Trigger</th><th>Mechanism</th><th>Contribution</th></tr>
+      <tr><td><strong>Blood-circuit contact</strong></td><td>Factor XII activation, complement activation, platelet adhesion</td><td>Major</td></tr>
+      <tr><td><strong>Ischaemia-reperfusion</strong></td><td>Aortic cross-clamp → ischaemia; release → reperfusion → ROS, cytokines</td><td>Major</td></tr>
+      <tr><td><strong>Cardiotomy suction</strong></td><td>Blood exposed to tissue factor, fat, air — activation</td><td>Major</td></tr>
+      <tr><td><strong>Endotoxin</strong></td><td>Gut hypoperfusion → bacterial translocation</td><td>Moderate</td></tr>
+      <tr><td><strong>Hypothermia</strong></td><td>Platelet activation, complement activation</td><td>Moderate</td></tr>
+      <tr><td><strong>Haemolysis</strong></td><td>Free haemoglobin → NO scavenging, inflammation</td><td>Moderate</td></tr>
+      <tr><td><strong>Surgical trauma</strong></td><td>Tissue injury → cytokine release</td><td>Moderate</td></tr>
+      <tr><td><strong>Transfusion</strong></td><td>Storage lesion, immunomodulation</td><td>Moderate</td></tr>
+    </table>
+
+    <h2 class="subhead">Mediators of the Inflammatory Response</h2>
+    <ul class="clist">
+      <li><strong>Complement activation:</strong> C3a, C5a — anaphylatoxins; cause mast cell degranulation, neutrophil activation, capillary leak.</li>
+      <li><strong>Cytokines:</strong> IL-6, IL-8, TNF-α, IL-1β — fever, vasodilation, capillary leak, acute phase response.</li>
+      <li><strong>Neutrophil activation:</strong> Degranulation, ROS production, adhesion to endothelium — tissue injury.</li>
+      <li><strong>Endothelial activation:</strong> Increased permeability, expression of adhesion molecules, nitric oxide dysregulation.</li>
+      <li><strong>Coagulation activation:</strong> Tissue factor expression, thrombin generation — links inflammation and coagulation.</li>
+      <li><strong>Fibrinolysis:</strong> tPA release — bleeding and inflammation.</li>
+    </ul>
+
+    <h2 class="subhead">Clinical Consequences</h2>
+    <table class="data-table">
+      <tr><th>System</th><th>Manifestation</th><th>Mechanism</th></tr>
+      <tr><td><strong>Cardiovascular</strong></td><td>Vasodilation, hypotension, capillary leak</td><td>NO, complement, cytokines</td></tr>
+      <tr><td><strong>Respiratory</strong></td><td>Post-perfusion lung injury, ARDS</td><td>Neutrophil sequestration, complement, surfactant dysfunction</td></tr>
+      <tr><td><strong>Renal</strong></td><td>Acute kidney injury</td><td>Hypoperfusion, inflammation, haemolysis</td></tr>
+      <tr><td><strong>Neurological</strong></td><td>Cognitive dysfunction, delirium</td><td>Emboli, inflammation, hypoperfusion</td></tr>
+      <tr><td><strong>Haematological</strong></td><td>Coagulopathy, bleeding</td><td>Platelet dysfunction, fibrinolysis</td></tr>
+      <tr><td><strong>Metabolic</strong></td><td>Insulin resistance, hyperglycaemia</td><td>Stress response, cytokines</td></tr>
+      <tr><td><strong>General</strong></td><td>Fever, leukocytosis, tachycardia</td><td>SIRS</td></tr>
+    </table>
+
+    <h2 class="subhead">Strategies to Mitigate the Inflammatory Response</h2>
+    <table class="data-table">
+      <tr><th>Strategy</th><th>Mechanism</th><th>Evidence</th></tr>
+      <tr><td><strong>Heparin-bonded circuits</strong></td><td>Reduces contact activation and complement</td><td>Moderate — reduces inflammation and bleeding</td></tr>
+      <tr><td><strong>Miniaturised circuits</strong></td><td>Reduces surface area and prime volume</td><td>Moderate — less haemodilution and inflammation</td></tr>
+      <tr><td><strong>Leukocyte filtration</strong></td><td>Removes activated neutrophils</td><td>Weak — inconsistent results</td></tr>
+      <tr><td><strong>Steroids</strong></td><td>Anti-inflammatory</td><td>Weak — may reduce SIRS but no clear outcome benefit; risk of infection</td></tr>
+      <tr><td><strong>Aprotinin</strong></td><td>Antifibrinolytic and anti-inflammatory</td><td>Restricted due to safety concerns (BART trial)</td></tr>
+      <tr><td><strong>Off-pump surgery</strong></td><td>Avoids CPB entirely</td><td>Reduces inflammation but technically demanding; not universally applicable</td></tr>
+      <tr><td><strong>Modified ultrafiltration (MUF)</strong></td><td>Removes inflammatory mediators and excess fluid</td><td>Moderate — used in paediatric cardiac surgery; improves haemodynamics</td></tr>
+      <tr><td><strong>Ultrafiltration during CPB</strong></td><td>Removes fluid and mediators</td><td>Weak — no clear outcome benefit</td></tr>
+    </table>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Bottom Line</strong>
+      The inflammatory response to CPB is multifactorial and cannot be eliminated — only attenuated. The most effective strategies are <strong>minimising circuit surface area and prime volume</strong>, <strong>reducing cardiotomy suction</strong>, and <strong>shortening bypass duration</strong>. Anti-inflammatory drugs have shown disappointing results in large trials.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: COMPLICATIONS -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 10 · Applied</div>
+      <div class="mod-title">Complications of <em>CPB</em></div>
+      <div class="mod-intro">From stroke to bleeding to renal failure — the major complications of cardiopulmonary bypass, their mechanisms, and management.</div>
+    </div>
+
+    <h2 class="subhead">Neurological Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Stroke</strong></td><td>1–5%</td><td>Emboli (atheroma, air, thrombus), hypoperfusion</td><td>Supportive; neurology; rehabilitation</td></tr>
+      <tr><td><strong>Post-operative cognitive dysfunction (POCD)</strong></td><td>20–50% at discharge; 10–20% at 3 months</td><td>Microemboli, inflammation, hypoperfusion</td><td>Supportive; cognitive rehabilitation</td></tr>
+      <tr><td><strong>Delirium</strong></td><td>10–30%</td><td>Inflammation, emboli, sleep deprivation</td><td>Multicomponent intervention; antipsychotics if needed</td></tr>
+      <tr><td><strong>Seizures</strong></td><td>1–2%</td><td>Emboli, hypoperfusion, metabolic</td><td>Anticonvulsants; investigate cause</td></tr>
+      <tr><td><strong>Spinal cord ischaemia</strong></td><td><1%</td><td>Hypoperfusion (especially with DHCA)</td><td>Supportive; rehabilitation</td></tr>
+    </table>
+    <div class="callout co-key">
+      <strong>Prevention of Neurological Injury</strong>
+      <strong>Embolic:</strong> Arterial filter, careful de-airing, avoidance of aortic manipulation (clampless techniques), epiaortic ultrasound to assess ascending aorta. <strong>Hypoperfusion:</strong> Maintain adequate flow and MAP, avoid severe hypotension, use alpha-stat. <strong>Inflammation:</strong> Minimise bypass duration, reduce cardiotomy suction, consider mini-circuits.
+    </div>
+
+    <h2 class="subhead">Cardiac Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Low cardiac output syndrome</strong></td><td>5–15%</td><td>Myocardial stunning, ischaemia-reperfusion, incomplete protection</td><td>Inotropes, vasopressors, IABP, ECMO</td></tr>
+      <tr><td><strong>Peri-operative MI</strong></td><td>2–5%</td><td>Graft failure, inadequate protection, emboli</td><td>Antiplatelets, revascularisation, supportive</td></tr>
+      <tr><td><strong>Arrhythmias</strong></td><td>20–40%</td><td>Ischaemia, inflammation, electrolyte imbalance</td><td>Beta-blockers, amiodarone, pacing</td></tr>
+      <tr><td><strong>Cardiac tamponade</strong></td><td>1–2%</td><td>Post-operative bleeding</td><td>Emergency re-sternotomy, drainage</td></tr>
+    </table>
+
+    <h2 class="subhead">Pulmonary Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Post-perfusion lung injury</strong></td><td>2–10%</td><td>Inflammation, ischaemia, surfactant dysfunction</td><td>Lung-protective ventilation, supportive</td></tr>
+      <tr><td><strong>ARDS</strong></td><td>1–5%</td><td>Severe inflammation, transfusion, sepsis</td><td>Lung-protective ventilation, prone positioning</td></tr>
+      <tr><td><strong>Pleural effusion</strong></td><td>10–20%</td><td>Surgical trauma, heart failure</td><td>Drainage if symptomatic</td></tr>
+      <tr><td><strong>Atelectasis</strong></td><td>Common</td><td>Anaesthesia, pain, immobility</td><td>Physiotherapy, incentive spirometry</td></tr>
+    </table>
+
+    <h2 class="subhead">Renal Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Acute kidney injury (AKI)</strong></td><td>5–30%</td><td>Hypoperfusion, emboli, haemolysis, inflammation</td><td>Avoid nephrotoxins, optimise haemodynamics, dialysis if severe</td></tr>
+      <tr><td><strong>Haemoglobinuria</strong></td><td>Common</td><td>Haemolysis from pump</td><td>Maintain urine output; monitor creatinine</td></tr>
+      <tr><td><strong>Oliguria</strong></td><td>Common</td><td>Hypovolaemia, hypothermia, low flow</td><td>Fluid, diuretics, optimise flow</td></tr>
+    </table>
+
+    <h2 class="subhead">Haematological Complications</h2>
+    <table class="data-table">
+      <tr><th>Complication</th><th>Incidence</th><th>Mechanism</th><th>Management</th></tr>
+      <tr><td><strong>Bleeding</strong></td><td>5–20%</td><td>Coagulopathy, platelet dysfunction, residual heparin</td><td>Blood products, protamine, antifibrinolytics, re-exploration</td></tr>
+      <tr><td><strong>Thrombocytopenia</strong></td><td>Common</td><td>Dilution, consumption, heparin</td><td>Platelet transfusion if bleeding</td></tr>
+      <tr><td><strong>Heparin-induced thrombocytopenia (HIT)</strong></td><td>1–3%</td><td>Anti-PF4 antibodies</td><td>Stop heparin; use argatroban, bivalirudin, danaparoid</td></tr>
+      <tr><td><strong>Haemolysis</strong></td><td>Common</td><td>Shear stress, cardiotomy suction</td><td>Monitor Hb, LDH, bilirubin; minimise suction</td></tr>
+    </table>
+
+    <h2 class="subhead">Other Complications</h2>
+    <ul class="clist">
+      <li><strong>Gastrointestinal:</strong> Ileus, ischaemia, GI bleeding, pancreatitis — hypoperfusion and inflammation.</li>
+      <li><strong>Infection:</strong> Sternal wound infection, mediastinitis, pneumonia, sepsis — immunosuppression, prolonged ICU stay.</li>
+      <li><strong>Vascular:</strong> Aortic dissection (cannulation), limb ischaemia (femoral cannulation), emboli.</li>
+      <li><strong>Metabolic:</strong> Hyperglycaemia, electrolyte disturbance, acidosis.</li>
+      <li><strong>Psychological:</strong> Depression, PTSD, cognitive dysfunction.</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ Emergency Scenarios</strong>
+      <strong>Massive air embolism:</strong> Trendelenburg, 100% O₂, aspirate air from aortic root, deep hypothermia, retrograde cerebral perfusion. <strong>Aortic dissection:</strong> Recognise by sudden malperfusion, hypotension, transoesophageal echo. Emergency repair. <strong>Circuit failure:</strong> Hand-crank the pump, replace oxygenator, call for help.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 09: WEANING -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Module 09 of 10 · Applied</div>
+      <div class="mod-title">Weaning from <em>Bypass</em></div>
+      <div class="mod-intro">The transition from mechanical to native circulation — the criteria, the sequence, and the complications of weaning.</div>
+    </div>
+
+    <div class="callout co-key">
+      <strong>The Goal</strong>
+      Safe separation from CPB requires <strong>adequate cardiac function</strong>, <strong>stable rhythm</strong>, <strong>optimised preload and afterload</strong>, and <strong>adequate gas exchange</strong>. Failure to wean is a major cause of morbidity and mortality.
+    </div>
+
+    <h2 class="subhead">Criteria for Weaning</h2>
+    <ul class="clist">
+      <li><strong>Cardiac:</strong> Adequate contractility (visually assessed, echocardiography), stable rhythm (sinus or paced), no significant ischaemia.</li>
+      <li><strong>Haemodynamic:</strong> Adequate preload (filling pressures, TEE), acceptable SVR, MAP >60 mmHg at reasonable flow rates.</li>
+      <li><strong>Temperature:</strong> Core temperature ≥36.0°C (rewarmed).</li>
+      <li><strong>Metabolic:</strong> Normal pH, electrolytes (K⁺, Ca²⁺, Mg²⁺), glucose.</li>
+      <li><strong>Coagulation:</strong> Heparin reversed (ACT within 10% of baseline), adequate platelets and clotting factors.</li>
+      <li><strong>Respiratory:</strong> Lungs ventilated, adequate gas exchange.</li>
+      <li><strong>Surgical:</strong> Haemostasis achieved, no mechanical issues (grafts, valves).</li>
+    </ul>
+
+    <h2 class="subhead">Weaning Sequence</h2>
+    <div class="flow-row">
+      <div class="flow-box">1. Rewarm<br>Core ≥36°C</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2. Optimise<br>Preload, rhythm, electrolytes</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3. Ventilate<br>Lungs, adjust FiO₂</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">4. Reduce flow<br>Gradually (10–20%)</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">5. Assess<br>Haemodynamics, TEE</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">6. Separate<br>Clamp venous line, decannulate</div>
+    </div>
+
+    <h2 class="subhead">Step-by-Step Weaning</h2>
+    <ol class="clist" style="list-style-type:decimal;padding-left:1.3rem">
+      <li><strong>Rewarm:</strong> Ensure core temperature ≥36°C. Slow rewarming (0.25–0.5°C/h) to avoid cerebral hyperthermia.</li>
+      <li><strong>Optimise preload:</strong> Assess filling pressures (CVP, PCWP, TEE). Transfuse if necessary (target Hct 25–30% on CPB, >30% after).</li>
+      <li><strong>Optimise rhythm:</strong> Treat arrhythmias (e.g., ventricular pacing for bradycardia, amiodarone for AF).</li>
+      <li><strong>Optimise electrolytes:</strong> K⁺ 4.0–5.0 mmol/L; Ca²⁺ and Mg²⁺ normal.</li>
+      <li><strong>Ventilate:</strong> Start mechanical ventilation; adjust FiO₂ (target SpO₂ >95%); PEEP 5 cmH₂O.</li>
+      <li><strong>Assess cardiac function:</strong> TEE — assess ventricular function, valve function, volume status.</li>
+      <li><strong>Reduce pump flow:</strong> Gradually reduce flow (10–20% steps) while monitoring haemodynamics (MAP, CVP, TEE).</li>
+      <li><strong>Assess native cardiac output:</strong> If MAP and cardiac function are adequate at low flow, proceed to separation.</li>
+      <li><strong>Separate:</strong> Clamp venous line, allow heart to fill, then clamp arterial line and decannulate.</li>
+      <li><strong>Protamine:</strong> Administer protamine to reverse heparin; monitor ACT.</li>
+    </ol>
+
+    <h2 class="subhead">Failure to Wean</h2>
+    <table class="data-table">
+      <tr><th>Cause</th><th>Diagnosis</th><th>Management</th></tr>
+      <tr><td><strong>Myocardial dysfunction</strong></td><td>TEE — poor contractility</td><td>Inotropes (dobutamine, milrinone, epinephrine), IABP</td></tr>
+      <tr><td><strong>Vasodilation</strong></td><td>Low SVR, hypotension</td><td>Vasopressors (norepinephrine, vasopressin, phenylephrine)</td></tr>
+      <tr><td><strong>Hypovolaemia</strong></td><td>Low filling pressures, TEE</td><td>Fluid, blood transfusion</td></tr>
+      <tr><td><strong>Right heart failure</strong></td><td>TEE — RV dilation, poor RV function</td><td>Milrinone, inhaled NO, prostacyclin; avoid high PEEP</td></tr>
+      <tr><td><strong>Ischaemia</strong></td><td>ECG changes, TEE wall motion abnormalities</td><td>Revascularisation, inotropes, IABP</td></tr>
+      <tr><td><strong>Valve dysfunction</strong></td><td>TEE</td><td>Surgical revision</td></tr>
+      <tr><td><strong>Arrhythmia</strong></td><td>ECG</td><td>Pacing, antiarrhythmics</td></tr>
+      <tr><td><strong>Mechanical obstruction</strong></td><td>TEE, surgical field</td><td>Surgical correction</td></tr>
+      <tr><td><strong>Severe</strong></td><td>Refractory</td><td>Re-institute CPB, IABP, ECMO</td></tr>
+    </table>
+
+    <h2 class="subhead">Mechanical Circulatory Support</h2>
+    <ul class="clist">
+      <li><strong>Intra-aortic balloon pump (IABP):</strong> Counterpulsation — reduces afterload and improves coronary perfusion. First-line for low cardiac output after CPB.</li>
+      <li><strong>Inotropes:</strong> Dobutamine (β₁), milrinone (PDE inhibitor), epinephrine (α/β), levosimendan (calcium sensitiser).</li>
+      <li><strong>Vasopressors:</strong> Norepinephrine, vasopressin, phenylephrine.</li>
+      <li><strong>ECMO:</strong> VA-ECMO for refractory cardiogenic shock after cardiac surgery (ECPR).</li>
+      <li><strong>Ventricular assist devices (VAD):</strong> For refractory heart failure — bridge to recovery or transplant.</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ The "Wean Trial"</strong>
+      Before separating from CPB, perform a "wean trial" — reduce flow to 1–1.5 L/min/m² and assess haemodynamics, TEE, and cardiac output. If the patient tolerates the trial, separate. If not, identify the cause and treat.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod9">
+    <div class="mod-head">
+      <div class="mod-num">Module 10 of 10 · Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Thirty questions across all nine modules — from circuit design to weaning. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<!-- DISCLAIMER -->
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<!-- ARTICLE FOOT -->
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--accent-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--accent)';
+  });
+});
+
+// ─── MODULE NAV ───
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/10)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ─── QUIZ ───
+const qs = [
+  // ── BASIC ──
+  {q:"What are the two primary functions of the CPB circuit?",opts:["Filtration and dialysis","Pump (heart) and oxygenator (lungs)","Cooling and warming","Anticoagulation and transfusion"],ans:1,exp:"CPB replaces the heart (pump) and lungs (oxygenator/membrane lung). The pump circulates blood; the oxygenator performs gas exchange. All other components support these two core functions."},
+  {q:"Which pump type is non-occlusive and therefore safer against excessive pressure generation?",opts:["Roller pump","Centrifugal pump","Diaphragm pump","Peristaltic pump"],ans:1,exp:"Centrifugal pumps are non-occlusive — flow is afterload-dependent, and the pump cannot generate excessive pressure if the outflow line is blocked. Roller pumps are positive displacement and can generate very high pressures, risking circuit rupture or air embolism."},
+  {q:"What is the target ACT for CPB?",opts:["150–200 seconds","250–300 seconds","400–480 seconds",">600 seconds"],ans:2,exp:"Target ACT for CPB is >400–480 seconds (varies by centre). For deep hypothermic circulatory arrest, target >480 seconds. Baseline ACT is 100–140 seconds; post-protamine ACT should return to within 10% of baseline."},
+  {q:"What is the standard heparin dose for CPB?",opts:["100 IU/kg","200 IU/kg","300 IU/kg","500 IU/kg"],ans:2,exp:"Standard heparin dose for CPB is 300 IU/kg IV (range 300–400 IU/kg), targeting an ACT >400–480 seconds. Some centres use heparin concentration monitoring (Hepcon) for more precise dosing."},
+  {q:"What is the mechanism of action of protamine?",opts:["Inhibits thrombin directly","Binds heparin to form an inactive complex","Activates antithrombin III","Inhibits platelet aggregation"],ans:1,exp:"Protamine is positively charged and binds negatively charged heparin, forming an inactive complex that is cleared by the reticuloendothelial system. It is the specific antidote for heparin."},
+  {q:"What is the normal cardiac index, and what is the typical CPB flow at normothermia?",opts:["CI 2.5–4.0; CPB flow 2.2–2.4 L/min/m²","CI 1.5–2.0; CPB flow 1.0–1.2 L/min/m²","CI 3.0–5.0; CPB flow 3.0–4.0 L/min/m²","CI 2.0–3.0; CPB flow 1.5–2.0 L/min/m²"],ans:0,exp:"Normal cardiac index is 2.5–4.0 L/min/m². CPB flow at normothermia is typically 2.2–2.4 L/min/m² — slightly lower than native CI due to non-pulsatile flow and altered autoregulation. Flow is reduced further with hypothermia."},
+  {q:"Which oxygenator type is standard in modern CPB?",opts:["Bubble oxygenator","Film oxygenator","Membrane oxygenator","Rotating disc oxygenator"],ans:2,exp:"Membrane oxygenators (microporous polypropylene) are standard in modern CPB. They separate blood and gas with a membrane, avoiding direct blood-gas interface — reducing blood trauma, protein denaturation, and microemboli compared to bubble oxygenators."},
+  {q:"What is the purpose of the arterial filter in the CPB circuit?",opts:["To remove white blood cells","To remove microemboli (particulate and air)","To warm the blood","To add heparin"],ans:1,exp:"The arterial filter (typically 40 µm) removes microemboli — particulate matter, fat, and air — from the arterial line before it enters the patient. This is essential for preventing neurological injury."},
+  // ── INTERMEDIATE ──
+  {q:"What is the Q10 effect in hypothermia?",opts:["For every 10°C rise, metabolic rate doubles","For every 10°C fall, metabolic rate falls by 50–70%","For every 10°C rise, oxygen consumption doubles","For every 10°C fall, oxygen consumption increases"],ans:1,exp:"The Q10 effect: for every 10°C reduction in temperature, metabolic rate falls by 50–70%. This is the basis of hypothermic organ protection — at 18–20°C, CMRO₂ is ~20–30% of normal, allowing circulatory arrest."},
+  {q:"What is the target core temperature for deep hypothermic circulatory arrest (DHCA)?",opts:["28–30°C","24–26°C","18–20°C","12–14°C"],ans:2,exp:"DHCA targets 18–20°C — deep enough to reduce CMRO₂ to ~20% of baseline, allowing 30–40 minutes of circulatory arrest. Adjuncts (ACP, RCP, pH-stat) extend safe duration."},
+  {q:"Which cardioplegia solution is a crystalloid solution with low sodium, low calcium, and histidine buffer — used for long myocardial protection?",opts:["St Thomas' solution","Bretschneider (HTK) solution","Buckberg blood cardioplegia","Del Nido solution"],ans:1,exp:"Bretschneider (HTK) solution is a crystalloid cardioplegia with low Na⁺, low Ca²⁺, histidine buffer, tryptophan, and ketoglutarate. It provides long protection (up to 3 h) with a single dose and is used in heart transplantation."},
+  {q:"What is the 'hot shot' in cardiac surgery?",opts:["A warm blood cardioplegia infusion before cross-clamp release","A rapid rewarming protocol","A type of laser used in surgery","A bolus of epinephrine"],ans:0,exp:"The 'hot shot' is a warm (37°C) blood cardioplegia infusion delivered before releasing the aortic cross-clamp. It restores metabolic substrates, washes out metabolites, and reduces reperfusion injury — improving myocardial recovery."},
+  {q:"Which strategy is used for cerebral protection during DHCA that involves perfusing the brain via the axillary artery?",opts:["Retrograde cerebral perfusion (RCP)","Antegrade cerebral perfusion (ACP)","pH-stat strategy","Topical cooling"],ans:1,exp:"Antegrade cerebral perfusion (ACP) delivers oxygenated blood via the axillary/innominate artery into the cerebral circulation during DHCA. It is preferred over retrograde cerebral perfusion (RCP) because it provides more physiological cerebral oxygenation."},
+  {q:"What is the primary mechanism of the inflammatory response to CPB?",opts:["Allergic reaction to heparin","Contact activation, ischaemia-reperfusion, and cardiotomy suction","Hypothermia-induced complement activation","Protamine anaphylaxis"],ans:1,exp:"The inflammatory response is multifactorial: blood-circuit contact (factor XII, complement, platelets), ischaemia-reperfusion (aortic cross-clamp release), and cardiotomy suction (tissue factor, fat, air). Endotoxin from gut hypoperfusion also contributes."},
+  {q:"Which of the following is a recognised haematological complication of CPB?",opts:["Polycythaemia","Thrombocytopenia and platelet dysfunction","Increased clotting factor activity","Erythrocytosis"],ans:1,exp:"CPB causes thrombocytopenia and platelet dysfunction (activation, consumption, heparin effect). It also causes haemodilution of clotting factors and fibrinolysis — together leading to a coagulopathy and bleeding risk."},
+  {q:"What is the target haematocrit on CPB?",opts:["15–20%","20–25%","25–30%","35–40%"],ans:2,exp:"Target haematocrit on CPB is 25–30%. Below 20% increases the risk of neurological and organ injury due to inadequate oxygen delivery. Haemodilution from the prime volume lowers Hct; transfuse if necessary."},
+  // ── ADVANCED ──
+  {q:"Which acid-base strategy maintains PaCO₂ at 40 mmHg uncorrected for temperature and preserves cerebral autoregulation?",opts:["pH-stat","Alpha-stat","Beta-stat","Gamma-stat"],ans:1,exp:"Alpha-stat maintains PaCO₂ at 40 mmHg when measured at 37°C (uncorrected). It preserves cerebral autoregulation and is standard for adult cardiac surgery. pH-stat corrects PaCO₂ for temperature (adds CO₂ at hypothermia) and is used in paediatric surgery."},
+  {q:"What is the safe duration of DHCA at 18–20°C without adjunctive cerebral perfusion?",opts:["10–15 minutes","30–40 minutes","60–90 minutes","120 minutes"],ans:1,exp:"Safe duration of DHCA at 18–20°C is ~30–40 minutes. Beyond this, the risk of neurological injury increases significantly. Adjunctive cerebral perfusion (ACP or RCP) extends the safe duration."},
+  {q:"Which of the following is a specific hazard of roller pumps compared with centrifugal pumps?",opts:["Higher risk of thrombosis","Increased risk of air embolism if reservoir empties","Lower flow rates","More haemolysis"],ans:1,exp:"Roller pumps are positive displacement — if the reservoir empties, they can pump air into the circuit, causing massive air embolism. Centrifugal pumps are non-occlusive; if the reservoir empties, flow stops rather than pumping air (though cavitation can occur)."},
+  {q:"What is the mechanism of heparin resistance in cardiac surgery?",opts:["Antithrombin III deficiency","Excess protamine","Platelet dysfunction","Fibrinolysis"],ans:0,exp:"Heparin resistance is most commonly due to antithrombin III (ATIII) deficiency — congenital or acquired (consumptive, e.g., prior heparin therapy). Heparin requires ATIII to exert its anticoagulant effect. Treat with ATIII concentrate or fresh frozen plasma."},
+  {q:"What is the 'post-perfusion syndrome'?",opts:["A allergic reaction to protamine","A systemic inflammatory response with fever, vasodilation, and capillary leak","A type of arrhythmia after CPB","A haemolytic reaction to the pump"],ans:1,exp:"Post-perfusion syndrome is a SIRS-like constellation of fever, vasodilation, capillary leak, leukocytosis, and organ dysfunction after CPB. It is triggered by blood-circuit contact, ischaemia-reperfusion, and cardiotomy suction."},
+  {q:"Which of the following is a risk factor for protamine anaphylaxis?",opts:["Fish allergy","Prior protamine exposure (e.g., NPH insulin, previous cardiac surgery)","Shellfish allergy","Egg allergy"],ans:1,exp:"Risk factors for protamine reaction include prior protamine exposure (NPH insulin, previous cardiac surgery, vasectomy), fish allergy, and rapid injection. Slow administration reduces the risk of histamine-mediated hypotension."},
+  {q:"What is the most sensitive early sign of malignant hyperthermia — and how does it differ from CPB complications?",opts:["Hyperthermia — CPB causes hypothermia, not hyperthermia","Unexplained rise in ETCO₂ — CPB can also cause hypercarbia but usually responds to increased sweep gas","Tachycardia — CPB always causes tachycardia","Masseter spasm — CPB does not affect muscle tone"],ans:1,exp:"Unexplained rise in ETCO₂ is the most sensitive early sign of MH. CPB can also cause hypercarbia, but it responds to increased oxygenator sweep gas flow. If ETCO₂ remains elevated despite maximal sweep gas, consider MH — though MH is rare during CPB due to the use of TIVA and avoidance of triggers."},
+  {q:"What is the primary determinant of oxygen delivery during CPB?",opts:["MAP","Pump flow rate","Haematocrit","PaO₂"],ans:1,exp:"Oxygen delivery (DO₂) = pump flow × arterial oxygen content. Pump flow is the primary determinant — MAP is secondary and influenced by SVR. A high MAP with low flow is worse than a moderate MAP with adequate flow."},
+  {q:"Which of the following is a cause of failure to wean from CPB?",opts:["Excellent myocardial function","Vasodilation with low SVR","Normal filling pressures","Sinus rhythm"],ans:1,exp:"Failure to wean can be caused by myocardial dysfunction, vasodilation (low SVR), hypovolaemia, right heart failure, ischaemia, valve dysfunction, arrhythmia, or mechanical obstruction. Vasodilation is treated with vasopressors."},
+  {q:"What is the recommended rewarming rate after hypothermic CPB?",opts:["0.1–0.2°C/h","0.25–0.5°C/h","1.0–2.0°C/h","2.0–5.0°C/h"],ans:1,exp:"Rewarming should be slow — 0.25–0.5°C/h — to avoid cerebral hyperthermia, afterdrop, and haemodynamic instability. Rapid rewarming is associated with worse neurological outcomes."},
+  {q:"Which of the following is TRUE about the arterial cannula site in standard CPB?",opts:["Femoral artery is the standard site","Ascending aorta is the standard site","Axillary artery is the standard site","Carotid artery is the standard site"],ans:1,exp:"The ascending aorta is the standard arterial cannulation site for CPB. Femoral and axillary sites are alternatives for redo surgery, aortic dissection, or minimally invasive procedures."},
+  {q:"What is the purpose of the vent in CPB?",opts:["To remove air from the circuit","To decompress the left ventricle and prevent distension","To warm the blood","To monitor ACT"],ans:1,exp:"The vent decompresses the left ventricle during aortic cross-clamping — preventing LV distension, subendocardial ischaemia, and pulmonary oedema. It is placed in the LV apex or aortic root."},
+  {q:"Which of the following is a recognised neurological complication of CPB?",opts:["Post-operative cognitive dysfunction (POCD)","Hyperkalaemia","Haemolysis","Thrombocytopenia"],ans:0,exp:"POCD is a recognised neurological complication of CPB, occurring in 20–50% of patients at discharge and 10–20% at 3 months. It is caused by microemboli, inflammation, and hypoperfusion. Stroke, delirium, and seizures are other neurological complications."},
+  {q:"What is the primary advantage of heparin-bonded circuits?",opts:["They eliminate the need for heparin","They reduce contact activation and inflammation","They increase haemodilution","They eliminate the need for an oxygenator"],ans:1,exp:"Heparin-bonded circuits reduce contact activation, complement activation, and inflammation — and may reduce bleeding and transfusion requirements. They do not eliminate the need for systemic heparin, though some protocols use lower doses."},
+  {q:"Which of the following is a key difference between CPB and ECMO?",opts:["CPB uses a membrane oxygenator; ECMO uses a bubble oxygenator","CPB is designed for hours; ECMO for days to weeks","CPB uses lower heparin doses than ECMO","CPB does not require anticoagulation"],ans:1,exp:"CPB is designed for intraoperative use (hours) with high-dose heparin. ECMO is designed for prolonged use (days to weeks) with lower-dose heparin and more biocompatible circuits. Both use membrane oxygenators."}
+];
+
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--accent);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — CPB is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
