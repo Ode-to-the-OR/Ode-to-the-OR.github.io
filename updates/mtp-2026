@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Massive Transfusion Protocol: The Bedside Guide (2026) — Ode to the OR</title>
+<meta name="description" content="A bedside guide to massive transfusion protocols, built from the European trauma-bleeding guideline (6th ed.), ATLS 11th edition, EAST whole-blood guidance and the 2026 whole-blood trials — triggers, ratios, TXA, calcium, targets, reversal and stand-down.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* BACK LINK */
+.back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.back-link:hover{color:var(--rust);}
+.back-link svg{width:11px;height:11px;}
+
+/* ARTICLE HEAD */
+.article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.article-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.1rem);font-weight:300;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+.article-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.dek{font-size:.95rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:620px;margin-bottom:1.4rem;}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.tt{border-color:var(--teal);color:var(--teal);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
+.article-body > * + *{margin-top:1.5rem;}
+.article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--text);padding-top:.6rem;}
+.article-body h2 em{font-style:italic;color:var(--rust);}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);margin-top:1.6rem !important;}
+
+.callout{background:var(--surface);border-left:3px solid var(--sage);padding:1.1rem 1.3rem;}
+.callout p{font-size:.85rem;color:var(--muted);}
+.callout p:first-child{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--sage);margin-bottom:.4rem;}
+
+.source-note{background:var(--deep);border:1px solid var(--border);padding:1rem 1.3rem;font-size:.78rem;color:var(--muted);line-height:1.75;}
+.source-note strong{color:var(--text);font-weight:500;}
+
+ul.plain{list-style:none;padding:0;display:flex;flex-direction:column;gap:.85rem;}
+ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:1.2rem;position:relative;}
+ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
+ul.plain li strong{font-weight:500;color:var(--rust);}
+
+/* RECOMMENDATION STRENGTH PILLS (new for this article) */
+.pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;}
+.pill{font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;padding:.22rem .55rem;border-radius:2px;font-weight:500;white-space:nowrap;}
+.p-strong{background:rgba(42,90,82,.15);color:var(--teal);border:1px solid var(--teal);}
+.p-cond{background:rgba(154,108,26,.15);color:var(--gold);border:1px solid var(--gold);}
+.p-insuff{background:rgba(122,100,85,.15);color:var(--muted);border:1px solid var(--faint);}
+.p-new{background:rgba(122,32,32,.12);color:var(--rust);border:1px solid var(--rust);}
+.p-up{background:rgba(58,58,106,.12);color:var(--indigo);border:1px solid var(--indigo);}
+.p-down{background:rgba(154,64,112,.12);color:var(--rose);border:1px solid var(--rose);}
+
+.rec-box{background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;}
+.rec-box p{font-size:.88rem;color:var(--text);line-height:1.7;}
+.rec-box p em{font-style:italic;color:var(--muted);font-size:.78rem;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
+thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:.75rem .9rem;border-bottom:1px solid var(--border);color:var(--text);font-weight:300;vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
+.table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* WORKED EXAMPLE / BUNDLE */
+.worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.worked h3{margin-top:0 !important;}
+.worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
+.worked ol li{counter-increment:step;font-size:.87rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:2rem;position:relative;}
+.worked ol li::before{content:counter(step);position:absolute;left:0;top:0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--border);}
+.worked ol li strong{font-weight:500;color:var(--text);}
+
+.bundle{background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.bundle h3{margin-top:0 !important;color:var(--teal) !important;}
+.bundle-step{margin-top:1.1rem;}
+.bundle-step:first-of-type{margin-top:1rem;}
+.bundle-step .step-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:.4rem;}
+.bundle-step p, .bundle-step li{font-size:.85rem;color:var(--text);line-height:1.7;}
+.bundle-step ul{list-style:none;padding:0;margin-top:.3rem;}
+.bundle-step ul li{padding-left:1rem;position:relative;}
+.bundle-step ul li::before{content:'·';position:absolute;left:0;color:var(--faint);}
+
+/* CLOSING */
+.lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
+.lesson h3{color:var(--sage) !important;}
+
+.refs{border-top:1px solid var(--border);padding-top:1.4rem;}
+.refs h3{margin-top:0 !important;color:var(--muted) !important;font-family:'Instrument Sans',sans-serif !important;font-size:.6rem !important;letter-spacing:.16em;text-transform:uppercase;font-weight:500 !important;}
+.refs ol{list-style:decimal;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;margin-top:.8rem;}
+.refs li{font-size:.76rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+.disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
+
+/* NEXT / FOOTER NAV */
+.article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:600px){
+  .back-row{padding:5rem 6vw 0;}
+  .article-head{padding:1.4rem 6vw 2rem;}
+  .article-body{padding:2.2rem 6vw 3rem;}
+  .article-foot{padding:0 6vw 2.5rem;}
+  table{font-size:.76rem;}
+  thead th,tbody td{padding:.6rem .6rem;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="updates-guidelines.html" class="current">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="updates-guidelines.html" class="back-link" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Updates &amp; Guidelines
+  </a>
+</div>
+
+<div class="article-head">
+  <div class="ey">Guideline Update</div>
+  <h1>Massive transfusion protocol: <em>the bedside guide, updated.</em></h1>
+  <p class="dek">There is no single "MTP guideline" — protocols are local, built from a handful of key documents. This page pulls them together: the European trauma-bleeding guideline (6th ed.), ATLS 11th edition, EAST whole-blood guidance, and the 2026 whole-blood trials. What triggers the protocol, what goes in the cooler, which numbers to chase, and when to stand down.</p>
+  <div class="meta-row">
+    <span class="tag tt">Transfusion</span>
+    <span class="tag tk">Massive Haemorrhage</span>
+    <span class="tag ti">Resuscitation</span>
+    <span class="meta-date">Synthesis of the European trauma-bleeding guideline 2023 · ATLS 11 (2025) · EAST 2024 · NEJM 2026 trials · Updated Nov 2026</span>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>Massive haemorrhage kills fast, and the protocol is only as good as the first thirty minutes. The core ideas have been stable for a decade — stop the bleeding, replace blood with blood, correct coagulopathy early, keep the patient warm and calcium-replete — but several details moved recently: whole blood has now been tested in two large randomised trials, empiric cryoprecipitate has been tested and not shown to help, calcium has moved from afterthought to routine, and ATLS now puts bleeding control ahead of the airway.</p>
+
+  <div class="callout">
+    <p>In short</p>
+    <p>Activate on physiology and mechanism, not on units already given. Control the source while you resuscitate. Blood first — balanced components (plasma:RBC at least 1:2, ideally 1:1, with platelets) or low-titre whole blood where a programme exists — and keep crystalloid to a minimum. Give TXA within 3 hours. Replace calcium, keep the patient warm, and move to lab- or viscoelastic-guided therapy as soon as results are back. Treat low fibrinogen; don't give cryoprecipitate empirically to everyone. In 2026, two large prehospital trials found whole blood no better than components for survival.</p>
+  </div>
+
+  <h2>How to read the tags in this article</h2>
+  <div class="pill-row">
+    <span class="pill p-strong">Strong</span>
+    <span class="pill p-cond">Conditional</span>
+    <span class="pill p-insuff">Insufficient evidence</span>
+    <span class="pill p-new">New 2025–26</span>
+  </div>
+  <p>Where a recommendation comes from the European guideline, the GRADE tag is shown: <strong>Strong</strong> = grade 1 ("we recommend"), <strong>Conditional</strong> = grade 2 ("we suggest"), with the evidence letter (A high, B moderate, C low). <strong>Insufficient evidence</strong> means no directional call was made. <strong>New 2025–26</strong> marks changes or trials since the European 6th edition's literature search closed in late 2021.</p>
+
+  <h2>When to activate: <em>early, on physiology</em></h2>
+  <p>Definitions of "massive" are retrospective, which is exactly why they make poor triggers. Use them to audit, not to decide.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Definition</th><th>Threshold</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Classic</td><td>≥10 units RBC in 24 h</td></tr>
+        <tr><td class="agent">Rate-based</td><td>≥4 units RBC in 1 h with ongoing need; or &gt;150 mL/min blood loss</td></tr>
+        <tr><td class="agent">Volume-based</td><td>Loss of one blood volume in 24 h (~70 mL/kg in adults) or 50% of blood volume in 3 h</td></tr>
+        <tr><td class="agent">Critical administration threshold</td><td>≥3 units RBC in 60 min — a pragmatic bedside marker of a patient who will go on to need a full protocol</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Common working definitions — not interchangeable; local policy governs</div>
+
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong · 1C</span></div>
+    <p>Assess the extent of haemorrhage from physiology, injury pattern, mechanism and response to initial resuscitation. Use shock index (HR ÷ SBP) and/or pulse pressure to gauge shock and transfusion need. <em>European guideline R5.</em></p>
+  </div>
+  <p>A shock index of 0.5–0.7 is normal; values of about 0.9–1.0 and above are associated with higher rates of massive transfusion, and a pulse pressure below 30–40 mmHg flags class II-and-worse bleeding. Beta-blockers, pacemakers, pregnancy, and the elderly blunt or distort these signs. ATLS 11 additionally recommends the <strong>ABC score</strong>: one point each for penetrating mechanism, SBP ≤90 mmHg, HR ≥120 bpm and a positive FAST — a score of 2 or more should trigger the protocol.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ATLS class</th><th>Blood loss</th><th>Base deficit</th><th>Blood products</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">I</td><td>&lt;15%</td><td>0 to −2</td><td>Monitor</td></tr>
+        <tr><td class="agent">II</td><td>15–30%</td><td>−2 to −6</td><td>Possible</td></tr>
+        <tr><td class="agent">III</td><td>31–40%</td><td>−6 to −10</td><td>Yes</td></tr>
+        <tr><td class="agent">IV</td><td>&gt;40%</td><td>≤ −10</td><td>Massive transfusion protocol</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">ACS ATLS classification as reproduced in the European guideline · a rough guide only</div>
+
+  <p>Other triggers worth acting on: no response, or only transient response, to the first one to two units; an obviously exsanguinating source (amputation, junctional or pelvic bleed, penetrating torso); a normal first haemoglobin does not rule out bleeding, so repeat it.</p>
+
+  <h2>First priority: <em>stop the bleeding</em></h2>
+  <ul class="plain">
+    <li><strong>Haemorrhage control comes first.</strong> ATLS 11 uses xABCDE — "x" is exsanguinating haemorrhage — so tourniquets, direct pressure and pelvic binders precede airway management when bleeding is life-threatening. Minimise the time from injury to bleeding control. <span class="pill p-strong">Strong · 1B</span></li>
+    <li><strong>Direct pressure and tourniquets</strong> for open extremity bleeding; <strong>pelvic binder</strong> for suspected pelvic fracture; pelvic ring closure early in shock. Topical haemostatics with packing for venous or moderate arterial parenchymal bleeding. <span class="pill p-strong">Strong · 1B–1C</span></li>
+    <li><strong>Damage control surgery</strong> for shock with ongoing bleeding, coagulopathy, hypothermia, acidosis or an inaccessible injury; definitive repair only if none of these are present. Preperitoneal packing or angioembolisation for pelvic bleeding. <span class="pill p-strong">Strong · 1B–1C</span> REBOA may be considered as a bridge in non-compressible torso bleeding. <span class="pill p-cond">Conditional · 2C</span></li>
+    <li><strong>Permissive hypotension:</strong> until bleeding is controlled, restrict volume and target a systolic of 80–90 mmHg (MAP 50–60) in patients without brain or spinal injury. In severe TBI (GCS ≤8), keep MAP ≥80 mmHg. Use caution in the elderly and the chronically hypertensive. <span class="pill p-strong">Strong · 1B / 1C</span></li>
+    <li><strong>Crystalloid is a bridge only.</strong> If fluid is needed before blood arrives, use balanced crystalloid (saline capped at about 1–1.5 L, avoided in severe acidosis); restrict colloids; avoid hypotonic fluids in severe head injury. If the target pressure isn't reached, add noradrenaline; use dobutamine for myocardial dysfunction. <span class="pill p-strong">Strong · 1B–1C</span></li>
+    <li><strong>Airway and ventilation:</strong> intubate for obstruction, GCS ≤8, hypoventilation or hypoxaemia; avoid hypoxaemia and aim for normocapnia (PaCO₂ 35–40 mmHg). Positive pressure unmasks hypovolaemia, so resuscitate before and during induction, use reduced-dose agents and have a vasopressor drawn up. <span class="pill p-strong">Strong · 1A–1B</span></li>
+    <li><strong>Temperature:</strong> prevent heat loss and warm early; aim for 36–37 °C. Each 1 °C fall costs roughly 10% of coagulation-factor function, and hypothermia is a core arm of the lethal triad. Use warmed fluids and blood through a rapid infuser with a warmer. <span class="pill p-strong">Strong · 1C</span></li>
+  </ul>
+
+  <h2>The blood: <em>what goes in the cooler</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong · 1C</span> <span class="pill p-cond">Conditional · 2B (platelets)</span></div>
+    <p>For expected massive haemorrhage, start with one of two strategies: <strong>(a)</strong> fibrinogen concentrate or cryoprecipitate plus RBC, or <strong>(b)</strong> plasma (FFP or pathogen-inactivated) at a plasma:RBC ratio of at least 1:2. In addition, a high platelet:RBC ratio is suggested. <em>European guideline R25.</em></p>
+  </div>
+  <p>Most protocols use the second route. The reference trial is <strong>PROPPR</strong> (680 patients): 1:1:1 versus 1:1:2 of plasma:platelets:RBC showed no significant difference in 24-hour or 30-day mortality, but the 1:1:1 arm achieved haemostasis more often and had fewer deaths from exsanguination in the first 24 hours. Hence the practical rule: <strong>balanced from the first pack, and the later you achieve haemostasis, the more the higher ratios matter.</strong> Switch to goal-directed therapy as soon as results are back.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Product</th><th>Trigger</th><th>Target / dose</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Red cells</td><td>From the start, ratio-driven</td><td>Hb 70–90 g/L when guided by labs <span class="pill p-strong">1C</span></td><td>Transfuse on physiology — don't wait for the Hb. Emergency release is group O until a type is available.</td></tr>
+        <tr><td class="agent">Plasma</td><td>Ratio from the start, then PT/APTT &gt;1.5× normal or VEM factor deficiency <span class="pill p-strong">1C</span></td><td>Plasma:RBC ≥1:2, ideally closer to 1:1; lab-guided dosing commonly 10–15 mL/kg</td><td>Contains only ~70% of normal factor levels. Use group AB or low-titre group A when the recipient's group is unknown. Don't use plasma to fix low fibrinogen if concentrate or cryo is available.</td></tr>
+        <tr><td class="agent">Platelets</td><td>Ratio-driven, or count &lt;50 ×10⁹/L with ongoing bleeding; &lt;100 ×10⁹/L in TBI <span class="pill p-cond">2C</span></td><td>One apheresis pack or 4–8 single-donor units <span class="pill p-cond">2B</span></td><td>Count falls late in trauma and poorly reflects platelet function. Expected rise &gt;30 ×10⁹/L but recovery is often lower in the bleeding patient.</td></tr>
+        <tr><td class="agent">Fibrinogen</td><td>Clauss ≤1.5 g/L or functional deficit on VEM <span class="pill p-strong">1C</span></td><td>3–4 g (15–20 single-donor cryo units, or 3–4 g concentrate); repeat on results <span class="pill p-cond">2C</span></td><td>Critical levels are reached early in many trauma patients. See CRYOSTAT-2 below.</td></tr>
+        <tr><td class="agent">Low-titre O whole blood</td><td>Where a programme exists</td><td>Per local programme</td><td>One product supplies red cells, plasma and platelets. "Low titre" was defined as anti-A and anti-B &lt;1:256 in the TOWAR trial. RhD policy is programme-specific.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Targets and doses from the European guideline unless stated · confirm with your blood bank's protocol</div>
+
+  <h3>Typical pack structure</h3>
+  <p>Protocols differ, but a common structure is a cooler of red cells and plasma released together (about six of each in PROPPR), with platelets arriving by the second round or as one apheresis unit alongside, and cryoprecipitate or fibrinogen concentrate added per local protocol or fibrinogen result. Take your own blood bank's pack composition and its time-to-thaw as the real answer for your hospital.</p>
+
+  <h3>Whole blood: <em>logistically attractive, not proven superior</em></h3>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-cond">Conditional</span> <span class="pill p-new">New 2025–26</span></div>
+    <p>EAST (2024) conditionally recommends whole blood for adult civilian trauma patients who need transfusion; the NAEMSP 2025 position statement prefers low-titre group O whole blood prehospital where a high-quality programme exists; ATLS 11 accepts either balanced components or low-titre whole blood. The European 6th edition made no recommendation for or against prehospital blood products.</p>
+  </div>
+  <p>Then came two large randomised trials in 2026, both published in NEJM. <strong>SWiFT</strong> tested up to two units of prehospital whole blood against a red-cell-plus-plasma comparator and was neutral for its primary outcome. <strong>TOWAR</strong> (1,020 severely injured adults, 44 air medical bases) compared up to two units of low-titre group O whole blood with as-indicated components: 30-day mortality was 25.9% versus 20.5% (adjusted OR 1.24, 95% CI 0.87–1.76, P=0.24), with no benefit in early mortality, haemorrhagic death or transfusion requirements. A storage-age substudy found no obvious penalty for whole blood stored 15–21 days (observational). The in-hospital <strong>TROOP</strong> trial, in patients predicted to need large-volume transfusion, is still to report.</p>
+  <p>The sensible reading: whole blood is a reasonable, simple way to deliver balanced resuscitation where a programme exists, and it is safe in the studied settings — but it is not proven to save more lives than well-delivered components, and the dose in these trials (two units) was small. Don't delay blood while waiting for whole blood to arrive. If a programme exists, it belongs in the MTP cooler; if it doesn't, balanced components remain standard care.</p>
+
+  <h3>Cryoprecipitate: <em>treat the deficiency, not everyone</em></h3>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025–26</span> <span class="pill p-strong">Strong · 1C (treat low fibrinogen)</span></div>
+    <p>In CRYOSTAT-2 (1,604 patients, JAMA 2023), early empiric high-dose cryoprecipitate on top of a standard major haemorrhage protocol did not change 28-day mortality: 25.3% versus 26.1%. In the penetrating-injury subgroup, mortality was higher with cryoprecipitate (16.2% vs 10.0%) — a subgroup finding, but a reason for caution.</p>
+  </div>
+  <p>This doesn't change the European recommendation to give fibrinogen when the level is ≤1.5 g/L or the viscoelastic trace shows a functional deficit — it argues against routine empiric cryoprecipitate for everyone on a protocol. If the lab can't deliver a fibrinogen result quickly, the guideline notes a pragmatic empiric dose of 2 g fibrinogen has been proposed when clinical criteria suggest high risk (SBP &lt;100 mmHg, lactate ≥5 mmol/L, base excess ≤ −6 or Hb ≤9 g/dL), but this rests on weak evidence.</p>
+
+  <h2>Tranexamic acid: <em>early, and before the lab results</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong · 1A</span> <span class="pill p-strong">Strong · 1B (don't wait for VEM)</span></div>
+    <p>Give TXA to the bleeding trauma patient or one at risk of significant bleeding as soon as possible, ideally en route and within 3 hours of injury: 1 g IV over 10 minutes, then 1 g over 8 hours. Do not wait for viscoelastic results. <em>European guideline R23.</em></p>
+  </div>
+  <ul class="plain">
+    <li><strong>Trauma:</strong> CRASH-2 showed fewer deaths when TXA was started within 3 hours; benefit fades with delay. Some protocols (US military CPGs, for example) use a single 2 g bolus; the standard regimen above is the one with the trial evidence. ATLS 11 reinforces the 3-hour window.</li>
+    <li><strong>TBI:</strong> CRASH-3 found benefit in mild-to-moderate head injury treated within 3 hours, not in severe injury.</li>
+    <li><strong>Postpartum haemorrhage:</strong> 1 g IV as early as possible, within 3 hours of birth (WOMAN trial); a second 1 g dose if bleeding continues after 30 minutes or restarts within 24 hours.</li>
+    <li><strong>GI bleeding:</strong> routine TXA is not recommended — HALT-IT showed no mortality benefit and more venous thromboembolic events.</li>
+  </ul>
+
+  <h2>Calcium: <em>from afterthought to routine</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong · 1C</span> <span class="pill p-new">New 2025–26 data</span></div>
+    <p>Monitor ionised calcium and keep it in the normal range (1.1–1.3 mmol/L) during major trauma and massive transfusion; treat transfusion-related hypocalcaemia (iCa below about 0.9 mmol/L) promptly. Calcium chloride is the recommended salt. <em>European guideline R31.</em></p>
+  </div>
+  <p>Citrate in every red-cell and plasma unit chelates calcium, and a shocked liver can't clear it. Calcium is a cofactor for clotting factors and platelet function and drives cardiac contractility, and standard clotting tests are recalcified before analysis, so they don't show its absence. The US Joint Trauma System and TCCC guidance give a simple dosing rule: <strong>1 g calcium IV/IO after the first unit of blood product, then again after every fourth unit</strong>, guided by ionised levels.</p>
+  <ul class="plain">
+    <li><strong>Dose equivalence:</strong> 1 g calcium chloride contains roughly three times the elemental calcium of 1 g calcium gluconate. Chloride is preferred but irritates peripheral veins — central or large-vein access is best, and extravasation causes necrosis.</li>
+    <li><strong>New evidence is observational:</strong> a 2026 single-centre cohort (J Trauma Acute Care Surg) found calcium chloride at ≥1 g per 2 units of whole blood linked to lower 24-hour mortality. A large prospective observational study found worse outcomes with both low and high ionised calcium on arrival, so measure and replace to target rather than give blind and forget. The CAVALIER trial (prehospital calcium, and early vasopressin) is still running.</li>
+  </ul>
+
+  <h2>Monitoring and targets</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-strong">Strong · 1C</span></div>
+    <p>Monitor haemostasis early and repeatedly with PT/INR, Clauss fibrinogen and platelet count, and/or point-of-care PT/INR and/or a viscoelastic method; continue goal-directed resuscitation guided by these results. <em>European guideline R11, R26.</em></p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Target / threshold</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">BP</td><td>SBP 80–90 / MAP 50–60 mmHg</td><td>Until bleeding is controlled; MAP ≥80 mmHg in severe TBI</td></tr>
+        <tr><td class="agent">Haemoglobin</td><td>70–90 g/L</td><td>Initial Hb may be normal in early bleeding; repeat it. Transfuse on physiology.</td></tr>
+        <tr><td class="agent">Fibrinogen</td><td>Treat ≤1.5 g/L (Clauss)</td><td>Many centres aim for &gt;2 g/L in ongoing bleeding; obstetric practice targets &gt;2 g/L</td></tr>
+        <tr><td class="agent">Platelets</td><td>&gt;50 ×10⁹/L; &gt;100 ×10⁹/L in TBI</td><td>Weak evidence (2C)</td></tr>
+        <tr><td class="agent">PT / APTT</td><td>&lt;1.5× normal</td><td>PT ratio &gt;1.2 marks traumatic coagulopathy; &gt;1.5 is severe</td></tr>
+        <tr><td class="agent">Ionised calcium</td><td>1.1–1.3 mmol/L</td><td>Correct below ~0.9 promptly</td></tr>
+        <tr><td class="agent">Temperature</td><td>36–37 °C</td><td>Avoid &lt;35 °C</td></tr>
+        <tr><td class="agent">Lactate / base deficit</td><td>Falling</td><td>Lactate is the sensitive marker; base deficit is an alternative</td></tr>
+        <tr><td class="agent">pH and K⁺</td><td>pH &gt;7.2, K⁺ in normal range</td><td>Commonly used targets; stored blood raises potassium</td></tr>
+        <tr><td class="agent">Viscoelastic testing</td><td>Per local TEG/ROTEM algorithm</td><td>Thresholds differ by device; useful for hyperfibrinolysis and functional fibrinogen. In iTACTIC, overall outcomes matched conventional tests, with a TBI subgroup benefit.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Repeat labs or viscoelastic tests after each round of products, or roughly every 30–60 minutes</div>
+
+  <h2>Adjuncts <em>and what the guideline actually says</em></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Role</th><th>Strength / caution</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Prothrombin complex concentrate</td><td>Add only if VEM shows delayed coagulation initiation despite fibrinogen &gt;1.5 g/L; reverse vitamin K antagonists and Xa inhibitors (below)</td><td><span class="pill p-cond">2C</span> Avoid liberal use — thrombin potential stays raised for days</td></tr>
+        <tr><td class="agent">Factor XIII</td><td>Monitor in coagulation algorithms; supplement for a functional deficiency</td><td><span class="pill p-cond">2C</span> Optimal threshold not established</td></tr>
+        <tr><td class="agent">Desmopressin</td><td>0.3 µg/kg for patients on platelet-inhibiting drugs or with von Willebrand disease</td><td>Not routine in other trauma patients</td></tr>
+        <tr><td class="agent">Recombinant factor VIIa</td><td>Last resort when bleeding and coagulopathy persist despite all conventional measures; correct pH, temperature, calcium and fibrinogen first</td><td><span class="pill p-cond">2C</span> Off-label; thrombotic risk</td></tr>
+        <tr><td class="agent">Cell salvage</td><td>Consider in abdominal, pelvic or thoracic cavity bleeding</td><td><span class="pill p-cond">2B</span> Evidence limited; useful when blood is scarce or transfusion is declined</td></tr>
+        <tr><td class="agent">Vasopressin</td><td>Low-dose infusion reduced blood-product use in small trials</td><td><span class="pill p-insuff">Insufficient</span> Not routine; being studied (CAVALIER)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Reversing anticoagulants in the bleeding patient</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Drug</th><th>Reversal</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Warfarin (VKA)</td><td>PCC plus vitamin K 5–10 mg IV; PCC is preferred to plasma. Dose by label or protocol, typically 25–50 IU/kg.</td></tr>
+        <tr><td class="agent">Dabigatran</td><td>Idarucizumab 5 g IV (2 × 2.5 g) where available; TXA; PCC if not</td></tr>
+        <tr><td class="agent">Xa inhibitors (rivaroxaban, apixaban, edoxaban)</td><td>TXA; andexanet alfa where available, otherwise PCC (about 25–50 IU/kg)</td></tr>
+        <tr><td class="agent">Unfractionated heparin</td><td>Protamine, about 1 mg per 100 IU heparin given in the preceding 2–3 hours</td></tr>
+        <tr><td class="agent">LMWH</td><td>Protamine gives only partial reversal; dose relates to time since the last dose</td></tr>
+        <tr><td class="agent">Antiplatelet agents</td><td>Consider desmopressin 0.3 µg/kg; platelet transfusion decisions are individualised, with limited evidence</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Drug availability and doses vary by country and formulary — check your pharmacy</div>
+
+  <h2>Special situations</h2>
+  <h3>Brain and spinal injury</h3>
+  <p>Permissive hypotension does not apply: keep MAP ≥80 mmHg. Platelets above 100 ×10⁹/L, normocapnia (hyperventilation only as a short-lived rescue for herniation), and avoid hypotonic fluids such as Ringer's lactate in severe head injury. A haemoglobin threshold of about 70 g/L had better neurological outcome than 100 g/L in pooled data, though evidence is mixed.</p>
+  <h3>Obstetric haemorrhage</h3>
+  <p>Blood loss is underestimated because pregnancy's extra circulating volume delays hypotension. Give TXA early; treat the cause in parallel (uterotonics, uterine tamponade, surgical control) and replace fibrinogen early — a level below about 2 g/L predicts severe haemorrhage, and obstetric protocols target &gt;2 g/L. Cell salvage is an accepted option.</p>
+  <h3>Children</h3>
+  <p>Use your paediatric protocol: weight-based volumes, the same balanced-component principle, weight-based TXA and calcium, and a very low threshold for warming.</p>
+  <h3>Non-trauma and the operating theatre</h3>
+  <p>The same principles hold for ruptured aneurysm, GI and surgical bleeding. Avoid routine TXA in GI bleeding (HALT-IT). For perioperative bleeding, the ESAIC 2023 guideline supports goal-directed, viscoelastic- or lab-guided haemostatic therapy and early fibrinogen replacement.</p>
+
+  <h2>Complications <em>to anticipate</em></h2>
+  <ul class="plain">
+    <li><strong>Lethal triad:</strong> hypothermia, acidosis and coagulopathy feed each other — treat all three at once.</li>
+    <li><strong>Citrate and potassium:</strong> hypocalcaemia and hyperkalaemia rise with transfusion volume and shock. Check a blood gas with electrolytes at every round.</li>
+    <li><strong>Dilution:</strong> large crystalloid volumes worsen coagulopathy — another reason to give blood first.</li>
+    <li><strong>Transfusion reactions:</strong> emergency-release blood carries a small risk of ABO or RhD incompatibility; after resuscitation watch for TRALI and TACO. RhD-negative group O red cells for women of childbearing age is preferred where supply allows; local policy applies.</li>
+    <li><strong>Thrombosis:</strong> the European guideline recommends pharmacological thromboprophylaxis within 24 hours of bleeding control.</li>
+  </ul>
+
+  <h2>Stand down <em>and learn</em></h2>
+  <p>Deactivate as soon as the bleeding is controlled and the patient is physiologically stable with ongoing product demand falling, labs are at target, and the team agrees. Tell the blood bank immediately so unused products can be returned within the cold-chain window, restock the cooler, and document every unit and time. The European guideline recommends hospitals have an institutional protocol and a quality-improvement process around it — audit time to first blood, ratios achieved, calcium and temperature, and time to bleeding control.</p>
+
+  <div class="bundle">
+    <h3>MTP at a glance</h3>
+    <div class="bundle-step">
+      <div class="step-label">Recognize (t = 0)</div>
+      <p>Shock index ≥1, ABC score ≥2, class III–IV shock, or obvious exsanguination. Don't wait for the Hb or for units to accumulate.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Activate and communicate</div>
+      <ul>
+        <li>One call to the blood bank; name a single lead and a runner</li>
+        <li>Two large-bore lines or IO, rapid infuser with warmer</li>
+        <li>Send group and screen plus a baseline blood gas (iCa, lactate), Hb, PT/INR, Clauss fibrinogen, platelets, and viscoelastic test if available</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Simultaneous actions</div>
+      <ul>
+        <li>Control the source: tourniquet, pressure, binder, packing, OR or IR</li>
+        <li>TXA 1 g over 10 min within 3 h of injury</li>
+        <li>Calcium 1 g after the first unit, then every fourth unit</li>
+        <li>Active warming; permissive hypotension unless TBI or spinal injury</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Blood</div>
+      <p>Emergency-release group O red cells plus plasma (at least 1:2, ideally 1:1) or low-titre whole blood where available; platelets by the second round; minimal crystalloid.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Reassess every round</div>
+      <p>Repeat labs or VEM: fibrinogen ≤1.5 g/L → fibrinogen concentrate or cryo; platelets &lt;50 (&lt;100 in TBI) → platelets; iCa, K⁺, pH, temperature. Shift from ratio-driven to goal-directed therapy.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Stand down and review</div>
+      <p>Deactivate when bleeding is controlled; return unused products; start thromboprophylaxis within 24 h of haemostasis; debrief and audit.</p>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <h3>The lesson that doesn't show up in any table</h3>
+    <p>The evidence behind individual MTP details is thinner than the confidence of most protocols suggests. Ratios, platelets, whole blood, cryoprecipitate and calcium doses are all still argued over, and the two biggest 2026 trials were neutral. What is solid is the system: recognise early, control the bleeding, give blood rather than crystalloid, keep the patient warm and calcium-replete, and replace what the labs say is missing. A rehearsed protocol that runs at the same speed every time beats a perfect protocol that nobody has practised.</p>
+  </div>
+
+  <div class="source-note">
+    <strong>On this summary.</strong> Written independently for personal study and bedside reference. It synthesises the European trauma-bleeding guideline (6th edition, 2023), ATLS 11th edition (2025), EAST and NAEMSP guidance, and recent trial publications in original language, and is not a reproduction of any published text or evidence tables. Grades shown are the European guideline's. Where the sources conflict or the evidence is observational, the text says so. There is no single international MTP standard — always confirm against your institution's protocol and your blood bank's pack contents.
+  </div>
+
+  <div class="refs">
+    <h3>References</h3>
+    <ol>
+      <li>Rossaint R, Afshari A, Bouillon B, et al. The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition. <em>Crit Care.</em> 2023;27:80. doi:10.1186/s13054-023-04327-7.</li>
+      <li>American College of Surgeons. <em>Advanced Trauma Life Support (ATLS), 11th Edition.</em> 2025.</li>
+      <li>Meizoso JP, Cotton BA, Lawless RA, et al. Whole blood resuscitation for injured patients requiring transfusion: a systematic review, meta-analysis, and practice management guideline from the Eastern Association for the Surgery of Trauma. <em>J Trauma Acute Care Surg.</em> 2024;97(3):460–470.</li>
+      <li>Brown JB, Yazer MH, Kelly J, et al. Prehospital Trauma Compendium: transfusion of blood products in trauma — a position statement and resource document of NAEMSP. <em>Prehosp Emerg Care.</em> 2025.</li>
+      <li>Smith JE, Cardigan R, Sanderson E, et al. Prehospital whole blood in traumatic hemorrhage: a randomized controlled trial (SWiFT). <em>N Engl J Med.</em> Published online 17 Mar 2026.</li>
+      <li>Sperry JL, Guyette FX, Cotton BA, et al; TOWAR Study Group. Prehospital resuscitation with type O whole blood for trauma and hemorrhage. <em>N Engl J Med.</em> Published online 18 May 2026.</li>
+      <li>Davenport R, Curry N, Fox EE, et al. Early and empirical high-dose cryoprecipitate for hemorrhage after traumatic injury: the CRYOSTAT-2 randomized clinical trial. <em>JAMA.</em> 2023;330(19):1882–1891. doi:10.1001/jama.2023.21019.</li>
+      <li>Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 vs a 1:1:2 ratio and mortality in patients with severe trauma: the PROPPR randomized clinical trial. <em>JAMA.</em> 2015;313(5):471–482.</li>
+      <li>CRASH-2 collaborators. Effects of tranexamic acid on death, vascular occlusive events, and blood transfusion in trauma patients with significant haemorrhage. <em>Lancet.</em> 2010;376:23–32. · CRASH-3 trial collaborators. <em>Lancet.</em> 2019;394:1713–1723. · WOMAN trial collaborators. <em>Lancet.</em> 2017;389:2105–2116. · HALT-IT trial collaborators. <em>Lancet.</em> 2020;395:1927–1936.</li>
+      <li>Joint Trauma System. Clinical Practice Guideline: Damage Control Resuscitation (current edition); Committee on Tactical Combat Casualty Care guidelines.</li>
+      <li>Rajesh A, et al. Calcium chloride dosing and early mortality in trauma patients receiving low-titre whole blood. <em>J Trauma Acute Care Surg.</em> 2026;101:57–64.</li>
+      <li>Kietaibl S, Ahmed A, Afshari A, et al. Management of severe peri-operative bleeding: guidelines from the European Society of Anaesthesiology and Intensive Care — second update 2022. <em>Eur J Anaesthesiol.</em> 2023;40(4):226–304.</li>
+      <li>Jansen JO, Pedroza C, Novelo LL, et al. Trauma resuscitation with low-titer group O whole blood or products: study protocol for the TROOP trial. <em>Trials.</em> 2025;26:266.</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    This is a personal educational summary, not the guideline itself and not exhaustive. It is not a substitute for reading the primary publications, your institution's massive transfusion protocol, or independent clinical judgment. Drug doses and product details shown are illustrative — always verify against current institutional pharmacy and blood bank references and the patient's weight, renal and hepatic function before administration. Re-verify all recommendations against the current publications before clinical use.
+  </div>
+
+</div>
+
+<div class="article-foot">
+  <a href="updates-guidelines.html" class="foot-back" target="_self">← Back to Updates &amp; Guidelines</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
