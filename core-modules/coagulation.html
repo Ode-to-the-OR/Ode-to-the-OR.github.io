@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coagulation & Laboratory Tests — Ode to the OR</title>
+<meta name="description" content="A comprehensive guide to coagulation and laboratory tests — haemostasis, conventional tests, viscoelastic testing, bleeding disorders, anticoagulant monitoring, and a memory and synthesis tool. By Dr. Rushika Ode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --indigo:  #3a3a6a;
+  /* NEW ACCENT — Deep Forest Green */
+  --forest:       #3a5a3a;
+  --forest-soft:  #5a7a5a;
+  --forest-deep:  #2a4a2a;
+  --forest-light: #7a9a7a;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+#cur { width:7px;height:7px;background:var(--forest);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s; }
+#ring { width:30px;height:30px;border:1px solid var(--forest-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:transform .12s,opacity .12s; }
+@media(hover:none),(pointer:coarse){*{cursor:auto!important;}#cur,#ring{display:none!important;}}
+body::after {
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em; }
+.nav-logo em { font-style:italic;color:var(--gold); }
+.nav-links { display:flex;gap:1.6rem;list-style:none;align-items:center; }
+.nav-links a { text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s; }
+.nav-links a:hover,.nav-links a.current { color:var(--rust); }
+@media(max-width:700px){.nav-links{display:none;}}
+.back-row { position:fixed;top:58px;left:0;right:0;z-index:590;padding:.6rem 5vw;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+.back-link-top { font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s; }
+.back-link-top:hover { gap:.85rem;color:var(--forest-deep); }
+.page-hero {
+  padding: 130px 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(58,90,58,.03) 0%, transparent 100%);
+}
+.hgrid {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(58,90,58,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(58,90,58,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  pointer-events:none;
+}
+.hglow { position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(58,90,58,.06) 0%,transparent 68%);top:-250px;right:-150px;pointer-events:none; }
+.hglow2 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(90,122,90,.05) 0%,transparent 70%);bottom:-150px;left:-100px;pointer-events:none; }
+.hero-eyebrow { font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--forest);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem; }
+.hero-eyebrow::before { content:'';width:30px;height:1px;background:var(--forest); }
+.page-hero h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem; }
+.page-hero h1 em { font-style:italic;color:var(--forest);font-weight:600; }
+.hero-sub { font-size:.92rem;color:var(--muted);line-height:1.9;max-width:640px;font-weight:300; }
+.hero-sub strong { color:var(--forest);font-weight:500; }
+.hero-meta { display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.meta-item { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faint); }
+.meta-item span { color:var(--forest-soft);font-weight:600; }
+.module-nav {
+  position:sticky;top:96px;z-index:500;
+  background:rgba(237,231,218,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5vw;
+  display:flex;gap:0;overflow-x:auto;
+}
+.module-nav button {
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Instrument Sans',sans-serif;font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:.95rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.module-nav button:hover { color:var(--text); }
+.module-nav button.active { color:var(--forest);border-bottom-color:var(--forest); }
+.progress-strip { height:2px;background:var(--border); }
+.progress-fill { height:100%;background:linear-gradient(90deg,var(--forest),var(--forest-soft));transition:width .4s; }
+.page-body { max-width:1000px;margin:0 auto;padding:4rem 5vw 6rem; }
+.module { display:none; }
+.module.active { display:block; }
+.mod-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border); }
+.mod-num { font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--forest);margin-bottom:.6rem; }
+.mod-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:var(--text); }
+.mod-title em { font-style:italic;color:var(--forest); }
+.mod-intro { margin-top:.75rem;font-size:.88rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:660px;font-style:italic; }
+.sec-label { display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1rem; }
+.sec-label span { font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--forest); }
+.sec-label::after { content:'';height:1px;background:var(--border);flex:1; }
+h2.subhead { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--text);margin:2rem 0 .8rem;padding-left:.9rem;border-left:2px solid var(--forest); }
+h3.subsubhead { font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--forest-soft);margin:1.4rem 0 .5rem; }
+p { font-size:.88rem;line-height:1.9;color:var(--muted);margin-bottom:.75rem;font-weight:300; }
+p strong { color:var(--text);font-weight:500; }
+.val-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5px;background:var(--border);margin:1.2rem 0; }
+.val-item { background:var(--deep);padding:1rem 1.1rem; }
+.val-label { font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem; }
+.val-num { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--forest);line-height:1; }
+.val-unit { font-size:.6rem;color:var(--faint);display:block;margin-top:.15rem; }
+.data-table { width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem; }
+.data-table th { background:var(--surface);color:var(--forest);font-family:'Instrument Sans',sans-serif;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;padding:.65rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600; }
+.data-table td { padding:.65rem .9rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6; }
+.data-table td strong { color:var(--text); }
+.data-table tr:hover td { background:rgba(58,90,58,.02); }
+.td-hi { color:var(--forest)!important;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700; }
+.td-good { color:#4a7c59!important;font-weight:500; }
+.td-bad { color:var(--rust)!important;font-weight:500; }
+.td-mid { color:var(--amber)!important;font-weight:500; }
+.callout { padding:1rem 1.25rem;margin:1rem 0;border-left:3px solid;font-size:.84rem;line-height:1.85; }
+.callout strong { display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.3rem; }
+.co-warn { background:rgba(184,131,26,.06);border-color:var(--amber);color:var(--muted); }
+.co-warn strong { color:var(--amber); }
+.co-key { background:rgba(58,90,58,.04);border-color:var(--forest);color:var(--muted); }
+.co-key strong { color:var(--forest); }
+.co-pearl { background:rgba(74,124,89,.05);border-color:#4a7c59;color:var(--muted); }
+.co-pearl strong { color:#4a7c59; }
+.co-fact { background:rgba(90,122,90,.05);border-color:var(--forest-soft);color:var(--muted); }
+.co-fact strong { color:var(--forest-soft); }
+.co-danger { background:rgba(122,32,32,.06);border-color:var(--rust);color:var(--muted); }
+.co-danger strong { color:var(--rust); }
+.formula-box { background:var(--text);color:var(--night);padding:1.1rem 1.4rem;margin:.75rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;line-height:1.7; }
+.formula-box .flabel { font-family:'Instrument Sans',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem;display:block; }
+.formula-box .fexpl { font-family:'Instrument Sans',sans-serif;font-size:.72rem;color:var(--faint);margin-top:.4rem;font-style:normal; }
+.mnemonic-box { background:var(--surface);border:1px solid var(--border);padding:1.4rem;margin:1rem 0; }
+.mnemonic-word { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--forest);letter-spacing:.08em;margin-bottom:.8rem; }
+.mnem-row { display:flex;gap:.75rem;margin-bottom:.3rem;font-size:.84rem;line-height:1.5; }
+.mnem-l { font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--forest);width:22px;flex-shrink:0;font-size:1.1rem; }
+.tag-row { display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0; }
+.tag { font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.24rem .65rem;border:1px solid; }
+.t-forest { border-color:var(--forest);color:var(--forest); }
+.t-r { border-color:var(--rust);color:var(--rust); }
+.t-g { border-color:var(--amber);color:var(--amber); }
+.t-soft { border-color:var(--forest-soft);color:var(--forest-soft); }
+.accordion { border:1px solid var(--border);margin-bottom:.6rem; }
+.acc-btn { width:100%;background:var(--deep);border:none;padding:.9rem 1.2rem;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s; }
+.acc-btn:hover { background:var(--surface); }
+.acc-btn .arr { font-size:.7rem;color:var(--forest);transition:transform .2s; }
+.acc-btn.open .arr { transform:rotate(180deg); }
+.acc-body { display:none;padding:1.2rem;background:var(--night);border-top:1px solid var(--border);font-size:.84rem;line-height:1.85;color:var(--muted); }
+.acc-body.open { display:block; }
+.compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);margin:1rem 0; }
+.cg-card { background:var(--deep);padding:1.3rem; }
+.cg-card h4 { font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem; }
+.cg-card ul { padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.85; }
+.cg-card li { margin-bottom:.25rem; }
+@media(max-width:600px){ .compare-grid { grid-template-columns:1fr; } }
+ul.clist { padding-left:1.3rem;margin:.5rem 0 1rem; }
+ul.clist li { font-size:.85rem;line-height:1.85;color:var(--muted);margin-bottom:.3rem; }
+ul.clist li::marker { color:var(--forest); }
+ul.clist li strong { color:var(--text);font-weight:500; }
+.diagram-box { background:var(--card);border:1px solid var(--border);padding:1.25rem;margin:1rem 0;display:flex;justify-content:center;overflow-x:auto; }
+.diagram-box svg { max-width:100%; height:auto; }
+.flow-row { display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.75rem 0; }
+.flow-box { background:var(--deep);border:1px solid var(--border);padding:.4rem .85rem;font-size:.76rem;color:var(--text);text-align:center; }
+.flow-arr { color:var(--forest);font-size:.9rem;font-weight:700; }
+.up { color:var(--rust);font-weight:700; }
+.dn { color:#4a7c59;font-weight:700; }
+.eq { color:var(--faint);font-weight:700; }
+.quiz-wrap { margin-top:3rem;border-top:1px solid var(--border);padding-top:3rem; }
+.quiz-head { font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--forest);margin-bottom:2rem; }
+.quiz-q { background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1rem; }
+.quiz-q .qt { font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;line-height:1.45;color:var(--text);margin-bottom:1rem; }
+.quiz-opts button { display:block;width:100%;text-align:left;background:var(--night);border:1px solid var(--border);color:var(--muted);font-family:'Instrument Sans',sans-serif;font-size:.8rem;padding:.6rem .9rem;margin-bottom:.35rem;cursor:pointer;transition:all .15s; }
+.quiz-opts button:hover { border-color:var(--forest);color:var(--text); }
+.quiz-opts button.correct { background:rgba(74,124,89,.08);border-color:#4a7c59;color:#3a5e44;font-weight:500; }
+.quiz-opts button.wrong { background:rgba(122,32,32,.07);border-color:var(--rust);color:var(--rust); }
+.quiz-opts button:disabled { cursor:default; }
+.quiz-exp { display:none;margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border-left:3px solid var(--forest-soft);font-size:.8rem;line-height:1.8;color:var(--muted); }
+.score-box { font-family:'Cormorant Garamond',serif;font-size:1.8rem;text-align:center;color:var(--forest);margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border); }
+hr.div { border:none;border-top:1px solid var(--border);margin:2rem 0; }
+footer { padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center; }
+.f-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust); }
+.f-logo em { font-style:italic;color:var(--gold); }
+@media(max-width:900px){ .data-table{font-size:.76rem;} }
+@media(max-width:600px){ .data-table{display:block;overflow-x:auto;} .module-nav{top:96px;} }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="../cases.html">Cases</a></li>
+    <li><a href="../index.html#diaries">OR Diaries</a></li>
+    <li><a href="../index.html#letters">Letters</a></li>
+    <li><a href="../index.html#explore" class="current">Explore</a></li>
+    <li><a href="../index.html#community">Community</a></li>
+    <li><a href="../index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="../core-modules.html" class="back-link-top" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Core Modules
+  </a>
+</div>
+
+<section class="page-hero">
+  <div class="hgrid"></div>
+  <div class="hglow"></div>
+  <div class="hglow2"></div>
+  <div class="hero-eyebrow">Haematology · Critical Care · Perioperative Medicine · Transfusion</div>
+  <h1>Coagulation & <em>Laboratory Tests</em></h1>
+  <p class="hero-sub">
+    Haemostasis, conventional tests, viscoelastic testing, bleeding disorders, anticoagulant monitoring, and the clinical reasoning that ties them together. <strong>Ten modules. Evidence-based, 2025–26.</strong>
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">Modules <span>10</span></div>
+    <div class="meta-item">Scope <span>Haemostasis · PT/APTT · TEG/ROTEM · Bleeding · Thrombosis · Memory</span></div>
+    <div class="meta-item">Updated <span>2025–26</span></div>
+  </div>
+</section>
+
+<div class="module-nav" id="modNav">
+  <button class="active" onclick="showMod(0)">01 · Haemostasis</button>
+  <button onclick="showMod(1)">02 · Conventional Tests</button>
+  <button onclick="showMod(2)">03 · Viscoelastic Testing</button>
+  <button onclick="showMod(3)">04 · Inherited Bleeding</button>
+  <button onclick="showMod(4)">05 · Acquired Bleeding</button>
+  <button onclick="showMod(5)">06 · Thrombophilia</button>
+  <button onclick="showMod(6)">07 · Anticoagulant Monitoring</button>
+  <button onclick="showMod(7)">08 · Special Situations</button>
+  <button onclick="showMod(8)">09 · Memory & Synthesis</button>
+  <button onclick="showMod(9)">Assessment</button>
+</div>
+<div class="progress-strip"><div class="progress-fill" id="progFill" style="width:10%"></div></div>
+
+<div class="page-body">
+
+  <!-- ═══════════════════════════════ MODULE 01: HAEMOSTASIS -->
+  <div class="module active" id="mod0">
+    <div class="mod-head">
+      <div class="mod-num">Module 01 of 10</div>
+      <div class="mod-title">Normal <em>Haemostasis</em></div>
+      <div class="mod-intro">Primary haemostasis, secondary haemostasis, fibrinolysis — and the natural anticoagulants that keep the system in balance.</div>
+    </div>
+
+    <h2 class="subhead">The Three Phases of Haemostasis</h2>
+    <div class="flow-row">
+      <div class="flow-box">1. Primary<br>Platelet plug</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">2. Secondary<br>Fibrin clot</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">3. Fibrinolysis<br>Clot dissolution</div>
+    </div>
+
+    <table class="data-table">
+      <tr><th>Phase</th><th>Components</th><th>Tests</th><th>Clinical Failure</th></tr>
+      <tr><td><strong>Primary haemostasis</strong></td><td>Platelets, von Willebrand factor (vWF), endothelium</td><td>Platelet count, platelet function assays, vWF antigen/activity</td><td>Mucocutaneous bleeding (petechiae, bruising, epistaxis)</td></tr>
+      <tr><td><strong>Secondary haemostasis</strong></td><td>Coagulation factors (intrinsic, extrinsic, common pathways)</td><td>PT, APTT, fibrinogen, factor assays</td><td>Deep bleeding (haemarthrosis, muscle haematoma)</td></tr>
+      <tr><td><strong>Fibrinolysis</strong></td><td>Plasminogen, plasmin, tPA, α₂-antiplasmin</td><td>D-dimer, fibrin degradation products, viscoelastic testing</td><td>Delayed bleeding; thrombotic risk if impaired</td></tr>
+    </table>
+
+    <h2 class="subhead">The Coagulation Cascade — A Simplified Model</h2>
+    <p>The classical cascade describes intrinsic and extrinsic pathways converging on the common pathway. In vivo, the cell-based model is more accurate — tissue factor initiates coagulation, platelets provide the phospholipid surface, and thrombin generation occurs in overlapping phases.</p>
+
+    <div class="diagram-box">
+      <svg viewBox="0 0 700 320" width="100%" style="display:block;">
+        <text x="350" y="18" fill="#3a5a3a" font-family="Instrument Sans" font-size="10" text-anchor="middle" letter-spacing="2">THE COAGULATION CASCADE — SIMPLIFIED</text>
+
+        <!-- Intrinsic -->
+        <text x="150" y="45" fill="#3a5a3a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">INTRINSIC PATHWAY</text>
+        <text x="150" y="60" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">(APTT)</text>
+
+        <rect x="80" y="70" width="140" height="24" rx="3" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="150" y="86" fill="#2e2018" font-family="Instrument Sans" font-size="7" text-anchor="middle">XII → XIIa</text>
+        <rect x="80" y="100" width="140" height="24" rx="3" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="150" y="116" fill="#2e2018" font-family="Instrument Sans" font-size="7" text-anchor="middle">XI → XIa</text>
+        <rect x="80" y="130" width="140" height="24" rx="3" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="150" y="146" fill="#2e2018" font-family="Instrument Sans" font-size="7" text-anchor="middle">IX → IXa (with VIIIa)</text>
+
+        <!-- Extrinsic -->
+        <text x="550" y="45" fill="#3a5a3a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">EXTRINSIC PATHWAY</text>
+        <text x="550" y="60" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">(PT)</text>
+
+        <rect x="480" y="70" width="140" height="24" rx="3" fill="#ede7da" stroke="#d0c8b8"/>
+        <text x="550" y="86" fill="#2e2018" font-family="Instrument Sans" font-size="7" text-anchor="middle">Tissue Factor + VIIa</text>
+
+        <!-- Common -->
+        <text x="350" y="175" fill="#3a5a3a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">COMMON PATHWAY</text>
+
+        <rect x="280" y="185" width="140" height="24" rx="3" fill="#3a5a3a" opacity="0.1" stroke="#3a5a3a" stroke-width="1.5"/>
+        <text x="350" y="201" fill="#3a5a3a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">X → Xa (with Va)</text>
+        <rect x="280" y="215" width="140" height="24" rx="3" fill="#3a5a3a" opacity="0.1" stroke="#3a5a3a" stroke-width="1.5"/>
+        <text x="350" y="231" fill="#3a5a3a" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Prothrombin → Thrombin</text>
+        <rect x="280" y="245" width="140" height="24" rx="3" fill="#7a2020" opacity="0.1" stroke="#7a2020" stroke-width="1.5"/>
+        <text x="350" y="261" fill="#7a2020" font-family="Instrument Sans" font-size="7" text-anchor="middle" font-weight="600">Fibrinogen → Fibrin</text>
+
+        <!-- Arrows -->
+        <line x1="150" y1="154" x2="150" y2="175" stroke="#a89880" stroke-width="1"/>
+        <line x1="150" y1="175" x2="280" y2="197" stroke="#a89880" stroke-width="1" marker-end="url(#arrF)"/>
+        <line x1="550" y1="94" x2="550" y2="175" stroke="#a89880" stroke-width="1"/>
+        <line x1="550" y1="175" x2="420" y2="197" stroke="#a89880" stroke-width="1" marker-end="url(#arrF)"/>
+
+        <!-- Fibrinolysis note -->
+        <rect x="480" y="245" width="160" height="40" rx="3" fill="#e8e1d4" stroke="#d0c8b8"/>
+        <text x="560" y="260" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Fibrinolysis</text>
+        <text x="560" y="274" fill="#7a6455" font-family="Instrument Sans" font-size="7" text-anchor="middle">Plasminogen → Plasmin → D-dimer</text>
+
+        <defs><marker id="arrF" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" fill="#a89880"/></marker></defs>
+      </svg>
+    </div>
+
+    <h2 class="subhead">Natural Anticoagulants</h2>
+    <table class="data-table">
+      <tr><th>Anticoagulant</th><th>Mechanism</th><th>Clinical Relevance</th></tr>
+      <tr><td><strong>Antithrombin (AT)</strong></td><td>Inhibits thrombin, Xa, IXa, XIa, XIIa</td><td>Heparin requires AT to work; AT deficiency → heparin resistance</td></tr>
+      <tr><td><strong>Protein C</strong></td><td>Inactivates Va and VIIIa (with Protein S)</td><td>Deficiency → warfarin skin necrosis; DIC consumption</td></tr>
+      <tr><td><strong>Protein S</strong></td><td>Cofactor for Protein C</td><td>Deficiency → thrombophilia</td></tr>
+      <tr><td><strong>Tissue factor pathway inhibitor (TFPI)</strong></td><td>Inhibits TF-VIIa complex</td><td>Regulates extrinsic pathway initiation</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The Cell-Based Model</strong>
+      The classical cascade is a laboratory model. In vivo, coagulation occurs on cell surfaces: <strong>initiation</strong> on tissue factor-bearing cells, <strong>amplification</strong> on platelets, and <strong>propagation</strong> on activated platelet surfaces. This explains why PT and APTT do not always reflect bleeding risk — especially in liver disease and trauma .
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 02: CONVENTIONAL TESTS -->
+  <div class="module" id="mod1">
+    <div class="mod-head">
+      <div class="mod-num">Module 02 of 10</div>
+      <div class="mod-title">Conventional <em>Coagulation Tests</em></div>
+      <div class="mod-intro">PT, APTT, fibrinogen, D-dimer, platelet count — what they measure, what they miss, and how to interpret them.</div>
+    </div>
+
+    <h2 class="subhead">Normal Values & Units</h2>
+    <table class="data-table">
+      <tr><th>Test</th><th>Normal Range</th><th>Units</th><th>Measures</th></tr>
+      <tr><td><strong>Prothrombin time (PT)</strong></td><td>11–13.5</td><td>seconds</td><td>Extrinsic + common pathway (factors VII, X, V, II, fibrinogen)</td></tr>
+      <tr><td><strong>INR</strong></td><td>0.8–1.2</td><td>ratio</td><td>Standardised PT (for warfarin monitoring)</td></tr>
+      <tr><td><strong>APTT</strong></td><td>25–35</td><td>seconds</td><td>Intrinsic + common pathway (factors XII, XI, IX, VIII, X, V, II, fibrinogen)</td></tr>
+      <tr><td><strong>Fibrinogen</strong></td><td>2.0–4.0</td><td>g/L</td><td>Fibrinogen concentration (Clauss method)</td></tr>
+      <tr><td><strong>D-dimer</strong></td><td>&lt;0.5</td><td>mg/L FEU</td><td>Fibrin degradation (fibrinolysis marker)</td></tr>
+      <tr><td><strong>Platelet count</strong></td><td>150–400</td><td>×10⁹/L</td><td>Platelet number (not function)</td></tr>
+      <tr><td><strong>Thrombin time (TT)</strong></td><td>14–19</td><td>seconds</td><td>Fibrinogen → fibrin conversion (heparin-sensitive)</td></tr>
+      <tr><td><strong>Anti-Xa</strong></td><td>Drug-specific</td><td>IU/mL</td><td>Heparin/LMWH activity</td></tr>
+    </table>
+
+    <h2 class="subhead">What Each Test Misses</h2>
+    <table class="data-table">
+      <tr><th>Test</th><th>What It Does NOT Detect</th><th>Clinical Consequence</th></tr>
+      <tr><td><strong>PT/APTT</strong></td><td>Platelet function, vWF, fibrinolysis, natural anticoagulants</td><td>Normal PT/APTT does not exclude bleeding risk </td></tr>
+      <tr><td><strong>Platelet count</strong></td><td>Platelet function (aspirin, clopidogrel, uraemia)</td><td>Normal count with impaired function still bleeds</td></tr>
+      <tr><td><strong>Fibrinogen</strong></td><td>Fibrinogen function (dysfibrinogenaemia)</td><td>Normal level with abnormal function</td></tr>
+      <tr><td><strong>D-dimer</strong></td><td>Specificity — elevated in many conditions</td><td>Poor positive predictive value; useful for exclusion</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ The Conventional Test Trap in Liver Disease</strong>
+      In cirrhosis, PT and INR are prolonged because of reduced synthesis of procoagulant factors — but anticoagulant factors (Protein C, antithrombin) are also reduced. The result is a <strong>"re-balanced" haemostasis</strong>. Prolonged INR does not reliably predict bleeding risk, and correcting it with FFP may cause volume overload and worsen portal hypertension .
+    </div>
+
+    <h2 class="subhead">Mixing Studies</h2>
+    <ul class="clist">
+      <li><strong>Purpose:</strong> Distinguish factor deficiency from inhibitor (e.g., lupus anticoagulant, factor VIII inhibitor)</li>
+      <li><strong>Method:</strong> Mix patient plasma 1:1 with normal plasma; repeat PT/APTT</li>
+      <li><strong>Correction (normalises):</strong> Factor deficiency</li>
+      <li><strong>No correction (remains prolonged):</strong> Inhibitor present</li>
+      <li><strong>Partial correction:</strong> May indicate a slow-acting inhibitor or factor deficiency with inhibitor</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 03: VISCOELASTIC TESTING -->
+  <div class="module" id="mod2">
+    <div class="mod-head">
+      <div class="mod-num">Module 03 of 10</div>
+      <div class="mod-title">Viscoelastic <em>Testing (TEG/ROTEM)</em></div>
+      <div class="mod-intro">Whole-blood, real-time assessment of clot formation, strength, and lysis — the tool that conventional tests cannot replace, and the one that requires correct interpretation to guide therapy.</div>
+    </div>
+
+    <h2 class="subhead">Principles</h2>
+    <p>Viscoelastic testing (VET) measures the viscoelastic properties of whole blood as it clots. A pin or cup oscillates, and the resistance to movement is recorded over time. The result is a graphical representation of clot initiation, amplification, strength, and dissolution .</p>
+
+    <h2 class="subhead">The Normal Tracing — Standard Textbook Representation</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 800 420" width="100%" style="display:block;">
+        <!-- Title -->
+        <text x="400" y="25" fill="#3a5a3a" font-family="Instrument Sans" font-size="11" text-anchor="middle" letter-spacing="2" font-weight="600">STANDARD VISCOELASTIC TRACING (TEG / ROTEM)</text>
+
+        <!-- Phase Headers -->
+        <text x="250" y="55" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="600">Coagulation</text>
+        <text x="570" y="55" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="middle" font-weight="600">Fibrinolysis</text>
+        <line x1="400" y1="40" x2="400" y2="380" stroke="#d0c8b8" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- Phase divider lines -->
+        <line x1="130" y1="70" x2="130" y2="380" stroke="#d0c8b8" stroke-width="1"/>
+        <line x1="210" y1="70" x2="210" y2="380" stroke="#d0c8b8" stroke-width="1"/>
+
+        <!-- Axes -->
+        <line x1="130" y1="220" x2="750" y2="220" stroke="#a89880" stroke-width="1"/>
+        <line x1="130" y1="70" x2="130" y2="380" stroke="#a89880" stroke-width="1"/>
+        
+        <!-- Y-Axis Labels -->
+        <text x="110" y="200" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle" transform="rotate(-90, 110, 200)">Amplitude (mm)</text>
+        <text x="440" y="405" fill="#2e2018" font-family="Instrument Sans" font-size="9" text-anchor="middle">Time (in min.)</text>
+
+        <!-- TEG / ROTEM row labels -->
+        <text x="95" y="150" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="end" font-weight="600">TEG</text>
+        <text x="95" y="290" fill="#2e2018" font-family="Instrument Sans" font-size="10" text-anchor="end" font-weight="600">ROTEM</text>
+
+        <!-- The Spindle Shape (Symmetric Almond) -->
+        <!-- Starts at 130,220. Reaches max at 400,220 (width 60). Ends at 750,220. -->
+        <path d="M130,220 C210,220 300,80 400,80 C500,80 670,220 750,220" stroke="#3a5a3a" stroke-width="2" fill="none"/>
+        <path d="M130,220 C210,220 300,360 400,360 C500,360 670,220 750,220" stroke="#3a5a3a" stroke-width="2" fill="none"/>
+
+        <!-- Alpha Angle (TEG) -->
+        <path d="M210,220 L250,160" stroke="#a89880" stroke-width="1" stroke-dasharray="2,2"/>
+        <path d="M210,220 L250,280" stroke="#a89880" stroke-width="1" stroke-dasharray="2,2"/>
+        <path d="M225,220 Q235,200 240,190" stroke="#7a6455" stroke-width="1" fill="none"/>
+        <text x="245" y="190" fill="#7a6455" font-family="Cormorant Garamond" font-size="14" font-style="italic">α</text>
+
+        <!-- Alpha Angle (ROTEM) -->
+        <path d="M210,220 L250,160" stroke="#a89880" stroke-width="1" stroke-dasharray="2,2"/>
+        <path d="M210,220 L250,280" stroke="#a89880" stroke-width="1" stroke-dasharray="2,2"/>
+        <path d="M225,220 Q235,240 240,250" stroke="#7a6455" stroke-width="1" fill="none"/>
+        <text x="245" y="260" fill="#7a6455" font-family="Cormorant Garamond" font-size="14" font-style="italic">α</text>
+
+        <!-- === BLUE ARROWS (TEG - Top Half) === -->
+        <g stroke="#5a5a8a" stroke-width="1.5" fill="#5a5a8a">
+          <!-- R (Reaction Time) -->
+          <line x1="130" y1="150" x2="210" y2="150" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="170" y="140" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">R</text>
+          
+          <!-- K (Kinetics) -->
+          <line x1="210" y1="150" x2="250" y2="150" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="230" y="140" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">K</text>
+
+          <!-- MA (Maximum Amplitude) -->
+          <line x1="400" y1="80" x2="400" y2="220" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="410" y="140" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" font-weight="600">MA</text>
+
+          <!-- CL30 -->
+          <line x1="520" y1="115" x2="520" y2="220" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="530" y="160" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" font-weight="600">CL30</text>
+
+          <!-- CL60, ML -->
+          <line x1="620" y1="155" x2="620" y2="220" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="630" y="185" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" font-weight="600">CL60, ML</text>
+        </g>
+
+        <!-- === BLUE ARROWS (ROTEM - Bottom Half) === -->
+        <g stroke="#5a5a8a" stroke-width="1.5" fill="#5a5a8a">
+          <!-- CT (Clotting Time) -->
+          <line x1="130" y1="290" x2="210" y2="290" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="170" y="280" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">CT</text>
+
+          <!-- CFT (Clot Formation Time) -->
+          <line x1="210" y1="290" x2="250" y2="290" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="230" y="280" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" text-anchor="middle" font-weight="600">CFT</text>
+
+          <!-- MCF (Maximum Clot Firmness) -->
+          <line x1="400" y1="220" x2="400" y2="360" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="410" y="290" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" font-weight="600">MCF</text>
+
+          <!-- LY30 -->
+          <line x1="520" y1="220" x2="520" y2="325" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="530" y="270" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" font-weight="600">LY30</text>
+
+          <!-- LY60 -->
+          <line x1="620" y1="220" x2="620" y2="285" marker-end="url(#arrowBlue)" marker-start="url(#arrowBlueStart)"/>
+          <text x="630" y="250" fill="#5a5a8a" font-family="Instrument Sans" font-size="9" font-weight="600">LY60</text>
+        </g>
+
+        <!-- Arrow Markers -->
+        <defs>
+          <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a8a"/>
+          </marker>
+          <marker id="arrowBlueStart" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M 10 0 L 0 5 L 10 10 z" fill="#5a5a8a"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <h2 class="subhead">Abnormal Patterns — Side-by-Side Comparison</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 720 340" width="100%" style="display:block;">
+        <text x="360" y="18" fill="#3a5a3a" font-family="Instrument Sans" font-size="10" text-anchor="middle" letter-spacing="2">ABNORMAL VISCOELASTIC PATTERNS</text>
+
+        <!-- Panel 1: Normal -->
+        <rect x="20" y="35" width="160" height="280" rx="3" fill="#f5f0e8" stroke="#d0c8b8"/>
+        <text x="100" y="52" fill="#3a5a3a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">NORMAL</text>
+        <line x1="30" y1="280" x2="170" y2="280" stroke="#a89880" stroke-width="1"/>
+        <line x1="30" y1="280" x2="30" y2="70" stroke="#a89880" stroke-width="1"/>
+        <path d="M30,280 L45,280 C50,280 52,278 55,274 C65,258 75,235 85,215 C95,195 105,175 120,165 C130,160 140,162 155,170"
+              stroke="#3a5a3a" stroke-width="2" fill="none"/>
+        <text x="100" y="298" fill="#7a6455" font-family="Instrument Sans" font-size="6" text-anchor="middle">Normal R, α, MA, no lysis</text>
+
+        <!-- Panel 2: Prolonged CT/R -->
+        <rect x="190" y="35" width="160" height="280" rx="3" fill="#f5f0e8" stroke="#d0c8b8"/>
+        <text x="270" y="52" fill="#7a2020" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">PROLONGED CT / R</text>
+        <line x1="200" y1="280" x2="340" y2="280" stroke="#a89880" stroke-width="1"/>
+        <line x1="200" y1="280" x2="200" y2="70" stroke="#a89880" stroke-width="1"/>
+        <path d="M200,280 L255,280 C260,280 262,278 265,274 C275,258 285,235 295,215 C305,195 315,175 330,165"
+              stroke="#7a2020" stroke-width="2" fill="none"/>
+        <text x="270" y="298" fill="#7a6455" font-family="Instrument Sans" font-size="6" text-anchor="middle">Delayed initiation → factor deficiency</text>
+
+        <!-- Panel 3: Low MCF/MA -->
+        <rect x="360" y="35" width="160" height="280" rx="3" fill="#f5f0e8" stroke="#d0c8b8"/>
+        <text x="440" y="52" fill="#9a6c1a" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">LOW MCF / MA</text>
+        <line x1="370" y1="280" x2="510" y2="280" stroke="#a89880" stroke-width="1"/>
+        <line x1="370" y1="280" x2="370" y2="70" stroke="#a89880" stroke-width="1"/>
+        <path d="M370,280 L395,280 C400,280 402,278 405,272 C415,255 425,230 435,210 C445,190 455,175 470,170 C480,168 490,170 505,175"
+              stroke="#9a6c1a" stroke-width="2" fill="none"/>
+        <text x="440" y="298" fill="#7a6455" font-family="Instrument Sans" font-size="6" text-anchor="middle">Weak clot → platelets or fibrinogen</text>
+
+        <!-- Panel 4: Hyperfibrinolysis -->
+        <rect x="530" y="35" width="160" height="280" rx="3" fill="#f5f0e8" stroke="#d0c8b8"/>
+        <text x="610" y="52" fill="#7a2020" font-family="Instrument Sans" font-size="8" text-anchor="middle" font-weight="600">HYPERFIBRINOLYSIS</text>
+        <line x1="540" y1="280" x2="680" y2="280" stroke="#a89880" stroke-width="1"/>
+        <line x1="540" y1="280" x2="540" y2="70" stroke="#a89880" stroke-width="1"/>
+        <path d="M540,280 L555,280 C560,280 562,278 565,274 C575,258 585,235 595,215 C605,195 615,175 630,165 C640,160 650,175 670,230"
+              stroke="#7a2020" stroke-width="2" fill="none"/>
+        <text x="610" y="298" fill="#7a6455" font-family="Instrument Sans" font-size="6" text-anchor="middle">Rapid clot breakdown → TXA</text>
+
+        <!-- Separators -->
+        <line x1="180" y1="35" x2="180" y2="315" stroke="#d0c8b8" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="350" y1="35" x2="350" y2="315" stroke="#d0c8b8" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="520" y1="35" x2="520" y2="315" stroke="#d0c8b8" stroke-width="0.5" stroke-dasharray="2,3"/>
+      </svg>
+    </div>
+
+    <h2 class="subhead">TEG vs ROTEM — Key Parameters and Reference Ranges</h2>
+    <table class="data-table">
+      <tr><th>Parameter (TEG / ROTEM)</th><th>What It Measures</th><th>Normal / Reference</th><th>Abnormal → Implication</th></tr>
+      <tr><td><strong>R (TEG) / CT (ROTEM)</strong></td><td>Time to initial fibrin formation (2 mm amplitude)</td><td>ROTEM INTEM CT 100–240 s; EXTEM CT 38–79 s </td><td>Prolonged → factor deficiency, heparin (if HEPTEM corrects)</td></tr>
+      <tr><td><strong>K (TEG) / CFT (ROTEM)</strong></td><td>Time from 2 mm to 20 mm amplitude — clot kinetics</td><td>ROTEM INTEM CFT 45–110 s; EXTEM CFT 48–127 s </td><td>Prolonged → fibrinogen deficiency, platelet dysfunction</td></tr>
+      <tr><td><strong>α angle</strong></td><td>Slope of clot formation (speed of fibrin build)</td><td>ROTEM INTEM α 70–81°; EXTEM α 65–80° </td><td>Reduced → low fibrinogen, low platelets</td></tr>
+      <tr><td><strong>MA (TEG) / MCF (ROTEM)</strong></td><td>Maximum clot strength</td><td>ROTEM INTEM/EXTEM MCF 50–72 mm; FIBTEM MCF 9–25 mm </td><td>Reduced → low platelets or low fibrinogen</td></tr>
+      <tr><td><strong>LY30 (TEG) / ML or LI30 (ROTEM)</strong></td><td>Percentage of clot lysis at 30 min after MA/MCF</td><td>LY30 <3–5%; ML <15% </td><td>Elevated → hyperfibrinolysis</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>The FIBTEM Difference</strong>
+      FIBTEM contains cytochalasin D, which inhibits platelet GPIIb/IIIa — removing the platelet contribution to clot strength. FIBTEM MCF therefore reflects <strong>fibrinogen alone</strong> . This is how VET distinguishes platelet deficiency from fibrinogen deficiency: low EXTEM/INTEM MCF with <strong>normal FIBTEM</strong> → platelets; low EXTEM/INTEM MCF with <strong>low FIBTEM</strong> → fibrinogen.
+    </div>
+
+    <h2 class="subhead">Interpretation — Stepwise Approach</h2>
+    <div class="callout co-key">
+      <ul class="clist" style="margin-top:.5rem">
+        <li><strong>Step 1 — Prolonged CT/R:</strong> Factor deficiency or heparin. If HEPTEM CT corrects → heparin effect; if not → factor deficiency (FFP/PCC).</li>
+        <li><strong>Step 2 — Reduced MCF/MA with normal FIBTEM:</strong> Platelet deficiency or dysfunction → platelets.</li>
+        <li><strong>Step 3 — Reduced MCF/MA with low FIBTEM:</strong> Fibrinogen deficiency → fibrinogen concentrate or cryoprecipitate.</li>
+        <li><strong>Step 4 — Elevated ML/LY30:</strong> Hyperfibrinolysis → tranexamic acid.</li>
+        <li><strong>Step 5 — Normal VET but bleeding:</strong> Consider surgical bleeding, platelet inhibition (aspirin/clopidogrel), von Willebrand disease, or factor XIII deficiency — VET has limited sensitivity to these .</li>
+      </ul>
+    </div>
+
+    <h2 class="subhead">VET-Guided Product Therapy — Triggers and Doses</h2>
+    <table class="data-table">
+      <tr><th>Abnormality</th><th>Trigger (ROTEM)</th><th>Trigger (TEG)</th><th>Product</th><th>Typical Dose</th></tr>
+      <tr><td><strong>Fibrinogen deficiency</strong></td><td>FIBTEM A5/A10 ≤7–10 mm or MCF <6–8 mm </td><td>α angle <45–53° or functional fibrinogen MA <12 mm </td><td>Fibrinogen concentrate or cryoprecipitate</td><td>FC 25–50 mg/kg; cryoprecipitate 1–2 pools (5–10 units)</td></tr>
+      <tr><td><strong>Factor deficiency / heparin</strong></td><td>EXTEM CT >80 s </td><td>R >10 min </td><td>FFP or PCC</td><td>FFP 10–20 mL/kg; PCC 10–20 IU/kg</td></tr>
+      <tr><td><strong>Platelet deficiency/dysfunction</strong></td><td>EXTEM A10 ≤30–42 mm with FIBTEM >7–10 mm </td><td>MA <30–50 mm </td><td>Platelets</td><td>1–2 pools (adult)</td></tr>
+      <tr><td><strong>Hyperfibrinolysis</strong></td><td>EXTEM ML >15% or LI30 <90% </td><td>LY30 >3–15% </td><td>Tranexamic acid</td><td>1 g IV bolus; repeat or infusion per protocol</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ What VET Does NOT Detect</strong>
+      ROTEM has poor sensitivity to <strong>aspirin, clopidogrel, von Willebrand disease, LMWH, and warfarin</strong> . A normal VET in a patient on antiplatelet therapy or with vWD does not exclude a bleeding tendency. Combine VET with clinical assessment, medication history, and specific assays where indicated.
+    </div>
+
+    <h2 class="subhead">Clinical Utility — Evidence</h2>
+    <ul class="clist">
+      <li><strong>Trauma:</strong> VET-guided resuscitation improves outcomes and reduces blood product use compared to conventional tests; abnormal EXTEM and FIBTEM clot amplitude and lysis predict mortality .</li>
+      <li><strong>Liver transplantation:</strong> ROTEM/TEG algorithms reduce FFP and platelet use while increasing targeted fibrinogen administration .</li>
+      <li><strong>Cirrhosis:</strong> VET-guided algorithms reduce unnecessary FFP before invasive procedures .</li>
+      <li><strong>Cardiac surgery:</strong> Standardised VET-based algorithms are recommended over clinical discretion and conventional tests .</li>
+    </ul>
+
+    <div class="callout co-pearl">
+      <strong>✦ VET vs Conventional Tests</strong>
+      Conventional tests assess <strong>quantitative</strong> factor levels in plasma and take 30–60 minutes. VET assesses <strong>functional</strong> clot formation in whole blood, including platelet contribution and fibrinolysis, and provides results in minutes. The correlation between R/CT and PT/INR is weak (r = 0.24–0.37) — VET is not a substitute for factor assays, but a complementary functional assessment .
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 04: INHERITED BLEEDING -->
+  <div class="module" id="mod3">
+    <div class="mod-head">
+      <div class="mod-num">Module 04 of 10</div>
+      <div class="mod-title">Inherited <em>Bleeding Disorders</em></div>
+      <div class="mod-intro">Haemophilia A and B, von Willebrand disease, and the rare factor deficiencies — what the anaesthetist needs to know.</div>
+    </div>
+
+    <h2 class="subhead">Overview</h2>
+    <p>Haemophilia A and B and von Willebrand disease account for <strong>95–97%</strong> of all congenital coagulation disorders. The remaining 3–5% are rare factor deficiencies (factors I, II, V, VII, X, XI, XIII) .</p>
+
+    <h2 class="subhead">Haemophilia A and B</h2>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Haemophilia A</th><th>Haemophilia B</th></tr>
+      <tr><td><strong>Deficiency</strong></td><td>Factor VIII</td><td>Factor IX</td></tr>
+      <tr><td><strong>Inheritance</strong></td><td>X-linked recessive</td><td>X-linked recessive</td></tr>
+      <tr><td><strong>Incidence</strong></td><td>1:5,000 male births</td><td>1:30,000 male births</td></tr>
+      <tr><td><strong>APTT</strong></td><td>Prolonged</td><td>Prolonged</td></tr>
+      <tr><td><strong>PT</strong></td><td>Normal</td><td>Normal</td></tr>
+      <tr><td><strong>Bleeding pattern</strong></td><td>Haemarthrosis, muscle haematoma, intracranial</td><td>Same as A</td></tr>
+      <tr><td><strong>Treatment</strong></td><td>Factor VIII concentrate; desmopressin for mild</td><td>Factor IX concentrate</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Neuraxial Anaesthesia in Haemophilia</strong>
+      Neuraxial techniques are <strong>contraindicated</strong> in patients with severe haemophilia or active bleeding unless factor levels are corrected and confirmed. The risk of spinal haematoma is unacceptable. For mild haemophilia, coordinate with haematology; factor levels must be >50% for neuraxial procedures .
+    </div>
+
+    <h2 class="subhead">Von Willebrand Disease (vWD)</h2>
+    <table class="data-table">
+      <tr><th>Type</th><th>Mechanism</th><th>Treatment</th></tr>
+      <tr><td><strong>Type 1</strong> (most common)</td><td>Quantitative deficiency of vWF</td><td>Desmopressin (DDAVP); tranexamic acid</td></tr>
+      <tr><td><strong>Type 2</strong></td><td>Qualitative defect of vWF</td><td>vWF-containing factor VIII concentrate; desmopressin may be ineffective in some subtypes</td></tr>
+      <tr><td><strong>Type 3</strong> (rare, severe)</td><td>Complete deficiency</td><td>vWF-containing factor VIII concentrate</td></tr>
+    </table>
+    <ul class="clist">
+      <li><strong>Bleeding pattern:</strong> Mucocutaneous (epistaxis, menorrhagia, easy bruising), similar to platelet disorders</li>
+      <li><strong>APTT:</strong> May be prolonged (vWF stabilises factor VIII)</li>
+      <li><strong>Diagnosis:</strong> vWF antigen, vWF activity (ristocetin cofactor), factor VIII level</li>
+      <li><strong>Perioperative:</strong> Desmopressin for Type 1; factor concentrate for Type 3 or major surgery; tranexamic acid as adjunct</li>
+    </ul>
+
+    <h2 class="subhead">Rare Factor Deficiencies</h2>
+    <table class="data-table">
+      <tr><th>Factor</th><th>Deficiency</th><th>PT/APTT</th><th>Notes</th></tr>
+      <tr><td><strong>I (fibrinogen)</strong></td><td>Afibrinogenaemia, dysfibrinogenaemia</td><td>Both prolonged</td><td>Cryoprecipitate or fibrinogen concentrate</td></tr>
+      <tr><td><strong>II (prothrombin)</strong></td><td>Hypoprothrombinaemia</td><td>Both prolonged</td><td>PCC or FFP</td></tr>
+      <tr><td><strong>V</strong></td><td>Parahemophilia</td><td>Both prolonged</td><td>FFP; platelet transfusion if severe</td></tr>
+      <tr><td><strong>VII</strong></td><td>Alexander disease</td><td>PT prolonged; APTT normal</td><td>Recombinant VIIa</td></tr>
+      <tr><td><strong>X</strong></td><td>Stuart-Prower factor</td><td>Both prolonged</td><td>PCC or FFP</td></tr>
+      <tr><td><strong>XI</strong></td><td>Haemophilia C</td><td>APTT prolonged</td><td>FFP; tranexamic acid</td></tr>
+      <tr><td><strong>XIII</strong></td><td>Fibrin stabilising factor</td><td>PT/APTT normal</td><td>Urea solubility test; cryoprecipitate or factor XIII concentrate</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 05: ACQUIRED BLEEDING -->
+  <div class="module" id="mod4">
+    <div class="mod-head">
+      <div class="mod-num">Module 05 of 10</div>
+      <div class="mod-title">Acquired <em>Bleeding Disorders</em></div>
+      <div class="mod-intro">DIC, liver disease, vitamin K deficiency, massive transfusion, and drug-induced coagulopathy.</div>
+    </div>
+
+    <h2 class="subhead">Disseminated Intravascular Coagulation (DIC)</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Systemic activation of coagulation → widespread fibrin deposition → consumption of platelets and factors → bleeding and thrombosis simultaneously</li>
+      <li><strong>Causes:</strong> Sepsis, trauma, obstetric complications (placental abruption, amniotic fluid embolism), malignancy, burns, acute pancreatitis </li>
+      <li><strong>Laboratory:</strong> Thrombocytopenia, prolonged PT/APTT, low fibrinogen, elevated D-dimer, schistocytes on blood film</li>
+      <li><strong>Diagnosis:</strong> ISTH DIC score (platelet count, D-dimer/fibrin markers, PT prolongation, fibrinogen)</li>
+      <li><strong>Management:</strong> Treat the underlying cause; support with FFP, platelets, cryoprecipitate/fibrinogen based on bleeding and VET; consider heparin in thrombosis-predominant DIC</li>
+    </ul>
+
+    <div class="callout co-danger">
+      <strong>⚠ DIC in Obstetrics</strong>
+      Obstetric DIC is a life-threatening emergency. The 2024 revised Japanese obstetric DIC score emphasises <strong>fibrinogen decline</strong> and fibrin-related markers as key diagnostic variables. Early fibrinogen replacement, antithrombin concentrate, and tranexamic acid are recommended alongside interventional haemostasis .
+    </div>
+
+    <h2 class="subhead">Liver Disease</h2>
+    <ul class="clist">
+      <li><strong>Pathophysiology:</strong> Reduced synthesis of procoagulant factors (II, V, VII, IX, X) and anticoagulant factors (Protein C, antithrombin), thrombocytopenia, increased vWF, and rebalanced haemostasis </li>
+      <li><strong>PT/INR:</strong> Prolonged — does <strong>not</strong> predict bleeding risk</li>
+      <li><strong>Fibrinogen:</strong> Often low; <1.5 g/L may warrant replacement before major procedures</li>
+      <li><strong>Viscoelastic testing:</strong> More accurate than PT/INR for guiding transfusion in cirrhosis </li>
+      <li><strong>Procedures:</strong> ROTEM-guided algorithms reduce unnecessary FFP use in cirrhosis </li>
+    </ul>
+
+    <h2 class="subhead">Vitamin K Deficiency</h2>
+    <ul class="clist">
+      <li><strong>Factors affected:</strong> II, VII, IX, X (and Proteins C and S)</li>
+      <li><strong>Causes:</strong> Malnutrition, malabsorption, antibiotics (gut flora), obstructive jaundice, warfarin</li>
+      <li><strong>PT:</strong> Prolonged first (factor VII has shortest half-life)</li>
+      <li><strong>Treatment:</strong> Vitamin K 10 mg IV (takes 6–12 h to correct); urgent reversal with PCC or FFP</li>
+    </ul>
+
+    <h2 class="subhead">Massive Transfusion</h2>
+    <ul class="clist">
+      <li><strong>Dilutional coagulopathy:</strong> Loss of factors and platelets</li>
+      <li><strong>Citrate toxicity:</strong> Ionised hypocalcaemia → impaired coagulation</li>
+      <li><strong>Hypothermia:</strong> Impaired enzymatic function</li>
+      <li><strong>Acidosis:</strong> Impaired coagulation factor activity</li>
+      <li><strong>Management:</strong> 1:1:1 ratio (FFP:platelets:RBC) or VET-guided; calcium replacement; warming</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 06: THROMBOPHILIA -->
+  <div class="module" id="mod5">
+    <div class="mod-head">
+      <div class="mod-num">Module 06 of 10</div>
+      <div class="mod-title">Thrombophilia & <em>Hypercoagulable States</em></div>
+      <div class="mod-intro">Inherited and acquired thrombophilias — who to test, what it means, and how it changes perioperative management.</div>
+    </div>
+
+    <h2 class="subhead">Inherited Thrombophilias</h2>
+    <table class="data-table">
+      <tr><th>Condition</th><th>Prevalence</th><th>Thrombosis Risk</th><th>Testing</th></tr>
+      <tr><td><strong>Factor V Leiden</strong></td><td>3–8% (Caucasian)</td><td>3–8× increased</td><td>APC resistance; genetic testing</td></tr>
+      <tr><td><strong>Prothrombin G20210A</strong></td><td>1–2%</td><td>2–3× increased</td><td>Genetic testing</td></tr>
+      <tr><td><strong>Protein C deficiency</strong></td><td>0.2–0.5%</td><td>5–10× increased</td><td>Protein C activity</td></tr>
+      <tr><td><strong>Protein S deficiency</strong></td><td>0.2–0.5%</td><td>5–10× increased</td><td>Protein S activity</td></tr>
+      <tr><td><strong>Antithrombin deficiency</strong></td><td>0.02–0.2%</td><td>10–20× increased</td><td>Antithrombin activity</td></tr>
+    </table>
+
+    <h2 class="subhead">Antiphospholipid Syndrome (APS)</h2>
+    <ul class="clist">
+      <li><strong>Definition:</strong> Arterial or venous thrombosis + pregnancy morbidity + persistent antiphospholipid antibodies</li>
+      <li><strong>Laboratory:</strong> Lupus anticoagulant, anticardiolipin antibodies, anti-β₂-glycoprotein I antibodies</li>
+      <li><strong>Paradox:</strong> APTT is prolonged in vitro (lupus anticoagulant), but patients are <strong>prothrombotic</strong> in vivo</li>
+      <li><strong>Perioperative:</strong> High thrombotic risk; continue anticoagulation where possible; bridging with LMWH; avoid neuraxial if fully anticoagulated</li>
+    </ul>
+
+    <div class="callout co-warn">
+      <strong>⚠ Lupus Anticoagulant — The Trap</strong>
+      A prolonged APTT in a patient with APS does <strong>not</strong> mean they are anticoagulated. The lupus anticoagulant interferes with the phospholipid-dependent APTT assay in vitro. The patient is actually prothrombotic. Do not "correct" the APTT with FFP unless there is active bleeding.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 07: ANTICOAGULANT MONITORING -->
+  <div class="module" id="mod6">
+    <div class="mod-head">
+      <div class="mod-num">Module 07 of 10</div>
+      <div class="mod-title">Anticoagulant <em>Monitoring</em></div>
+      <div class="mod-intro">Heparin, LMWH, warfarin, DOACs — what to measure, when to measure it, and how to reverse.</div>
+    </div>
+
+    <h2 class="subhead">Heparin and LMWH</h2>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Monitoring Test</th><th>Therapeutic Range</th><th>Reversal</th></tr>
+      <tr><td><strong>Unfractionated heparin (IV)</strong></td><td>APTT or anti-Xa</td><td>APTT 1.5–2.5× normal; anti-Xa 0.3–0.7 IU/mL</td><td>Protamine 1 mg per 100 units heparin</td></tr>
+      <tr><td><strong>LMWH (prophylactic)</strong></td><td>Usually not monitored</td><td>—</td><td>Protamine (partial reversal)</td></tr>
+      <tr><td><strong>LMWH (therapeutic)</strong></td><td>Anti-Xa (if indicated)</td><td>0.5–1.0 IU/mL (peak, 4 h post-dose)</td><td>Protamine (partial reversal)</td></tr>
+    </table>
+
+    <div class="callout co-warn">
+      <strong>⚠ Heparin Resistance</strong>
+      Defined as requiring >35,000 units/day to maintain therapeutic APTT. Causes include <strong>antithrombin deficiency</strong>, increased heparin clearance, and elevated heparin-binding proteins. Treatment: antithrombin concentrate or FFP.
+    </div>
+
+    <h2 class="subhead">Warfarin</h2>
+    <ul class="clist">
+      <li><strong>Monitoring:</strong> INR (target 2.0–3.0 for most indications; 2.5–3.5 for mechanical mitral valves)</li>
+      <li><strong>Mechanism:</strong> Inhibits vitamin K epoxide reductase → reduces synthesis of factors II, VII, IX, X and Proteins C and S</li>
+      <li><strong>Reversal:</strong> Vitamin K 5–10 mg IV (slow); PCC (immediate) for major bleeding or urgent surgery; FFP if PCC unavailable</li>
+      <li><strong>Warfarin skin necrosis:</strong> Rare complication from early Protein C deficiency; prevent by overlapping heparin when starting warfarin</li>
+    </ul>
+
+    <h2 class="subhead">Direct Oral Anticoagulants (DOACs)</h2>
+    <table class="data-table">
+      <tr><th>Drug</th><th>Target</th><th>Monitoring</th><th>Reversal</th></tr>
+      <tr><td><strong>Dabigatran</strong></td><td>Thrombin (IIa)</td><td>TT or dilute TT; ecarin clotting time</td><td>Idarucizumab</td></tr>
+      <tr><td><strong>Rivaroxaban</strong></td><td>Factor Xa</td><td>Anti-Xa (drug-specific)</td><td>Andexanet alfa (if available)</td></tr>
+      <tr><td><strong>Apixaban</strong></td><td>Factor Xa</td><td>Anti-Xa (drug-specific)</td><td>Andexanet alfa (if available)</td></tr>
+    </table>
+
+    <div class="callout co-key">
+      <strong>DOAC Monitoring in Practice</strong>
+      Routine monitoring is not required for most patients. However, in <strong>emergency surgery, major bleeding, or suspected accumulation</strong> (renal impairment, extremes of weight), drug-specific assays or TT/anti-Xa should be used. Standard PT/APTT are unreliable for DOACs.
+    </div>
+
+    <h2 class="subhead">Heparin-Induced Thrombocytopenia (HIT)</h2>
+    <ul class="clist">
+      <li><strong>Mechanism:</strong> IgG antibodies against platelet factor 4–heparin complexes → platelet activation → thrombocytopenia and thrombosis </li>
+      <li><strong>Timing:</strong> 5–10 days after heparin initiation; rapid onset if prior exposure</li>
+      <li><strong>4Ts Score:</strong> Thrombocytopenia, Timing, Thrombosis, oTher causes — calculate to estimate probability </li>
+      <li><strong>Diagnosis:</strong> Intermediate/high 4Ts → immunoassay (PF4 ELISA) → functional assay (serotonin release assay) to confirm </li>
+      <li><strong>Management:</strong> Stop heparin immediately; start non-heparin anticoagulant (argatroban, bivalirudin, fondaparinux); avoid platelet transfusion unless bleeding</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 08: SPECIAL SITUATIONS -->
+  <div class="module" id="mod7">
+    <div class="mod-head">
+      <div class="mod-num">Module 08 of 10</div>
+      <div class="mod-title">Special <em>Situations</em></div>
+      <div class="mod-intro">Obstetrics, cardiac surgery, trauma, and the patient on multiple antithrombotics.</div>
+    </div>
+
+    <h2 class="subhead">Obstetrics</h2>
+    <ul class="clist">
+      <li><strong>Physiological changes:</strong> Hypercoagulable state (increased factors VII, VIII, X, fibrinogen; decreased Protein S); increased thrombosis risk</li>
+      <li><strong>Obstetric DIC:</strong> Placental abruption, amniotic fluid embolism, HELLP syndrome, postpartum haemorrhage </li>
+      <li><strong>Neuraxial anaesthesia:</strong> Follow ASRA/ESAIC guidelines for anticoagulation; LMWH timing is critical</li>
+      <li><strong>Inherited bleeding disorders in pregnancy:</strong> Factor levels may change; coordinate with haematology for delivery planning </li>
+    </ul>
+
+    <h2 class="subhead">Cardiac Surgery</h2>
+    <ul class="clist">
+      <li><strong>Heparinisation:</strong> High-dose heparin for cardiopulmonary bypass; monitor ACT (target >400–480 seconds)</li>
+      <li><strong>Protamine reversal:</strong> 1 mg per 100 units heparin; risk of protamine reaction (anaphylaxis, pulmonary hypertension)</li>
+      <li><strong>HIT:</strong> Complex; alternative anticoagulants (bivalirudin) for CPB in HIT patients </li>
+      <li><strong>Viscoelastic testing:</strong> Guides transfusion and reduces re-exploration</li>
+    </ul>
+
+    <h2 class="subhead">Trauma</h2>
+    <ul class="clist">
+      <li><strong>Acute traumatic coagulopathy:</strong> Endothelial injury, shock, hyperfibrinolysis</li>
+      <li><strong>Management:</strong> Damage control resuscitation; tranexamic acid; VET-guided transfusion; fibrinogen and calcium replacement </li>
+      <li><strong>Viscoelastic testing:</strong> Superior to conventional tests for guiding resuscitation in trauma </li>
+    </ul>
+
+    <h2 class="subhead">The Patient on Multiple Antithrombotics</h2>
+    <ul class="clist">
+      <li><strong>Assessment:</strong> Bleeding risk vs thrombotic risk; procedure-specific risk; timing of last dose</li>
+      <li><strong>Bridging:</strong> LMWH bridging for high-risk patients on warfarin; DOACs usually do not require bridging</li>
+      <li><strong>Neuraxial:</strong> Follow ASRA guidelines strictly; document last dose and renal function</li>
+      <li><strong>Emergency surgery:</strong> Consider reversal agents (PCC, idarucizumab, andexanet) based on drug and urgency</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ MODULE 09: MEMORY & SYNTHESIS -->
+  <div class="module" id="mod8">
+    <div class="mod-head">
+      <div class="mod-num">Module 09 of 10</div>
+      <div class="mod-title">Memory, Pitfalls & <em>Synthesis</em></div>
+      <div class="mod-intro">The revision tool — a unified formula sheet, a diagnostic algorithm, the top traps, and a synthesis case.</div>
+    </div>
+
+    <h2 class="subhead">1 · Unified Formula Sheet</h2>
+    <table class="data-table">
+      <tr><th>Test/Formula</th><th>Equation / Normal</th><th>Units</th></tr>
+      <tr><td><strong>PT</strong></td><td>11–13.5</td><td>seconds</td></tr>
+      <tr><td><strong>INR</strong></td><td>(PT<sub>patient</sub> / PT<sub>normal</sub>)<sup>ISI</sup></td><td>ratio</td></tr>
+      <tr><td><strong>APTT</strong></td><td>25–35</td><td>seconds</td></tr>
+      <tr><td><strong>Fibrinogen</strong></td><td>2.0–4.0</td><td>g/L</td></tr>
+      <tr><td><strong>D-dimer</strong></td><td>&lt;0.5</td><td>mg/L FEU</td></tr>
+      <tr><td><strong>Platelet count</strong></td><td>150–400</td><td>×10⁹/L</td></tr>
+      <tr><td><strong>Anti-Xa (UFH)</strong></td><td>0.3–0.7</td><td>IU/mL</td></tr>
+      <tr><td><strong>Anti-Xa (LMWH peak)</strong></td><td>0.5–1.0</td><td>IU/mL</td></tr>
+      <tr><td><strong>4Ts Score</strong></td><td>Thrombocytopenia, Timing, Thrombosis, oTher</td><td>0–8 points</td></tr>
+    </table>
+
+    <h2 class="subhead">2 · Diagnostic Algorithm — Prolonged APTT</h2>
+    <div class="callout co-key">
+      <ul class="clist" style="margin-top:.5rem">
+        <li><strong>Step 1:</strong> Is the patient bleeding?</li>
+        <li><strong>Step 2:</strong> Check mixing study</li>
+        <li><strong>Corrects:</strong> Factor deficiency (VIII, IX, XI, XII) → factor assays</li>
+        <li><strong>Does not correct:</strong> Inhibitor (lupus anticoagulant, factor VIII inhibitor) → specific inhibitor assays</li>
+        <li><strong>Step 3:</strong> Check heparin contamination (TT prolonged; anti-Xa)</li>
+        <li><strong>Step 4:</strong> Consider lupus anticoagulant (prolonged APTT, no bleeding, thrombosis history)</li>
+      </ul>
+    </div>
+
+    <h2 class="subhead">3 · The Top 10 Traps</h2>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 1 — Normal PT/APTT does not exclude bleeding risk <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Conventional tests miss platelet function, vWF, fibrinolysis, and natural anticoagulants. In liver disease and trauma, PT/APTT are unreliable .
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 2 — Prolonged INR in cirrhosis is not a bleeding risk marker <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Cirrhosis is a re-balanced haemostatic state. Correcting INR with FFP may cause harm. Use VET if available .
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 3 — Lupus anticoagulant prolongs APTT but causes thrombosis <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Do not "correct" the APTT with FFP. The patient is prothrombotic, not bleeding.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 4 — HIT is a thrombotic disorder, not just thrombocytopenia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Stop heparin and start a non-heparin anticoagulant. Do not simply stop heparin and observe .
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 5 — Protamine reverses heparin but not LMWH completely <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Protamine partially reverses LMWH. Anti-Xa levels may remain elevated.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 6 — DOACs are not monitored with PT/APTT <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Use drug-specific anti-Xa assays, TT (dabigatran), or ecarin clotting time. Standard tests are unreliable.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 7 — Factor VII deficiency prolongs PT but not APTT <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Isolated PT prolongation with normal APTT suggests factor VII deficiency. Confirm with factor VII assay.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 8 — Fibrinogen can be normal in dysfibrinogenaemia <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Fibrinogen level (Clauss) may be normal but function is abnormal. TT may be prolonged. Consider reptilase time.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 9 — Neuraxial anaesthesia in haemophilia is contraindicated <span class="arr">▼</span></button>
+      <div class="acc-body">
+        Unless factor levels are corrected and confirmed >50%. Coordinate with haematology .
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">Trap 10 — VET is not a substitute for clinical judgement <span class="arr">▼</span></button>
+      <div class="acc-body">
+        VET guides transfusion but does not replace assessment of bleeding, surgical source control, and the clinical context.
+      </div>
+    </div>
+
+    <h2 class="subhead">4 · The Synthesis Case</h2>
+    <div class="callout co-key">
+      <strong>A 55-year-old with cirrhosis and sepsis, bleeding from a line site</strong><br><br>
+      <strong>Bloods:</strong> Platelets 65 ×10⁹/L, PT 22 s, INR 1.9, APTT 45 s, fibrinogen 1.1 g/L, D-dimer 8.0 mg/L FEU.<br><br>
+      <strong>Step 1 — Interpret:</strong> Thrombocytopenia, prolonged PT/APTT, low fibrinogen, elevated D-dimer → consistent with DIC on a background of cirrhosis.<br>
+      <strong>Step 2 — Clinical:</strong> Is the patient bleeding? Yes (line site). Is there thrombosis? Assess.<br>
+      <strong>Step 3 — VET if available:</strong> ROTEM may show prolonged CT, reduced MCF, low fibrinogen — guide targeted replacement.<br>
+      <strong>Step 4 — Management:</strong> Treat sepsis (source control, antibiotics). Replace fibrinogen (cryoprecipitate or fibrinogen concentrate) if <1.5 g/L and bleeding. Platelets if <50 ×10⁹/L and bleeding. FFP only if VET indicates factor deficiency. Avoid routine FFP for INR correction .<br>
+      <strong>Step 5 — Monitor:</strong> Repeat VET/coagulation after replacement; reassess bleeding.
+    </div>
+
+    <div class="callout co-pearl">
+      <strong>✦ The Final Rule</strong>
+      Coagulation is a balance — bleeding and thrombosis are two sides of the same coin. Treat the patient, not the number. Use the right test for the right question: conventional tests for factor levels, VET for functional clot assessment, and clinical judgement for everything else.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ASSESSMENT -->
+  <div class="module" id="mod9">
+    <div class="mod-head">
+      <div class="mod-num">Assessment</div>
+      <div class="mod-title">Self-<em>Assessment</em></div>
+      <div class="mod-intro">Twenty questions across all modules. Click an option to reveal the explanation.</div>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-head">▸ Questions — click to answer</div>
+      <div id="quizContainer"></div>
+      <div class="score-box" id="scoreBox" style="display:none"></div>
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<section style="padding:2.5rem 5vw;background:var(--surface);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem;display:flex;align-items:center;gap:.75rem;"><span style="width:20px;height:1px;background:var(--faint);display:inline-block;"></span>Disclaimer</div>
+    <p style="font-size:.76rem;line-height:1.85;color:var(--faint);font-weight:300;">This resource is created for educational purposes. All content is based on published literature and standard clinical references current to 2025–26. It is not a substitute for institutional guidelines, senior clinical advice, or individual patient assessment.</p>
+  </div>
+</section>
+
+<div class="article-foot" style="padding:1.5rem 5vw;text-align:center;">
+  <a href="../core-modules.html" style="font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);text-decoration:none;" target="_self">← Back to Core Modules</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.acc-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(2.8)';
+    ring.style.transform='translate(-50%,-50%) scale(1.7)';
+    ring.style.opacity='1';
+    ring.style.borderColor='var(--forest-soft)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.opacity='.4';
+    ring.style.borderColor='var(--forest)';
+  });
+});
+function showMod(idx) {
+  document.querySelectorAll('.module').forEach((m,i) => m.classList.toggle('active', i===idx));
+  document.querySelectorAll('.module-nav button').forEach((b,i) => b.classList.toggle('active', i===idx));
+  const pct = ((idx+1)/10)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  window.scrollTo({top: document.querySelector('.module-nav').offsetTop - 100, behavior:'smooth'});
+}
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+const qs = [
+  {q:"Which pathway does the APTT assess?",opts:["Extrinsic pathway","Intrinsic pathway","Common pathway only","Fibrinolysis"],ans:1,exp:"APTT assesses the intrinsic and common pathways (factors XII, XI, IX, VIII, X, V, II, fibrinogen). PT assesses the extrinsic and common pathways."},
+  {q:"What does a normal PT/APTT NOT exclude?",opts:["Factor VIII deficiency","Platelet dysfunction","Factor VII deficiency","Fibrinogen deficiency"],ans:1,exp:"PT/APTT assess plasma coagulation factors but not platelet function. A patient on aspirin or with uraemia can have normal PT/APTT but impaired platelet function and bleeding."},
+  {q:"Which viscoelastic parameter represents clot strength?",opts:["R time (TEG)","CT (ROTEM)","MA/MCF","LY30/ML"],ans:2,exp:"MA (maximum amplitude) on TEG and MCF (maximum clot firmness) on ROTEM represent clot strength. Reduced MA/MCF indicates low platelets or low fibrinogen."},
+  {q:"What is the inheritance pattern of haemophilia A?",opts:["Autosomal dominant","Autosomal recessive","X-linked recessive","Mitochondrial"],ans:2,exp:"Haemophilia A (factor VIII deficiency) and B (factor IX deficiency) are X-linked recessive disorders. They affect males almost exclusively; females are carriers."},
+  {q:"Which type of von Willebrand disease is most common?",opts:["Type 1","Type 2","Type 3","Acquired"],ans:0,exp:"Type 1 vWD (quantitative deficiency) is the most common, accounting for ~75% of cases. Type 3 is rare and severe."},
+  {q:"What is the first-line treatment for Type 1 vWD before minor surgery?",opts:["FFP","Desmopressin (DDAVP)","Platelets","Cryoprecipitate"],ans:1,exp:"Desmopressin releases endogenous vWF and factor VIII, and is first-line for Type 1 vWD. Tranexamic acid is an adjunct."},
+  {q:"In DIC, which laboratory finding is characteristic?",opts:["Elevated fibrinogen","Normal D-dimer","Thrombocytopenia with elevated D-dimer","Normal PT/APTT"],ans:2,exp:"DIC causes consumption of platelets and factors → thrombocytopenia, prolonged PT/APTT, low fibrinogen, and elevated D-dimer."},
+  {q:"Why is PT/INR unreliable for assessing bleeding risk in cirrhosis?",opts:["PT is always normal in cirrhosis","Cirrhosis is a re-balanced haemostatic state","PT measures platelet function","INR is not standardised"],ans:1,exp:"Cirrhosis reduces both procoagulant and anticoagulant factors. PT/INR reflects only procoagulant factor synthesis and does not predict bleeding risk ."},
+  {q:"Which test is used to monitor unfractionated heparin therapy?",opts:["PT","APTT","D-dimer","Fibrinogen"],ans:1,exp:"APTT is the standard test for monitoring UFH. Target is 1.5–2.5× normal. Anti-Xa can also be used."},
+  {q:"What is the target INR for a mechanical mitral valve?",opts:["1.5–2.0","2.0–3.0","2.5–3.5","3.5–4.5"],ans:2,exp:"Mechanical mitral valves require a higher target INR (2.5–3.5) than most other indications (2.0–3.0) due to higher thrombotic risk."},
+  {q:"Which DOAC is reversed by idarucizumab?",opts:["Rivaroxaban","Apixaban","Dabigatran","Edoxaban"],ans:2,exp:"Idarucizumab is the specific reversal agent for dabigatran (a direct thrombin inhibitor). Andexanet alfa is used for factor Xa inhibitors."},
+  {q:"What is the 4Ts score used for?",opts:["Assessing bleeding risk","Diagnosing HIT","Monitoring warfarin","Assessing DIC"],ans:1,exp:"The 4Ts score (Thrombocytopenia, Timing, Thrombosis, oTher causes) estimates the probability of heparin-induced thrombocytopenia. Intermediate/high scores require further testing ."},
+  {q:"What is the first step in managing HIT?",opts:["Give platelets","Stop heparin and start a non-heparin anticoagulant","Give vitamin K","Give protamine"],ans:1,exp:"HIT is a thrombotic disorder. Stop heparin immediately and start a non-heparin anticoagulant (argatroban, bivalirudin, fondaparinux). Do not just stop heparin and observe ."},
+  {q:"Which inherited thrombophilia is most common?",opts:["Antithrombin deficiency","Protein C deficiency","Factor V Leiden","Prothrombin G20210A"],ans:2,exp:"Factor V Leiden is the most common inherited thrombophilia, present in 3–8% of Caucasian populations. It causes activated protein C resistance."},
+  {q:"Why is APTT prolonged in antiphospholipid syndrome?",opts:["Factor deficiency","Lupus anticoagulant interferes with the assay","Heparin contamination","Liver disease"],ans:1,exp:"The lupus anticoagulant interferes with phospholipid-dependent clotting assays in vitro, prolonging APTT. However, patients are prothrombotic in vivo."},
+  {q:"What is the maximum correction rate for chronic hyponatraemia?",opts:["20 mmol/L/24 h","6–8 mmol/L/24 h","15 mmol/L/8 h","No limit"],ans:1,exp:"Chronic hyponatraemia should be corrected at ≤6–8 mmol/L in 24 hours to avoid osmotic demyelination syndrome. The 'rule of 6' is a practical framework."},
+  {q:"Which viscoelastic parameter indicates hyperfibrinolysis?",opts:["Prolonged R time","Reduced MA","Elevated LY30/ML","Prolonged CFT"],ans:2,exp:"Elevated LY30 (TEG) or ML (ROTEM) indicates excessive clot lysis — hyperfibrinolysis. This may warrant tranexamic acid."},
+  {q:"What is the initial management of major bleeding on warfarin?",opts:["Vitamin K alone","PCC + vitamin K","FFP alone","Platelets"],ans:1,exp:"For major bleeding on warfarin, give PCC (immediate reversal) plus vitamin K 5–10 mg IV (sustained reversal). FFP is an alternative if PCC is unavailable."},
+  {q:"Which condition is associated with a normal PT/APTT but bleeding due to factor XIII deficiency?",opts:["Haemophilia A","Factor VII deficiency","Factor XIII deficiency","von Willebrand disease"],ans:2,exp:"Factor XIII deficiency causes bleeding with normal PT and APTT. Diagnosis requires a specific factor XIII assay or urea solubility test."},
+  {q:"What is the recommended haemoglobin trigger for transfusion in a stable ICU patient?",opts:["<70 g/L","<90 g/L","<100 g/L","<120 g/L"],ans:0,exp:"A restrictive transfusion threshold of <70 g/L is standard for stable ICU patients, based on the TRICC trial and subsequent evidence."}
+];
+let done = 0, corr = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer');
+  qs.forEach((q,qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="qt">${qi+1}. ${q.q}</div>
+      <div class="quiz-opts" id="qo${qi}">
+        ${q.opts.map((o,oi)=>`<button onclick="ans(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-exp" id="qe${qi}"><strong style="color:var(--forest);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem;">Explanation</strong>${q.exp}</div>
+    `;
+    c.appendChild(d);
+  });
+}
+function ans(qi, oi) {
+  const opts = document.getElementById('qo'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  opts.querySelectorAll('button')[oi].classList.add(oi===qs[qi].ans?'correct':'wrong');
+  opts.querySelectorAll('button')[qs[qi].ans].classList.add('correct');
+  document.getElementById('qe'+qi).style.display='block';
+  done++;
+  if(oi===qs[qi].ans) corr++;
+  if(done===qs.length) {
+    const sb = document.getElementById('scoreBox');
+    sb.style.display='block';
+    const pct = Math.round((corr/qs.length)*100);
+    const grade = pct>=90 ? 'Excellent — coagulation is yours.' : pct>=70 ? 'Good — review the weaker modules.' : 'Keep going — revisit the modules and try again.';
+    sb.innerHTML = `Score: ${corr} / ${qs.length} &nbsp;&nbsp;·&nbsp;&nbsp; ${pct}%<br><span style="font-family:'Instrument Sans',sans-serif;font-size:.76rem;color:var(--muted);">${grade}</span>`;
+  }
+}
+buildQuiz();
+</script>
+</body>
+</html>
