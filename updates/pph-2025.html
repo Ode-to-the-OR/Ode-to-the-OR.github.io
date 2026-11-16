@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postpartum Haemorrhage 2025: The Anaesthesiologist's Guide — Ode to the OR</title>
+<meta name="description" content="The WHO/FIGO/ICM 2025 consolidated PPH guideline, read for anaesthesiologists — new definition, measured blood loss, the E-MOTIVE bundle, TXA, uterotonics at caesarean, fibrinogen and coagulopathy, anaesthetic technique, escalation and a bedside bundle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #f5f0e8;
+  --deep:    #ede7da;
+  --surface: #e8e1d4;
+  --card:    #e2dace;
+  --border:  #d0c8b8;
+  --faint:   #a89880;
+  --muted:   #7a6455;
+  --text:    #2e2018;
+  --sage:    #8b3a2a;
+  --gold:    #9a6c1a;
+  --amber:   #b8831a;
+  --rust:    #7a2020;
+  --maroon:  #5a1515;
+  --teal:    #2a5a52;
+  --indigo:  #3a3a6a;
+  --plum:    #7a5abf;
+  --rose:    #9a4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--night);
+  color:var(--text);
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  height:58px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,240,232,.94);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);text-decoration:none;letter-spacing:.02em;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.nav-links a:hover,.nav-links a.current{color:var(--rust);}
+@media(max-width:700px){nav .nav-links{display:none;}}
+
+/* BACK LINK */
+.back-row{max-width:760px;margin:0 auto;padding:5.5rem 5vw 0;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);transition:color .2s;}
+.back-link:hover{color:var(--rust);}
+.back-link svg{width:11px;height:11px;}
+
+/* ARTICLE HEAD */
+.article-head{max-width:760px;margin:0 auto;padding:1.6rem 5vw 2.4rem;border-bottom:1px solid var(--border);}
+.ey{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.ey::before{content:'';width:26px;height:1px;background:var(--sage);}
+.article-head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.1rem);font-weight:300;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+.article-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
+.dek{font-size:.95rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:620px;margin-bottom:1.4rem;}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
+.tag{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;border-radius:2px;white-space:nowrap;}
+.tt{border-color:var(--teal);color:var(--teal);}
+.tk{border-color:var(--amber);color:var(--amber);}
+.ti{border-color:var(--indigo);color:var(--indigo);}
+.meta-date{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-left:.3rem;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:2.6rem 5vw 4rem;}
+.article-body > * + *{margin-top:1.5rem;}
+.article-body p{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:300;}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--text);padding-top:.6rem;}
+.article-body h2 em{font-style:italic;color:var(--rust);}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--rust);margin-top:1.6rem !important;}
+
+.callout{background:var(--surface);border-left:3px solid var(--sage);padding:1.1rem 1.3rem;}
+.callout p{font-size:.85rem;color:var(--muted);}
+.callout p:first-child{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--sage);margin-bottom:.4rem;}
+
+.source-note{background:var(--deep);border:1px solid var(--border);padding:1rem 1.3rem;font-size:.78rem;color:var(--muted);line-height:1.75;}
+.source-note strong{color:var(--text);font-weight:500;}
+
+ul.plain{list-style:none;padding:0;display:flex;flex-direction:column;gap:.85rem;}
+ul.plain li{font-size:.9rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:1.2rem;position:relative;}
+ul.plain li::before{content:'—';position:absolute;left:0;color:var(--rust);}
+ul.plain li strong{font-weight:500;color:var(--rust);}
+
+/* RECOMMENDATION STRENGTH PILLS (new for this article) */
+.pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;}
+.pill{font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;padding:.22rem .55rem;border-radius:2px;font-weight:500;white-space:nowrap;}
+.p-strong{background:rgba(42,90,82,.15);color:var(--teal);border:1px solid var(--teal);}
+.p-cond{background:rgba(154,108,26,.15);color:var(--gold);border:1px solid var(--gold);}
+.p-insuff{background:rgba(122,100,85,.15);color:var(--muted);border:1px solid var(--faint);}
+.p-new{background:rgba(122,32,32,.12);color:var(--rust);border:1px solid var(--rust);}
+.p-up{background:rgba(58,58,106,.12);color:var(--indigo);border:1px solid var(--indigo);}
+.p-down{background:rgba(154,64,112,.12);color:var(--rose);border:1px solid var(--rose);}
+
+.rec-box{background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;}
+.rec-box p{font-size:.88rem;color:var(--text);line-height:1.7;}
+.rec-box p em{font-style:italic;color:var(--muted);font-size:.78rem;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--deep);}
+thead th{background:var(--card);text-align:left;padding:.7rem .9rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:.75rem .9rem;border-bottom:1px solid var(--border);color:var(--text);font-weight:300;vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+td.agent{font-weight:500;color:var(--rust);white-space:nowrap;}
+.table-caption{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:.6rem;}
+
+/* WORKED EXAMPLE / BUNDLE */
+.worked{background:var(--surface);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.worked h3{margin-top:0 !important;}
+.worked ol{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
+.worked ol li{counter-increment:step;font-size:.87rem;color:var(--text);line-height:1.75;font-weight:300;padding-left:2rem;position:relative;}
+.worked ol li::before{content:counter(step);position:absolute;left:0;top:0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--border);}
+.worked ol li strong{font-weight:500;color:var(--text);}
+
+.bundle{background:var(--deep);border:1px solid var(--border);padding:1.4rem 1.5rem;}
+.bundle h3{margin-top:0 !important;color:var(--teal) !important;}
+.bundle-step{margin-top:1.1rem;}
+.bundle-step:first-of-type{margin-top:1rem;}
+.bundle-step .step-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:.4rem;}
+.bundle-step p, .bundle-step li{font-size:.85rem;color:var(--text);line-height:1.7;}
+.bundle-step ul{list-style:none;padding:0;margin-top:.3rem;}
+.bundle-step ul li{padding-left:1rem;position:relative;}
+.bundle-step ul li::before{content:'·';position:absolute;left:0;color:var(--faint);}
+
+/* CLOSING */
+.lesson{border-top:1px solid var(--border);padding-top:1.6rem;}
+.lesson h3{color:var(--sage) !important;}
+
+.refs{border-top:1px solid var(--border);padding-top:1.4rem;}
+.refs h3{margin-top:0 !important;color:var(--muted) !important;font-family:'Instrument Sans',sans-serif !important;font-size:.6rem !important;letter-spacing:.16em;text-transform:uppercase;font-weight:500 !important;}
+.refs ol{list-style:decimal;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;margin-top:.8rem;}
+.refs li{font-size:.76rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+.disclaimer{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.3rem;font-size:.76rem;color:var(--muted);line-height:1.75;font-style:italic;}
+
+/* NEXT / FOOTER NAV */
+.article-foot{max-width:760px;margin:0 auto;padding:0 5vw 3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.foot-back{text-decoration:none;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:.15rem;}
+
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rust);}
+.f-logo em{font-style:italic;color:var(--gold);}
+
+@media(max-width:600px){
+  .back-row{padding:5rem 6vw 0;}
+  .article-head{padding:1.4rem 6vw 2rem;}
+  .article-body{padding:2.2rem 6vw 3rem;}
+  .article-foot{padding:0 6vw 2.5rem;}
+  table{font-size:.76rem;}
+  thead th,tbody td{padding:.6rem .6rem;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ode <em>to the OR</em></a>
+  <ul class="nav-links">
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="index.html#diaries">OR Diaries</a></li>
+    <li><a href="index.html#letters">Letters</a></li>
+    <li><a href="updates-guidelines.html" class="current">Explore</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<div class="back-row">
+  <a href="updates-guidelines.html" class="back-link" target="_self">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Updates &amp; Guidelines
+  </a>
+</div>
+
+<div class="article-head">
+  <div class="ey">Guideline Update</div>
+  <h1>Postpartum haemorrhage 2025: <em>the anaesthesiologist's guide.</em></h1>
+  <p class="dek">The first joint WHO, FIGO and ICM guideline devoted entirely to PPH — 51 recommendations, a new definition, blood loss that is measured rather than guessed, and a treatment bundle that starts everything at once. Read here for the anaesthesiologist: uterotonic haemodynamics, fibrinogen and coagulopathy, technique, and when to call the massive transfusion protocol.</p>
+  <div class="meta-row">
+    <span class="tag tt">Obstetric</span>
+    <span class="tag tk">PPH</span>
+    <span class="tag ti">Haemorrhage</span>
+    <span class="meta-date">WHO / FIGO / ICM · Consolidated PPH guideline, 5 Oct 2025 · with ESAIC, the international uterotonic consensus and key trials</span>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>Postpartum haemorrhage remains the leading cause of maternal death worldwide, and most of those deaths are preventable. The problem is rarely the lack of a drug. It is late recognition, a stepwise ladder climbed too slowly, and teams that do not share the same plan. The 2025 consolidated guideline pulls prevention, diagnosis and treatment into one document and pushes on all three: define PPH earlier, measure blood loss objectively, and give the first-response treatments together.</p>
+
+  <div class="callout">
+    <p>In short</p>
+    <p>PPH is now measured blood loss of 500 mL or more, or 300 mL or more with abnormal vital signs — whichever comes first. Measure with a calibrated drape. First-response treatment is a bundle given at once: uterine massage, an oxytocic, tranexamic acid, IV fluids, examination of the genital tract and escalation. TXA is for treatment, not routine prevention. At caesarean, avoid a rapid oxytocin bolus. For the anaesthesiologist, fibrinogen is the early coagulation casualty — replace it when it is low, not pre-emptively — and a safe, simple technique matters as much as the drugs.</p>
+  </div>
+
+  <h2>How to read the tags in this article</h2>
+  <div class="pill-row">
+    <span class="pill p-new">New 2025</span>
+    <span class="pill p-down">Not recommended</span>
+    <span class="pill p-insuff">Consensus / practice</span>
+  </div>
+  <p><strong>New 2025</strong> marks what is new in the WHO/FIGO/ICM guideline. <strong>Not recommended</strong> means the guideline advises against it. <strong>Consensus / practice</strong> marks anaesthetic points that come from international consensus statements, ESAIC guidance or standard practice rather than from the WHO guideline itself — the WHO document does not tell anaesthesiologists how to run the theatre.</p>
+
+  <h2>Define it and measure it</h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025</span></div>
+    <p>Clinically significant PPH: measured blood loss of at least 500 mL, <strong>or</strong> at least 300 mL with signs of haemodynamic compromise — pulse above 100/min, systolic BP below 100 mmHg, diastolic BP below 60 mmHg, or shock index above 1. Start first-response treatment at whichever threshold is reached first.</p>
+  </div>
+  <p>The shift is from eyeballing to measuring. Use a calibrated drape for blood collection after vaginal birth, and assess uterine tone early to catch atony before the bleeding is heavy. Visual estimates under-read, and pregnancy hides shock: blood volume rises by roughly 40–50%, so a woman can lose a litre or more before the blood pressure moves. Treating at 300 mL plus a vital-sign trigger is meant to close that gap.</p>
+  <p>Tone (atony) is the commonest cause, followed by trauma, retained tissue and thrombin (coagulopathy) — the four Ts. Look for all of them from the start, because the bundle treats atony but a laceration or retained placenta needs hands and light.</p>
+
+  <h2>Prevention: <em>one uterotonic, given to everyone</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025</span></div>
+    <p>A quality-assured uterotonic is recommended for every birth, vaginal or caesarean. Use <strong>only one</strong> of oxytocin, carbetocin or misoprostol for prevention.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Prevention dose</th><th>When to choose it</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Oxytocin</td><td>10 IU IM or IV</td><td>First choice where it is stored properly. Heat degrades it, so cold-chain failure means an ineffective drug.</td></tr>
+        <tr><td class="agent">Carbetocin</td><td>100 µg IM or IV</td><td>Alternative to oxytocin. The heat-stable formulation is recommended where the cold chain cannot be guaranteed.</td></tr>
+        <tr><td class="agent">Misoprostol</td><td>Oral; commonly 400–600 µg</td><td>When neither of the above is available.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">WHO 2025 · confirm dose and route against your national protocol</div>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-down">Not recommended</span></div>
+    <p>Routine prophylactic tranexamic acid for vaginal or caesarean birth is not recommended by the 2025 guideline. TXA belongs in treatment.</p>
+  </div>
+  <p>Prevention starts before labour. Antenatal anaemia lowers reserve and raises the cost of any bleed, and the 2025 FIGO good-practice recommendations on anaemia in pregnancy treat its correction as part of PPH prevention. Risk factors are worth recording but predict poorly — many severe PPHs happen in women with none — so every birth gets a uterotonic and every unit stays ready.</p>
+
+  <h3>Oxytocin at caesarean: <em>the anaesthesiologist's drug</em></h3>
+  <p>The WHO group found too little trial evidence to prefer one oxytocin regimen at caesarean over another. It does advise against a rapid IV bolus and suggests splitting the 10 IU between a smaller bolus and an infusion. That matches the international consensus statement on uterotonics at caesarean (Anaesthesia, 2019), which recommends a low initial dose followed by a titrated infusion:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Setting</th><th>Initial bolus</th><th>Infusion</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Elective caesarean</td><td>1 IU slowly (over at least 15 s)</td><td>2.5–7.5 IU/h</td></tr>
+        <tr><td class="agent">Caesarean in labour</td><td>3 IU slowly</td><td>7.5–15 IU/h</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Consensus / practice · doses are starting points, and are raised for atony risk factors</div>
+  <p>A 2024 dose-finding study found that after a 1 IU bolus at elective caesarean under spinal anaesthesia, a maintenance infusion of 4.5 IU/h was enough in 90% of women. Oxytocin causes vasodilation, hypotension and tachycardia, and a 5 IU bolus is the classic cause of both. In women with cardiac disease, use the slowest, smallest-bolus approach, and give a second-line agent early if tone is poor rather than escalating oxytocin without limit.</p>
+
+  <h2>Treatment: <em>the bundle, all at once</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-new">New 2025</span></div>
+    <p>When PPH is diagnosed, give all of the first-response elements together, not in sequence: <strong>M</strong>assage the uterus, give an <strong>O</strong>xytocic, give <strong>T</strong>ranexamic acid, start <strong>IV</strong> fluids, and <strong>E</strong>xamine the genital tract and <strong>E</strong>scalate care — the E-MOTIVE bundle. Ideally every element starts within about 15 minutes of diagnosis.</p>
+  </div>
+  <p>The evidence is the E-MOTIVE cluster-randomised trial (NEJM, 2023; about 200,000 women in four African countries). Early detection with a drape plus the bundle cut the composite of severe PPH (1000 mL or more), laparotomy or death from 4.3% to 1.6%. WHO adopted the bundle in 2023, and the 2025 guideline consolidates it.</p>
+
+  <ul class="plain">
+    <li><strong>Uterine massage</strong> while the other steps are organised. It is free, immediate and helps while drugs are drawn up.</li>
+    <li><strong>Oxytocic.</strong> Oxytocin IV is first-line for treatment. If bleeding persists, move to an alternate uterotonic early (table below) instead of waiting.</li>
+    <li><strong>Tranexamic acid:</strong> 1 g IV over about 10 minutes as soon as PPH is diagnosed and within 3 hours of birth, in addition to uterotonics. A second 1 g dose is given if bleeding continues after 30 minutes or restarts within 24 hours (WOMAN trial). Do not wait for laboratory results. Keep the cumulative dose within the usual limit, because high doses are linked to seizures and renal effects.</li>
+    <li><strong>IV fluids:</strong> isotonic crystalloid to start, with blood early if loss continues. Excess crystalloid dilutes clotting factors, and obstetric evidence for permissive hypotension is lacking, so aim to restore perfusion rather than a specific low pressure.</li>
+    <li><strong>Examine and escalate:</strong> inspect the cervix, vagina and perineum, remove retained placenta or tissue, and call the senior obstetrician, senior anaesthetist, blood bank and theatre early.</li>
+  </ul>
+
+  <h3>Second-line uterotonics: <em>know what each does to the patient</em></h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Typical adult dose</th><th>Anaesthetic implications</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Ergometrine / methylergometrine</td><td>0.2 mg IM (slow IV in some protocols)</td><td>Vasoconstriction and hypertension; avoid in pre-eclampsia, hypertension and cardiac disease. Nausea and vomiting common.</td></tr>
+        <tr><td class="agent">Carboprost (PGF2α)</td><td>250 µg IM, repeated at about 15-minute intervals (maximum 8 doses)</td><td>Bronchospasm and ventilation–perfusion mismatch with hypoxaemia; avoid in asthma. Diarrhoea and vomiting.</td></tr>
+        <tr><td class="agent">Misoprostol</td><td>Sublingual or rectal, commonly 600–800 µg</td><td>Fever and shivering, which confuse the picture of a bleeding patient. Slower onset.</td></tr>
+        <tr><td class="agent">Oxytocin infusion</td><td>By local protocol</td><td>Vasodilation, hypotension, hyponatraemia with large volumes in dilute fluid.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Consensus / practice · doses vary by country and formulary — check your own</div>
+  <p>Magnesium sulphate, given for pre-eclampsia, relaxes the uterus and makes atony more likely. A uterine relaxant volatile at high concentration does the same, which is why many anaesthetists keep the volatile at or below 0.5 MAC or switch to TIVA once the baby is delivered.</p>
+
+  <h2>If bleeding continues: <em>escalate, don't repeat</em></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Step</th><th>What it is</th><th>Anaesthetic note</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Bimanual compression</td><td>Manual uterine compression while other steps proceed. Aortic compression is a temporising option.</td><td>Needs the patient settled and a second pair of hands.</td></tr>
+        <tr><td class="agent">Uterine balloon tamponade</td><td>For atony unresponsive to drugs. Low-cost devices are widely used in India.</td><td>Can be placed under minimal anaesthesia or analgesia. Monitor for continued bleeding and for transfusion needs.</td></tr>
+        <tr><td class="agent">Surgery</td><td>Compression sutures (B-Lynch), vessel ligation, then hysterectomy for refractory bleeding. Interventional embolisation where available and the patient is stable.</td><td>Move to theatre before the patient decompensates; don't delay hysterectomy in a deteriorating woman.</td></tr>
+        <tr><td class="agent">Temporising devices</td><td>Non-pneumatic anti-shock garment to buy time for transfer where definitive care is distant.</td><td>Not a substitute for definitive haemostasis.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Declare a major obstetric haemorrhage — and call the massive transfusion protocol — when loss is continuing and large (a litre or more with ongoing bleeding), when the patient is haemodynamically unstable, or when you are concerned about coagulopathy. Waiting for a number is how time is lost. See the <a href="mtp-2026.html" target="_self">massive transfusion protocol page</a> for products, calcium, temperature and targets, which apply in obstetrics too.</p>
+
+  <h2>The anaesthesiologist's role</h2>
+  <p>This section is <strong>consensus and practice</strong>, not WHO text. It is where the anaesthetic decisions that change outcome sit.</p>
+
+  <h3>Be ready before delivery</h3>
+  <ul class="plain">
+    <li><strong>Know the risk flags:</strong> previous PPH, placenta praevia or accreta, multiple pregnancy, polyhydramnios, antenatal anaemia, prolonged or augmented labour, pre-eclampsia, and anticoagulation. Risk prediction is imperfect, so be prepared for the unexpected too.</li>
+    <li><strong>Access and blood:</strong> two large-bore IV lines in higher-risk women, a current group and screen, and cross-matched blood for the highest-risk cases. Know where emergency-release blood is and how fast it arrives.</li>
+    <li><strong>Drugs and equipment:</strong> uterotonics drawn up, a vasopressor ready, a blood warmer, and cell salvage set up when risk is high (for example, placenta accreta spectrum).</li>
+    <li><strong>Position:</strong> left uterine displacement until the baby is delivered.</li>
+  </ul>
+
+  <h3>Choosing the technique</h3>
+  <ul class="plain">
+    <li><strong>Neuraxial</strong> is fine for caesarean when the patient is stable and coagulation is normal. Avoid it, or avoid topping up an existing epidural, in a woman who is hypovolaemic, haemodynamically unstable or coagulopathic.</li>
+    <li><strong>General anaesthesia</strong> is the safer choice when the patient is unstable, bleeding briskly or coagulopathic, or when the block is failing. Rapid sequence induction with a reduced-dose agent (ketamine or etomidate are common choices) and a vasopressor running; expect post-induction hypotension. Pre-oxygenate well — oxygen reserve is lower in pregnancy.</li>
+    <li><strong>Maintenance:</strong> keep the volatile at or below about 0.5 MAC, or use TIVA, so as not to relax the uterus, and ensure adequate depth with processed EEG if awareness is a concern.</li>
+  </ul>
+
+  <h3>Resuscitation</h3>
+  <ul class="plain">
+    <li>Give <strong>blood early</strong> rather than large volumes of crystalloid, through a warmer, and use a rapid infuser if loss is brisk. Insert an arterial line when the patient is unstable and it does not delay care.</li>
+    <li>Vasopressors (phenylephrine or noradrenaline) bridge while volume arrives. They do not replace it.</li>
+    <li>Cell salvage is an accepted option in obstetric haemorrhage with a leucocyte-depletion filter. Remember anti-D prophylaxis for RhD-negative women whose baby is RhD-positive.</li>
+    <li>Keep her warm and keep her calcium normal. Both matter more than they sound (see the MTP page).</li>
+  </ul>
+
+  <h2>Coagulopathy in PPH: <em>fibrinogen first</em></h2>
+  <div class="rec-box">
+    <div class="pill-row"><span class="pill p-insuff">Consensus / practice · ESAIC</span></div>
+    <p>Measure fibrinogen in the bleeding parturient — a level below 2 g/L identifies women at risk of progressing to severe PPH. Do not replace fibrinogen pre-emptively. In ongoing PPH with hypofibrinogenaemia, replace it. If fibrinogen is above 2 g/L or FIBTEM A5 above 12 mm, replacement is not indicated. In severe PPH, use a viscoelastic-guided protocol if you have one. <em>ESAIC severe perioperative bleeding guideline, obstetric section.</em></p>
+  </div>
+  <p>Fibrinogen is the first clotting factor to fall to a critical level in PPH, through dilution, consumption and hyperfibrinolysis. That is why it is the first thing to check. But low fibrinogen is not universal. In a UK series of 203 women with major obstetric haemorrhage, only 23% had a FIBTEM A5 below 12 mm — an argument against formulaic "shock packs" and for measuring. A randomised trial that gave fibrinogen concentrate early (OBS2, using a FIBTEM A5 of 15 mm or below as the trigger) showed no reduction in blood-product use, which is why the advice is to replace a proven deficiency, not to give fibrinogen on spec.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Target / trigger</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="agent">Fibrinogen (Clauss)</td><td>Keep above 2 g/L in ongoing PPH</td><td>Higher than the trauma threshold of 1.5 g/L</td></tr>
+        <tr><td class="agent">FIBTEM A5</td><td>Replace if below about 12 mm with ongoing bleeding</td><td>An A5 above 12 mm is unlikely to benefit from fibrinogen; below about 7 mm replace promptly. Cut-offs vary by device and protocol.</td></tr>
+        <tr><td class="agent">Replacement</td><td>Fibrinogen concentrate commonly 25–50 mg/kg; or cryoprecipitate commonly 4–6 mL/kg</td><td>Both are used. Cryoprecipitate also supplies factor XIII. Doses vary by product and protocol.</td></tr>
+        <tr><td class="agent">Platelets, PT/APTT</td><td>Platelets above 50 ×10⁹/L; PT and APTT below 1.5× normal</td><td>General massive-haemorrhage targets; see the MTP page.</td></tr>
+        <tr><td class="agent">Ionised calcium</td><td>Normal range, around 1.1–1.3 mmol/L</td><td>Citrate load from transfusion lowers it.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-caption">Targets differ between protocols · follow your own obstetric haemorrhage algorithm</div>
+  <p>Coagulopathy can come before the haemorrhage in abruption, amniotic fluid embolism, sepsis and HELLP syndrome, so a woman who bleeds out of proportion to her visible loss in these conditions needs early laboratory and viscoelastic testing.</p>
+
+  <h2>Special situations</h2>
+  <ul class="plain">
+    <li><strong>Pre-eclampsia:</strong> avoid ergometrine; magnesium raises the atony risk; thrombocytopenia or HELLP limits neuraxial blocks and raises bleeding risk; be careful with fluid volumes, but do not under-resuscitate a woman who is bleeding.</li>
+    <li><strong>Cardiac disease:</strong> small slow oxytocin boluses or carbetocin, early invasive monitoring, and avoid sudden vasodilation and fluid overload together.</li>
+    <li><strong>Placenta accreta spectrum:</strong> plan delivery in a centre with blood bank, interventional radiology, ICU and an experienced multidisciplinary team. Arrange cross-matched blood, large-bore access, an arterial line, and cell salvage in advance.</li>
+    <li><strong>Anaemic patient:</strong> physiological reserve is lower; transfuse earlier on physiology and treat the anaemia afterwards with iron.</li>
+    <li><strong>Declined transfusion:</strong> agree a plan antenatally, optimise haemoglobin, plan for cell salvage and early definitive surgery.</li>
+  </ul>
+
+  <h2>After the bleed</h2>
+  <p>Monitor in a high-dependency or intensive care setting if bleeding was major. Restart thromboprophylaxis as soon as bleeding is controlled — post-PPH women are at high thrombotic risk. Treat anaemia (IV iron is often needed), tell her what happened, and debrief the team. Record measured blood loss, the time of each step, and the products given. These are the numbers you will audit.</p>
+
+  <div class="bundle">
+    <h3>PPH at a glance</h3>
+    <div class="bundle-step">
+      <div class="step-label">Recognize (t = 0)</div>
+      <p>Measured blood loss at least 500 mL, or at least 300 mL with pulse above 100, SBP below 100, DBP below 60 or shock index above 1. Check tone, then look for trauma, tissue and thrombin causes.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Call</div>
+      <p>Senior obstetrician, senior anaesthetist, midwife in charge, blood bank and theatre. Say "postpartum haemorrhage" out loud.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Bundle — start all together</div>
+      <ul>
+        <li>Massage the uterus</li>
+        <li>Oxytocin (or the next uterotonic if oxytocin already given)</li>
+        <li>Tranexamic acid 1 g IV over 10 min, within 3 h of birth</li>
+        <li>Isotonic crystalloid, two large-bore lines, blood early</li>
+        <li>Examine the genital tract; remove tissue; escalate</li>
+      </ul>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Anaesthetist's tasks</div>
+      <p>Left uterine displacement, blood warmer, calcium, labs and fibrinogen (or FIBTEM), technique chosen for stability (GA if unstable), volatile at or below 0.5 MAC, vasopressor bridge, arterial line.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Escalate</div>
+      <p>Not responding: second-line uterotonics, balloon tamponade, theatre for sutures or ligation or hysterectomy. Ongoing or unstable: call the massive transfusion protocol.</p>
+    </div>
+    <div class="bundle-step">
+      <div class="step-label">Afterwards</div>
+      <p>HDU or ICU if major, thromboprophylaxis when bleeding stops, treat anaemia, debrief and audit.</p>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <h3>The lesson that doesn't show up in any table</h3>
+    <p>The 2025 guideline's real message is about time, not drugs. Measuring blood loss gets the diagnosis made earlier, and the bundle gets treatment started in minutes. Most of the drugs are old; what changed is that they are given together, before the woman is in shock. The anaesthesiologist's contribution is to keep her physiology safe while that happens — choose the technique for stability, protect the circulation from the drugs, and replace fibrinogen and blood in time.</p>
+  </div>
+
+  <div class="source-note">
+    <strong>On this summary.</strong> Written independently for personal study and bedside reference from the WHO/FIGO/ICM 2025 consolidated guideline and its published summaries, the E-MOTIVE and WOMAN trials, the international consensus statement on uterotonics at caesarean, and the ESAIC bleeding guideline. It reflects structure and key numbers in original language and is not a reproduction of any published text or evidence tables. Anaesthetic points are labelled where they come from consensus or practice and not from the WHO guideline. Always confirm exact wording and any subsequent corrections against the primary sources and your own obstetric haemorrhage protocol.
+  </div>
+
+  <div class="refs">
+    <h3>References</h3>
+    <ol>
+      <li>World Health Organization, International Federation of Gynecology and Obstetrics, International Confederation of Midwives. <em>Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage.</em> Geneva: WHO; 2025. (Implementation guide published February 2026.)</li>
+      <li>New guidelines for the prevention, diagnosis, and treatment of postpartum haemorrhage: ending the geography of risk. <em>Lancet Glob Health.</em> 2025;13:e1796. Published online 4 Oct 2025.</li>
+      <li>Gallos I, Devall A, Martin J, et al. Randomized trial of early detection and treatment of postpartum hemorrhage (E-MOTIVE). <em>N Engl J Med.</em> 2023;389:11–21. doi:10.1056/NEJMoa2303966.</li>
+      <li>WOMAN Trial Collaborators. Effect of early tranexamic acid administration on mortality, hysterectomy, and other morbidities in women with post-partum haemorrhage. <em>Lancet.</em> 2017;389:2105–2116.</li>
+      <li>Widmer M, Piaggio G, Nguyen TMH, et al. Heat-stable carbetocin versus oxytocin to prevent hemorrhage after vaginal birth. <em>N Engl J Med.</em> 2018;379:743–752.</li>
+      <li>Heesen M, Carvalho B, Carvalho JCA, et al. International consensus statement on the use of uterotonic agents during caesarean section. <em>Anaesthesia.</em> 2019;74:1305–1319.</li>
+      <li>Boonstra L, Carvalho JCA, Turner W, et al. Maintenance infusion rate of oxytocin after initial 1-IU bolus for elective Cesarean delivery: a dose-finding study. <em>Can J Anaesth.</em> 2024;71(10):1363–1371.</li>
+      <li>Kietaibl S, Ahmed A, Afshari A, et al. Management of severe peri-operative bleeding: guidelines from the European Society of Anaesthesiology and Intensive Care — second update 2022. <em>Eur J Anaesthesiol.</em> 2023;40(4):226–304.</li>
+      <li>Collins PW, Cannings-John R, Bruynseels D, et al. Viscoelastometric-guided early fibrinogen concentrate replacement during postpartum haemorrhage: OBS2, a double-blind randomized controlled trial. <em>Br J Anaesth.</em> 2017;119:411–421.</li>
+      <li>Ubom AE, Begum F, Ramasauskaite D, et al. FIGO good practice recommendations on anemia in pregnancy, to reduce the incidence and impact of postpartum hemorrhage (PPH). <em>Int J Gynaecol Obstet.</em> 2025;171:993–1007.</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    This is a personal educational summary, not the guideline itself and not exhaustive. It is not a substitute for reading the full WHO/FIGO/ICM guideline, your institution's obstetric haemorrhage protocol, or independent clinical judgment. Drug doses shown are typical or illustrative — always verify against current institutional pharmacy references, national protocols and the patient's weight, comorbidities and renal and hepatic function before administration. Re-verify all recommendations against the current publication and your protocol before clinical use.
+  </div>
+
+</div>
+
+<div class="article-foot">
+  <a href="updates-guidelines.html" class="foot-back" target="_self">← Back to Updates &amp; Guidelines</a>
+</div>
+
+<footer>
+  <div class="f-logo">Ode <em>to the OR</em></div>
+</footer>
+
+</body>
+</html>
