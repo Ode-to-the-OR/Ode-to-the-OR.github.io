@@ -60,6 +60,12 @@ nav{
 .page-head h1 em{font-style:italic;color:var(--rust);font-weight:600;}
 .page-head p{font-size:.88rem;color:var(--muted);max-width:540px;line-height:1.75;font-weight:300;}
 
+/* CONSENT NOTE */
+.consent-note{margin-top:1.6rem;max-width:720px;padding:.9rem 1.1rem;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--sage);border-radius:0 3px 3px 0;display:flex;gap:.9rem;align-items:flex-start;}
+.consent-note svg{flex:none;width:16px;height:16px;margin-top:.18rem;color:var(--sage);}
+.consent-note h5{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:.3rem;}
+.consent-note p{font-size:.78rem;line-height:1.65;color:var(--muted);max-width:none;}
+
 /* LAYOUT */
 .cases-layout{max-width:1200px;margin:0 auto;padding:0 5vw 5rem;display:grid;grid-template-columns:240px 1fr;gap:2.5rem;align-items:start;}
 @media(max-width:900px){
@@ -233,6 +239,13 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   <div class="ey">Case Archives</div>
   <h1>Every published case, <em>de-identified</em><br>and organised for learning.</h1>
   <p>Cases drawn from the OR — the decisions, reasoning, and evidence that shaped them.</p>
+  <div class="consent-note" role="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+    <div>
+      <h5>Consent &amp; Privacy</h5>
+      <p>Informed consent for publication was obtained from each patient (or legal guardian, with assent where applicable) before any case appeared here. Names, dates, locations, institution and identifying images are removed or altered, and details are shared only as far as needed for learning.</p>
+    </div>
+  </div>
 </div>
 
 <div class="cases-layout">
